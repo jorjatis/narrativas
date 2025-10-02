@@ -1,66 +1,33 @@
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const mapContainer = document.querySelector(".v-spc-map-c");
-  const map = document.querySelector(".v-spc-map");
-  const sections = document.querySelectorAll(".v-spc-zone");
+  document.addEventListener("DOMContentLoaded", () => {
+    // Nombres mural
+    const containerNames = document.querySelector(".v-spc-names");
+    const names = Array.from(containerNames.querySelectorAll("span"));
 
-  const observer = new IntersectionObserver((entries) => {
-    // Filtramos las que están visibles
-    const visible = entries.filter(entry => entry.isIntersecting);
+    const shuffled = names.sort(() => Math.random() - 0.5);
 
-    if (visible.length > 0) {
-      // Ordenamos por el que está más cerca del top (o el que ocupa más)
-      const topMost = visible.reduce((closest, entry) => {
-        if (!closest) return entry;
-        return entry.boundingClientRect.top < closest.boundingClientRect.top
-          ? entry
-          : closest;
-      }, null);
+    const totalDuration = 5000;
+    const interval = totalDuration / shuffled.length;
 
-      if (topMost) {
-        const classes = Array.from(topMost.target.classList);
-        const zoneClass = classes.find(c => c.startsWith("v-spc-zone--"));
+    shuffled.forEach((name, index) => {
+      setTimeout(() => {
+        name.classList.add("visible");
+      }, index * interval);
+    });
 
-        if (zoneClass) {
-          const num = zoneClass.split("--")[1];
+    containerNames.querySelectorAll("span").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.getAttribute("data-target");
+        const el = document.querySelector(`[popovertarget="${targetId}"]`);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.classList.add("found");
 
-          // Resetear clase del mapa (versión más concisa)
-          map.classList.forEach(c => c.startsWith("v-spc-map--") && map.classList.remove(c));
-
-          // Añadir nueva clase
-          map.classList.add(`v-spc-map--${num}`);
+          setTimeout(() => {
+            el.classList.remove("found");
+          }, 4000);
         }
-      }
-    }
-  }, {
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.25
+      });
+    });
   });
-
-  sections.forEach(zone => observer.observe(zone));
-
-  // Detectar cuando el sticky está "pegado"
-  const stickyTop = 90; // coincide con tu CSS
-  const mediaQuery = window.matchMedia("(max-width: 1395px)");
-
-  const checkSticky = () => {
-    if (mediaQuery.matches) {
-      const rect = mapContainer.getBoundingClientRect();
-      if (rect.top <= stickyTop) {
-        mapContainer.classList.add("fog");
-      } else {
-        mapContainer.classList.remove("fog");
-      }
-    } else {
-      mapContainer.classList.remove("fog");
-    }
-  };
-
-  window.addEventListener("scroll", checkSticky);
-  window.addEventListener("resize", checkSticky);
-
-  // Ejecutar una vez al cargar
-  checkSticky();
-});
 </script>
