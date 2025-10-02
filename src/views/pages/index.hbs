@@ -1,36 +1,194 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}}</title>
-</head>
-<body>
-  asdasd
-  {{> header}} <!-- Parcial del encabezado -->
-  <a href="/about.html">About</a>
-  <a href="/contact.html">Contacto</a>
-  <a href="/blog.html">Blog</a>
-  <a href="/cosas/cosa1.html">Cosa 1</a>
+{{> base/head
+  title="100 metros que anegaron la vida"
+}}
 
-  La imagen
-  <img src="assets/images/default.jpg" alt="Imagen de ejemplo">
+{{> base/header }}
 
-  <img src="assets/images/icons/chapa.jpg" alt="Imagen de ejemplo">
+<div class="voc-wrapper">
+  <div class="voc-container">
+    <div class="voc-article-container">
+      <div class="voc-article voc-article--detail voc-article--detail-visual">
+        <div class="voc-info-container">
+          <p class="voc-pretitle">
+            <span class="voc-pretitle__prm">{{> icons/abc-premium-badge }}</span> 
+            <span class="voc-pretitle__txt">Un año de la Dana</span>
+          </p>
+          <h1 class="voc-title">100 metros que anegaron la vida</h1>
+        </div>
+        <div class="voc-img-container voc-img-container--fw-xs voc-img-container--wmd">
+          <figure class="voc-img-figure ">
+            <div class="voc-img-link">
+              <video autoplay="" loop="" muted="" playsinline="" class="video">
+                <source src="/assets/videos/video.mp4" type="video/mp4">
+              </video>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="voc-container voc-container--wxs">
+    <div class="voc-d voc-d--visual" data-voc-component="voc-d">
+      <h2 class="voc-subtitle">
+        Doce meses han transcurrido desde que el rugido del agua lo cambió todo. Volvemos al epicentro del desastre, la calle Sant Jordi, para comprobar si el tiempo ha intentado sanar las heridas abiertas por la devastadora DANA
+      </h2>
+      {{> components/author }}
+    </div>
+  </div>
+  <div class="voc-container voc-container--spc">
+    <div class="v-spc-map-c">
+      <div class="v-spc-map v-spc-map--1">
+      </div>
+    </div>
 
-  <p>Listado:</p>
-  <ul>
-    {{#each items}}
-      <li>
-        <h2>{{name}}</h2>
-        <p>{{description}}</p>
-      </li>
-    {{/each}}
-  </ul>
+    {{!-- NOTE: Zona 1 --}}
 
-  <p>Listado test each items:</p>
-  {{> test-each }}
+    <div class="v-spc-zone v-spc-zone--1">
+      <div class="v-spc-hdg v-spc-hdg">
+        <div class="v-spc-dot">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="17" fill="#FC3636" fill-opacity=".4"/><circle cx="17" cy="17" r="6" fill="#FC3636"/></svg>
+        </div>
+        <span class="v-spc-hdg__t v-spc-hdg__t--1">Portal 4, edificio San Jordi</span>
+        <span class="v-spc-hdg__t v-spc-hdg__t--2">Julia, 34 años</span>
+      </div>
+      
+      <h2 class="v-spc-t">
+        Hace un año estaba embarazada, hoy nos cuenta como le ha cambiado su vida
+      </h2>
 
-  {{> footer}} <!-- Parcial del pie de página -->
-</body>
-</html>
+      <p class="v-spc-p">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam arcu erat, dictum sit amet nisl eget, convallis congue libero. Phasellus ultricies tellus risus, non tincidunt elit tincidunt et. Mauris viverra, sapien eget consectetur aliquet, arcu lectus suscipit elit, id ultricies nibh velit sed est. Etiam tincidunt sapien odio, eget sodales ipsum tempus ut. Suspendisse eget dignissim nisi. Curabitur id neque nec sapien porta tincidunt at vitae tellus. Ut vel mi sit amet dolor lobortis ornare. Vestibulum ut ultrices diam. Aenean tincidunt ante ante, quis condimentum arcu volutpat sed. Donec tincidunt ultrices sapien. Donec a tortor consectetur, ullamcorper augue eget, pretium mi. Fusce eu massa non nulla pulvinar interdum.
+      </p>
+
+      <figure class="v-spc-img-c">
+        <img src="https://picsum.photos/1200/900">
+      </figure>
+
+      <p class="v-spc-p">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam arcu erat, dictum sit amet nisl eget, convallis congue libero. Phasellus ultricies tellus risus, non tincidunt elit tincidunt et. Mauris viverra, sapien eget consectetur aliquet, arcu lectus suscipit elit, id ultricies nibh velit sed est. Etiam tincidunt sapien odio, eget sodales ipsum tempus ut. Suspendisse eget dignissim nisi. Curabitur id neque nec sapien porta tincidunt at vitae tellus. Ut vel mi sit amet dolor lobortis ornare. Vestibulum ut ultrices diam. Aenean tincidunt ante ante, quis condimentum arcu volutpat sed. Donec tincidunt ultrices sapien. Donec a tortor consectetur, ullamcorper augue eget, pretium mi. Fusce eu massa non nulla pulvinar interdum.
+      </p>
+
+      <p class="v-spc-p">
+        Vivamus et posuere orci. Donec volutpat neque ac lacus lobortis, vitae posuere enim condimentum. Phasellus scelerisque nulla at tempus eleifend. Duis pharetra lectus mi. Vivamus efficitur, est at congue condimentum, dui purus pellentesque ex, a euismod neque erat non tortor. Vestibulum a enim at est viverra vulputate. Duis quis arcu sapien. Pellentesque posuere risus eget ipsum bibendum malesuada. Proin gravida dictum feugiat.
+      </p>
+    </div>
+
+    {{!-- NOTE: Zona 2 --}}
+
+    <div class="v-spc-zone v-spc-zone--2">
+      <div class="v-spc-hdg">
+        <div class="v-spc-dot">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="17" fill="#FC3636" fill-opacity=".4"/><circle cx="17" cy="17" r="6" fill="#FC3636"/></svg>
+        </div>
+        <span class="v-spc-hdg__t v-spc-hdg__t--1">Portal 2, edificio Aurora</span>
+        <span class="v-spc-hdg__t v-spc-hdg__t--2">Marcos, 41 años</span>
+      </div>
+
+      <h2 class="v-spc-t">
+        Después de cambiar de ciudad, nos comparte cómo encontró una nueva motivación
+      </h2>
+
+      <p class="v-spc-p">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam arcu erat, dictum sit amet nisl eget, convallis congue libero. Phasellus ultricies tellus risus, non tincidunt elit tincidunt et. Mauris viverra, sapien eget consectetur aliquet, arcu lectus suscipit elit, id ultricies nibh velit sed est. Etiam tincidunt sapien odio, eget sodales ipsum tempus ut. Suspendisse eget dignissim nisi. Curabitur id neque nec sapien porta tincidunt at vitae tellus. Ut vel mi sit amet dolor lobortis ornare. Vestibulum ut ultrices diam. Aenean tincidunt ante ante, quis condimentum arcu volutpat sed. Donec tincidunt ultrices sapien. Donec a tortor consectetur, ullamcorper augue eget, pretium mi. Fusce eu massa non nulla pulvinar interdum.
+      </p>
+
+      <figure class="v-spc-img-c">
+        <img src="https://picsum.photos/1201/900">
+      </figure>
+
+      <p class="v-spc-p">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam arcu erat, dictum sit amet nisl eget, convallis congue libero. Phasellus ultricies tellus risus, non tincidunt elit tincidunt et. Mauris viverra, sapien eget consectetur aliquet, arcu lectus suscipit elit, id ultricies nibh velit sed est. Etiam tincidunt sapien odio, eget sodales ipsum tempus ut. Suspendisse eget dignissim nisi. Curabitur id neque nec sapien porta tincidunt at vitae tellus. Ut vel mi sit amet dolor lobortis ornare. Vestibulum ut ultrices diam. Aenean tincidunt ante ante, quis condimentum arcu volutpat sed. Donec tincidunt ultrices sapien. Donec a tortor consectetur, ullamcorper augue eget, pretium mi. Fusce eu massa non nulla pulvinar interdum.
+      </p>
+
+      <p class="v-spc-p">
+        Vivamus et posuere orci. Donec volutpat neque ac lacus lobortis, vitae posuere enim condimentum. Phasellus scelerisque nulla at tempus eleifend. Duis pharetra lectus mi. Vivamus efficitur, est at congue condimentum, dui purus pellentesque ex, a euismod neque erat non tortor. Vestibulum a enim at est viverra vulputate. Duis quis arcu sapien. Pellentesque posuere risus eget ipsum bibendum malesuada. Proin gravida dictum feugiat.
+      </p>
+    </div>
+
+    {{!-- NOTE: Zona 3 --}}
+
+    <div class="v-spc-zone v-spc-zone--3">
+      <div class="v-spc-hdg">
+        <div class="v-spc-dot">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="17" fill="#FC3636" fill-opacity=".4"/><circle cx="17" cy="17" r="6" fill="#FC3636"/></svg>
+        </div>
+        <span class="v-spc-hdg__t v-spc-hdg__t--1">Portal 7, edificio Las Palmas</span>
+        <span class="v-spc-hdg__t v-spc-hdg__t--2">Claudia, 28 años</span>
+      </div>
+
+      <h2 class="v-spc-t">
+        Hace seis meses empezó un nuevo trabajo y hoy habla de su experiencia
+      </h2>
+
+      <p class="v-spc-p">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam arcu erat, dictum sit amet nisl eget, convallis congue libero. Phasellus ultricies tellus risus, non tincidunt elit tincidunt et. Mauris viverra, sapien eget consectetur aliquet, arcu lectus suscipit elit, id ultricies nibh velit sed est. Etiam tincidunt sapien odio, eget sodales ipsum tempus ut. Suspendisse eget dignissim nisi. Curabitur id neque nec sapien porta tincidunt at vitae tellus. Ut vel mi sit amet dolor lobortis ornare. Vestibulum ut ultrices diam. Aenean tincidunt ante ante, quis condimentum arcu volutpat sed. Donec tincidunt ultrices sapien. Donec a tortor consectetur, ullamcorper augue eget, pretium mi. Fusce eu massa non nulla pulvinar interdum.
+      </p>
+
+      <figure class="v-spc-img-c">
+        <img src="https://picsum.photos/1202/900">
+      </figure>
+
+      <p class="v-spc-p">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam arcu erat, dictum sit amet nisl eget, convallis congue libero. Phasellus ultricies tellus risus, non tincidunt elit tincidunt et. Mauris viverra, sapien eget consectetur aliquet, arcu lectus suscipit elit, id ultricies nibh velit sed est. Etiam tincidunt sapien odio, eget sodales ipsum tempus ut. Suspendisse eget dignissim nisi. Curabitur id neque nec sapien porta tincidunt at vitae tellus. Ut vel mi sit amet dolor lobortis ornare. Vestibulum ut ultrices diam. Aenean tincidunt ante ante, quis condimentum arcu volutpat sed. Donec tincidunt ultrices sapien. Donec a tortor consectetur, ullamcorper augue eget, pretium mi. Fusce eu massa non nulla pulvinar interdum.
+      </p>
+
+      <p class="v-spc-p">
+        Vivamus et posuere orci. Donec volutpat neque ac lacus lobortis, vitae posuere enim condimentum. Phasellus scelerisque nulla at tempus eleifend. Duis pharetra lectus mi. Vivamus efficitur, est at congue condimentum, dui purus pellentesque ex, a euismod neque erat non tortor. Vestibulum a enim at est viverra vulputate. Duis quis arcu sapien. Pellentesque posuere risus eget ipsum bibendum malesuada. Proin gravida dictum feugiat.
+      </p>
+    </div>
+
+    {{!-- NOTE: Zona 4 --}}
+
+    <div class="v-spc-zone v-spc-zone--4">
+      <div class="v-spc-hdg v-spc-hdg--4">
+        <div class="v-spc-dot">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="17" fill="#FC3636" fill-opacity=".4"/><circle cx="17" cy="17" r="6" fill="#FC3636"/></svg>
+        </div>
+        <span class="v-spc-hdg__t v-spc-hdg__t--1">Portal 5, edificio Mirador</span>
+        <span class="v-spc-hdg__t v-spc-hdg__t--2">Andrés, 37 años</span>
+      </div>
+
+      <h2 class="v-spc-t">
+        Tras superar un reto personal, nos cuenta qué aprendió en el camino
+      </h2>
+
+      <p class="v-spc-p">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam arcu erat, dictum sit amet nisl eget, convallis congue libero. Phasellus ultricies tellus risus, non tincidunt elit tincidunt et. Mauris viverra, sapien eget consectetur aliquet, arcu lectus suscipit elit, id ultricies nibh velit sed est. Etiam tincidunt sapien odio, eget sodales ipsum tempus ut. Suspendisse eget dignissim nisi. Curabitur id neque nec sapien porta tincidunt at vitae tellus. Ut vel mi sit amet dolor lobortis ornare. Vestibulum ut ultrices diam. Aenean tincidunt ante ante, quis condimentum arcu volutpat sed. Donec tincidunt ultrices sapien. Donec a tortor consectetur, ullamcorper augue eget, pretium mi. Fusce eu massa non nulla pulvinar interdum.
+      </p>
+
+      <figure class="v-spc-img-c">
+        <img src="https://picsum.photos/1203/900">
+      </figure>
+
+      <p class="v-spc-p">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam arcu erat, dictum sit amet nisl eget, convallis congue libero. Phasellus ultricies tellus risus, non tincidunt elit tincidunt et. Mauris viverra, sapien eget consectetur aliquet, arcu lectus suscipit elit, id ultricies nibh velit sed est. Etiam tincidunt sapien odio, eget sodales ipsum tempus ut. Suspendisse eget dignissim nisi. Curabitur id neque nec sapien porta tincidunt at vitae tellus. Ut vel mi sit amet dolor lobortis ornare. Vestibulum ut ultrices diam. Aenean tincidunt ante ante, quis condimentum arcu volutpat sed. Donec tincidunt ultrices sapien. Donec a tortor consectetur, ullamcorper augue eget, pretium mi. Fusce eu massa non nulla pulvinar interdum.
+      </p>
+
+      <p class="v-spc-p">
+        Vivamus et posuere orci. Donec volutpat neque ac lacus lobortis, vitae posuere enim condimentum. Phasellus scelerisque nulla at tempus eleifend. Duis pharetra lectus mi. Vivamus efficitur, est at congue condimentum, dui purus pellentesque ex, a euismod neque erat non tortor. Vestibulum a enim at est viverra vulputate. Duis quis arcu sapien. Pellentesque posuere risus eget ipsum bibendum malesuada. Proin gravida dictum feugiat.
+      </p>
+    </div>
+  </div>
+
+  <div class="voc-container">
+    {{!-- NOTE: Creditos --}}
+
+    <div class="v-c-crd">
+      <span>Créditos</span>
+      <ul>
+          <li><span>Guión: <b>Andrea Morán</b></span></li>
+          <li><span>Diseño: <b>Carlos Caneiro</b></span></li>
+          <li><span>Infografía: <b>Javier Torres</b></span></li>
+          <li><span>Desarrollo: <b>J. García</b></span></li>
+          <li><span>Texto: <b>Patricia Biosca</b></span></li>
+      </ul>
+    </div>
+  </div>
+  
+</div>
+
+{{> base/footer }}
+
+{{> js/special-script }}
+
+{{> base/foot }}

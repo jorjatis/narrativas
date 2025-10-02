@@ -1,8 +1,6 @@
 // Carga estilo principal
 import './assets/styles/styles.scss';
 
-import './assets/styles/chunks/chunki.scss';
-
 // Cargar dinámicamente plantillas y datos desde las carpetas correspondientes
 const templatesContext = require.context('./views/pages', true, /\.hbs$/);
 const dataContext = require.context('./data', true, /\.json$/);

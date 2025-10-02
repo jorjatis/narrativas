@@ -90,6 +90,10 @@ module.exports = {
         { 
           from: path.join('src', 'assets', 'images'), 
           to: path.join('assets', 'images')
+        },
+        {
+          from: path.join('src', 'assets', 'videos'),
+          to: path.join('assets', 'videos')
         }
       ]
     }),

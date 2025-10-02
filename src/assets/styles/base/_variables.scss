@@ -1,0 +1,111 @@
+// =======================================================
+// Variables
+// =======================================================
+
+// Colores
+$cp1: #e4b016;
+$cp2: var(--cp2);
+$cp2c: #ae5100;
+$cp3: var(--cp3);
+$cp3c: #008ab7;
+$cp4: var(--cp4);
+$cp4c: #b97011;
+$cp5: var(--cp5);
+$cp5c: #8AB0DB;
+$cp6: #E2F3FB;
+$cp7: var(--cp7);
+$cp7c: #E64A19;
+$cp8: var(--cp8);
+$cp8c: #244765;
+$cp9: var(--cp9);
+$cp9c: #FFA85B;
+$cp10: #DBF3FF;
+$cp11: var(--cp11);
+$cp11c: #8CCEF1;
+$cp12: #FCF7E7;
+$cp13: #005D7F;
+$cp14: #0072BC;
+$cp15: #f19e84;
+$cp16: #fcede8;
+$cp17: #FFDD00;
+$cp18: #DE0429;
+$cp19: var(--cp19);
+$cp19c: #46BEE5;
+$cp20: #FAC252;
+$cp21: #FFA41C;
+$cp22: #FFD814;
+$cp23: var(--cp23);
+$cp23c: #6F5F4F;
+$cp24: #d42561;
+$cp25: #EFF3F5;
+$cp26: #F2D98E;
+$cp17: #7464DE;
+$cp28: #D20019;
+$cp29: #bfe2ed;
+$cp30: #258B4E;
+$cp31: #61BB46;
+$cp32: var(--cp32);
+$cp32c: #00C0FF;
+
+$cb1: var(--cb1);
+$cb1c: #000000;
+$cb2: #333333;
+$cb3: var(--cb3);
+$cb3c: #555555;
+$cb4: #dddddd;
+$cb5: #f3f3f3;
+$cb6: var(--cb6);
+$cb6c: #888888;
+$cb7: #ffffff;
+$cb8: #4C4C4C;
+$cb9: var(--cb9);
+$cb9c: #262626;
+$cb10: #999999;
+$cb11: #CCCCCC;
+$cb12: #B7B7B7;
+$cb13: #707070;
+$cb14: #BBBBBB;
+$cb15: #c9c3c9;
+$cb16: #3AD5F1;
+$cb17: #D2FF19;
+$cb18: #37474F;
+$cb19: #f1f1ea;
+$cb20: #D5E0E5;
+$cb21: #F3F8F8;
+$cb22: #AAAAAA;
+$cb23: #d8d8d8;
+$cb24: #4A4848;
+$cb25: #C4C4C4;
+$cb26: #F8F0E6;
+$cb27: #c0bcb7;
+$cb28: #425312;
+$cb29: #191919;
+$cb30: #6c6c6c;
+$cb31: #eff0f1;
+$cb32: #e1e1e1;
+
+// Fonts
+$abctl: 'ABCText Light', Georgia, Times New Roman, serif;
+$abcts: 'ABCText Semibold', Georgia, Times New Roman, serif;
+
+$abcdel: 'ABCDisplay Extralight', Georgia, Times New Roman, serif;
+$abcdl: 'ABCDisplay Light', Georgia, Times New Roman, serif;
+$abcdr:'ABCDisplay Regular', Georgia, Times New Roman, serif;
+$abcds: 'ABCDisplay Semibold', Georgia, Times New Roman, serif;
+$abcdb: 'ABCDisplay Bold', Georgia, Times New Roman, serif;
+$abcdblk: 'ABCDisplay Black', Georgia, Times New Roman, serif;
+
+$basr: 'Basier Square Regular', Arial, Roboto, Helvetica, sans-serif;
+$bass: 'Basier Square Semibold', Arial, Roboto, Helvetica, sans-serif;
+
+// Media queries
+$screen-lg-max: 1920px;
+$screen-lg: 1600px;
+$screen-md: 1366px;
+$screen-smd: 1200px;
+$screen-sm: 1039px;
+$screen-smx: 860px;
+$screen-xs: 699px;
+$screen-xxs: 375px;
+$screen-xxxs: 320px;
+$screen-base: 0px;
