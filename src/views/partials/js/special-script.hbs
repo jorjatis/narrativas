@@ -1,33 +1,192 @@
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Nombres mural
-    const containerNames = document.querySelector(".v-spc-names");
-    const names = Array.from(containerNames.querySelectorAll("span"));
+document.addEventListener("DOMContentLoaded", () => {
+  const PARTICULAS = ["de", "del", "de la", "de los", "de las", "la", "los", "las", "y"];
 
-    const shuffled = names.sort(() => Math.random() - 0.5);
+  // Función para normalizar nombre y quitar partículas
+  function crearSlug(nombre) {
+    return nombre
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(p => !PARTICULAS.includes(p))
+      .join("-");
+  }
 
-    const totalDuration = 5000;
-    const interval = totalDuration / shuffled.length;
+  // Seleccionar todos los spans dentro de v-spc-names y generar slug
+  const spans = document.querySelectorAll(".v-spc-names span");
+  spans.forEach(span => {
+    let nombre = span.textContent.replace(/[, ]+$/, "").trim(); // Quitar coma final
+    const slug = crearSlug(nombre);
+    span.setAttribute("data-target", slug);
+  });
 
-    shuffled.forEach((name, index) => {
-      setTimeout(() => {
-        name.classList.add("visible");
-      }, index * interval);
-    });
-
-    containerNames.querySelectorAll("span").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const targetId = btn.getAttribute("data-target");
-        const el = document.querySelector(`[popovertarget="${targetId}"]`);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "center" });
-          el.classList.add("found");
-
-          setTimeout(() => {
-            el.classList.remove("found");
-          }, 4000);
-        }
-      });
+  // Click en nombre → scroll al button correspondiente
+  spans.forEach(span => {
+    span.addEventListener("click", () => {
+      const targetId = span.getAttribute("data-target");
+      const el = document.querySelector(`.v-spc-faces__itm[popovertarget="${targetId}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.classList.add("found");
+        setTimeout(() => el.classList.remove("found"), 3000);
+      }
     });
   });
+
+  // Función para obtener datos de Google Sheets
+  async function fetchSheetData() {
+    const SPREADSHEET_ID = "1H6SJVE9WEXakWdyIU_TU2ZUoxyF7pxeTZsq0IZOOv70";
+    const API_KEY = "AIzaSyBI99DiN3fTeBdJVjsu58Lrnvyxfl9cKWM"; 
+    const SHEET_NAME = "datos";
+
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      if (!data.values) return [];
+
+      const rows = data.values.slice(8); // Empezar desde fila 9
+      return rows.map(r => {
+        const fotoFlag = r[0]?.trim() || "";   
+        let nombreCompleto = r[1]?.trim() || "";
+        const age = r[10]?.trim() || "Edad placeholder";
+        const location = r[11]?.trim() || "Ubicacion placeholder";
+        const desc = r[2]?.trim() || "";
+
+        const match = nombreCompleto.match(/^(\d+)\.\s*(.*)/);
+        let numero = "";
+        if (match) {
+          numero = match[1];
+          nombreCompleto = match[2];
+        }
+
+        const slug = crearSlug(nombreCompleto);
+
+        const slugImg = nombreCompleto
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .split(" ")
+          .join("_");
+
+        const imgBaseName = numero ? `${numero}_${slugImg}` : slugImg;
+
+        return { fotoFlag, nombre: nombreCompleto, slug, imgBaseName, age, location, desc };
+      });
+
+    } catch (err) {
+      console.error("Error al leer la hoja:", err);
+      return [];
+    }
+  }
+
+  // Abrir popover y bloquear fondo
+  function openPopover(pop) {
+    document.body.classList.add('is-overflow');
+    pop.classList.add('is-open'); // opcional para animación
+  }
+
+  // Cerrar popover y restaurar fondo
+  function closePopover(pop) {
+    document.body.classList.remove('is-overflow');
+    pop.classList.remove('is-open'); // opcional para animación
+  }
+
+  // Inicializar grid de buttons
+  async function initGrid() {
+    const loader = document.querySelector(".v-spc-loader");
+    const container = document.querySelector(".v-spc-faces-grid");
+
+    loader.style.display = "block";
+    const rows = await fetchSheetData();
+
+    rows.forEach(person => {
+      const btn = document.createElement("button");
+      btn.className = "v-spc-faces__itm is-hidden";
+      btn.setAttribute("popovertarget", person.slug);
+
+      const imgSrc = person.fotoFlag.toUpperCase() === "SI"
+        ? `assets/images/fotos/${person.imgBaseName}.jpg`
+        : "assets/images/dummy.jpg";
+
+      const figure = document.createElement("figure");
+      figure.className = "v-spc-faces__img";
+      const img = document.createElement("img");
+      img.src = imgSrc;
+      img.alt = person.nombre;
+      figure.appendChild(img);
+
+      const span = document.createElement("span");
+      span.className = "v-spc-faces__name";
+      span.textContent = person.nombre;
+
+      btn.appendChild(figure);
+      btn.appendChild(span);
+      container.appendChild(btn);
+
+      // Click en button → actualizar popover existente
+      btn.addEventListener("click", () => {
+        const pop = document.querySelector('.v-spc-pop');
+        if (!pop) return; // si no existe el popover, salir
+
+        const popClose = pop.querySelector('.v-x');
+
+        // Rellenar datos
+        const popImg = pop.querySelector("#pop-img");
+        const popName = pop.querySelector("#pop-name");
+        const popAge = pop.querySelector("#pop-age");
+        const popLoc = pop.querySelector("#pop-loc");
+        const popDesc = pop.querySelector("#pop-desc");
+
+        pop.id = person.slug;
+        popClose.setAttribute("popovertarget", person.slug);
+        popImg.src = imgSrc;
+        popImg.alt = person.nombre;
+        popName.textContent = person.nombre;
+        popAge.textContent = person.age;
+        popLoc.textContent = person.location;
+        popDesc.textContent = person.desc;
+
+        openPopover(pop);
+
+        // Cerrar popover al click en el botón de cerrar
+        popClose.addEventListener('click', () => closePopover(pop), { once: true });
+      });
+    });
+
+    // Esperar a que carguen las imágenes
+    const images = container.querySelectorAll(".v-spc-faces__img img");
+    await Promise.all(Array.from(images).map(img => new Promise(resolve => {
+      img.onload = img.onerror = resolve;
+    })));
+
+    loader.style.display = "none";
+
+    const items = container.querySelectorAll(".v-spc-faces__itm");
+    items.forEach((item, i) => setTimeout(() => item.classList.remove("is-hidden"), i * 20));
+  }
+
+  initGrid();
+
+  // Animación inicial de los spans
+  const totalDuration = 5000;
+  const interval = totalDuration / spans.length;
+  const shuffled = Array.from(spans).sort(() => Math.random() - 0.5);
+  shuffled.forEach((name, index) => {
+    setTimeout(() => name.classList.add("visible"), index * interval);
+  });
+
+  // Cerrar popover al hacer click fuera
+  document.addEventListener('click', (e) => {
+    const pop = document.querySelector('.v-spc-pop');
+    if (!pop) return;
+
+    if (document.body.classList.contains('is-overflow') && 
+        !pop.contains(e.target) && 
+        !e.target.closest('.v-spc-faces__itm')) {
+      closePopover(pop);
+    }
+  });
+});
 </script>
