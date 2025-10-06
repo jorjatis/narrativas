@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const imgSrc = person.fotoFlag.toUpperCase() === "SI"
         ? `assets/images/fotos/${person.imgBaseName}.jpg`
-        : "assets/images/dummy.jpg";
+        : "assets/images/no-photo.jpg";
 
       const figure = document.createElement("figure");
       figure.className = "v-spc-faces__img";
@@ -187,6 +187,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initGrid();
+
+  // Filtro de búsqueda
+  const buscador = document.getElementById("buscador");
+
+  if (buscador) {
+    buscador.addEventListener("input", () => {
+      const query = buscador.value
+        .trim()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+
+      // Seleccionar todos los botones del grid
+      const items = document.querySelectorAll(".v-spc-faces__itm");
+
+      items.forEach(item => {
+        const nombre = item.querySelector(".v-spc-faces__name").textContent
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase();
+
+        // Mostrar solo los que empiecen por lo buscado
+        if (nombre.startsWith(query) || query === "") {
+          item.classList.remove("hidden");
+        } else {
+          item.classList.add("hidden");
+        }
+      });
+    });
+  }
 
   // Animación inicial de los spans
   const totalDuration = 5000;

@@ -157,6 +157,7 @@ body .voc-footer {
   position: relative;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   gap: 16px;
   min-height: 200px;
   padding-top: 110px;
@@ -176,7 +177,7 @@ body .voc-footer {
   &-txt {
     display: block;
     width: 100%;
-    margin-bottom: 45px;
+    margin-bottom: 8px;
     font: 14px/16px $basr;
     text-align: center;
     letter-spacing: -.42px;
@@ -185,9 +186,14 @@ body .voc-footer {
 
   &-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(143px, 1fr));
-    gap: 18px 24px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 6px 8px;
     align-items: flex-start;
+
+    @media (min-width: $screen-xs) {
+      grid-template-columns: repeat(auto-fill, minmax(143px, 1fr));
+      gap: 18px 24px;
+    }
 
     &:has(> .v-spc-faces__itm.found) {
       .v-spc-faces__itm:not(.found) {
@@ -210,7 +216,7 @@ body .voc-footer {
   }
 
   &__itm {
-    min-width: 143px;
+    width: 100%;
     transition: .5s opacity ease;
     opacity: 1;
     transform: scale(1);
@@ -413,6 +419,22 @@ body .voc-footer {
   }
 }
 
+.v-spc-search {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 36px;
+  padding: 8px 12px;
+  font-family: $basr;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.v-spc-faces__itm.hidden {
+  display: none !important;
+}
+
 body.is-overflow {
   pointer-events: none;
 }
@@ -469,7 +491,8 @@ body.is-overflow .v-spc-pop {
     animation-delay: 2s;
   }
 
-  &-txt {
+  &-txt,
+  .v-spc-search {
     opacity: 0;
     animation: fadeInBlock 0.8s ease forwards;
     animation-delay: 2.4s;
