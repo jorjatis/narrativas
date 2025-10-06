@@ -34,49 +34,68 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Función para obtener datos de Google Sheets
   async function fetchSheetData() {
-    const SPREADSHEET_ID = "1H6SJVE9WEXakWdyIU_TU2ZUoxyF7pxeTZsq0IZOOv70";
-    const API_KEY = "AIzaSyBI99DiN3fTeBdJVjsu58Lrnvyxfl9cKWM"; 
-    const SHEET_NAME = "datos";
+    const SPREADSHEET_ID = "1H6SJVE9WEXakWdyIU_TU2ZUoxyF7pxeTZsq0IZOOv70"; // tu ID
+    const SHEET_NAME = "datos"; // nombre de la hoja
 
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+    const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
 
     try {
       const res = await fetch(url);
-      const data = await res.json();
-      if (!data.values) return [];
+      const text = await res.text();
 
-      const rows = data.values.slice(8); // Empezar desde fila 9
+      // Quitar cualquier comentario inicial y la función de Google Sheets
+      const jsonText = text
+        .replace(/^[\s\S]*?google\.visualization\.Query\.setResponse\(/, '') // quitar todo antes de la función
+        .replace(/\);?\s*$/, ''); // quitar el cierre de la función
+
+      const data = JSON.parse(jsonText);
+
+      if (!data.table.rows) return [];
+
+      const rows = data.table.rows.slice(8); // ajustar según tu hoja
+
       return rows.map(r => {
-        const fotoFlag = r[0]?.trim() || "";   
-        let nombreCompleto = r[1]?.trim() || "";
-        const age = r[10]?.trim() || "Edad placeholder";
-        const location = r[11]?.trim() || "Ubicacion placeholder";
-        const desc = r[2]?.trim() || "";
+        const fotoFlag = r.c[0]?.v || "";
+        const nombreCompleto = r.c[1]?.v || "";
+        const age = r.c[10]?.v || "Edad placeholder";
+        const location = r.c[11]?.v || "Ubicacion placeholder";
+        const desc = r.c[2]?.v || "";
 
         const match = nombreCompleto.match(/^(\d+)\.\s*(.*)/);
         let numero = "";
+        let nombre = nombreCompleto;
         if (match) {
           numero = match[1];
-          nombreCompleto = match[2];
+          nombre = match[2];
         }
 
-        const slug = crearSlug(nombreCompleto);
+        const PARTICULAS = ["de", "del", "de la", "de los", "de las", "la", "los", "las", "y"];
+        const crearSlug = (nombre) =>
+          nombre
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .split(/\s+/)
+            .filter(p => !PARTICULAS.includes(p))
+            .join("-");
 
-        const slugImg = nombreCompleto
-          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        const slug = crearSlug(nombre);
+
+        const slugImg = nombre
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
           .toLowerCase()
           .split(" ")
           .join("_");
 
         const imgBaseName = numero ? `${numero}_${slugImg}` : slugImg;
 
-        return { fotoFlag, nombre: nombreCompleto, slug, imgBaseName, age, location, desc };
+        return { fotoFlag, nombre, slug, imgBaseName, age, location, desc };
       });
 
     } catch (err) {
-      console.error("Error al leer la hoja:", err);
+      console.error("Error al leer la hoja pública:", err);
       return [];
     }
   }
