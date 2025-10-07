@@ -144,25 +144,8 @@ body .voc-footer {
         left: 50%;
         transform: translateX(-50%);
         width: 100vw;
-        height: 240px;
-        background: linear-gradient(180deg,rgba(grey, 1) 0%, rgba(grey, 1) 80%, rgba(grey, 0) 100%);
-        opacity: 0;  
-        transition: opacity 0.5s ease; 
-        pointer-events: none;
-        z-index: -1;
-      }
-    }
-
-    &:after {
-      @media (max-width: 1395px) {
-        content: "";
-        position: absolute;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100vw;
-        height: 130px;
-        background: linear-gradient(180deg,rgba(grey, 0.7) 0%, rgba(grey, 0) 100%);
+        height: 400px;
+        background: linear-gradient(180deg,rgba(#161515, 1) 0%, rgba(#161515, 1) 80%, rgba(#161515, 0) 100%);
         opacity: 0;  
         transition: opacity 0.5s ease; 
         pointer-events: none;
@@ -171,8 +154,11 @@ body .voc-footer {
     }
 
     &.fog {
-       &:before,
-       &:after {
+      &:before {
+        @media (max-width: $screen-xs) {
+          height: 350px;
+        }
+
         @media (max-width: 1395px) {
           opacity: 1;
         }
@@ -181,29 +167,65 @@ body .voc-footer {
   }
 
   .v-spc-map {
-    width: 287px;
-    height: 287px;
+    width: 250px;
+    height: auto;
     transition: background .5s ease;
     opacity: .8;
 
+    @media (min-width: $screen-xs) {
+      width: 300px;
+    }
+
     @media (min-width: 1395px) {
       position: absolute;
+      width: 420px;
+    }
+
+    .radar {
+      transition: transform 2s ease;
+
+      circle:first-child {
+        animation: radarSvg 2s infinite;
+        
+        @keyframes radarSvg {
+          0% {
+            r: 0;
+            opacity: 1;
+          }
+          70% {
+            r: 30;
+            opacity: 0;
+          }
+          100% {
+            r: 30;
+            opacity: 0;
+          }
+        }
+      }
     }
 
     &--1 {
-      background: white;
+      .radar {
+        transform: translate(0, 0);
+      }
     }
 
     &--2 {
-      background: lightcoral;
+      .radar { 
+        transform: translate(33px, 130px);
+      }
     }
 
     &--3 {
-      background: lightblue;
+      .radar {
+        transform: translate(50px, 200px);
+      }
     }
 
     &--4 {
-      background: lightgreen;
+      .radar {
+        transform: translate(80px, 288px);
+      }
     }
   }
 

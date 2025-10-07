@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const map = document.querySelector(".v-spc-map");
   const sections = document.querySelectorAll(".v-spc-zone");
 
-  const observer = new IntersectionObserver((entries) => {
+  const mapObserver = new IntersectionObserver((entries) => {
     // Filtramos las que están visibles
     const visible = entries.filter(entry => entry.isIntersecting);
 
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     threshold: 0.25
   });
 
-  sections.forEach(zone => observer.observe(zone));
+  sections.forEach(zone => mapObserver.observe(zone));
 
   // Detectar cuando el sticky está "pegado"
   const stickyTop = 90; // coincide con tu CSS
@@ -62,5 +62,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Ejecutar una vez al cargar
   checkSticky();
+
+  const video = document.querySelector(".voc-article--detail .video");
+  if (!video) return;
+
+  let alreadyPlayed = false;
+
+  const videoObserver = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 1 && !alreadyPlayed) {
+          video.play();
+          alreadyPlayed = true;
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 1 }
+  );
+
+  videoObserver.observe(video);
 });
 </script>
