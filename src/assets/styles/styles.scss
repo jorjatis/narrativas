@@ -102,6 +102,8 @@ body .voc-footer {
   video {
     width: 100%;
     margin-top: 64px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 }
 
@@ -138,12 +140,28 @@ body .voc-footer {
     background: $darkbg;
     z-index: 1;
 
+    @media (max-width: $screen-xs) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-left: -25px;
+      width: 100vw;
+      height: 50px;
+    }
+
     > span {
-      position: absolute;
+      @media (min-width: $screen-xs) {
+        position: absolute;
+      }
     }
 
     > nav {
-      flex: 1 0 auto;
+      width: 100%;
+
+      @media (min-width: $screen-xs) {
+        flex: 1 0 auto;
+      }
 
       ul {
         display: flex;
