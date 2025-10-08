@@ -36,6 +36,17 @@
     </div>
   </div>
   <div class="voc-container voc-container--spc">
+    <div class="v-spc-nav">
+      <span>Las historias</span>
+      <nav>
+        <ul>
+          <li><a href="#zona-1" class="is-active">Portal 4</a></li>
+          <li><a href="#zona-2">Portal 2</a></li>
+          <li><a href="#zona-3">Portal 7</a></li>
+          <li><a href="#zona-4">Portal 5</a></li>
+        </ul>
+      </ul>
+    </div>
     <div class="v-spc-map-c">
       <div class="v-spc-map v-spc-map--1">
         {{> components/map }}
@@ -44,7 +55,10 @@
 
     {{!-- NOTE: Zona 1 --}}
 
-    <div class="v-spc-zone v-spc-zone--1">
+    <div class="v-spc-zone v-spc-zone--1" id="zona-1">
+      <div class="v-spc-map v-spc-map--1">
+        {{> components/map }}
+      </div>
       <div class="v-spc-hdg v-spc-hdg">
         <div class="v-spc-dot">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="17" fill="#FC3636" fill-opacity=".4"/><circle cx="17" cy="17" r="6" fill="#FC3636"/></svg>
@@ -76,7 +90,10 @@
 
     {{!-- NOTE: Zona 2 --}}
 
-    <div class="v-spc-zone v-spc-zone--2">
+    <div class="v-spc-zone v-spc-zone--2" id="zona-2">
+      <div class="v-spc-map v-spc-map--2">
+        {{> components/map }}
+      </div>
       <div class="v-spc-hdg">
         <div class="v-spc-dot">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="17" fill="#FC3636" fill-opacity=".4"/><circle cx="17" cy="17" r="6" fill="#FC3636"/></svg>
@@ -108,7 +125,10 @@
 
     {{!-- NOTE: Zona 3 --}}
 
-    <div class="v-spc-zone v-spc-zone--3">
+    <div class="v-spc-zone v-spc-zone--3" id="zona-3">
+      <div class="v-spc-map v-spc-map--3">
+        {{> components/map }}
+      </div>
       <div class="v-spc-hdg">
         <div class="v-spc-dot">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="17" fill="#FC3636" fill-opacity=".4"/><circle cx="17" cy="17" r="6" fill="#FC3636"/></svg>
@@ -140,7 +160,10 @@
 
     {{!-- NOTE: Zona 4 --}}
 
-    <div class="v-spc-zone v-spc-zone--4">
+    <div class="v-spc-zone v-spc-zone--4" id="zona-4">
+      <div class="v-spc-map v-spc-map--4">
+        {{> components/map }}
+      </div>
       <div class="v-spc-hdg v-spc-hdg--4">
         <div class="v-spc-dot">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="17" fill="#FC3636" fill-opacity=".4"/><circle cx="17" cy="17" r="6" fill="#FC3636"/></svg>
