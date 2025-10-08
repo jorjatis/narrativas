@@ -204,15 +204,23 @@ body .voc-footer {
     width: 350px;
     height: auto;
     transition: background .5s ease;
-    opacity: .8;
+    margin-bottom: 24px;
 
     @media (min-width: $screen-xs) {
-      width: 300px;
+      width: 420px;
     }
 
     @media (min-width: 1395px) {
       position: absolute;
-      width: 420px;
+    }
+
+    .textos {
+      text {
+        font-family: $bass;
+        font-size: 24px;
+        fill: $cb7;
+        text-transform: uppercase;
+      }
     }
 
     .radar {
