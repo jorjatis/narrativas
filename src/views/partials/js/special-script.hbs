@@ -1,122 +1,110 @@
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const map = document.querySelector(".v-spc-map");
-  const sections = Array.from(document.querySelectorAll(".v-spc-zone")); // <-- se usa también para nav
-  const mediaQuery = window.matchMedia("(min-width: 1395px)");
-  let mapObserver = null;
+  document.addEventListener("DOMContentLoaded", () => {
+    const map = document.querySelector(".v-spc-map");
+    const sections = [...document.querySelectorAll(".v-spc-zone")];
+    const navLinks = [...document.querySelectorAll(".v-spc-nav a")];
+    const mediaQuery = window.matchMedia("(min-width: 1395px)");
+    const video = document.querySelector(".voc-article--detail .video");
 
-  // --- Observador del mapa ---
-  const createMapObserver = () => {
-    if (!map || sections.length === 0) return;
+    let mapObserver = null;
+    let navObserver = null;
 
-    mapObserver = new IntersectionObserver((entries) => {
+    // ---------------------------
+    // UTILIDADES
+    // ---------------------------
+    const clearClasses = (el, prefix) => {
+      el.classList.forEach(c => c.startsWith(prefix) && el.classList.remove(c));
+    };
+
+    const createObserver = (targetElements, options, onIntersect) => {
+      const obs = new IntersectionObserver(onIntersect, options);
+      targetElements.forEach(el => obs.observe(el));
+      return obs;
+    };
+
+    // ---------------------------
+    // MAPA INTERACTIVO
+    // ---------------------------
+    const updateMapClass = (entries) => {
       const visible = entries.filter(e => e.isIntersecting);
-      if (visible.length === 0) return;
+      if (!visible.length) return;
 
-      const topMost = visible.reduce((closest, entry) => {
-        if (!closest) return entry;
-        return entry.boundingClientRect.top < closest.boundingClientRect.top ? entry : closest;
-      }, null);
+      const topMost = visible.reduce((a, b) =>
+        a.boundingClientRect.top < b.boundingClientRect.top ? a : b
+      );
 
-      if (!topMost) return;
-
-      const zoneClass = Array.from(topMost.target.classList)
-        .find(c => c.startsWith("v-spc-zone--"));
+      const zoneClass = [...topMost.target.classList].find(c => c.startsWith("v-spc-zone--"));
       if (!zoneClass) return;
 
-      const num = zoneClass.split("--")[1];
+      clearClasses(map, "v-spc-map--");
+      map.classList.add(`v-spc-map--${zoneClass.split("--")[1]}`);
+    };
 
-      Array.from(map.classList).forEach(c => {
-        if (c.startsWith("v-spc-map--")) map.classList.remove(c);
-      });
-
-      map.classList.add(`v-spc-map--${num}`);
-    }, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.25
-    });
-
-    sections.forEach(zone => mapObserver.observe(zone));
-  };
-
-  const destroyMapObserver = () => {
-    if (mapObserver) {
-      mapObserver.disconnect();
-      mapObserver = null;
-    }
-  };
-
-  const checkSticky = () => {
-    if (mediaQuery.matches) {
-      if (!mapObserver) createMapObserver();
-    } else {
-      destroyMapObserver();
-      if (map) {
-        Array.from(map.classList).forEach(c => {
-          if (c.startsWith("v-spc-map--")) map.classList.remove(c);
-        });
+    const enableMapObserver = () => {
+      if (map && sections.length) {
+        mapObserver = createObserver(sections, { threshold: 0.25 }, updateMapClass);
       }
+    };
+
+    const disableMapObserver = () => {
+      mapObserver?.disconnect();
+      mapObserver = null;
+      if (map) clearClasses(map, "v-spc-map--");
+    };
+
+    const handleResponsiveObservers = () => {
+      if (mediaQuery.matches) {
+        if (!mapObserver) enableMapObserver();
+      } else {
+        disableMapObserver();
+      }
+    };
+
+    mediaQuery.addEventListener?.("change", handleResponsiveObservers);
+    mediaQuery.addListener?.(handleResponsiveObservers);
+    window.addEventListener("scroll", handleResponsiveObservers);
+    window.addEventListener("resize", handleResponsiveObservers);
+
+    handleResponsiveObservers();
+
+    // ---------------------------
+    // VIDEO AUTO-PLAY
+    // ---------------------------
+    if (video) {
+      let played = false;
+      createObserver([video], { threshold: 1 }, (entries, obs) => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !played) {
+            video.play();
+            played = true;
+            obs.unobserve(video);
+          }
+        });
+      });
     }
-  };
 
-  if (typeof mediaQuery.addEventListener === "function") {
-    mediaQuery.addEventListener("change", checkSticky);
-  } else if (typeof mediaQuery.addListener === "function") {
-    mediaQuery.addListener(checkSticky);
-  }
+    // ---------------------------
+    // SCROLLSPY NAV
+    // ---------------------------
+    // Click manual → activar inmediatamente
+    navLinks.forEach(link =>
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        navLinks.forEach(l => l.classList.remove("is-active"));
+        e.currentTarget.classList.add("is-active");
+      })
+    );
 
-  window.addEventListener("scroll", checkSticky);
-  window.addEventListener("resize", checkSticky);
-
-  checkSticky();
-
-  // --- Video observer ---
-  const video = document.querySelector(".voc-article--detail .video");
-  if (video) {
-    let alreadyPlayed = false;
-    const videoObserver = new IntersectionObserver((entries, obs) => {
+    // Scroll automático → activar según sección visible
+    navObserver = createObserver(sections, { threshold: 0.3 }, (entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 1 && !alreadyPlayed) {
-          video.play();
-          alreadyPlayed = true;
-          obs.unobserve(entry.target);
+        const id = entry.target.id;
+        const link = document.querySelector(`.v-spc-nav a[href="#${id}"]`);
+        if (entry.isIntersecting && link) {
+          navLinks.forEach(l => l.classList.remove("is-active"));
+          link.classList.add("is-active");
         }
       });
-    }, { threshold: 1 });
-
-    videoObserver.observe(video);
-  }
-
-  // --- Scrollspy nav ---
-  const navLinks = document.querySelectorAll(".v-spc-nav a");
-
-  // Cuando haces clic en un enlace → marcar activo inmediatamente
-  navLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-      navLinks.forEach(l => l.classList.remove("is-active"));
-      e.currentTarget.classList.add("is-active");
     });
   });
-
-  // Cuando haces scroll → marcar activo según sección visible
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = entry.target.getAttribute("id");
-      const link = document.querySelector(`.v-spc-nav a[href="#${id}"]`);
-      if (!link) return;
-
-      if (entry.isIntersecting) {
-        // Activar enlace de la sección visible
-        navLinks.forEach(l => l.classList.remove("is-active"));
-        link.classList.add("is-active");
-      }
-    });
-  }, {
-    root: null,
-    threshold: 0.3, // se activa cuando al menos el 30% de la sección está visible
-  });
-
-  sections.forEach(section => navObserver.observe(section));
-});
 </script>
