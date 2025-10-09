@@ -1,239 +1,222 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  // ----------------------------------------
+  // CONFIGURACIÓN Y UTILIDADES
+  // ----------------------------------------
   const PARTICULAS = ["de", "del", "de la", "de los", "de las", "la", "los", "las", "y"];
+  const SHEET_ID = "1H6SJVE9WEXakWdyIU_TU2ZUoxyF7pxeTZsq0IZOOv70";
+  const SHEET_NAME = "datos";
 
-  // Función para normalizar nombre y quitar partículas
-  function crearSlug(nombre) {
-    return nombre
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
+  const qs = (sel, ctx = document) => ctx.querySelector(sel);
+  const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+  const normalizeText = (txt = "") =>
+    txt.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+
+  const crearSlug = (nombre = "") =>
+    normalizeText(nombre)
       .split(/\s+/)
       .filter(p => !PARTICULAS.includes(p))
       .join("-");
-  }
 
-  // Seleccionar todos los spans dentro de v-spc-names y generar slug
-  const spans = document.querySelectorAll(".v-spc-names span");
+  const delay = ms => new Promise(res => setTimeout(res, ms));
+
+  // ----------------------------------------
+  // GENERAR SLUGS PARA LOS NOMBRES
+  // ----------------------------------------
+  const spans = qsa(".v-spc-names span");
+
   spans.forEach(span => {
-    let nombre = span.textContent.replace(/[, ]+$/, "").trim(); // Quitar coma final
-    const slug = crearSlug(nombre);
-    span.setAttribute("data-target", slug);
+    const nombre = span.textContent.replace(/[, ]+$/, "").trim();
+    span.dataset.target = crearSlug(nombre);
   });
 
-  // Click en nombre → scroll al button correspondiente
+  // ----------------------------------------
+  // ANIMACION SCROLL NOMBRE MURO - IMAGEN MURO
+  // ----------------------------------------
   spans.forEach(span => {
     span.addEventListener("click", () => {
-      const targetId = span.getAttribute("data-target");
-      const el = document.querySelector(`.v-spc-faces__itm[popovertarget="${targetId}"]`);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-        el.classList.add("found");
-        setTimeout(() => el.classList.remove("found"), 3000);
-      }
+      const target = span.dataset.target;
+      const el = qs(`.v-spc-faces__itm[popovertarget="${target}"]`);
+      if (!el) return;
+
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.classList.add("found");
+      setTimeout(() => el.classList.remove("found"), 3000);
     });
   });
 
+  // ----------------------------------------
+  // CARGAR DATOS DESDE GOOGLE SHEETS
+  // ----------------------------------------
   async function fetchSheetData() {
-    const SPREADSHEET_ID = "1H6SJVE9WEXakWdyIU_TU2ZUoxyF7pxeTZsq0IZOOv70"; // tu ID
-    const SHEET_NAME = "datos"; // nombre de la hoja
-
-    const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
-
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
     try {
       const res = await fetch(url);
       const text = await res.text();
 
-      // Quitar cualquier comentario inicial y la función de Google Sheets
-      const jsonText = text
-        .replace(/^[\s\S]*?google\.visualization\.Query\.setResponse\(/, '') // quitar todo antes de la función
-        .replace(/\);?\s*$/, ''); // quitar el cierre de la función
+      const json = text
+        .replace(/^[\s\S]*?google\.visualization\.Query\.setResponse\(/, "")
+        .replace(/\);?\s*$/, "");
 
-      const data = JSON.parse(jsonText);
+      const data = JSON.parse(json);
+      if (!data.table?.rows) return [];
 
-      if (!data.table.rows) return [];
+      // helper para leer celdas sin romper
+      const getCell = (row, idx) => row.c[idx]?.v ?? "";
 
-      const rows = data.table.rows.slice(8); // ajustar según tu hoja
+      return data.table.rows.slice(8).map(r => {
+        const fotoFlag = getCell(r, 0);
+        const nombreCompleto = getCell(r, 1);
+        const desc = getCell(r, 2);
+        const age = getCell(r, 10) || "Edad no disponible";
+        const location = getCell(r, 11) || "Ubicación no disponible";
 
-      return rows.map(r => {
-        const fotoFlag = r.c[0]?.v || "";
-        const nombreCompleto = r.c[1]?.v || "";
-        const age = r.c[10]?.v || "Edad placeholder";
-        const location = r.c[11]?.v || "Ubicacion placeholder";
-        const desc = r.c[2]?.v || "";
-
+        // Extraer número y nombre
         const match = nombreCompleto.match(/^(\d+)\.\s*(.*)/);
-        let numero = "";
-        let nombre = nombreCompleto;
-        if (match) {
-          numero = match[1];
-          nombre = match[2];
-        }
-
-        const PARTICULAS = ["de", "del", "de la", "de los", "de las", "la", "los", "las", "y"];
-        const crearSlug = (nombre) =>
-          nombre
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .toLowerCase()
-            .split(/\s+/)
-            .filter(p => !PARTICULAS.includes(p))
-            .join("-");
+        const numero = match?.[1] || "";
+        const nombre = match?.[2] || nombreCompleto;
 
         const slug = crearSlug(nombre);
+        const slugImg = normalizeText(nombre).replace(/\s+/g, "_");
+        const imgBase = numero ? `${numero}_${slugImg}` : slugImg;
 
-        const slugImg = nombre
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .toLowerCase()
-          .split(" ")
-          .join("_");
-
-        const imgBaseName = numero ? `${numero}_${slugImg}` : slugImg;
-
-        return { fotoFlag, nombre, slug, imgBaseName, age, location, desc };
+        return {
+          nombre,
+          slug,
+          desc,
+          age,
+          location,
+          foto: fotoFlag.toUpperCase?.() === "SI"
+            ? `assets/images/fotos/${imgBase}.jpg`
+            : "assets/images/no-photo.jpg"
+        };
       });
-
     } catch (err) {
       console.error("Error al leer la hoja pública:", err);
       return [];
     }
   }
 
-  // Abrir popover y bloquear fondo
-  function openPopover(pop) {
-    document.body.classList.add('is-overflow');
-    pop.classList.add('is-open'); // opcional para animación
-  }
+  // ----------------------------------------
+  // POPOVER CONTROL
+  // ----------------------------------------
+  const openPopover = pop => {
+    document.body.classList.add("is-overflow");
+    pop.classList.add("is-open");
+  };
 
-  // Cerrar popover y restaurar fondo
-  function closePopover(pop) {
-    document.body.classList.remove('is-overflow');
-    pop.classList.remove('is-open'); // opcional para animación
-  }
+  const closePopover = pop => {
+    document.body.classList.remove("is-overflow");
+    pop.classList.remove("is-open");
+  };
 
-  // Inicializar grid de buttons
+  document.addEventListener("click", e => {
+    const pop = qs(".v-spc-pop");
+    if (!pop) return;
+    const insidePopover = pop.contains(e.target);
+    const faceItem = e.target.closest(".v-spc-faces__itm");
+    if (document.body.classList.contains("is-overflow") && !insidePopover && !faceItem) {
+      closePopover(pop);
+    }
+  });
+
+  // ----------------------------------------
+  // CREAR GRID DE PERSONAS
+  // ----------------------------------------
   async function initGrid() {
-    const loader = document.querySelector(".v-spc-loader");
-    const container = document.querySelector(".v-spc-faces-grid");
+    const loader = qs(".v-spc-loader");
+    const grid = qs(".v-spc-faces-grid");
 
     loader.style.display = "block";
-    const rows = await fetchSheetData();
+    const people = await fetchSheetData();
 
-    rows.forEach(person => {
+    for (const person of people) {
       const btn = document.createElement("button");
       btn.className = "v-spc-faces__itm is-hidden";
       btn.setAttribute("popovertarget", person.slug);
 
-      const imgSrc = person.fotoFlag.toUpperCase() === "SI"
-        ? `assets/images/fotos/${person.imgBaseName}.jpg`
-        : "assets/images/no-photo.jpg";
+      btn.innerHTML = `
+        <figure class="v-spc-faces__img">
+          <img src="${person.foto}" alt="${person.nombre}">
+        </figure>
+        <span class="v-spc-faces__name">${person.nombre}</span>
+      `;
 
-      const figure = document.createElement("figure");
-      figure.className = "v-spc-faces__img";
-      const img = document.createElement("img");
-      img.src = imgSrc;
-      img.alt = person.nombre;
-      figure.appendChild(img);
+      grid.appendChild(btn);
 
-      const span = document.createElement("span");
-      span.className = "v-spc-faces__name";
-      span.textContent = person.nombre;
-
-      btn.appendChild(figure);
-      btn.appendChild(span);
-      container.appendChild(btn);
-
-      // Click en button → actualizar popover existente
       btn.addEventListener("click", () => {
-        const pop = document.querySelector('.v-spc-pop');
-        if (!pop) return; // si no existe el popover, salir
+        // Verificar si hay datos reales
+        const hasDesc = person.desc && person.desc.trim() !== "";
+        const hasAge = person.age && !/Edad no disponible/i.test(person.age);
+        const hasLoc = person.location && !/Ubicación no disponible/i.test(person.location);
 
-        const popClose = pop.querySelector('.v-x');
+        // Si no hay ningún dato, no hacer nada (sin popover)
+        if (!hasDesc && !hasAge && !hasLoc) return;
 
-        // Rellenar datos
-        const popImg = pop.querySelector("#pop-img");
-        const popName = pop.querySelector("#pop-name");
-        const popAge = pop.querySelector("#pop-age");
-        const popLoc = pop.querySelector("#pop-loc");
-        const popDesc = pop.querySelector("#pop-desc");
+        const pop = qs(".v-spc-pop");
+        if (!pop) return;
 
-        pop.id = person.slug;
-        popClose.setAttribute("popovertarget", person.slug);
-        popImg.src = imgSrc;
-        popImg.alt = person.nombre;
-        popName.textContent = person.nombre;
-        popAge.textContent = person.age;
-        popLoc.textContent = person.location;
-        popDesc.textContent = person.desc;
+        Object.assign(pop, { id: person.slug });
+
+        qs("#pop-img", pop).src = person.foto;
+        qs("#pop-img", pop).alt = person.nombre;
+        qs("#pop-name", pop).textContent = person.nombre;
+
+        // Rellenar campos solo si existen
+        qs("#pop-age", pop).textContent = hasAge ? person.age : "";
+        qs("#pop-loc", pop).textContent = hasLoc ? person.location : "";
+        qs("#pop-desc", pop).textContent = hasDesc ? person.desc : "";
+
+        // Ocultar visualmente los elementos vacíos (opcional)
+        qs("#pop-age", pop).style.display = hasAge ? "" : "none";
+        qs("#pop-loc", pop).style.display = hasLoc ? "" : "none";
+        qs("#pop-desc", pop).style.display = hasDesc ? "" : "none";
+
+        const closeBtn = qs(".v-x", pop);
+        closeBtn.setAttribute("popovertarget", person.slug);
+        closeBtn.addEventListener("click", () => closePopover(pop), { once: true });
 
         openPopover(pop);
-
-        // Cerrar popover al click en el botón de cerrar
-        popClose.addEventListener('click', () => closePopover(pop), { once: true });
       });
-    });
+    }
 
-    // Esperar a que carguen las imágenes
-    const images = container.querySelectorAll(".v-spc-faces__img img");
-    await Promise.all(Array.from(images).map(img => new Promise(resolve => {
-      img.onload = img.onerror = resolve;
-    })));
+    // Esperar imágenes
+    await Promise.all(qsa(".v-spc-faces__img img", grid).map(img =>
+      new Promise(resolve => (img.onload = img.onerror = resolve))
+    ));
 
     loader.style.display = "none";
 
-    const items = container.querySelectorAll(".v-spc-faces__itm");
-    items.forEach((item, i) => setTimeout(() => item.classList.remove("is-hidden"), i * 20));
+    // Animación de aparición escalonada
+    qsa(".v-spc-faces__itm", grid).forEach((item, i) =>
+      setTimeout(() => item.classList.remove("is-hidden"), i * 20)
+    );
   }
 
   initGrid();
 
-  // Filtro de búsqueda
-  const buscador = document.getElementById("buscador");
-
+  // ----------------------------------------
+  // FILTRO DE BÚSQUEDA
+  // ----------------------------------------
+  /*const buscador = qs("#buscador");
   if (buscador) {
     buscador.addEventListener("input", () => {
-      const query = buscador.value
-        .trim()
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase();
-
-      // Seleccionar todos los botones del grid
-      const items = document.querySelectorAll(".v-spc-faces__itm");
-
-      items.forEach(item => {
-        const nombre = item.querySelector(".v-spc-faces__name").textContent
-          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-          .toLowerCase();
-
-        // Mostrar solo los que empiecen por lo buscado
-        if (nombre.startsWith(query) || query === "") {
-          item.classList.remove("hidden");
-        } else {
-          item.classList.add("hidden");
-        }
+      const query = normalizeText(buscador.value);
+      qsa(".v-spc-faces__itm").forEach(item => {
+        const nombre = normalizeText(qs(".v-spc-faces__name", item).textContent);
+        item.classList.toggle("hidden", query && !nombre.startsWith(query));
       });
     });
-  }
+  }*/
 
-  // Animación inicial de los spans
+  // ----------------------------------------
+  // ANIMACIÓN INICIAL DE NOMBRES
+  // ----------------------------------------
   const totalDuration = 5000;
-  const interval = totalDuration / spans.length;
-  const shuffled = Array.from(spans).sort(() => Math.random() - 0.5);
-  shuffled.forEach((name, index) => {
-    setTimeout(() => name.classList.add("visible"), index * interval);
+  const delayStep = totalDuration / spans.length;
+  qsa(".v-spc-names span")
+    .sort(() => Math.random() - 0.5)
+    .forEach((span, i) => setTimeout(() => span.classList.add("visible"), i * delayStep));
   });
-
-  // Cerrar popover al hacer click fuera
-  document.addEventListener('click', (e) => {
-    const pop = document.querySelector('.v-spc-pop');
-    if (!pop) return;
-
-    if (document.body.classList.contains('is-overflow') && 
-        !pop.contains(e.target) && 
-        !e.target.closest('.v-spc-faces__itm')) {
-      closePopover(pop);
-    }
-  });
-});
 </script>
