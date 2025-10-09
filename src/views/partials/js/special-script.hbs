@@ -91,6 +91,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Scrollspy nav ---
   const navLinks = document.querySelectorAll(".v-spc-nav a");
 
+  // Cuando haces clic en un enlace → marcar activo inmediatamente
+  navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      navLinks.forEach(l => l.classList.remove("is-active"));
+      e.currentTarget.classList.add("is-active");
+    });
+  });
+
+  // Cuando haces scroll → marcar activo según sección visible
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const id = entry.target.getAttribute("id");
@@ -98,13 +107,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!link) return;
 
       if (entry.isIntersecting) {
-        // Quitar is-active de todos
+        // Activar enlace de la sección visible
         navLinks.forEach(l => l.classList.remove("is-active"));
-        // Poner is-active al enlace correspondiente
         link.classList.add("is-active");
       }
     });
-  }, { threshold: 0.5 });
+  }, {
+    root: null,
+    threshold: 0.3, // se activa cuando al menos el 30% de la sección está visible
+  });
 
   sections.forEach(section => navObserver.observe(section));
 });
