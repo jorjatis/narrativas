@@ -1,222 +1,258 @@
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // ----------------------------------------
-  // CONFIGURACIÓN Y UTILIDADES
-  // ----------------------------------------
-  const PARTICULAS = ["de", "del", "de la", "de los", "de las", "la", "los", "las", "y"];
-  const SHEET_ID = "1H6SJVE9WEXakWdyIU_TU2ZUoxyF7pxeTZsq0IZOOv70";
-  const SHEET_NAME = "datos";
+  document.addEventListener("DOMContentLoaded", async () => {
 
-  const qs = (sel, ctx = document) => ctx.querySelector(sel);
-  const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqgue7-yB0O5ERkCtZKhBfS-jaSRBbO31WlJjxjlh2SvDLb38fLcTpn6kbYxqCFIasbR9HBl1Yl2WA/pub?gid=0&single=true&output=csv";
+    const qs = (sel, ctx = document) => ctx.querySelector(sel);
+    const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-  const normalizeText = (txt = "") =>
-    txt.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+    // ----------------------------------------
+    // UTILIDADES
+    // ----------------------------------------
+    function limpiarNombreSlug(rawName) {
+      return rawName
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/🟢|🔴/g, "")
+        .replace(/-\s*hija del número\s*\d+\s*-/i, "")
+        .replace(/-\s*.*-$/i, "")
+        .trim();
+    }
 
-  const crearSlug = (nombre = "") =>
-    normalizeText(nombre)
-      .split(/\s+/)
-      .filter(p => !PARTICULAS.includes(p))
-      .join("-");
+    function limpiarNombreVisible(rawName) {
+      return rawName.replace(/🟢|🔴/g, "").trim();
+    }
 
-  const delay = ms => new Promise(res => setTimeout(res, ms));
+    function crearSlug(nombre = "") {
+      return nombre
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(p => !["de", "del", "de la", "de los", "de las", "la", "los", "las", "y"].includes(p))
+        .join("-");
+    }
 
-  // ----------------------------------------
-  // GENERAR SLUGS PARA LOS NOMBRES
-  // ----------------------------------------
-  const spans = qsa(".v-spc-names span");
+    function parseCSV(csvText) {
+      const rows = [];
+      const lines = csvText.split("\n");
+      for (let line of lines) {
+        const row = [];
+        let match;
+        const regex = /"(.*?)"|([^,]+)/g;
+        while ((match = regex.exec(line)) !== null) {
+          row.push(match[1] !== undefined ? match[1] : (match[2] || ""));
+        }
+        rows.push(row);
+      }
+      return rows;
+    }
 
-  spans.forEach(span => {
-    const nombre = span.textContent.replace(/[, ]+$/, "").trim();
-    span.dataset.target = crearSlug(nombre);
-  });
+    // ----------------------------------------
+    // CARGAR CSV Y PROCESAR DATOS
+    // ----------------------------------------
+    async function fetchPeople() {
+      const PROXY = "https://corsproxy.io/?";
+      const res = await fetch(PROXY + encodeURIComponent(CSV_URL));
+      const csvText = await res.text();
+      const rows = parseCSV(csvText);
 
-  // ----------------------------------------
-  // ANIMACION SCROLL NOMBRE MURO - IMAGEN MURO
-  // ----------------------------------------
-  spans.forEach(span => {
-    span.addEventListener("click", () => {
-      const target = span.dataset.target;
-      const el = qs(`.v-spc-faces__itm[popovertarget="${target}"]`);
-      if (!el) return;
+      const people = [];
+      for (let i = 8; i < rows.length; i++) {
+        const row = rows[i];
 
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
-      el.classList.add("found");
-      setTimeout(() => el.classList.remove("found"), 3000);
-    });
-  });
+        const fotoFlag = (row[0] || "").toUpperCase();
+        let nombreRaw = "";
+        for (let col of row) {
+          if (/^\d+\./.test(col?.trim())) {
+            nombreRaw = col.trim();
+            break;
+          }
+        }
+        if (!nombreRaw) continue;
 
-  // ----------------------------------------
-  // CARGAR DATOS DESDE GOOGLE SHEETS
-  // ----------------------------------------
-  async function fetchSheetData() {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
-    try {
-      const res = await fetch(url);
-      const text = await res.text();
+        const match = nombreRaw.match(/^\d+\.\s*(.*)/);
+        const nombreVisible = match ? limpiarNombreVisible(match[1]) : limpiarNombreVisible(nombreRaw);
+        const nombreSlug = limpiarNombreSlug(nombreVisible);
+        if (!nombreVisible) continue;
 
-      const json = text
-        .replace(/^[\s\S]*?google\.visualization\.Query\.setResponse\(/, "")
-        .replace(/\);?\s*$/, "");
-
-      const data = JSON.parse(json);
-      if (!data.table?.rows) return [];
-
-      // helper para leer celdas sin romper
-      const getCell = (row, idx) => row.c[idx]?.v ?? "";
-
-      return data.table.rows.slice(8).map(r => {
-        const fotoFlag = getCell(r, 0);
-        const nombreCompleto = getCell(r, 1);
-        const desc = getCell(r, 2);
-        const age = getCell(r, 10) || "Edad no disponible";
-        const location = getCell(r, 11) || "Ubicación no disponible";
-
-        // Extraer número y nombre
-        const match = nombreCompleto.match(/^(\d+)\.\s*(.*)/);
-        const numero = match?.[1] || "";
-        const nombre = match?.[2] || nombreCompleto;
-
-        const slug = crearSlug(nombre);
-        const slugImg = normalizeText(nombre).replace(/\s+/g, "_");
+        const slug = crearSlug(nombreSlug);
+        const numero = match ? match[0].split(".")[0] : "";
+        let slugImg = nombreSlug.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "");
+        slugImg = slugImg.replace(/^_+|_+$/g, "");
         const imgBase = numero ? `${numero}_${slugImg}` : slugImg;
+        const foto = (fotoFlag === "SI") ? `assets/images/fotos/${imgBase}.jpg` : "assets/images/no-photo.jpg";
 
-        return {
-          nombre,
-          slug,
-          desc,
-          age,
-          location,
-          foto: fotoFlag.toUpperCase?.() === "SI"
-            ? `assets/images/fotos/${imgBase}.jpg`
-            : "assets/images/no-photo.jpg"
-        };
-      });
-    } catch (err) {
-      console.error("Error al leer la hoja pública:", err);
-      return [];
+        // Extraer edad desde la descripción si aparece "XX años"
+        const descRaw = row[2] || "";
+        const ageMatch = descRaw.match(/(\d+)\s*años/);
+        const age = ageMatch ? ageMatch[1] + " años" : "";
+
+        const location = ""; // Si se obtiene de otra columna, agregar aquí
+
+        people.push({ nombreVisible, slug, foto, desc: descRaw, age, location });
+      }
+
+      people.sort((a, b) => a.nombreVisible.localeCompare(b.nombreVisible, 'es', { sensitivity: 'base' }));
+
+      return people;
     }
-  }
 
-  // ----------------------------------------
-  // POPOVER CONTROL
-  // ----------------------------------------
-  const openPopover = pop => {
-    document.body.classList.add("is-overflow");
-    pop.classList.add("is-open");
-  };
-
-  const closePopover = pop => {
-    document.body.classList.remove("is-overflow");
-    pop.classList.remove("is-open");
-  };
-
-  document.addEventListener("click", e => {
+    // ----------------------------------------
+    // POPUP CONTROL
+    // ----------------------------------------
     const pop = qs(".v-spc-pop");
-    if (!pop) return;
-    const insidePopover = pop.contains(e.target);
-    const faceItem = e.target.closest(".v-spc-faces__itm");
-    if (document.body.classList.contains("is-overflow") && !insidePopover && !faceItem) {
-      closePopover(pop);
-    }
-  });
+    const closeBtn = qs(".v-x", pop);
 
-  // ----------------------------------------
-  // CREAR GRID DE PERSONAS
-  // ----------------------------------------
-  async function initGrid() {
-    const loader = qs(".v-spc-loader");
-    const grid = qs(".v-spc-faces-grid");
+    const closePopover = () => {
+      // Limpiar datos internos
+      const img = qs("#pop-img", pop);
+      const name = qs("#pop-name", pop);
+      const age = qs("#pop-age", pop);
+      const loc = qs("#pop-loc", pop);
+      const desc = qs("#pop-desc", pop);
 
-    loader.style.display = "block";
-    const people = await fetchSheetData();
+      if (img) { img.src = ""; img.alt = ""; }
+      if (name) name.textContent = "";
+      if (age) { age.textContent = ""; age.style.display = "none"; }
+      if (loc) { loc.textContent = ""; loc.style.display = "none"; }
+      if (desc) { desc.textContent = ""; }
 
-    for (const person of people) {
-      const btn = document.createElement("button");
-      btn.className = "v-spc-faces__itm is-hidden";
-      btn.setAttribute("popovertarget", person.slug);
+      // Limpiar id y atributos
+      pop.id = "";
+      closeBtn.setAttribute("popovertarget", "");
 
-      btn.innerHTML = `
+      // Quitar clases y estilos para cerrar visualmente
+      document.body.classList.remove("is-overflow");
+      pop.classList.remove("is-open");
+
+      // Opcional: si usas transiciones CSS con opacity/visibility
+      pop.style.display = "none";
+    };
+
+    // Listener único para cerrar
+    closeBtn.addEventListener("click", closePopover);
+
+    const openPopover = pop => {
+      pop.style.display = ""; // o "block"
+      pop.classList.add("is-open");
+      document.body.classList.add("is-overflow");
+    };
+
+    document.addEventListener("click", (e) => {
+      const insidePopover = pop.contains(e.target);
+      const faceItem = e.target.closest(".v-spc-faces__itm");
+      if (document.body.classList.contains("is-overflow") && !insidePopover && !faceItem) {
+        closePopover();
+      }
+    });
+
+    // ----------------------------------------
+    // INICIALIZAR NOMBRES, GRID Y POPUP
+    // ----------------------------------------
+    async function init() {
+      const loader = qs(".v-spc-loader");
+      const namesContainer = qs(".v-spc-names");
+      const grid = qs(".v-spc-faces-grid");
+
+      loader.style.display = "block";
+      const people = await fetchPeople();
+      namesContainer.innerHTML = "";
+      grid.innerHTML = "";
+
+      // --- NOMBRES ---
+      people.forEach((person, index) => {
+        const span = document.createElement("span");
+        span.textContent = index === people.length - 1
+          ? person.nombreVisible
+          : person.nombreVisible + ", ";
+        span.dataset.target = person.slug;
+        namesContainer.appendChild(span);
+      });
+
+      // --- GRID DE FOTOS ---
+      people.forEach(person => {
+        const btn = document.createElement("button");
+        btn.className = "v-spc-faces__itm is-hidden";
+        btn.setAttribute("popovertarget", person.slug);
+
+        btn.innerHTML = `
         <figure class="v-spc-faces__img">
-          <img src="${person.foto}" alt="${person.nombre}">
+          <img src="${person.foto}" alt="${person.nombreVisible}">
         </figure>
-        <span class="v-spc-faces__name">${person.nombre}</span>
+        <span class="v-spc-faces__name">${person.nombreVisible}</span>
       `;
 
-      grid.appendChild(btn);
+        // --- CLICK POPUP SOLO SI HAY DESCRIPCIÓN VÁLIDA ---
+        const descLimpia = person.desc?.trim();
+        const tieneDescReal = descLimpia && !/^(-{3,}|\/{3,})\s*$/.test(descLimpia);
 
-      btn.addEventListener("click", () => {
-        // Verificar si hay datos reales
-        const hasDesc = person.desc && person.desc.trim() !== "";
-        const hasAge = person.age && !/Edad no disponible/i.test(person.age);
-        const hasLoc = person.location && !/Ubicación no disponible/i.test(person.location);
+        if (tieneDescReal) {
+          btn.addEventListener("click", () => {
+            closePopover(); // Limpiar antes de abrir nuevo
+            pop.id = person.slug;
+            closeBtn.setAttribute("popovertarget", person.slug);
 
-        // Si no hay ningún dato, no hacer nada (sin popover)
-        if (!hasDesc && !hasAge && !hasLoc) return;
+            qs("#pop-img", pop).src = person.foto;
+            qs("#pop-img", pop).alt = person.nombreVisible;
+            qs("#pop-name", pop).textContent = person.nombreVisible;
 
-        const pop = qs(".v-spc-pop");
-        if (!pop) return;
+            const ageSpan = qs("#pop-age", pop);
+            if (person.age && !/Edad no disponible/.test(person.age)) {
+              ageSpan.textContent = person.age;
+              ageSpan.style.display = "";
+            } else {
+              ageSpan.textContent = "";
+              ageSpan.style.display = "none"; // ocultamos en vez de remover
+            }
 
-        Object.assign(pop, { id: person.slug });
+            const locSpan = qs("#pop-loc", pop);
+            if (person.location && !/Ubicación no disponible/.test(person.location)) {
+              locSpan.textContent = person.location;
+              locSpan.style.display = "";
+            } else {
+              locSpan.textContent = "";
+              locSpan.style.display = "none"; // ocultamos en vez de remover
+            }
 
-        qs("#pop-img", pop).src = person.foto;
-        qs("#pop-img", pop).alt = person.nombre;
-        qs("#pop-name", pop).textContent = person.nombre;
+            qs("#pop-desc", pop).textContent = descLimpia;
 
-        // Rellenar campos solo si existen
-        qs("#pop-age", pop).textContent = hasAge ? person.age : "";
-        qs("#pop-loc", pop).textContent = hasLoc ? person.location : "";
-        qs("#pop-desc", pop).textContent = hasDesc ? person.desc : "";
+            openPopover(pop);
+          });
+        }
 
-        // Ocultar visualmente los elementos vacíos (opcional)
-        qs("#pop-age", pop).style.display = hasAge ? "" : "none";
-        qs("#pop-loc", pop).style.display = hasLoc ? "" : "none";
-        qs("#pop-desc", pop).style.display = hasDesc ? "" : "none";
-
-        const closeBtn = qs(".v-x", pop);
-        closeBtn.setAttribute("popovertarget", person.slug);
-        closeBtn.addEventListener("click", () => closePopover(pop), { once: true });
-
-        openPopover(pop);
+        grid.appendChild(btn);
       });
+
+      // Esperar que carguen las imágenes
+      await Promise.all(qsa("img", grid).map(img => new Promise(res => img.onload = img.onerror = res)));
+      loader.style.display = "none";
+
+      // --- Animación Nombres ---
+      const spans = qsa(".v-spc-names span");
+      const totalDuration = 5000;
+      const delayStep = totalDuration / spans.length;
+      spans.sort(() => Math.random() - 0.5)
+        .forEach((span, i) => setTimeout(() => span.classList.add("visible"), i * delayStep));
+
+      // --- Scroll a la imagen desde el nombre ---
+      spans.forEach(span => {
+        span.addEventListener("click", () => {
+          const target = span.dataset.target;
+          const el = qs(`.v-spc-faces__itm[popovertarget="${target}"]`);
+          if (!el) return;
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.classList.add("found");
+          setTimeout(() => el.classList.remove("found"), 3000);
+        });
+      });
+
+      // --- Animación Grid ---
+      qsa(".v-spc-faces__itm", grid).forEach((item, i) =>
+        setTimeout(() => item.classList.remove("is-hidden"), i * 20)
+      );
     }
 
-    // Esperar imágenes
-    await Promise.all(qsa(".v-spc-faces__img img", grid).map(img =>
-      new Promise(resolve => (img.onload = img.onerror = resolve))
-    ));
+    init();
 
-    loader.style.display = "none";
-
-    // Animación de aparición escalonada
-    qsa(".v-spc-faces__itm", grid).forEach((item, i) =>
-      setTimeout(() => item.classList.remove("is-hidden"), i * 20)
-    );
-  }
-
-  initGrid();
-
-  // ----------------------------------------
-  // FILTRO DE BÚSQUEDA
-  // ----------------------------------------
-  const buscador = qs("#buscador");
-  if (buscador) {
-    buscador.addEventListener("input", () => {
-      const query = normalizeText(buscador.value);
-      qsa(".v-spc-faces__itm").forEach(item => {
-        const nombre = normalizeText(qs(".v-spc-faces__name", item).textContent);
-        item.classList.toggle("hidden", query && !nombre.startsWith(query));
-      });
-    });
-  }
-
-  // ----------------------------------------
-  // ANIMACIÓN INICIAL DE NOMBRES
-  // ----------------------------------------
-  const totalDuration = 5000;
-  const delayStep = totalDuration / spans.length;
-  qsa(".v-spc-names span")
-    .sort(() => Math.random() - 0.5)
-    .forEach((span, i) => setTimeout(() => span.classList.add("visible"), i * delayStep));
   });
 </script>
