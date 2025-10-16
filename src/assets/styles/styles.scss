@@ -146,6 +146,10 @@ body .voc-footer {
     text-align: justify;
     color: $cb7;
 
+    .v-spc-loader {
+      padding-top: 42px;
+    }
+
     span {
       position: relative;
       opacity: 0;

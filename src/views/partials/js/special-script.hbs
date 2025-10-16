@@ -181,11 +181,13 @@
     // INICIALIZAR NOMBRES, GRID Y POPUP
     // ----------------------------------------
     async function init() {
-      const loader = qs(".v-spc-loader");
+      const loaders = qsa(".v-spc-loader"); // todos los loaders
       const namesContainer = qs(".v-spc-names");
       const grid = qs(".v-spc-faces-grid");
 
-      loader.style.display = "block";
+      // Mostrar todos los loaders
+      loaders.forEach(loader => loader.style.display = "block");
+
       const people = await fetchPeople();
       namesContainer.innerHTML = "";
       grid.innerHTML = "";
@@ -207,19 +209,19 @@
         btn.setAttribute("popovertarget", person.slug);
 
         btn.innerHTML = `
-        <figure class="v-spc-faces__img">
-          <img src="${person.foto}" alt="${person.nombreVisible}">
-        </figure>
-        <span class="v-spc-faces__name">${person.nombreVisible}</span>
-      `;
+          <figure class="v-spc-faces__img">
+            <img src="${person.foto}" alt="${person.nombreVisible}">
+          </figure>
+          <span class="v-spc-faces__name">${person.nombreVisible}</span>
+        `;
 
-        // --- CLICK POPUP SOLO SI HAY DESCRIPCIÓN VÁLIDA ---
+        // click popup
         const descLimpia = person.desc?.trim();
         const tieneDescReal = descLimpia && !/^(-{3,}|\/{3,})\s*$/.test(descLimpia);
 
         if (tieneDescReal) {
           btn.addEventListener("click", () => {
-            closePopover(); // Limpiar antes de abrir nuevo
+            closePopover(); 
             pop.id = person.slug;
             closeBtn.setAttribute("popovertarget", person.slug);
 
@@ -233,7 +235,7 @@
               ageSpan.style.display = "";
             } else {
               ageSpan.textContent = "";
-              ageSpan.style.display = "none"; // ocultamos en vez de remover
+              ageSpan.style.display = "none";
             }
 
             const locSpan = qs("#pop-loc", pop);
@@ -242,11 +244,10 @@
               locSpan.style.display = "";
             } else {
               locSpan.textContent = "";
-              locSpan.style.display = "none"; // ocultamos en vez de remover
+              locSpan.style.display = "none";
             }
 
             qs("#pop-desc", pop).textContent = descLimpia;
-
             openPopover(pop);
           });
         }
@@ -254,9 +255,11 @@
         grid.appendChild(btn);
       });
 
-      // Esperar que carguen las imágenes
+      // Esperar que carguen todas las imágenes de todos los grids
       await Promise.all(qsa("img", grid).map(img => new Promise(res => img.onload = img.onerror = res)));
-      loader.style.display = "none";
+
+      // Ocultar todos los loaders
+      loaders.forEach(loader => loader.style.display = "none");
 
       // --- Animación Nombres ---
       const spans = qsa(".v-spc-names span");
