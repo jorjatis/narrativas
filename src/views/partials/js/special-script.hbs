@@ -92,8 +92,39 @@
         people.push({ nombreVisible, slug, foto, desc: descRaw, age, location });
       }
 
-      people.sort((a, b) => a.nombreVisible.localeCompare(b.nombreVisible, 'es', { sensitivity: 'base' }));
+      people.sort((a, b) => {
+        const preposiciones = ["de", "del", "de la", "de los", "de las", "la", "los", "las", "y", "da", "do", "das", "dos"];
 
+        function obtenerClaveOrden(nombre) {
+          // Normalizar y quitar tildes
+          const partes = nombre
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .split(/\s+/)
+            .filter(p => p && !preposiciones.includes(p.toLowerCase()));
+
+          // Ver si tiene Socol
+          const indiceSocol = partes.findIndex(p => p.toLowerCase() === "socol");
+          if (indiceSocol !== -1) {
+            // clave: Socol + primera letra del nombre para ordenar internamente
+            return "Socol " + partes[0].toLowerCase();
+          }
+
+          // regla normal
+          if (partes.length === 3) {
+            return partes[1]; // 2ª palabra → primer apellido
+          } else if (partes.length >= 4) {
+            return partes[2]; // 3ª palabra → primer apellido
+          } else {
+            return partes[0]; // fallback
+          }
+        }
+
+        const claveA = obtenerClaveOrden(a.nombreVisible);
+        const claveB = obtenerClaveOrden(b.nombreVisible);
+        return claveA.localeCompare(claveB, 'es', { sensitivity: 'base' });
+      });
+      
       return people;
     }
 
@@ -254,5 +285,54 @@
 
     init();
 
+    // ----------------------------------------
+    // COMPARTIR EN REDES
+    // ----------------------------------------
+    const buttons = document.querySelectorAll('[data-share]');
+    const pageUrl = window.location.href;
+    const shareText = '¡Mira este artículo interesante!';
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', event => {
+        event.preventDefault();
+        const type = btn.dataset.share;
+
+        switch (type) {
+          case 'facebook':
+            window.open(
+              `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`,
+              '_blank',
+              'width=600,height=400'
+            );
+            break;
+
+          case 'x':
+            window.open(
+              `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`,
+              '_blank',
+              'width=600,height=400'
+            );
+            break;
+
+          case 'whatsapp':
+            window.open(
+              `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${pageUrl}`)}`,
+              '_blank'
+            );
+            break;
+
+          // case 'email':
+          //   window.location.href =
+          //     `mailto:?subject=${encodeURIComponent('Te recomiendo este artículo')}&body=${encodeURIComponent(`${shareText}\n${pageUrl}`)}`;
+          //   break;
+
+          case 'copy':
+            navigator.clipboard.writeText(pageUrl)
+              .then(() => showCopyMessage(btn))
+              .catch(() => console.error('Error al copiar el enlace'));
+            break;
+        }
+      });
+    });
   });
 </script>

@@ -125,7 +125,11 @@ body .voc-footer {
     }
   }
 
-  .voc-author__time { color: $palewhite; }
+  .voc-author {
+    z-index: 10;
+    
+    &__time { color: $palewhite; }
+  }
 }
 
 // -----------------------------

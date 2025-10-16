@@ -1,0 +1,84 @@
+<div id="open-share-email" class="voc-modal voc-share-email">
+  <div class="voc-modal__wrapper">
+    <header class="voc-modal__header">
+      <span class="voc-share-email__header-icon"><svg viewBox="0 0 16.172 10.916">
+          <use href="#icon-share-envelop"></use>
+        </svg></span>
+      <span class="voc-modal__title">Comparte esta noticia por correo electrónico</span>
+      <button class="voc-modal__close" aria-label="Cerrar formulario compartir por email">
+        <svg viewBox="0 0 18.139 15.673">
+          <g transform="translate(1005.835 -1055.521)">
+            <rect width="22" height="2" rx="1" transform="rotate(40 -1952.285 -852.229)"></rect>
+            <rect width="22" height="2" rx="1" transform="rotate(-40 966.519 1916.585)"></rect>
+          </g>
+        </svg>
+      </button>
+    </header>
+    <div
+      data-voc-form-share-email="https://frontal-bridge.vocento.com/share-mail/www.abc.es/economia/gobierno-plantea-cambiar-subida-cuotas-autonomos-tras-20251016183341-nt.html">
+      <div>
+        <style>
+          .ohnohoney {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 0;
+            width: 0;
+            z-index: -1;
+          }
+        </style>
+
+        <div class="voc-modal__container" data-voc-open-share-mail-form="" data-voc-host="www.abc.es">
+          <div class="voc-form__container voc-form__container--has-bg voc-form__container--inputs-w">
+            <form class="voc-form">
+              <div class="voc-form__item">
+                <label class="voc-form__label">Tu nombre*</label>
+                <input class="voc-form__input" type="text" data-voc-shared-email="name" required="">
+              </div>
+              <div class="ohnohoney">
+                <label class="voc-form__label" for="surname">Tu apellido*</label>
+                <input id="surname" class="voc-form__input" type="text" data-voc-shared-email="surname">
+              </div>
+              <div class="voc-form__item">
+                <label class="voc-form__label">Tu email*</label>
+                <input class="voc-form__input" type="text" data-voc-shared-email="email" required="">
+              </div>
+              <div class="voc-form__item">
+                <label class="voc-form__label">Email del destinatario* (Separa varias direcciones con comas)</label>
+                <input class="voc-form__input" type="text" data-voc-shared-email="emailSend" required="">
+              </div>
+              <div class="voc-form__item">
+                <label class="voc-form__label">Tu mensaje*</label>
+                <textarea class="voc-form__input voc-form__input--textarea" data-voc-shared-email="message"></textarea>
+              </div>
+              <input class="hidden" type="text" data-voc-shared-email="section" value="economia" required="">
+              <div class="voc-form__item">
+                <div class="voc-form__help-container">
+                  <p class="voc-form__help">*Campos obligatorios</p>
+                  <p class="voc-form__help-error" data-voc-shared-email-error-message="">Algunos campos contienen
+                    errores</p>
+                </div>
+              </div>
+              <div class="voc-form__item">
+                <div class="voc-captcha">
+                  <div class="voc-captcha__item voc-captcha__item--1">
+                    <input type="submit" class="voc-btn is-disabled" value="Enviar" data-voc-shared-email-button="">
+                    <a href="https://www.vocento.com/politica-privacidad" class="voc-form__link">Política de
+                      privacidad</a>
+                  </div>
+                  <input type="hidden" name="token"
+                    value="1760606161.8a3845e478630034362e529d777bb631c7e261323b17be1f31b04dcfea22a292"
+                    data-voc-shared-email="token">
+                </div>
+              </div>
+            </form>
+            <div class="voc-form__message">
+              <p class="voc-form__message-text">Tu mensaje se ha enviado con éxito</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
