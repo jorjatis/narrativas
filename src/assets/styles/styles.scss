@@ -4,7 +4,7 @@ $palewhite: rgba($cb7, .8);
 $hueso: #F9F6EE;
 $darkbg: #161515;
 
-body {
+body, html {
   background: $darkbg;
 }
 
@@ -34,7 +34,7 @@ body {
 // FOOTER
 // -----------------------------
 body .voc-footer {
-  margin: 180px auto 0;
+  margin: 180px auto -80px;
 
   .voc-heading__logo { filter: invert(1); }
   .voc-footer__corporate .voc-heading__logo { filter: brightness(5); }
@@ -59,6 +59,37 @@ body .voc-footer {
   color: #FFFFFFE5;
 }
 
+.voc-advertising {
+  margin-top: 80px;
+  margin-bottom: 80px !important;
+}
+
+.voc-d-c__s-title {
+  margin-bottom: 16px;
+  color: $cb7;
+}
+
+.voc-c-container.voc-c-container--w-col-ab {
+  @media (min-width: $screen-sm) {
+    margin-left: -50px;
+    margin-top: 60px;
+    margin-bottom: 60px !important;
+  }
+}
+
+.voc-figcaption {
+  &--type {
+    color: $cb7;
+  }
+
+  &-container {
+    color: $cb7;
+  }
+}
+
+.voc-stores__text {
+  color: hsla(0, 0%, 100%, .8);
+}
 // -----------------------------
 // DETAIL VISUAL BLOQUE
 // -----------------------------
@@ -117,6 +148,14 @@ body .voc-footer {
     &__name {
       font: 22px/28px $abctl;
       color: $palewhite;
+    }
+
+    &__time {
+      color: rgba($cb7, .8);
+    }
+
+    .voc-social__icon--save svg {
+      stroke: rgba($cb7, .8);
     }
   }
 }
