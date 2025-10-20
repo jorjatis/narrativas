@@ -89,11 +89,18 @@ module.exports = {
       patterns: [
         { 
           from: path.join('src', 'assets', 'images'), 
-          to: path.join('assets', 'images')
+          to: path.join('assets', 'images'),
+          noErrorOnMissing: true
         },
         {
           from: path.join('src', 'assets', 'videos'),
-          to: path.join('assets', 'videos')
+          to: path.join('assets', 'videos'),
+          noErrorOnMissing: true
+        },
+        {
+          from: path.join('src', 'assets', 'data'),
+          to: path.join('assets', 'data'),
+          noErrorOnMissing: true
         }
       ]
     }),

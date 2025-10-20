@@ -9,97 +9,149 @@
     <div class="voc-article-container">
       <div class="voc-article voc-article--detail voc-article--detail-visual">
         <div class="voc-info-container">
-          <p class="voc-pretitle">
-            <span class="voc-pretitle__txt">Un año de la Dana</span>
-          </p>
           <h1 class="voc-title">{{title}}</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="voc-container voc-container--wxs">
-    <div class="voc-d voc-d--visual" data-voc-component="voc-d">
-      <h2 class="voc-subtitle">
-        {{subtitle}}
-      </h2>
-      <p class="v-dsc">
-        {{{disclaimer}}}
-      </p>
-      {{> components/author }}
-    </div>
-  </div>
-  <div class="voc-container voc-container--spc">
-    <div class="v-spc-names">
-      <div class="v-spc-loader">
-        <div class="spinner"></div>
-      </div>
-
-      {{!-- <span>María Isabel Piris Rico, </span><span>Silverio Navarro Borrás, </span><span>Miguel Ángel Pérez Ferragud, </span><span>Enrique Miguel Magraner, </span><span>José Hernáiz Montoro, </span><span>Teresa Plaza Oliver, </span><span>José Luis Rodríguez Ogayar, </span><span>María Dolores Almansa LaCuesta, </span><span>Dolores Lacuesta Arnandis, </span><span>Roberto Grau Gómez, </span><span>Juan Luis Vila Raga, </span><span>Eugenio Toledo Alexandre, </span><span>Carlos González Castán, </span><span>Sara Carpio García, </span><span>Miguel Carpio Espí, </span><span>Manuel Álvarez Ruiz, </span><span>José Solano Algaba, </span><span>Francisco Doménech García, </span><span>Valentina Toro González, </span><span>José Sancho Martín, </span><span>Luis Valdés Asensio, </span><span>Manuel Alonso Ridaura, </span><span>Marina Company Candel, </span><span>Amparo Bou Chisvert, </span><span>Fernando Páez Robles, </span><span>Silvano Rentero García, </span> --}}
-    </div>
-
-    <div class="v-spc-faces">
-      <span class="v-spc-faces-txt">Clica sobre cada víctima para conocer su historia</span>
-
-      {{!-- <input type="text" id="buscador" placeholder="Buscar nombre..." class="v-spc-search"/> --}}
-
-      <div class="v-spc-faces-grid">
-        <div class="v-spc-loader">
-          <div class="spinner"></div>
-        </div>
-
-        {{!-- NOTE: Aquí se rellenarán las personas por JS del google sheets --}}
-        {{!-- <button class="v-spc-faces__itm" popovertarget="maria-piris">
-          <figure class="v-spc-faces__img">
-            <img src="assets/images/img-ph.jpg" alt="José Hernaiz">
-          </figure>
-          <span class="v-spc-faces__name">José Hernaiz</span>
-        </button> --}}
-      </div>
-      
-      <div id="maria-isabel-piris-rico" popover class="v-mdl-pop v-spc-pop">
-        <div class="v-mdl__c v-mdl-pop__c">
-          <div class="v-mdl-pop__h">
-            <button class="v-x" popovertarget="" popovertargetaction="hide">
-              <span class="v-i">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="a" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><path fill="#D9D9D9" d="M0 0h24v24H0z"/></mask><g mask="url(#a)"><path d="M6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5l5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19Z" fill="#1C1B1F"/></g></svg>
-              </span>
-            </span>
-          </div>
-          <div class="v-mdl-pop__w">
-            <div class="v-mdl-pop__b v-mdl-pop__b--1">
-              <figure class="v-spc-faces__img">
-                <img id="pop-img" src="assets/images/no-photo.jpg" alt="">
-              </figure>
-              <div class="v-spc-faces__info">
-                <span id="pop-name" class="v-spc-faces__name"></span>
-                <span id="pop-age" class="v-spc-faces__age"></span>
-                <span id="pop-loc" class="v-spc-faces__loc"></span>
+          <section class="voc-author" data-mrf-recirculation="Autor">
+            <div class="voc-author__item voc-author__item--1">
+              <div class="voc-author__container">
+                <div class="voc-author__subitem voc-author__subitem--1">
+                  <p class="voc-author__name">
+                    <a href="https://www.abc.es/autor/alvaro-ybarra-zavala-6200/" data-mrf-link="https://www.abc.es/autor/alvaro-ybarra-zavala-6200/" cmp-ltrk="Autor" cmp-ltrk-idx="0" mrfobservableid="3b65314b-ec66-46f7-be28-0fbaa38e5aa0">Fotografía y texto: Álvaro Ybarra Zavala</a>
+                  </p>
+                </div>
               </div>
             </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <div class="v-mdl-pop__b v-mdl-pop__b--2">
-              <p id="pop-desc" class="v-spc-faces__desc"></p>
-            </div> 
+  <div class="voc-container voc-container--wxs">
+    <div class="voc-d voc-d--visual" data-voc-component="voc-d">
+
+      <div class="voc-c-container voc-c-container--wsm-max">
+        <div class="v-art-d">
+          <div class="v-art-img-c">
+            <figure class="v-art-f">
+              <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/01.jpg" alt="" class="v-art-i v-art-i--1">
+              <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/02.jpg" alt="" class="v-art-i v-art-i--2">
+              <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/03.jpg" alt="" class="v-art-i v-art-i--3">
+              <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/04.jpg" alt="" class="v-art-i v-art-i--4">
+              <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/05.jpg" alt="" class="v-art-i v-art-i--5">
+              <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/06.jpg" alt="" class="v-art-i v-art-i--6">
+              <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/07.jpg" alt="" class="v-art-i v-art-i--7">
+              <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/08.jpg" alt="" class="v-art-i v-art-i--8">
+            </figure>
+          </div>
+          <div class="v-art-inf-c">
+            <h2 class="v-sub">El fuego del 16 de agosto dejó San Vicente de Leira, en Valdeorras (Orense), al borde del olvido. Sus vecinos resisten entre la devastación, la soledad y la falta de respuestas, en un lugar donde el fuego no solo quemó los montes, sino también una forma de vida que el tiempo y el abandono ya habían empezado a borrar</h2>
+            <h2 class="v-sub"><a href="">El rastro del fuego que arrasó San Vicente de Leira, en imágenes</a></h2>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore optio fugit quia vel ex error exercitationem voluptatibus omnis ipsam, officiis incidunt sint distinctio accusantium quaerat aliquam laborum, facere ipsa sequi.</p>
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptatibus aliquid nam ex esse, minus, magni dolor exercitationem ab labore sunt soluta animi facere, doloribus doloremque quos vitae numquam cum.</p>
+      <p class="voc-p">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi voluptatem itaque enim quibusdam, corrupti veniam odit doloremque nostrum culpa nisi. Impedit omnis voluptatibus nisi adipisci, suscipit explicabo voluptates porro libero?</p>
 
-  <div class="voc-container">
-    <div class="v-c-crd">
-      <span>Créditos</span>
-      <ul>
-        <li><span>Recopilación de historias: <b>Javier Palomo, Patricia Biosca, Gregoria Caro, David Sánchez de Castro, Toni Jiménez, David Maroto</b></span></li>
-        <li><span>Edición: <b>Esther Blanco y David Sánchez de Castro</b></span></li>
-        <li><span>Desarrollo: <b>Jorge García</b></span></li>
-        <li><span>Dirección de arte y diseño: <b>Fernando Hernández</b></span></li>
-      </ul>
+      <div class="voc-c-container voc-c-container--wsm-max">
+        <div class="v-c-cmp">
+          <div class="v-cmp-cmb-2">
+            <figure class="v-cmp-cmb-2__f">
+              <div class="v-cmp-cmb-2__c">
+                <div class="v-cmp-cmb-2__i-c v-cmp-cmb-2__i-c--1">
+                  <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/01.jpg" alt="" class="v-cmp-cmb-2__i">
+                </div>
+                <div class="v-cmp-cmb-2__i-c v-cmp-cmb-2__i-c--2">
+                  <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/02.jpg" alt="" class="v-cmp-cmb-2__i">
+                </div>
+                <figcaption class="v-fc">
+                  <span class="v-fc__t">Constantino Fernández,</span><span class="v-fc__p">de 81 años, ha vivido en el pueblo casi toda su vida. No fue a la escuela, pero aprendió pronto el oficio de trabajar la tierra. Pasó por Melilla durante la mili y más tarde por Alemania, para regresar definitivamente. Se casó, tuvo 4 hijas y levantó un pequeño bar que durante años fue el punto de encuentro de los vecinos. <span class="v-fc__t">Joaquín Ovira <span class="hd-xs">(derecha)</span> <span class="vs-xs">(abajo)</span></span> trabajó en el monte, haciendo carbón, carros y vendiendo castañas. Emigró a Suiza, pero volvió pronto: «Aquí siempre fue mi sitio», dice. Recuerda un pueblo lleno de vida, con más de 600 personas. Hoy solo queda el eco de aquella vida. Fotos: Álvaro ybarra zavala</span>
+                </figcaption>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore optio fugit quia vel ex error exercitationem voluptatibus omnis ipsam, officiis incidunt sint distinctio accusantium quaerat aliquam laborum, facere ipsa sequi.</p>
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptatibus aliquid nam ex esse, minus, magni dolor exercitationem ab labore sunt soluta animi facere, doloribus doloremque quos vitae numquam cum.</p>
+      <p class="voc-p">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi voluptatem itaque enim quibusdam, corrupti veniam odit doloremque nostrum culpa nisi. Impedit omnis voluptatibus nisi adipisci, suscipit explicabo voluptates porro libero?</p>
+
+      <div class="voc-c-container voc-c-container--wsm-max">
+        <div class="v-c-cmp">
+          <div class="v-cmp-cmb-2">
+            <figure class="v-cmp-cmb-2__f">
+              <div class="v-cmp-cmb-2__c">
+                <div class="v-cmp-cmb-2__i-c v-cmp-cmb-2__i-c--1">
+                  <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/03.jpg" alt="" class="v-cmp-cmb-2__i">
+                </div>
+                <div class="v-cmp-cmb-2__i-c v-cmp-cmb-2__i-c--2">
+                  <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/04.jpg" alt="" class="v-cmp-cmb-2__i">
+                </div>
+                <figcaption class="v-fc">
+                  <span class="v-fc__t">Leopoldo Nogueira González,</span><span class="v-fc__p">76 años, ha pasado toda su vida en el pueblo donde nació y del que apenas quedan 16 vecinos. Junto a su esposa, es uno de los pocos que nunca se marcharon. Trabajó en el monte, y más tarde en las canteras de pizarra hasta su jubilación. Para él, el fuego no solo quemó casas: «Creo que nadie volverá a vivir aquí». <span class="v-fc__t">Mª Encarnación Fernández González <span class="hd-xs">(derecha)</span> <span class="vs-xs">(abajo)</span></span> habla despacio, con un gallego suave. Recuerda los días de infancia con el pueblo lleno de niños, los vecinos ayudándose unos a otros y el olor de las castañas asadas del otoño. Hoy ya no queda nada de aquello. Dice que el fuego se llevó la alegría del lugar. Fotos: Álvaro ybarra zavala</span>
+                </figcaption>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore optio fugit quia vel ex error exercitationem voluptatibus omnis ipsam, officiis incidunt sint distinctio accusantium quaerat aliquam laborum, facere ipsa sequi.</p>
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptatibus aliquid nam ex esse, minus, magni dolor exercitationem ab labore sunt soluta animi facere, doloribus doloremque quos vitae numquam cum.</p>
+      <p class="voc-p">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi voluptatem itaque enim quibusdam, corrupti veniam odit doloremque nostrum culpa nisi. Impedit omnis voluptatibus nisi adipisci, suscipit explicabo voluptates porro libero?</p>
+
+      <div class="voc-c-container voc-c-container--wsm-max">
+        <div class="v-c-cmp">
+          <div class="v-cmp-cmb-2">
+            <figure class="v-cmp-cmb-2__f">
+              <div class="v-cmp-cmb-2__c">
+                <div class="v-cmp-cmb-2__i-c v-cmp-cmb-2__i-c--1">
+                  <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/05.jpg" alt="" class="v-cmp-cmb-2__i">
+                </div>
+                <div class="v-cmp-cmb-2__i-c v-cmp-cmb-2__i-c--2">
+                  <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/06.jpg" alt="" class="v-cmp-cmb-2__i">
+                </div>
+                <figcaption class="v-fc">
+                  <span class="v-fc__t">Francisca Fernández, </span><span class="v-fc__p">nació en el barrio de Aldea, donde pasó la mayor parte de su vida. Recuerda una infancia sencilla, de trabajo y alegría, con el pueblo lleno de juventud y los días marcados por las estaciones. «Éramos felices con lo que teníamos», dice. Se casó, y crió a sus hijos en San Vicente. Habla del futuro sin ilusión, pero sin rencor. «Que vuelvan los castaños, aunque los que había, ya no volverán». <span class="v-fc__t">Pedro Álvarez Sánchez <span class="hd-xs">(derecha)</span> <span class="vs-xs">(abajo)</span></span> fue camionero, y hombre de familia. Pasaba largas jornadas en la carretera, pero siempre volvía al pueblo, donde le esperaban Francisca y la calma de su casa. Vive entregado a los suyos y a cuidar su tierra. Fotos: Álvaro ybarra zavala</span>
+                </figcaption>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore optio fugit quia vel ex error exercitationem voluptatibus omnis ipsam, officiis incidunt sint distinctio accusantium quaerat aliquam laborum, facere ipsa sequi.</p>
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptatibus aliquid nam ex esse, minus, magni dolor exercitationem ab labore sunt soluta animi facere, doloribus doloremque quos vitae numquam cum.</p>
+      <p class="voc-p">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi voluptatem itaque enim quibusdam, corrupti veniam odit doloremque nostrum culpa nisi. Impedit omnis voluptatibus nisi adipisci, suscipit explicabo voluptates porro libero?</p>
+
+      <div class="voc-c-container voc-c-container--wsm-max">
+        <div class="v-c-cmp">
+          <div class="v-cmp-cmb-2">
+            <figure class="v-cmp-cmb-2__f">
+              <div class="v-cmp-cmb-2__c">
+                <div class="v-cmp-cmb-2__i-c v-cmp-cmb-2__i-c--1">
+                  <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/07.jpg" alt="" class="v-cmp-cmb-2__i">
+                </div>
+                <div class="v-cmp-cmb-2__i-c v-cmp-cmb-2__i-c--2">
+                  <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/20/traslosincendios/assets/images/08.jpg" alt="" class="v-cmp-cmb-2__i">
+                </div>
+                <figcaption class="v-fc">
+                  <span class="v-fc__t">Clemente González, </span><span class="v-fc__p">nació en San Vicente de Leira, aunque la vida lo llevó lejos. Emigró joven al País Vasco, donde trabajó durante años y al que aún llama su «segunda casa». Habla con franqueza, entre la rabia y la resignación de quien ha visto el abandono demasiadas veces. Durante el incendio vio arder la casa donde nació, la de sus hermanos, y ayudó a otros vecinos a salvar lo poco que quedaba. Aún recuerda el calor, la impotencia y el silencio. «Ver cómo se quema todo y no poder hacer nada… eso duele de verdad». <span class="v-fc__t">Secundino Álvarez <span class="hd-xs">(derecha)</span> <span class="vs-xs">(abajo)</span></span> se marchó a Barcelona con 12 años. Volvía siempre que podía, cuatro o cinco veces al año, fiel al lugar al que sigue llamando casa. A veces recorre las ruinas con su cámara, fotografiando los primeros brotes verdes. Fotos: Álvaro ybarra zavala</span>
+                </figcaption>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore optio fugit quia vel ex error exercitationem voluptatibus omnis ipsam, officiis incidunt sint distinctio accusantium quaerat aliquam laborum, facere ipsa sequi.</p>
+      <p class="voc-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptatibus aliquid nam ex esse, minus, magni dolor exercitationem ab labore sunt soluta animi facere, doloribus doloremque quos vitae numquam cum.</p>
+      <p class="voc-p">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi voluptatem itaque enim quibusdam, corrupti veniam odit doloremque nostrum culpa nisi. Impedit omnis voluptatibus nisi adipisci, suscipit explicabo voluptates porro libero?</p>
+
     </div>
   </div>
-  
-</div>
 
 {{> base/footer }}
 
