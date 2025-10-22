@@ -16,31 +16,31 @@ function mapFilenamesToCacheGroups(options = {}) {
     extensions = ['scss'],
   } = options;
 
-  try {
-    // Leer archivos en el directorio especificado
-    const files = fs.readdirSync(directory)
-      .filter(file => extensions.some(ext => file.endsWith(`.${ext}`)));
-
-    // Generar cacheGroups basados en los archivos encontrados
-    return files.reduce((cacheGroups, file) => {
-      const name = path.basename(file, path.extname(file)); // Obtener nombre sin extensión
-      const test = new RegExp(`${name}\\.${extensions.join('|')}$`); // Crear un regex para el test
-
-      return {
-        ...cacheGroups,
-        [name]: {
-          name, // Nombre del chunk
-          test, // Patrón para identificar el archivo
-          type: 'css/mini-extract', // Tipo: mini-css-extract-plugin
-          chunks: 'all', // Incluye todos los chunks
-          enforce: true, // Asegura que siempre se genere el chunk
-        },
-      };
-    }, {});
-  } catch (error) {
-    console.error('Error al generar cacheGroups:', error.message);
-    return {}; // Retornar un objeto vacío en caso de error
+  if (!fs.existsSync(directory)) {
+    // Carpeta no existe → retornar vacío silenciosamente
+    return {};
   }
+
+  // Leer archivos en el directorio especificado
+  const files = fs.readdirSync(directory)
+    .filter(file => extensions.some(ext => file.endsWith(`.${ext}`)));
+
+  // Generar cacheGroups basados en los archivos encontrados
+  return files.reduce((cacheGroups, file) => {
+    const name = path.basename(file, path.extname(file));
+    const test = new RegExp(`${name}\\.${extensions.join('|')}$`);
+
+    return {
+      ...cacheGroups,
+      [name]: {
+        name,
+        test,
+        type: 'css/mini-extract',
+        chunks: 'all',
+        enforce: true,
+      },
+    };
+  }, {});
 }
 
 module.exports = mapFilenamesToCacheGroups;

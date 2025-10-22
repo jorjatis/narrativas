@@ -1,12 +1,18 @@
 const path = require('path');
+const fs = require('fs');
 const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin  = require('copy-webpack-plugin');
 const styleChunksCacheGroups = require('./styleChunksCacheGroups.js');
 
+// Obtener páginas solo si existe la carpeta
+const pages = fs.existsSync(path.resolve(__dirname, 'src/views/pages'))
+  ? glob.sync('src/views/pages/**/*.hbs')
+  : [];
+
 module.exports = {
-  devtool: 'source-map', // Desactivar en produccion o si la build es lenta
+  // devtool: 'source-map', // Desactivar en produccion o si la build es lenta
   entry: './src/config.js', // Punto de entrada de tu aplicación
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -14,6 +20,17 @@ module.exports = {
     chunkFilename: '[name].js',
     clean: true, // Limpia el directorio 'dist' antes de generar los archivos
     publicPath: '/', // Se utiliza para los enlaces públicos de los archivos generados
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@images': path.resolve(__dirname, 'src/assets/images'),
+      '@videos': path.resolve(__dirname, 'src/assets/videos'),
+      '@styles': path.resolve(__dirname, 'src/assets/styles'),
+      '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
+      '@data': path.resolve(__dirname, 'src/data')
+    }
   },
   module: {
     rules: [
@@ -60,23 +77,25 @@ module.exports = {
     },
   },
   plugins: [
-    // Generar HTML para todas las páginas de src/views/pages
-    ...glob.sync('src/views/pages/**/*.hbs').map((filePath) => {
-      const outputPath = path.relative('src/views/pages', filePath).replace(/\.hbs$/, '.html'); // Define la ruta de salida del HTML
+    // ✅ Solo intentar generar HTML de las páginas existentes
+    ...pages.map((filePath) => {
+      const outputPath = path
+        .relative('src/views/pages', filePath)
+        .replace(/\.hbs$/, '.html');
       const pageName = path.basename(filePath, '.hbs');
-      const dataPath = path.resolve(__dirname, `src/data/${pageName}.js`); // Ruta de los archivos JSON asociados
+      const dataFileJs = path.resolve(__dirname, `src/data/${pageName}.js`);
+      const dataFileJson = path.resolve(__dirname, `src/data/${pageName}.json`);
 
       return new HtmlWebpackPlugin({
-        template: filePath, // Plantilla .hbs
-        filename: `/${outputPath}`, // Nombre del archivo HTML de salida
+        template: filePath,
+        filename: `/${outputPath}`,
         templateParameters: () => {
-          try {
-            return require(dataPath); // Carga los datos asociados a la plantilla
-          } catch (e) {
-            console.warn(`No se encontró archivo de datos para ${pageName}`);
-            return {}; // Retorna un objeto vacío si no hay datos
-          }
-        },
+          // ✅ Soporta JSON o JS
+          if (fs.existsSync(dataFileJs)) return require(dataFileJs);
+          if (fs.existsSync(dataFileJson)) return require(dataFileJson);
+          console.warn(`⚠️ No hay datos para la página ${pageName}`);
+          return {};
+        }
       });
     }),
     // Extraer el CSS en un archivo separado
@@ -87,23 +106,38 @@ module.exports = {
     // Meter imagenes en dist
     new CopyWebpackPlugin({
       patterns: [
-        { 
-          from: path.join('src', 'assets', 'images'), 
-          to: path.join('assets', 'images')
+        {
+          from: path.join('src', 'assets', 'images'),
+          to: path.join('assets', 'images'),
+          noErrorOnMissing: true
         },
         {
           from: path.join('src', 'assets', 'videos'),
-          to: path.join('assets', 'videos')
+          to: path.join('assets', 'videos'),
+          noErrorOnMissing: true
+        },
+        {
+          from: path.join('src', 'data'),
+          to: path.join('data'),
+          globOptions: {
+            ignore: ['**/*.json']
+          },
+          noErrorOnMissing: true
+        },
+        {
+          from: path.join('src', 'favicon.ico'),
+          to: '',
+          noErrorOnMissing: true
         }
       ]
-    }),
+    })
   ],
   devServer: {
     static: path.resolve(__dirname, 'dist'), // Directorio desde donde servir los archivos
     port: 8080, // Puerto del servidor
     open: true, // Abre el navegador automáticamente
     hot: true, // Habilita el hot-reloading
-    watchFiles: ['src/**/*'], // Observa los archivos en la carpeta 'src'
+    watchFiles: ['src/**/*.{hbs,js,json,scss}'], // Live reload inteligente
     historyApiFallback: true, // Permite redirigir a HTML5 History API
   },
 };
