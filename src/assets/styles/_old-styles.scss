@@ -1,0 +1,257 @@
+@use './base/variables' as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.status-item {
+    font-size: 18px;
+}
+
+.status-score {
+    display: flex;
+    gap: 8px;
+}
+
+.score-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.score-icon.correct {
+    background-color: green;
+}
+
+.score-icon.incorrect {
+    background-color: red;
+}
+
+#drag-zone {
+    width: 300px;
+    height: 84px;
+    margin-bottom: 30px;
+    padding: 10px;
+    border: 2px solid $cb1;
+}
+
+.blocks-area {
+    width: 300px;
+    border: 2px solid $cb1;
+    overflow: hidden;
+}
+
+.blocks-area-top,
+.blocks-area-bottom {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    font: bold 14px/1 Roboto;
+    text-transform: uppercase;
+    text-align: center;
+    color: white;
+    background: crimson;
+}
+
+.blocks-area-inner {
+    position: relative;
+    padding: 10px;
+}
+
+.blocks-above,
+.blocks-below {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+    gap: 8px;
+    min-height: 200px;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+.blocks-above {
+    justify-content: flex-end;
+}
+
+.blocks-below {
+    justify-content: flex-start;
+}
+
+.block-item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    border-radius: 8px;
+    font: bold 14px/1 Roboto;
+    text-transform: uppercase;
+    text-align: center;
+    background: $cb4;
+}
+
+.block-item--main {
+    margin: 8px 0;
+    font-size: 16px;
+    color: black;
+    background: #BBB;
+
+    &.is-close {
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: orange;
+            border-radius: 8px;
+        }
+
+        &:before {
+            top: -68px;
+        }
+
+        &:after {
+            top: 68px;
+        }
+    }
+}
+
+.blocks-area-inner:not(:has(.blocks-above:empty)) {
+    .block-item--main {
+        &.is-close {
+            &:before {
+                top: -38px;
+                height: 30px;
+            }
+        }
+    }
+}
+
+.blocks-area-inner:not(:has(.blocks-below:empty)) {
+    .block-item--main {
+        &.is-close {
+            &:after {
+                top: -38px;
+                height: 30px;
+            }
+        }
+    }
+}
+
+.block-item--drag {
+    color: white;
+    background: cadetblue;
+    cursor: grab;
+
+    &.is-dragging {
+        cursor: grabbing;
+    }
+}
+
+.block-item--drop {
+    height: 30px;
+    transition: height .3s ease-out;
+
+    &.is-close {
+         height: 60px;
+    }
+}
+
+.block-item.is-dragging + .block-item.is-close {
+    &:before {
+        content: '';
+        position: absolute;
+        top: -68px;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: orange;
+        border-radius: 8px;
+    }
+}
+
+.block-item.is-close + .block-item.is-dragging {
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: orange;
+        border-radius: 8px;
+    }
+}
+
+.block-item.correct {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.block-item.wrong {
+    background-color: #F44336;
+    color: white;
+}
+
+.score-box {
+    font-size: 2rem;
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+#share-btn, #restart-btn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#share-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+#restart-btn {
+    background-color: #f0f0f0;
+}
+
+video {
+  width: 100%;
+  height: auto;
+}
+
+.icn {
+  display: flex;
+}
+
+.icn svg {
+  width: 100%;
+  height: auto;
+}
+
+
+.cnt {
+  display: flex;
+  justify-content: center;
+}/*# sourceMappingURL=styles.css.map */

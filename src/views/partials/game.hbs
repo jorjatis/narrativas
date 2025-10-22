@@ -1,0 +1,103 @@
+<div class="container hidden">
+  <div class="status-bar">
+    <div class="status-item">
+      <strong>Ronda:</strong> <span id="round">1</span>/7
+    </div>
+    <div id="score" class="status-score"></div>
+  </div>
+
+  <div id="drag-zone">
+    <div class="block-item block-item--drag" draggable="true" id="drag-item">Item Drag</div>
+  </div>
+
+  <div class="blocks-area">
+    <span class="blocks-area-top">Más antiguo</span>
+    <div class="blocks-area-inner" id="drop-zone">
+      <div class="blocks-above"></div>
+      <div class="block-item block-item--main">Item Main</div>
+      <div class="blocks-below"></div>
+    </div>
+    <span class="blocks-area-bottom">Más actual</span>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="game" {{{props}}}>
+  <div class="game__h">
+    {{> components/btn
+      isButton=true
+      typeLink=true
+      text="Cómo jugar"
+      popover=true
+      popoverTarget="howToPlay"
+    }}
+  </div>
+
+  <div class="game__score-cnt">
+    <div class="game__lvl-cnt">
+      <span class="game__lvl">Nivel <span>{{!-- NOTE: El nº de nivel se rellena por JS --}}</span></span>
+      <span class="icn">
+        {{!-- NOTE: El icono se rellena por JS --}}
+      </span>
+    </div>
+
+    <div class="game__score">
+      <div class="game__round">Ronda <span class="game__round-actual">{{!-- NOTE: La ronda actual se rellena por JS
+          --}}</span><span class="game__round-sep">/</span><span class="game__round-total">{{!-- NOTE: Las rondas
+          totales se rellenan por JS --}}</span></div>
+      <div class="game__score-blocks">
+        <span>{{!-- NOTE: La clase 'wrong' u 'ok' asi como el svg, en estos bloques, se rellenan por JS --}}</span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="game__cnt">
+    <div class="game__drag-zone">
+      {{!-- NOTE: El item/bloque de sucesos a mover se rellena por JS de manera random --}}
+      {{!--
+      <article class="game-item">
+        [ ... ]
+      </article>
+      --}}
+    </div>
+
+    <div class="game__drop-zone">
+      <span class="game__sign game__sign-older">
+        Más antiguo
+      </span>
+
+      {{!-- NOTE: Los items/bloques de sucesos se rellenan por JS de manera segun los arrastras --}}
+      {{!--
+      <article class="game-item">
+        [ ... ]
+      </article>
+
+      <article class="game-item">
+        [ ... ]
+      </article>
+
+      <article class="game-item">
+        [ ... ]
+      </article>
+
+      [ ... ]
+      --}}
+
+      <span class="game__sign game__sign-newer">
+        Más actual
+      </span>
+    </div>
+  </div>
+</div>
+
+{{> modals/modal-game-result }}

@@ -1,0 +1,113 @@
+@use '../base/variables' as *;
+
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	min-height: 45px;
+	padding: 0 45px;
+	font: 18px/21px $basr;
+	text-transform: uppercase;
+	color: $cb7;
+	border: 1px solid $cp3;
+	border-radius: 30px;
+	background: $cp3;
+	transition: all 0.2s;
+
+  .icn {
+		width: auto;
+		height: 16px;
+	}
+
+	&:hover {
+		opacity: 0.7;
+	}
+}
+
+.btn.is-disabled {
+	border-color: $cb11;
+	background: $cb11;
+	color: $cb13;
+	cursor: not-allowed;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.btn--sec {
+	color: $cb1;
+	background: $cb7;
+	transition: color 0.2s, background 0.2s;
+  
+	&:hover {
+		color: $cb7;
+		background: $cp13;
+		opacity: 1;
+	}
+
+	&.is-active {
+		color: $cb7;
+		background: $cp13;
+	}
+}
+
+.btn--s {
+	min-height: 30px;
+	padding: 0 16px;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+.btn--xs {
+	min-height: 24px;
+	padding: 0 16px;
+	font-size: 12px;
+	line-height: 14px;
+}
+
+.btn--lnk {
+	min-height: 36px;
+	padding: 0 16px;
+	font-size: 12px;
+	line-height: 15px;
+	text-decoration: underline;
+	color: $cb1;
+	background: rgba($cb1, 0);
+	border: 0;
+	border-radius: 0;
+}
+
+.btn--icn {
+	height: auto;
+	padding: 0;
+	background: rgba($cb1, 0);
+	border: 0;
+	border-radius: 0;
+}
+
+.btn-level {
+	padding: 0 12px;
+	font-size: 12px;
+	line-height: 15px;
+
+	.icn {
+		height: 9px;
+	}
+}
+
+.btn--x {
+	width: 40px;
+	height: 40px;
+	min-height: 40px;
+	padding: 0;
+	background: $cb5;
+	border: 0;
+	border-radius: 100%;
+
+	.icn {
+		width: 100%;
+		height: auto;
+	}
+}

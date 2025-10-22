@@ -1,0 +1,88 @@
+$font-family_1: "Basier Square Semibold",
+-apple-system,
+BlinkMacSystemFont,
+Roboto,
+Helvetica,
+Arial,
+sans-serif;
+
+@use '../base/variables' as *;
+
+.modal#howToPlay {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 338px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
+
+  .modal__inner {
+    padding: 16px 16px 36px;
+    background: $cb7;
+  }
+
+  .modal__h {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  h2 {
+    margin-bottom: 24px;
+    font: 18px/21px $bass;
+    text-transform: uppercase;
+  }
+
+  p {
+    font: 14px/17px $basr;
+  }
+
+  ol {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 18px 8px;
+    list-style: none;
+    counter-reset: num;
+
+    li {
+      font: 14px/17px $basr;
+      counter-increment: num;
+
+      &:before {
+        content: counter(num) ". ";
+        font-weight: bold;
+      }
+    }
+  }
+
+  .modal__media {
+    width: 100%;
+    height: auto;
+    margin-top: -20px;
+    margin-bottom: 20px;
+
+    video {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+    }
+  }
+
+  .modal__ftr {
+    margin-top: 32px;
+    text-align: center;
+
+    p {
+      margin-bottom: 36px;
+      font-family: $font-family_1;
+      text-transform: uppercase;
+    }
+
+    .btn-grp {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

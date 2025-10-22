@@ -1,0 +1,11 @@
+{{#if openPopoverBtn}}
+    <button class="btn btn--s" popovertarget="{{popoverTarget}}" popovertargetaction="toggle">
+        <span>Mostrar modal {{#if popoverName}}{{popoverName}}{{/if}}</span>
+    </button>
+{{/if}}
+
+<div id="{{popoverTarget}}" popover="{{#if popoverManual}}manual{{else}}auto{{/if}}" class="modal {{#if classes}}{{classes}}{{/if}}">
+  <div class="modal__inner">
+    {{> @partial-block }}
+  </div>
+</div>

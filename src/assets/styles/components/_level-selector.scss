@@ -1,0 +1,87 @@
+@use '../base/variables' as *;
+
+.menu-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 340px;
+  padding: 16px 16px 36px;
+  border-radius: 8px;
+  background: $cb4;
+
+  .menu-game__h {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 50px;
+
+    .btn--icn {
+      .icn {
+        width: 24px;
+        height: 24px;
+        transition: 0.3s opacity;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+
+    .btn--lnk {
+      padding: 0;
+    }
+  }
+
+  .menu-game__cnt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu-game__media {
+    width: 175px;
+    height: auto;
+    margin-bottom: 32px;
+  }
+
+  h1 {
+    margin-bottom: 24px;
+    font: 28px/31px $abcds;
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 36px;
+    font: 16px/19px $basr;
+    text-align: center;
+  }
+
+  .lvl-sel {
+    width: 100%;
+
+    p {
+      font: 14px/17px $bass;
+      margin-bottom: 12px;
+    }
+
+    .lvl-sel__btns {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+  }
+
+  .menu-game__ftr {
+    margin-top: 56px;
+  }
+
+  .btn-grp {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}

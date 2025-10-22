@@ -1,0 +1,112 @@
+@use '../base/variables' as *;
+
+.modal#gameResult {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 390px;
+  max-width: 325px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
+
+  &::backdrop {
+    width: 100%;
+    height: 100%;
+    background-color: rgba($cb1, 0.8);
+  }
+
+  .modal__inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 12px;
+    background: $cb7;
+  }
+
+  .modal__cnt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+      margin-bottom: 12px;
+      font: 22px/25px $bass;
+      text-transform: uppercase;
+      text-align: center;
+      color: $cb1;
+    }
+
+    p {
+      margin-bottom: 50px;
+      font: 16px/19px $basr;
+      text-align: center;
+    }
+  }
+
+  .points {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      position: absolute;
+      width: auto;
+      height: 90px;
+
+      &:first-child {
+        left: 4px;
+        transform: scaleX(-1);
+      }
+
+      &:last-child {
+        right: 4px;
+      }
+    }
+
+    .points__result {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .points__txt {
+        font: 18px/21px $basr;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .points__num {
+        font: 45px/48px $bass;
+        text-transform: uppercase;
+        text-align: center;
+        color: $cp3;
+      }
+
+      .points__txt-2 {
+        margin-top: -6px;
+        font: 14px/17px $basr;
+        text-transform: uppercase;
+        text-align: center;
+        color: $cp3;
+      }
+    }
+  }
+
+  .modal__ftr {
+    .btn-grp {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+
+      .btn {
+        width: 230px;
+      }
+    }
+  }
+}

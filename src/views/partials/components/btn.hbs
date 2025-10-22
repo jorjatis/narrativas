@@ -1,0 +1,26 @@
+{{#if isButton}}
+    <button {{#if id}}id="{{id}}"{{/if}} class="btn {{#if isIcon}}btn--icn{{/if}} {{#if sizeS}}btn--s{{/if}} {{#if sizeXS}}btn--xs{{/if}} {{#if typeLink}}btn--lnk{{/if}} {{#if btnSecondary}}btn--sec{{/if}} {{#if isDisabled}}is-disabled{{/if}} {{#if classes}}{{classes}}{{/if}}" {{#if popover}}popovertarget="{{popoverTarget}}" popovertargetaction="toggle"{{/if}} {{#if dataAttr}}data-{{dataAttr}}="{{dataAttrContent}}"{{/if}}>
+{{else if isLink}}
+    <a href="#" {{#if id}}id="{{id}}"{{/if}} class="btn {{#if sizeS}}btn--s{{/if}} {{#if sizeXS}}btn--xs{{/if}} {{#if typeLink}}btn--lnk{{/if}} {{#if btnSecondary}}btn--sec{{/if}} {{#if isDisabled}}is-disabled{{/if}} {{#if classes}}{{classes}}{{/if}}" {{#if dataAttr}}data-{{dataAttr}}="{{dataAttrContent}}"{{/if}}></a>
+{{/if}}
+
+    {{#if prevIcon}}
+        {{> components/icon }}
+    {{/if}}
+
+    {{#if text}}
+        <span>{{text}}</span>
+    {{else if noText}}
+    {{else}}
+        <span>Texto del botón</span>
+    {{/if}}
+
+    {{#if icon}}
+        {{> components/icon }}
+    {{/if}}
+
+{{#if isButton}}
+    </button>
+{{else if isLink}}
+    </a>
+{{/if}}

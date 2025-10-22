@@ -4,12 +4,17 @@
 
 <div class="voc-wrapper">
   <div class="voc-container">
-    <h1>{{cosa}}</h1>
+    {{> level-selector }}
+
+    {{> game }}
   </div>  
 </div>
 
-{{> base/footer }}
+{{> modals/modal-how-to-play  
+  popoverTarget="howToPlay"
+  popoverName="'Cómo jugar'"
+}}
 
-{{> js/special-script }}
+{{> base/footer }}
 
 {{> base/foot }}

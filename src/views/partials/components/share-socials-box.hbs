@@ -1,0 +1,62 @@
+{{!-- NOTE: Caja de compartir en redes sociales para el modal del resultado del juego --}}
+
+<div class="share">
+  <div class="share__h">
+    <span>Compartir</span>
+
+    {{> components/btn
+      isButton=true
+      classes="btn--x"
+      noText=true
+      icon=true
+      iconClose=true
+    }}
+  </div>
+
+  <ul class="share__l">
+    <li>
+      <a href="#">
+        <span class="icn">
+          {{> ./icons/icon-share-2 }}
+        </span>
+        <span>Copiar enlace</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        <span class="icn">
+          {{> ./icons/icon-facebook }}
+        </span>
+        <span>Facebook</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        <span class="icn">
+          {{> ./icons/icon-twitter }}
+        </span>
+        <span>Twitter</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        <span class="icn">
+          {{> ./icons/icon-whatsapp }}
+        </span>
+        <span>Whatsapp</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="#">
+        <span class="icn">
+          {{> ./icons/icon-email }}
+        </span>
+        <span>Email</span>
+      </a>
+    </li>
+  </ul>
+</div>

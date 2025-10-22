@@ -1,0 +1,105 @@
+<div id="level-selector" class="level-selector">
+  <h2>Selecciona un nivel</h2>
+  <div class="level-buttons">
+    <button class="level-btn" data-level="1">Nivel 1</button>
+    <button class="level-btn" data-level="2">Nivel 2</button>
+    <button class="level-btn" data-level="3">Nivel 3</button>
+  </div>
+  <button id="start-game-btn" disabled>Comenzar juego</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+<section class="menu-game" style="display: block;">
+  <div class="menu-game__h">
+    {{> components/btn
+      isButton=true
+      isIcon=true
+      noText=true
+      icon=true
+      iconOptions=true
+    }}
+
+    {{> components/btn
+      isButton=true
+      typeLink=true
+      text="Cómo jugar"
+      popover=true
+      popoverTarget="howToPlay"
+    }}
+  </div>
+
+  <div class="menu-game__cnt">
+    <div class="menu-game__media">
+      <img src="assets/images/menu-game.png" alt="">
+    </div>
+
+    <h1>¿Cuánto sabes de la historia reciente de España?</h1>
+
+    <p>Pulsa sobre los eventos históricos que irán apareciendo y arrástralos, antes o después de otro evento, hasta
+      colocarlos en el orden cronológico correcto</p>
+
+    <div class="lvl-sel">
+      <p>Selecciona un nivel de dificultad</p>
+      <div class="lvl-sel__btns">
+        {{> components/btn
+          isButton=true
+          classes="btn-level"
+          btnSecondary=true
+          sizeS=true
+          text="Nivel 1"
+          icon=true
+          iconLevel=true
+          level1=true
+          dataAttr="level"
+          dataAttrContent="level1"
+        }}
+
+        {{> components/btn
+          isButton=true
+          classes="btn-level"
+          btnSecondary=true
+          sizeS=true
+          text="Nivel 2"
+          icon=true
+          iconLevel=true
+          level2=true
+          dataAttr="level"
+          dataAttrContent="level2"
+        }}
+
+        {{> components/btn
+          isButton=true
+          classes="btn-level"
+          btnSecondary=true
+          sizeS=true
+          text="Nivel 3"
+          icon=true
+          iconLevel=true
+          level3=true
+          dataAttr="level"
+          dataAttrContent="level3"
+        }}
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-game__ftr">
+    <div class="btn-grp">
+      {{> components/btn
+        isButton=true
+        isDisabled=true
+        text="Empezar"
+        id="startGame"
+      }}
+    </div>
+  </div>
+
+</section>

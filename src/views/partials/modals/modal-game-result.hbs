@@ -1,0 +1,53 @@
+<div id="result-modal" class="modal hidden">
+  <div class="modal-content">
+    <h2 id="result-title"></h2>
+    <p id="result-subtitle"></p>
+    <div class="score-box">
+      <span id="result-score"></span> PUNTOS
+    </div>
+    <button id="share-btn">COMPARTIR RESULTADO ➡️</button>
+    <button id="restart-btn">VOLVER A JUGAR 🔄</button>
+  </div>
+</div>
+
+
+{{#> components/popover }}
+  <div class="modal__cnt">
+    <h2>¡Una puntuación de matrícula!</h2>
+
+    <p>Tienes más memoria que Jordi Hurtado</p>
+
+    <div class="points">
+      <img src="assets/images/results-stars.png" alt="">
+      <span class="points__result">
+        <span class="points__txt">Resultado</span>
+        <span class="points__num">8</span>
+        <span class="points__txt-2">puntos</span>
+      </span>
+      <img src="assets/images/results-stars.png" alt="">
+    </div>
+  </div>
+
+  <div class="modal__ftr">
+    <div class="btn-grp">
+      {{> components/btn
+        isButton=true
+        sizeS=true
+        text="Compartir resultado"
+        icon=true
+        iconShare=true
+      }}
+
+      {{> components/btn
+        isButton=true
+        sizeS=true
+        text="Volver a jugar"
+        icon=true
+        iconReload=true
+        others="popovertarget=\"gameResult\" popovertargetaction=\"hide\""
+      }}
+    </div>
+  </div>
+
+  {{> components/share-socials-box }}
+{{/ components/popover}}

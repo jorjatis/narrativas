@@ -1,0 +1,15 @@
+@use './old-styles'; // Borrar al acabar
+
+// NOTE: Base
+@use './base/variables' as *;
+@use './base/narwhal-overwrite';
+
+// NOTE: Componentes
+@use './components/btn';
+@use './components/level-selector';
+@use './components/game';
+@use './components/share-socials-box';
+
+// NOTE: Modales
+@use './modals/modal-how-to-play';
+@use './modals/modal-game-result';
