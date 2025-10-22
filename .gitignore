@@ -9,3 +9,8 @@ dist/
 
 # Configuración del entorno
 .env
+
+# Windows temp
+%LOCALAPPDATA%/
+AppData/
+*.tmp
