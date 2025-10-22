@@ -1,13 +1,18 @@
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
+    // -----------------------
+    // RUTAS / CONFIG
+    // -----------------------
+    // BASE_PATH dinámico (funciona en localhost y en producción en un CDN/s3)
+    const BASE_PATH = "https://pre-s3.abcstatics.com/comun/especiales/dana/vidas-rotas/";
+    const CSV_URL = `${BASE_PATH}assets/data/dana_people.csv`;
 
-    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqgue7-yB0O5ERkCtZKhBfS-jaSRBbO31WlJjxjlh2SvDLb38fLcTpn6kbYxqCFIasbR9HBl1Yl2WA/pub?gid=0&single=true&output=csv";
     const qs = (sel, ctx = document) => ctx.querySelector(sel);
     const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-    // ----------------------------------------
-    // UTILIDADES
-    // ----------------------------------------
+    // -----------------------
+    // UTILIDADES NOMBRES / SLUGS
+    // -----------------------
     function limpiarNombreSlug(rawName) {
       return rawName
         .normalize("NFD")
@@ -32,38 +37,66 @@
         .join("-");
     }
 
+    // -----------------------
+    // PARSER CSV ROBUSTO
+    // -----------------------
     function parseCSV(csvText) {
       const rows = [];
-      const lines = csvText.split("\n");
+      const lines = csvText.split(/\r?\n/);
+
       for (let line of lines) {
-        const row = [];
-        let match;
-        const regex = /"(.*?)"|([^,]+)/g;
-        while ((match = regex.exec(line)) !== null) {
-          row.push(match[1] !== undefined ? match[1] : (match[2] || ""));
+        // ignorar líneas vacías totalmente
+        if (!line) {
+          rows.push([]); // mantener índice de líneas si quieres; alternativamente continue;
+          continue;
         }
+
+        const row = [];
+        let current = '';
+        let insideQuotes = false;
+
+        for (let i = 0; i < line.length; i++) {
+          const char = line[i];
+
+          if (char === '"') {
+            // doble comilla escapada dentro de comillas -> añadir una comilla
+            if (insideQuotes && line[i + 1] === '"') {
+              current += '"';
+              i++; // saltar la segunda comilla
+            } else {
+              insideQuotes = !insideQuotes;
+            }
+          } else if (char === ',' && !insideQuotes) {
+            row.push(current.trim());
+            current = '';
+          } else {
+            current += char;
+          }
+        }
+        row.push(current.trim());
         rows.push(row);
       }
       return rows;
     }
 
-    // ----------------------------------------
+    // -----------------------
     // CARGAR CSV Y PROCESAR DATOS
-    // ----------------------------------------
+    // -----------------------
     async function fetchPeople() {
-      const PROXY = "https://corsproxy.io/?";
-      const res = await fetch(PROXY + encodeURIComponent(CSV_URL));
+      const res = await fetch(CSV_URL);
+      if (!res.ok) throw new Error(`No se pudo cargar CSV: ${res.status} ${res.statusText}`);
       const csvText = await res.text();
       const rows = parseCSV(csvText);
 
       const people = [];
-      for (let i = 8; i < rows.length; i++) {
+      for (let i = 8; i < rows.length; i++) { // empiezas en la fila 9 (índice 8) como antes
         const row = rows[i];
+        if (!row || row.length === 0) continue;
 
         const fotoFlag = (row[0] || "").toUpperCase();
         let nombreRaw = "";
         for (let col of row) {
-          if (/^\d+\./.test(col?.trim())) {
+          if (/^\d+\./.test((col || "").trim())) {
             nombreRaw = col.trim();
             break;
           }
@@ -80,96 +113,92 @@
         let slugImg = nombreSlug.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "");
         slugImg = slugImg.replace(/^_+|_+$/g, "");
         const imgBase = numero ? `${numero}_${slugImg}` : slugImg;
-        const foto = (fotoFlag === "SI") ? `assets/images/fotos/${imgBase}.jpg` : "assets/images/no-photo.jpg";
+        const foto = (fotoFlag === "SI")
+          ? `${BASE_PATH}assets/images/fotos/${imgBase}.jpg`
+          : `${BASE_PATH}assets/images/no-photo.jpg`;
 
-        // Extraer edad desde la descripción si aparece "XX años"
-        const descRaw = row[2] || "";
-        const ageMatch = descRaw.match(/(\d+)\s*años/);
-        const age = ageMatch ? ageMatch[1] + " años" : "";
+        // descripción en la columna 3 (índice 2) como antes
+        let descRaw = row[2] || "";
+        descRaw = descRaw
+          .replace(/"\s*(.*?)\s*"/g, '«$1»')  // convierte "texto" en «texto»
+          .replace(/''\s*(.*?)\s*''/g, '«$1»') // soporte por si vinieran dobles comillas simples
+          .replace(/"\s*/g, '«')               // comilla inicial huérfana
+          .replace(/\s*"/g, '»');              // comilla final huérfana
+        const location = ""; // si hay otra columna para ubicación, mapear aquí
 
-        const location = ""; // Si se obtiene de otra columna, agregar aquí
-
-        people.push({ nombreVisible, slug, foto, desc: descRaw, age, location });
+        people.push({ nombreVisible, slug, foto, desc: descRaw, location });
       }
 
+      // orden personalizado
       people.sort((a, b) => {
         const preposiciones = ["de", "del", "de la", "de los", "de las", "la", "los", "las", "y", "da", "do", "das", "dos"];
 
         function obtenerClaveOrden(nombre) {
-          // Normalizar y quitar tildes
           const partes = nombre
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
             .split(/\s+/)
             .filter(p => p && !preposiciones.includes(p.toLowerCase()));
 
-          // Ver si tiene Socol
           const indiceSocol = partes.findIndex(p => p.toLowerCase() === "socol");
           if (indiceSocol !== -1) {
-            // clave: Socol + primera letra del nombre para ordenar internamente
             return "Socol " + partes[0].toLowerCase();
           }
 
-          // regla normal
-          if (partes.length === 3) {
-            return partes[1]; // 2ª palabra → primer apellido
+          // NUEVA LÓGICA: si hay sólo 2 palabras, usar la 2ª como primer apellido
+          if (partes.length === 2) {
+            return partes[1].toLowerCase();
+          } else if (partes.length === 3) {
+            return partes[1].toLowerCase();
           } else if (partes.length >= 4) {
-            return partes[2]; // 3ª palabra → primer apellido
+            return partes[2].toLowerCase();
           } else {
-            return partes[0]; // fallback
+            return partes[0].toLowerCase();
           }
         }
 
         const claveA = obtenerClaveOrden(a.nombreVisible);
         const claveB = obtenerClaveOrden(b.nombreVisible);
-        return claveA.localeCompare(claveB, 'es', { sensitivity: 'base' });
+        return claveA.localeCompare(claveB, "es", { sensitivity: "base" });
       });
-      
+
       return people;
     }
 
-    // ----------------------------------------
+    // -----------------------
     // POPUP CONTROL
-    // ----------------------------------------
+    // -----------------------
     const pop = qs(".v-spc-pop");
     const closeBtn = qs(".v-x", pop);
 
     const closePopover = () => {
-      // Limpiar datos internos
       const img = qs("#pop-img", pop);
       const name = qs("#pop-name", pop);
-      const age = qs("#pop-age", pop);
       const loc = qs("#pop-loc", pop);
       const desc = qs("#pop-desc", pop);
 
       if (img) { img.src = ""; img.alt = ""; }
       if (name) name.textContent = "";
-      if (age) { age.textContent = ""; age.style.display = "none"; }
       if (loc) { loc.textContent = ""; loc.style.display = "none"; }
       if (desc) { desc.textContent = ""; }
 
-      // Limpiar id y atributos
       pop.id = "";
-      closeBtn.setAttribute("popovertarget", "");
-
-      // Quitar clases y estilos para cerrar visualmente
+      if (closeBtn) closeBtn.setAttribute("popovertarget", "");
       document.body.classList.remove("is-overflow");
       pop.classList.remove("is-open");
-
-      // Opcional: si usas transiciones CSS con opacity/visibility
       pop.style.display = "none";
     };
 
-    // Listener único para cerrar
-    closeBtn.addEventListener("click", closePopover);
+    if (closeBtn) closeBtn.addEventListener("click", closePopover);
 
     const openPopover = pop => {
-      pop.style.display = ""; // o "block"
+      pop.style.display = "";
       pop.classList.add("is-open");
       document.body.classList.add("is-overflow");
     };
 
     document.addEventListener("click", (e) => {
+      if (!pop) return;
       const insidePopover = pop.contains(e.target);
       const faceItem = e.target.closest(".v-spc-faces__itm");
       if (document.body.classList.contains("is-overflow") && !insidePopover && !faceItem) {
@@ -177,98 +206,127 @@
       }
     });
 
-    // ----------------------------------------
-    // INICIALIZAR NOMBRES, GRID Y POPUP
-    // ----------------------------------------
+    // -----------------------
+    // INIT: render nombres, grid y popup
+    // -----------------------
     async function init() {
-      const loaders = qsa(".v-spc-loader"); // todos los loaders
+      const loaders = qsa(".v-spc-loader");
       const namesContainer = qs(".v-spc-names");
       const grid = qs(".v-spc-faces-grid");
 
-      // Mostrar todos los loaders
       loaders.forEach(loader => loader.style.display = "block");
 
-      const people = await fetchPeople();
+      let people = [];
+      try {
+        people = await fetchPeople();
+      } catch (err) {
+        console.error("Error cargando CSV:", err);
+        loaders.forEach(loader => loader.style.display = "none");
+        return;
+      }
+
       namesContainer.innerHTML = "";
       grid.innerHTML = "";
 
-      // --- NOMBRES ---
+      // NOMBRES (lista)
       people.forEach((person, index) => {
         const span = document.createElement("span");
-        span.textContent = index === people.length - 1
-          ? person.nombreVisible
-          : person.nombreVisible + ", ";
+        span.textContent = index === people.length - 1 ? person.nombreVisible : person.nombreVisible + ", ";
         span.dataset.target = person.slug;
         namesContainer.appendChild(span);
       });
 
-      // --- GRID DE FOTOS ---
+      // GRID DE FOTOS
       people.forEach(person => {
         const btn = document.createElement("button");
         btn.className = "v-spc-faces__itm is-hidden";
         btn.setAttribute("popovertarget", person.slug);
 
         btn.innerHTML = `
-          <figure class="v-spc-faces__img">
-            <img src="${person.foto}" alt="${person.nombreVisible}">
-          </figure>
-          <span class="v-spc-faces__name">${person.nombreVisible}</span>
-        `;
+        <figure class="v-spc-faces__img">
+          <img src="${person.foto}" alt="${person.nombreVisible}">
+        </figure>
+        <span class="v-spc-faces__name">${person.nombreVisible}</span>
+      `;
 
-        // click popup
         const descLimpia = person.desc?.trim();
         const tieneDescReal = descLimpia && !/^(-{3,}|\/{3,})\s*$/.test(descLimpia);
 
         if (tieneDescReal) {
           btn.addEventListener("click", () => {
-            closePopover(); 
+            closePopover();
             pop.id = person.slug;
-            closeBtn.setAttribute("popovertarget", person.slug);
+            if (closeBtn) closeBtn.setAttribute("popovertarget", person.slug);
 
-            qs("#pop-img", pop).src = person.foto;
-            qs("#pop-img", pop).alt = person.nombreVisible;
-            qs("#pop-name", pop).textContent = person.nombreVisible;
+            const imgEl = qs("#pop-img", pop);
+            if (imgEl) { imgEl.src = person.foto; imgEl.alt = person.nombreVisible; }
 
-            const ageSpan = qs("#pop-age", pop);
-            if (person.age && !/Edad no disponible/.test(person.age)) {
-              ageSpan.textContent = person.age;
-              ageSpan.style.display = "";
-            } else {
-              ageSpan.textContent = "";
-              ageSpan.style.display = "none";
-            }
+            const nameEl = qs("#pop-name", pop);
+            if (nameEl) nameEl.textContent = person.nombreVisible;
 
             const locSpan = qs("#pop-loc", pop);
-            if (person.location && !/Ubicación no disponible/.test(person.location)) {
-              locSpan.textContent = person.location;
-              locSpan.style.display = "";
-            } else {
-              locSpan.textContent = "";
-              locSpan.style.display = "none";
+            if (locSpan) {
+              if (person.location && !/Ubicación no disponible/.test(person.location)) {
+                locSpan.textContent = person.location;
+                locSpan.style.display = "";
+              } else {
+                locSpan.textContent = "";
+                locSpan.style.display = "none";
+              }
             }
 
-            qs("#pop-desc", pop).textContent = descLimpia;
+            const descEl = qs("#pop-desc", pop);
+            if (descEl) descEl.textContent = descLimpia;
             openPopover(pop);
           });
         }
 
         grid.appendChild(btn);
       });
+    
+      // --- TARJETA EXTRA AL FINAL ---
+      const extraBtn = document.createElement("button");
+      extraBtn.className = "v-spc-faces__itm is-hidden";
+      extraBtn.setAttribute("popovertarget", "victima-desconocida");
 
-      // Esperar que carguen todas las imágenes de todos los grids
-      await Promise.all(qsa("img", grid).map(img => new Promise(res => img.onload = img.onerror = res)));
+      extraBtn.innerHTML = `
+        <figure class="v-spc-faces__img">
+          <img src="${BASE_PATH}assets/images/no-photo.jpg" alt="Víctimas sin identificar">
+        </figure>
+      `;
 
-      // Ocultar todos los loaders
+      extraBtn.addEventListener("click", () => {
+        closePopover();
+        pop.id = "victima-desconocida";
+        closeBtn.setAttribute("popovertarget", "victima-desconocida");
+
+        qs("#pop-img", pop).src = `${BASE_PATH}assets/images/no-photo.jpg`;
+        qs("#pop-name", pop).style.display = "none";
+        qs("#pop-loc", pop).style.display = "none";
+
+        qs("#pop-desc", pop).textContent =
+          "Tras consultar el sumario y los registros de las asociaciones, hay dos fallecidos de los que se desconoce con claridad la identidad: son la víctima 108 y la 228. La víctima 237 es un británico de 71 años, que murió en el hospital de Alhaurín de la Torre (Málaga) tras ser rescatado en su casa con signos de hipotermia. Es la única víctima mortal registrada en Andalucía.";
+
+        openPopover(pop);
+      });
+
+      grid.appendChild(extraBtn);
+
+      // Esperar carga de imágenes
+      await Promise.all(qsa("img", grid).map(img => new Promise(res => { img.onload = img.onerror = res; })));
+
       loaders.forEach(loader => loader.style.display = "none");
 
-      // --- Animación Nombres ---
+      // Animación nombres
       const spans = qsa(".v-spc-names span");
-      const totalDuration = 5000;
-      const delayStep = totalDuration / spans.length;
-      spans.sort(() => Math.random() - 0.5)
-        .forEach((span, i) => setTimeout(() => span.classList.add("visible"), i * delayStep));
+      if (spans.length > 0) {
+        const totalDuration = 5000;
+        const delayStep = totalDuration / spans.length;
+        spans.sort(() => Math.random() - 0.5)
+          .forEach((span, i) => setTimeout(() => span.classList.add("visible"), i * delayStep));
+      }
 
-      // --- Scroll a la imagen desde el nombre ---
+      // Scroll a imagen desde nombre
       spans.forEach(span => {
         span.addEventListener("click", () => {
           const target = span.dataset.target;
@@ -280,7 +338,7 @@
         });
       });
 
-      // --- Animación Grid ---
+      // Animación grid
       qsa(".v-spc-faces__itm", grid).forEach((item, i) =>
         setTimeout(() => item.classList.remove("is-hidden"), i * 20)
       );
@@ -288,9 +346,35 @@
 
     init();
 
-    // ----------------------------------------
+    // -----------------------
     // COMPARTIR EN REDES
-    // ----------------------------------------
+    // -----------------------
+    function showCopyMessage(btn) {
+      try {
+        const msg = document.createElement("div");
+        msg.className = "copy-msg-temp";
+        msg.textContent = "Enlace copiado";
+        msg.style.position = "fixed";
+        msg.style.zIndex = 9999;
+        msg.style.padding = "6px 10px";
+        msg.style.borderRadius = "6px";
+        msg.style.background = "rgba(0,0,0,0.8)";
+        msg.style.color = "#fff";
+        msg.style.fontSize = "13px";
+
+        const rect = btn.getBoundingClientRect();
+        // colocar encima del botón, centrado
+        msg.style.left = Math.min(window.innerWidth - 120, Math.max(8, rect.left + (rect.width / 2) - 60)) + "px";
+        msg.style.top = Math.max(8, rect.top - 40) + "px";
+
+        document.body.appendChild(msg);
+        setTimeout(() => { msg.remove(); }, 1500);
+      } catch (e) {
+        // fallback silencioso
+        console.log("Enlace copiado");
+      }
+    }
+
     const buttons = document.querySelectorAll('[data-share]');
     const pageUrl = window.location.href;
     const shareText = '¡Mira este artículo interesante!';
@@ -323,11 +407,6 @@
               '_blank'
             );
             break;
-
-          // case 'email':
-          //   window.location.href =
-          //     `mailto:?subject=${encodeURIComponent('Te recomiendo este artículo')}&body=${encodeURIComponent(`${shareText}\n${pageUrl}`)}`;
-          //   break;
 
           case 'copy':
             navigator.clipboard.writeText(pageUrl)

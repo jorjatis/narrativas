@@ -88,12 +88,16 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { 
-          from: path.join('src', 'assets', 'images'), 
+          from: path.join('src', 'assets', 'images'),
           to: path.join('assets', 'images')
         },
         {
           from: path.join('src', 'assets', 'videos'),
           to: path.join('assets', 'videos')
+        },
+        {
+          from: path.join('src', 'assets', 'data'),
+          to: path.join('assets', 'data')
         }
       ]
     }),
