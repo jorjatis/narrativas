@@ -1,4 +1,13 @@
 {
-  "headerTitle": "100 metros que anegaron la vida",
-  "section": "España"
+  "section": "España",
+  "title": "Dana: la vida y la muerte en cien metros",
+  "subtitle": "Doce meses han transcurrido desde que el rugido del agua lo cambió todo. Volvemos al epicentro del desastre, la calle Sant Jordi, para comprobar si el tiempo ha intentado sanar las heridas abiertas por la devastadora DANA",
+  "creditos": [
+    { "cargo": "Dirección de arte", "nombre": "Fernando Hernández" },
+    { "cargo": "Diseño", "nombre": "Jorge González" },
+    { "cargo": "Infografía", "nombre": "Julián de Velasco" },
+    { "cargo": "Desarrollo", "nombre": "Jorge García" },
+    { "cargo": "Texto", "nombre": "Patricia Biosca" },
+    { "cargo": "xxxxxxxxxxxxxxxxxxxxxxxx", "nombre": "Xxxxxxxxxxxxxxxxxxxxxxx" }
+  ]
 }
