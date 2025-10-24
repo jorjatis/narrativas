@@ -240,6 +240,12 @@ body:has(.voc-paywall--grad) {
           .voc-author__name {
             color: $cb7;
           }
+
+          .voc-author__special {
+            margin-top: 8px;
+            text-transform: uppercase;
+            color: $cb7;
+          }
         }
       }
     }
@@ -389,18 +395,18 @@ body:has(.voc-paywall--grad) {
   .voc-c-container {
     .voc-d-c-fignumber {
       &__container {
-        left: 50%;
-        right: unset;
         width: 100%;
         max-width: 260px;
-        transform: translateX(-50%);
+        margin: 0 auto;
+        text-align: center;
 
         @media (min-width: $screen-md) {
           left: unset;
-          right: -239px;
-          width: 170px;
+          right: -250px;
+          width: 180px;
           max-width: unset;
           transform: unset;
+          text-align: left;
         }
 
         &:before {
@@ -409,11 +415,15 @@ body:has(.voc-paywall--grad) {
       }
 
       &__number {
-        margin-bottom: 6px;
+        margin: 0 auto 6px;
         font-family: $bass;
         font-size: 50px;
         line-height: 42px;
         color: #FC3636;
+
+        @media (min-width: $screen-md) {
+          margin: 0 0 6px;
+        }
       }
 
       &__title {
@@ -447,6 +457,10 @@ body:has(.voc-paywall--grad) {
     margin-top: 100px;
     margin-bottom: 40px;
     text-align: center;
+
+    @media (max-width: $screen-md) {
+      scroll-margin-top: 220px;
+    }
 
     .voc-d-c__pretitle {
       max-width: 562px;

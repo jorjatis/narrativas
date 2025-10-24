@@ -107,9 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initObserver();
   }
 
+  const navLinks = document.querySelectorAll('.v-spc-nav a');
+
   // Opcional: Manejar clicks en la navegación para scroll suave
   document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.v-spc-nav a');
 
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
@@ -127,12 +128,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
   const toggleButton = document.querySelector('.v-spc-nav-tgl');
   const navList = document.querySelector('.v-spc-nav');
 
+  // Abrir/cerrar menú al hacer clic en el botón
   toggleButton.addEventListener('click', () => {
     const isOpen = navList.classList.toggle('is-active');
     toggleButton.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Cerrar menú cuando se hace clic en un enlace
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navList.classList.remove('is-active');
+      toggleButton.setAttribute('aria-expanded', false);
+    });
   });
 });
