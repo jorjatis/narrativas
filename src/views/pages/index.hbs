@@ -16,9 +16,22 @@
       {{!-- NOTE: Suele haber una p antes del contenido cuando lleva paywall, que se embute en layout/article-content -> layout/article-paywall-content --}}
       {{#if hasPaywall}}
         <p class='voc-p'>{{{ paywallFirstP }}}</p>
+
+        {{> components/paywall }}
+      {{else }}
+        <p class='voc-p'>{{{ paywallFirstP }}}</p>
+
+        <span class="paywall">
+          {{> layout/article-content }}
+
+          {{> components/credits }}
+        </span>
       {{/if}}
 
-      {{> layout/article-content }}
+      <section class="voc-btn__container voc-btn__container--s-between">
+        {{!-- Note: Boton Reportar un error --}}
+        {{ components/btn-report-error }}
+      </section>
     </div>
   </div>
 </div>

@@ -1,12 +1,12 @@
 {
   "section": "España",
-  "ABCPremiumBadge": true,
+  "ABCPremiumBadge": false,
   "infoContainerDark": false,
-  "title": "Dana: la vida y la muerte en cien metros",
-  "subtitle": "Doce meses han transcurrido desde que el rugido del agua lo cambió todo. Volvemos al epicentro del desastre, la calle Sant Jordi, para comprobar si el tiempo ha intentado sanar las heridas abiertas por la devastadora DANA",
-  "author": "Chapu Apaolaza, Carlota García y Juan Bitrián. Fotos: Ignacio Gil",
+  "title": "Cómo hemos cambiado",
+  "subtitle": "Cincuenta años de monarquía en España reflejan mucho más que una etapa política: son medio siglo de cambios en nuestra economía, cultura, moda y forma de vivir. Un viaje por cómo hemos evolucionado como sociedad hasta el país que somos hoy.",
+  "author": "ISRAEL VIANA | LAURA ALBOR | JULIÁN DE VELASCO",
   "authorImg": false,
-  "hasPaywall": true,
+  "hasPaywall": false,
   "paywallFirstP": "Frente a Sant Jordi, 10, sobre las escaleras que se usan para bajar al cauce del Barranco del Poyo, el agua puso su primer pie en la acera y desencadenó <strong>la barbarie </strong>de coches, ramas, piedras y muertos que hizo de la ribera de Paiporta, un barrio residencial de la Horta Sud de Valencia, el mayor tanatorio al aire libre de la historia reciente de España.",
   "credits": [
     { "position": "Dirección de arte", "name": "Fernando Hernández" },

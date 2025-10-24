@@ -1,7 +1,9 @@
 <section class="voc-author" data-mrf-recirculation="Autor">
-  <figure class="voc-author__image">
-    <img class="voc-author__img" src="{{#if authorImg}}{{authorImg}}{{else}}https://s3.abcstatics.com/comun/2015/img/autor/autor-6489-foto-1.jpeg{{/if}}" alt="{{author}}">
-  </figure>
+  {{#if authorImg}}
+    <figure class="voc-author__image">
+      <img class="voc-author__img" src="{{#if authorImg}}{{authorImg}}{{else}}https://s3.abcstatics.com/comun/2015/img/autor/autor-6489-foto-1.jpeg{{/if}}" alt="{{author}}">
+    </figure>
+  {{/if}}
   <div class="voc-author__item voc-author__item--1">
     <div class="voc-author__container">
       <div class="voc-author__subitem voc-author__subitem--1">

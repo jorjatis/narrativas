@@ -1,0 +1,17 @@
+@use '../base/variables' as *;
+
+// -------------------------------
+// BARRA AUTOR/AUTORES
+// -------------------------------
+
+.voc-article.voc-article--detail-visual {
+  .voc-author {
+    &__item {
+      &--1 {
+        &:before {
+          content: none;
+        }
+      }
+    }
+  }
+}
