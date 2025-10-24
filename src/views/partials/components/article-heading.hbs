@@ -5,16 +5,14 @@
         <span class="voc-pretitle-sponsor-link">
           <img class="voc-pretitle-sponsor" src="https://s2.abcstatics.com/abc/www/multimedia/espana/2025/10/26/dana-placa-calle.jpg" alt="">
         </span>
+        <p class="voc-pretitle">
+          <span class="voc-pretitle__prm">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 24">
+              <use href="#icon-premium-pretitle"></use>
+            </svg>
+          </span>
+        </p>
         <h1 class="voc-title">{{ title }}</h1>
-        <div class="voc-img-container voc-img-container--fw-xs voc-img-container--wmd">
-          <figure class="voc-img-figure ">
-            <div class="voc-img-link">
-              <video muted playsinline controls class="video">
-                <source src="/assets/videos/video-dana.mp4" type="video/mp4">
-              </video>
-            </div>
-          </figure>
-        </div>
         <section class="voc-author" data-mrf-recirculation="Autor">
           <figure class="voc-author__image">
             <img class="voc-author__img" src="https://s3.abcstatics.com/comun/2015/img/autor/autor-6489-foto-1.jpeg" alt="Texto: Chapu Apaolaza. Vídeo: Carlota García y Juan Bitrián. Fotos: Ignacio Gil">
@@ -23,7 +21,7 @@
             <div class="voc-author__container">
               <div class="voc-author__subitem voc-author__subitem--1">
                 <p class="voc-author__name">
-                  <a href="https://www.abc.es/autor/chapu-apaolaza-6489/" data-mrf-link="https://www.abc.es/autor/chapu-apaolaza-6489/" cmp-ltrk="Autor" cmp-ltrk-idx="0" mrfobservableid="14fe2b41-43d4-47df-a0f2-bab935b3f49f">Texto: Chapu Apaolaza. Vídeo: Carlota García y Juan Bitrián. Fotos: Ignacio Gil</a>
+                  <a href="https://www.abc.es/autor/chapu-apaolaza-6489/" data-mrf-link="https://www.abc.es/autor/chapu-apaolaza-6489/" cmp-ltrk="Autor" cmp-ltrk-idx="0" mrfobservableid="14fe2b41-43d4-47df-a0f2-bab935b3f49f">Chapu Apaolaza, Carlota García y Juan Bitrián. Fotos: Ignacio Gil</a>
                 </p>
               </div>
               <div class="voc-author__subitem voc-author__subitem--2">
@@ -48,9 +46,9 @@
             </div>
           </div>
         </section>
-        <h2 class="voc-subtitle">
-          {{ subtitle }}
-        </h2>
+      </div>
+      <div class="voc-img-container voc-img-container--fw-xs voc-img-container--wmd">
+        {{> components/video-heading }}
       </div>
     </div>
   </div>
