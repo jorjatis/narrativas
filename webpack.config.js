@@ -46,15 +46,21 @@ module.exports = {
       {
         test: /\.(c|sc|sa)ss$/,
         use: [
-          MiniCssExtractPlugin.loader, // Extrae el CSS a un archivo separado
-          'css-loader', // Resuelve @import y URL
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           'postcss-loader',
-          'resolve-url-loader', // Para manejar los URLs relativos dentro del CSS
+          {
+            loader: 'resolve-url-loader',
+            options: { sourceMap: true } // ✅ aquí
+          },
           {
             loader: 'sass-loader',
-            options: { sassOptions: { sourceMapIncludeSources: true } }, // Manejo de SCSS
-          },
-        ],
+            options: {
+              sourceMap: true, // ✅ importante para resolve-url-loader
+              sassOptions: { sourceMapIncludeSources: true }
+            }
+          }
+        ]
       },
       // Manejo de imágenes (JPG, PNG, GIF, SVG)
       {

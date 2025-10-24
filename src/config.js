@@ -2,7 +2,7 @@
 import './assets/styles/styles.scss';
 
 // Cargar js principal
-import './js/main.js'; 
+import './js/main.js';
 
 // Cargar dinámicamente plantillas y datos desde las carpetas correspondientes
 const templatesContext = require.context('./views/pages', true, /\.hbs$/);
