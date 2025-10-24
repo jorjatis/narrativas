@@ -40,8 +40,24 @@ body {
   display: inline-flex;
 }
 
-.video .vjs-play-progress {
-  background-color: #e4b016;
+.voc-img-figure .voc-img-link.video {
+  @media (max-width: $screen-xs) {
+    height: 100%;
+    aspect-ratio: 9 / 16;
+  }
+}
+
+video-js.vjs-1-1:not(.vjs-audio-only-mode), .video-js.vjs-16-9:not(.vjs-audio-only-mode), .video-js.vjs-4-3:not(.vjs-audio-only-mode), .video-js.vjs-9-16:not(.vjs-audio-only-mode), .video-js.vjs-fluid:not(.vjs-audio-only-mode) {
+  @media (max-width: $screen-xs) {
+    height: 100%;
+    aspect-ratio: 9 / 16;
+  }
+}
+
+.video {
+  .vjs-play-progress {
+    background-color: #e4b016;
+  }
 }
 
 .ai2html {
