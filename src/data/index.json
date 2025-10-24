@@ -1,3 +1,20 @@
 {
-  "cosa": "100 metros que anegaron la vida"
+  "section": "España",
+  "ABCPremiumBadge": true,
+  "infoContainerDark": false,
+  "title": "Dana: la vida y la muerte en cien metros",
+  "subtitle": "Doce meses han transcurrido desde que el rugido del agua lo cambió todo. Volvemos al epicentro del desastre, la calle Sant Jordi, para comprobar si el tiempo ha intentado sanar las heridas abiertas por la devastadora DANA",
+  "author": "Chapu Apaolaza, Carlota García y Juan Bitrián. Fotos: Ignacio Gil",
+  "authorImg": false,
+  "hasPaywall": true,
+  "paywallFirstP": "Frente a Sant Jordi, 10, sobre las escaleras que se usan para bajar al cauce del Barranco del Poyo, el agua puso su primer pie en la acera y desencadenó <strong>la barbarie </strong>de coches, ramas, piedras y muertos que hizo de la ribera de Paiporta, un barrio residencial de la Horta Sud de Valencia, el mayor tanatorio al aire libre de la historia reciente de España.",
+  "credits": [
+    { "position": "Dirección de arte", "name": "Fernando Hernández" },
+    { "position": "Diseño", "name": "Jorge González Navarro" },
+    { "position": "Infografía", "name": "Julián de Velasco, Javier Torres, Marcos Jiménez" },
+    { "position": "Desarrollo", "name": "Jorge García Gómez" },
+    { "position": "Producción vídeo", "name": "Javier Nadales, Samuel González (dron)" },
+    { "position": "Motion graphics", "name": "Estíbaliz Pangua" },
+    { "position": "Coordinación editorial", "name": "Elena de Miguel" }
+  ]
 }

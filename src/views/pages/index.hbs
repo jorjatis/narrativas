@@ -3,13 +3,26 @@
 {{> base/header }}
 
 <div class="voc-wrapper">
-  <div class="voc-container">
-    <h1>{{cosa}}</h1>
-  </div>  
+  {{> layout/article-heading }}
+
+  <div class="voc-container voc-container--wxs" data-mrf-recirculation="Apertura">
+    <div class="voc-d voc-d--visual" data-voc-component="voc-d">
+      <h2 class="voc-subtitle">
+        {{ subtitle }}
+      </h2>
+
+      {{> components/bar-socials-updated-article }}    
+
+      {{!-- NOTE: Suele haber una p antes del contenido cuando lleva paywall, que se embute en layout/article-content -> layout/article-paywall-content --}}
+      {{#if hasPaywall}}
+        <p class='voc-p'>{{{ paywallFirstP }}}</p>
+      {{/if}}
+
+      {{> layout/article-content }}
+    </div>
+  </div>
 </div>
 
 {{> base/footer }}
-
-{{> js/special-script }}
 
 {{> base/foot }}
