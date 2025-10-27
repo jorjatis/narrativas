@@ -5,29 +5,8 @@
 {{> base/header }}
 
 <div class="voc-wrapper">
-  <div class="voc-container">
-    <div class="voc-article-container">
-      <div class="voc-article voc-article--detail voc-article--detail-visual">
-        <div class="voc-info-container">
-          <p class="voc-pretitle">
-            <span class="voc-pretitle__txt">{{pretitle}}</span>
-          </p>
-          <h1 class="voc-title">{{title}}</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="voc-container voc-container--wxs">
-    <div class="voc-d voc-d--visual" data-voc-component="voc-d">
-      <h2 class="voc-subtitle">
-        {{subtitle}}
-      </h2>
-      <p class="v-dsc">
-        {{{disclaimer}}}
-      </p>
-      {{> components/author }}
-    </div>
-  </div>
+  {{> components/article-heading}}
+  
   <div class="voc-container voc-container--spc">
     <div class="v-spc-names">
       <div class="v-spc-loader">
@@ -87,17 +66,7 @@
     </div>
   </div>
 
-  <div class="voc-container">
-    <div class="v-c-crd">
-      <span>Créditos</span>
-      <ul>
-        <li><span>Recopilación de historias: <b>Javier Palomo, Patricia Biosca, Gregoria Caro, David Sánchez de Castro, Toni Jiménez, David Maroto</b></span></li>
-        <li><span>Edición: <b>Esther Blanco y David Sánchez de Castro</b></span></li>
-        <li><span>Desarrollo: <b>Jorge García</b></span></li>
-        <li><span>Dirección de arte y diseño: <b>Fernando Hernández</b></span></li>
-      </ul>
-    </div>
-  </div>
+  {{> components/credits }}
   
 </div>
 

@@ -415,12 +415,44 @@ body.is-overflow {
   .v-spc-pop { pointer-events: auto; }
 }
 
-.voc-container .v-c-crd {
-  max-width: 600px;
-  margin: 180px auto 0;
+// -------------------------------
+// CREDITOS
+// -------------------------------
+.voc-c-container:has(.v-c-crd) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 140px auto 0;
 
-  > span,
-  ul li { color: $palewhite; }
+    &:before {
+        content: '';
+        height: 1px;
+        background: $cb7;
+        margin-bottom: 20px;
+    }
+
+    &:after {
+        content: none;
+    }
+
+    .v-c-crd {
+        text-align: center;
+
+        >span,
+        ul li {
+            color: $cb7;
+        }
+
+        ul {
+            padding: 0;
+
+            li {
+                b {
+                    margin: 0;
+                }
+            }
+        }
+    }
 }
 
 // -----------------------------

@@ -4,8 +4,8 @@
     // RUTAS / CONFIG
     // -----------------------
     // BASE_PATH dinámico (funciona en localhost y en producción en un CDN/s3)
-    const BASE_PATH = "https://pre-s3.abcstatics.com/comun/especiales/dana/vidas-rotas/";
-    const CSV_URL = `${BASE_PATH}assets/data/dana_people.csv`;
+    const BASE_PATH = "https://s1.abcstatics.com/comun/narrativas/redaccion/2025/10/29/vidas-rotas/";
+    const CSV_URL = `${BASE_PATH}dana_people.csv`;
 
     const qs = (sel, ctx = document) => ctx.querySelector(sel);
     const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
@@ -345,76 +345,5 @@
     }
 
     init();
-
-    // -----------------------
-    // COMPARTIR EN REDES
-    // -----------------------
-    function showCopyMessage(btn) {
-      try {
-        const msg = document.createElement("div");
-        msg.className = "copy-msg-temp";
-        msg.textContent = "Enlace copiado";
-        msg.style.position = "fixed";
-        msg.style.zIndex = 9999;
-        msg.style.padding = "6px 10px";
-        msg.style.borderRadius = "6px";
-        msg.style.background = "rgba(0,0,0,0.8)";
-        msg.style.color = "#fff";
-        msg.style.fontSize = "13px";
-
-        const rect = btn.getBoundingClientRect();
-        // colocar encima del botón, centrado
-        msg.style.left = Math.min(window.innerWidth - 120, Math.max(8, rect.left + (rect.width / 2) - 60)) + "px";
-        msg.style.top = Math.max(8, rect.top - 40) + "px";
-
-        document.body.appendChild(msg);
-        setTimeout(() => { msg.remove(); }, 1500);
-      } catch (e) {
-        // fallback silencioso
-        console.log("Enlace copiado");
-      }
-    }
-
-    const buttons = document.querySelectorAll('[data-share]');
-    const pageUrl = window.location.href;
-    const shareText = '¡Mira este artículo interesante!';
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', event => {
-        event.preventDefault();
-        const type = btn.dataset.share;
-
-        switch (type) {
-          case 'facebook':
-            window.open(
-              `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`,
-              '_blank',
-              'width=600,height=400'
-            );
-            break;
-
-          case 'x':
-            window.open(
-              `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`,
-              '_blank',
-              'width=600,height=400'
-            );
-            break;
-
-          case 'whatsapp':
-            window.open(
-              `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${pageUrl}`)}`,
-              '_blank'
-            );
-            break;
-
-          case 'copy':
-            navigator.clipboard.writeText(pageUrl)
-              .then(() => showCopyMessage(btn))
-              .catch(() => console.error('Error al copiar el enlace'));
-            break;
-        }
-      });
-    });
   });
 </script>

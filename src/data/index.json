@@ -3,5 +3,14 @@
   "title": "Vidas rotas por la Dana",
   "subtitle": "Francisco estuvo cuatro horas agarrado a un árbol; Pepe tenía alzhéimer y no pudo subir a la planta superior; Hui, de 11 años, murió ahogada en el bar de sus padres; Scarlett no llegó a nacer… 229 nombres, 229 historias truncadas. Detrás de cada número, hay un proyecto vital que se frenó en seco. En ABC, hemos creado este muro del recuerdo en homenaje a quienes perdieron la vida el 29 de octubre de 2024 en las inundaciones en Valencia, Castilla-La Mancha y Andalucía.",
   "section": "España",
-  "disclaimer": "Algunas historias siguen incompletas. Si quieres hacernos llegar información sobre alguna de las víctimas, escríbenos a <a href=\"mailto:abcredaccioninternet@abc.es\">abcredaccioninternet@abc.es</a>"
+  "disclaimer": "Algunas historias siguen incompletas. Si quieres hacernos llegar información sobre alguna de las víctimas, escríbenos a <a href=\"mailto:abcredaccioninternet@abc.es\">abcredaccioninternet@abc.es</a>",
+  "creditos": [
+    { "cargo": "Dirección de arte", "nombre": "Fernando Hernández" },
+    { "cargo": "Diseño", "nombre": "Jorge González Navarro" },
+    { "cargo": "Infografía", "nombre": "Julián de Velasco, Javier Torres, Marcos Jiménez" },
+    { "cargo": "Desarrollo", "nombre": "Jorge García Gómez" },
+    { "cargo": "Producción vídeo", "nombre": "Javier Nadales, Samuel González (dron)" },
+    { "cargo": "Motion graphics", "nombre": "Estíbaliz Pangua" },
+    { "cargo": "Coordinación editorial", "nombre": "Elena de Miguel" }
+  ]
 }
