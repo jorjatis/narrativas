@@ -5,73 +5,88 @@
 {{> base/header }}
 
 <div class="voc-wrapper">
-  {{> components/article-heading}}
-  
-  <div class="voc-container voc-container--spc">
-    <div class="v-spc-names">
-      <div class="v-spc-loader">
-        <div class="spinner"></div>
-      </div>
-
-      {{!-- <span>María Isabel Piris Rico, </span><span>Silverio Navarro Borrás, </span><span>Miguel Ángel Pérez Ferragud, </span><span>Enrique Miguel Magraner, </span><span>José Hernáiz Montoro, </span><span>Teresa Plaza Oliver, </span><span>José Luis Rodríguez Ogayar, </span><span>María Dolores Almansa LaCuesta, </span><span>Dolores Lacuesta Arnandis, </span><span>Roberto Grau Gómez, </span><span>Juan Luis Vila Raga, </span><span>Eugenio Toledo Alexandre, </span><span>Carlos González Castán, </span><span>Sara Carpio García, </span><span>Miguel Carpio Espí, </span><span>Manuel Álvarez Ruiz, </span><span>José Solano Algaba, </span><span>Francisco Doménech García, </span><span>Valentina Toro González, </span><span>José Sancho Martín, </span><span>Luis Valdés Asensio, </span><span>Manuel Alonso Ridaura, </span><span>Marina Company Candel, </span><span>Amparo Bou Chisvert, </span><span>Fernando Páez Robles, </span><span>Silvano Rentero García, </span> --}}
-    </div>
-
-    <div class="v-spc-faces">
-      <span class="v-spc-faces-txt">Clica sobre cada víctima para conocer su historia</span>
-
-      {{!-- <input type="text" id="buscador" placeholder="Buscar nombre..." class="v-spc-search"/> --}}
-
-      <div class="v-spc-faces-grid">
-        <div class="v-spc-loader">
-          <div class="spinner"></div>
-        </div>
-
-        {{!-- NOTE: Aquí se rellenarán las personas por JS del google sheets --}}
-        {{!-- <button class="v-spc-faces__itm" popovertarget="maria-piris">
-          <figure class="v-spc-faces__img">
-            <img src="assets/images/img-ph.jpg" alt="José Hernaiz">
-          </figure>
-          <span class="v-spc-faces__name">José Hernaiz</span>
-        </button> --}}
-      </div>
-      
-      <div id="maria-isabel-piris-rico" popover class="v-mdl-pop v-spc-pop">
-        <div class="v-mdl__c v-mdl-pop__c">
-          <div class="v-mdl-pop__h">
-            <button class="v-x" popovertarget="" popovertargetaction="hide">
-              <span class="v-i">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="a" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><path fill="#D9D9D9" d="M0 0h24v24H0z"/></mask><g mask="url(#a)"><path d="M6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5l5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19Z" fill="#1C1B1F"/></g></svg>
-              </span>
-            </span>
-          </div>
-          <div class="v-mdl-pop__w">
-            <div class="v-mdl-pop__b v-mdl-pop__b--1">
-              <figure class="v-spc-faces__img">
-                <img id="pop-img" src="assets/images/no-photo.jpg" alt="">
-              </figure>
-              <div class="v-spc-faces__info">
-                <span id="pop-name" class="v-spc-faces__name"></span>
-                <span id="pop-age" class="v-spc-faces__age"></span>
-                <span id="pop-loc" class="v-spc-faces__loc"></span>
-              </div>
-            </div>
-
-            <div class="v-mdl-pop__b v-mdl-pop__b--2">
-              <p id="pop-desc" class="v-spc-faces__desc"></p>
-            </div> 
-          </div>
+  <div class="voc-container voc-container--wxs">
+    <div class="voc-article-container">
+      <div class="voc-article voc-article--detail voc-article--detail-visual">
+        <div class="voc-info-container voc-info-container--dark">
+          <p class="voc-pretitle">{{pretitle}}</p>
+          <h1 class="voc-title">{{title}}</h1>
+          <section class="voc-author" data-mrf-recirculation="Autor"></section>
         </div>
       </div>
-
     </div>
   </div>
 
-  {{> components/credits }}
+  <div class="voc-container voc-container--wxs">
+    <div class="voc-d voc-d--visual" data-voc-component="voc-d">
+      {{> components/bar-socials-updated-article }}      
+      <p class="voc-p">{{{subtitle}}}</p>
+      <span class="paywall">
+        <p class="voc-p" style=""><em>{{{disclaimer}}}</em></p>
+        
+        {{!-- NOTE: Contenido del especial --}}
+        <div class="voc-c-container voc-c-container--wmd">
+          <div class="voc-container-spc">
+            <div class="v-spc-names">
+              <div class="v-spc-loader">
+                <div class="spinner"></div>
+              </div>
+              {{!-- NOTE: El muro de nombres se rellena por JS del google sheets --}}
+              {{!-- <span>María Isabel Piris Rico, </span><span>Silverio Navarro Borrás, </span><span>Miguel Ángel Pérez Ferragud, </span><span>Enrique Miguel Magraner, </span><span>José Hernáiz Montoro, </span><span>Teresa Plaza Oliver, </span><span>José Luis Rodríguez Ogayar, </span><span>María Dolores Almansa LaCuesta, </span><span>Dolores Lacuesta Arnandis, </span><span>Roberto Grau Gómez, </span><span>Juan Luis Vila Raga, </span><span>Eugenio Toledo Alexandre, </span><span>Carlos González Castán, </span><span>Sara Carpio García, </span><span>Miguel Carpio Espí, </span><span>Manuel Álvarez Ruiz, </span><span>José Solano Algaba, </span><span>Francisco Doménech García, </span><span>Valentina Toro González, </span><span>José Sancho Martín, </span><span>Luis Valdés Asensio, </span><span>Manuel Alonso Ridaura, </span><span>Marina Company Candel, </span><span>Amparo Bou Chisvert, </span><span>Fernando Páez Robles, </span><span>Silvano Rentero García, </span> --}}
+            </div>
+            <div class="v-spc-faces">
+              <span class="v-spc-faces-txt">Clica sobre cada víctima para conocer su historia</span>
+              {{!-- <input type="text" id="buscador" placeholder="Buscar nombre..." class="v-spc-search"/> --}}
+              <div class="v-spc-faces-grid">
+                <div class="v-spc-loader">
+                  <div class="spinner"></div>
+                </div>
+                {{!-- NOTE: Aquí se rellenarán las personas por JS del google sheets --}}
+                {{!-- <button class="v-spc-faces__itm" popovertarget="maria-piris">
+                  <figure class="v-spc-faces__img">
+                    <img src="assets/images/img-ph.jpg" alt="José Hernaiz">
+                  </figure>
+                  <span class="v-spc-faces__name">José Hernaiz</span>
+                </button> --}}
+              </div>            
+              <div id="" popover class="v-mdl-pop v-spc-pop">
+                <div class="v-mdl__c v-mdl-pop__c">
+                  <div class="v-mdl-pop__h">
+                    <button class="v-x" popovertarget="" popovertargetaction="hide">
+                      <span class="v-i">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="a" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><path fill="#D9D9D9" d="M0 0h24v24H0z"/></mask><g mask="url(#a)"><path d="M6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5l5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19Z" fill="#1C1B1F"/></g></svg>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="v-mdl-pop__w">
+                    <div class="v-mdl-pop__b v-mdl-pop__b--1">
+                      <figure class="v-spc-faces__img">
+                        <img id="pop-img" src="assets/images/no-photo.jpg" alt="">
+                      </figure>
+                      <div class="v-spc-faces__info">
+                        <span id="pop-name" class="v-spc-faces__name"></span>
+                        <span id="pop-age" class="v-spc-faces__age"></span>
+                        <span id="pop-loc" class="v-spc-faces__loc"></span>
+                      </div>
+                    </div>
+                    <div class="v-mdl-pop__b v-mdl-pop__b--2">
+                      <p id="pop-desc" class="v-spc-faces__desc"></p>
+                    </div> 
+                  </div>
+                </div>
+              </div>            
+            </div>
+          </div>
+        </div>
+
+        {{> components/credits }}
+      </span>
+      {{> components/btns-pre-footer}}
+    </div>
+  </div>
   
 </div>
 
 {{> base/footer }}
-
-{{> js/special-script }}
 
 {{> base/foot }}

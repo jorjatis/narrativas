@@ -7,6 +7,26 @@ body {
   background: $darkbg;
 }
 
+#icon-save-news path {
+  stroke: $palewhite;
+}
+
+#icon-ver-comentarios path {
+  fill: $palewhite;
+}
+
+.voc-social__icon--comments {
+  cursor: pointer;
+}
+
+.voc-btn__container--s-between {
+  margin-top: 80px;
+}
+
+.voc-advertising.voc-advertising--footer {
+  display: none;
+}
+
 // -----------------------------
 // HEADER
 // -----------------------------
@@ -36,11 +56,12 @@ body {
 // FOOTER
 // -----------------------------
 body .voc-footer {
-  margin: 180px auto 0;
+  margin: 120px auto 0;
 
   .voc-heading__logo { filter: invert(1); }
   .voc-footer__corporate .voc-heading__logo { filter: brightness(5); }
 
+  .voc-stores__text,
   .voc-heading__text,
   .voc-to-top__text,
   .voc-footer-nav__list li a,
@@ -58,39 +79,33 @@ body .voc-footer {
 // DETAIL VISUAL BLOQUE
 // -----------------------------
 .voc-article.voc-article--detail-visual {
-  .voc-pretitle {
-    margin-bottom: 24px;
-
-    &__prm { fill: $cb7; }
-
-    &__txt {
+  .voc-info-container--dark {
+    .voc-pretitle {
+      margin-bottom: 24px;
       font: 12px/normal $bass;
       letter-spacing: -.36px;
       text-transform: uppercase;
       color: $cb7;
       margin-top: 36px;
+
+      &::after { content: none; }
     }
 
-    &::after { content: none; }
-  }
+    .voc-title {
+      max-width: 700px;
+      width: 100%;
+      font: 50px/48px $abcdel;
+      text-transform: uppercase;
+      color: #F9F6EE;
 
-  .voc-title {
-    max-width: 700px;
-    width: 100%;
-    font: 50px/48px $abcdel;
-    text-transform: uppercase;
-    color: #F9F6EE;
-
-    @media (min-width: $screen-md) {
-      font-size: 90px;
-      line-height: 76px;
+      @media (min-width: $screen-md) {
+        font-size: 90px;
+        line-height: 76px;
+      }
     }
-  }
 
-  @media (min-width: $screen-md) {
-    .voc-img-container--wmd {
-      margin-left: calc((-1200px / 2) + 50%);
-      width: 1200px;
+    .voc-author {
+      margin-top: 0;
     }
   }
 }
@@ -99,43 +114,54 @@ body .voc-footer {
 // D VISUAL
 // -----------------------------
 .voc-d.voc-d--visual {
-  > .voc-subtitle {
-    margin-left: auto;
-    margin-right: auto;
+  .voc-author {
     max-width: 100%;
-    font: 22px/28px $abctl;
-    color: $palewhite;
-  }
-
-  .v-dsc {
-    margin-bottom: 80px;
-    font-family: $abcdli;
-    font-size: 16px;
-    line-height: 20px;
-    font-style: italic;
-    color: $palewhite;
-    text-align: center;
+    margin-bottom: 92px;
+    z-index: 10;
     
-    a {
-      transition: opacity .3s;
-
-      &:hover {
-        opacity: .7;
-      }
+    &__time { 
+      color: $palewhite; 
     }
   }
 
-  .voc-author {
-    z-index: 10;
-    
-    &__time { color: $palewhite; }
+  > p {
+    margin-bottom: 72px;
+    font: 20px/26px $abctl;
+    text-align: center;
+    color: $palewhite;
+
+    @media (min-width: $screen-xs) {
+      font-size: 22px;
+      line-height: 28px;
+    }
+  }
+
+  .paywall {
+    > .voc-p {
+      margin-bottom: 80px;
+      font-family: $abcdli;
+      font-size: 16px;
+      line-height: 20px;
+      font-style: italic;
+      color: $palewhite;
+      text-align: center;
+      
+      a {
+        color: $palewhite;
+        transition: opacity .3s;
+
+        &:hover {
+          opacity: .7;
+        }
+      }
+    }
   }
 }
 
 // -----------------------------
 // CONTENEDOR DEL ESPECIAL
 // -----------------------------
-.voc-container--spc {
+.voc-container-spc {
   margin-top: 36px;
 
   .v-spc-names {
@@ -422,7 +448,7 @@ body.is-overflow {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 140px auto 0;
+    margin: 120px auto 0;
 
     &:before {
         content: '';
@@ -478,8 +504,8 @@ body.is-overflow {
   }
 }
 
-.voc-subtitle,
-.v-dsc,
+.voc-d > .voc-p,
+.voc-d > .paywall > .voc-p,
 .voc-author {
   opacity: 0;
   animation: fadeInBlock 0.8s ease forwards 1.3s;
