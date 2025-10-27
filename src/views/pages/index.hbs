@@ -3,7 +3,31 @@
 {{> base/header }}
 
 <div class="voc-wrapper">
-  {{> layout/article-heading }}
+  {{!-- NOTE: Article heading --}}
+  <div class="voc-container voc-container--wxs" data-mrf-recirculation="Apertura">
+    <div class="voc-article-container">
+      <div class="voc-article voc-article--detail voc-article--detail-visual">
+        <div class="voc-info-container {{#if infoContainerDark}}voc-info-container--dark{{/if}}">
+          {{!-- NOTE: ABC Premium badge --}}
+          {{#if ABCPremiumBadge}}
+            <p class="voc-pretitle">
+              <span class="voc-pretitle__prm">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 24">
+                  <use href="#icon-premium-pretitle"></use>
+                </svg>
+              </span>
+            </p>
+          {{/if}}
+
+          {{!-- NOTE: Titulo --}}
+          <h1 class="voc-title">{{ title }}</h1>
+
+          {{!-- NOTE: Componente autor/autores --}}
+          {{> components/author }}
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="voc-container voc-container--wxs" data-mrf-recirculation="Apertura">
     <div class="voc-d voc-d--visual" data-voc-component="voc-d">
@@ -28,10 +52,13 @@
         </span>
       {{/if}}
 
-      <section class="voc-btn__container voc-btn__container--s-between">
-        {{!-- Note: Boton Reportar un error --}}
-        {{ components/btn-report-error }}
-      </section>
+      {{#if topics}}
+        {{> components/topics }}
+      {{/if}}
+
+      {{#unless hasPaywall}}
+      {{> components/btns-pre-footer }}
+      {{/unless}}
     </div>
   </div>
 </div>
