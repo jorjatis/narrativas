@@ -101,6 +101,10 @@ symbol#icon-premium-pretitle {
   fill: $cb7;
 }
 
+symbol#icon-down-arrow path {
+  stroke: #FC3636;
+}
+
 // -------------------------------
 // HEADER
 // -------------------------------
@@ -324,6 +328,18 @@ body:has(.voc-paywall--grad) {
         bottom: 0;
       }
     }
+  }
+  
+  .voc-topics__header-link {
+    color: #FC3636;
+  }
+
+  .voc-topics__link {
+    color: #999;
+  }
+
+  .voc-accordion__icon svg {
+    fill: #666;
   }
 
   .voc-author {

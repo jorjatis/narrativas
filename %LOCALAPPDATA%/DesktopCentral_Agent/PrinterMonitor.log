@@ -1,0 +1,55 @@
+﻿Date	Time	Severity	PID	TID	Function	Message
+27-10-2025	10:50:13.632	 INFO	 86216	 52404	DllMain	"DLL_PROCESS_ATTACH Fri Sep 26 20:08:34 2025 11.4.2500.11"
+27-10-2025	10:50:13.642	 INFO	 86216	 52404	DllMain	"PROCESS ATTACHED"
+27-10-2025	10:50:13.643	 INFO	 86216	 15456	LateInitialization	"Intialization..."
+27-10-2025	10:50:13.645	 INFO	 86216	 15456	LoadDisplayDevicesName	"DisplayDevices : "
+27-10-2025	10:50:13.646	 INFO	 86216	 15456	LoadDisplayDevicesName	"\\.\DISPLAY1"
+27-10-2025	10:50:13.649	 INFO	 86216	 15456	LoadDisplayDevicesName	"\\.\DISPLAY2"
+27-10-2025	10:50:13.650	 INFO	 86216	 15456	LoadDisplayDevicesName	"\\.\DISPLAY3"
+27-10-2025	10:50:13.651	 INFO	 86216	 15456	LoadDisplayDevicesName	"\\.\DISPLAY4"
+27-10-2025	10:50:13.652	 INFO	 86216	 15456	LoadDisplayDevicesName	"\\.\DISPLAY5"
+27-10-2025	10:50:13.653	 INFO	 86216	 15456	LoadDisplayDevicesName	"\\.\DISPLAY6"
+27-10-2025	10:50:13.654	 INFO	 86216	 15456	LoadDisplayDevicesName	"\\.\DISPLAY7"
+27-10-2025	10:50:13.655	 INFO	 86216	 15456	LoadDisplayDevicesName	"\\.\DISPLAY8"
+27-10-2025	10:50:13.661	ERROR	 86216	 15456	LateInitialization	"std::exception caught = GetFileVersionInfoSizeW failed with 1813
+"
+27-10-2025	10:50:13.666	 INFO	 86216	 15456	LateInitialization	"Exe = C:\Users\jgarcia\AppData\Local\Programs\Git\usr\bin\bash.exe
+ProductName = 
+FileDescription = 
+ShadowFolder = %LOCALAPPDATA%\EndpointDLP\print-shadow
+ParsingMode = Hybrid
+DeletePrinterShadowFiles = 1
+PrinterUseDisplayDevicesList = 0
+EnablePrinterEscapeProcessing = 1
+EnableWatermarkForAll = 0
+MaxPrintPages = 4294967295
+GdiPlusToken = 265154484
+ExcludedEscapes = 4117, 37, 4118, 4115, 4121, "
+27-10-2025	10:50:13.669	 INFO	 86216	 15456	LateInitialization	"Intialization finished"
+27-10-2025	10:50:29.016	 INFO	 88488	 86164	DllMain	"DLL_PROCESS_ATTACH Fri Sep 26 20:08:34 2025 11.4.2500.11"
+27-10-2025	10:50:29.022	 INFO	 88488	 86164	DllMain	"PROCESS ATTACHED"
+27-10-2025	10:50:29.024	 INFO	 88488	 85824	LateInitialization	"Intialization..."
+27-10-2025	10:50:29.025	 INFO	 88488	 85824	LoadDisplayDevicesName	"DisplayDevices : "
+27-10-2025	10:50:29.026	 INFO	 88488	 85824	LoadDisplayDevicesName	"\\.\DISPLAY1"
+27-10-2025	10:50:29.027	 INFO	 88488	 85824	LoadDisplayDevicesName	"\\.\DISPLAY2"
+27-10-2025	10:50:29.029	 INFO	 88488	 85824	LoadDisplayDevicesName	"\\.\DISPLAY3"
+27-10-2025	10:50:29.030	 INFO	 88488	 85824	LoadDisplayDevicesName	"\\.\DISPLAY4"
+27-10-2025	10:50:29.032	 INFO	 88488	 85824	LoadDisplayDevicesName	"\\.\DISPLAY5"
+27-10-2025	10:50:29.033	 INFO	 88488	 85824	LoadDisplayDevicesName	"\\.\DISPLAY6"
+27-10-2025	10:50:29.035	 INFO	 88488	 85824	LoadDisplayDevicesName	"\\.\DISPLAY7"
+27-10-2025	10:50:29.036	 INFO	 88488	 85824	LoadDisplayDevicesName	"\\.\DISPLAY8"
+27-10-2025	10:50:29.039	ERROR	 88488	 85824	LateInitialization	"std::exception caught = GetFileVersionInfoSizeW failed with 1813
+"
+27-10-2025	10:50:29.041	 INFO	 88488	 85824	LateInitialization	"Exe = C:\Users\jgarcia\AppData\Local\Programs\Git\usr\bin\bash.exe
+ProductName = 
+FileDescription = 
+ShadowFolder = %LOCALAPPDATA%\EndpointDLP\print-shadow
+ParsingMode = Hybrid
+DeletePrinterShadowFiles = 1
+PrinterUseDisplayDevicesList = 0
+EnablePrinterEscapeProcessing = 1
+EnableWatermarkForAll = 0
+MaxPrintPages = 4294967295
+GdiPlusToken = 265169859
+ExcludedEscapes = 4117, 37, 4118, 4115, 4121, "
+27-10-2025	10:50:29.043	 INFO	 88488	 85824	LateInitialization	"Intialization finished"
