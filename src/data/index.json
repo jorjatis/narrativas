@@ -18,6 +18,7 @@
     { "position": "Motion graphics", "name": "Estíbaliz Pangua" },
     { "position": "Coordinación editorial", "name": "Elena de Miguel" }
   ],
+  "topics": true,
   "commentsBtn": true,
   "reportErrorBtn": true
 }

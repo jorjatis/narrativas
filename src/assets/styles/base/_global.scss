@@ -1,8 +1,30 @@
 @use './variables' as *;
 
+$dark-theme: true;
+
 // -------------------------------
 // GLOBAL
 // -------------------------------
 .voc-d span.paywall {
   padding-bottom: 72px;
+  margin-bottom: 80px;
+}
+
+body {
+  .voc-footer {
+    margin-top: 80px;
+    margin-bottom: 0;
+  }
+}
+
+@if $dark-theme {
+  body {
+    background: #121212;
+  }
+
+  body {
+    .voc-title {
+      color: $cb7;
+    }
+  }
 }
