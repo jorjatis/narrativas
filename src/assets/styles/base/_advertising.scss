@@ -1,0 +1,48 @@
+@use './variables' as *;
+
+// =======================================================
+// Advertising
+// =======================================================
+
+.voc-advertising.voc-advertising--megabanner {
+  margin-top: 72px;
+  margin-bottom: 72px;
+  overflow: visible;
+
+  &:after {
+    content: 'Publicidad';
+    position: absolute;
+    bottom: -16px;
+    font: 10px/1 $basr;
+  }
+}
+
+.voc-advertising.voc-advertising--footer {
+  position: relative;
+  margin-top: 64px;
+  padding-bottom: 0;
+  min-height: auto;
+  background: transparent;
+  overflow: visible;
+
+  &:after {
+    content: 'Publicidad';
+    position: absolute;
+    bottom: -16px;
+    font: 10px/1 $basr;
+  }
+}
+
+.voc-container .voc-advertising.voc-advertising--footer {
+  margin-bottom: 80px;
+}
+
+.voc-advertising.voc-advertising--megabanner,
+.voc-advertising.voc-advertising--footer {
+  &:after {
+    content: 'Publicidad';
+    position: absolute;
+    bottom: -16px;
+    font: 10px/1 $basr;
+  }
+}

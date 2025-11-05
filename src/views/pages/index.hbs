@@ -2,7 +2,7 @@
 
 {{> base/header }}
 
-<div class="voc-wrapper">
+<article class="voc-wrapper">
   {{> layout/article-heading }}
 
   <div class="voc-container voc-container--wxs" data-mrf-recirculation="Apertura">
@@ -18,8 +18,10 @@
         <p class='voc-p'>{{{ paywallFirstP }}}</p>
 
         {{> components/paywall }}
-      {{else }}
+      {{else}}
         <p class='voc-p'>{{{ paywallFirstP }}}</p>
+
+        {{> advertising/ad-megabanner }}
 
         <span class="paywall">
           {{> layout/article-content }}
@@ -28,11 +30,15 @@
         </span>
       {{/if}}
 
-      <section class="voc-btn__container voc-btn__container--s-between">
-        {{!-- Note: Boton Reportar un error --}}
-        {{ components/btn-report-error }}
-      </section>
+      {{> components/topics }}
+      {{> components/btns-error-comment}}
     </div>
+  </div>
+</article>
+
+<div class="voc-wrapper">
+  <div class="voc-container">
+    {{> advertising/ad-footer }}
   </div>
 </div>
 

@@ -1,0 +1,17 @@
+<section class="voc-btn__container voc-btn__container--s-between">
+  {{#if commentsBtn}}
+  <button data-target="open-comments" data-voc-component="modal-open" class="voc-btn voc-btn--bdr voc-btn--has-icon voc-btn--has-icon--right">
+    <p class="voc-btn__text">Ver comentarios <span class="voc-btn__number">(0)</span>
+    </p>
+    <span class="voc-btn__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.2 19.4" xml:space="preserve">
+        <path fill="none" stroke="#000" style="stroke-linecap:round;stroke-linejoin:round" d="m.6 18.8 6-9-6-9"></path>
+      </svg>
+    </span>
+  </button>
+  {{/if}}
+
+  {{#if reportErrorBtn}}
+  <button data-target="open-report-error" data-voc-component="modal-open" class="voc-btn voc-btn--g report-error__btn">Reportar un error</button>  
+  {{/if}}
+</section>
