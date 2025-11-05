@@ -26,16 +26,16 @@
         <span class="paywall">
           {{> layout/article-content }}
 
-          {{#if credits}}
-            {{> components/credits }}
-          {{/if}}
+          {{> components/credits }}
         </span>
       {{/if}}
 
-      {{> components/topics }}
+      {{#if topics}}
+        {{> components/topics }}
+      {{/if}}
 
       {{#unless hasPaywall}}
-        {{> components/btns-error-comment}}
+      {{> components/btns-error-comment }}
       {{/unless}}
     </div>
   </div>
