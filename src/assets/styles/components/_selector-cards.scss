@@ -1,0 +1,23 @@
+@use '../base/variables' as *;
+@use '../base/variables-special' as *;
+
+.sel-cards {
+  margin-top: 36px;
+
+  &__txt {
+    display: block;
+    margin: 0 0 98px;
+    font-size: 14px;
+    line-height: normal;
+    text-align: center;
+  }
+
+  &__c {
+    display: flex;
+    justify-content: center;
+  }
+
+  .card {
+    margin-top: 130px;
+  }
+}

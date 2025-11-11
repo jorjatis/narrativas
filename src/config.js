@@ -1,6 +1,11 @@
 // Carga estilo principal
 import './assets/styles/styles.scss';
 
+// Cargar js vendors
+import './js/vendors/flip/flip.min.js';
+import './js/vendors/gsap/gsap.min.js';
+import './js/vendors/gsap/ScrollTrigger.min.js';
+
 // Cargar js principal
 import './js/main.js';
 

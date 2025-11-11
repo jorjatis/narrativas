@@ -1,18 +1,18 @@
 <section class="voc-author" data-mrf-recirculation="Autor">
-  {{#if authorImg}}
+  {{#if config.authorImg}}
     <figure class="voc-author__image">
-      <img class="voc-author__img" src="./assets/images/mockup/author-img.webp" alt="{{author}}">
+      <img class="voc-author__img" src="./assets/images/mockup/author-img.webp" alt="{{config.author}}">
     </figure>
   {{/if}}
   <div class="voc-author__item voc-author__item--1">
     <div class="voc-author__container">
       <div class="voc-author__subitem voc-author__subitem--1">
         <p class="voc-author__name">
-          <a href="https://www.abc.es/autor/chapu-apaolaza-6489/" data-mrf-link="https://www.abc.es/autor/chapu-apaolaza-6489/" cmp-ltrk="Autor" cmp-ltrk-idx="0" mrfobservableid="14fe2b41-43d4-47df-a0f2-bab935b3f49f">{{authorName}}</a>
+          <a href="https://www.abc.es/autor/chapu-apaolaza-6489/" data-mrf-link="https://www.abc.es/autor/chapu-apaolaza-6489/" cmp-ltrk="Autor" cmp-ltrk-idx="0" mrfobservableid="14fe2b41-43d4-47df-a0f2-bab935b3f49f">{{config.authorName}}</a>
         </p>
-        {{#if authorLocation}}
+        {{#if config.authorLocation}}
         <p class="voc-author__special">
-          {{#if authorLocation}}Madrid{{else}}{{authorLocation}}{{/if}}
+          {{#if config.authorLocation}}Madrid{{else}}{{config.authorLocation}}{{/if}}
         </p>
         {{/if}}
       </div>

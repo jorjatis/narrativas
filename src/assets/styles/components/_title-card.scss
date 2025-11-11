@@ -1,0 +1,37 @@
+@use '../base/variables' as *;
+@use '../base/variables-special' as *;
+
+.title-card {
+  position: relative;
+  width: 800px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 1px;
+    background: #C7C2BD;
+  }
+
+  .card {
+    margin: 0 auto 8px;
+    padding-bottom: 30px;
+
+    &__fig {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.voc-d span.paywall {
+  .title-card + .voc-d-c__s-title {
+    margin-bottom: 60px;
+    font: 80px/52px $axs;
+    text-align: center;
+    letter-spacing: -.8px;
+    text-transform: uppercase;
+  }
+}

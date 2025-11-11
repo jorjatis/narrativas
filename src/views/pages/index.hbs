@@ -5,23 +5,23 @@
 <article class="voc-wrapper">
   {{> layout/article-heading }}
 
-  <div class="voc-container voc-container--wxs" data-mrf-recirculation="Apertura">
+  <div class="voc-container voc-container--wxs">
     <div class="voc-d voc-d--visual" data-voc-component="voc-d">
       <h2 class="voc-subtitle">
-        {{ subtitle }}
+        {{config.subtitle}}
       </h2>
 
       {{> components/bar-socials-updated-article }}    
 
       {{!-- NOTE: Suele haber una p antes del contenido cuando lleva paywall, que se embute en layout/article-content -> layout/article-paywall-content --}}
-      {{#if hasPaywall}}
-        <p class='voc-p'>{{{ paywallFirstP }}}</p>
+      {{#if config.hasPaywall}}
+        <p class='voc-p'>{{{config.paywallFirstP}}}</p>
 
         {{> components/paywall }}
       {{else}}
-        <p class='voc-p'>{{{ paywallFirstP }}}</p>
+        {{!-- <p class='voc-p'>{{{config.paywallFirstP}}}</p> --}}
 
-        {{> advertising/ad-megabanner }}
+        {{!-- {{> advertising/ad-megabanner }} --}}
 
         <span class="paywall">
           {{> layout/article-content }}
@@ -30,11 +30,11 @@
         </span>
       {{/if}}
 
-      {{#if topics}}
+      {{#if config.topics}}
         {{> components/topics }}
       {{/if}}
 
-      {{#unless hasPaywall}}
+      {{#unless config.hasPaywall}}
       {{> components/btns-error-comment }}
       {{/unless}}
     </div>

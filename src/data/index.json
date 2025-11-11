@@ -1,14 +1,19 @@
 {
-  "section": "España",
-  "ABCPremiumBadge": true,
-  "infoContainerDark": false,
-  "title": "Cómo hemos cambiado",
-  "subtitle": "Cincuenta años de monarquía en España reflejan mucho más que una etapa política: son medio siglo de cambios en nuestra economía, cultura, moda y forma de vivir. Un viaje por cómo hemos evolucionado como sociedad hasta el país que somos hoy.",
-  "authorName": "José Rafael Mañueco",
-  "authorImg": false,
-  "authorLocation": true,
-  "hasPaywall": false,
-  "paywallFirstP": "Frente a Sant Jordi, 10, sobre las escaleras que se usan para bajar al cauce del Barranco del Poyo, el agua puso su primer pie en la acera y desencadenó <strong>la barbarie </strong>de coches, ramas, piedras y muertos que hizo de la ribera de Paiporta, un barrio residencial de la Horta Sud de Valencia, el mayor tanatorio al aire libre de la historia reciente de España.",
+  "config": {
+    "section": "España",
+    "ABCPremiumBadge": false,
+    "infoContainerDark": false,
+    "title": "Cómo hemos cambiado",
+    "subtitle": "Cincuenta años de monarquía en España reflejan mucho más que una etapa política: son medio siglo de cambios en nuestra economía, cultura, moda y forma de vivir. Un viaje por cómo hemos evolucionado como sociedad hasta el país que somos hoy.",
+    "authorName": "ISRAEL VIANA | LAURA ALBOR | JULIÁN DE VELASCO",
+    "authorImg": false,
+    "authorLocation": false,
+    "hasPaywall": false,
+    "paywallFirstP": "Frente a Sant Jordi, 10, sobre las escaleras que se usan para bajar al cauce del Barranco del Poyo, el agua puso su primer pie en la acera y desencadenó <strong>la barbarie </strong>de coches, ramas, piedras y muertos que hizo de la ribera de Paiporta, un barrio residencial de la Horta Sud de Valencia, el mayor tanatorio al aire libre de la historia reciente de España.",
+    "topics": true,
+    "commentsBtn": true,
+    "reportErrorBtn": true
+  },
   "credits": [
     { "position": "Dirección de arte", "name": "Fernando Hernández" },
     { "position": "Diseño", "name": "Jorge González Navarro" },
@@ -18,7 +23,44 @@
     { "position": "Motion graphics", "name": "Estíbaliz Pangua" },
     { "position": "Coordinación editorial", "name": "Elena de Miguel" }
   ],
-  "topics": true,
-  "commentsBtn": true,
-  "reportErrorBtn": true
+  "selectorCard": [
+    {
+      "imgSrc": "card-mazo",
+      "title": "Xxxxxxxxxxmazo",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "imgSrc": "card-phone",
+      "title": "Xxxxxxxxxxphone",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "imgSrc": "card-photo",
+      "title": "Xxxxxxxxxxphoto",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "imgSrc": "card-book",
+      "title": "Xxxxxxxxxxbook",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "imgSrc": "card-car",
+      "title": "Xxxxxxxxxxcar",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "imgSrc": "card-cine",
+      "title": "Xxxxxxxxxxcine",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+  ],
+  "selectorNav": [
+    { "title": "Población", "isActive": true },
+    { "title": "Familia y educación" },
+    { "title": "Economía" },
+    { "title": "Vivienda y consumo" },
+    { "title": "Ocio" },
+    { "title": "XXXXXXXXXXXXXXXXX" }
+  ]
 }

@@ -1,0 +1,16 @@
+<div class="card {{#if indexArray}}card--{{@index}}{{else if index}}card--{{index}}{{/if}}">
+  {{#if link}}
+  <a href="#">
+  {{/if}}
+    <figure class="card__fig">
+      <img src="assets/images/cards/{{imgSrc}}.png" alt="{{title}}">
+    </figure>
+
+    <span class="card__t">{{title}}</span>
+    <p class="card__p">
+      {{desc}}
+    </p>
+  {{#if link}}
+  </a>
+  {{/if}}
+</div>

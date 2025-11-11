@@ -1,0 +1,49 @@
+@use '../base/variables' as *;
+@use '../base/variables-special' as *;
+
+// -------------------------------
+// ARTICLE HEADING
+// -------------------------------
+
+.voc-article.voc-article--detail-visual {
+  .voc-title {
+    font: 60px/52px $abcdr;
+    text-transform: uppercase;
+    letter-spacing: -2.4px;
+    color: rgba($cb1, .8);
+  }
+
+  .voc-subtitle {
+    width: 724px;
+    max-width: unset;
+    font: 25px/32px $abcdr;
+  }
+
+  .voc-title+.voc-subtitle {
+    margin-top: 38px;
+    margin-bottom: 0;
+  }
+
+  .voc-author {
+    margin-top: 80px;
+
+    &__name {
+      font-size: 12px;
+      line-height: normal;
+    }
+
+    &__subitem {
+      &--1 {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .voc-info-container {
+    padding-top: 70px;
+  }
+}
+
+.voc-d.voc-d--visual {
+  margin-top: 64px;
+}

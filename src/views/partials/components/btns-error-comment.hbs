@@ -1,5 +1,5 @@
 <section class="voc-btn__container voc-btn__container--s-between">
-  {{#if commentsBtn}}
+  {{#if config.commentsBtn}}
   <button data-target="open-comments" data-voc-component="modal-open" class="voc-btn voc-btn--bdr voc-btn--has-icon voc-btn--has-icon--right">
     <p class="voc-btn__text">Ver comentarios <span class="voc-btn__number">(0)</span>
     </p>
@@ -11,7 +11,7 @@
   </button>
   {{/if}}
 
-  {{#if reportErrorBtn}}
+  {{#if config.reportErrorBtn}}
   <button data-target="open-report-error" data-voc-component="modal-open" class="voc-btn voc-btn--g report-error__btn">Reportar un error</button>  
   {{/if}}
 </section>

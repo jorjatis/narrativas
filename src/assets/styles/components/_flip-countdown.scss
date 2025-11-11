@@ -1,0 +1,53 @@
+@use '../base/variables' as *;
+@use '../base/variables-special' as *;
+
+@use '../vendors/flip/flip.min.css';
+
+.tick {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 48px;
+  font-family: $sxr;
+  font-size: 98px;
+  line-height: 170px;
+  text-align: center;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 184px;
+    height: 184px;
+    background: $cb1;
+    top: -7px;
+    left: -7px;
+    border-radius: 42px;
+  }
+
+  &-flip {
+    margin: 0;
+    min-width: auto;
+    letter-spacing: unset;
+    text-indent: unset;
+    border-radius: 36px;
+
+    &-panel {
+      color: #FAF2EB;
+    }
+
+    &-card:nth-child(1) {
+      .tick-flip-panel {
+        background: linear-gradient(179deg,rgba(219, 219, 219, 1) 0%, rgba(59, 59, 59, 1) 1%, rgba(30, 30, 30, 1) 88%, rgba(0, 0, 0, 1) 100%);
+      }
+    }
+
+    &-card:nth-child(2) {
+      .tick-flip-panel {
+        background: linear-gradient(0deg, rgb(37, 37, 38) 5%, rgb(60, 60, 60) 92%, rgb(0, 0, 0) 100%);
+      }
+    }
+    
+    &-shadow {
+      box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.5), 0 0.02125em 0.06125em rgba(0, 0, 0, 0.5);
+    }
+  }
+}
