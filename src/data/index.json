@@ -27,40 +27,96 @@
     {
       "imgSrc": "card-mazo",
       "title": "Xxxxxxxxxxmazo",
-      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "anchor": "poblacion"
     },
     {
       "imgSrc": "card-phone",
       "title": "Xxxxxxxxxxphone",
-      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "anchor": "familia"
     },
     {
       "imgSrc": "card-photo",
       "title": "Xxxxxxxxxxphoto",
-      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "anchor": "economia"
     },
     {
       "imgSrc": "card-book",
       "title": "Xxxxxxxxxxbook",
-      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "anchor": "vivienda"
     },
     {
       "imgSrc": "card-car",
       "title": "Xxxxxxxxxxcar",
-      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "anchor": "ocio"
     },
     {
       "imgSrc": "card-cine",
       "title": "Xxxxxxxxxxcine",
-      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "anchor": "xxx"
     }
   ],
   "selectorNav": [
-    { "title": "Población", "isActive": true },
-    { "title": "Familia y educación" },
-    { "title": "Economía" },
-    { "title": "Vivienda y consumo" },
-    { "title": "Ocio" },
-    { "title": "XXXXXXXXXXXXXXXXX" }
+    { "title": "Población", "isActive": true, "anchor": "poblacion" },
+    { "title": "Familia y educación", "anchor": "familia" },
+    { "title": "Economía", "anchor": "economia" },
+    { "title": "Vivienda y consumo", "anchor": "vivienda" },
+    { "title": "Ocio", "anchor": "ocio" },
+    { "title": "XXXXXXXXXXXXXXXXX", "anchor": "xxx" }
+  ],
+  "zones": [
+    {
+      "i": "0",
+      "imgSrc": "card-mazo",
+      "title": "Xxxxxxxxxxmazo",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "zoneTitle": "Población",
+      "id": "poblacion"
+    },
+    {
+      "i": "1",
+      "imgSrc": "card-phone",
+      "title": "Xxxxxxxxxxphone",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "zoneTitle": "Familia y educación",
+      "id": "familia"
+    },
+    {
+      "i": "2",
+      "imgSrc": "card-photo",
+      "title": "Xxxxxxxxxxphoto",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "zoneTitle": "Economía",
+      "id": "economia"
+    },
+    {
+      "i": "3",
+      "imgSrc": "card-book",
+      "title": "Xxxxxxxxxxbook",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "zoneTitle": "Vivienda y consumo",
+      "id": "vivienda"
+    },
+    {
+      "i": "4",
+      "imgSrc": "card-car",
+      "title": "Xxxxxxxxxxcar",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "zoneTitle": "Ocio",
+      "id": "ocio"
+    },
+    {
+      "i": "5",
+      "imgSrc": "card-cine",
+      "title": "Xxxxxxxxxxcine",
+      "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "zoneTitle": "XXXXXXXXXXXXXXXXX",
+      "id": "xxx"
+    }
   ]
 }

@@ -1,6 +1,6 @@
-<div class="card {{#if indexArray}}card--{{@index}}{{else if index}}card--{{index}}{{/if}}">
-  {{#if link}}
-  <a href="#">
+<div class="card {{#if indexArray}}card--{{@index}}{{/if}} {{#if i}}card--{{i}}{{/if}}">
+  {{#if anchor}}
+  <a href="#{{anchor}}">
   {{/if}}
     <figure class="card__fig">
       <img src="assets/images/cards/{{imgSrc}}.png" alt="{{title}}">

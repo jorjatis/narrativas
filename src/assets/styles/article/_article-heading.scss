@@ -7,16 +7,30 @@
 
 .voc-article.voc-article--detail-visual {
   .voc-title {
-    font: 60px/52px $abcdr;
+    font: 52px/45px $abcdr;
     text-transform: uppercase;
     letter-spacing: -2.4px;
     color: rgba($cb1, .8);
+
+    @media (min-width: $screen-xs) {
+      font-size: 60px;
+      line-height: 52px;
+    }
   }
 
   .voc-subtitle {
-    width: 724px;
+    width: 100%;
     max-width: unset;
-    font: 25px/32px $abcdr;
+    font: 20px/27px $abcdr;
+
+    @media (min-width: $screen-xs) {
+      font-size: 25px;
+      line-height: 32px;
+    }
+
+    @media (min-width: $screen-smx) {
+      width: 724px;
+    }
   }
 
   .voc-title+.voc-subtitle {

@@ -9,18 +9,7 @@
   border: 0.65px solid rgba(55, 25, 0, 0.09);
   border-radius: 16px;
   box-shadow: 0 9.096px 35.083px 0 rgba(46, 41, 13, 0.11), 0 2.599px 2.599px 0 rgba(0, 0, 0, 0.14);
-
-  a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    transition: opacity .3s;
-
-    &:hover {
-      opacity: .8;
-    }
-  }
-
+  
   &__fig {
     display: flex;
     align-items: center;

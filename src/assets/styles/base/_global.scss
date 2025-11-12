@@ -5,6 +5,10 @@ $dark-theme: false;
 // -------------------------------
 // GLOBAL
 // -------------------------------
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: url('~@images/trama-bg.jpg');
 }

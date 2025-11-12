@@ -1,0 +1,402 @@
+[
+  {
+    "slug": "furtivos",
+    "title": "Furtivos",
+    "subtitle": "José Luis Borau",
+    "desc": "Hito de la Transición y gran repercusión cultural en España. Premio en el Festival de Málaga.",
+    "img": "assets/images/movies/movie-1975.jpg",
+    "year": "1975"
+  },
+  {
+    "slug": "el-hombre-que-supo-amar",
+    "title": "El hombre que supo amar",
+    "subtitle": "François Truffaut",
+    "desc": "Drama romántico destacado en 1976, con buena acogida en salas españolas.",
+    "img": "assets/images/movies/movie-1976.jpg",
+    "year": "1976"
+  },
+  {
+    "slug": "star-wars-una-nueva-esperanza",
+    "title": "Star Wars: Episodio IV – Una nueva esperanza",
+    "subtitle": "George Lucas",
+    "desc": "Fenómeno mundial y gran éxito de taquilla también en España.",
+    "img": "assets/images/movies/movie-1977.jpg",
+    "year": "1977"
+  },
+  {
+    "slug": "la-escopeta-nacional",
+    "title": "La escopeta nacional",
+    "subtitle": "Luis García Berlanga",
+    "desc": "Sátira política y social que arrasó en taquilla en España.",
+    "img": "assets/images/movies/movie-1978.jpg",
+    "year": "1978"
+  },
+  {
+    "slug": "alien-el-octavo-pasajero",
+    "title": "Alien, el octavo pasajero",
+    "subtitle": "Ridley Scott",
+    "desc": "Película de culto y éxito internacional, muy popular entre el público español.",
+    "img": "assets/images/movies/movie-1979.jpg",
+    "year": "1979"
+  },
+  {
+    "slug": "el-crimen-de-cuenca",
+    "title": "El crimen de Cuenca",
+    "subtitle": "Pilar Miró",
+    "desc": "Obra polémica y de gran impacto público, censurada inicialmente y convertida en símbolo.",
+    "img": "assets/images/movies/movie-1980.jpg",
+    "year": "1980"
+  },
+  {
+    "slug": "en-busca-del-arca-perdida",
+    "title": "En busca del arca perdida",
+    "subtitle": "Steven Spielberg",
+    "desc": "Fenómeno de aventura y uno de los grandes éxitos de taquilla en España.",
+    "img": "assets/images/movies/movie-1981.jpg",
+    "year": "1981"
+  },
+  {
+    "slug": "et-el-extraterrestre",
+    "title": "E.T., el extraterrestre",
+    "subtitle": "Steven Spielberg",
+    "desc": "Uno de los mayores fenómenos de taquilla de los 80, éxito familiar sin precedentes.",
+    "img": "assets/images/movies/movie-1982.jpg",
+    "year": "1982"
+  },
+  {
+    "slug": "flashdance",
+    "title": "Flashdance",
+    "subtitle": "Adrian Lyne",
+    "desc": "Icono pop de los 80, con enorme popularidad en cines españoles.",
+    "img": "assets/images/movies/movie-1983.jpg",
+    "year": "1983"
+  },
+  {
+    "slug": "los-goonies",
+    "title": "Los Goonies",
+    "subtitle": "Richard Donner",
+    "desc": "Aventura juvenil de culto, muy popular en España.",
+    "img": "assets/images/movies/movie-1984.jpg",
+    "year": "1984"
+  },
+  {
+    "slug": "regreso-al-futuro",
+    "title": "Regreso al futuro",
+    "subtitle": "Robert Zemeckis",
+    "desc": "Éxito de público y uno de los clásicos más recordados del cine de los 80.",
+    "img": "assets/images/movies/movie-1985.jpg",
+    "year": "1985"
+  },
+  {
+    "slug": "top-gun",
+    "title": "Top Gun",
+    "subtitle": "Tony Scott",
+    "desc": "Fenómeno de taquilla y estilo, con gran impacto en el público español.",
+    "img": "assets/images/movies/movie-1986.jpg",
+    "year": "1986"
+  },
+  {
+    "slug": "mujeres-al-borde-de-un-ataque-de-nervios",
+    "title": "Mujeres al borde de un ataque de nervios",
+    "subtitle": "Pedro Almodóvar",
+    "desc": "Gran éxito nacional e internacional, consolidó a Almodóvar como figura clave.",
+    "img": "assets/images/movies/movie-1987.jpg",
+    "year": "1987"
+  },
+  {
+    "slug": "rain-man",
+    "title": "Rain Man",
+    "subtitle": "Barry Levinson",
+    "desc": "Ganadora del Óscar y gran éxito de público en España.",
+    "img": "assets/images/movies/movie-1988.jpg",
+    "year": "1988"
+  },
+  {
+    "slug": "batman",
+    "title": "Batman",
+    "subtitle": "Tim Burton",
+    "desc": "Fenómeno cultural y enorme taquilla en España.",
+    "img": "assets/images/movies/movie-1989.jpg",
+    "year": "1989"
+  },
+  {
+    "slug": "el-silencio-de-los-corderos",
+    "title": "El silencio de los corderos",
+    "subtitle": "Jonathan Demme",
+    "desc": "Thriller multipremiado y gran éxito también en España.",
+    "img": "assets/images/movies/movie-1990.jpg",
+    "year": "1990"
+  },
+  {
+    "slug": "terminator-2",
+    "title": "Terminator 2: El juicio final",
+    "subtitle": "James Cameron",
+    "desc": "Supertaquilla global y gran éxito en salas españolas.",
+    "img": "assets/images/movies/movie-1991.jpg",
+    "year": "1991"
+  },
+  {
+    "slug": "aladdin",
+    "title": "Aladdin",
+    "subtitle": "Ron Clements y John Musker",
+    "desc": "Éxito familiar y gran recaudación en España.",
+    "img": "assets/images/movies/movie-1992.jpg",
+    "year": "1992"
+  },
+  {
+    "slug": "jurassic-park",
+    "title": "Jurassic Park",
+    "subtitle": "Steven Spielberg",
+    "desc": "Fenómeno mundial y enorme éxito en España.",
+    "img": "assets/images/movies/movie-1993.jpg",
+    "year": "1993"
+  },
+  {
+    "slug": "forrest-gump",
+    "title": "Forrest Gump",
+    "subtitle": "Robert Zemeckis",
+    "desc": "Película icónica y gran éxito de taquilla en España.",
+    "img": "assets/images/movies/movie-1994.jpg",
+    "year": "1994"
+  },
+  {
+    "slug": "toy-story",
+    "title": "Toy Story",
+    "subtitle": "John Lasseter",
+    "desc": "Revolucionaria en animación y gran éxito familiar en España.",
+    "img": "assets/images/movies/movie-1995.jpg",
+    "year": "1995"
+  },
+  {
+    "slug": "independence-day",
+    "title": "Independence Day",
+    "subtitle": "Roland Emmerich",
+    "desc": "Blockbuster de ciencia ficción con gran recaudación en España.",
+    "img": "assets/images/movies/movie-1996.jpg",
+    "year": "1996"
+  },
+  {
+    "slug": "titanic",
+    "title": "Titanic",
+    "subtitle": "James Cameron",
+    "desc": "Fenómeno de taquilla global y récord histórico también en España.",
+    "img": "assets/images/movies/movie-1997.jpg",
+    "year": "1997"
+  },
+  {
+    "slug": "torrente",
+    "title": "Torrente, el brazo tonto de la ley",
+    "subtitle": "Santiago Segura",
+    "desc": "Fenómeno nacional de taquilla que marcó un antes y un después en la comedia española.",
+    "img": "assets/images/movies/movie-1998.jpg",
+    "year": "1998"
+  },
+  {
+    "slug": "star-wars-la-amenaza-fantasma",
+    "title": "Star Wars: Episodio I – La amenaza fantasma",
+    "subtitle": "George Lucas",
+    "desc": "Gran convocatoria en salas españolas.",
+    "img": "assets/images/movies/movie-1999.jpg",
+    "year": "1999"
+  },
+  {
+    "slug": "gladiator",
+    "title": "Gladiator",
+    "subtitle": "Ridley Scott",
+    "desc": "Épico éxito de taquilla y público en España.",
+    "img": "assets/images/movies/movie-2000.jpg",
+    "year": "2000"
+  },
+  {
+    "slug": "el-senor-de-los-anillos-la-comunidad-del-anillo",
+    "title": "El Señor de los Anillos: La Comunidad del Anillo",
+    "subtitle": "Peter Jackson",
+    "desc": "Inicio de la trilogía con enorme impacto en España.",
+    "img": "assets/images/movies/movie-2001.jpg",
+    "year": "2001"
+  },
+  {
+    "slug": "spider-man",
+    "title": "Spider-Man",
+    "subtitle": "Sam Raimi",
+    "desc": "Supertaquilla y gran presencia en el público español.",
+    "img": "assets/images/movies/movie-2002.jpg",
+    "year": "2002"
+  },
+  {
+    "slug": "el-senor-de-los-anillos-el-retorno-del-rey",
+    "title": "El Señor de los Anillos: El Retorno del Rey",
+    "subtitle": "Peter Jackson",
+    "desc": "Cierre de la trilogía con un éxito masivo en España.",
+    "img": "assets/images/movies/movie-2003.jpg",
+    "year": "2003"
+  },
+  {
+    "slug": "harry-potter-y-el-prisionero-de-azkaban",
+    "title": "Harry Potter y el prisionero de Azkaban",
+    "subtitle": "Alfonso Cuarón",
+    "desc": "Aclamada entrega de la saga y gran afluencia en salas españolas.",
+    "img": "assets/images/movies/movie-2004.jpg",
+    "year": "2004"
+  },
+  {
+    "slug": "harry-potter-y-el-caliz-de-fuego",
+    "title": "Harry Potter y el Cáliz de Fuego",
+    "subtitle": "Mike Newell",
+    "desc": "Gran éxito de público en España, consolidando la saga.",
+    "img": "assets/images/movies/movie-2005.jpg",
+    "year": "2005"
+  },
+  {
+    "slug": "piratas-del-caribe-el-cofre-del-hombre-muerto",
+    "title": "Piratas del Caribe: El cofre del hombre muerto",
+    "subtitle": "Gore Verbinski",
+    "desc": "Gran recaudación y fenómeno de público en España.",
+    "img": "assets/images/movies/movie-2006.jpg",
+    "year": "2006"
+  },
+  {
+    "slug": "el-orfanato",
+    "title": "El orfanato",
+    "subtitle": "J.A. Bayona",
+    "desc": "Fenómeno nacional de taquilla y éxito internacional.",
+    "img": "assets/images/movies/movie-2007.jpg",
+    "year": "2007"
+  },
+  {
+    "slug": "el-caballero-oscuro",
+    "title": "El Caballero Oscuro",
+    "subtitle": "Christopher Nolan",
+    "desc": "Fenómeno de taquilla y éxito crítico en España.",
+    "img": "assets/images/movies/movie-2008.jpg",
+    "year": "2008"
+  },
+  {
+    "slug": "avatar",
+    "title": "Avatar",
+    "subtitle": "James Cameron",
+    "desc": "Película más taquillera de 2009 en España y una de las mayores de la historia.",
+    "img": "assets/images/movies/movie-2009.jpg",
+    "year": "2009"
+  },
+  {
+    "slug": "toy-story-3",
+    "title": "Toy Story 3",
+    "subtitle": "Lee Unkrich",
+    "desc": "Gran éxito de público en España y cierre emocional de la trilogía.",
+    "img": "assets/images/movies/movie-2010.jpg",
+    "year": "2010"
+  },
+  {
+    "slug": "harry-potter-y-las-reliquias-de-la-muerte-2",
+    "title": "Harry Potter y las Reliquias de la Muerte – Parte 2",
+    "subtitle": "David Yates",
+    "desc": "Final de la saga con enorme asistencia de público en España.",
+    "img": "assets/images/movies/movie-2011.jpg",
+    "year": "2011"
+  },
+  {
+    "slug": "lo-imposible",
+    "title": "Lo imposible",
+    "subtitle": "J.A. Bayona",
+    "desc": "Película española con repercusión masiva y gran taquilla nacional e internacional.",
+    "img": "assets/images/movies/movie-2012.jpg",
+    "year": "2012"
+  },
+  {
+    "slug": "frozen",
+    "title": "Frozen: El reino del hielo",
+    "subtitle": "Chris Buck y Jennifer Lee",
+    "desc": "Fenómeno familiar y gran éxito en taquilla en España.",
+    "img": "assets/images/movies/movie-2013.jpg",
+    "year": "2013"
+  },
+  {
+    "slug": "ocho-apellidos-vascos",
+    "title": "Ocho apellidos vascos",
+    "subtitle": "Emilio Martínez-Lázaro",
+    "desc": "Fenómeno de taquilla en España, récord histórico de espectadores.",
+    "img": "assets/images/movies/movie-2014.jpg",
+    "year": "2014"
+  },
+  {
+    "slug": "ocho-apellidos-catalanes",
+    "title": "Ocho apellidos catalanes",
+    "subtitle": "Emilio Martínez-Lázaro",
+    "desc": "Secuela que mantuvo el éxito masivo del público en España.",
+    "img": "assets/images/movies/movie-2015.jpg",
+    "year": "2015"
+  },
+  {
+    "slug": "un-monstruo-viene-a-verme",
+    "title": "Un monstruo viene a verme",
+    "subtitle": "J.A. Bayona",
+    "desc": "Notable éxito de público y crítica en España.",
+    "img": "assets/images/movies/movie-2016.jpg",
+    "year": "2016"
+  },
+  {
+    "slug": "it",
+    "title": "It (Eso)",
+    "subtitle": "Andy Muschietti",
+    "desc": "Gran éxito comercial y de público en España.",
+    "img": "assets/images/movies/movie-2017.jpg",
+    "year": "2017"
+  },
+  {
+    "slug": "campeones",
+    "title": "Campeones",
+    "subtitle": "Javier Fesser",
+    "desc": "Fenómeno doméstico y una de las películas españolas más taquilleras del año.",
+    "img": "assets/images/movies/movie-2018.jpg",
+    "year": "2018"
+  },
+  {
+    "slug": "el-rey-leon",
+    "title": "El Rey León (2019)",
+    "subtitle": "Jon Favreau",
+    "desc": "Remake de Disney con enorme taquilla en España.",
+    "img": "assets/images/movies/movie-2019.jpg",
+    "year": "2019"
+  },
+  {
+    "slug": "tenet",
+    "title": "Tenet",
+    "subtitle": "Christopher Nolan",
+    "desc": "Uno de los pocos grandes estrenos de 2020, destacado en plena pandemia.",
+    "img": "assets/images/movies/movie-2020.jpg",
+    "year": "2020"
+  },
+  {
+    "slug": "el-buen-patron",
+    "title": "El buen patrón",
+    "subtitle": "Fernando León de Aranoa",
+    "desc": "Película española más destacada en 2021, con gran acogida crítica.",
+    "img": "assets/images/movies/movie-2021.jpg",
+    "year": "2021"
+  },
+  {
+    "slug": "alcarras",
+    "title": "Alcarràs",
+    "subtitle": "Carla Simón",
+    "desc": "Ganadora del Oso de Oro y con gran repercusión cultural en España.",
+    "img": "assets/images/movies/movie-2022.jpg",
+    "year": "2022"
+  },
+  {
+    "slug": "barbie",
+    "title": "Barbie",
+    "subtitle": "Greta Gerwig",
+    "desc": "Fenómeno global y arrasó también en taquilla en España.",
+    "img": "assets/images/movies/movie-2023.jpg",
+    "year": "2023"
+  },
+  {
+    "slug": "del-reves-2",
+    "title": "Del Revés 2 (Inside Out 2)",
+    "subtitle": "Kelsey Mann",
+    "desc": "Película más taquillera del año 2024 en España, éxito rotundo de público.",
+    "img": "assets/images/movies/movie-2024.jpg",
+    "year": "2024"
+  }
+]

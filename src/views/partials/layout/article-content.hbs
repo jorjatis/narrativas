@@ -1,15 +1,25 @@
 {{!-- NOTE: Se mueve arriba por JS -> js/dom-utils.js --}}
-{{> components/flip-countdown }} 
+{{> components/flip-countdown 
+    dataFlipInit="handleTickInit"
+}} 
 
 {{> components/selector-cards }}
 {{> components/selector-nav }}
 
-{{> components/title-card 
-    imgSrc="card-mazo"
-    title="Xxxxxxxxxxmazo"
-    desc="Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+{{> components/grid-gallery 
+    dataCategory="movies"
+    dataFlipInit="handleGalleryTick"
 }}
-<h3 class="voc-d-c__s-title">Población</h3>
-<p class="voc-p">Entradilla xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxx
-</p>
-{{> components/combo-2 }}
+
+{{> components/grid-gallery 
+    dataCategory="songs"
+    dataFlipInit="handleGalleryTick"
+}}
+
+{{#each zones}}
+  {{> components/title-card }}
+  <h3 class="voc-d-c__s-title">{{zoneTitle}}</h3>
+  <p class="voc-p">Entradilla xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxx
+  </p>
+  {{> components/combo-2 }}
+{{/each}}

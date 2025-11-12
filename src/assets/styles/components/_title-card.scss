@@ -3,14 +3,20 @@
 
 .title-card {
   position: relative;
-  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  scroll-margin-top: 140px;
+
+  @media (min-width: $screen-sm) {
+    width: 800px;
+  }
 
   &:before {
     content: '';
     position: absolute;
     top: 50%;
-    left: 0px;
-    transform: translateY(-50%);
     width: 100%;
     height: 1px;
     background: #C7C2BD;
@@ -28,10 +34,16 @@
 
 .voc-d span.paywall {
   .title-card + .voc-d-c__s-title {
-    margin-bottom: 60px;
-    font: 80px/52px $axs;
+    margin-bottom: 42px;
+    font: 56px/46px $axs;
     text-align: center;
     letter-spacing: -.8px;
     text-transform: uppercase;
+
+    @media (min-width: $screen-xs) {
+      margin-bottom: 60px;
+      font-size: 80px;
+      line-height: 52px;
+    }
   }
 }

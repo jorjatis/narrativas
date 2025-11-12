@@ -6,6 +6,8 @@
 @use './base/ev-paywall-template';
 @use './base/advertising';
 
+@use './vendors/flip/flip.min.css';
+
 @use './article/article-heading';
 
 @use './narwhal/narwhal-author';
@@ -19,3 +21,4 @@
 @use './components/selector-nav';
 @use './components/title-card';
 @use './components/combo-2';
+@use './components/grid-gallery';

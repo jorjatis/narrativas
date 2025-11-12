@@ -1,0 +1,402 @@
+[
+  {
+    "slug": "bohemian-rhapsody",
+    "title": "Bohemian Rhapsody",
+    "subtitle": "Queen",
+    "desc": "Éxito internacional, sonó ampliamente en España y se convirtió en clásico duradero.",
+    "img": "assets/images/music/album-1975.jpg",
+    "year": "1975"
+  },
+  {
+    "slug": "dancing-queen",
+    "title": "Dancing Queen",
+    "subtitle": "ABBA",
+    "desc": "Gran éxito en España y Europa; aún recordada como himno disco.",
+    "img": "assets/images/music/album-1976.jpg",
+    "year": "1976"
+  },
+  {
+    "slug": "stayin-alive",
+    "title": "Stayin’ Alive",
+    "subtitle": "Bee Gees",
+    "desc": "El auge del cine y la música disco; fenómeno mundial también en España.",
+    "img": "assets/images/music/album-1977.jpg",
+    "year": "1977"
+  },
+  {
+    "slug": "ymca",
+    "title": "Y.M.C.A.",
+    "subtitle": "Village People",
+    "desc": "Éxito internacional de baile muy presente en discotecas españolas.",
+    "img": "assets/images/music/album-1978.jpg",
+    "year": "1978"
+  },
+  {
+    "slug": "we-will-rock-you",
+    "title": "We Will Rock You / We Are the Champions",
+    "subtitle": "Queen",
+    "desc": "Canciones que marcaron la época; Queen triunfaba en España.",
+    "img": "assets/images/music/album-1979.jpg",
+    "year": "1979"
+  },
+  {
+    "slug": "another-brick-in-the-wall",
+    "title": "Another Brick in the Wall (Part 2)",
+    "subtitle": "Pink Floyd",
+    "desc": "N.º 1 en medio mundo, también un éxito rotundo en España.",
+    "img": "assets/images/music/album-1980.jpg",
+    "year": "1980"
+  },
+  {
+    "slug": "in-the-air-tonight",
+    "title": "In the Air Tonight",
+    "subtitle": "Phil Collins",
+    "desc": "Popular en radio española durante los primeros 80.",
+    "img": "assets/images/music/album-1981.jpg",
+    "year": "1981"
+  },
+  {
+    "slug": "i-will-survive",
+    "title": "I Will Survive",
+    "subtitle": "Gloria Gaynor",
+    "desc": "Gloria Gaynor fue un icono en España en los 80.",
+    "img": "assets/images/music/album-1982.jpg",
+    "year": "1982"
+  },
+  {
+    "slug": "billie-jean",
+    "title": "Billie Jean",
+    "subtitle": "Michael Jackson",
+    "desc": "Éxito absoluto, líder de ventas también en España.",
+    "img": "assets/images/music/album-1983.jpg",
+    "year": "1983"
+  },
+  {
+    "slug": "wake-me-up-before-you-go-go",
+    "title": "Wake Me Up Before You Go-Go",
+    "subtitle": "Wham!",
+    "desc": "Uno de los temas más radiados en España ese año.",
+    "img": "assets/images/music/album-1984.jpg",
+    "year": "1984"
+  },
+  {
+    "slug": "take-on-me",
+    "title": "Take on Me",
+    "subtitle": "a-ha",
+    "desc": "Éxito pop europeo; España la adoptó con entusiasmo.",
+    "img": "assets/images/music/album-1985.jpg",
+    "year": "1985"
+  },
+  {
+    "slug": "la-puerta-de-alcala",
+    "title": "La puerta de Alcalá",
+    "subtitle": "Ana Belén y Víctor Manuel",
+    "desc": "Éxito español emblemático, omnipresente ese año.",
+    "img": "assets/images/music/album-1986.jpg",
+    "year": "1986"
+  },
+  {
+    "slug": "la-isla-bonita",
+    "title": "La isla bonita",
+    "subtitle": "Madonna",
+    "desc": "Uno de los mayores éxitos internacionales del año, arrasó en España.",
+    "img": "assets/images/music/album-1987.jpg",
+    "year": "1987"
+  },
+  {
+    "slug": "faith",
+    "title": "Faith",
+    "subtitle": "George Michael",
+    "desc": "Gran rotación en radio española.",
+    "img": "assets/images/music/album-1988.jpg",
+    "year": "1988"
+  },
+  {
+    "slug": "like-a-prayer",
+    "title": "Like a Prayer",
+    "subtitle": "Madonna",
+    "desc": "Top ventas y símbolo de los 80 también en España.",
+    "img": "assets/images/music/album-1989.jpg",
+    "year": "1989"
+  },
+  {
+    "slug": "nothing-compares-2-u",
+    "title": "Nothing Compares 2 U",
+    "subtitle": "Sinéad O’Connor",
+    "desc": "N.º 1 mundial; también en listas españolas.",
+    "img": "assets/images/music/album-1990.jpg",
+    "year": "1990"
+  },
+  {
+    "slug": "everything-i-do",
+    "title": "(Everything I Do) I Do It for You",
+    "subtitle": "Bryan Adams",
+    "desc": "Gran éxito de ventas y radio en España.",
+    "img": "assets/images/music/album-1991.jpg",
+    "year": "1991"
+  },
+  {
+    "slug": "amigos-para-siempre",
+    "title": "Amigos para siempre",
+    "subtitle": "Josep Carreras & Sarah Brightman",
+    "desc": "Tema oficial de los JJ.OO. de Barcelona, omnipresente en España.",
+    "img": "assets/images/music/album-1992.jpg",
+    "year": "1992"
+  },
+  {
+    "slug": "whats-up",
+    "title": "What’s Up?",
+    "subtitle": "4 Non Blondes",
+    "desc": "Éxito internacional masivo; muy popular en España.",
+    "img": "assets/images/music/album-1993.jpg",
+    "year": "1993"
+  },
+  {
+    "slug": "the-rhythm-of-the-night",
+    "title": "The Rhythm of the Night",
+    "subtitle": "Corona",
+    "desc": "Éxito euro-dance en España.",
+    "img": "assets/images/music/album-1994.jpg",
+    "year": "1994"
+  },
+  {
+    "slug": "macarena",
+    "title": "Macarena",
+    "subtitle": "Los del Río",
+    "desc": "Canción española más internacional y una de las más vendidas de todos los tiempos.",
+    "img": "assets/images/music/album-1995.jpg",
+    "year": "1995"
+  },
+  {
+    "slug": "wannabe",
+    "title": "Wannabe",
+    "subtitle": "Spice Girls",
+    "desc": "Gran fenómeno pop también en España.",
+    "img": "assets/images/music/album-1996.jpg",
+    "year": "1996"
+  },
+  {
+    "slug": "barbie-girl",
+    "title": "Barbie Girl",
+    "subtitle": "Aqua",
+    "desc": "Tema dance-pop líder en España ese verano.",
+    "img": "assets/images/music/album-1997.jpg",
+    "year": "1997"
+  },
+  {
+    "slug": "my-heart-will-go-on",
+    "title": "My Heart Will Go On",
+    "subtitle": "Céline Dion",
+    "desc": "Éxito arrollador ligado a Titanic; n.º 1 en España.",
+    "img": "assets/images/music/album-1998.jpg",
+    "year": "1998"
+  },
+  {
+    "slug": "livin-la-vida-loca",
+    "title": "Livin’ La Vida Loca",
+    "subtitle": "Ricky Martin",
+    "desc": "Éxito absoluto en España; una de las más escuchadas del año.",
+    "img": "assets/images/music/album-1999.jpg",
+    "year": "1999"
+  },
+  {
+    "slug": "a-tu-lado",
+    "title": "A tu lado",
+    "subtitle": "La Oreja de Van Gogh",
+    "desc": "Gran fenómeno pop nacional; La Oreja de Van Gogh lideraba las listas españolas.",
+    "img": "assets/images/music/album-2000.jpg",
+    "year": "2000"
+  },
+  {
+    "slug": "hanging-by-a-moment",
+    "title": "Hanging by a Moment / Devuélveme la vida",
+    "subtitle": "Lifehouse / David Bustamante",
+    "desc": "La música pop española crecía en popularidad.",
+    "img": "assets/images/music/album-2001.jpg",
+    "year": "2001"
+  },
+  {
+    "slug": "asereje",
+    "title": "Aserejé (The Ketchup Song)",
+    "subtitle": "Las Ketchup",
+    "desc": "Éxito global y uno de los mayores hits españoles.",
+    "img": "assets/images/music/album-2002.jpg",
+    "year": "2002"
+  },
+  {
+    "slug": "obsesion",
+    "title": "Obsesión",
+    "subtitle": "Aventura",
+    "desc": "Bachata que arrasó en España.",
+    "img": "assets/images/music/album-2003.jpg",
+    "year": "2003"
+  },
+  {
+    "slug": "dragostea-din-tei",
+    "title": "Dragostea din tei",
+    "subtitle": "O-Zone",
+    "desc": "Hit veraniego pan-europeo también en España.",
+    "img": "assets/images/music/album-2004.jpg",
+    "year": "2004"
+  },
+  {
+    "slug": "la-tortura",
+    "title": "La tortura",
+    "subtitle": "Shakira ft. Alejandro Sanz",
+    "desc": "N.º 1 en España durante semanas.",
+    "img": "assets/images/music/album-2005.jpg",
+    "year": "2005"
+  },
+  {
+    "slug": "hips-dont-lie",
+    "title": "Hips Don’t Lie",
+    "subtitle": "Shakira ft. Wyclef Jean",
+    "desc": "Fenómeno mundial; grandísima difusión en España.",
+    "img": "assets/images/music/album-2006.jpg",
+    "year": "2006"
+  },
+  {
+    "slug": "umbrella",
+    "title": "Umbrella",
+    "subtitle": "Rihanna ft. Jay-Z",
+    "desc": "Éxito masivo en radios españolas.",
+    "img": "assets/images/music/album-2007.jpg",
+    "year": "2007"
+  },
+  {
+    "slug": "viva-la-vida",
+    "title": "Viva la Vida",
+    "subtitle": "Coldplay",
+    "desc": "Muy radiada y éxito digital en España.",
+    "img": "assets/images/music/album-2008.jpg",
+    "year": "2008"
+  },
+  {
+    "slug": "i-gotta-feeling",
+    "title": "I Gotta Feeling",
+    "subtitle": "Black Eyed Peas",
+    "desc": "Canción del verano y del año en España.",
+    "img": "assets/images/music/album-2009.jpg",
+    "year": "2009"
+  },
+  {
+    "slug": "waka-waka",
+    "title": "Waka Waka (Esto es África)",
+    "subtitle": "Shakira",
+    "desc": "Tema oficial del Mundial, enorme éxito en España.",
+    "img": "assets/images/music/album-2010.jpg",
+    "year": "2010"
+  },
+  {
+    "slug": "ai-se-eu-te-pego",
+    "title": "Ai se eu te pego",
+    "subtitle": "Michel Teló",
+    "desc": "Canción más escuchada en España ese año.",
+    "img": "assets/images/music/album-2011.jpg",
+    "year": "2011"
+  },
+  {
+    "slug": "gangnam-style",
+    "title": "Gangnam Style",
+    "subtitle": "PSY",
+    "desc": "Fenómeno global, también lideró en España.",
+    "img": "assets/images/music/album-2012.jpg",
+    "year": "2012"
+  },
+  {
+    "slug": "get-lucky",
+    "title": "Get Lucky",
+    "subtitle": "Daft Punk ft. Pharrell Williams",
+    "desc": "Éxito internacional y en radios españolas.",
+    "img": "assets/images/music/album-2013.jpg",
+    "year": "2013"
+  },
+  {
+    "slug": "bailando",
+    "title": "Bailando",
+    "subtitle": "Enrique Iglesias ft. Descemer Bueno & Gente de Zona",
+    "desc": "Canción más reproducida y radiada en España.",
+    "img": "assets/images/music/album-2014.jpg",
+    "year": "2014"
+  },
+  {
+    "slug": "el-perdon",
+    "title": "El perdón",
+    "subtitle": "Nicky Jam & Enrique Iglesias",
+    "desc": "Éxito de ventas y streaming en España.",
+    "img": "assets/images/music/album-2015.jpg",
+    "year": "2015"
+  },
+  {
+    "slug": "la-bicicleta",
+    "title": "La bicicleta",
+    "subtitle": "Shakira & Carlos Vives",
+    "desc": "Canción del verano en España.",
+    "img": "assets/images/music/album-2016.jpg",
+    "year": "2016"
+  },
+  {
+    "slug": "despacito",
+    "title": "Despacito",
+    "subtitle": "Luis Fonsi & Daddy Yankee",
+    "desc": "Récord histórico de reproducciones y ventas en España.",
+    "img": "assets/images/music/album-2017.jpg",
+    "year": "2017"
+  },
+  {
+    "slug": "lo-malo",
+    "title": "Lo malo",
+    "subtitle": "Aitana & Ana Guerra",
+    "desc": "Tema del año en España, surgido de Operación Triunfo.",
+    "img": "assets/images/music/album-2018.jpg",
+    "year": "2018"
+  },
+  {
+    "slug": "con-altura",
+    "title": "Con altura",
+    "subtitle": "Rosalía & J Balvin",
+    "desc": "Canción española más internacional y reproducida.",
+    "img": "assets/images/music/album-2019.jpg",
+    "year": "2019"
+  },
+  {
+    "slug": "tusa",
+    "title": "Tusa",
+    "subtitle": "Karol G & Nicki Minaj",
+    "desc": "Hit en pleno confinamiento, altísima reproducción en España.",
+    "img": "assets/images/music/album-2020.jpg",
+    "year": "2020"
+  },
+  {
+    "slug": "pepas",
+    "title": "Pepas",
+    "subtitle": "Farruko",
+    "desc": "Tema más sonado en discotecas y radios.",
+    "img": "assets/images/music/album-2021.jpg",
+    "year": "2021"
+  },
+  {
+    "slug": "quevedo-bzrp-vol-52",
+    "title": "Quevedo: BZRP Music Sessions Vol. 52",
+    "subtitle": "Bizarrap & Quevedo",
+    "desc": "Canción más reproducida del año en España.",
+    "img": "assets/images/music/album-2022.jpg",
+    "year": "2022"
+  },
+  {
+    "slug": "flowers",
+    "title": "Flowers",
+    "subtitle": "Miley Cyrus",
+    "desc": "Tema más escuchado del año en Spotify España.",
+    "img": "assets/images/music/album-2023.jpg",
+    "year": "2023"
+  },
+  {
+    "slug": "bellakeo",
+    "title": "Bellakeo / Los Ángeles",
+    "subtitle": "Peso Pluma, Anitta & Aitana",
+    "desc": "Entre las canciones más reproducidas del año en España.",
+    "img": "assets/images/music/album-2024.jpg",
+    "year": "2024"
+  }
+]

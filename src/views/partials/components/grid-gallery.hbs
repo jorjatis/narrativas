@@ -1,0 +1,27 @@
+<div class="grid-gallery" data-category="{{dataCategory}}">
+  {{!-- NOTE: Contenedor del flip --}}
+  <div class="tick grid-gallery-tick" data-credits="false" data-did-init="handleGalleryTickInit">
+    <div data-layout="horizontal fill">
+      <span data-key="years" data-transform="pad(0000)" data-view="flip"></span>
+    </div>
+  </div>
+
+  <div class="grid-gallery__c">
+    {{!-- NOTE: Thumbnails -> Se rellenan por el js/grid-gallery.js y el json de js/json/data-movies/music.json --}}
+    {{!-- <div class="grid-gallery-thumb" data-item="{{dataItem}}">
+      <img src="{{#if src}}{{src}}{{else}}https://picsum.photos/460/65{{@index}}{{/if}}" alt="{{title}}">
+    </div> --}}
+
+    {{!-- NOTE: Tarjeta grande --}}
+    <div class="grid-gallery-feature" id="feature">
+      <img id="feature-img" src="{{#if src}}{{featureSrc}}{{else}}https://picsum.photos/142/213{{/if}}" alt="{{featureTitle}}">
+      <div class="grid-gallery-feature__info">
+        <h2 class="grid-gallery-feature__title" id="feature-title">{{featureTitle}}</h2>
+        <h3 class="grid-gallery-feature__subtitle" id="feature-subtitle">{{featureSubitle}}</h3>
+        <p class="grid-gallery-feature__desc" id="feature-desc">
+          {{featureDesc}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,20 +1,21 @@
-// Importar el vendor directamente dentro del bundle
+// flip-countdown.js
 import './vendors/flip/flip.min.js';
 
-// flip-anim.js
+// ✅ Función principal de inicialización (tu animación original)
 export function initFlipCountdown() {
   window.handleTickInit = function (tick) {
-    const startYear = new Date().getFullYear();
-    const endYear = 1975;
-    const totalDuration = 5000; // duración total en ms
+    const startYear = 1975;
+    const endYear = new Date().getFullYear();
+    const totalDuration = 5000;
     const frameRate = 60;
     const totalFrames = Math.round((totalDuration / 1000) * frameRate);
-    const power = 3; // controla el easing (2 = normal, 3 = más fuerte)
+    const powerIn = 3;
+    const powerOut = 3;
 
     function easeInOutPower(t) {
       return t < 0.5
-        ? 0.5 * Math.pow(2 * t, power)
-        : 1 - 0.5 * Math.pow(2 * (1 - t), power);
+        ? 0.5 * Math.pow(2 * t, powerIn)
+        : 1 - 0.5 * Math.pow(2 * (1 - t), powerOut);
     }
 
     tick.value = { years: startYear };
