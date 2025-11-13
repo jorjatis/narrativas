@@ -1,18 +1,18 @@
 // main.js
-import { moveSubtitle, moveFlipCountdown, selectorNavActive } from './dom-utils';
+import { moveSubtitle, moveFlipCountdown, selectorNavActive, scrollToTopOnReload } from './dom-utils';
 import { initFlipCountdown } from './flip-countdown.js';
-import { selectorCardsAnim } from './selector-cards';
 import { gridGallery } from './grid-gallery.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Animaciones y efectos globales
+
+  // ------ Cosas globales ------
   moveSubtitle();
   moveFlipCountdown();
   selectorNavActive();
   initFlipCountdown();
-  selectorCardsAnim();
+  scrollToTopOnReload();
 
-  // Iniciar todas las galerías
+  // ------ Galerías ------
   document.querySelectorAll('.grid-gallery').forEach(gallery => {
     gridGallery(gallery);
   });

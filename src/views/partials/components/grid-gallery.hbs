@@ -1,4 +1,6 @@
 <div class="grid-gallery" data-category="{{dataCategory}}">
+  <div class="grid-gallery__stk"></div>
+  
   {{!-- NOTE: Contenedor del flip --}}
   <div class="tick grid-gallery-tick" data-credits="false" data-did-init="handleGalleryTickInit">
     <div data-layout="horizontal fill">
@@ -14,14 +16,32 @@
 
     {{!-- NOTE: Tarjeta grande --}}
     <div class="grid-gallery-feature" id="feature">
-      <img id="feature-img" src="{{#if src}}{{featureSrc}}{{else}}https://picsum.photos/142/213{{/if}}" alt="{{featureTitle}}">
-      <div class="grid-gallery-feature__info">
-        <h2 class="grid-gallery-feature__title" id="feature-title">{{featureTitle}}</h2>
-        <h3 class="grid-gallery-feature__subtitle" id="feature-subtitle">{{featureSubitle}}</h3>
-        <p class="grid-gallery-feature__desc" id="feature-desc">
-          {{featureDesc}}
-        </p>
-      </div>
+      {{#if gridGallerySongs}}
+        <!-- LOADER -->
+        <div id="feature-loader" class="spotify-loader"></div>
+
+        <link rel="preconnect" href="https://open.spotify.com">
+        <link rel="preconnect" href="https://i.scdn.co">
+
+        <!-- iframe único -->
+        <iframe 
+          id="feature-spotify"
+          data-src=""
+          width="100%" height="152"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
+      {{else}}
+        <img id="feature-img" src="{{#if src}}{{featureSrc}}{{else}}https://picsum.photos/142/213{{/if}}" alt="{{featureTitle}}">
+        <div class="grid-gallery-feature__info">
+          <h2 class="grid-gallery-feature__title" id="feature-title">{{featureTitle}}</h2>
+          <h3 class="grid-gallery-feature__subtitle" id="feature-subtitle">{{featureSubitle}}</h3>
+          <p class="grid-gallery-feature__desc" id="feature-desc">
+            {{featureDesc}}
+          </p>
+        </div>
+      {{/if}}
     </div>
   </div>
 </div>

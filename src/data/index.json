@@ -76,7 +76,9 @@
       "title": "Xxxxxxxxxxmazo",
       "desc": "Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
       "zoneTitle": "Población",
-      "id": "poblacion"
+      "id": "poblacion",
+      "video1": true,
+      "video2": true
     },
     {
       "i": "1",

@@ -105,3 +105,8 @@ export function selectorNavActive() {
   window.addEventListener("resize", updateActiveSection);
   updateActiveSection();
 }
+
+export function scrollToTopOnReload() {
+  window.history.scrollRestoration = "manual";
+  window.scrollTo(0, 0);
+}

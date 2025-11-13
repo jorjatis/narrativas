@@ -3,7 +3,9 @@
 
   <div class="sel-cards__c">
     {{#each selectorCard}}
-      {{> components/card link=true indexArray=true }}
+      <div class="card-animation-layer">
+        {{> components/card link=true indexArray=true }}
+      </div>
     {{/each}}
   </div>
 </div>

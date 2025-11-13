@@ -3,10 +3,21 @@
 
 .sel-cards {
   margin-top: 36px;
+  padding: 0 10px;
+  width: 100vw;
+
+  @media (min-width: $screen-xs) {
+    width: 690px;
+  }
+
+  @media (min-width: $screen-sm) {
+    width: 1100px;
+    padding: 0;
+  }
 
   &__txt {
     display: block;
-    margin: 0 0 98px;
+    margin: 0 0 64px;
     font-size: 14px;
     line-height: normal;
     text-align: center;
@@ -15,10 +26,26 @@
   &__c {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px 10px;
+
+    /* ▶️ IMPORTANTE: el wrapper de animación */
+    .card-animation-layer {
+      display: block;
+      /* No toca layout, solo envuelve la .card */
+    }
   }
 
   .card {
-    margin-top: 130px;
+    @media (min-width: $screen-xs) {
+      transition: transform .3s;
+    }
+
+    &:hover {
+      @media (min-width: $screen-xs) {
+        transform: translateY(-20px);
+      }
+    }
 
     a {
       display: block;
@@ -30,6 +57,92 @@
         opacity: .8;
       }
     }
+  }
+}
 
+/* =========================================================
+   🔥 EFECTO REAL DE LA DEMO — versión adaptada a tus cards
+   ========================================================= */
+
+@keyframes sel-slide-in {
+  from {
+    scale: .85;
+    rotate: calc(var(--side, 1) * (5deg * var(--amp, 1)));
+  }
+  to {
+    scale: 1;
+    rotate: 0deg;
+  }
+}
+
+/* Solo si el navegador soporta scroll-driven animations */
+@supports (animation-timeline: view()) {
+
+  .sel-cards__c .card-animation-layer {
+    @media (prefers-reduced-motion: no-preference) {
+
+      animation: sel-slide-in linear both;
+      animation-timeline: view();
+      animation-range: cover 0% contain 20%;
+
+      /* Aquí la GRAN diferencia de la demo → agrupa mucho las cards */
+      transform-origin: center bottom;
+      scale: .85;
+    }
+
+    /* Alternancia izquierda / derecha */
+    &:nth-of-type(2n + 1) {
+      transform-origin: 40vw 100%;
+      --side: -1;
+      --amp: 1;
+    }
+
+    &:nth-of-type(2n) {
+      transform-origin: -40vw 100%;
+      --side: 1;
+      --amp: 1;
+    }
+
+    /* Más exageración (como la demo) */
+    &:nth-of-type(3n) {
+      --amp: 2;
+    }
+
+    &:nth-of-type(5n) {
+      --amp: 3;
+    }
+  }
+}
+
+/* =========================================================
+   🔄 AGRUPACIONES POR BREAKPOINTS
+   ========================================================= */
+
+/* --- mobile: grupos de 2 --- */
+@media (max-width: 699px) {
+  .sel-cards__c .card-animation-layer {
+    &:nth-of-type(2n + 1) { transform-origin: 30vw 100%; --side: -1; --amp: 1; }
+    &:nth-of-type(2n)     { transform-origin: -30vw 100%; --side: 1;  --amp: 1; }
+  }
+}
+
+/* --- tablet: grupos de 3 --- */
+@media (min-width: 700px) and (max-width: 1039px) {
+  .sel-cards__c .card-animation-layer {
+    &:nth-of-type(3n + 1) { transform-origin: 40vw 100%; --side: -1; --amp: 2; }
+    &:nth-of-type(3n + 2) { transform-origin: 0vw 100%;  --side: 1;  --amp: 1; }
+    &:nth-of-type(3n)     { transform-origin: -40vw 100%; --side: 1;  --amp: 2; }
+  }
+}
+
+/* --- desktop: grupos de 6 (efecto arco más grande) --- */
+@media (min-width: 1040px) {
+  .sel-cards__c .card-animation-layer {
+    &:nth-of-type(6n + 1) { transform-origin: 70vw 100%; --side: -1; --amp: 4; }
+    &:nth-of-type(6n + 2) { transform-origin: 40vw 100%; --side: -1; --amp: 3; }
+    &:nth-of-type(6n + 3) { transform-origin: 20vw 100%; --side: -1; --amp: 2; }
+    &:nth-of-type(6n + 4) { transform-origin: -20vw 100%; --side: 1;  --amp: 2; }
+    &:nth-of-type(6n + 5) { transform-origin: -40vw 100%; --side: 1;  --amp: 3; }
+    &:nth-of-type(6n)     { transform-origin: -70vw 100%; --side: 1;  --amp: 4; }
   }
 }
