@@ -1,0 +1,45 @@
+@use '../base/variables' as *;
+
+// -------------------------------
+// BARRA ARTICULO + COMPARTIR
+// -------------------------------
+
+.voc-d.voc-d--visual {
+  .voc-author {
+    max-width: 100%;
+
+    &__time {
+      color: $cb7;
+    }
+  }
+
+  .voc-social__icon--circle {
+    background: #0037FF;
+  }
+
+  .voc-social__icon--save {
+    svg {
+      stroke: #0037FF;
+    }
+  }
+
+  .voc-subtitle {
+    font-size: 24px;
+    line-height: normal;
+    color: $cb7;
+  }
+}
+
+symbol[id*="icon-share-"] {
+  fill: $cb7;
+}
+
+#icon-ver-comentarios {
+  fill: #0037FF;
+}
+
+#icon-premium-pretitle {
+  > g > path:first-child {
+    fill: $cb7;
+  }
+}

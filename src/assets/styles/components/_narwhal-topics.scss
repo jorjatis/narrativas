@@ -1,0 +1,21 @@
+@use '../base/variables' as *;
+
+.voc-d--visual .voc-topics {
+  &:before {
+    background: $cb7;
+  }
+
+  &__header-link {
+    color: $cb7;
+  }
+
+  &__link {
+    color: #bbb;
+  }
+}
+
+#icon-down-arrow {
+  path {
+    stroke: $cb7;
+  }
+}

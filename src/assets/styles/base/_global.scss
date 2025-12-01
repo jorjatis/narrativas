@@ -1,6 +1,6 @@
 @use './variables' as *;
 
-$dark-theme: false;
+$dark-theme: true;
 
 // -------------------------------
 // GLOBAL
@@ -11,20 +11,45 @@ $dark-theme: false;
 }
 
 body {
+  background: $cb1;
+
+  .voc-header {
+    &__text {
+      color: #575757;
+    }
+  }
+
+  .voc-progress {
+    background: #0037FF;
+  }
+
+  .voc-title,
+  .voc-p {
+    color: $cb7;
+  }
+
   .voc-footer {
     margin-top: 80px;
     margin-bottom: 0;
-  }
-}
+    color: $cb7;
 
-@if $dark-theme {
-  body {
-    background: #121212;
-  }
+    &__social .voc-social-networks__icon,
+    .voc-stores,
+    .voc-to-top {
+      svg {
+        rect,
+        circle {
+          fill: #0037FF;
+        }
+      }
+    }
 
-  body {
-    .voc-title {
+    .voc-footer-nav__list li a {
       color: $cb7;
     }
+  }
+
+  .voc-heading__img {
+    filter: brightness(5);
   }
 }
