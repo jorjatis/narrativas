@@ -16,7 +16,8 @@ body {
   .voc-footer .voc-footer-nav__list li a,
   .voc-article--detail-visual .voc-info-container--dark .voc-title,
   .voc-article--detail-visual .voc-info-container--dark .voc-subtitle,
-  .voc-article--detail-visual .voc-info-container--dark .voc-author__name {
+  .voc-article--detail-visual .voc-info-container--dark .voc-author__name,
+  .voc-paywall__link {
     color: $cb7;
   }
 
@@ -43,6 +44,10 @@ body {
 
   .voc-footer__corporate .voc-heading__img {
     filter: brightness(5);
+  }
+
+  .voc-paywall--grad:before {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(0 0 0 / 70%) 50%, #000000 90%);
   }
 }
 
