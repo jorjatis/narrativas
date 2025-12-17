@@ -1,0 +1,72 @@
+@use './variables' as *;
+
+body {
+  background: $cb1;
+  
+  .voc-title,
+  .voc-p,
+  .voc-d-c-chapter__title,
+  .voc-advertising:after,
+  .v-c-crd>span, 
+  .v-c-crd ul li,
+  .voc-author__time,
+  .voc-topics__header-link,
+  .voc-topics__link,
+  .voc-footer,
+  .voc-footer .voc-footer-nav__list li a,
+  .voc-article--detail-visual .voc-info-container--dark .voc-title,
+  .voc-article--detail-visual .voc-info-container--dark .voc-subtitle,
+  .voc-article--detail-visual .voc-info-container--dark .voc-author__name {
+    color: $cb7;
+  }
+
+  .voc-author-comments-number {
+    color: $cb1;
+  }
+
+  .voc-advertising--megabanner {
+    @media (min-width: $screen-xs) {
+      border-color: $cb7;
+    }
+  }
+
+  .voc-article--c-summary .voc-info-container:before,
+  .voc-c-container:has(.v-c-crd):before,
+  .voc-author .voc-social__icon--circle,
+  .voc-topics:before {
+    background: $cb7;
+  }
+
+  .voc-footer .voc-heading__img {
+    filter: invert(1);
+  }
+
+  .voc-footer__corporate .voc-heading__img {
+    filter: brightness(5);
+  }
+}
+
+#icon-save-news,
+#icon-down-arrow {
+  path {
+    stroke: $cb7;
+  }
+}
+
+.voc-footer .voc-footer__social .voc-social-networks__icon svg,
+.voc-stores {
+  rect,
+  circle {
+    fill: $cb7;
+  }
+
+  path {
+    fill: $cb1;
+  }
+}
+
+#icon-ver-comentarios {
+  path {
+    fill: $cb7;
+  }
+}

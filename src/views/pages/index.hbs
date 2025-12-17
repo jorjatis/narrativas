@@ -3,39 +3,56 @@
 {{> base/header }}
 
 <article class="voc-wrapper">
-  {{> layout/article-heading }}
+  {{!-- voc-article--detail-visual // heading --}}
+  <div class="voc-container voc-container--wxs">
+    <div class="voc-article-container">
+      <div class="voc-article voc-article--detail voc-article--detail-visual">
+        {{> layout/article-heading }}
+      </div>
+    </div>
+  </div>
 
+  {{!-- voc-d--visual --}}
   <div class="voc-container voc-container--wxs" data-mrf-recirculation="Apertura">
     <div class="voc-d voc-d--visual" data-voc-component="voc-d">
-      <h2 class="voc-subtitle">
-        {{ subtitle }}
-      </h2>
+      {{#if subtitle}}
+        <h2 class="voc-subtitle">
+          {{ subtitle }}
+        </h2>
+      {{/if}}
 
-      {{> components/bar-socials-updated-article }}    
+      {{> narwhal-components/bar-socials-updated-article }}    
 
       {{!-- NOTE: Suele haber una p antes del contenido cuando lleva paywall, que se embute en layout/article-content -> layout/article-paywall-content --}}
       {{#if hasPaywall}}
         <p class='voc-p'>{{{ paywallFirstP }}}</p>
 
-        {{> components/paywall }}
+        {{> narwhal-components/paywall }}
       {{else}}
-        <p class='voc-p'>{{{ paywallFirstP }}}</p>
+        <p class='voc-p'>
+          {{{ paywallFirstP }}}
+          {{#if hasPWOpen}}
+            <span class="paywall pw-open">
+              {{{ paywallFirstP-2 }}}
+            </span>
+          {{/if}}
+        </p>
 
-        {{> advertising/ad-megabanner }}
+        {{!-- {{> advertising/ad-megabanner }} --}}
 
         <span class="paywall">
           {{> layout/article-content }}
 
-          {{> components/credits }}
+          {{> narwhal-components/credits }}
         </span>
       {{/if}}
 
       {{#if topics}}
-        {{> components/topics }}
+        {{> narwhal-components/topics }}
       {{/if}}
 
       {{#unless hasPaywall}}
-      {{> components/btns-error-comment }}
+        {{> narwhal-components/btns-error-comment }}
       {{/unless}}
     </div>
   </div>

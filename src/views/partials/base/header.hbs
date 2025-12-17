@@ -5,7 +5,7 @@
         <span class="voc-menu-icon__stripe"></span>
       </a>
       <!-- Pastilla -->
-      <a class="voc-header__pill--desktop" href="https://secure.abc.es/suscripcion"title="Premium">
+      <a class="voc-header__pill--desktop" href="https://secure.abc.es/suscripcion" title="Premium">
         <div class="pill_Container_Me pill_ABC_Me">
           <div class="pill_Subscribe_Me">
             <div class="starBlack_Me"></div>
@@ -20,10 +20,19 @@
         <a href="https://www.abc.es" title="ABC: últimas noticias y actualidad de España y el mundo" target="_self" rel="follow">
           <img src="https://s1.abcstatics.com/narwhal/latest/assets/images/logo-ABC.svg" class="voc-header__img voc-header__img--abc" alt="ABC: últimas noticias y actualidad de España y el mundo" width="67" height="22">
         </a>
-        <a href="https://www.abc.es/{{section}}/" title="Últimas noticias de {{section}}">
-          <span class="voc-header__text">{{section}}</span>
-        </a>
-        <div class="voc-header__title ">{{headerTitle}}</div>
+        {{#if sectionText}}
+          <a href="https://www.abc.es/{{sectionText}}/" title="Últimas noticias de {{sectionText}}">
+            <span class="voc-header__text">{{sectionText}}</span>
+          </a>
+        {{/if}}
+        {{#if sectionLogo}}
+          {{#if sectionLogoMMA}}
+            <a href="https://www.abc.es/deportes/mma/" data-voc-vtm-id="logo-i" data-voc-vtm-info="cabecera" title="Últimas noticias de MMA">
+              <img src="https://s1.abcstatics.com/media/infografias/logos/logo-mma.svg" class="voc-header__img--section" alt="MMA" width="154" height="30">
+            </a>
+          {{/if}}
+        {{/if}}
+        <div class="voc-header__title">{{title}}</div>
       </div>
       <div class="voc-header__buttons">
         <div class="voc-social">
@@ -272,11 +281,12 @@
             </div>
           </div>
         </div>
-        <a href="https://secure.abc.es/identidad/inicio" title="Iniciar Sesión" class="voc-login gigya-login-link"
-          style="display: none;">
-          <span class="voc-login__icon"><svg viewBox="0 0 35.38 35.38">
+        <a href="https://secure.abc.es/identidad/inicio" title="Iniciar Sesión" class="voc-login gigya-login-link">
+          <span class="voc-login__icon">
+            <svg viewBox="0 0 35.38 35.38">
               <use href="#icon-menu-login" viewBox="0 0 35.38 35.38"></use>
-            </svg></span>
+            </svg>
+          </span>
         </a>
       </div>
     </header>

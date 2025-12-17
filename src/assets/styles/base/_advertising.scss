@@ -4,10 +4,13 @@
 // Advertising
 // =======================================================
 
-.voc-advertising.voc-advertising--megabanner {
-  margin-top: 72px;
-  margin-bottom: 72px;
-  overflow: visible;
+.voc-advertising.voc-advertising--megabanner,
+.voc-advertising.voc-advertising--megabanner.voc-advertising--fw {
+  @media (min-width: $screen-xs) {
+    margin-top: 72px;
+    margin-bottom: 88px;
+    overflow: visible;
+  }
 
   &:after {
     content: 'Publicidad';

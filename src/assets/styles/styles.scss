@@ -2,9 +2,6 @@
 
 @use './base/fonts';
 @use './base/global';
-@use './base/ev-paywall-template';
 @use './base/advertising';
 
-@use './components/narwhal-author';
-@use './components/narwhal-bar-socials-updated-article';
-@use './components/narwhal-credits';
+@use './base/dark-theme';

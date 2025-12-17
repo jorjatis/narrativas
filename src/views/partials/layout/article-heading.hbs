@@ -1,25 +1,30 @@
 {{!-- NOTE: Article heading --}}
-<div class="voc-container voc-container--wxs" data-mrf-recirculation="Apertura">
-  <div class="voc-article-container">
-    <div class="voc-article voc-article--detail voc-article--detail-visual">
-      <div class="voc-info-container {{#if infoContainerDark}}voc-info-container--dark{{/if}}">
-        {{!-- NOTE: ABC Premium badge --}}
-        {{#if ABCPremiumBadge}}
-          <p class="voc-pretitle">
-            <span class="voc-pretitle__prm">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 24">
-                <use href="#icon-premium-pretitle"></use>
-              </svg>
-            </span>
-          </p>
+  <div class="voc-info-container {{#if infoContainerDark}}voc-info-container--dark{{/if}}">
+    {{!-- NOTE: Pretitulo --}}
+    {{#if pretitle}}
+      <p class="voc-pretitle">
+        {{!-- NOTE: Premium badge --}}
+        {{#if pretitle.ABCPremiumBadge}}
+          <span class="voc-pretitle__prm">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 24"><use href="#icon-premium-pretitle"></use></svg>
+          </span>
         {{/if}}
+      </p>
+    {{/if}}
 
-        {{!-- NOTE: Titulo --}}
-        <h1 class="voc-title">{{ title }}</h1>
+    {{!-- NOTE: Titulo --}}
+    <h1 class="voc-title">{{ title }}</h1>
 
-        {{!-- NOTE: Componente autor/autores --}}
-        {{> components/author }}
-      </div>
-    </div>
+    {{!-- NOTE: Componente autor/autores --}}
+    {{> narwhal-components/author }}
   </div>
-</div>
+
+  {{#if headingImage}}
+    <div class="voc-img-container voc-img-container--fw-xs voc-img-container--wmd">
+      <figure class="voc-img-figure">
+        <div class="voc-img-link">
+          <img class="voc-img" src="{{headingImage}}" loading="eager" decoding="async" alt="{{title}}" width="1200" height="672">
+        </div>
+      </figure>
+    </div>
+  {{/if}}
