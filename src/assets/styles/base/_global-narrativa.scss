@@ -1,0 +1,229 @@
+@use './variables' as *;
+
+.voc-article--detail.voc-article--detail-visual {
+  .voc-info-container {
+    padding: 140px 0 0;
+  }
+
+  .voc-title {
+    font-size: 48px;
+    line-height: 46px;
+    letter-spacing: -.74px;
+    text-align: center;
+    text-transform: unset;
+
+    @media (min-width: 420px) {
+      font-size: 64px;
+      line-height: 60px;
+    }
+
+    @media (min-width: $screen-xs) {
+      font-size: 74px;
+      line-height: 70px;
+    }
+
+    .text-fixed {
+      font-family: $abcdel;
+    }
+
+    .text-anim {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      font-family: $abcds;
+      perspective: 1000px;
+      height: 70px;
+    }
+
+    .word {
+      position: absolute;
+      width: max-content;
+      transform-origin: center;
+      animation: flipVertical 1.2s ease-in-out;
+      opacity: 0;
+      pointer-events: none;
+
+      &--1 {
+        animation-delay: 0s;
+      }
+
+      &--2 {
+        animation-delay: 1.2s;
+      }
+
+      &--3 {
+        animation-delay: 2.4s;
+      }
+
+      &--4 {
+        animation-delay: 3.6s;
+        animation-name: flipVerticalFinal;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    @keyframes flipVertical { 
+      0% { transform: rotateX(-90deg); opacity: 0; z-index: 10; } 
+      20% { transform: rotateX(0deg); opacity: 1; z-index: 10; } 
+      80% { transform: rotateX(0deg); opacity: 1; z-index: 10; } 
+      100% { transform: rotateX(90deg); opacity: 0; z-index: 10; } 
+    }
+
+    @keyframes flipVerticalFinal { 
+      0% { transform: rotateX(-90deg); opacity: 0; z-index: 10; } 
+      20% { transform: rotateX(0deg); opacity: 1; z-index: 10; } 
+      100% { transform: rotateX(0deg); opacity: 1; z-index: 10; } 
+    }
+  }
+
+  .voc-title + .voc-subtitle {
+    margin-top: 48px;
+  }
+
+  .voc-author {
+    margin-top: 40px;
+    max-width: 250px;
+
+    &__name {
+      font-family: $abcds;
+      font-size: 17px;
+      line-height: normal;
+      text-transform: unset;
+    }
+  }
+
+  .voc-img-container {
+    margin-top: 96px;
+  }
+}
+
+.voc-d.voc-d--visual {
+  margin-top: 116px;
+
+  .voc-d-c-chapter {
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 48px;
+
+    @media (min-width: 900px) {
+      margin-left: -130px;
+    }
+
+    &:before {
+      content: '';
+      width: 156px;
+      height: 1px;
+      margin-bottom: 24px;
+      background: $cb7;
+    }
+
+    &__title {
+      font-family: $abcdr;
+      font-size: 45px;
+      line-height: 47px;
+    }
+  }
+
+  .voc-p + .voc-c-container:has(.voc-d-c-chapter) {
+    .voc-d-c-chapter {
+      margin-top: 140px;
+    }
+  }
+
+  .voc-article--c-summary {
+    display: block;
+    margin: 52px 0;
+
+    @media (min-width: 900px) {
+      margin-left: -130px;
+    }
+
+    .voc-info-container {
+      display: flex;
+      column-gap: 15px;
+
+      &:before {
+        content: "“";
+        position: relative;
+        top: -21px;
+        width: auto;
+        height: auto;
+        margin: 0;
+        font-family: $antonioFont;
+        font-size: 99px;
+        line-height: 100%;
+        color: $mainBlue;
+        background: transparent;
+      }
+
+      .voc-title {
+        max-width: 335px;
+        width: 100%;
+        font-family: $abcdr;
+        font-size: 24px;
+        line-height: 130%;
+        text-align: left;
+      }
+
+      .voc-article-position {
+        display: none;
+      }
+    }
+  }
+
+  .voc-article--c-photo {
+    .voc-figcaption-container {
+      width: 100%;
+      max-width: 320px;
+      margin: 28px 0 36px;
+      font-size: 12px;
+      line-height: 120%;
+      letter-spacing: .24px;
+      color: $cb7;
+    }
+
+    .voc-figcaption--type {
+      color: $cb7;
+    }
+
+    &:has(.voc-figcaption-container) {
+      border-bottom: 1px solid #ffffff20;
+    }
+  }
+}
+
+body {
+  .voc-author .voc-social__icon--circle {
+    background: $mainBlue;
+  }
+
+  .voc-author-comments-number {
+    color: $cb7;
+  }
+
+  .voc-to-top__icon svg {
+    fill: $mainBlue;
+  }
+}
+
+#icon-save-news {
+  path {
+    stroke: $mainBlue;
+  }
+}
+
+#icon-ver-comentarios {
+  path {
+    fill: $mainBlue;
+  }
+}
+
+#icon-share-fb,
+#icon-share-tw,
+#icon-share-open-panel {
+  path {
+    fill: $cb7;
+  }
+}

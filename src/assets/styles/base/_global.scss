@@ -1,7 +1,5 @@
 @use './variables' as *;
 
-$dark-theme: false;
-
 // -------------------------------
 // GLOBAL
 // -------------------------------
@@ -11,7 +9,11 @@ $dark-theme: false;
 }
 
 body {
-  .voc-container--wxs {
+  .voc-container--wxs:has(.voc-article--detail-visual) {
+    max-width: 635px;
+  }
+
+  .voc-container--wxs:has(.voc-d--visual) {
     max-width: 565px;
   }
 
@@ -47,6 +49,10 @@ body {
     &:before {
       content: none;
     }
+  }
+
+  .voc-author__subitem--1 {
+    margin-right: 0;
   }
 }
 

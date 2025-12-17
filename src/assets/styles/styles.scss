@@ -4,4 +4,8 @@
 @use './base/global';
 @use './base/advertising';
 
+// NOTE: Activar si el tema es oscuro
 @use './base/dark-theme';
+
+// NOTE: Estilos globales especificos para la narrativa
+@use './base/global-narrativa';
