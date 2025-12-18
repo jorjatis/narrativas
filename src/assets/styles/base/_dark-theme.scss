@@ -5,6 +5,7 @@ body {
   
   .voc-title,
   .voc-p,
+  .voc-p a,
   .voc-d-c-chapter__title,
   .voc-advertising:after,
   .v-c-crd>span, 
@@ -73,5 +74,13 @@ body {
 #icon-ver-comentarios {
   path {
     fill: $cb7;
+  }
+}
+
+#icon-premium-pretitle {
+  > g {
+    > path:first-child {
+      fill: $cb7;
+    }
   }
 }
