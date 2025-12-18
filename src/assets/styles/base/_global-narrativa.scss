@@ -6,6 +6,7 @@
   }
 
   .voc-title {
+    font-family: $abcdel;
     font-size: 48px;
     line-height: 46px;
     letter-spacing: -.74px;
@@ -27,52 +28,25 @@
     }
 
     .text-anim {
-      position: relative;
-      display: flex;
-      justify-content: center;
       font-family: $abcds;
-      perspective: 1000px;
-      height: 70px;
+      display: inline-flex;
+      flex-direction: column;
+      overflow: hidden;
+      line-height: 1;
+      height: 1em;
     }
 
     .word {
-      position: absolute;
-      width: max-content;
-      transform-origin: center;
-      animation: flipVertical 1.2s ease-in-out;
-      opacity: 0;
-      pointer-events: none;
-
-      &--1 {
-        animation-delay: 0s;
-      }
-
-      &--2 {
-        animation-delay: 1.2s;
-      }
-
-      &--3 {
-        animation-delay: 2.4s;
-      }
-
-      &--4 {
-        animation-delay: 3.6s;
-        animation-name: flipVerticalFinal;
-        animation-fill-mode: forwards;
-      }
+      height: 1em;
+      line-height: 1;
+      animation: moveUp 5s ease-out forwards;
     }
 
-    @keyframes flipVertical { 
-      0% { transform: rotateX(-90deg); opacity: 0; z-index: 10; } 
-      20% { transform: rotateX(0deg); opacity: 1; z-index: 10; } 
-      80% { transform: rotateX(0deg); opacity: 1; z-index: 10; } 
-      100% { transform: rotateX(90deg); opacity: 0; z-index: 10; } 
-    }
-
-    @keyframes flipVerticalFinal { 
-      0% { transform: rotateX(-90deg); opacity: 0; z-index: 10; } 
-      20% { transform: rotateX(0deg); opacity: 1; z-index: 10; } 
-      100% { transform: rotateX(0deg); opacity: 1; z-index: 10; } 
+    @keyframes moveUp {
+      0%,20%   { transform: translateY(0); }
+      40%,55%  { transform: translateY(-1em); }
+      70%,85%  { transform: translateY(-2em); }
+      100%     { transform: translateY(-3em); }
     }
   }
 
@@ -94,6 +68,11 @@
 
   .voc-img-container {
     margin-top: 96px;
+
+    @media (min-width: 1500px) {
+      width: 1440px;
+      margin-left: calc((-1440px / 2) + 50%);
+    }
   }
 }
 
@@ -179,12 +158,21 @@
         flex-direction: column;
         justify-content: left;
         gap: 4px;
+        font-size: 16px;
+        line-height: 18px;
         color: $cb7;
 
         &__name {
           margin-right: 0;
         }
       }
+    }
+  }
+
+  .voc-c-container:has(.voc-article--c-photo) {
+    @media (min-width: 1500px) {
+      width: 1440px;
+      margin-left: calc((-1440px / 2) + 50%);
     }
   }
 
