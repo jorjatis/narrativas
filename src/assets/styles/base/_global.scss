@@ -33,6 +33,10 @@ body {
 // -------------------------------
 .voc-article.voc-article--c-photo {
   margin: 72px 0;
+
+  .voc-figcaption-container {
+    position: relative;
+  }
 }
 
 .voc-c-container:has(.voc-article--c-photo) + .voc-c-container:has(.voc-article--c-photo) {
@@ -62,6 +66,10 @@ body {
 .voc-d.voc-d--visual {
   .voc-author {
     max-width: 100%;
+  }
+
+  .voc-social__icon--comments {
+    margin-right: 0;
   }
 }
 

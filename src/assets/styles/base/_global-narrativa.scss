@@ -82,7 +82,7 @@
 
   .voc-author {
     margin-top: 40px;
-    max-width: 250px;
+    max-width: 240px;
 
     &__name {
       font-family: $abcds;
@@ -133,34 +133,41 @@
   }
 
   .voc-article--c-summary {
-    display: block;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 12px;
     margin: 52px 0;
 
     @media (min-width: 900px) {
       margin-left: -130px;
     }
 
+    &:before {
+      content: "“";
+      position: relative;
+      top: -22px;
+      width: fit-content;
+      height: auto;
+      display: block;
+      font-family: "Antonio", Georgia, Times New Roman, serif;
+      font-size: 99px;
+      line-height: 100%;
+      color: #0037FF;
+    }
+
     .voc-info-container {
       display: flex;
-      column-gap: 15px;
+      flex-direction: column;
+      width: auto;      
+      max-width: 335px;
+      margin: 0;
 
       &:before {
-        content: "“";
-        position: relative;
-        top: -21px;
-        width: auto;
-        height: auto;
-        margin: 0;
-        font-family: $antonioFont;
-        font-size: 99px;
-        line-height: 100%;
-        color: $mainBlue;
-        background: transparent;
+        content: none;
       }
 
       .voc-title {
-        max-width: 335px;
-        width: 100%;
         font-family: $abcdr;
         font-size: 24px;
         line-height: 130%;
@@ -168,12 +175,24 @@
       }
 
       .voc-article-position {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        gap: 4px;
+        color: $cb7;
+
+        &__name {
+          margin-right: 0;
+        }
       }
     }
   }
 
   .voc-article--c-photo {
+    .voc-figcaption {
+      color: $cb7;
+    }
+
     .voc-figcaption-container {
       width: 100%;
       max-width: 320px;
