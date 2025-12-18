@@ -75,3 +75,11 @@ body {
     fill: $cb7;
   }
 }
+
+#icon-premium-pretitle {
+  > g {
+    > path:first-child {
+      fill: $cb7;
+    }
+  }
+}
