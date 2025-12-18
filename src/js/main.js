@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="text-anim">
         <div class="word word--1">los demonios</div>
         <div class="word word--2">las dudas</div>
-        <div class="word word--3">las angustias</div>
+        <div class="word word--3">el dolor</div>
         <div class="word word--4">el miedo</div>
       </div>
     `;
