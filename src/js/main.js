@@ -1,13 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // --------------------------------
-  // Mover elementos
-  // --------------------------------
-  // Mover subtitle debajo del title
-  const title = document.querySelector('.voc-title');
-  const subtitle = document.querySelector('.voc-subtitle');
+import "../js/kraken.js";
+import "../js/gsap.min.js";
+import "../js/scrollTrigger.min.js";
 
-  if (title && subtitle) {
-    title.insertAdjacentElement('afterend', subtitle);
-  }
+import { initPreHeaderScroll } from "./preHeaderScroll.js";
+import { initScrollZoomMorph } from "./scrollZoomMorph.js";
 
+document.addEventListener("DOMContentLoaded", () => {
+  initPreHeaderScroll();
+  initScrollZoomMorph();
 });

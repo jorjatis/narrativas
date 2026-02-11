@@ -4,113 +4,106 @@
 // $abctb: 'ABCText Bold', Georgia, Times New Roman, serif; // -> base/_fonts.scss
 
 // =======================================================
-// Variables Narwhal
+// Variables Kraken
 // =======================================================
 
+// ---------------------------------------
 // Colores
-$cp1: #e4b016;
-$cp2: var(--cp2);
-$cp2c: #ae5100;
-$cp3: var(--cp3);
-$cp3c: #008ab7;
-$cp4: var(--cp4);
-$cp4c: #b97011;
-$cp5: var(--cp5);
-$cp5c: #8AB0DB;
-$cp6: #E2F3FB;
-$cp7: var(--cp7);
-$cp7c: #E64A19;
-$cp8: var(--cp8);
-$cp8c: #244765;
-$cp9: var(--cp9);
-$cp9c: #FFA85B;
-$cp10: #DBF3FF;
-$cp11: var(--cp11);
-$cp11c: #8CCEF1;
-$cp12: #FCF7E7;
-$cp13: #005D7F;
-$cp14: #0072BC;
-$cp15: #f19e84;
-$cp16: #fcede8;
-$cp17: #FFDD00;
-$cp18: #DE0429;
-$cp19: var(--cp19);
-$cp19c: #46BEE5;
-$cp20: #FAC252;
-$cp21: #FFA41C;
-$cp22: #FFD814;
-$cp23: var(--cp23);
-$cp23c: #6F5F4F;
-$cp24: #d42561;
-$cp25: #EFF3F5;
-$cp26: #F2D98E;
-$cp17: #7464DE;
-$cp28: #D20019;
-$cp29: #bfe2ed;
-$cp30: #258B4E;
-$cp31: #61BB46;
-$cp32: var(--cp32);
-$cp32c: #00C0FF;
+// ---------------------------------------
 
-$cb1: var(--cb1);
-$cb1c: #000000;
-$cb2: #333333;
-$cb3: var(--cb3);
-$cb3c: #555555;
-$cb4: #dddddd;
-$cb5: #f3f3f3;
-$cb6: var(--cb6);
-$cb6c: #888888;
-$cb7: #ffffff;
-$cb8: #4C4C4C;
-$cb9: var(--cb9);
-$cb9c: #262626;
-$cb10: #999999;
-$cb11: #CCCCCC;
-$cb12: #B7B7B7;
-$cb13: #707070;
-$cb14: #BBBBBB;
-$cb15: #c9c3c9;
-$cb16: #3AD5F1;
-$cb17: #D2FF19;
-$cb18: #37474F;
-$cb19: #f1f1ea;
-$cb20: #D5E0E5;
-$cb21: #F3F8F8;
-$cb22: #AAAAAA;
-$cb23: #d8d8d8;
-$cb24: #4A4848;
-$cb25: #C4C4C4;
-$cb26: #F8F0E6;
-$cb27: #c0bcb7;
-$cb28: #425312;
-$cb29: #191919;
-$cb30: #6c6c6c;
-$cb31: #eff0f1;
-$cb32: #e1e1e1;
+// ** Colores primarios
 
-// Fonts
-$abctl: 'ABCText Light', Georgia, Times New Roman, serif;
-$abcts: 'ABCText Semibold', Georgia, Times New Roman, serif;
+$cp1: #0E3A6F;
+$cp2: #3E618C;
+$cp3: #6E89A9;
+$cp4: #CFD8E2;
+$cp5: #E7EBF1;
+$cp6: #F3F5F8;
 
-$abcdel: 'ABCDisplay Extralight', Georgia, Times New Roman, serif;
-$abcdl: 'ABCDisplay Light', Georgia, Times New Roman, serif;
-$abcdr:'ABCDisplay Regular', Georgia, Times New Roman, serif;
-$abcds: 'ABCDisplay Semibold', Georgia, Times New Roman, serif;
-$abcdb: 'ABCDisplay Bold', Georgia, Times New Roman, serif;
-$abcdblk: 'ABCDisplay Black', Georgia, Times New Roman, serif;
+$cp7: #2185FF;
+$cp8: #33A3FF;
+$cp9: #66BAFF;
+$cp10: #CCE8FF;
+$cp11: #E5F3FF;
+$cp12: #F2F9FF;
 
-$basr: 'Basier Square Regular', Arial, Roboto, Helvetica, sans-serif;
-$bass: 'Basier Square Semibold', Arial, Roboto, Helvetica, sans-serif;
+$cp13: #FC3636;
+$cp14: #FFE1E1;
+$cp15: #F9F6EE;
 
+$cp16: #23A476;
+$cp17: #FFD030;
+$cp18: #E02872;
+
+// ** Colores base
+
+$cb1: #000;
+$cb2: #fff;
+$cb3: #F4F4F4;
+$cb4: #E9E9E9;
+$cb5: #D2D2D2;
+$cb6: #A6A6A6;
+$cb7: #797979;
+$cb8: #4D4D4D;
+$cb9: #202020;
+
+// ** Equivalencias modo oscuro
+
+$cb1-d: $cb2;
+$cb3-d: rgba($cb2, .13);
+$cb4-d: rgba($cb2, .42);
+$cb5-d: rgba($cb2, .58);
+$cb6-d: rgba($cb2, .84);
+
+// ** Equivalencias modo claro
+
+$cb1-l: rgba($cb1, .87);
+$cb3-l: rgba($cb1, .02);
+$cb4-l: rgba($cb1, .05);
+$cb5-l: rgba($cb1, .07);
+$cb6-l: rgba($cb1, .16);
+
+// ** XLSemamal
+
+$x-cp1: #C90023;
+
+// ---------------------------------------
+// Fuentes
+// ---------------------------------------
+
+$adel: 'ABC Display ExtraLight', serif;
+$adl: 'ABC Display Light', serif;
+$ads: 'ABC Display Semibold', serif;
+
+$atl: 'ABC Text Light', serif;
+$atli: 'ABC Text Light Italic', serif;
+$ats: 'ABC Text Semibold', serif;
+$atsi: 'ABC Text Semibold Italic', serif;
+
+$mcr: 'Micrograph Regular', sans-serif;
+$mcs: 'Micrograph Semibold', sans-serif;
+$axs: 'ABC XCond Semibold', serif;
+
+$pvl: 'PPLL Vocento Light', serif;
+$pvli: 'PPLL Vocento Light Italic', serif;
+$pvr: 'PPLL Vocento Regular', serif;
+$pvs: 'PPLL Vocento Semibold', serif;
+$pvsi: 'PPLL Vocento Semibold Italic', serif;
+$pveb: 'PPLL Vocento Extrabold', serif;
+
+$psl: 'PPLL Sans Light', serif;
+$psr: 'PPLL Sans Regular', serif;
+$pss: 'PPLL Sans Semibold', serif;
+
+// ---------------------------------------
 // Media queries
-$screen-lg-max: 1920px;
-$screen-lg: 1600px;
+// ---------------------------------------
+
+$screen-xl: 1920px;
+$screen-lg: 1660px;
 $screen-md: 1366px;
-$screen-smd: 1200px;
-$screen-sm: 1039px;
-$screen-smx: 860px;
+$screen-sm: 1025px;
+$screen-ms: 769px; // medium-small
 $screen-xs: 699px;
-$screen-xxs: 375px;
+$screen-xxs: 360px;
 $screen-xxxs: 320px;
-$screen-base: 0px;

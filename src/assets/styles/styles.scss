@@ -1,7 +1,6 @@
 @use './base/variables' as *;
 
-@use './base/fonts';
-@use './base/global';
-@use './base/advertising';
+@use './base/kraken-detail-special-visual';
 
-@use './base/dark-theme';
+@use './components/pre-header-scroll';
+@use './components/scroll-zoom-morph';
