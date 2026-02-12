@@ -1,0 +1,133 @@
+.v-btn-c {
+  .v-s__b--1 {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .v-s__b--1:hover {
+    color: #fff;
+  }
+
+  .v-s__b--1 {
+    overflow: hidden;
+    background: #fff;
+    border-color: #0E3A6F;
+    margin-top: 32px;
+    color: #0E3A6F;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (min-width: 1025px) {
+    .v-s__b--1 {
+      margin-top: 24px;
+    }
+  }
+
+  .v-s__b--1:hover {
+    color: #fff;
+    border-color: #6E89A9;
+    opacity: 1;
+  }
+
+  .v-s__b--1::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 200px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s, background 0.3s;
+  }
+
+  .v-s__b--1::before {
+    background: #0E3A6F;
+  }
+
+  .v-s__b--1:hover:before {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  .v-s__b--1 span {
+    z-index: 1;
+  }
+
+  .v-s__b--1 span:not(.v-i-2) {
+    display: inline-block;
+    width: 100%;
+    transition: opacity 0.15s linear 0.2s;
+  }
+
+  .v-i-2 {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+
+  .v-s__b--1 .v-i-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s linear 0.15s;
+  }
+
+  .v-i-2 svg {
+    animation: a9 1.5s linear infinite;
+  }
+
+  .v-i-2 circle {
+    stroke: #000;
+    stroke-linecap: round;
+    animation: l1 1.5s ease-in-out infinite;
+  }
+
+  .v-s__b--1 .v-i-2 circle {
+    stroke: #fff;
+  }
+
+  .v-s__b--1.is-load {
+    transform: scale(1.05);
+    width: 48px;
+    border-radius: 50%;
+    padding: 0;
+    background: #0E3A6F;
+  }
+
+  .v-s__b--1.is-load span:not(.v-i-2) {
+    transition: none;
+    width: 0%;
+    opacity: 0;
+  }
+
+  .v-s__b--1.is-load .v-i-2 {
+    opacity: 1;
+  }
+
+  @keyframes a9 {
+    to {
+      transform: rotate(360deg)
+    }
+  }
+
+  @keyframes l1 {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0
+    }
+
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35
+    }
+
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124
+    }
+  }
+}

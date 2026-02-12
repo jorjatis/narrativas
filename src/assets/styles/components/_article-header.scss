@@ -1,0 +1,115 @@
+@use '../base/variables' as *;
+
+$gc: 69.125px;
+
+.v-w {
+  .v-a--t1 {
+    display: flex;
+    flex-direction: column-reverse;
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    padding: 24px 50px 48px;
+    background: $cp1;
+
+    @media (min-width: $screen-xs) {
+      flex-direction: row;
+      width: 100%;
+      max-width: 964px;
+      height: 768px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .v-a-img-c,
+    .v-a-fig,
+    .v-a-lnk {
+      @media (min-width: $screen-xs) {
+        height: 100%;
+      }
+    }
+
+    .v-a-img-c {
+      margin-top: 24px;
+      border-radius: 2px;
+      overflow: hidden;
+
+      @media (min-width: $screen-xs) {
+        width: 58%;
+        margin-top: 0;
+        border-radius: 0;
+      }
+    }
+
+    .v-a-img {
+      aspect-ratio: 3/4;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+
+    .v-a-inf-c {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .v-a-t {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font: 31px/1 $adel;
+      font-style: italic;
+      letter-spacing: -1.557px;
+      color: $cp15;
+
+      &:before,
+      &:after {
+        @media (min-width: $screen-xs) {
+          content: '';
+          width: 1px;
+          height: 52px;
+          background: $cp15;
+        }
+      }
+
+      &:before {
+        @media (min-width: $screen-xs) {
+          margin-bottom: 24px;
+        }
+      }
+
+      &:after {
+        @media (min-width: $screen-xs) {
+          margin-top: 24px;
+        }
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        font: 100px/1 $axs;
+        letter-spacing: -1px;
+        color: $cp15;
+
+        &:before,
+        &:after {
+          content: '';
+          width: 29px;
+          height: 1px;
+          background: $cp15;
+          transform: translateY(8px);
+
+          @media (min-width: $screen-xs) {
+            content: none;
+          }
+        }
+
+        &:first-child {
+          margin: -2px 0 4px;
+        }
+      }
+    }
+  }
+}

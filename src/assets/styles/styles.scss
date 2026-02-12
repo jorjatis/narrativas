@@ -1,1 +1,33 @@
 @use './base/variables' as *;
+
+@use './base/fonts';
+
+@use './components/article-header';
+@use './components/card';
+@use './components/button-load';
+
+.v-w {
+  .v-btn-c {
+    margin-top: 96px;
+    margin-bottom: 142px;
+  }
+
+  .v-g-c-xs-2 {
+    @media (max-width: $screen-xs) {
+      gap: 20px;
+    }
+  }
+
+  .v-g__c {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: card-in 0.4s ease forwards;
+  }
+
+  @keyframes card-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

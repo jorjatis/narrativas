@@ -1,0 +1,54 @@
+@use '../base/variables' as *;
+
+.v-w {
+  .v-a--crd {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    text-align: left;
+    border: 1px solid $cb4;
+
+    .v-a-lnk {
+      transition: opacity .3s;
+
+      &:hover {
+        opacity: .7;
+      }
+    }
+
+    .v-a-img {
+      aspect-ratio: 1;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .v-a-inf-c {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 20px 24px;
+    }
+
+    .v-a-p-t {
+      font: 48px/120% $axs;
+      letter-spacing: -.96px;
+      text-transform: uppercase;
+      color: #85817699;
+    }
+
+    .v-a-t {
+      flex: 1 0 0;
+      font: 16px/115% $ads;
+      letter-spacing: .09px;
+      text-transform: unset;
+
+      @media (min-width: $screen-xs) {
+        font-size: 18px;
+      }
+    }
+
+    .v-a-s-t {
+      font: 12px/115% $mcr;
+      letter-spacing: .06px;
+      color: $cb1;
+    }
+  }
+}

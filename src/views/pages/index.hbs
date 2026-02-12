@@ -3,7 +3,24 @@
 {{> base/header }}
 
 <div class="v-w">
-  
+  <div class="v-c">
+    {{> ./kraken-components/article-header }}
+  </div>
+
+  <div class="v-c">      
+    {{> ./kraken-components/cintillo 
+      title="Artículos"
+    }}
+
+    <div class="v-g v-g--4-c v-g-c-xs-2">
+    </div>  
+
+    <div class="v-btn-c v-btn-c--c">
+      {{> ./kraken-components/button-load
+        title="Cargar más artículos"
+      }}
+    </div>    
+  </div>
 </div>
 
 {{> base/footer }}
