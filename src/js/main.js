@@ -1,11 +1,5 @@
-import "../js/kraken.js";
-import "../js/gsap.min.js";
-import "../js/ScrollTrigger.min.js";
+import { initUpdateTime } from './updateDate.js';
 
-import { initPreHeaderScroll } from "./preHeaderScroll.js";
-import { initScrollZoomMorph } from "./scrollZoomMorph.js";
-
-document.addEventListener("DOMContentLoaded", () => {
-  initPreHeaderScroll();
-  initScrollZoomMorph();
+document.addEventListener('DOMContentLoaded', () => {
+  initUpdateTime();
 });

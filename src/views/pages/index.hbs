@@ -3,27 +3,7 @@
 {{> base/header }}
 
 <div class="v-w">
-  {{!-- Contenido principal --}}
-  <main class="v-w-c {{#if hasPaywall}}v-w-c--1{{/if}} v-d-c">
-    <article class="v-d-w">
-      {{!-- Include superior a la cabecera --}}
-      {{> ./includes/pre-header-scroll }}
-
-      {{!-- Cabecera articulo visual --}}
-      {{> ./layout/article-header }}
-
-      {{!-- Contenido articulo --}}
-      <div class="v-c">
-        <div class="v-d v-d--1 v-d--s v-d--abc">
-          {{> ./layout/article-bar-firma }}
-          {{> ./layout/article-content }}
-        </div>
-      </div>
-    </article>
-  </main>
-
-  {{!-- Contenido secundario (outbrain / relacionadas / megabanner footer) --}}
-  {{> ./layout/article-bottom }}
+  
 </div>
 
 {{> base/footer }}
