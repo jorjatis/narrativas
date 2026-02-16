@@ -3,8 +3,8 @@
 .v-n-preh {
   position: relative;
   width: 100%;
-  height: calc(100dvh - 58px);
-  margin-top: -40px;
+  height: 100vh;
+  margin-top: -98px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,36 +39,63 @@
         height: 134px;
         top: 65%;
         left: 0px;
+
+        @media (max-width: $screen-xs) {
+          left: -20px;
+        }
       }
 
       &--2 {
         height: 246px;
         top: 20%;
         left: 8%;
+
+        @media (max-width: $screen-xs) {
+          left: -45px;
+        }
       }
 
       &--3 {
         height: 154px;
         top: 40%;
         left: 28%;
+
+        @media (max-width: $screen-xs) {
+          height: 94px;
+          top: 52%;
+          left: 56%;
+        }
       }
 
       &--4 {
         height: 164px;
         top: 10%;
         right: 26%;
+
+        @media (max-width: $screen-xs) {
+          right: 8%;
+        }
       }
 
       &--5 {
         height: 193px;
         top: 30%;
         right: 11%;
+
+        @media (max-width: $screen-xs) {
+          right: -10%;
+        }
       }
 
       &--6 {
         height: 144px;
         top: 60%;
         right: -2%;
+
+        @media (max-width: $screen-xs) {
+          right: 0%;
+          top: 70%;
+        }
       }      
     }
   }
@@ -141,7 +168,9 @@
     .flag {
       position: absolute;
       top: -23px;
-      left: -1px;  
+      left: -2px;
+      border-radius: 12px 12px 12px 0;
+      overflow: hidden;
 
       img {
         width: auto;
@@ -164,9 +193,44 @@
       height: 168px;
       padding: 32px 24px 0;
       border-radius: 2px;
-      background: #FC3636;
+      background: $cp7;
       font-family: $mcs;
       color: #FFF;
+    }
+  }
+
+  // ---------------------------------------
+  // RESPONSIVE CUSTOM
+  // ---------------------------------------
+  @media (max-width: 950px) {
+    .preh-cards-2 {
+      width: 100%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+
+      .preh-card {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255,255,255, 0.9)
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    .preh-cards-1 {
+      display: block;
+      z-index: 2;
+
+      .preh-card {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255,255,255, 0.9)
+      }
     }
   }
 }

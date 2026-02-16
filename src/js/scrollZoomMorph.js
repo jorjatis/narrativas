@@ -10,13 +10,10 @@ export function initScrollZoomMorph() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: block,
-        start: "center center",
+        start: "top top",
         end: "+=100%",
         scrub: true,
-        pin: true,
-        pinType: "fixed",
-        anticipatePin: 1, // Evita saltos al refrescar
-        invalidateOnRefresh: true // Evita saltos al refrescar
+        pin: true
       }
     });
 
@@ -33,11 +30,5 @@ export function initScrollZoomMorph() {
       transformOrigin: "center top",
       ease: "none"
     }, 0);
-
-  });
-
-   // Evita saltos al refrescar
-  window.addEventListener("load", () => {
-    ScrollTrigger.refresh();
   });
 }

@@ -1,11 +1,11 @@
 @use '../base/variables' as *;
 
 .sil-morph {
-  &--horz {
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 30px;
-  }
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   &__c {
     display: flex;
@@ -21,7 +21,7 @@
     margin-bottom: 24px;
     font: 22px/24px $mcr;
     text-transform: uppercase;
-    color: #FC3636;
+    color: $cp7;
 
     .line {
       width: 1px;
