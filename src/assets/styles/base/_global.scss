@@ -1,0 +1,83 @@
+@use '../base/variables' as *;
+
+@media (max-width: 699px) {
+  .v-h-a {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.ai2html {
+  display: flex;
+  justify-content: center;
+}
+
+.v-a--d-s-1 {
+  // NOTE: Cuando saquen el bloque de contenido superior, borrarlo
+  visibility: hidden;
+
+  // NOTE: Lo mismo, se tendra que modificar estos margenes del v-a-inf-c directamente
+  &.is-visible {
+    visibility: visible;
+    height: auto;
+    min-height: auto;
+    margin-top: -150px;
+    margin-bottom: 80px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: -200px;
+      margin-bottom: 140px;
+    }
+  }
+
+  .v-a-img-c {
+    display: none;
+  }
+
+  .v-a-inf-c {
+    padding-bottom: 0;
+    justify-content: flex-start;
+  }
+
+  .v-a-p-t {
+    max-width: 240px;
+    font-size: 28px;
+    line-height: 90%;
+    letter-spacing: -0.42px;
+    color: $cp7;
+
+    @media (min-width: 699px) {
+      max-width: 350px;
+      font-size: 42px;
+    }
+  }
+
+  .v-a-t {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -1.2px;
+    color: #202020;
+    text-transform: none;
+
+    @media (min-width: 699px) {
+      font-size: 60px;
+      line-height: 60px;
+    }
+  }
+
+  .v-a-s-t {
+    margin-top: 80px;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: -0.11px;
+    color: #000;
+
+    @media (min-width: 699px) {
+      margin-top: 120px;
+    }
+  }
+
+  .v-i {
+    display: none;
+  }
+}

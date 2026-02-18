@@ -1,7 +1,7 @@
 // Carga estilo principal
 import './assets/styles/styles.scss';
 
-// Cargar js principal
+// // Cargar js principal
 import './js/main.js';
 
 // Cargar dinámicamente plantillas y datos desde las carpetas correspondientes

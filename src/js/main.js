@@ -1,30 +1,29 @@
-import "../js/kraken.js";
-import "../js/gsap.min.js";
-import "../js/ScrollTrigger.min.js";
+import "./vendors/gsap.min.js";
+import "./vendors/ScrollTrigger.min.js";
 
-import { initPreHeaderScroll } from "./preHeaderScroll.js";
-import { initScrollZoomMorph } from "./scrollZoomMorph.js";
-import { initHorizontalScroll } from "./scrollHorizontal.js";
-
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
-}
+import { relocatePreHeader } from "./imports/relocatePreHeader.js";
+import { initScrollIndicator } from "./imports/initScrollIndicator.js";
+import { initPreHeaderScroll } from "./imports/preHeaderScroll.js";
+import { initScrollZoomMorph } from "./imports/scrollZoomMorph.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const { gsap, ScrollTrigger } = window;
+
+  if (!gsap || !ScrollTrigger) {
+    console.warn("GSAP o ScrollTrigger no están disponibles.");
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  relocatePreHeader();
+  initScrollIndicator();
   initPreHeaderScroll();
   initScrollZoomMorph();
-  initHorizontalScroll();
 });
 
-// Reset de scrollTrigger al cargar para evitar saltos
 window.addEventListener("load", () => {
-  if (!window.ScrollTrigger) return;
-
-  ScrollTrigger.clearScrollMemory();
-  window.scrollTo(0, 0);
-  ScrollTrigger.refresh(true);
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh();
+  });
 });
-
-window.onbeforeunload = function () {
-  window.scrollTo(0, 0);
-};

@@ -26,7 +26,7 @@
     .line {
       width: 1px;
       height: 49px;
-      background: #202020;
+      background: $cb9;
     }
   }
 
@@ -34,7 +34,7 @@
     margin-bottom: 20px;
     font: 28px/32px $ats;
     text-align: center;
-    color: #000;
+    color: $cb1;
   }
 
   &__media {

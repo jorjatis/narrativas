@@ -7,16 +7,27 @@
   <main class="v-w-c {{#if hasPaywall}}v-w-c--1{{/if}} v-d-c">
     <article class="v-d-w">
       {{!-- Include superior a la cabecera --}}
-      {{> ./includes/pre-header-scroll }}
+      {{!-- NOTE: Tienen que cambiarlo, por eso lo comento, porque esta dentro del article-header, y tendria que ir fuera, aqui --}}
+      {{!-- {{> ./includes/pre-header-scroll }} --}}
 
       {{!-- Cabecera articulo visual --}}
-      {{!-- {{> ./layout/article-header }} --}}
+      {{> ./layout/article-header }}
 
       {{!-- Contenido articulo --}}
       <div class="v-c">
         <div class="v-d v-d--1 v-d--s v-d--abc">
-          {{> ./layout/article-bar-firma }}
-          {{> ./layout/article-content }}
+          {{> ./layout/article-metadata }}
+
+          <p class="v-d-p" style="">Lo anterior no es una ficción. Es la historia de Sade, un cristiano en un país musulmán que dejó su tierra perseguido por su fe. <strong>«Temía por mi vida, así que tuve que irme»</strong>, cuenta. Sade lleva más de una década como inmigrante <span class="paywall pw-open">irregular en suelo europeo.</span></p>
+
+          <div class="paywall">
+            {{> ./layout/article-content }}
+
+            {{!-- NOTE: Creditos --}}
+            {{> ./kraken-components/credits }}
+
+            {{> ./layout/article-topics-comments }}
+          </div>
         </div>
       </div>
     </article>

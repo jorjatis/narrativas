@@ -1,0 +1,35 @@
+@use '../base/variables'as *;
+
+.inc-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__pre {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    font: 22px/24px $mcr;
+    text-transform: uppercase;
+    color: $cp7;
+
+    span:first-child {
+      font-family: $mcs;
+    }
+
+    .line {
+      width: 1px;
+      height: 49px;
+      background: $cb9;
+    }
+  }
+
+  &__t {
+    margin-bottom: 20px;
+    font: 28px/32px $ats;
+    text-align: center;
+    color: $cb1;
+  }
+}

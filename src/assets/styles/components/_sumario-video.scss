@@ -2,14 +2,19 @@
 
 .v-cmp-smy-media {
   position: relative;
-  width: 100vw;
-  margin-left: -50vw;
-  left: 50%;
-  overflow-x: clip;
 
-  @media (min-width: $screen-xs) {
-    max-width: 1440px;
-    overflow-x: unset;
+  @media (max-width: $screen-xs) {
+    padding-top: 40px;
+  }
+
+  @media (min-width: $screen-sm) {
+    width: 954px;
+    margin-left: calc((-954px / 2) + 50%);
+  }
+
+  @media (min-width: $screen-md) {
+    width: 1150px;
+    margin-left: calc((-1150px / 2) + 50%);
   }
 }
 
@@ -19,7 +24,6 @@
 
   @media (min-width: $screen-xs) {
     align-items: center;
-    padding-left: 200px;
   }
 
   .v-a-inf-c {
@@ -36,19 +40,14 @@
 
     @media (min-width: $screen-xs) {
       position: absolute;
-      left: 80px;  
-      max-width: 300px;
-      height: 250px;
+      left: -60px;
+      max-width: 180px;
+      height: 180px;
     }
 
-    @media (min-width: 850px) {
+    @media (min-width: $screen-sm) {
       max-width: 426px;
       height: 355px;
-    }
-
-    @media (min-width: 1120px) {
-      left: unset;
-      right: calc(875px - (426px / 2));
     }
 
     .v-a-img {
@@ -61,10 +60,10 @@
       @media (min-width: $screen-xs) {
         top: unset;
         bottom: -90px;
-        right: 0;
+        right: 90px;
       }
 
-      @media (min-width: 850px) {
+      @media (min-width: $screen-sm) {
         right: unset;
       }
     }
@@ -75,11 +74,16 @@
     color: $cb2;
 
     @media (min-width: $screen-xs) {
+      font-size: 20px;
+      line-height: 22px;
+    }
+
+    @media (min-width: $screen-sm) {
       font-size: 24px;
       line-height: 28px;
     }
 
-    @media (min-width: 850px) {
+    @media (min-width: $screen-md) {
       font-size: 28px;
       line-height: 32px;
     }
@@ -94,7 +98,14 @@
 
     @media (min-width: $screen-xs) {
       display: block;
-      max-width: 875px;
+    }
+
+    @media (min-width: $screen-sm) {
+      max-width: 660px;
+    }
+
+    @media (min-width: $screen-md) {
+      max-width: 850px;
     }
   }
 }

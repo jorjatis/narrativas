@@ -9,6 +9,12 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background: $cb2;
+
+  .preh-silueta,
+  .overlay {
+    will-change: transform, opacity;
+  }
 
   .preh-silueta {
     position: relative;
@@ -109,10 +115,23 @@
     flex-direction: column;
     gap: 24px;
 
+    @media (max-width: 640px) {
+      display: block;
+      z-index: 2;
+    }
+
     .preh-card {
       opacity: 0;
       transform: none;
       justify-content: center;
+
+      @media (max-width: 640px) {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255,255,255, 0.9)
+      }
     }
   }
 
@@ -125,6 +144,13 @@
     gap: 32px;
     z-index: 2;
 
+    @media (max-width: 950px) {
+      width: 100%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+    }
+
     b {
       margin-bottom: 8px;
       font-size: 18px;
@@ -136,6 +162,14 @@
       opacity: 0;
       transform: translateY(80px);
       padding-top: 36px;
+
+      @media (max-width: 950px) {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255,255,255, 0.9)
+      }
 
       .now {
         opacity: 0;
@@ -150,8 +184,8 @@
     flex-direction: column;
     padding: 0 24px;
     border-radius: 2px;
-    border: 1px solid rgba(0, 0, 0, 0.50);
-    background: #FFF;
+    border: 1px solid rgba($cb1, 0.50);
+    background: $cb2;
     font: 16px/20px $mcr;
     color: #000;
 
@@ -195,42 +229,35 @@
       border-radius: 2px;
       background: $cp7;
       font-family: $mcs;
-      color: #FFF;
+      color: $cb2;
     }
   }
 
-  // ---------------------------------------
-  // RESPONSIVE CUSTOM
-  // ---------------------------------------
-  @media (max-width: 950px) {
-    .preh-cards-2 {
-      width: 100%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      display: block;
+  .v-i--scroll {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: -18px;
+    z-index: 3;
+    width: 36px;
+    height: 23px;
+    animation: a8 1s infinite ease-in-out;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    opacity: 1;
+    visibility: visible;
 
-      .preh-card {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(255,255,255, 0.9)
-      }
+    @media (min-width: $screen-xs) {
+      bottom: 30px;
     }
-  }
 
-  @media (max-width: 640px) {
-    .preh-cards-1 {
-      display: block;
-      z-index: 2;
+    &.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
 
-      .preh-card {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(255,255,255, 0.9)
-      }
+    svg {
+      fill: $cp7;
     }
   }
 }

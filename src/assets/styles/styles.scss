@@ -1,8 +1,9 @@
 @use './base/variables' as *;
+// @use './base/variables-custom' as *;
 
-@use './base/kraken-detail-special-visual';
+@use './base/global';
 
+@use './components/titles';
 @use './components/pre-header-scroll';
 @use './components/scroll-zoom-morph';
 @use './components/sumario-video';
-@use './components/scroll-hzn-img';
