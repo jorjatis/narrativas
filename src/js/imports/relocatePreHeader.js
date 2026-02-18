@@ -4,6 +4,9 @@ export function relocatePreHeader() {
 
   if (!preh || !articleWrapper) return;
 
-  // Insertar antes del bloque contenedor
+  // Insertar la narrativa antes de donde lo coloca ahora (tienen que cambiarlo)
   articleWrapper.parentNode.insertBefore(preh, articleWrapper);
+
+  // Mostrar el bloque ya recolocado (por css lo ocultamos hasta que lo cambien)
+  articleWrapper.classList.add("is-visible");
 }

@@ -1,12 +1,9 @@
 @use '../base/variables' as *;
 
 .sil-morph {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
+  position: relative;
+  z-index: 10;
+  
   &__c {
     display: flex;
     flex-direction: column;

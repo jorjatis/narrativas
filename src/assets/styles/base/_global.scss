@@ -12,22 +12,26 @@
   justify-content: center;
 }
 
-.v-a--d-s-1 {
+body .v-h-a ~ .v-w .v-a--d {
+  min-height: unset;
+}
+
+.v-w .v-a--d-s-1 {
   // NOTE: Cuando saquen el bloque de contenido superior, borrarlo
   visibility: hidden;
+  height: 100vh;
+
+  @media (min-width: $screen-xs) {
+    margin-top: -200px;
+    margin-bottom: 140px;
+  }
 
   // NOTE: Lo mismo, se tendra que modificar estos margenes del v-a-inf-c directamente
   &.is-visible {
-    visibility: visible;
+    display: block;
     height: auto;
     min-height: auto;
-    margin-top: -150px;
-    margin-bottom: 80px;
-
-    @media (min-width: $screen-xs) {
-      margin-top: -200px;
-      margin-bottom: 140px;
-    }
+    visibility: visible;
   }
 
   .v-a-img-c {
@@ -56,7 +60,7 @@
     font-size: 36px;
     line-height: 40px;
     letter-spacing: -1.2px;
-    color: #202020;
+    color: $cb9;
     text-transform: none;
 
     @media (min-width: 699px) {
@@ -70,7 +74,7 @@
     font-size: 22px;
     line-height: 26px;
     letter-spacing: -0.11px;
-    color: #000;
+    color: $cb1;
 
     @media (min-width: 699px) {
       margin-top: 120px;
