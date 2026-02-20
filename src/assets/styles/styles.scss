@@ -3,3 +3,12 @@
 
 @use './base/global';
 
+// Re-estilos de kraken
+@use './base/kraken-styles';
+
+// Componentes narrativa
+@use './components/lifeline';
+@use './components/lines-title';
+@use './components/box-heading';
+@use './components/doctor-profile';
+@use './components/n-aud-player';

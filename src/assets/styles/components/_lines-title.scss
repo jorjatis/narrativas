@@ -1,0 +1,30 @@
+@use '../base/variables' as *;
+
+.v-w .v-a--d-s-1 {
+  .v-a-inf-c {
+    position: relative;
+    justify-content: flex-start;
+    
+    .v-a-t,
+    .v-a-s-t {
+      z-index: 3;
+    }
+  }
+}
+
+.lines-title {
+  display: none;
+  position: absolute;
+  width: 300px;
+  min-height: 225px;
+  align-items: center;
+
+  &.is-left {
+    left: -340px;
+  }
+
+  &.is-right {
+    right: -340px;
+  }
+
+}

@@ -1,6 +1,10 @@
 import "./vendors/gsap.min.js";
 import "./vendors/ScrollTrigger.min.js";
 
+import initLifeline from "./imports/lifeline.js";
+import initLinesTitle from "./imports/lines-title.js";
+import initBoxHeadingTimer from "./imports/box-heading-timer.js";
+
 /* =====================================================
    PRE INIT
 ===================================================== */
@@ -33,6 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // Init módulos
+  initLinesTitle();
+  initBoxHeadingTimer();
+  initLifeline(); 
 
   ScrollTrigger.refresh();
 });

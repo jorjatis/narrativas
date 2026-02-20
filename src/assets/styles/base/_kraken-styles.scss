@@ -1,0 +1,23 @@
+@use '../base/variables' as *;
+
+.v-w {
+  .v-a--d-s-1 {
+    .v-a-t {
+      max-width: 480px;
+      font-size: 48px;
+      line-height: 115%;
+      text-transform: unset;
+    }
+
+    .v-a-s-t {
+      max-width: 600px;
+      font-size: 30px;
+      line-height: 34px;
+      color: rgba($cb1, 0.80);
+    }
+  }
+
+  .v-d--1 {
+    position: relative;
+  }
+}

@@ -8,15 +8,16 @@
     },
     "infoContainer": {
       "exists": true,
-      "pretitle": "El modelo migratorio de Dinamarca",
-      "title": "Viaje a la Dinamarca sin inmigrantes que imita Europa",
-      "description": "Este 2026 marca un giro en la política migratoria europea. El modelo danés abrió el camino y ahora la UE adopta su receta: más retornos, más rápidos y acuerdos con terceros países para las deportaciones. La excepción vuelve a ser España",
-      "chevronDown": true
+      "pretitle": false,
+      "title": "Más allá del reloj: un médico en 24 horas de guardia",
+      "description": "Resistencia y compromiso en un turno que no conoce pausas. Pasillos de desvelo donde se encuentra el  noble oficio de salvaguardar la vida de otros",
+      "chevronDown": false
     },
     "firma": {
       "author": "Carlota Pérez (texto)",
       "coauthor": "e Ignacio Gil (fotos y vídeos)",
       "location": "Copenhague (Dinamarca), Calais (Francia) y Cardiff (Gales)"
-    }
+    },
+    "paragraphPaywall": "Lo anterior no es una ficción. Es la historia de Sade, un cristiano en un país musulmán que dejó su tierra perseguido por su fe. <strong>«Temía por mi vida, así que tuve que irme»</strong>, cuenta. Sade lleva más de una década como inmigrante <span class=\"paywall pw-open\">irregular en suelo europeo."
   }
 }
