@@ -1,11 +1,6 @@
 import "./vendors/gsap.min.js";
 import "./vendors/ScrollTrigger.min.js";
 
-import { relocatePreHeader } from "./imports/relocatePreHeader.js";
-import { initScrollIndicator } from "./imports/initScrollIndicator.js";
-import { initPreHeaderScroll } from "./imports/preHeaderScroll.js";
-import { initScrollZoomMorph } from "./imports/scrollZoomMorph.js";
-
 /* =====================================================
    PRE INIT
 ===================================================== */
@@ -38,20 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // Init módulos
-  relocatePreHeader();
-  initScrollIndicator();
-  initPreHeaderScroll();
-  initScrollZoomMorph();
-
-  ScrollTrigger.addEventListener("refreshInit", () => {
-    gsap.set(".overlay", { clearProps: "transform,opacity" });
-  });
-
-  const onResize = gsap.utils.debounce(() => {
-    ScrollTrigger.refresh();
-  }, 200);
-
-  window.addEventListener("resize", onResize);
 
   ScrollTrigger.refresh();
 });
