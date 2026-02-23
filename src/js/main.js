@@ -5,28 +5,13 @@ import initLifeline from "./imports/lifeline.js";
 import initLinesTitle from "./imports/lines-title.js";
 import initBoxHeadingTimer from "./imports/box-heading-timer.js";
 
-/* =====================================================
-   PRE INIT
-===================================================== */
+import { initAudioPlayers } from './imports/audio-player.js';
+import { initVideoPlayers } from './imports/video-player.js';
+import initDocPrfScroll from "./imports/doc-prf-scroll.js";
 
-// Bloquear scroll mientras carga
-document.documentElement.style.overflow = "hidden";
-document.body.style.overflow = "hidden";
-
-// Evitar restauración automática de scroll
-if ("scrollRestoration" in history) {
-  history.scrollRestoration = "manual";
-}
-
-// Forzar inicio arriba
-window.scrollTo(0, 0);
-
-
-/* =====================================================
-   DOM READY
-===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+
   const { gsap, ScrollTrigger } = window;
 
   if (!gsap || !ScrollTrigger) {
@@ -36,37 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Init módulos
+  initAudioPlayers();
+  initVideoPlayers();
+
   initLinesTitle();
   initBoxHeadingTimer();
-  initLifeline(); 
-
-  ScrollTrigger.refresh();
+  initLifeline();
 });
-
-
-/* =====================================================
-   WINDOW LOAD
-===================================================== */
 
 window.addEventListener("load", () => {
-  window.scrollTo(0, 0);
+  const { ScrollTrigger } = window;
 
-  document.documentElement.style.overflow = "";
-  document.body.style.overflow = "";
+  initDocPrfScroll();
 
-  if (window.ScrollTrigger) {
-    requestAnimationFrame(() => {
-      window.ScrollTrigger.refresh();
-    });
-  }
-});
-
-
-/* =====================================================
-   BEFORE UNLOAD
-===================================================== */
-
-window.addEventListener("beforeunload", () => {
-  window.scrollTo(0, 0);
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh(true);
+  });
 });

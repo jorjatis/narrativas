@@ -1,0 +1,107 @@
+@use '../base/variables' as *;
+
+.grid-doctors {
+  &__entry {
+    max-width: 269px;
+    margin: 0 auto 24px;
+    font: 18px/22px $mcr;
+    text-align: center;
+    color: $cb9;
+  }
+
+  &__c {
+    margin: 48px 0;
+
+    @media (min-width: $screen-xs) {
+      margin: 60px 0;
+    }
+  }
+
+  &__g {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 8px;
+
+    @media (min-width: 360px) {
+      gap: 0 20px;
+    }
+
+    @media (min-width: $screen-xs) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0 26px;
+      width: auto;
+      margin-left: unset;
+    }
+
+    @media (min-width: 800px) {
+      width: 758px;
+      margin-left: calc((-758px / 2) + 50%);
+    }
+  }
+
+  .doctor-card {
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+  
+    &__img {
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        height: 75%;
+        background: $cp7;
+        border-radius: 10px 10px 0 0;
+      }
+
+      img {
+        position: relative;
+        z-index: 1;
+      }
+    }
+
+    &__inf {
+      flex: 1 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 18px 14px;
+      border: 1px solid $cp7;
+      border-top: 0;
+      text-align: center;
+      border-radius: 0 0 10px 10px;
+    }
+
+    &__name {
+      font: 16px/18px $mcs;
+      text-transform: uppercase;
+      color: $cp7;
+    }
+
+    &__cargo {
+      font: 16px/18px $mcr;
+      color: $cb9;
+    }
+    
+    &__loc {
+      margin-top: auto;
+      font: 16px/18px $mcr;
+      color: $cb7;
+
+      &:before {
+        content: '';
+        display: block;
+        margin: 0 auto 12px;
+        width: 10px;
+        height: 10px;
+        background: $cp7;
+        border-radius: 2px;
+      }
+    }
+  }
+}

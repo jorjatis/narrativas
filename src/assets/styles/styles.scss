@@ -11,4 +11,11 @@
 @use './components/lines-title';
 @use './components/box-heading';
 @use './components/doctor-profile';
+@use './components/n-btn-player';
 @use './components/n-aud-player';
+@use './components/grid-doctors';
+@use './components/busca-message';
+
+html {
+  scroll-behavior: unset !important;
+}

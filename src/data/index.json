@@ -19,5 +19,13 @@
       "location": "Copenhague (Dinamarca), Calais (Francia) y Cardiff (Gales)"
     },
     "paragraphPaywall": "Lo anterior no es una ficción. Es la historia de Sade, un cristiano en un país musulmán que dejó su tierra perseguido por su fe. <strong>«Temía por mi vida, así que tuve que irme»</strong>, cuenta. Sade lleva más de una década como inmigrante <span class=\"paywall pw-open\">irregular en suelo europeo."
+  },
+  "gridDoctors1": {
+    "doctors": [
+      { "name": "Almudena", "cargo": "Residente en alergología. Hace guardia en Medicina Interna", "location": "H. Provincial y H. General (Castellón)"},
+      { "name": "Almudena", "cargo": "Residente en alergología. Hace guardia en Medicina Interna", "location": "H. Provincial y H. General (Castellón)"},
+      { "name": "Almudena", "cargo": "Residente en alergología. Hace guardia en Medicina Interna", "location": "H. Provincial y H. General (Castellón)"},
+      { "name": "Almudena", "cargo": "Residente en alergología. Hace guardia en Medicina Interna", "location": "H. Provincial y H. General (Castellón)"}
+    ]
   }
 }

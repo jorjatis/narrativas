@@ -27,6 +27,7 @@ module.exports = {
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@images': path.resolve(__dirname, 'src/assets/images'),
       '@videos': path.resolve(__dirname, 'src/assets/videos'),
+      '@audio': path.resolve(__dirname, 'src/assets/audio'),
       '@styles': path.resolve(__dirname, 'src/assets/styles'),
       '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
       '@data': path.resolve(__dirname, 'src/data')
@@ -40,6 +41,7 @@ module.exports = {
         loader: 'handlebars-loader',
         options: {
           partialDirs: [path.resolve(__dirname, 'src/views/partials')], // Directorios donde se encuentran los partials
+          helperDirs: [path.resolve(__dirname, 'src/views/helpers')]
         },
       },
       // Manejo de archivos .scss y .css
@@ -120,6 +122,11 @@ module.exports = {
         {
           from: path.join('src', 'assets', 'videos'),
           to: path.join('assets', 'videos'),
+          noErrorOnMissing: true
+        },
+        {
+          from: path.join('src', 'assets', 'audio'),
+          to: path.join('assets', 'audio'),
           noErrorOnMissing: true
         },
         {

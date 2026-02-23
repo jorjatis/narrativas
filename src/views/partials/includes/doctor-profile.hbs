@@ -1,33 +1,24 @@
 <div class="doc-prf">
   <div class="doc-prf__c">
-    <div class="doc-prf__data">
-      <div class="doc-prf__pat"></div>
-      <div class="doc-prf__inf">
-        <h3 class="doc-prf__name">Salvador Pérez Ibárruri</h2>
-        <span class="doc-prf__cargo">Cirujía cardiovascular</span>
-      </div>
-      <figure class="doc-prf__img">
-        <img src="assets/images/mockup/doctor-profile.jpg" alt="{{name}}">
-      </figure>
-    </div>
-
-    <div class="doc-prf__box">
+    <div class="doc-prf__inf">
       <div class="doc-prf__time">
         <div class="doc-prf__time-clock"></div>
         <span class="doc-prf__time-txt">20:00 h.</span>
       </div>
-      <span class="doc-prf__t">«Lorem ipsum dolor sit amet, consectetur adipiscing elit»</span>
-      <p class="doc-prf__txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus euismod eros, posuere commodo tellus dapibus at. Aliquam mollis risus maximus augue fermentum pretium in et est. Nulla facilisi. Quisque et varius lectus.</p>
+      <p class="doc-prf__txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus euismod eros, posuere commodo tellus dapibus at. Aliquam mollis risus maximus augue.</p>
+    </div>
+
+    <div class="n-ply-c doc-prf__media">  
+      <video class="doc-prf__video" preload="metadata" playsinline poster="assets/images/mockup/doctor-profile.jpg">
+        <source src="assets/videos/video.mp4" type="video/mp4">
+      </video>
+      <div class="n-btn-ply">
+        <button>
+          <span class="n-btn-ply__ic n-btn-ply__ic--play"></span>
+          <span class="n-btn-ply__ic n-btn-ply__ic--pause"></span>
+          <span class="n-btn-ply__ic n-btn-ply__ic--loader"></span>
+        </button>
+      </div>
     </div>
   </div>
-
-  {{#if doctorProfileHasTimer}}
-    {{!-- NOTE: Caja heading timer --}}
-    {{> includes/box-heading 
-        isTimer=true
-        class="timer-01"
-        hours="15"
-        minutes="28"
-    }}
-  {{/if}}
 </div>
