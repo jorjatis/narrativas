@@ -1,42 +1,48 @@
 export default function initDocPrfScroll() {
 
   const { gsap, ScrollTrigger } = window;
-
   if (!gsap || !ScrollTrigger) return;
 
   gsap.utils.toArray(".doc-prf").forEach((block) => {
 
     const media = block.querySelector(".doc-prf__media");
-    const info = block.querySelector(".doc-prf__txt");
+    const name  = block.querySelector(".clock-heading__name");
 
-    if (!media) return;
+    if (!media || !name) return;
 
-    gsap.set(media, { y: 0 });
+    const getOffset = () => {
+      const mediaRect = media.getBoundingClientRect();
+      const nameRect  = name.getBoundingClientRect();
+      return mediaRect.top - nameRect.bottom;
+    };
 
-    gsap.to(media, {
-      y: -192,
-      ease: "none",
+    let offset = 0;
+
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: block,
-        start: "top 60%",
-        end: "+=300",
-        scrub: 1,
+        start: "top 15%",
+        toggleActions: "play none none reverse",
         invalidateOnRefresh: true,
-        markers: true
+        onRefresh: () => {
+          offset = getOffset();
+        }
       }
     });
 
-    if (info) {
-      gsap.to(info, {
-        opacity: 0.1,
-        scrollTrigger: {
-          trigger: block,
-          start: "top 60%",
-          end: "+=300",
-          scrub: 1,
-          invalidateOnRefresh: true
-        }
-      });
-    }
+    tl.to(media, {
+      y: () => -offset,
+      duration: 0.8,
+      ease: "power2.out"
+    }, 0);
+
+    tl.to(block, {
+      marginBottom: () => -offset,
+      duration: 0.8,
+      ease: "power2.out"
+    }, 0);
+
   });
+
+  ScrollTrigger.refresh();
 }

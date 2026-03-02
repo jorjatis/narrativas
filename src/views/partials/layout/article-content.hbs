@@ -1,54 +1,420 @@
-{{!-- NOTE: Lineas electrocardiograma titular --}}
+{{!-- ------------------------- --}}
+{{!-- NOTE: Inicio del articulo --}}
+
+                 
+{{!-- ------------------------- --}}
+{{!-- NOTE: Include css/js y htmls superiores --}}
+
+<!-- NOTE: Styles -->
+{{!-- NOTE: Lo cojo del propio webpack --}}
+{{!-- <link rel="stylesheet" href="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/02/27/24-horas-urgencias/main.css"> --}}
+
+<!-- NOTE: Javascript -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+
+{{!-- NOTE: Este lo cojo del propio main.js --}}
+{{!-- <script src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/02/27/24-horas-urgencias/scripts.js?v7"></script> --}}
+
+{{!-- NOTE: Lineas lifeline del titulo del header, que se mueven a el por js --}}
 {{> includes/lines-title }}
 
-{{!-- NOTE: Grid de 4 doctores --}}
-{{> includes/grid-doctors gridDoctors1 }}    
+{{!-- NOTE: Lifeline desktop lateral / Lifeline mobile sticky top. Tambien se mueve con js --}}
+{{> includes/lifeline-desktop }}
+{{> includes/lifeline-mobile }}
 
-{{!-- NOTE: Audio player --}}
-{{> includes/audio-player }}    
+{{!-- NOTE: Grid de 4 doctores. Tambien se mueve con js --}}
+{{> includes/grid-doctors gridDoctors1 }}  
 
-{{!-- NOTE: Perfil médico --}}
-{{> includes/doctor-profile }}
 
-{{!-- NOTE: Busca mensajes --}}
-{{> includes/busca-message }}
 
-{{!-- NOTE: Caja heading --}}
-{{> includes/box-heading 
-  title="Urgencias"
+<p class="v-d-p">Ocho de la mañana de un día cualquiera. Miles de médicos empiezan su jornada en los hospitales y centros de salud de toda España. Algunos terminarán ese día a las tres de la tarde; otros no lograrán atender a todos los pacientes que tienen agendados hasta las cuatro o cinco y volverán a sus casas con horas de retraso.</p>
+<p class="v-d-p">Pero muchos otros no abandonarán el centro hasta las ocho, nueve e incluso diez de la mañana del día siguiente. A su jornada ordinaria de siete horas le seguirá otra de 17, la conocida como guardia, el principal frente de batalla entre el Ministerio de Sanidad y los principales sindicatos médicos en su reivindicación por un nuevo Estatuto.</p>
+<p class="v-d-p">Al final, serán 24 o 25 horas ininterrumpidas en las que apenas podrán parar a comer, ir al baño o descansar algún momento. Y en las que notarán que su capacidad de pensar y actuar va disminuyendo a medida que el reloj avanza. Una cirujana general, un cardiólogo, una anestesióloga y una residente de distintos hospitales públicos del país diseccionan en ABC cómo transcurren y viven una de sus guardias.</p>
+
+<div class="lowLifeline"></div>
+
+{{!-- video --}}
+{{> includes/doctor-profile 
+    time="08:00"
+    name="Almudena"
 }}
 
-{{!-- NOTE: Caja heading timer --}}
-{{> includes/box-heading 
-    isTimer=true
-    hours="15"
-    minutes="28"
+<p class="v-d-p">Cirujana general y de digestivo, Almudena sale de la reunión de pase de guardia con los dos primeros pacientes a los que intervenir: uno con una apendicitis aguda y otro con colecistitis, es decir, una infección en la vesícula.</p>
+<p class="v-d-p">A cientos de kilómetros, llega a su puesto de trabajo Beatriz Forniés, anestesióloga en un hospital terciario (que es como se conoce a los de gran complejidad) de Aragón, tras despedirse de sus hijos. No los volverá a ver hasta la tarde del día siguiente, cuando vuelvan del instituto. Lleva despierta desde las seis y media de la mañana para dejar organizada su casa antes de salir hacia el centro hospitalario.</p>
+
+{{!-- audio --}}
+{{> includes/audio-player
+    time="08:42"
+    name="Víctor"
+    img="victor"
 }}
 
-<p class="v-d-p">A sus 45 años, espera su turno en una gran cola de gente. Hace frío y llueve, pero ese va a ser el único alimento caliente que ingiera en el día: una especie de pasta con verduras de color amarillo. Como él, cerca de 300 personas aguardan de manera ordenada en un descampado a las afueras de Grande-Synthe, una comuna de Francia en la región de Norte-Paso de Calais (Francia).</p>
+<p class="v-d-p">A esa hora, aproximadamente, se levanta cada día Víctor Girbes, cardiólogo, para llegar a tiempo a su puesto en el Hospital Lluís Alcanyís de Játiva (Valencia). Es viernes y acumula ya 40 horas trabajadas en la semana.</p>
 
-{{!-- NOTE: Lifeline --}}
-{{> includes/lifeline }}
-<p class="v-d-p">A sus 45 años, espera su turno en una gran cola de gente. Hace frío y llueve, pero ese va a ser el único alimento caliente que ingiera en el día: una especie de pasta con verduras de color amarillo. Como él, cerca de 300 personas aguardan de manera ordenada en un descampado a las afueras de Grande-Synthe, una comuna de Francia en la región de Norte-Paso de Calais (Francia).</p>
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="00:00" data-time-spin="02:07">
+  <div class="timer-front">
+  </div>
+</div>
 
-<p class="v-d-p">A sus 45 años, espera su turno en una gran cola de gente. Hace frío y llueve, pero ese va a ser el único alimento caliente que ingiera en el día: una especie de pasta con verduras de color amarillo. Como él, cerca de 300 personas aguardan de manera ordenada en un descampado a las afueras de Grande-Synthe, una comuna de Francia en la región de Norte-Paso de Calais (Francia).</p>
+<div class="mediumLifeline"></div>
 
-{{!-- NOTE: Audio player --}}
-{{> includes/audio-player__old }}
-
-<p class="v-d-p">A sus 45 años, espera su turno en una gran cola de gente. Hace frío y llueve, pero ese va a ser el único alimento caliente que ingiera en el día: una especie de pasta con verduras de color amarillo. Como él, cerca de 300 personas aguardan de manera ordenada en un descampado a las afueras de Grande-Synthe, una comuna de Francia en la región de Norte-Paso de Calais (Francia).</p>
-
-<p class="v-d-p">A sus 45 años, espera su turno en una gran cola de gente. Hace frío y llueve, pero ese va a ser el único alimento caliente que ingiera en el día: una especie de pasta con verduras de color amarillo. Como él, cerca de 300 personas aguardan de manera ordenada en un descampado a las afueras de Grande-Synthe, una comuna de Francia en la región de Norte-Paso de Calais (Francia).</p>
-
-{{!-- NOTE: Caja heading timer --}}
-{{> includes/box-heading 
-    isTimer=true
-    class="timer-02 in-detail"
-    hours="15"
-    minutes="28"
+{{!-- audio --}}
+{{> includes/audio-player
+    time="10:07"
+    name="Beatriz"
+    img="beatriz"
 }}
 
-<p class="v-d-p">A sus 45 años, espera su turno en una gran cola de gente. Hace frío y llueve, pero ese va a ser el único alimento caliente que ingiera en el día: una especie de pasta con verduras de color amarillo. Como él, cerca de 300 personas aguardan de manera ordenada en un descampado a las afueras de Grande-Synthe, una comuna de Francia en la región de Norte-Paso de Calais (Francia).</p>
+<p class="v-d-p">El paciente de Beatriz requiere de anestesia general. Los traumatólogos valoran los daños e intentarán reparar y coser todo lo que sea recuperable para que la mano recupere la movilidad en todos los dedos de la mano si es posible. Esta es la primera intervención del día. Todavía intervendrá en otras siete.</p>
 
-<p class="v-d-p">A sus 45 años, espera su turno en una gran cola de gente. Hace frío y llueve, pero ese va a ser el único alimento caliente que ingiera en el día: una especie de pasta con verduras de color amarillo. Como él, cerca de 300 personas aguardan de manera ordenada en un descampado a las afueras de Grande-Synthe, una comuna de Francia en la región de Norte-Paso de Calais (Francia).</p>
+<div class="highLifeline"></div>
 
+{{!-- busca 1 --}}
+{{> includes/busca
+    busca1hora="11:00 / Almudena"
+    busca1texto="Percance en otro quirófano. Posible perforación de intestino."
+}}
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="02:07" data-time-spin="05:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+<p class="v-d-p">Cambio de centro para Angélica, residente de tercer año en un hospital general. Afronta lo que viene con optimismo, pese a no estar tan descansada como le gustaría. Hace un par de jornadas ya hizo una guardia de 24 horas en urgencias, así que no ha tenido ni un día completo para reponerse.</p>
+<p class="v-d-p">Esta joven facultativa se forma en Alergología, pero hace guardias en los servicios de Urgencias y Medicina Interna en otro centro. Tras algún café se desplaza al hospital en el que tendrá lugar su guardia de 17 horas.</p>
+
+<div class="mediumLifeline"></div>
+
+{{!-- video --}}
+{{> includes/doctor-profile 
+    time="13:30"
+    name="Almudena"
+}}
+
+<p class="v-d-p">Tras dos horas de cirugía, Almudena está preparada para su próxima intervención, la de la colecistitis pendiente desde el turno anterior. Con esta son ya tres las operaciones en las que ha intervenido y todavía no ha empezado su guardia.</p>
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="05:00" data-time-spin="06:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+<p class="v-d-p">A más de 300 kilómetros, la anestesióloga Beatriz Forniés acaba de participar en la operación del joven con el corte en la mano y lesiones en varios tendones. Luego aprovecha para reunirse con su jefe y terminar una sesión clínica. La jornada «se está animando», como «suele suceder» y ante la perspectiva de lo que viene, aprovecha para comer.</p>
+
+<div class="lowLifeline"></div>
+
+{{!-- audio --}}
+{{> includes/audio-player
+    time="14:36"
+    name="Beatriz"
+    img="beatriz"
+}}
+
+<p class="v-d-p">Apenas han pasado 15 minutos, cuando ya está en pie y lista para la primera de las cuatro urgencias que tiene pendientes y con las que estima que tendrán trabajo hasta «las 10 de la noche mínimo». Su trabajo no consiste solo en dormir al paciente. Primero los valora y luego debe estar pendiente de cómo evolucionan durante la cirugía. Por último, se encarga de ellos cuando despiertan y sigue de cerca sus primeras horas para comprobar que todo esté bien.</p>
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="06:00" data-time-spin="07:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+<p class="v-d-p">A las tres de la tarde se produce el primer relevo. Concluye el turno del personal sanitario no médico (enfermería, auxiliares o celadores) y entran los del turno de tarde. Nuestros protagonistas siguen en sus puestos y ahora es cuando comienza la guardia.</p>
+<p class="v-d-p">Las horas que trabajen desde este momento no computan como cotizadas para la jubilación, otro de los aspectos que generan descontento entre los facultativos y por los que el colectivo exige a la ministra, Mónica García, una norma propia al margen del Estatuto Marco aprobado por Sanidad para el conjunto de las profesiones sanitarias.</p>
+
+<div class="highLifeline"></div>
+
+{{!-- busca 1 --}}
+{{> includes/busca
+    busca1hora="15:00"
+    busca1texto="Víctor. Paciente de urgencias. Insuficiencia cardíaca descompensada."
+}}
+
+<p class="v-d-p">El arranque de la guardia pilla a Víctor con 15 ecografías realizadas durante la mañana. Ahora tiene 17 horas por delante, con 124 pacientes a su cargo cuya supervisión se reparte con otro médico. Ha sacado unos minutos para comer, pero cuando se disponía a lavarse los dientes, suena el busca. En Madrid, la cirujana general Almudena sigue con la operación del paciente con la infección de vesícula. Terminará cerca de las cuatro de la tarde, «sin comer todavía».</p>
+
+<div class="lowLifeline"></div>
+
+{{!-- busca 2 --}}
+{{> includes/busca
+    busca1hora="15:30"
+    busca1texto="Víctor. Unidad de preingreso. Mujer de edad avanzada en las últimas horas de su vida."
+    busca2=true
+    busca2hora="15:50"
+    busca2texto="Víctor. Habitación en planta. Exitus (fallecimiento). Hay que firmar certificado de defunción."
+}}
+
+<p class="v-d-p">Tras terminar la apendicitis, Beatriz se dispone a pasar de nuevo por quirófano con otra urgencia. Es una chica de 22 años, operada hace 10 días en otra comunidad y a la que le han surgido complicaciones. Hay que abrirle la cavidad abdominal para ver qué sucede. Es su tercera intervención.</p>
+<p class="v-d-p">Por su parte, Angélica ya ha comenzado la guardia de medicina interna. Esta es la situación que se encuentra en las urgencias de su centro:</p>
+
+<div class="mediumLifeline"></div>
+
+{{!-- video --}}
+{{> includes/doctor-profile 
+    time="15:55"
+    name="Angélica"
+}}
+
+<p class="v-d-p">Ella no está en urgencias, pero lo que pasa en este área les afecta porque tienen que bajar continuamente a ver pacientes.</p>
+
+<div class="lowLifeline"></div>
+
+{{!-- busca 1 --}}
+{{> includes/busca
+    busca1hora="15:59"
+    busca1texto="Beatriz. Aviso del paritorio. Mujer en dilatación necesita epidural."
+}}
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="07:00" data-time-spin="08:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+{{!-- audio --}}
+{{> includes/audio-player
+    time="16:45"
+    name="Beatriz"
+    img="beatriz"
+}}
+
+<p class="v-d-p">El cansancio empieza a hacer mella. Estas horas de guardia, al estar fuera de la jornada ordinaria, no se retribuyen de la misma manera. En la mayoría de los casos se pagan por debajo de la hora de trabajo normal. Un ejemplo: la cirugía en la que participa Beatriz durante su guardia se cobra peor que la que ha atendido a las 10 de la mañana. Esta es una de las principales reclamaciones que los médicos exigen: que se pague la hora de guardia al menos como la de jornada ordinaria.</p>
+<p class="v-d-p">El Estatuto Marco que el Ministerio de Sanidad ha acordado con los sindicatos UGT, CCOO, CSIF y el sindicato de enfermería Satse no recoge cambios sobre este punto. La regulación de esa retribución depende de cada comunidad autónoma, pero uno de los borradores del texto de Mónica García llegó a establecer unos mínimos, que luego desaparecieron en la versión final.</p>
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="08:00" data-time-spin="09:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+{{!-- audio --}}
+{{> includes/audio-player
+    time="17:00"
+    name="Víctor"
+    img="victor"
+}}
+
+<p class="v-d-p">Almudena ha podido hacer un alto y comer. Mientras se dispone a ello la llaman para que valore a otro paciente. A partir de ese momento, encadenará varias cirugías que la mantendrán ocupada prácticamente toda la tarde. Los breves descansos que tenga los usará para tomar algún café y así seguir activa.</p>
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="09:00" data-time-spin="10:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+{{!-- audio --}}
+{{> includes/audio-player
+    time="18:00"
+    name="Víctor"
+    img="victor"
+}}
+
+<p class="v-d-p">Tres horas después de comer, Víctor ha podido ir al baño y lavarse los dientes. Por detalles como este niega la mayor sobre que las horas de guardia no se conciban como horas de trabajo efectivas, sino que oficialmente y por defecto se consideran como tiempo «a disposición del trabajo». Es decir, que lo que se retribuye es el estar disponible para trabajar si así hiciera falta.</p>
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="10:00" data-time-spin="11:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+<div class="mediumLifeline"></div>
+
+{{!-- busca 3 --}}
+{{> includes/busca
+    busca1hora="18:02"
+    busca1texto="Víctor. Habitación en planta. Hombre con enfermedades crónicas. Le falta la respiración."
+    busca2=true
+    busca2hora="18:30"
+    busca2texto="Beatriz. Urgencia de traumatología. Fractura de tibia."
+    busca3=true
+    busca3hora="19:07"
+    busca3texto="Víctor. Habitación en planta. Mujer con enfermedad grave en varias arterias. Valorar cirugía"
+}}
+
+<p class="v-d-p">El cansancio empieza a sentirse con más intensidad tras casi 12 horas de trabajo. «A partir de este momento ya empiezas a notarte peor, a veces en broma digo que alguien me preste una neurona porque ya no puedo más», remarca Angélica.</p>
+
+<div class="lowLifeline"></div>
+
+{{!-- video --}}
+{{> includes/doctor-profile 
+    time="19:20"
+    name="Angélica"
+}}
+
+<p class="v-d-p">Los turnos de 12 horas son una de las opciones que los facultativos plantean para poner fin a las guardias de 24. «Hay servicios grandes en los que se podría hacer perfectamente, de hecho en algún sitio ya se hace, pero es cierto que se necesitaría a medio plazo un aumento de plantillas», valora Víctor Girbes.</p>
+<p class="v-d-p">El proyecto de Estatuto Marco del Ministerio de Sanidad plantea cambios en este sentido, aunque los médicos los ven insuficientes y creen que, en la práctica, no acabará con las guardias de 24 horas, pese a que la ministra Mónica García presuma de ello.</p>
+
+<div class="highLifeline"></div>
+
+{{!-- busca 1 --}}
+{{> includes/busca
+    busca1hora="21:30 / Beatriz"
+    busca1texto="Cirugía general. Mujer con la vesícula inflamada."
+}}
+
+<p class="v-d-p">En concreto, el texto establece que la jornada de guardia no podrá ser superior a las 17 horas de trabajo. Pero hay letra pequeña. «Excepcionalmente, con el consentimiento expreso de los trabajadores afectados, de manera voluntaria (...) la jornada de guardia podrá ampliarse hasta 24 horas continuadas, para aquellos puestos identificados como de difícil cobertura o en el caso de fines de semana».</p>
+
+<p class="v-d-p">22:00 (hora) - 14:00 (tiempo transcurrido de la jornada)</p>
+
+{{!-- audio --}}
+{{> includes/audio-player
+    time="22:00"
+    name="Beatriz"
+    img="beatriz"
+}}
+
+<p class="v-d-p">Nuevo cambio de turno del personal no médico. Será la tercera tanda de profesionales de enfermería, auxiliares y celadores con la que trabajen. Para Beatriz, la anestesióloga, este momento es un punto de inflexión: «Ahora empieza lo peor de la guardia».</p>
+
+<p class="v-d-p">«La mejor solución es que desaparezca ese concepto de jornada complementaria que es lo que son las guardias», apunta Forniés. Ello no implicaría, insiste, dejar de atender a la población las 24 horas del día. Siempre habría médicos para asistir las urgencias, pero el sistema de organización de los centros sería diferente al actual.</p>
+
+<div class="lowLifeline"></div>
+
+{{!-- audio --}}
+{{> includes/audio-player
+    time="22:13"
+    name="Beatriz"
+    img="beatriz"
+}}
+
+<p class="v-d-p">El proyecto de Sanidad expone que en el caso de que se encadene jornada ordinaria y guardia, «la suma no excederá de 17 horas». «La realidad es que alguien tiene que hacerse cargo de las urgencias desde las ocho de la mañana hasta las tres de la tarde», dice Almudena tras haber operado durante ese turno ordinario a tres pacientes y haber valorado a otros tantos, poniendo en duda que con el sistema actual se pueda aplicar.</p>
+<p class="v-d-p">Contra este anteproyecto y para exigir una norma propia que regule las particularidades de su profesión los médicos han ido ya a cinco huelgas en los últimos meses. La última, la semana pasada, que tiene carácter indefinido y se replicará una semana, al mes de momento, hasta junio.</p>
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="11:00" data-time-spin="15:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+<div class="mediumLifeline"></div>
+
+{{!-- video --}}
+{{> includes/doctor-profile 
+    time="23:00"
+    name="Almudena"
+}}
+
+<p class="v-d-p">Aún sin cenar, Almudena ha terminado de operar al cuarto paciente de la tarde. Comerá algo rápido y seguirá atendiendo a enfermos. Aproximadamente a la una y media de la madrugada aprovechará un momento más tranquilo para poder descansar.</p>
+<p class="v-d-p">En otro punto del país, cerca de la medianoche, las instalaciones de urgencias del centro en el que hace su guardia la médico residente Angélica se encuentran al límite.</p>
+
+<div class="highLifeline"></div>
+
+{{!-- video --}}
+{{> includes/doctor-profile 
+    time="23:04"
+    name="Angélica"
+}}
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="15:00" data-time-spin="16:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+<p class="v-d-p">Empiezan las horas más duras. Nuestros profesionales ya llevan 16 horas trabajando. Las ojeras comienzan a asomar con más intensidad y el cansancio se acumula, pero a partir de ahora tienen que vencer también al sueño.</p>
+<p class="v-d-p">«Yo a las once de la noche ya estoy deshecha, pero me queda todavía toda la noche, que es el momento más complicado porque hay menos personal y estamos mucho más cansados», lamenta la anestesióloga. Lleva ya 24 años haciendo guardias y sabe bien de lo que habla. Tras acabar la intervención de tibia y peroné entró a otra. Lo cuenta desde el quirófano:</p>
+
+{{!-- audio --}}
+{{> includes/audio-player
+    time="00:00"
+    name="Beatriz"
+    img="beatriz"
+}}
+
+<p class="v-d-p">Mientras, Víctor, el cardiólogo en Játiva, sigue atendiendo a enfermos y ajustando tratamientos. «En una hora intentaremos ver cómo organizamos la noche para atender los buscas».</p>
+<p class="v-d-p">Angélica, por su parte, nota cómo cada vez le cuesta más pensar los tratamientos que pone a los pacientes a su cargo. «La verdad es que estoy ya muy cansada y tengo que repasarlos y volverlos a repasar. La mente ya no me da para tanto», reconoce.</p>
+
+<div class="mediumLifeline"></div>
+
+{{!-- video --}}
+{{> includes/doctor-profile 
+    time="00:41"
+    name="Angélica"
+}}
+
+<p class="v-d-p">Mientras espera a ver si baja la afluencia de pacientes y puede dar una cabezada, reflexiona sobre un suceso ocurrido el día anterior: la muerte de un compañero de enfermería al regresar de una guardia.</p>
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="16:00" data-time-spin="17:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+<div class="lowLifeline"></div>
+
+{{!-- audio --}}
+{{> includes/audio-player
+    time="01:00"
+    name="Víctor"
+    img="victor"
+}}
+
+<p class="v-d-p">En Madrid, por primera vez en todo el día, Almudena y sus compañeros no tienen «nada pendiente de valoración» por su parte y parece que se presenta la ocasión para intentar descansar.</p>
+
+<div class="mediumLifeline"></div>
+
+{{!-- busca 2 --}}
+{{> includes/busca
+    busca1hora="01:30"
+    busca1texto="Víctor. Habitación en planta. Dos pacientes indispuestos. Náuseas, malestar y tensión elevada."
+    busca2=true
+    busca2hora="02:15"
+    busca2texto="Beatriz. Cirugía general menor. Abceso en zona perianal."
+}}
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="17:00" data-time-spin="19:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+<p class="v-d-p">Tras apenas un par de horas de descanso, vuelta a la acción.</p>
+
+<div class="highLifeline"></div>
+
+{{!-- video --}}
+{{> includes/doctor-profile 
+    time="03:00"
+    name="Angélica"
+}}
+
+<p class="v-d-p">Suena el busca de Almudena, por una perforación de estómago que necesita ser intervenida quirúrgicamente de inmediato. Se toma un café corriendo, el séptimo desde que entró por la puerta del hospital, y se va hacia el quirófano, donde permanecerá hasta las seis y media de la mañana. Acaba «devastada».</p>
+
+{{!-- video --}}
+{{> includes/doctor-profile 
+    time="03:30"
+    name="Almudena"
+}}
+
+<p class="v-d-p">Mientras Almudena comienza a operar, Beatriz, la anestesióloga, ha podido parar. Sube a reposar un poco tras casi 20 horas de trabajo seguido. «Te acuestas con un busca debajo de la almohada y aunque estás agotado, a la vez estás con la adrenalina de todo el día circulando por la sangre. Por lo menos estás tumbada y las piernas te dejan de doler un poco».</p>
+
+{{!-- Timer --}}
+<div class="timer is-desktop" data-time-start="19:00" data-time-spin="00:00">
+  <div class="timer-front">
+  </div>
+</div>
+
+<p class="v-d-p">Ya van 24 horas trabajadas y ahora hay que dar el 'pase de guardia' a los compañeros que entran. No ha sido la peor guardia que han hecho, coinciden todos, pues lo de poder descansar (que no dormir) más de una hora seguida sin tener que bajar corriendo a atender una urgencia no es lo habitual.</p>
+
+<div class="lowLifeline"></div>
+
+{{!-- Timer --}}
+<p class="v-d-p"><b>Beatriz - 14. 08:50DIASIGUIENTE FALTA AQUI EL AUDIO</b></p>
+
+{{!-- video - falta video --}}
+{{> includes/doctor-profile 
+    time="09:00"
+    name="Almudena"
+}}
+
+<p class="v-d-p">Al día siguiente, a las 8 de la mañana, volverán a su puesto de trabajo. Ese día, con suerte, solo serán 7 horas. Y así hasta la próxima guardia, que, como mucho, tardará una semana en llegar.</p>
+
+{{!-- video - falta video --}}
+{{> includes/doctor-profile 
+    time="10:00"
+    name="Víctor"
+}}
+
+<p class="v-d-p">Los cuatro médicos consiguen irse de sus hospitales alrededor de las nueve de la mañana, pero ninguno se dormirá al llegar a casa. Han perdido un día entero de su vida personal y aprovecharán para comprar, hacer gestiones e incluso para seguir formándose profesionalmente.</p>
+
+<p class="v-d-p">Pero al día siguiente a las 8 de la mañana volverán a su puesto de trabajo, ese día, con suerte, solo 7 horas (que siempre son algo más). Y hasta la próxima guardia, que, como mucho, tardará una semana en llegar.</p>

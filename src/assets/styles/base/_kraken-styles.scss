@@ -1,19 +1,150 @@
 @use '../base/variables' as *;
 
+body:has(.v-h-a) {
+  .v-a--d-s-1 {
+    @media (max-width: $screen-sm) {
+      height: calc(100vh - 106px);
+    }
+  }
+}
+
 .v-w {
   .v-a--d-s-1 {
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    
+    @media (max-width: $screen-ms) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+      overflow: hidden;
+      background-color: $cb2;
+      background-position: -20px 20px;
+      background-image:
+        /* Líneas gruesas verticales */
+        repeating-linear-gradient(
+          to right,
+          rgba(255, 0, 0, 0.15) 0px,
+          rgba(255, 0, 0, 0.15) 2px,
+          transparent 2px,
+          transparent 50px
+        ),
+
+        /* Líneas gruesas horizontales */
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255, 0, 0, 0.15) 0px,
+          rgba(255, 0, 0, 0.15) 2px,
+          transparent 2px,
+          transparent 50px
+        ),
+
+        /* Líneas finas verticales */
+        repeating-linear-gradient(
+          to right,
+          rgba(255, 0, 0, 0.15) 0px,
+          rgba(255, 0, 0, 0.15) 1px,
+          transparent 1px,
+          transparent 10px
+        ),
+
+        /* Líneas finas horizontales */
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255, 0, 0, 0.15) 0px,
+          rgba(255, 0, 0, 0.15) 1px,
+          transparent 1px,
+          transparent 10px
+        );
+    }
+
+    @media (min-width: $screen-ms) {
+      max-width: 300px;
+      transform: translateX(150px);
+    }
+
+    @media (min-width: $screen-sm) {
+      max-width: 500px;
+      transform: translateX(250px);
+    }
+
+    .v-a-inf-c {
+      padding-bottom: 0;
+      text-align: left;
+
+      @media (max-width: $screen-xs) and (max-height: 675px) {
+        max-width: 414px;
+      }
+
+      @media (max-width: $screen-ms) {
+        max-width: 324px;
+        text-align: center;
+        order: 2;
+        justify-content: center;
+      }
+    }
+
     .v-a-t {
-      max-width: 480px;
-      font-size: 48px;
+      font-size: 38px;
       line-height: 115%;
       text-transform: unset;
+
+      @media (max-width: $screen-xxs) {
+        font-size: 30px;
+      }
+
+      @media (max-width: $screen-ms) {
+        text-shadow: 2px 2px $cb2;
+      }
+
+      @media (max-width: $screen-xs) and (max-height: 675px) {
+        font-size: 32px;
+      }
+
+      @media (min-width: $screen-sm) {
+        padding-right: 20px;
+        font-size: 48px;
+      }
     }
 
     .v-a-s-t {
-      max-width: 600px;
-      font-size: 30px;
-      line-height: 34px;
+      margin-top: 36px;
+      font-size: 20px;
+      line-height: 115%;
       color: rgba($cb1, 0.80);
+
+      @media (max-width: $screen-xxs) {
+        font-size: 18px;
+      }
+
+      @media (max-width: $screen-ms) {
+        text-shadow: 2px 2px $cb2;
+      }
+
+      @media (max-width: $screen-xs) and (max-height: 675px) {
+        margin-top: 36px;
+        font-size: 16px;
+      }
+
+      @media (min-width: $screen-sm) {
+        margin-top: 54px;
+        font-size: 30px;
+      }
+    }
+
+    .v-i {
+      position: absolute;
+      bottom: 40px;
+
+      @media (min-width: $screen-ms) {
+        left: 0;
+      }
+
+      svg {
+        fill: $cb1;
+      }
     }
   }
 

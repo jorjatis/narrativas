@@ -1,30 +1,103 @@
 @use '../base/variables' as *;
 
-.v-w .v-a--d-s-1 {
-  .v-a-inf-c {
-    position: relative;
-    justify-content: flex-start;
+.lines-title {
+  position: relative;
+  display: none;
+  width: 128px;
+  z-index: 2;
+
+  @media (min-width: $screen-ms) {
+    position: absolute;
+  }
+
+  &.is-left {
+    order: 1;
+    width: 65px;
+    height: auto;
+
+    @media (max-width: $screen-xxs) {
+      width: 45px;
+    }
+
+    @media (max-width: $screen-ms) {
+      top: 0;
+    }
+
+    @media (min-width: $screen-ms) {
+      right: calc(100% + 43px);
+      width: 540px;
+    }
+
+    @media (min-width: $screen-sm) {
+      width: 706px;
+    }
+  }
+
+  &.is-right {
+    order: 3;
+    width: 336px;
+    height: auto;
+
+    @media (max-width: $screen-xxs) {
+      width: 230px;
+    }
+
+    @media (max-width: $screen-ms) {
+      bottom: 0;
+    }
+
+    @media (min-width: $screen-ms) {
+      order: unset;
+      left: calc(100% + 43px);
+      transform: translateY(-26px);
+      width: 170px;
+    }
+
+    @media (min-width: $screen-sm) {
+      width: 216px;
+    }
+  }
+
+  &.is-desktop {
+    display: none;
+
+    @media (min-width: $screen-ms) {
+      display: block;
+    }
+  }
+
+  &.is-mobile {
+    display: block;
+
+    svg path {
+      stroke-dasharray: none !important;
+      stroke-dashoffset: 0 !important;
+    }
     
-    .v-a-t,
-    .v-a-s-t {
-      z-index: 3;
+    @media (min-width: $screen-ms) {
+      display: none;
     }
   }
 }
 
-.lines-title {
-  display: none;
-  position: absolute;
-  width: 300px;
-  min-height: 225px;
-  align-items: center;
+.lines-title svg path {
+  fill: none;
+  stroke: $cp1;
+}
 
-  &.is-left {
-    left: -340px;
+.drawLeft {
+  animation: drawLine 4s linear forwards;
+}
+
+.drawRight {
+  animation: drawLine 1s linear forwards;
+}
+
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: var(--path-length);
   }
-
-  &.is-right {
-    right: -340px;
+  to {
+    stroke-dashoffset: 0;
   }
-
 }

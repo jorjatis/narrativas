@@ -1,0 +1,117 @@
+@use '../base/variables'as *;
+
+.lifeline-mobile {
+  position: sticky;
+  top: 60px;
+  z-index: 3;
+  display: flex;
+  margin-right: -20px;
+  margin-left: -10px;
+  padding-bottom: 20px;
+  
+  @media (max-width: $screen-xs) {
+    top: 52px;
+  }
+
+  @media (min-width: $screen-sm) {
+    display: none;
+  }
+
+  &:after {
+    content: '';
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%);
+  }
+
+  .lifeline__txt {
+    position: absolute;
+    bottom: 20px;
+    left: 98px;
+    z-index: 2;
+    background-color: #ffffff80;
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-size: 12px;
+    line-height: 1;
+    font-family: "Micrograph Semibold", sans-serif;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+  }
+
+  .lifeline__c {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .timer {
+    &.is-mobile {
+      position: relative;
+      left: 0;
+    }
+  }
+
+  .lifeline-strip-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 45px;
+    flex: 1 0 auto;
+    transform: translateX(-8px);
+    background-color: $cb2;
+    background-position: 0px -13px;
+    background-image:
+      /* Líneas gruesas verticales */
+      repeating-linear-gradient(
+        to right,
+        rgba(255, 0, 0, 0.15) 0px,
+        rgba(255, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 25px
+      ),
+
+      /* Líneas gruesas horizontales */
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.15) 0px,
+        rgba(255, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 25px
+      ),
+
+      /* Líneas finas verticales */
+      repeating-linear-gradient(
+        to right,
+        rgba(255, 0, 0, 0.15) 0px,
+        rgba(255, 0, 0, 0.15) 1px,
+        transparent 0px,
+        transparent 5px
+      ),
+
+      /* Líneas finas horizontales */
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.15) 0px,
+        rgba(255, 0, 0, 0.15) 1px,
+        transparent 0px,
+        transparent 5px
+      );
+  }
+
+  .lifeline-strip {
+  width: 100%;
+  height: 45px;
+  display: block;
+  overflow: hidden;
+  
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+}

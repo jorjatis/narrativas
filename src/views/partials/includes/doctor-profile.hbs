@@ -1,10 +1,44 @@
-<div class="doc-prf">
+<div class="v-c-cmp">
+  <div class="doc-prf">
+    <div class="doc-prf__c">
+      <div class="doc-prf__inf">
+        <div class="clock-heading">
+          <div class="clock-heading__time">
+            <div class="clock-heading__time-clock"></div>
+            <span class="clock-heading__time-txt">{{time}} h.</span>
+          </div>
+          <span class="clock-heading__name">{{name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="v-c-cmp">
+  <div class="v-cmp-m v-cmp-m--t1">
+    <div class="v-a v-a--cmp-m v-a--cmp-v">
+      <div class="v-a-img-c v-a-img-c--t2">
+        <figure class="v-a-fig">
+          {{> includes/video-player 
+            isVideoVertical=true
+          }}
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- <div class="doc-prf">
   <div class="doc-prf__c">
     <div class="doc-prf__inf">
-      <div class="doc-prf__time">
-        <div class="doc-prf__time-clock"></div>
-        <span class="doc-prf__time-txt">20:00 h.</span>
-      </div>
+      <div class="clock-heading">
+        <div class="clock-heading__time">
+          <div class="clock-heading__time-clock"></div>
+          <span class="clock-heading__time-txt">20:00 h.</span>
+        </div>
+        <span class="clock-heading__name">Almudena</span>
+      </div>      
+      <p class="doc-prf__cite">«Lorem ipsum dolor sit amet, consectetur adipiscing elit»</p>
       <p class="doc-prf__txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus euismod eros, posuere commodo tellus dapibus at. Aliquam mollis risus maximus augue.</p>
     </div>
 
@@ -21,4 +55,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}

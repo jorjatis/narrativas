@@ -4,31 +4,47 @@ import './assets/styles/styles.scss';
 // // Cargar js principal
 import './js/main.js';
 
-// Cargar dinámicamente plantillas y datos desde las carpetas correspondientes
-const templatesContext = require.context('./views/pages', true, /\.hbs$/);
-const dataContext = require.context('./data', true, /\.json$/);
+// /**
+//  * Lógica de Renderizado Dinámico
+//  * Solo se ejecuta en Modo Desarrollo (npm start / webpack serve)
+//  */
+// if (process.env.NODE_ENV !== 'production') {
+//   try {
+//     const templatesContext = require.context('./views/pages', true, /\.hbs$/);
+//     const dataContext = require.context('./data', true, /\.json$/);
 
-// Crear un objeto con las plantillas y los datos cargados automáticamente
-const templates = Object.fromEntries(
-  templatesContext.keys().map(file => {
-    const name = file.replace('./', '').replace('.hbs', '');
-    return [name, templatesContext(file)];
-  })
-);
+//     const templates = Object.fromEntries(
+//       templatesContext.keys().map(file => {
+//         // Limpiamos la ruta para que coincida con el nombre de la página
+//         const name = file.replace('./', '').replace('.hbs', '');
+//         return [name, templatesContext(file)];
+//       })
+//     );
 
-const data = Object.fromEntries(
-  dataContext.keys().map(file => {
-    const name = file.replace('./', '').replace('.json', '');
-    return [name, dataContext(file)];
-  })
-);
+//     const data = Object.fromEntries(
+//       dataContext.keys().map(file => {
+//         const name = file.replace('./', '').replace('.json', '');
+//         return [name, dataContext(file)];
+//       })
+//     );
 
-// Detectar la página actual basada en la URL
-const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+//     // Detectar página actual
+//     const path = window.location.pathname;
+//     let currentPage = path.split('/').pop().replace('.html', '') || 'index';
+    
+//     // Si estás en una subcarpeta (ej: /pages/contacto), ajustamos el nombre
+//     if (path.includes('/views/pages/')) {
+//        currentPage = path.split('/views/pages/').pop().replace('.html', '');
+//     }
 
-// Renderizar la plantilla correspondiente con sus datos
-if (templates[currentPage]) {
-  document.body.innerHTML = templates[currentPage](data[currentPage] || {});
-} else {
-  console.error(`No se encontró la plantilla para la página: ${currentPage}`);
-}
+//     // Solo renderizamos si el body está vacío (evita pisar el trabajo de HtmlWebpackPlugin)
+//     if (templates[currentPage]) {
+//       console.log(`%c Renderizando plantilla: ${currentPage}`, "color: green; font-weight: bold");
+//       document.body.innerHTML = templates[currentPage](data[currentPage] || {});
+//     } else {
+//       console.warn(`No se encontró la plantilla local para: ${currentPage}. Es posible que estés viendo el HTML estático de Webpack.`);
+//     }
+//   } catch (e) {
+//     console.error("Error en el cargador de plantillas de desarrollo:", e);
+//   }
+// }

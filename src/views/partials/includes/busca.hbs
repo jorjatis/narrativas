@@ -1,0 +1,49 @@
+<div class="busca-w">
+  <div class="busca">
+    <div class="busca__c">
+      <div class="busca-svg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="73" height="49" viewBox="0 0 73 49" fill="none">
+          <rect width="73" height="49" rx="8" fill="#4D4D4D"/>
+          <rect x="12" y="8" width="49" height="13" rx="2" fill="#6BE399" fill-opacity="1"/>
+          <path d="M65.3165 8.42385C65.3861 8.26315 65.6139 8.26315 65.6835 8.42385L66.678 10.7205C66.7352 10.8526 66.6384 11 66.4945 11H64.5055C64.3616 11 64.2648 10.8526 64.322 10.7205L65.3165 8.42385Z" fill="white"/>
+          <path d="M65.3165 20.5761C65.3861 20.7369 65.6139 20.7369 65.6835 20.5761L66.678 18.2795C66.7352 18.1474 66.6384 18 66.4945 18H64.5055C64.3616 18 64.2648 18.1474 64.322 18.2795L65.3165 20.5761Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="busca__msg">
+        <span class="busca__time" data-text="{{busca1hora}}"></span>
+        <p class="busca__txt"
+           data-text="{{busca1texto}}">
+          <span class="busca__typed"></span><span class="busca__tilt">|</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {{#if busca2}}
+    <div class="busca">
+      <div class="busca__c">
+        <div class="busca__msg">
+          <span class="busca__time" data-text="{{busca2hora}}"></span>
+          <p class="busca__txt"
+            data-text="{{busca2texto}}">
+            <span class="busca__typed"></span><span class="busca__tilt">|</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if busca3}}
+    <div class="busca">
+      <div class="busca__c">
+        <div class="busca__msg">
+          <span class="busca__time" data-text="{{busca3hora}}"></span>
+          <p class="busca__txt"
+            data-text="{{busca3texto}}">
+            <span class="busca__typed"></span><span class="busca__tilt">|</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</div>

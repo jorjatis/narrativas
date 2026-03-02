@@ -7,15 +7,39 @@
 @use './base/kraken-styles';
 
 // Componentes narrativa
-@use './components/lifeline';
+@use './components/lifeline-desktop';
+@use './components/lifeline-mobile';
 @use './components/lines-title';
-@use './components/box-heading';
+@use './components/timer';
 @use './components/doctor-profile';
 @use './components/n-btn-player';
 @use './components/n-aud-player';
 @use './components/grid-doctors';
-@use './components/busca-message';
+@use './components/busca';
+@use './components/clock-heading';
 
 html {
   scroll-behavior: unset !important;
+}
+
+.v-c-cmp .v-cmp-m .video-js .vjs-voc-bigplaybutton-info-title {
+  display: none;
+}
+
+.v-cmp-m--t1 .video-player,
+.v-cmp-ply {
+  margin: 0 0 60px;
+}
+
+.busca-w {
+  margin: 60px 0;
+}
+
+.clock-heading {
+  margin: 40px 0 0;
+}
+
+.v-a-lnk.video-player {
+  max-width: 320px;
+  margin: 0 auto;
 }

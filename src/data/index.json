@@ -11,7 +11,7 @@
       "pretitle": false,
       "title": "Más allá del reloj: un médico en 24 horas de guardia",
       "description": "Resistencia y compromiso en un turno que no conoce pausas. Pasillos de desvelo donde se encuentra el  noble oficio de salvaguardar la vida de otros",
-      "chevronDown": false
+      "chevronDown": true
     },
     "firma": {
       "author": "Carlota Pérez (texto)",
@@ -22,10 +22,10 @@
   },
   "gridDoctors1": {
     "doctors": [
-      { "name": "Almudena", "cargo": "Residente en alergología. Hace guardia en Medicina Interna", "location": "H. Provincial y H. General (Castellón)"},
-      { "name": "Almudena", "cargo": "Residente en alergología. Hace guardia en Medicina Interna", "location": "H. Provincial y H. General (Castellón)"},
-      { "name": "Almudena", "cargo": "Residente en alergología. Hace guardia en Medicina Interna", "location": "H. Provincial y H. General (Castellón)"},
-      { "name": "Almudena", "cargo": "Residente en alergología. Hace guardia en Medicina Interna", "location": "H. Provincial y H. General (Castellón)"}
+      { "name": "Almudena", "cargo": "Cirujana general y de digestivo" },
+      { "name": "Víctor", "cargo": "Cardiólogo" },
+      { "name": "Beatriz", "cargo": "Anestesióloga"},
+      { "name": "Angélica", "cargo": "Residente. Hace guardia en Medicina Interna"}
     ]
   }
 }

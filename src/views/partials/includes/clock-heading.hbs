@@ -1,0 +1,16 @@
+<div class="clock-heading">
+  <div class="clock-heading__time">
+    <div class="clock-heading__time-clock"></div>
+    <span class="clock-heading__time-txt">{{time}}</span>
+  </div>
+  {{#if name}}
+  <span class="clock-heading__name">
+    {{#if img}}
+    <figure>
+      <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/02/27/24-horas-urgencias/images/{{img}}-small.png" alt="{{name}}">
+    </figure>
+    {{/if}}
+    {{name}}
+  </span>
+  {{/if}}
+</div>  

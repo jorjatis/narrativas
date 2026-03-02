@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock & Lifeline Demo</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --cb1: #1a1a1a; /* Fondo oscuro */
+            --cb2: #ffffff; /* Blanco */
+            --mcs: 'Arial Black', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f0f0f0;
+            font-family: sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- STICKY HEADER --- */
+        .sticky-header {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .clock-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            min-width: 90px;
+            height: 37px;
+            padding: 4px 8px;
+            background: var(--cb1);
+            border: 3px solid var(--cb1);
+        }
+
+        .clock-box:before, .clock-box:after {
+            content: '';
+            position: absolute;
+            background: var(--cb2);
+            border: 3px solid var(--cb1);
+        }
+
+        .clock-box:before {
+            top: -11px; left: 1px;
+            width: 100%; height: 5px;
+            border-bottom: 0;
+            transform: skew(-45deg, 0deg);
+        }
+
+        .clock-box:after {
+            bottom: 1px; right: -11px;
+            width: 5px; height: 100%;
+            border-left: 0;
+            transform: skew(0deg, -45deg);
+        }
+
+        .timer-front { display: flex; align-items: center; }
+
+        .digit {
+            position: relative;
+            width: 18px;
+            height: 28px;
+            overflow: hidden;
+        }
+
+        .digit-inner {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+        }
+
+        .digit-inner span, .colon {
+            display: block;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            font-family: var(--mcs);
+            font-size: 24px;
+            color: var(--cb2);
+        }
+
+        /* --- LIFELINE ECG --- */
+        .lifeline-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(0,0,0,0.05);
+            overflow: hidden;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .lifeline-piece {
+            position: absolute;
+            right: -200px; /* Aparecen por la derecha */
+            height: 60px;
+            width: 200px;
+        }
+
+        /* --- CONTENIDO DE PRUEBA --- */
+        .content { padding: 50px; text-align: center; }
+        .spacer { height: 80vh; display: flex; align-items: center; justify-content: center; border-bottom: 1px dashed #ccc; }
+        
+        /* Marcas */
+        .marker {
+            padding: 20px;
+            background: #e0e0e0;
+            margin: 20px auto;
+            width: 50%;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sticky-header">
+        <div class="clock-box timer-sticky">
+            <div class="timer-front">
+                </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Scroll para ver el efecto</h1>
+        <div class="spacer">Empiezas en 00:00. Baja un poco...</div>
+
+        <div class="marker time-marker mediumLines" data-add="02:30">
+            MARCA: +02:30 (Ritmo Medio)
+        </div>
+
+        <div class="spacer">El reloj ahora marca 02:30 y el latido es más fuerte.</div>
+
+        <div class="marker time-marker highLines" data-add="05:15">
+            MARCA: +05:15 (Ritmo Alto!)
+        </div>
+
+        <div class="spacer">El reloj suma a 07:45.</div>
+
+        <div class="marker time-marker lowLines" data-add="01:00">
+            MARCA: +01:00 (Volvemos a Low)
+        </div>
+
+        <div class="spacer" style="height: 100vh;">Fin del demo.</div>
+    </div>
+
+    <div class="lifeline-container" id="lifeline"></div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- LÓGICA DEL RELOJ ACUMULATIVO ---
+        let currentTotalTime = "00:00";
+        const digitHeight = 28;
+
+        function addTimes(t1, t2) {
+            const [h1, m1] = t1.split(':').map(Number);
+            const [h2, m2] = t2.split(':').map(Number);
+            let totalM = m1 + m2;
+            let totalH = h1 + h2 + Math.floor(totalM / 60);
+            totalM = totalM % 60;
+            return `${String(totalH).padStart(2, '0')}:${String(totalM).padStart(2, '0')}`;
+        }
+
+        function updateClock(newTime) {
+            const frontFace = document.querySelector('.timer-front');
+            const startStr = currentTotalTime;
+            const endStr = newTime;
+            
+            frontFace.innerHTML = '';
+            const columns = [];
+
+            for (let i = 0; i < 5; i++) {
+                const s = startStr[i];
+                const e = endStr[i];
+
+                if (s === ':') {
+                    frontFace.insertAdjacentHTML('beforeend', '<div class="colon">:</div>');
+                    continue;
+                }
+
+                const wrap = document.createElement('div');
+                wrap.className = 'digit';
+                const strip = document.createElement('div');
+                strip.className = 'digit-inner';
+
+                const sequence = [parseInt(s)];
+                let curr = parseInt(s);
+                const target = parseInt(e);
+                
+                if (s !== e) {
+                    while (curr !== target) {
+                        curr = (curr + 1) % 10;
+                        sequence.push(curr);
+                    }
+                    columns.push({ el: strip, steps: sequence.length - 1 });
+                }
+
+                sequence.forEach(n => strip.insertAdjacentHTML('beforeend', `<span>${n}</span>`));
+                wrap.appendChild(strip);
+                frontFace.appendChild(wrap);
+            }
+
+            // Animación
+            columns.reverse().forEach((col, idx) => {
+                gsap.to(col.el, {
+                    y: -col.steps * digitHeight,
+                    duration: 1,
+                    ease: "power2.inOut",
+                    delay: idx * 0.1
+                });
+            });
+
+            currentTotalTime = newTime;
+        }
+
+        // --- LÓGICA DEL LIFELINE (ECG) ---
+        const paths = {
+            low: "M0,30 L40,30 L45,20 L50,40 L55,30 L100,30",
+            medium: "M0,30 L35,30 L40,10 L50,50 L60,30 L100,30",
+            high: "M0,30 L30,30 L35,0 L45,60 L55,30 L100,30"
+        };
+        let intensity = 'low';
+
+        function createHeartbeat() {
+            const container = document.getElementById('lifeline');
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("viewBox", "0 0 100 60");
+            svg.classList.add('lifeline-piece');
+            
+            const path = document.createElementNS(svgNS, "path");
+            path.setAttribute("d", paths[intensity]);
+            path.setAttribute("stroke", "#1a1a1a");
+            path.setAttribute("fill", "none");
+            path.setAttribute("stroke-width", "2");
+
+            svg.appendChild(path);
+            container.appendChild(svg);
+
+            // Animar de derecha a izquierda
+            gsap.to(svg, {
+                x: -(window.innerWidth + 400),
+                duration: 5,
+                ease: "none",
+                onComplete: () => svg.remove()
+            });
+        }
+
+        // --- INICIALIZACIÓN ---
+        document.addEventListener("DOMContentLoaded", () => {
+            updateClock("00:00");
+
+            // Crear latidos constantes
+            setInterval(createHeartbeat, 800);
+
+            // ScrollTrigger para marcas
+            document.querySelectorAll('.time-marker').forEach(marker => {
+                ScrollTrigger.create({
+                    trigger: marker,
+                    start: "top center",
+                    onEnter: () => {
+                        // 1. Sumar tiempo
+                        const toAdd = marker.getAttribute('data-add');
+                        updateClock(addTimes(currentTotalTime, toAdd));
+
+                        // 2. Cambiar ECG
+                        if (marker.classList.contains('highLines')) intensity = 'high';
+                        else if (marker.classList.contains('mediumLines')) intensity = 'medium';
+                        else intensity = 'low';
+                    },
+                    onLeaveBack: () => {
+                        // Opcional: Lógica para "des-sumar" si el usuario sube
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

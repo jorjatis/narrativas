@@ -1,5 +1,9 @@
 @use '../base/variables' as *;
 
+// body {
+//   overflow-y: hidden;
+// }
+
 @media (max-width: 699px) {
   .v-h-a {
     position: relative;
@@ -13,19 +17,11 @@
 }
 
 .v-w .v-a--d-s-1 {
-  display: block;
-  height: auto;
-  padding-top: 120px;
-
   .v-a-inf-c {
     .v-a-p-t,
     .v-a-t,
     .v-a-s-t {
       color: $cb1;
-    }
-
-    .v-i {
-      display: none;
     }
   }
 }

@@ -1,0 +1,51 @@
+@use '../base/variables'as *;
+
+.lifeline-desktop {
+  display: none;
+  position: absolute;
+  left: -250px;
+
+  @media (min-width: $screen-sm) {
+    display: block;
+  }
+
+  .timer {
+    position: relative;
+    left: unset;
+    z-index: 1;
+  }
+
+  .lifeline__c {
+    margin-left: 50px;
+  }
+
+  .lifeline__txt {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-bottom: 16px;
+    max-width: 146px;
+    font: 18px/22px $mcs;
+    text-transform: uppercase;
+  }
+
+  .lifeline-svg {
+    width: 65px;
+
+    path {
+      stroke: $cb1;
+      stroke-width: 2;
+      fill: none;
+    }
+  }
+
+  .lifeline-box {
+    width: 65px;
+    height: 65px;
+    background: white;
+    position: fixed;
+    bottom: 0;
+    z-index: 0;
+    transform: translateX(50px);
+  }
+}

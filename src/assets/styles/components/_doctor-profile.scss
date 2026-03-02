@@ -1,75 +1,37 @@
-@use '../base/variables' as *;
+@use '../base/variables'as *;
 
-.doc-prf { 
+.doc-prf {
   position: relative;
+  overflow: hidden;
 
   &__c {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 42px;
-    margin: 80px 0;
+    gap: 36px;
   }
 
   &__inf {
     position: relative;
     width: 100%;
-    max-width: 260px;
-    padding: 22px 0;
-    border-top: 1px solid $cp7;
-    border-bottom: 1px solid $cp7;
+    max-width: 262px;
   }
-  
-  &__time {
-    display: flex;
-    align-items: center;
-    gap: 12px;
 
-    &-clock {
-      position: relative;
-      width: 29px;
-      height: 29px;
-      border: 2px solid $cb1;
-
-      &:before,
-      &:after {
-        content: "";
-        position: absolute;
-        width: 2px;
-        height: 11px;
-        top: 2px;
-        left: 50%;
-        transform: translateX(-50%);
-        transform-origin: bottom center;
-        background: $cp7;
-        transition: transform 0.5s;
-      }
-
-      &:hover {
-        &:before {
-          transform: translateX(-50%) rotate(260deg);
-        }
-
-        &:after {
-          transform: translateX(-50%) rotate(120deg);
-        }
-      }
-    }
-
-    &-txt {
-      font-family: $mcr;
-      font-size: 33px;
-      line-height: normal;
-      color: $cp7;
-    }
+  &__cite {
+    padding: 24px 0 18px;
+    font: 24px/28px $ads;
+    letter-spacing: -.72px;
+    text-align: center;
+    border-bottom: 1px solid $cp1;
   }
 
   &__txt {
-    margin-top: 8px;
-    padding-right: 30px;
+    padding: 18px 0 26px;
     font: 16px/22px $mcr;
     letter-spacing: -0.48px;
+    text-align: center;
+    border-bottom: 1px solid $cp1;
   }
 
   &__media {
@@ -95,7 +57,7 @@
       bottom: 0;
       width: 100%;
       height: 100%;
-      background: $cp7;
+      background: $cp1;
       border-radius: 2px;
       z-index: 1;
       transition: transform 0.3s;
@@ -117,8 +79,4 @@
     height: 100%;
     object-fit: cover;
   }
-}
-
-.doc-prf + * {
-  margin-top: -192px;
 }

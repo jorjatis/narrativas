@@ -1,0 +1,73 @@
+{{!-- Video brightcove --}}
+
+{{#if isVideoBrightcoveEmpty}}
+  <div class="video-player"></div>
+{{else}}
+  <div class="video-player" {{#if isVideoVertical}}data-voc-video-player-vertical{{/if}}>
+    <div style="position: relative;">
+      <div style="max-width: 100%;" {{#if isVideoVertical}}class="vjs-voc-vertical"{{else if isVideoSticky}}class="vjs-pip-container"{{/if}}>
+        {{#if isVideoVertical}}
+          <video-js
+            data-video-id="{{#if customVideoDataID}}{{customVideoDataID}}{{else}}5844793048001{{/if}}"
+            data-account="{{#if customVideoDataAccount}}{{customVideoDataAccount}}{{else}}703745716001{{/if}}"
+            data-player="{{#if customVideoDataPlayer}}{{customVideoDataPlayer}}{{else}}r1GZ2K1el{{/if}}"
+            data-embed="default"
+            controls
+            preload
+            playsinline 
+            {{#if isVideoAutoplayFalse}}data-autoplay="false"{{/if}}
+            {{#if isVideoMutedTrue}}data-muted="true"{{/if}}
+            {{#if isVideoLoopTrue}}data-loop="true"{{/if}}
+            poster="https://picsum.photos/748/1329"
+            class="vjs-fluid">
+          </video-js>
+        {{else if isVideoSquare}}
+          <video-js
+            data-video-id="{{#if customVideoDataID}}{{customVideoDataID}}{{else}}6339894872112{{/if}}"
+            data-account="{{#if customVideoDataAccount}}{{customVideoDataAccount}}{{else}}703745716001{{/if}}"
+            data-player="{{#if customVideoDataPlayer}}{{customVideoDataPlayer}}{{else}}r1GZ2K1el{{/if}}"
+            data-embed="default"
+            controls
+            preload
+            playsinline
+            {{#if isVideoAutoplayFalse}}data-autoplay="false"{{/if}}
+            {{#if isVideoMutedTrue}}data-muted="true"{{/if}}
+            {{#if isVideoLoopTrue}}data-loop="true"{{/if}}
+            poster="https://picsum.photos/748/748"
+            class="vjs-fluid">
+          </video-js>
+        {{else if isVideoSticky}}
+          <video-js
+            data-video-id="{{#if customVideoDataID}}{{customVideoDataID}}{{else}}6339894872112{{/if}}"
+            data-account="{{#if customVideoDataAccount}}{{customVideoDataAccount}}{{else}}703745716001{{/if}}"
+            data-player="{{#if customVideoDataPlayer}}{{customVideoDataPlayer}}{{else}}r1GZ2K1el{{/if}}"
+            data-embed="default"
+            controls
+            preload
+            playsinline
+            autoplay="true"
+            muted="true"
+            class="vjs-fluid">
+          </video-js>
+        {{else}}
+          <video-js
+            {{#if customVideoID}}id={{customVideoID}}{{/if}}
+            data-video-id="{{#if customVideoDataID}}{{customVideoDataID}}{{else}}6339894872112{{/if}}"
+            data-account="{{#if customVideoDataAccount}}{{customVideoDataAccount}}{{else}}703745716001{{/if}}"
+            data-player="{{#if customVideoDataPlayer}}{{customVideoDataPlayer}}{{else}}r1GZ2K1el{{/if}}"
+            data-embed="default"
+            controls
+            preload
+            playsinline
+            {{#if isVideoAutoplayFalse}}data-autoplay="false"{{/if}}
+            {{#if isVideoMutedTrue}}data-muted="true"{{/if}}
+            {{#if isVideoLoopTrue}}data-loop="true"{{/if}}
+            poster="{{#if customVideoPoster}}{{customVideoPoster}}{{else}}https://picsum.photos/748/523{{/if}}"
+            class="vjs-fluid">
+          </video-js>
+        {{/if}}
+      </div>
+      <script src="https://players.brightcove.net/{{#if customVideoDataAccount}}{{customVideoDataAccount}}{{else}}703745716001{{/if}}/{{#if customVideoDataPlayer}}{{customVideoDataPlayer}}{{else}}r1GZ2K1el{{/if}}_default/index.min.js"></script>
+    </div>
+  </div>
+{{/if}}
