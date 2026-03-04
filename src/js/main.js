@@ -447,11 +447,65 @@
     });
   }
 
+  // NOTE: Animacion 01
+  function initAnim01() {
+    const imgs = gsap.utils.toArray('.anim-01 img');
+    if (!imgs.length) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".anim-01",
+        start: "top 50%",
+        toggleActions: "play none none none"
+      }
+    });
+
+    tl.from(imgs[0], {
+      opacity: 0,
+      x: -80,
+      rotate: -90,
+      duration: 0.5,
+      ease: "power2.out"
+    })
+    .from(imgs[1], {
+      opacity: 0,
+      y: 80,
+      duration: 0.5,
+      ease: "power2.out"
+    }, "-=0.4")
+    .from(imgs[2], {
+      opacity: 0,
+      x: 80,
+      rotate: 90,
+      duration: 0.5,
+      ease: "power2.out"
+    }, "-=0.4")
+    .from(imgs[3], {
+      opacity: 0,
+      y: 80,
+      duration: 0.5,
+      ease: "power2.out"
+    }, "-=0.4")
+    .from(imgs[4], {
+      opacity: 0,
+      scale: 0.2,
+      duration: 0.5,
+      ease: "back.out(2)"
+    }, "-=0.4")
+    .to(imgs[4], {
+      x: -6,
+      duration: 0.05,
+      repeat: 6,
+      yoyo: true
+    });
+  }
+
   function initAll() {
     initMoveEls('.v-a-s-t', '.v-ath--t1');
     initMapPopovers();
     initMapAnimation();
     initSumarioAnimation();
+    initAnim01();
   }
 
   document.addEventListener('DOMContentLoaded', initAll);
