@@ -18,10 +18,5 @@
       will-change: transform, opacity;
       object-fit: cover;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      transform:none !important;
-      opacity:1 !important;
-    }
   }
 }

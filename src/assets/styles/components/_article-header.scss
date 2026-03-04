@@ -1,12 +1,12 @@
 @use '../base/variables' as *;
 
 body:has(.v-h-a) .a-h-inc {
-  height: calc(100vh - 106px);
+  height: calc(100dvh - 106px);
 }
 
 @media (max-width: $screen-xs) {
   .v-h-a ~ .v-w .a-h-inc {
-      min-height: calc(100vh - 50px - 48px);
+      min-height: calc(100dvh - 50px - 48px);
   }
 }
 
@@ -14,14 +14,14 @@ body:has(.v-h-a) .a-h-inc {
   position: relative;
   display: grid;
   grid-template-columns: 100%;
-  min-height: calc(100vh - 50px);
+  min-height: calc(100dvh - 50px);
   margin-top: -20px;
   margin-bottom: 32px;
   padding: 0 40px;
 
   @media (min-width: $screen-xs) {
     min-height: auto;
-    height: calc(100vh - 58px);
+    height: calc(100dvh - 58px);
     margin-top: -40px;
     margin-bottom: 40px;
   }
@@ -115,7 +115,7 @@ body:has(.v-h-a) .a-h-inc {
   .v-i-c {
     position: absolute;
     left: calc(50% - 10px);
-    bottom: 50px;
+    bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;

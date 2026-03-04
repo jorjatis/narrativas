@@ -12,3 +12,11 @@
 @use './components/parallax';
 @use './components/sumario';
 @use './components/anim-01';
+
+html, body {
+  overflow-x: clip;
+}
+
+body {
+  touch-action: pan-y;
+}

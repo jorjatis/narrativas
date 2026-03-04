@@ -1,8 +1,11 @@
+@use '../base/variables' as *;
+
 .parallax {
   position: relative;
   left: 50%;
   width: 100vw;
-  margin-left: -50vw;
+  transform: translateX(-50%);
+  overflow: hidden;
 
   &--01 {
     .parallax__img {
@@ -12,24 +15,19 @@
 
   &__img {
     aspect-ratio: 16 / 9;
-    min-height: 350px;
-    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-
-    // @media only screen and (max-device-width: 1366px) {
-    //   background-attachment: scroll;
-    // }
-
-    @media (prefers-reduced-motion: reduce) {
-      background-attachment: initial;
-    }
+    will-change: transform;
   }
 
   .v-fc {
+    position: relative;
     max-width: 1010px;
     margin: 8px auto 0;
+    padding-top: 8px;
     padding-right: 20px;
+    background: $cb2;
+    z-index: 1;
   }
 }

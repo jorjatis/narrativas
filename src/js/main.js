@@ -447,6 +447,27 @@
     });
   }
 
+  // NOTE: Parallax
+  function initParallax() {
+    const sections = gsap.utils.toArray(".parallax");
+
+    sections.forEach(section => {
+      const img = section.querySelector(".parallax__img");
+
+      gsap.set(img, { yPercent: -50 });
+      gsap.to(img, {
+        yPercent: 50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+  }
+
   // NOTE: Animacion 01
   function initAnim01() {
     const imgs = gsap.utils.toArray('.anim-01 img');
@@ -505,6 +526,7 @@
     initMapPopovers();
     initMapAnimation();
     initSumarioAnimation();
+    initParallax();
     initAnim01();
   }
 

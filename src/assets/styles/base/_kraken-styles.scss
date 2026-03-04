@@ -1,13 +1,1 @@
 @use '../base/variables' as *;
-
-body:has(.v-h-a) {
-  .v-a--d-s-1 {
-    @media (max-width: $screen-sm) {
-      height: calc(100vh - 106px);
-    }
-  }
-}
-
-.v-w {
-  
-}

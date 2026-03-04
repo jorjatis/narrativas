@@ -4,6 +4,12 @@
 .n-map-pop {
   margin: 150px 0;
 
+  @media (max-width: $screen-xs) {
+    width: 100vw;
+    margin: 80px 0;
+    margin-left: -20px;
+  }
+
   &__c {
     position: relative;
     width: min(860px, 100%);
@@ -34,7 +40,7 @@
       content:"";
       position: absolute;
       inset: 0;
-      background: url("../../../assets/images/grano.png");
+      background: url("https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/grano.png");
       background-size: contain;
       background-repeat: repeat;
       mix-blend-mode: overlay;
@@ -79,19 +85,14 @@
 
   &__dot {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
-    border: 1px solid $cb1;
+    border: 2px solid $cb1;
     background: $cb2;
     cursor: pointer;
     z-index: 1;
     transform: translate(-50%, -50%);
-
-    @media (min-width: 475px) {
-      width: 15px;
-      height: 15px;
-    }
 
     @media (min-width: $screen-xs) {
       width: 20px;
@@ -249,13 +250,18 @@
         position: relative;
         margin: 0 auto;
         padding: 19px;
-        width: 124px;
-        height: 124px;
+        width: 84px;
+        height: 84px;
         aspect-ratio: 1;
         background: $cb2;
         border: 6px solid $cb1;
         box-sizing: content-box;
         border-radius: 100%;
+
+        @media (min-width: $screen-xs) {
+          width: 124px;
+          height: 124px;
+        }
       }
     }
 
@@ -269,8 +275,12 @@
       line-height: 1;
 
       > * {
-        padding: 16px 0;
+        padding: 10px 0;
         border-top: 1px solid $cb6;
+
+        @media (min-width: $screen-xs) {
+          padding: 16px 0;
+        }
 
         &:nth-child(-n+2) {
           border-top: 0;
@@ -289,8 +299,12 @@
     &-stadium {
       align-self: flex-end;
       transform: translateX(-50px);
-      width: 125px;
+      width: 85px;
       height: auto;
+
+      @media (min-width: $screen-xs) {
+        width: 125px;
+      }
     }
   }
 }
