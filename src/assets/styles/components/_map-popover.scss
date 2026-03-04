@@ -5,7 +5,7 @@
   margin: 150px 0;
 
   @media (max-width: $screen-xs) {
-    width: 100vw;
+    width: calc(100% + 40px);
     margin: 80px 0;
     margin-left: -20px;
   }
@@ -26,6 +26,7 @@
     position: absolute;
     inset: 0;
     overflow: visible;
+    z-index: 1;
   }
 
   &__line {
@@ -49,31 +50,43 @@
       pointer-events: none;
     }
 
-    &--1 { 
-      top: 0%; left: 13.87%; width: 52.88%; height: 12.41%; 
-    }
-    &--2 { 
-      top: 12.41%; left: 13.87%; width: 86.13%; height: 12.77%; 
-    }
-    &--3 { 
-      top: 25.18%; left: 29.32%; width: 62.57%; height: 12.77%; 
-    }
-    &--4 { 
-      top: 37.96%; left: 29.32%; width: 48.95%; height: 12.04%; 
-    }
+    &--1 { top: 0%; left: 13.87%; width: 52.88%; height: 12.41%; }
+    &--2 { top: 12.41%; left: 13.87%; width: 86.13%; height: 12.77%; }
+    &--3 { top: 25.18%; left: 29.32%; width: 62.57%; height: 12.77%; }
+    &--4 { top: 37.96%; left: 29.32%; width: 48.95%; height: 12.04%; }
+
     &--5 { 
-      top: 50%; left: 24.61%; width: 50.64%; height: 12.41%; 
-      &:after { content: ""; position: absolute; left: 129.96%; top: -18.59%; width: 14.44%; height: 80%; background: linear-gradient(90deg, #3c941f 0%, #2f7f1f 100%); }
+      top: 50%; left: 24.61%; width: 50.64%; height: 12.41%;
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: 129.96%;
+        top: -18.59%;
+        width: 14.44%;
+        height: 80%;
+        background: linear-gradient(90deg, #3c941f 0%, #2f7f1f 100%);
+      }
     }
-    &--6 { 
-      top: 62.41%; left: 24.61%; width: 56.81%; height: 12.41%; 
-    }
-    &--7 { 
-      top: 74.82%; left: 24.61%; width: 46.86%; height: 12.41%; 
-    }
-    &--8 { 
-      top: 87.23%; left: 31.15%; width: 17.02%; height: 12.77%; 
-      &:after { content: ""; position: absolute; left: -183.08%; top: 14.29%; width: 69.23%; height: 68.57%; background: linear-gradient(90deg, #88bf34 0%, #79ad2f 100%); }
+
+    &--6 { top: 62.41%; left: 24.61%; width: 56.81%; height: 12.41%; }
+    &--7 { top: 74.82%; left: 24.61%; width: 46.86%; height: 12.41%; }
+
+    &--8 {
+      top: 87.23%;
+      left: 31.15%;
+      width: 17.02%;
+      height: 12.77%;
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: -183.08%;
+        top: 14.29%;
+        width: 69.23%;
+        height: 68.57%;
+        background: linear-gradient(90deg, #88bf34 0%, #79ad2f 100%);
+      }
     }
   }
 
@@ -81,22 +94,21 @@
     position: absolute;
     inset: 0;
     overflow: visible;
+    z-index: 5;
   }
 
   &__dot {
     position: absolute;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;    
     border-radius: 50%;
     border: 2px solid $cb1;
     background: $cb2;
     cursor: pointer;
-    z-index: 1;
+    z-index: 5;
     transform: translate(-50%, -50%);
 
     @media (min-width: $screen-xs) {
-      width: 20px;
-      height: 20px;
       border-width: 3px;
     }
 
@@ -107,93 +119,126 @@
     }
 
     &[aria-expanded=true] {
-      background: #3ecf10;
+      background-color: $cb6;
+      animation: dotPulse 1.2s ease-out infinite;
     }
 
-    &--1 { top: 47%; left: 48%; anchor-name: --dot1; }   // Madrid
-    &--2 { top: 47%; left: 51%; anchor-name: --dot2; }   // Madrid
-    &--3 { top: 47%; left: 54%; anchor-name: --dot3; }   // Madrid
-
-    &--4 { top: 87%; left: 48%; anchor-name: --dot4; }   // Málaga
-    &--5 { top: 78%; left: 39%; anchor-name: --dot5; }   // Sevilla
-    &--6 { top: 24%; left: 97%; anchor-name: --dot6; }   // Barcelona
-
-    &--7 { top: 82%; left: 37%; anchor-name: --dot7; }   // Sevilla
-    &--8 { top: 82%; left: 41%; anchor-name: --dot8; }   // Sevilla
-
-    &--9 { top: 3%; left: 25%; anchor-name: --dot9; }   // Lugo
-    &--10 { top: 20%; left: 95%; anchor-name: --dot10; } // Barcelona
-    &--11 { top: 51%; left: 53%; anchor-name: --dot11; } // Madrid
-
-    &--12 { top: 5%; left: 35%; anchor-name: --dot12; } // Oviedo
-    &--13 { top: 16%; left: 67%; anchor-name: --dot13; } // Pamplona
-    &--14 { top: 1%; left: 64%; anchor-name: --dot14; } // San Sebastián
-    &--15 { top: 8%; left: 62%; anchor-name: --dot15; } // Bilbao
-
-    &--16 { top: 51%; left: 49%; anchor-name: --dot16; } // Madrid
-    &--17 { top: 6%; left: 16%; anchor-name: --dot17; } // A Coruña
-
-    &--18 { top: 23%; left: 76%; anchor-name: --dot18; } // Zaragoza
-    &--19 { top: 27%; left: 77%; anchor-name: --dot19; } // Zaragoza
-
-    &--20 { top: 1%; left: 34%; anchor-name: --dot20; } // Gijón
-    &--21 { top: 84%; left: 55%; anchor-name: --dot21; } // Granada
-
-    &--22 { top: 3%; left: 49%; anchor-name: --dot22; } // Santander
-    &--23 { top: 17%; left: 50%; anchor-name: --dot23; } // Burgos
-
-    &--24 { top: 98%; left: 40%; anchor-name: --dot24; } // Cádiz
-    &--25 { top: 72%; left: 44%; anchor-name: --dot25; } // Córdoba
-
-    &--26 { top: 85%; left: 61%; anchor-name: --dot26; } // Almería
-    &--27 { top: 94%; left: 6%; anchor-name: --dot27; } // Las Palmas
+    &--1 { 
+      top: 47%; left: 48%; 
+      @media (max-width: $screen-xs) { top: 45%; left: 46%; }
+    }
+    &--2 { 
+      top: 47%; left: 51%; 
+      @media (max-width: $screen-xs) { top: 45%; left: 51%; }
+    }
+    &--3 { 
+      top: 47%; left: 54%; 
+      @media (max-width: $screen-xs) { top: 45%; left: 56%; }
+    }
+    &--4 { 
+      top: 87%; left: 48%; 
+    }
+    &--5 { 
+      top: 78%; left: 39%; 
+      @media (max-width: $screen-xs) { top: 77%; left: 39%; }
+    }
+    &--6 { 
+      top: 24%; left: 97%; 
+    }
+    &--7 { 
+      top: 82%; left: 37%; 
+      @media (max-width: $screen-xs) { top: 83%; left: 36%; }
+    }
+    &--8 { 
+      top: 82%; left: 41%; 
+      @media (max-width: $screen-xs) { top: 83%; left: 42%; }
+    }
+    &--9 { 
+      top: 3%; left: 25%; 
+    }
+    &--10 { 
+      top: 20%; left: 95%; 
+      @media (max-width: $screen-xs) { top: 18%; left: 95%; }
+    }
+    &--11 { 
+      top: 51%; left: 53%; 
+      @media (max-width: $screen-xs) { top: 52%; left: 54%; }
+    }
+    &--12 { 
+      top: 5%; left: 35%; 
+      @media (max-width: $screen-xs) { top: 8%; left: 35%; }
+    }
+    &--13 { 
+      top: 16%; left: 67%; 
+    }
+    &--14 { 
+      top: 1%; left: 64%; 
+    }
+    &--15 { 
+      top: 8%; left: 62%; 
+    }
+    &--16 { 
+      top: 51%; left: 49%; 
+      @media (max-width: $screen-xs) { top: 52%; left: 48%; }
+    }
+    &--17 { 
+      top: 6%; left: 16%; 
+    }
+    &--18 { 
+      top: 23%; left: 76%; 
+      @media (max-width: $screen-xs) { top: 22%; left: 76%; }
+    }
+    &--19 { 
+      top: 27%; left: 77%; 
+      @media (max-width: $screen-xs) { top: 29%; left: 77%; }
+    }
+    &--20 { 
+      top: 1%; left: 34%; 
+    }
+    &--21 { 
+      top: 84%; left: 55%; 
+    }
+    &--22 { 
+      top: 3%; left: 49%; 
+    }
+    &--23 { 
+      top: 17%; left: 50%; 
+    }
+    &--24 { 
+      top: 98%; left: 40%; 
+    }
+    &--25 { 
+      top: 72%; left: 44%; 
+    }
+    &--26 { 
+      top: 85%; left: 61%; 
+    }
+    &--27 { 
+      top: 94%; left: 6%; 
+    }
   }
 
   &__card {
     position: absolute;
     background: transparent;
-    box-shadow: 5px 5px 0px 0px rgba($cb1,1);
-    top: calc(anchor(top) - 110px);
+    box-shadow: 5px 5px 0 rgba($cb1,1);
     opacity: 0;
-    scale: .96;
-    transition: opacity .25s ease, scale .25s ease;
+    transform: translateY(-50%) scale(.96);
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 10;
 
-    @media (max-width: $screen-xs) {
-      position: fixed;
-      position-anchor: none !important;
-      top: 50%;
-      left: 50%;
-      translate: -50% -50%;
-      transform: none;
-    }
-
-    &:popover-open {
+    &.is-open {
       opacity: 1;
-      scale: 1;
-    }
-    
-    &.is-left {
-      @media (min-width: $screen-xs) {
-        translate: calc(-100% - 15px) 0;
-        left: anchor(left);
-      }
+      transform: translateY(-50%) scale(1);
+      pointer-events: auto;
     }
 
-    &.is-right {
-      @media (min-width: $screen-xs) {
-        translate: 15px 0;
-        left: anchor(right);
-      }
-    }
-
-    @for $i from 1 through 4 {
-      &#pop-#{$i} {
-        position-anchor: --dot#{$i};
-      }
-    }
-
-    &::backdrop {
-      display: none;
+    @media (max-width:875px){
+      position:fixed;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
     }
 
     &-c {
@@ -287,20 +332,15 @@
         }
       }
 
-      dt {
-        font-family: $mcs;
-      }
+      dt { font-family: $mcs; }
 
-      dd {
-        text-transform: uppercase;
-      }
+      dd { text-transform: uppercase; }
     }
 
     &-stadium {
       align-self: flex-end;
       transform: translateX(-50px);
       width: 85px;
-      height: auto;
 
       @media (min-width: $screen-xs) {
         width: 125px;
@@ -309,9 +349,14 @@
   }
 }
 
-@starting-style {
-  .n-map-pop__card:popover-open {
-    opacity: 0;
-    scale: .96;
+@keyframes dotPulse{
+  0%{
+    box-shadow:0 0 0 0 rgba($cb2,.6);
+  }
+  70%{
+    box-shadow:0 0 0 12px rgba(62,207,16,0);
+  }
+  100%{
+    box-shadow:0 0 0 0 rgba(62,207,16,0);
   }
 }
