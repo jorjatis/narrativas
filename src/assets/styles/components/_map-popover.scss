@@ -30,6 +30,19 @@
       background: linear-gradient(90deg, #88bf34 0%, #79ad2f 100%);
     }
 
+    &:before {
+      content:"";
+      position: absolute;
+      inset: 0;
+      background: url("../../../assets/images/grano.png");
+      background-size: contain;
+      background-repeat: repeat;
+      mix-blend-mode: overlay;
+      opacity: 0.5;
+      filter: contrast(120%) brightness(90%);
+      pointer-events: none;
+    }
+
     &--1 { 
       top: 0%; left: 13.87%; width: 52.88%; height: 12.41%; 
     }
@@ -54,7 +67,7 @@
     }
     &--8 { 
       top: 87.23%; left: 31.15%; width: 17.02%; height: 12.77%; 
-      &:before { content: ""; position: absolute; left: -183.08%; top: 14.29%; width: 69.23%; height: 68.57%; background: linear-gradient(90deg, #88bf34 0%, #79ad2f 100%); }
+      &:after { content: ""; position: absolute; left: -183.08%; top: 14.29%; width: 69.23%; height: 68.57%; background: linear-gradient(90deg, #88bf34 0%, #79ad2f 100%); }
     }
   }
 
