@@ -6,8 +6,8 @@
   {{!-- Contenido principal --}}
   <main class="v-w-c {{#if hasPaywall}}v-w-c--1{{/if}} v-d-c">
     <article class="v-d-w">
-      {{!-- Include superior a la cabecera --}}
-      {{!-- {{> ./includes/pre-header-scroll }} --}}
+      {{!-- Include superior a la cabecera, si lo lleva --}}
+      {{> ./includes/pre-article-header }}
 
       {{!-- Cabecera articulo visual --}}
       {{> ./layout/article-header }}
@@ -17,7 +17,7 @@
         <div class="v-d v-d--1 v-d--s v-d--abc">
           {{> ./layout/article-metadata }}
 
-          {{!-- <p class="v-d-p">{{{metadata.paragraphPaywall}}}</p> --}}
+          <p class="v-d-p">{{{metadata.paragraphPaywall}}}</p>
 
           <div class="paywall">
             {{> ./layout/article-content }}

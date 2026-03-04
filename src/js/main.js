@@ -1,4 +1,15 @@
 (function () {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // NOTE: Mover elementos
+  function initMoveEls(source, target) {
+    const elSource = document.querySelector(source);
+    const elTarget = document.querySelector(target);
+
+    elTarget?.before(elSource);
+  }
+
+  // NOTE: Mapa con popovers
   const MAP_DATA = [
     {
       id: 1,
@@ -271,13 +282,16 @@
       stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-ultra-naciente.jpg"
     }
   ];
-
+  const MAP_INDEX = Object.fromEntries(
+    MAP_DATA.map(item => [item.id, item])
+  );
   function initMapPopovers() {
     const map = document.querySelector('.n-map-pop');
     if (!map) return;
 
     const dots = map.querySelectorAll('.n-map-pop__dot');
     const pop = document.getElementById('map-popover');
+    if (!pop) return;
 
     const elAgrupacion = pop.querySelector('#pop-agrupacion');
     const elClub = pop.querySelector('#pop-club');
@@ -290,6 +304,7 @@
     function closeAll() {
       pop.hidePopover?.();
       dots.forEach(dot => dot.setAttribute('aria-expanded', 'false'));
+      document.body.classList.remove('is-overflow');
     }
 
     dots.forEach(dot => {
@@ -297,47 +312,52 @@
         e.stopPropagation();
 
         const id = Number(dot.dataset.id);
-        const data = MAP_DATA.find(item => item.id === id);
+        const data = MAP_INDEX[id];
         if (!data) return;
 
         const isOpen = pop.matches(':popover-open');
+        const currentAnchor = pop.style.positionAnchor;
+
+        if (isOpen && currentAnchor === `--dot${id}`) {
+          closeAll();
+          return;
+        }
+
         closeAll();
 
-        if (!isOpen) {
+        elAgrupacion.textContent = data.agrupacion || "—";
+        elClub.textContent = data.club || "—";
+        elFundacion.textContent = data.fundacion || "—";
+        elIdeologia.textContent = data.ideologia || "—";
+        elUbicacion.textContent = data.ubicacion || "—";
 
-          // 🔥 Inyectar datos
-          elAgrupacion.textContent = data.agrupacion;
-          elClub.textContent = data.club;
-          elFundacion.textContent = data.fundacion;
-          elIdeologia.textContent = data.ideologia;
-          elUbicacion.textContent = data.ubicacion;
+        elLogo.src = data.logo;
+        elStadium.src = data.stadium;
 
-          elLogo.src = data.logo;
-          elStadium.src = data.stadium;
+        pop.style.positionAnchor = `--dot${id}`;
 
-          // 🔥 Anchor dinámico
-          pop.style.positionAnchor = `--dot${id}`;
+        const rect = dot.getBoundingClientRect();
 
-          // 🔥 Lado automático
-          const rect = dot.getBoundingClientRect();
-          if (rect.left > window.innerWidth / 2) {
-            pop.classList.add('is-left');
-            pop.classList.remove('is-right');
-          } else {
-            pop.classList.add('is-right');
-            pop.classList.remove('is-left');
-          }
-
-          pop.showPopover();
-          dot.setAttribute('aria-expanded', 'true');
-
-          pop.querySelector('.n-map-pop__card-close')?.focus();
+        pop.classList.remove('is-left', 'is-right');
+        if (rect.left > window.innerWidth / 2) {
+          pop.classList.add('is-left');
+        } else {
+          pop.classList.add('is-right');
         }
+
+        if (window.matchMedia("(max-width: 699px)").matches) {
+          map.scrollIntoView({ behavior: "smooth", block: "center" });
+          document.body.classList.add('is-overflow');
+        }
+        pop.showPopover();
+        dot.setAttribute('aria-expanded', 'true');
+
+        pop.querySelector('.n-map-pop__card-close')?.focus();
       });
     });
 
-    pop.querySelector('.n-map-pop__card-close')
-      .addEventListener('click', closeAll);
+    const closeBtn = pop.querySelector('.n-map-pop__card-close');
+    if (closeBtn) closeBtn.addEventListener('click', closeAll);
 
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.n-map-pop__dot') &&
@@ -350,7 +370,89 @@
       if (e.key === 'Escape') closeAll();
     });
   }
+  function initMapAnimation() {
+    const lines = gsap.utils.toArray('.n-map-pop__line');
+    const dots = gsap.utils.toArray('.n-map-pop__dot');
 
-  document.addEventListener('DOMContentLoaded', initMapPopovers);
+    if (!lines.length) return;
 
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".n-map-pop",
+        start: "top 70%",
+        toggleActions: "play none none none"
+      }
+    });
+
+    tl.from(lines, {
+      opacity: 0,
+      yPercent: -20,
+      duration: 0.6,
+      ease: "power2.out",
+      stagger: 0.15
+    })
+
+      .from(dots, {
+        scale: 0,
+        opacity: 0,
+        duration: 0.35,
+        ease: "back.out(1.7)",
+        stagger: 0.05
+      }, "-=1");
+  }
+
+  // NOTE: Animacion de los sumarios
+  function initSumarioAnimation() {
+    const sumarios = gsap.utils.toArray('.sumario');
+    sumarios.forEach(sumario => {
+      const num = sumario.querySelector('.sumario__num');
+      const txt = sumario.querySelector('.sumario__txt');
+      const icn = sumario.querySelector('.sumario__icn');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sumario,
+          start: "top 70%",
+          toggleActions: "play none none none"
+        }
+      });
+
+      tl.from(sumario, {
+        opacity: 0,
+        x: -40,
+        duration: 0.6,
+        ease: "power2.out"
+      }).from(txt, {
+        opacity: 0,
+        y: 10,
+        duration: 0.5,
+        ease: "power2.out"
+      }, "-=0.3");
+
+      if (num) {
+        tl.from(num, {
+          scale: 0.6,
+          opacity: 0,
+          duration: 0.5,
+          ease: "back.out(1.7)"
+        }, "-=0.6");
+      }
+
+      tl.from(icn, {
+        opacity: 0,
+        y: 20,
+        duration: 0.4,
+        ease: "power2.out"
+      }, "-=0.3");
+    });
+  }
+
+  function initAll() {
+    initMoveEls('.v-a-s-t', '.v-ath--t1');
+    initMapPopovers();
+    initMapAnimation();
+    initSumarioAnimation();
+  }
+
+  document.addEventListener('DOMContentLoaded', initAll);
 })();

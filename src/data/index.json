@@ -1,7 +1,7 @@
 {
   "metadata": {
     "img": {
-      "exists": false,
+      "exists": true,
       "src": false,
       "figcaption": true,
       "figcaptionText": false
@@ -9,8 +9,8 @@
     "infoContainer": {
       "exists": true,
       "pretitle": false,
-      "title": "Más allá del reloj: un médico en 24 horas de guardia",
-      "description": "Resistencia y compromiso en un turno que no conoce pausas. Pasillos de desvelo donde se encuentra el  noble oficio de salvaguardar la vida de otros",
+      "title": "Ultras: La ‘kale borroka’ del fútbol",
+      "description": "\"El asunto no es si va a haber más muertos por los ultras del fútbol; la única incógnita es cuándo\", advierten fuentes policiales, \"porque la violencia va a más\"",
       "chevronDown": true
     },
     "firma": {
