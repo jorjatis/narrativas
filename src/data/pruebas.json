@@ -1,0 +1,34 @@
+{
+  "mapPopover": {
+    "cards": [
+      {
+        "agrupacion": "Brigada Norte",
+        "club": "Athletic Club",
+        "ideologia": "Ultra localista",
+        "ubicacion": "Grada baja",
+        "isRight": false
+      },
+      {
+        "agrupacion": "Brigada Norte",
+        "club": "Athletic Club",
+        "ideologia": "Ultra localista",
+        "ubicacion": "Grada baja",
+        "isRight": false
+      },
+      {
+        "agrupacion": "Brigada Norte",
+        "club": "Athletic Club",
+        "ideologia": "Ultra localista",
+        "ubicacion": "Grada baja",
+        "isRight": false
+      },
+      {
+        "agrupacion": "Brigada Norte",
+        "club": "Athletic Club",
+        "ideologia": "Ultra localista",
+        "ubicacion": "Grada baja",
+        "isRight": false
+      }
+    ]
+  }
+}

@@ -38,20 +38,6 @@
   <meta name="msapplication-wide310x150logo" content="https://s1.abcstatics.com/comun/2018/img/iconos-metas/widetile.png">
   <meta name="msapplication-square150x150logo" content="https://s1.abcstatics.com/comun/2018/img/iconos-metas/mediumtile.png">
   <meta name="msapplication-square310x310logo" content="https://s1.abcstatics.com/comun/2018/img/iconos-metas/largetile.png">
-
-  <script>
-    // Mock preventivo para el script de Adobe/GfK
-    window.gfkMediaID = window.gfkMediaID || function() { return ""; };
-    
-    // Evita que el error se propague si Adobe intenta leer propiedades de undefined
-    window.addEventListener('error', function(e) {
-      if (e.message && e.message.includes('replace')) {
-        console.warn('Cazado error de Adobe/GfK para evitar bloqueo:', e.message);
-        e.stopImmediatePropagation();
-      }
-    }, true);
-  </script>
-
 </head>
 <body>  
   {{!-- Estilos advertising mockup --}}

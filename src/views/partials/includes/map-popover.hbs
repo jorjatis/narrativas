@@ -1,0 +1,44 @@
+<div class="n-map-pop">
+  <div class="n-map-pop__c">
+    {{!-- Lineas con puntos --}}
+    <div class="n-map-pop__lines">
+      <div class="n-map-pop__line n-map-pop__line--1">
+        <button class="n-map-pop__dot n-map-pop__dot--1" type="button" aria-expanded="false" aria-label="Ver info de Brigada Norte" aria-haspopup="dialog" data-id="1" aria-controls="pop-1"></button>
+      </div>
+      <div class="n-map-pop__line n-map-pop__line--2">
+        <button class="n-map-pop__dot n-map-pop__dot--2" type="button" aria-expanded="false" aria-label="Ver info de Brigada Norte" aria-haspopup="dialog" data-id="2" aria-controls="pop-2"></button>
+      </div>
+      <div class="n-map-pop__line n-map-pop__line--3"></div>
+      <div class="n-map-pop__line n-map-pop__line--4">
+        <button class="n-map-pop__dot n-map-pop__dot--3" type="button" aria-expanded="false" aria-label="Ver info de Brigada Norte" aria-haspopup="dialog" data-id="3" aria-controls="pop-3"></button>
+      </div>
+      <div class="n-map-pop__line n-map-pop__line--5"></div>
+      <div class="n-map-pop__line n-map-pop__line--6"></div>
+      <div class="n-map-pop__line n-map-pop__line--7">
+        <button class="n-map-pop__dot n-map-pop__dot--4" type="button" aria-expanded="false" aria-label="Ver info de Brigada Norte" aria-haspopup="dialog" data-id="4" aria-controls="pop-4"></button>
+      </div>
+      <div class="n-map-pop__line n-map-pop__line--8"></div>
+    </div>
+    {{!-- Card --}}
+    <article class="n-map-pop__card" popover="manual" role="dialog" aria-modal="false" id="map-popover">
+      <div class="n-map-pop__card-c">
+        <button class="n-map-pop__card-close" type="button" aria-label="Cerrar popover">
+          <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="none"><path stroke="#000" stroke-linecap="round" d="M.707.5 32 31.793M32.293.5 1 31.793"/></svg>
+        </button>
+        <div class="n-map-pop__card-logo">
+          <img id="pop-logo" aria-hidden="true">
+        </div>
+        <dl class="n-map-pop__card-data">
+          <dt>Agrupación</dt><dd id="pop-agrupacion"></dd>
+          <dt>Club</dt><dd id="pop-club"></dd>
+          <dt>Fundación</dt><dd id="pop-fundacion"></dd>
+          <dt>Ideología</dt><dd id="pop-ideologia"></dd>
+          <dt>Ubicación</dt><dd id="pop-ubicacion"></dd>
+        </dl>
+        <div class="n-map-pop__card-stadium">
+          <img id="pop-stadium" aria-hidden="true">
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

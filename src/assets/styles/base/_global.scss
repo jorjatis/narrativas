@@ -1,10 +1,10 @@
 @use '../base/variables' as *;
 
-// body {
-//   overflow-y: hidden;
-// }
+html {
+  scroll-behavior: unset !important;
+}
 
-@media (max-width: 699px) {
+@media (max-width: $screen-xs) {
   .v-h-a {
     position: relative;
     z-index: 1;
@@ -22,6 +22,12 @@
     .v-a-t,
     .v-a-s-t {
       color: $cb1;
+    }
+
+    .v-i {
+      svg {
+        fill: $cb1;
+      }
     }
   }
 }

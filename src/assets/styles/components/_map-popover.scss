@@ -1,0 +1,234 @@
+@use '../base/variables' as *;
+
+// Mapa con puntos popover
+.n-map-pop {
+  margin: 150px 0;
+
+  &__c {
+    position: relative;
+    width: min(860px, 100%);
+    aspect-ratio: 382 / 274;
+    margin: 0 auto;
+
+    @media (min-width: 900px) {
+      width: 860px;
+      margin-left: calc(-430px + 50%);
+    }
+  }
+
+  &__lines {
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+  }
+
+  &__line {
+    position: absolute;
+    background: linear-gradient(90deg, #3c941f 0%, #2f7f1f 100%);
+
+    &:nth-child(even) {
+      background: linear-gradient(90deg, #88bf34 0%, #79ad2f 100%);
+    }
+
+    &--1 { 
+      top: 0%; left: 13.87%; width: 52.88%; height: 12.41%; 
+    }
+    &--2 { 
+      top: 12.41%; left: 13.87%; width: 86.13%; height: 12.77%; 
+    }
+    &--3 { 
+      top: 25.18%; left: 29.32%; width: 62.57%; height: 12.77%; 
+    }
+    &--4 { 
+      top: 37.96%; left: 29.32%; width: 48.95%; height: 12.04%; 
+    }
+    &--5 { 
+      top: 50%; left: 24.61%; width: 50.64%; height: 12.41%; 
+      &:after { content: ""; position: absolute; left: 129.96%; top: -18.59%; width: 14.44%; height: 80%; background: linear-gradient(90deg, #3c941f 0%, #2f7f1f 100%); }
+    }
+    &--6 { 
+      top: 62.41%; left: 24.61%; width: 56.81%; height: 12.41%; 
+    }
+    &--7 { 
+      top: 74.82%; left: 24.61%; width: 46.86%; height: 12.41%; 
+    }
+    &--8 { 
+      top: 87.23%; left: 31.15%; width: 17.02%; height: 12.77%; 
+      &:before { content: ""; position: absolute; left: -183.08%; top: 14.29%; width: 69.23%; height: 68.57%; background: linear-gradient(90deg, #88bf34 0%, #79ad2f 100%); }
+    }
+  }
+
+  &__dot {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 6px solid $cb1;
+    background: $cb2;
+    cursor: pointer;
+    z-index: 1;
+
+    &--1 {
+      top: 50%; transform: translateY(-50%); left: 30%;
+      anchor-name: --dot1;
+    }
+    &--2 {
+      bottom: 15%; right: 3%;
+      anchor-name: --dot2;
+    }
+    &--3 {
+      bottom: 0; left: 50%; transform: translate(-50%, 50%);
+      anchor-name: --dot3;
+    }
+    &--4 {
+      top: 20%; left: 20%;
+      anchor-name: --dot4;
+    }
+  }
+
+  &__card {
+    position: absolute;
+    background: transparent;
+    box-shadow: 5px 5px 0px 0px rgba($cb1,1);
+    top: calc(anchor(top) - 110px);
+    opacity: 0;
+    scale: .96;
+    transition: opacity .25s ease, scale .25s ease;
+
+    @media (max-width: $screen-xs) {
+      translate: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &:popover-open {
+      opacity: 1;
+      scale: 1;
+    }
+    
+    &.is-left {
+      @media (min-width: $screen-xs) {
+        translate: calc(-100% - 15px) 0;
+        left: anchor(left);
+      }
+    }
+
+    &.is-right {
+      @media (min-width: $screen-xs) {
+        translate: 15px 0;
+        left: anchor(right);
+      }
+    }
+
+    @for $i from 1 through 4 {
+      &#pop-#{$i} {
+        position-anchor: --dot#{$i};
+      }
+    }
+
+    &::backdrop {
+      display: none;
+    }
+
+    &-c {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 350px;
+      border: 6px solid $cb1;
+      background: $cb2;
+      overflow: hidden;
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 23px;
+        height: 23px;
+        border: 6px solid $cb1;
+        border-left: 0;
+        border-bottom: 0;
+        border-radius: 0 100% 0 0;
+      }
+    }
+
+    &-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 33px;
+      height: 33px;
+      z-index: 1;
+    }
+
+    &-logo {
+      position: relative;
+      margin-top: 28px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: $cb1;
+      }
+
+      img {
+        position: relative;
+        margin: 0 auto;
+        padding: 19px;
+        width: 124px;
+        height: 124px;
+        aspect-ratio: 1;
+        background: $cb2;
+        border: 6px solid $cb1;
+        box-sizing: content-box;
+        border-radius: 100%;
+      }
+    }
+
+    &-data {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 6px;
+      padding: 0 22px;
+      font-family: $mcr;
+      font-size: 16px;
+      line-height: 1;
+
+      > * {
+        padding: 16px 0;
+        border-top: 1px solid $cb6;
+
+        &:nth-child(-n+2) {
+          border-top: 0;
+        }
+      }
+
+      dt {
+        font-family: $mcs;
+      }
+
+      dd {
+        text-transform: uppercase;
+      }
+    }
+
+    &-stadium {
+      align-self: flex-end;
+      transform: translateX(-50px);
+      width: 125px;
+      height: auto;
+    }
+  }
+}
+
+@starting-style {
+  .n-map-pop__card:popover-open {
+    opacity: 0;
+    scale: .96;
+  }
+}

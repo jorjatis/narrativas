@@ -20,12 +20,32 @@
     },
     "paragraphPaywall": "Lo anterior no es una ficción. Es la historia de Sade, un cristiano en un país musulmán que dejó su tierra perseguido por su fe. <strong>«Temía por mi vida, así que tuve que irme»</strong>, cuenta. Sade lleva más de una década como inmigrante <span class=\"paywall pw-open\">irregular en suelo europeo."
   },
-  "gridDoctors1": {
-    "doctors": [
-      { "name": "Almudena", "cargo": "Cirujana general y de digestivo" },
-      { "name": "Víctor", "cargo": "Cardiólogo" },
-      { "name": "Beatriz", "cargo": "Anestesióloga"},
-      { "name": "Angélica", "cargo": "Residente. Hace guardia en Medicina Interna"}
+  "mapPopover": {
+    "cards": [
+      {
+        "agrupacion": "Brigada Norte",
+        "club": "Athletic Club",
+        "ideologia": "Ultra localista",
+        "ubicacion": "Grada baja"
+      },
+      {
+        "agrupacion": "Brigada Norte",
+        "club": "Athletic Club",
+        "ideologia": "Ultra localista",
+        "ubicacion": "Grada baja"
+      },
+      {
+        "agrupacion": "Brigada Norte",
+        "club": "Athletic Club",
+        "ideologia": "Ultra localista",
+        "ubicacion": "Grada baja"
+      },
+      {
+        "agrupacion": "Brigada Norte",
+        "club": "Athletic Club",
+        "ideologia": "Ultra localista",
+        "ubicacion": "Grada baja"
+      }
     ]
   }
 }
