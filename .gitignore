@@ -14,3 +14,5 @@ dist/
 %LOCALAPPDATA%/
 AppData/
 *.tmp
+# Local Netlify folder
+.netlify

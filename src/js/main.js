@@ -18,8 +18,8 @@
       fundacion: 1982,
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-frente-atletico.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-frente-atletico.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/2-frente.png",
+      stadium: ""
     },
     {
       id: 2,
@@ -28,8 +28,8 @@
       fundacion: null,
       ubicacion: "",
       ideologia: "Neonazis",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-suburbios-firm.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-suburbios-firm.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/3-suburbios.png",
+      stadium: ""
     },
     {
       id: 3,
@@ -38,8 +38,8 @@
       fundacion: 1980,
       ubicacion: "",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-ultras-sur.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-ultras-sur.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/4-ultrasur.png",
+      stadium: ""
     },
     {
       id: 4,
@@ -48,8 +48,8 @@
       fundacion: 1986,
       ubicacion: "Fondo norte",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-frente-bokeron.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-frente-bokeron.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/5-frente.png",
+      stadium: ""
     },
     {
       id: 5,
@@ -58,8 +58,8 @@
       fundacion: 1975,
       ubicacion: "Fondo norte",
       ideologia: "Extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-biris-norte.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-biris-norte.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/6-birisnorte.png",
+      stadium: ""
     },
     {
       id: 6,
@@ -68,8 +68,8 @@
       fundacion: 1981,
       ubicacion: "Fondo norte",
       ideologia: "Independentistas de extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-boixos-nois.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-boixos-nois.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/7-boixos.png",
+      stadium: ""
     },
     {
       id: 7,
@@ -78,8 +78,8 @@
       fundacion: 1986,
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-supporters-gol-sur.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-supporters-gol-sur.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/8-suporters.png",
+      stadium: ""
     },
     {
       id: 8,
@@ -88,8 +88,8 @@
       fundacion: 2011,
       ubicacion: "Fondo sur",
       ideologia: "Extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-united-family.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-united-family.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/9-united.png",
+      stadium: ""
     },
     {
       id: 9,
@@ -98,8 +98,8 @@
       fundacion: 2016,
       ubicacion: "Curva norte",
       ideologia: "Nacionalistas de extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-tropas-de-breogan.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-tropas-de-breogan.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/10-tropas.png",
+      stadium: ""
     },
     {
       id: 10,
@@ -108,8 +108,8 @@
       fundacion: 2002,
       ubicacion: "Se sitúan en el gol de Cornellá",
       ideologia: "",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-curva-rcde.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-curva-rcde.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/11-curva.png",
+      stadium: ""
     },
     {
       id: 11,
@@ -118,8 +118,8 @@
       fundacion: 1992,
       ubicacion: "Se sitúan en el único fondo que hay",
       ideologia: "Extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-bukaneros.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-bukaneros.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/12-bukaneros.png",
+      stadium: ""
     },
     {
       id: 12,
@@ -128,8 +128,8 @@
       fundacion: 1994,
       ubicacion: "Fondo norte",
       ideologia: "",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-symmachiarii.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-symmachiarii.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/13-symmachiarii.png",
+      stadium: ""
     },
     {
       id: 13,
@@ -138,8 +138,8 @@
       fundacion: 1987,
       ubicacion: "Grada baja del fondo sur",
       ideologia: "Independentistas de extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-indar-gorri.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-indar-gorri.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/14-indar.png",
+      stadium: ""
     },
     {
       id: 14,
@@ -148,8 +148,8 @@
       fundacion: 2018,
       ubicacion: "Fondo sur",
       ideologia: "Independentistas de extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-bultza.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-bultza.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/15-bultzada.png",
+      stadium: ""
     },
     {
       id: 15,
@@ -158,8 +158,8 @@
       fundacion: 1982,
       ubicacion: "Fondo norte",
       ideologia: "Independentistas de extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-herri-norte-taldea.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-herri-norte-taldea.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/16-herri-norte.png",
+      stadium: ""
     },
     {
       id: 16,
@@ -168,8 +168,8 @@
       fundacion: 2009,
       ubicacion: "Fondo norte",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-ghetto-28.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-ghetto-28.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/17-ghetto.png",
+      stadium: ""
     },
     {
       id: 17,
@@ -178,8 +178,8 @@
       fundacion: 1987,
       ubicacion: "Zona central del fondo norte",
       ideologia: "Nacionalistas de extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-riazor-blues.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-riazor-blues.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/18-riazor.png",
+      stadium: ""
     },
     {
       id: 18,
@@ -188,8 +188,8 @@
       fundacion: 1986,
       ubicacion: "Fondo norte",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-ligallo-fondo-norte.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-ligallo-fondo-norte.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/19-ligallo.png",
+      stadium: ""
     },
     {
       id: 19,
@@ -198,8 +198,8 @@
       fundacion: 2010,
       ubicacion: "",
       ideologia: "Extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-avispero-real-zaragoza.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-avispero-real-zaragoza.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/20-avispero.png",
+      stadium: ""
     },
     {
       id: 20,
@@ -208,8 +208,8 @@
       fundacion: 1981,
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-ultra-boys.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-ultra-boys.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/21-ultraboys.png",
+      stadium: ""
     },
     {
       id: 21,
@@ -218,8 +218,8 @@
       fundacion: 2022,
       ubicacion: "Curva sur del fondo sur",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-curva-sur-granada.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-curva-sur-granada.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/22-curva-sur.png",
+      stadium: ""
     },
     {
       id: 22,
@@ -228,8 +228,8 @@
       fundacion: 1986,
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-juventudes-verdiblancas.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-juventudes-verdiblancas.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/23-juventudes.png",
+      stadium: ""
     },
     {
       id: 23,
@@ -238,8 +238,8 @@
       fundacion: 1997,
       ubicacion: "Fondo sur",
       ideologia: "Extrema izquierda",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-resaca-castellana.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-resaca-castellana.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/24-resaca.png",
+      stadium: ""
     },
     {
       id: 24,
@@ -248,8 +248,8 @@
       fundacion: 1982,
       ubicacion: "Fondo sur",
       ideologia: "",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-brigadas-amarillas.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-brigadas-amarillas.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/25-brigadas.png",
+      stadium: ""
     },
     {
       id: 25,
@@ -258,8 +258,8 @@
       fundacion: 1993,
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-brigadas-blanquiverdes.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-brigadas-blanquiverdes.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/26-brigadas-blanquiverdes.png",
+      stadium: ""
     },
     {
       id: 26,
@@ -268,8 +268,8 @@
       fundacion: 2009,
       ubicacion: "Fondo norte",
       ideologia: "",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-grada-joven.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-grada-joven.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/27-grada-joven.png",
+      stadium: ""
     },
     {
       id: 27,
@@ -278,8 +278,8 @@
       fundacion: 1985,
       ubicacion: "Curva del fondo norte",
       ideologia: "",
-      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/logo-ultra-naciente.jpg",
-      stadium: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/stadium/stadium-ultra-naciente.jpg"
+      logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/28-ultra.png",
+      stadium: ""
     }
   ];
   const MAP_INDEX = Object.fromEntries(

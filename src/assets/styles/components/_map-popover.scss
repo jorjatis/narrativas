@@ -5,9 +5,7 @@
   margin: 150px 0;
 
   @media (max-width: $screen-xs) {
-    width: calc(100% + 40px);
     margin: 80px 0;
-    margin-left: -20px;
   }
 
   &__c {
