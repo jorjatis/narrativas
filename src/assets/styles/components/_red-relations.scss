@@ -1,8 +1,12 @@
 @use '../base/variables'as *;
 
 .red-relations {
+  margin-top: 80px;
+  margin-bottom: 80px;
+
   .v-d-p {
     margin-bottom: 32px;
+    text-align: center;
   }
 
   .map-legend {

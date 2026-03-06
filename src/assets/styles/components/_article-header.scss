@@ -135,7 +135,9 @@ body:has(.v-h-a) .a-h-inc {
 
 .v-w {
   .v-a--d-s-1 {
-    display: none;
+    > * {
+      display: none !important;
+    }
   }
 
   .v-a-s-t {

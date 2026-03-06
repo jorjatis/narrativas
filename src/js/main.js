@@ -1,4 +1,11 @@
 (function () {
+  const { gsap, ScrollTrigger } = window;
+
+  if (!gsap || !ScrollTrigger) {
+    console.warn("GSAP o ScrollTrigger no están disponibles.");
+    return;
+  }
+
   gsap.registerPlugin(ScrollTrigger);
 
   // NOTE: Mover elementos
@@ -772,7 +779,12 @@
     initParallax();
     initImagesAnimations();
     initRelationsChart();
+
+    ScrollTrigger.refresh();
   }
 
-  document.addEventListener('DOMContentLoaded', initAll);
+  window.addEventListener('load', () => {
+    initAll();
+    document.querySelector('.v-a--d-s-1').remove();
+  });
 })();
