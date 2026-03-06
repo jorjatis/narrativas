@@ -783,7 +783,7 @@
     ScrollTrigger.refresh();
   }
 
-  window.addEventListener('load', () => {
+  document.addEventListener('DOMContentLoaded',() => {
     initAll();
     document.querySelector('.v-a--d-s-1').remove();
   });
