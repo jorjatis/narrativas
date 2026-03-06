@@ -586,153 +586,179 @@
 
   // NOTE: Mapa de relacions con D3
   function initRelationsChart() {
-    const DATA = [
-        { id: 1, n: "Frente Atlético", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/2-frente.png" },
-        { id: 2, n: "Suburbios Firm", i: "Neonazis", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/3-suburbios.png" },
-        { id: 3, n: "Ultras Sur", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/4-ultrasur.png" },
-        { id: 4, n: "Frente Bokerón", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/5-frente.png" },
-        { id: 5, n: "Biris Norte", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/6-birisnorte.png" },
-        { id: 6, n: "Boixos Nois", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/7-boixos.png" },
-        { id: 7, n: "Supporters Gol Sur", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/8-suporters.png" },
-        { id: 8, n: "United Family", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/9-united.png" },
-        { id: 9, n: "Tropas de Breogán", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/10-tropas.png" },
-        { id: 10, n: "Curva RCDE", i: "Neutral", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/11-curva.png" },
-        { id: 11, n: "Bukaneros", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/12-bukaneros.png" },
-        { id: 12, n: "Symmachiarii", i: "Neutral", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/13-symmachiarii.png" },
-        { id: 13, n: "Indar Gorri", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/14-indar.png" },
-        { id: 14, n: "Bultzada", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/15-bultzada.png" },
-        { id: 15, n: "Herri Norte Taldea", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/16-herri-norte.png" },
-        { id: 16, n: "Ghetto 28", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/17-ghetto.png" },
-        { id: 17, n: "Riazor Blues", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/18-riazor.png" },
-        { id: 18, n: "Ligallo Fondo Norte", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/19-ligallo.png" },
-        { id: 19, n: "Avispero", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/20-avispero.png" },
-        { id: 20, n: "Ultra Boys", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/21-ultraboys.png" },
-        { id: 21, n: "Curva Sur Granada", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/22-curva-sur.png" },
-        { id: 22, n: "Juventudes Verdiblancas", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/23-juventudes.png" },
-        { id: 23, n: "Resaca Castellana", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/24-resaca.png" },
-        { id: 24, n: "Brigadas Amarillas", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/25-brigadas.png" },
-        { id: 25, n: "Brigadas Blanquiverdes", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/26-brigadas-blanquiverdes.png" },
-        { id: 26, n: "Grada Joven", i: "Neutral", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/27-grada-joven.png" },
-        { id: 27, n: "Ultra Naciente", i: "Neutral", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/28-ultra.png" }
-    ];
+    let activeNodeId = null;
+    let isM = window.innerWidth < 600;
+
+    const DATA = MAP_DATA.map(d => ({
+      id: d.id,
+      n: d.agrupacion,
+      i: d.ideologia || "Neutral",
+      img: d.logo
+    }));
 
     const RELS_RAW = `Frente Atlético,Ultra Boys,Afines|Frente Atlético,Supporters Gol Sur,Afines|Frente Atlético,Biris Norte,Enfrentados|Frente Atlético,Riazor Blues,Enfrentados|Frente Atlético,Ultras Sur,Enfrentados|Frente Atlético,Bukaneros,Enfrentados|Ultras Sur,Frente Atlético,Enfrentados|Ultras Sur,Boixos Nois,Enfrentados|Ultras Sur,Biris Norte,Enfrentados|Frente Bokerón,Frente Atlético,Enfrentados|Frente Bokerón,Ligallo Fondo Norte,Afines|Frente Bokerón,Ultra Boys,Afines|Biris Norte,Riazor Blues,Afines|Biris Norte,Supporters Gol Sur,Enfrentados|Biris Norte,Ultras Sur,Enfrentados|Biris Norte,Brigadas Amarillas,Enfrentados|Boixos Nois,Supporters Gol Sur,Afines|Boixos Nois,United Family,Afines|Boixos Nois,Ultras Sur,Enfrentados|Supporters Gol Sur,Frente Atlético,Afines|Supporters Gol Sur,Ultra Boys,Afines|Supporters Gol Sur,Biris Norte,Enfrentados|United Family,Frente Atlético,Afines|United Family,Biris Norte,Enfrentados|Tropas de Breogán,Frente Bokerón,Enfrentados|Tropas de Breogán,Riazor Blues,Enfrentados|Tropas de Breogán,Herri Norte Taldea,Afines|Curva RCDE,Ultras Sur,Afines|Curva RCDE,Boixos Nois,Enfrentados|Bukaneros,Brigadas Amarillas,Afines|Bukaneros,Ultras Sur,Enfrentados|Bukaneros,Frente Atlético,Enfrentados|Symmachiarii,Ultra Boys,Enfrentados|Symmachiarii,Indar Gorri,Enfrentados|Indar Gorri,Ligallo Fondo Norte,Enfrentados|Indar Gorri,Herri Norte Taldea,Afines|Indar Gorri,Bukaneros,Afines|Bultzada,Frente Atlético,Enfrentados|Bultzada,Ultras Sur,Enfrentados|Bultzada,Herri Norte Taldea,Afines|Herri Norte Taldea,Ultra Boys,Enfrentados|Ghetto 28,Ultras Sur,Afines|Ghetto 28,Ultra Naciente,Afines|Riazor Blues,Biris Norte,Afines|Riazor Blues,Ultras Sur,Enfrentados|Ligallo Fondo Norte,Ultra Boys,Afines|Avispero,Ligallo Fondo Norte,Enfrentados|Avispero,Bultzada,Enfrentados|Curva Sur Granada,Frente Bokerón,Afines|Curva Sur Granada,Brigadas Amarillas,Enfrentados|Juventudes Verdiblancas,Ultras Sur,Afines|Juventudes Verdiblancas,Frente Atlético,Afines|Resaca Castellana,Bukaneros,Afines|Resaca Castellana,Riazor Blues,Afines|Brigadas Amarillas,Biris Norte,Afines|Brigadas Amarillas,Bukaneros,Afines|Brigadas Amarillas,Frente Atlético,Enfrentados|Brigadas Amarillas,Ultras Sur,Enfrentados|Brigadas Blanquiverdes,Brigadas Amarillas,Enfrentados|Brigadas Blanquiverdes,Biris Norte,Enfrentados|Grada Joven,Brigadas Amarillas,Enfrentados|Grada Joven,Brigadas Blanquiverdes,Enfrentados|Grada Joven,Ultras Sur,Enfrentados`;
 
     const LINKS = RELS_RAW.split('|').map(r => {
-        const [s, t, type] = r.split(',');
-        const sNode = DATA.find(n => n.n === s);
-        const tNode = DATA.find(n => n.n === t);
-        return sNode && tNode ? { source: sNode.id, target: tNode.id, type: type === 'Afines' ? 'afines' : 'enfrentados' } : null;
+      const [s, t, type] = r.split(',');
+      const findNode = (name) => DATA.find(node =>
+        node.n.toLowerCase().trim().includes(name.toLowerCase().trim().substring(0, 6))
+      );
+      const sNode = findNode(s);
+      const tNode = findNode(t);
+      return sNode && tNode ? {
+        source: sNode.id, target: tNode.id, type: type === 'Afines' ? 'afines' : 'enfrentados'
+      } : null;
     }).filter(x => x);
 
     const svg = d3.select("#chart").append("svg");
-    const gLink = svg.append("g");
-    const gNode = svg.append("g");
+    const gLink = svg.append("g").attr("class", "layer-links");
+    const gNode = svg.append("g").attr("class", "layer-nodes");
+    const gText = svg.append("g").attr("class", "layer-texts");
 
     function getIdeology(i) {
-        if (i.includes("derecha") || i.includes("Neonazi")) return "D";
-        if (i.includes("izquierda") || i.includes("Nacionalista")) return "I";
-        return "N";
+      const text = i.toLowerCase();
+      if (text.includes("derecha") || text.includes("neonazi")) return "D";
+      if (text.includes("izquierda") || text.includes("nacionalista") || text.includes("independentista")) return "I";
+      return "N";
     }
 
     const sim = d3.forceSimulation(DATA)
-        .force("link", d3.forceLink(LINKS).id(d => d.id).distance(35)) 
-        .force("charge", d3.forceManyBody().strength(-100))
-        .force("collide", d3.forceCollide(24)); 
+      .force("link", d3.forceLink(LINKS).id(d => d.id))
+      .force("charge", d3.forceManyBody())
+      .force("collide", d3.forceCollide());
 
     function draw() {
-        const container = document.getElementById('red-relations');
-        const w = container.clientWidth;
-        const h = container.clientHeight; // Aquí toma los 500px
-        const isM = w < 600;
-        
-        // POSICIONES ESTRUCTURA (Subimos topY para quitar blanco arriba)
-        const topY = h * 0.15;      // Antes 0.3, ahora mucho más arriba
-        const bottomY = h * 0.75;   // Base un poco más arriba para dejar hueco a labels
-        const midX = w / 2;
-        
-        const leftX = isM ? w * 0.15 : w * 0.28; 
-        const rightX = isM ? w * 0.85 : w * 0.72;
+      const container = document.getElementById('red-relations');
+      if (!container) return;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      isM = w < 600;
 
-        // ETIQUETAS HACIA LOS LATERALES (Sin tapar escudos)
-        d3.select("#label-n").style("top", (topY - 35) + "px").style("left", (midX - 35) + "px"); 
-        d3.select("#label-i").style("top", (bottomY + 50) + "px").style("left", (isM ? 10 : w * 0.05) + "px"); 
-        d3.select("#label-d").style("top", (bottomY + 50) + "px").style("right", (isM ? 10 : w * 0.05) + "px").style("left", "auto"); 
+      // Ajuste dinámico de fuerzas según tamaño
+      sim.force("link").distance(isM ? 45 : 65);
+      sim.force("charge").strength(isM ? -180 : -250);
+      sim.force("collide").radius(isM ? 35 : 45);
 
-        svg.attr("width", w).attr("height", h);
+      const topY = h * 0.15;
+      const bottomY = h * 0.75;
+      const midX = w / 2;
+      const leftX = isM ? w * 0.22 : w * 0.28;
+      const rightX = isM ? w * 0.78 : w * 0.72;
 
-        sim.force("x", d3.forceX(d => {
-            const ideo = getIdeology(d.i);
-            if (ideo === "I") return leftX;
-            if (ideo === "D") return rightX;
-            return midX;
-        }).strength(2.0)); 
+      d3.select("#label-n").style("top", "0px").style("left", (midX - 35) + "px");
+      d3.select("#label-i").style("bottom", "15px").style("left", "15px");
+      d3.select("#label-d").style("bottom", "15px").style("right", "15px");
 
-        sim.force("y", d3.forceY(d => {
-            const ideo = getIdeology(d.i);
-            return ideo === "N" ? topY : bottomY;
-        }).strength(2.0));
+      svg.attr("width", w).attr("height", h);
 
-        sim.alpha(1).restart();
-        for (let i = 0; i < 150; ++i) sim.tick();
-        sim.stop();
+      sim.force("x", d3.forceX(d => {
+        const ideo = getIdeology(d.i);
+        return ideo === "I" ? leftX : (ideo === "D" ? rightX : midX);
+      }).strength(2.5));
 
-        const l = gLink.selectAll("line").data(LINKS).join("line")
-            .attr("class", d => `link ${d.type}`)
-            .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-            .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+      sim.force("y", d3.forceY(d => getIdeology(d.i) === "N" ? topY : bottomY).strength(2.5));
 
-        const n = gNode.selectAll(".node-group").data(DATA).join("g")
-            .attr("class", "node-group")
-            .attr("transform", d => `translate(${d.x},${d.y})`)
-            .on("mouseover", (e, d) => highlight(d))
-            .on("mouseout", reset)
-            .on("click", (e, d) => { e.stopPropagation(); highlight(d); });
+      sim.alpha(1).restart();
+      for (let i = 0; i < 150; ++i) sim.tick();
+      sim.stop();
 
-        n.selectAll("circle").data(d => [d]).join("circle")
-            .attr("r", isM ? 11 : 18)
-            .attr("fill", d => {
-                const ideo = getIdeology(d.i);
-                if (isM) return ideo === "D" ? "#0056b3" : (ideo === "I" ? "#d90429" : "#2b9348");
-                return "#fff";
-            })
-            .style("stroke", d => {
-                const ideo = getIdeology(d.i);
-                return ideo === "D" ? "#0056b3" : (ideo === "I" ? "#d90429" : "#2b9348");
-            })
-            .style("stroke-width", isM ? 0 : 2);
+      const padding = isM ? 35 : 55;
+      DATA.forEach(d => {
+        d.x = Math.max(padding, Math.min(w - padding, d.x));
+        d.y = Math.max(padding, Math.min(h - padding, d.y));
+      });
 
-        if (!isM) {
-            n.selectAll("image").data(d => [d]).join("image")
-                .attr("xlink:href", d => d.img)
-                .attr("x", -14).attr("y", -14).attr("width", 28).attr("height", 28);
-        }
+      const l = gLink.selectAll("line").data(LINKS).join("line")
+        .attr("class", d => `link ${d.type}`)
+        .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
 
-        n.selectAll("text").data(d => [d]).join("text")
-            .attr("class", "node-label")
-            .attr("dy", isM ? 25 : 32)
-            .text(d => d.n);
+      const n = gNode.selectAll(".node-group").data(DATA).join("g")
+        .attr("class", "node-group")
+        .attr("transform", d => `translate(${d.x},${d.y})`)
+        .on("mouseover", (e, d) => { if (!activeNodeId) highlight(d); })
+        .on("mouseout", () => { if (!activeNodeId) reset(); })
+        .on("click", (e, d) => {
+          e.stopPropagation();
+          if (activeNodeId === d.id) { activeNodeId = null; reset(); }
+          else { activeNodeId = d.id; highlight(d); }
+        });
+
+      n.selectAll("circle").data(d => [d]).join("circle")
+        .attr("r", isM ? 14 : 18)
+        .attr("fill", "#fff")
+        .style("stroke", d => {
+          const ideo = getIdeology(d.i);
+          return ideo === "D" ? "#0056b3" : (ideo === "I" ? "#d90429" : "#2b9348");
+        })
+        .style("stroke-width", 1.5);
+
+      n.selectAll("image").data(d => [d]).join("image")
+        .attr("xlink:href", d => d.img)
+        .attr("x", isM ? -11 : -14).attr("y", isM ? -11 : -14)
+        .attr("width", isM ? 22 : 28).attr("height", isM ? 22 : 28);
+
+      const texts = gText.selectAll(".node-label").data(DATA).join("text")
+        .attr("class", d => `node-label node-label-${d.id}`)
+        .attr("x", d => d.x)
+        .attr("y", d => {
+          const offset = isM ? 24 : 32;
+          const extra = (d.id % 2 === 0) ? (isM ? 14 : 18) : 0;
+          return d.y + offset + extra;
+        })
+        .style("text-anchor", "middle")
+        .style("paint-order", "stroke")
+        .style("stroke", "#fff")
+        .style("stroke-width", "3px")
+        .text(d => d.n);
+
+      if (activeNodeId) {
+        const activeNode = DATA.find(d => d.id === activeNodeId);
+        if (activeNode) highlight(activeNode);
+      }
     }
 
     function highlight(d) {
-        const neighbors = new Set([d.id]);
-        LINKS.forEach(l => {
-            if (l.source.id === d.id) neighbors.add(l.target.id);
-            if (l.target.id === d.id) neighbors.add(l.source.id);
-        });
-        d3.selectAll(".label-block").classed("hidden", true);
-        gNode.selectAll(".node-group").classed("faint", n => !neighbors.has(n.id)).classed("show-label", n => neighbors.has(n.id));
-        gLink.selectAll("line").classed("faint", l => l.source.id !== d.id && l.target.id !== d.id).classed("active-link", l => l.source.id === d.id || l.target.id === d.id);
+      const neighbors = new Set([d.id]);
+      LINKS.forEach(l => {
+        if (l.source.id === d.id) neighbors.add(l.target.id);
+        if (l.target.id === d.id) neighbors.add(l.source.id);
+      });
+
+      d3.selectAll(".label-block").classed("hidden", true);
+      gNode.selectAll(".node-group").classed("faint", n => !neighbors.has(n.id));
+      gLink.selectAll("line").classed("faint", l => l.source.id !== d.id && l.target.id !== d.id)
+        .classed("active-link", l => l.source.id === d.id || l.target.id === d.id);
+
+      gText.selectAll(".node-label")
+        .style("opacity", n => neighbors.has(n.id) ? 1 : 0)
+        .style("pointer-events", "none");
     }
 
     function reset() {
-        d3.selectAll(".label-block").classed("hidden", false);
-        gNode.selectAll(".node-group").classed("faint", false).classed("show-label", false);
-        gLink.selectAll("line").classed("faint", false).classed("active-link", false);
+      d3.selectAll(".label-block").classed("hidden", false);
+      gNode.selectAll(".node-group").classed("faint", false);
+      gLink.selectAll("line").classed("faint", false).classed("active-link", false);
+      gText.selectAll(".node-label").style("opacity", 0);
     }
 
-    window.addEventListener("resize", draw);
-    window.addEventListener("click", reset);
+    function debounce(func, wait) {
+      let timeout;
+      return function () {
+        const context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+      };
+    }
+
+    const debouncedDraw = debounce(draw, 250);
+
+    window.addEventListener("resize", debouncedDraw);
+    window.addEventListener("click", () => {
+      activeNodeId = null;
+      reset();
+    });
+
     draw();
   }
 
