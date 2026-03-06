@@ -2,10 +2,11 @@
 
 // Mapa con puntos popover
 .n-map-pop {
-  margin: 150px 0;
+  margin-top: 32px;
+  margin-bottom: 56px;
 
-  @media (max-width: $screen-xs) {
-    margin: 80px 0;
+  .v-d-p {
+    margin-bottom: 23px;
   }
 
   &__c {

@@ -134,7 +134,7 @@
       ubicacion: "Se sitúan en el único fondo que hay",
       ideologia: "Extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/12-bukaneros.png",
-      fondo: "sur"
+      fondo: "bukaneros"
     },
     {
       id: 12,
@@ -335,7 +335,8 @@
 
     const SVG_FONDO = {
       norte: `<svg xmlns="http://www.w3.org/2000/svg" id="Capa_2" data-name="Capa 2" viewBox="0 0 105.67 127"><defs><style>.cls-1,.cls-2{fill:none;stroke:#000;stroke-miterlimit:10}.cls-2{stroke-width:2px}</style></defs><g id="campos"><path d="M32.1 32.07 22.03 22.01c3.39-3.38 8.06-5.48 13.23-5.48h35.15c5.17 0 9.85 2.1 13.24 5.49L73.6 32.09z" style="fill:#a6a6a6"/><rect width="103.67" height="125" x="1" y="1" class="cls-2" rx="31.76" ry="31.76"/><path d="M16.53 91.73V35.26c0-5.17 2.1-9.86 5.5-13.25 3.39-3.38 8.06-5.48 13.23-5.48h35.15c5.17 0 9.85 2.1 13.24 5.49s5.49 8.07 5.49 13.24v56.47c0 10.34-8.39 18.73-18.73 18.73H35.26c-10.34 0-18.73-8.39-18.73-18.73Z" class="cls-2"/><path d="M32.07 32.07H73.6v62.86H32.07z" class="cls-1"/><path d="M35.4 91.6V35.4h34.87v56.2z" class="cls-1"/><path d="M46.52 91.6v-6.34h12.65v6.34zM46.52 41.74V35.4h12.65v6.34zM32.07 32.07 10.31 10.31M73.6 32.07 95.37 10.3M32.07 94.93 10.3 116.7M73.6 94.93l21.77 21.77M35.4 63.5h34.87" class="cls-1"/></g></svg>`,
-      sur: `<svg xmlns="http://www.w3.org/2000/svg" id="Capa_2" data-name="Capa 2" viewBox="0 0 105.67 127"><defs><style>.cls-1,.cls-2{fill:none;stroke:#000;stroke-miterlimit:10}.cls-2{stroke-width:2px}</style></defs><g id="campos"><path d="m73.57 94.93 10.07 10.06c-3.39 3.38-8.06 5.48-13.23 5.48H35.26c-5.17 0-9.85-2.1-13.24-5.49l10.05-10.07z" style="fill:#a6a6a6"/><rect width="103.67" height="125" x="1" y="1" class="cls-2" rx="31.76" ry="31.76"/><path d="M89.14 35.27v56.47c0 5.17-2.1 9.86-5.5 13.25-3.39 3.38-8.06 5.48-13.23 5.48H35.26c-5.17 0-9.85-2.1-13.24-5.49a18.67 18.67 0 0 1-5.49-13.24V35.27c0-10.34 8.39-18.73 18.73-18.73h35.15c10.34 0 18.73 8.39 18.73 18.73Z" class="cls-2"/><path d="M73.6 94.93H32.07V32.07H73.6z" class="cls-1"/><path d="M70.28 35.4v56.2H35.41V35.4z" class="cls-1"/><path d="M59.16 35.4v6.34H46.51V35.4zM59.16 85.26v6.34H46.51v-6.34zM73.6 94.93l21.77 21.76M32.07 94.93 10.3 116.7M73.6 32.07 95.37 10.3M32.07 32.07 10.3 10.3M70.27 63.5H35.4" class="cls-1"/></g></svg>`
+      sur: `<svg xmlns="http://www.w3.org/2000/svg" id="Capa_2" data-name="Capa 2" viewBox="0 0 105.67 127"><defs><style>.cls-1,.cls-2{fill:none;stroke:#000;stroke-miterlimit:10}.cls-2{stroke-width:2px}</style></defs><g id="campos"><path d="m73.57 94.93 10.07 10.06c-3.39 3.38-8.06 5.48-13.23 5.48H35.26c-5.17 0-9.85-2.1-13.24-5.49l10.05-10.07z" style="fill:#a6a6a6"/><rect width="103.67" height="125" x="1" y="1" class="cls-2" rx="31.76" ry="31.76"/><path d="M89.14 35.27v56.47c0 5.17-2.1 9.86-5.5 13.25-3.39 3.38-8.06 5.48-13.23 5.48H35.26c-5.17 0-9.85-2.1-13.24-5.49a18.67 18.67 0 0 1-5.49-13.24V35.27c0-10.34 8.39-18.73 18.73-18.73h35.15c10.34 0 18.73 8.39 18.73 18.73Z" class="cls-2"/><path d="M73.6 94.93H32.07V32.07H73.6z" class="cls-1"/><path d="M70.28 35.4v56.2H35.41V35.4z" class="cls-1"/><path d="M59.16 35.4v6.34H46.51V35.4zM59.16 85.26v6.34H46.51v-6.34zM73.6 94.93l21.77 21.76M32.07 94.93 10.3 116.7M73.6 32.07 95.37 10.3M32.07 32.07 10.3 10.3M70.27 63.5H35.4" class="cls-1"/></g></svg>`,
+      bukaneros: `<svg xmlns="http://www.w3.org/2000/svg" id="Capa_2" data-name="Capa 2" viewBox="0 0 105.67 118.11"><defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10}</style></defs><g id="campos"><path d="M32.1 32.08 22.03 22.02c3.39-3.38 8.06-5.48 13.23-5.48h35.15c5.17 0 9.85 2.1 13.24 5.49L73.6 32.1z" style="fill:#a6a6a6"/><path d="M104.67 32.77v61.47c0 8.77-3.56 16.71-9.3 22.46l-11.72-11.72c3.39-3.39 5.49-8.07 5.49-13.24V35.27c0-5.17-2.1-9.85-5.49-13.24s-8.07-5.49-13.24-5.49H35.26c-5.17 0-9.84 2.1-13.23 5.48-3.4 3.39-5.5 8.08-5.5 13.25v56.47c0 5.17 2.1 9.85 5.49 13.24L10.3 116.7C4.55 110.95 1 103.01 1 94.24V32.77C1 15.22 15.22 1 32.76 1h40.15c17.54 0 31.76 14.22 31.76 31.77Z" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px"/><path d="M32.07 32.08H73.6v62.86H32.07z" class="cls-1"/><path d="M35.4 91.6V35.4h34.87v56.2z" class="cls-1"/><path d="M46.51 91.6v-6.34h12.65v6.34zM46.51 41.74V35.4h12.65v6.34zM32.07 32.08 10.3 10.31M73.6 32.08l21.77-21.77M10.3 116.7l11.72-11.72 10.05-10.05M95.37 116.7l-11.72-11.72L73.6 94.93M35.4 63.5h34.87" class="cls-1"/></g></svg>`
     };
 
     let activeId = null;
@@ -354,11 +355,11 @@
     }
 
     function fillPopover(data) {
-      els.agrupacion.textContent = data.agrupacion ?? "—";
-      els.club.textContent = data.club ?? "—";
-      els.fundacion.textContent = data.fundacion ?? "—";
-      els.ideologia.textContent = data.ideologia ?? "—";
-      els.ubicacion.textContent = data.ubicacion ?? "—";
+      els.agrupacion.textContent = data.agrupacion || "—";
+      els.club.textContent = data.club || "—";
+      els.fundacion.textContent = data.fundacion || "—";
+      els.ideologia.textContent = data.ideologia || "—";
+      els.ubicacion.textContent = data.ubicacion || "—";
 
       els.logo.src = data.logo;
 
@@ -545,9 +546,9 @@
     sections.forEach(section => {
       const img = section.querySelector(".parallax__img");
 
-      gsap.set(img, { yPercent: -50 });
+      gsap.set(img, { yPercent: -100 });
       gsap.to(img, {
-        yPercent: 50,
+        yPercent: 100,
         ease: "none",
         scrollTrigger: {
           trigger: section,
@@ -628,7 +629,7 @@
       .force("collide", d3.forceCollide());
 
     function draw() {
-      const container = document.getElementById('red-relations');
+      const container = document.getElementById('red-relations-d3');
       if (!container) return;
       const w = container.clientWidth;
       const h = container.clientHeight;
