@@ -8,7 +8,6 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // NOTE: Mover elementos
   function initMoveEls(source, target, position = 'before') {
     const elSource = document.querySelector(source);
     const elTarget = document.querySelector(target);
@@ -31,7 +30,6 @@
     }
   }
 
-  // NOTE: Mapa con popovers
   const MAP_DATA = [
     {
       id: 1,
@@ -314,7 +312,7 @@
 
     const pop = document.getElementById('map-popover');
     if (!pop) return;
-    
+
     const dotsContainer = map.querySelector('.n-map-pop__dots');
 
     dotsContainer.innerHTML = MAP_DATA.map(item => `
@@ -329,7 +327,7 @@
     `).join('');
 
     const dots = [...dotsContainer.querySelectorAll('.n-map-pop__dot')];
-    
+
     const els = {
       agrupacion: pop.querySelector('#pop-agrupacion'),
       club: pop.querySelector('#pop-club'),
@@ -354,7 +352,7 @@
       pop.classList.remove('is-open');
 
       const activeDot = map.querySelector('[aria-expanded="true"]');
-      activeDot?.setAttribute('aria-expanded','false');
+      activeDot?.setAttribute('aria-expanded', 'false');
 
       document.body.classList.remove("is-overflow");
 
@@ -500,7 +498,6 @@
       }, "-=1");
   }
 
-  // NOTE: Animacion de los sumarios
   function initSumarioAnimation() {
     const sumarios = gsap.utils.toArray('.sumario');
     sumarios.forEach(sumario => {
@@ -546,7 +543,6 @@
     });
   }
 
-  // NOTE: Parallax
   function initParallax() {
     const sections = gsap.utils.toArray(".parallax");
 
@@ -567,7 +563,6 @@
     });
   }
 
-  // NOTE: Animaciones
   function initImagesAnimations() {
     const blocks = gsap.utils.toArray('.n-anim');
     if (!blocks.length) return;
@@ -581,7 +576,7 @@
         y: 60,
         duration: 0.6,
         ease: "power2.out",
-        stagger: -0.25, // la siguiente empieza antes de que termine la anterior
+        stagger: -0.25,
         scrollTrigger: {
           trigger: block,
           start: "top 50%",
@@ -592,7 +587,6 @@
     });
   }
 
-  // NOTE: Mapa de relacions con D3
   function initRelationsChart() {
     let activeNodeId = null;
     let isM = window.innerWidth < 600;
@@ -642,20 +636,15 @@
       const h = container.clientHeight;
       isM = w < 600;
 
-      // Ajuste dinámico de fuerzas según tamaño
       sim.force("link").distance(isM ? 45 : 65);
       sim.force("charge").strength(isM ? -180 : -250);
       sim.force("collide").radius(isM ? 35 : 45);
 
-      const topY = h * 0.15;
-      const bottomY = h * 0.75;
+      const topY = h * 0.05;
+      const bottomY = h * 0.70;
       const midX = w / 2;
       const leftX = isM ? w * 0.22 : w * 0.28;
       const rightX = isM ? w * 0.78 : w * 0.72;
-
-      d3.select("#label-n").style("top", "0px").style("left", (midX - 35) + "px");
-      d3.select("#label-i").style("bottom", "15px").style("left", "15px");
-      d3.select("#label-d").style("bottom", "15px").style("right", "15px");
 
       svg.attr("width", w).attr("height", h);
 
@@ -670,10 +659,13 @@
       for (let i = 0; i < 150; ++i) sim.tick();
       sim.stop();
 
-      const padding = isM ? 35 : 55;
+      const paddingSide = isM ? 50 : 70;
+      const paddingTop = isM ? 40 : 70;
+      const paddingBottom = isM ? 40 : 50;
+
       DATA.forEach(d => {
-        d.x = Math.max(padding, Math.min(w - padding, d.x));
-        d.y = Math.max(padding, Math.min(h - padding, d.y));
+        d.x = Math.max(paddingSide, Math.min(w - paddingSide, d.x));
+        d.y = Math.max(paddingTop, Math.min(h - paddingBottom, d.y));
       });
 
       const l = gLink.selectAll("line").data(LINKS).join("line")
@@ -734,20 +726,42 @@
       });
 
       d3.selectAll(".label-block").classed("hidden", true);
+
       gNode.selectAll(".node-group").classed("faint", n => !neighbors.has(n.id));
       gLink.selectAll("line").classed("faint", l => l.source.id !== d.id && l.target.id !== d.id)
         .classed("active-link", l => l.source.id === d.id || l.target.id === d.id);
 
-      gText.selectAll(".node-label")
-        .style("opacity", n => neighbors.has(n.id) ? 1 : 0)
-        .style("pointer-events", "none");
+      const container = document.getElementById('red-relations-d3');
+      const w = container.clientWidth;
+
+      d3.select("#red-relations-d3").selectAll(".node-label-absolute")
+        .data(DATA.filter(n => neighbors.has(n.id)), n => n.id)
+        .join("div")
+        .attr("class", "node-label-absolute")
+        .style("left", n => `${n.x}px`)
+        .style("top", n => {
+          const offset = isM ? 22 : 28;
+          return getIdeology(n.i) === "N" ? `${n.y - offset}px` : `${n.y + offset}px`;
+        })
+        .style("text-align", n => {
+          if (n.x < 60) return "left";
+          if (n.x > w - 60) return "right";
+          return "center";
+        })
+        .style("transform", n => {
+          if (n.x < 60) return "translate(0%, -50%)";
+          if (n.x > w - 60) return "translate(-100%, -50%)";
+          return "translate(-50%, -50%)";
+        })
+        .text(n => n.n);
     }
 
     function reset() {
       d3.selectAll(".label-block").classed("hidden", false);
       gNode.selectAll(".node-group").classed("faint", false);
       gLink.selectAll("line").classed("faint", false).classed("active-link", false);
-      gText.selectAll(".node-label").style("opacity", 0);
+
+      d3.select("#red-relations-d3").selectAll(".node-label-absolute").remove();
     }
 
     function debounce(func, wait) {
@@ -783,8 +797,9 @@
     ScrollTrigger.refresh();
   }
 
-  document.addEventListener('DOMContentLoaded',() => {
+  document.addEventListener('DOMContentLoaded', () => {
     initAll();
     document.querySelector('.v-a--d-s-1').remove();
   });
+
 })();
