@@ -335,14 +335,11 @@
       dd { text-transform: uppercase; }
     }
 
-    &-stadium {
+    &-fondo {
       align-self: flex-end;
-      transform: translateX(-50px);
-      width: 85px;
-
-      @media (min-width: $screen-xs) {
-        width: 125px;
-      }
+      transform: translateX(-20px);
+      width: 65px;
+      margin-bottom: 16px;
     }
   }
 }

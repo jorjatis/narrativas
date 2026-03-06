@@ -7,7 +7,9 @@
   <main class="v-w-c {{#if hasPaywall}}v-w-c--1{{/if}} v-d-c">
     <article class="v-d-w">
       {{!-- Include superior a la cabecera, si lo lleva --}}
-      {{> ./includes/pre-article-header }}
+      {{#unless metadata.img.preArticleHeader}}
+        {{> ./includes/pre-article-header }}
+      {{/unless}}
 
       {{!-- Cabecera articulo visual --}}
       {{> ./layout/article-header }}

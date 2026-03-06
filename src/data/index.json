@@ -2,6 +2,7 @@
   "metadata": {
     "img": {
       "exists": true,
+      "preArticleHeader": true,
       "src": false,
       "figcaption": true,
       "figcaptionText": false

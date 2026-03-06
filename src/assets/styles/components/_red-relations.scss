@@ -1,0 +1,89 @@
+@use '../base/variables'as *;
+
+#red-relations {
+  width: 100%;
+  height: 500px;
+  margin: 0 auto;
+  position: relative;
+  font-family: sans-serif;
+  overflow: hidden;
+  background: #fff;
+}
+
+#chart {
+  width: 100%;
+  height: 100%;
+}
+
+.label-block {
+  position: absolute;
+  background: #a2d2ff;
+  color: #003049;
+  padding: 5px 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  pointer-events: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.label-block.hidden {
+  opacity: 0;
+}
+
+.link {
+  fill: none;
+  stroke-opacity: 0.2;
+  stroke-width: 1.5px;
+  transition: 0.3s;
+}
+
+.link.afines {
+  stroke: #0056b3;
+}
+
+.link.enfrentados {
+  stroke: #d90429;
+}
+
+.node-group {
+  cursor: pointer;
+}
+
+.node-label {
+  font-size: 11px;
+  font-weight: bold;
+  fill: #222;
+  text-anchor: middle;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 3px;
+}
+
+.node-group.show-label .node-label {
+  opacity: 1;
+  z-index: 20;
+}
+
+.faint {
+  opacity: 0.1;
+}
+
+.active-link {
+  stroke-opacity: 1 !important;
+  stroke-width: 3px !important;
+}
+
+@media (max-width: 600px) {
+  .label-block {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}

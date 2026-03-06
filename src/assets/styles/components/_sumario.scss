@@ -35,6 +35,8 @@
   }
   
   &__num {
+    display: flex;
+    flex-direction: column;
     font-family: $axs;
     font-size: 120px;
     line-height: 1;
@@ -42,6 +44,7 @@
     transform: translateY(-15px);
 
     @media (min-width: 440px) {
+      align-items: flex-end;
       margin-left: 16px;
     }
 
@@ -49,6 +52,14 @@
       margin-left: 56px;
       font-size: 170px;
       transform: translateY(-25px);
+    }
+
+    > span {
+      font-size: 32px;
+
+      @media (min-width: 530px) {
+        font-size: 42px;
+      }
     }
   }
 

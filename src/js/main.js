@@ -2,11 +2,26 @@
   gsap.registerPlugin(ScrollTrigger);
 
   // NOTE: Mover elementos
-  function initMoveEls(source, target) {
+  function initMoveEls(source, target, position = 'before') {
     const elSource = document.querySelector(source);
     const elTarget = document.querySelector(target);
 
-    elTarget?.before(elSource);
+    if (!elSource || !elTarget) return;
+
+    switch (position) {
+      case 'before':
+        elTarget.before(elSource);
+        break;
+      case 'after':
+        elTarget.after(elSource);
+        break;
+      case 'append':
+        elTarget.append(elSource);
+        break;
+      case 'prepend':
+        elTarget.prepend(elSource);
+        break;
+    }
   }
 
   // NOTE: Mapa con popovers
@@ -19,7 +34,7 @@
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/2-frente.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 2,
@@ -29,7 +44,7 @@
       ubicacion: "",
       ideologia: "Neonazis",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/3-suburbios.png",
-      stadium: ""
+      fondo: null
     },
     {
       id: 3,
@@ -39,7 +54,7 @@
       ubicacion: "",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/4-ultrasur.png",
-      stadium: ""
+      fondo: null
     },
     {
       id: 4,
@@ -49,7 +64,7 @@
       ubicacion: "Fondo norte",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/5-frente.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 5,
@@ -59,7 +74,7 @@
       ubicacion: "Fondo norte",
       ideologia: "Extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/6-birisnorte.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 6,
@@ -69,7 +84,7 @@
       ubicacion: "Fondo norte",
       ideologia: "Independentistas de extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/7-boixos.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 7,
@@ -79,7 +94,7 @@
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/8-suporters.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 8,
@@ -89,7 +104,7 @@
       ubicacion: "Fondo sur",
       ideologia: "Extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/9-united.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 9,
@@ -99,7 +114,7 @@
       ubicacion: "Curva norte",
       ideologia: "Nacionalistas de extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/10-tropas.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 10,
@@ -109,7 +124,7 @@
       ubicacion: "Se sitúan en el gol de Cornellá",
       ideologia: "",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/11-curva.png",
-      stadium: ""
+      fondo: null
     },
     {
       id: 11,
@@ -119,7 +134,7 @@
       ubicacion: "Se sitúan en el único fondo que hay",
       ideologia: "Extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/12-bukaneros.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 12,
@@ -129,7 +144,7 @@
       ubicacion: "Fondo norte",
       ideologia: "",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/13-symmachiarii.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 13,
@@ -139,7 +154,7 @@
       ubicacion: "Grada baja del fondo sur",
       ideologia: "Independentistas de extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/14-indar.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 14,
@@ -149,7 +164,7 @@
       ubicacion: "Fondo sur",
       ideologia: "Independentistas de extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/15-bultzada.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 15,
@@ -159,7 +174,7 @@
       ubicacion: "Fondo norte",
       ideologia: "Independentistas de extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/16-herri-norte.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 16,
@@ -169,7 +184,7 @@
       ubicacion: "Fondo norte",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/17-ghetto.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 17,
@@ -179,7 +194,7 @@
       ubicacion: "Zona central del fondo norte",
       ideologia: "Nacionalistas de extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/18-riazor.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 18,
@@ -189,7 +204,7 @@
       ubicacion: "Fondo norte",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/19-ligallo.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 19,
@@ -199,7 +214,7 @@
       ubicacion: "",
       ideologia: "Extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/20-avispero.png",
-      stadium: ""
+      fondo: null
     },
     {
       id: 20,
@@ -209,7 +224,7 @@
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/21-ultraboys.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 21,
@@ -219,7 +234,7 @@
       ubicacion: "Curva sur del fondo sur",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/22-curva-sur.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 22,
@@ -229,7 +244,7 @@
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/23-juventudes.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 23,
@@ -239,7 +254,7 @@
       ubicacion: "Fondo sur",
       ideologia: "Extrema izquierda",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/24-resaca.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 24,
@@ -249,7 +264,7 @@
       ubicacion: "Fondo sur",
       ideologia: "",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/25-brigadas.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 25,
@@ -259,7 +274,7 @@
       ubicacion: "Fondo sur",
       ideologia: "Extrema derecha",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/26-brigadas-blanquiverdes.png",
-      stadium: ""
+      fondo: "sur"
     },
     {
       id: 26,
@@ -269,7 +284,7 @@
       ubicacion: "Fondo norte",
       ideologia: "",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/27-grada-joven.png",
-      stadium: ""
+      fondo: "norte"
     },
     {
       id: 27,
@@ -279,7 +294,7 @@
       ubicacion: "Curva del fondo norte",
       ideologia: "",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/28-ultra.png",
-      stadium: ""
+      fondo: "norte"
     }
   ];
   const MAP_INDEX = Object.fromEntries(
@@ -315,7 +330,12 @@
       ideologia: pop.querySelector('#pop-ideologia'),
       ubicacion: pop.querySelector('#pop-ubicacion'),
       logo: pop.querySelector('#pop-logo'),
-      stadium: pop.querySelector('#pop-stadium')
+      fondo: pop.querySelector('#pop-fondo')
+    };
+
+    const SVG_FONDO = {
+      norte: `<svg xmlns="http://www.w3.org/2000/svg" id="Capa_2" data-name="Capa 2" viewBox="0 0 105.67 127"><defs><style>.cls-1,.cls-2{fill:none;stroke:#000;stroke-miterlimit:10}.cls-2{stroke-width:2px}</style></defs><g id="campos"><path d="M32.1 32.07 22.03 22.01c3.39-3.38 8.06-5.48 13.23-5.48h35.15c5.17 0 9.85 2.1 13.24 5.49L73.6 32.09z" style="fill:#a6a6a6"/><rect width="103.67" height="125" x="1" y="1" class="cls-2" rx="31.76" ry="31.76"/><path d="M16.53 91.73V35.26c0-5.17 2.1-9.86 5.5-13.25 3.39-3.38 8.06-5.48 13.23-5.48h35.15c5.17 0 9.85 2.1 13.24 5.49s5.49 8.07 5.49 13.24v56.47c0 10.34-8.39 18.73-18.73 18.73H35.26c-10.34 0-18.73-8.39-18.73-18.73Z" class="cls-2"/><path d="M32.07 32.07H73.6v62.86H32.07z" class="cls-1"/><path d="M35.4 91.6V35.4h34.87v56.2z" class="cls-1"/><path d="M46.52 91.6v-6.34h12.65v6.34zM46.52 41.74V35.4h12.65v6.34zM32.07 32.07 10.31 10.31M73.6 32.07 95.37 10.3M32.07 94.93 10.3 116.7M73.6 94.93l21.77 21.77M35.4 63.5h34.87" class="cls-1"/></g></svg>`,
+      sur: `<svg xmlns="http://www.w3.org/2000/svg" id="Capa_2" data-name="Capa 2" viewBox="0 0 105.67 127"><defs><style>.cls-1,.cls-2{fill:none;stroke:#000;stroke-miterlimit:10}.cls-2{stroke-width:2px}</style></defs><g id="campos"><path d="m73.57 94.93 10.07 10.06c-3.39 3.38-8.06 5.48-13.23 5.48H35.26c-5.17 0-9.85-2.1-13.24-5.49l10.05-10.07z" style="fill:#a6a6a6"/><rect width="103.67" height="125" x="1" y="1" class="cls-2" rx="31.76" ry="31.76"/><path d="M89.14 35.27v56.47c0 5.17-2.1 9.86-5.5 13.25-3.39 3.38-8.06 5.48-13.23 5.48H35.26c-5.17 0-9.85-2.1-13.24-5.49a18.67 18.67 0 0 1-5.49-13.24V35.27c0-10.34 8.39-18.73 18.73-18.73h35.15c10.34 0 18.73 8.39 18.73 18.73Z" class="cls-2"/><path d="M73.6 94.93H32.07V32.07H73.6z" class="cls-1"/><path d="M70.28 35.4v56.2H35.41V35.4z" class="cls-1"/><path d="M59.16 35.4v6.34H46.51V35.4zM59.16 85.26v6.34H46.51v-6.34zM73.6 94.93l21.77 21.76M32.07 94.93 10.3 116.7M73.6 32.07 95.37 10.3M32.07 32.07 10.3 10.3M70.27 63.5H35.4" class="cls-1"/></g></svg>`
     };
 
     let activeId = null;
@@ -341,7 +361,14 @@
       els.ubicacion.textContent = data.ubicacion ?? "—";
 
       els.logo.src = data.logo;
-      els.stadium.src = data.stadium;
+
+      const fondo = data.fondo;
+
+      if (fondo && SVG_FONDO[fondo]) {
+        els.fondo.innerHTML = SVG_FONDO[fondo];
+      } else {
+        els.fondo.innerHTML = "";
+      }
     }
 
     function positionPopover(dot) {
@@ -393,6 +420,11 @@
         });
 
         document.body.classList.add("is-overflow");
+      } else {
+        pop.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
       }
     }
 
@@ -426,12 +458,6 @@
 
     mqMobile.addEventListener("change", () => {
       closePopover();
-    });
-
-    window.addEventListener("scroll", () => {
-      if(activeId && !mqMobile.matches){
-        closePopover();
-      }
     });
   }
 
@@ -533,66 +559,192 @@
     });
   }
 
-  // NOTE: Animacion 01
-  function initAnim01() {
-    const imgs = gsap.utils.toArray('.anim-01 img');
-    if (!imgs.length) return;
+  // NOTE: Animaciones
+  function initImagesAnimations() {
+    const blocks = gsap.utils.toArray('.n-anim');
+    if (!blocks.length) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".anim-01",
-        start: "top 50%",
-        toggleActions: "play none none none"
-      }
-    });
+    blocks.forEach(block => {
 
-    tl.from(imgs[0], {
-      opacity: 0,
-      x: -80,
-      rotate: -90,
-      duration: 0.5,
-      ease: "power2.out"
-    })
-      .from(imgs[1], {
+      const imgs = block.querySelectorAll('img');
+
+      gsap.from(imgs, {
         opacity: 0,
-        y: 80,
-        duration: 0.5,
-        ease: "power2.out"
-      }, "-=0.4")
-      .from(imgs[2], {
-        opacity: 0,
-        x: 80,
-        rotate: 90,
-        duration: 0.5,
-        ease: "power2.out"
-      }, "-=0.4")
-      .from(imgs[3], {
-        opacity: 0,
-        y: 80,
-        duration: 0.5,
-        ease: "power2.out"
-      }, "-=0.4")
-      .from(imgs[4], {
-        opacity: 0,
-        scale: 0.2,
-        duration: 0.5,
-        ease: "back.out(2)"
-      }, "-=0.4")
-      .to(imgs[4], {
-        x: -6,
-        duration: 0.05,
-        repeat: 5,
-        yoyo: true
+        y: 60,
+        duration: 0.6,
+        ease: "power2.out",
+        stagger: -0.25, // la siguiente empieza antes de que termine la anterior
+        scrollTrigger: {
+          trigger: block,
+          start: "top 50%",
+          toggleActions: "play none none none"
+        }
       });
+
+    });
+  }
+
+  // NOTE: Mapa de relacions con D3
+  function initRelationsChart() {
+    const DATA = [
+        { id: 1, n: "Frente Atlético", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/2-frente.png" },
+        { id: 2, n: "Suburbios Firm", i: "Neonazis", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/3-suburbios.png" },
+        { id: 3, n: "Ultras Sur", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/4-ultrasur.png" },
+        { id: 4, n: "Frente Bokerón", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/5-frente.png" },
+        { id: 5, n: "Biris Norte", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/6-birisnorte.png" },
+        { id: 6, n: "Boixos Nois", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/7-boixos.png" },
+        { id: 7, n: "Supporters Gol Sur", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/8-suporters.png" },
+        { id: 8, n: "United Family", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/9-united.png" },
+        { id: 9, n: "Tropas de Breogán", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/10-tropas.png" },
+        { id: 10, n: "Curva RCDE", i: "Neutral", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/11-curva.png" },
+        { id: 11, n: "Bukaneros", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/12-bukaneros.png" },
+        { id: 12, n: "Symmachiarii", i: "Neutral", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/13-symmachiarii.png" },
+        { id: 13, n: "Indar Gorri", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/14-indar.png" },
+        { id: 14, n: "Bultzada", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/15-bultzada.png" },
+        { id: 15, n: "Herri Norte Taldea", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/16-herri-norte.png" },
+        { id: 16, n: "Ghetto 28", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/17-ghetto.png" },
+        { id: 17, n: "Riazor Blues", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/18-riazor.png" },
+        { id: 18, n: "Ligallo Fondo Norte", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/19-ligallo.png" },
+        { id: 19, n: "Avispero", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/20-avispero.png" },
+        { id: 20, n: "Ultra Boys", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/21-ultraboys.png" },
+        { id: 21, n: "Curva Sur Granada", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/22-curva-sur.png" },
+        { id: 22, n: "Juventudes Verdiblancas", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/23-juventudes.png" },
+        { id: 23, n: "Resaca Castellana", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/24-resaca.png" },
+        { id: 24, n: "Brigadas Amarillas", i: "Extrema izquierda", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/25-brigadas.png" },
+        { id: 25, n: "Brigadas Blanquiverdes", i: "Extrema derecha", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/26-brigadas-blanquiverdes.png" },
+        { id: 26, n: "Grada Joven", i: "Neutral", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/27-grada-joven.png" },
+        { id: 27, n: "Ultra Naciente", i: "Neutral", img: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/28-ultra.png" }
+    ];
+
+    const RELS_RAW = `Frente Atlético,Ultra Boys,Afines|Frente Atlético,Supporters Gol Sur,Afines|Frente Atlético,Biris Norte,Enfrentados|Frente Atlético,Riazor Blues,Enfrentados|Frente Atlético,Ultras Sur,Enfrentados|Frente Atlético,Bukaneros,Enfrentados|Ultras Sur,Frente Atlético,Enfrentados|Ultras Sur,Boixos Nois,Enfrentados|Ultras Sur,Biris Norte,Enfrentados|Frente Bokerón,Frente Atlético,Enfrentados|Frente Bokerón,Ligallo Fondo Norte,Afines|Frente Bokerón,Ultra Boys,Afines|Biris Norte,Riazor Blues,Afines|Biris Norte,Supporters Gol Sur,Enfrentados|Biris Norte,Ultras Sur,Enfrentados|Biris Norte,Brigadas Amarillas,Enfrentados|Boixos Nois,Supporters Gol Sur,Afines|Boixos Nois,United Family,Afines|Boixos Nois,Ultras Sur,Enfrentados|Supporters Gol Sur,Frente Atlético,Afines|Supporters Gol Sur,Ultra Boys,Afines|Supporters Gol Sur,Biris Norte,Enfrentados|United Family,Frente Atlético,Afines|United Family,Biris Norte,Enfrentados|Tropas de Breogán,Frente Bokerón,Enfrentados|Tropas de Breogán,Riazor Blues,Enfrentados|Tropas de Breogán,Herri Norte Taldea,Afines|Curva RCDE,Ultras Sur,Afines|Curva RCDE,Boixos Nois,Enfrentados|Bukaneros,Brigadas Amarillas,Afines|Bukaneros,Ultras Sur,Enfrentados|Bukaneros,Frente Atlético,Enfrentados|Symmachiarii,Ultra Boys,Enfrentados|Symmachiarii,Indar Gorri,Enfrentados|Indar Gorri,Ligallo Fondo Norte,Enfrentados|Indar Gorri,Herri Norte Taldea,Afines|Indar Gorri,Bukaneros,Afines|Bultzada,Frente Atlético,Enfrentados|Bultzada,Ultras Sur,Enfrentados|Bultzada,Herri Norte Taldea,Afines|Herri Norte Taldea,Ultra Boys,Enfrentados|Ghetto 28,Ultras Sur,Afines|Ghetto 28,Ultra Naciente,Afines|Riazor Blues,Biris Norte,Afines|Riazor Blues,Ultras Sur,Enfrentados|Ligallo Fondo Norte,Ultra Boys,Afines|Avispero,Ligallo Fondo Norte,Enfrentados|Avispero,Bultzada,Enfrentados|Curva Sur Granada,Frente Bokerón,Afines|Curva Sur Granada,Brigadas Amarillas,Enfrentados|Juventudes Verdiblancas,Ultras Sur,Afines|Juventudes Verdiblancas,Frente Atlético,Afines|Resaca Castellana,Bukaneros,Afines|Resaca Castellana,Riazor Blues,Afines|Brigadas Amarillas,Biris Norte,Afines|Brigadas Amarillas,Bukaneros,Afines|Brigadas Amarillas,Frente Atlético,Enfrentados|Brigadas Amarillas,Ultras Sur,Enfrentados|Brigadas Blanquiverdes,Brigadas Amarillas,Enfrentados|Brigadas Blanquiverdes,Biris Norte,Enfrentados|Grada Joven,Brigadas Amarillas,Enfrentados|Grada Joven,Brigadas Blanquiverdes,Enfrentados|Grada Joven,Ultras Sur,Enfrentados`;
+
+    const LINKS = RELS_RAW.split('|').map(r => {
+        const [s, t, type] = r.split(',');
+        const sNode = DATA.find(n => n.n === s);
+        const tNode = DATA.find(n => n.n === t);
+        return sNode && tNode ? { source: sNode.id, target: tNode.id, type: type === 'Afines' ? 'afines' : 'enfrentados' } : null;
+    }).filter(x => x);
+
+    const svg = d3.select("#chart").append("svg");
+    const gLink = svg.append("g");
+    const gNode = svg.append("g");
+
+    function getIdeology(i) {
+        if (i.includes("derecha") || i.includes("Neonazi")) return "D";
+        if (i.includes("izquierda") || i.includes("Nacionalista")) return "I";
+        return "N";
+    }
+
+    const sim = d3.forceSimulation(DATA)
+        .force("link", d3.forceLink(LINKS).id(d => d.id).distance(35)) 
+        .force("charge", d3.forceManyBody().strength(-100))
+        .force("collide", d3.forceCollide(24)); 
+
+    function draw() {
+        const container = document.getElementById('red-relations');
+        const w = container.clientWidth;
+        const h = container.clientHeight; // Aquí toma los 500px
+        const isM = w < 600;
+        
+        // POSICIONES ESTRUCTURA (Subimos topY para quitar blanco arriba)
+        const topY = h * 0.15;      // Antes 0.3, ahora mucho más arriba
+        const bottomY = h * 0.75;   // Base un poco más arriba para dejar hueco a labels
+        const midX = w / 2;
+        
+        const leftX = isM ? w * 0.15 : w * 0.28; 
+        const rightX = isM ? w * 0.85 : w * 0.72;
+
+        // ETIQUETAS HACIA LOS LATERALES (Sin tapar escudos)
+        d3.select("#label-n").style("top", (topY - 35) + "px").style("left", (midX - 35) + "px"); 
+        d3.select("#label-i").style("top", (bottomY + 50) + "px").style("left", (isM ? 10 : w * 0.05) + "px"); 
+        d3.select("#label-d").style("top", (bottomY + 50) + "px").style("right", (isM ? 10 : w * 0.05) + "px").style("left", "auto"); 
+
+        svg.attr("width", w).attr("height", h);
+
+        sim.force("x", d3.forceX(d => {
+            const ideo = getIdeology(d.i);
+            if (ideo === "I") return leftX;
+            if (ideo === "D") return rightX;
+            return midX;
+        }).strength(2.0)); 
+
+        sim.force("y", d3.forceY(d => {
+            const ideo = getIdeology(d.i);
+            return ideo === "N" ? topY : bottomY;
+        }).strength(2.0));
+
+        sim.alpha(1).restart();
+        for (let i = 0; i < 150; ++i) sim.tick();
+        sim.stop();
+
+        const l = gLink.selectAll("line").data(LINKS).join("line")
+            .attr("class", d => `link ${d.type}`)
+            .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+
+        const n = gNode.selectAll(".node-group").data(DATA).join("g")
+            .attr("class", "node-group")
+            .attr("transform", d => `translate(${d.x},${d.y})`)
+            .on("mouseover", (e, d) => highlight(d))
+            .on("mouseout", reset)
+            .on("click", (e, d) => { e.stopPropagation(); highlight(d); });
+
+        n.selectAll("circle").data(d => [d]).join("circle")
+            .attr("r", isM ? 11 : 18)
+            .attr("fill", d => {
+                const ideo = getIdeology(d.i);
+                if (isM) return ideo === "D" ? "#0056b3" : (ideo === "I" ? "#d90429" : "#2b9348");
+                return "#fff";
+            })
+            .style("stroke", d => {
+                const ideo = getIdeology(d.i);
+                return ideo === "D" ? "#0056b3" : (ideo === "I" ? "#d90429" : "#2b9348");
+            })
+            .style("stroke-width", isM ? 0 : 2);
+
+        if (!isM) {
+            n.selectAll("image").data(d => [d]).join("image")
+                .attr("xlink:href", d => d.img)
+                .attr("x", -14).attr("y", -14).attr("width", 28).attr("height", 28);
+        }
+
+        n.selectAll("text").data(d => [d]).join("text")
+            .attr("class", "node-label")
+            .attr("dy", isM ? 25 : 32)
+            .text(d => d.n);
+    }
+
+    function highlight(d) {
+        const neighbors = new Set([d.id]);
+        LINKS.forEach(l => {
+            if (l.source.id === d.id) neighbors.add(l.target.id);
+            if (l.target.id === d.id) neighbors.add(l.source.id);
+        });
+        d3.selectAll(".label-block").classed("hidden", true);
+        gNode.selectAll(".node-group").classed("faint", n => !neighbors.has(n.id)).classed("show-label", n => neighbors.has(n.id));
+        gLink.selectAll("line").classed("faint", l => l.source.id !== d.id && l.target.id !== d.id).classed("active-link", l => l.source.id === d.id || l.target.id === d.id);
+    }
+
+    function reset() {
+        d3.selectAll(".label-block").classed("hidden", false);
+        gNode.selectAll(".node-group").classed("faint", false).classed("show-label", false);
+        gLink.selectAll("line").classed("faint", false).classed("active-link", false);
+    }
+
+    window.addEventListener("resize", draw);
+    window.addEventListener("click", reset);
+    draw();
   }
 
   function initAll() {
     initMoveEls('.v-a-s-t', '.v-ath--t1');
+    initMoveEls('.a-h-inc', '.v-a.v-a--d.v-a--d-s-1', 'before');
     initMapPopovers();
     initMapAnimation();
     initSumarioAnimation();
     initParallax();
-    initAnim01();
+    initImagesAnimations();
+    initRelationsChart();
   }
 
   document.addEventListener('DOMContentLoaded', initAll);

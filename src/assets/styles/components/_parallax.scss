@@ -6,6 +6,7 @@
   width: 100vw;
   transform: translateX(-50%);
   overflow: hidden;
+  margin: 60px 0;
   
   &__c {
     position: relative;
@@ -38,7 +39,7 @@
   
   &--01 {
     .parallax__img {
-      background-image: url("../../../assets/images/grafiti.jpg");
+      background-image: url("https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/grafiti.jpg");
     }
   }
 

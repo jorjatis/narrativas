@@ -1,16 +1,20 @@
 <div class="v-a v-a--d v-a--d-s-1">
   {{#if metadata.img.exists}}
   <div class="v-a-img-c">
-    <figure class="v-a-fig">
-      <div class="v-a-lnk">
-        <img class="v-a-img" loading="lazy" src="{{#if metadata.img.src}}{{metadata.img.src}}{{else}}https://picsum.photos/748/523"{{/if}} alt="{{#if metadata.infoContainer.title}}{{metadata.infoContainer.title}}{{else}}[ALTERNATIVE TEXT]{{/if}}">
-      </div>
-      {{#if metadata.img.figcaption}}
-        <figcaption class="v-fc">
-          <span class="v-fc__t">{{#if metadata.img.figcaptionText}}{{metadata.img.figcaptionText}}{{else}}La presidenta del Congreso.{{/if}}</span>
-        </figcaption>
-      {{/if}}
-    </figure>
+    {{#if metadata.img.preArticleHeader}}
+      {{> ../includes/pre-article-header }}
+    {{else}}
+      <figure class="v-a-fig">
+        <div class="v-a-lnk">
+          <img class="v-a-img" loading="lazy" src="{{#if metadata.img.src}}{{metadata.img.src}}{{else}}https://picsum.photos/748/523"{{/if}} alt="{{#if metadata.infoContainer.title}}{{metadata.infoContainer.title}}{{else}}[ALTERNATIVE TEXT]{{/if}}">
+        </div>
+        {{#if metadata.img.figcaption}}
+          <figcaption class="v-fc">
+            <span class="v-fc__t">{{#if metadata.img.figcaptionText}}{{metadata.img.figcaptionText}}{{else}}La presidenta del Congreso.{{/if}}</span>
+          </figcaption>
+        {{/if}}
+      </figure>
+    {{/if}}
   </div>
   {{/if}}
   {{#if metadata.infoContainer.exists}}
