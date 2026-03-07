@@ -46,7 +46,7 @@
       agrupacion: "Suburbios Firm",
       club: "Atlético de Madrid",
       fundacion: null,
-      ubicacion: "",
+      ubicacion: null,
       ideologia: "Neonazis",
       logo: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/08/grupos-ultra/images/logo/3-suburbios.png",
       fondo: null
@@ -114,7 +114,7 @@
     {
       id: 9,
       agrupacion: "Tropas de Breogán",
-      club: "CD Lugo",
+      club: "Celta de Vigo",
       fundacion: 2016,
       ubicacion: "Curva norte",
       ideologia: "Nacionalistas de extrema izquierda",
@@ -163,7 +163,7 @@
     },
     {
       id: 14,
-      agrupacion: "Bultza",
+      agrupacion: "Bultzada",
       club: "Real Sociedad",
       fundacion: 2018,
       ubicacion: "Fondo sur",
@@ -386,25 +386,40 @@
       }
 
       const gap = 10;
-
       const dotRect = dot.getBoundingClientRect();
+      const mapContainer = map.querySelector('.n-map-pop__c');
 
-      const top = dot.offsetTop + dot.offsetHeight / 2;
-      let left = dot.offsetLeft + dot.offsetWidth + gap;
+      const popHeight = pop.offsetHeight;
+      const popWidth = pop.offsetWidth;
+      const mapHeight = mapContainer.offsetHeight;
+
+      // --- LÓGICA VERTICAL ---
+      let top = dot.offsetTop + dot.offsetHeight / 2;
+
+      // Límites para que no se salga por arriba ni por abajo
+      const minTop = (popHeight / 2) + gap;
+      const maxTop = mapHeight - (popHeight / 2) - gap;
+
+      // Ajustamos el top si se sale de los límites
+      if (top < minTop) {
+        top = minTop;
+      } else if (top > maxTop) {
+        top = maxTop;
+      }
 
       pop.style.transform = "translateY(-50%)";
       pop.style.top = `${top}px`;
-      pop.style.left = `${left}px`;
 
-      const popWidth = pop.offsetWidth;
-
+      // --- LÓGICA HORIZONTAL ---
+      let left = dot.offsetLeft + dot.offsetWidth + gap;
       const spaceRight = window.innerWidth - (dotRect.left + dotRect.width);
 
       if (spaceRight < popWidth + gap) {
         const gapLeft = 20;
         left = dot.offsetLeft - popWidth - gapLeft;
-        pop.style.left = `${left}px`;
       }
+
+      pop.style.left = `${left}px`;
     }
 
     function openPopover(dot, id) {
@@ -426,12 +441,8 @@
         });
 
         document.body.classList.add("is-overflow");
-      } else {
-        pop.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
       }
+      // Hemos eliminado el 'else' que hacía scrollIntoView en escritorio
     }
 
     dots.forEach(dot => {
@@ -466,7 +477,7 @@
       closePopover();
     });
   }
-
+  
   function initMapAnimation() {
     const lines = gsap.utils.toArray('.n-map-pop__line');
     const dots = gsap.utils.toArray('.n-map-pop__dot');
@@ -544,13 +555,16 @@
   }
 
   function initParallax() {
-    const sections = gsap.utils.toArray(".parallax");
+  const sections = gsap.utils.toArray(".parallax");
 
-    sections.forEach(section => {
-      const img = section.querySelector(".parallax__img");
+  sections.forEach(section => {
+    const container = section.querySelector(".parallax__c");
 
-      gsap.set(img, { yPercent: -100 });
-      gsap.to(img, {
+    gsap.set(container, { force3D: true });
+
+    gsap.fromTo(container, 
+      { yPercent: -100 },
+      {
         yPercent: 100,
         ease: "none",
         scrollTrigger: {
@@ -559,9 +573,10 @@
           end: "bottom top",
           scrub: true
         }
-      });
-    });
-  }
+      }
+    );
+  });
+}
 
   function initImagesAnimations() {
     const blocks = gsap.utils.toArray('.n-anim');
@@ -643,8 +658,8 @@
       const topY = h * 0.05;
       const bottomY = h * 0.70;
       const midX = w / 2;
-      const leftX = isM ? w * 0.22 : w * 0.28;
-      const rightX = isM ? w * 0.78 : w * 0.72;
+      const leftX = isM ? w * 0.22 : w * 0.12;
+      const rightX = isM ? w * 0.78 : w * 0.85;
 
       svg.attr("width", w).attr("height", h);
 

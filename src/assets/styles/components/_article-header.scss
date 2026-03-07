@@ -98,10 +98,15 @@ body:has(.v-h-a) .a-h-inc {
   }
 
   .v-a-img {
+    max-height: 80vh;
     object-fit: contain;
     aspect-ratio: unset;
     width: 100%;
     margin: 0 auto;
+
+    @media (min-width: 900px) and (min-height: 700px) and (max-height: 860px) {
+      max-height: 60vh;
+    }
 
     @media (min-width: $screen-xs) {
       width: 80%;
