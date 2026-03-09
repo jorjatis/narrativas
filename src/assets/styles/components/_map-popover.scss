@@ -6,7 +6,12 @@
   margin-bottom: 56px;
 
   .v-d-p {
-    margin-bottom: 23px;
+    margin-bottom: 32px;
+    text-align: center;
+
+    strong {
+      font-family: $mcs;
+    }
   }
 
   &__c {
