@@ -1,43 +1,11 @@
-{{> base/head }}
-
-{{> base/header }}
-
-<div class="v-w">
-  {{!-- Contenido principal --}}
-  <main class="v-w-c {{#if hasPaywall}}v-w-c--1{{/if}} v-d-c">
-    <article class="v-d-w">
-      {{!-- Include superior a la cabecera, si lo lleva --}}
-      {{#unless metadata.img.preArticleHeader}}
-        {{> ./includes/pre-article-header }}
-      {{/unless}}
-
-      {{!-- Cabecera articulo visual --}}
-      {{> ./layout/article-header }}
-
-      {{!-- Contenido articulo --}}
-      <div class="v-c">
-        <div class="v-d v-d--1 v-d--s v-d--abc">
-          {{> ./layout/article-metadata }}
-
-          <p class="v-d-p">{{{metadata.paragraphPaywall}}}</p>
-
-          <div class="paywall">
-            {{> ./layout/article-content }}
-
-            {{!-- NOTE: Creditos --}}
-            {{> ./kraken-components/credits }}
-
-            {{> ./layout/article-topics-comments }}
-          </div>
-        </div>
-      </div>
-    </article>
-  </main>
-
-  {{!-- Contenido secundario (outbrain / relacionadas / megabanner footer) --}}
-  {{> ./layout/article-bottom }}
-</div>
-
-{{> base/footer }}
-
-{{> base/foot }}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>

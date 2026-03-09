@@ -3,26 +3,6 @@
 
 @use './base/global';
 
-// Re-estilos de kraken
-@use './base/kraken-styles';
-
-// Componentes narrativa
-@use './components/article-header';
-@use './components/map-popover';
-@use './components/parallax';
-@use './components/sumario';
-@use './components/animations';
-@use './components/red-relations';
-
-// html, body {
-//   overflow-x: clip;
-// }
-
 body {
   touch-action: pan-y;
-}
-
-.v-cmp-cmb {
-  margin-top: 56px;
-  margin-bottom: 56px;
 }
