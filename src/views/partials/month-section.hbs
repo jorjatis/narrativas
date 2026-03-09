@@ -1,0 +1,12 @@
+{{#each months}}
+  <section class="month-group">
+    <h2 class="month-title">{{title}}</h2>
+
+    <div class="grid">
+      {{#each cards}}
+        {{> ./card }}
+      {{/each}}
+    </div>
+
+  </section>
+{{/each}}

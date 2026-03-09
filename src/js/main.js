@@ -1,11 +1,11 @@
-(function () {
- 
-  function initAll() {
-   
-  }
+﻿import { initThemeToggle } from './modules/theme-toggle';
+import { initCardPreviewHover } from './modules/card-preview';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    initAll();
-  });
+function initAll() {
+  initThemeToggle();
+  initCardPreviewHover();
+}
 
-})();
+document.addEventListener('DOMContentLoaded', () => {
+  initAll();
+});

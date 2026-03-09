@@ -3,6 +3,5 @@
 
 @use './base/global';
 
-body {
-  touch-action: pan-y;
-}
+// Estilos portfolio narrativas
+@use './base/portfolio';

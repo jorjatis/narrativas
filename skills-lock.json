@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "skills": {
+    "d3-viz": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "f16b782976ac2df47f91839385b4458944d90f23f109ff32a8f450bbdaf6431d"
+    },
+    "frontend-design": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "e8118284a6365753790d44bb2758a6032b3af27fa84696428d9233f2be0f4e78"
+    },
+    "gsap": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "2e8b1557817779caec2da7bd1ef8cb1ac84a39a37bea9d20c7997b8e8b644aff"
+    },
+    "handlebars": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "c486c472971cc882389a027c75d8ed7ad30b484cb543c617136908cac10934f8"
+    },
+    "interface-design": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "c95e38d9ff07e71104695114a8783778ccdf4756510e48a07e8b26b838c84cb6"
+    },
+    "refactor": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "87789a786b96f99ba0680e89345a975106e10e7db1071c7cdc2e76d507c449d6"
+    },
+    "ui-ux-pro-max": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "2cc9bf0201da1fbf1eb7a68a757536ee612f460b0a3401f034bbe30910b4a278"
+    }
+  }
+}

@@ -1,1 +1,9 @@
 @use '../base/variables' as *;
+
+html {
+  scroll-behavior: unset !important;
+}
+
+body {
+  touch-action: pan-y;
+}

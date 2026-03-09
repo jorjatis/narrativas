@@ -16,3 +16,7 @@ AppData/
 *.tmp
 # Local Netlify folder
 .netlify
+
+.agents
+
+AGENTS.md
