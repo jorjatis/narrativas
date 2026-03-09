@@ -1,16 +1,16 @@
 <article class="card">
-  <a class="media-container" href="{{url}}" aria-label="Abrir {{title}}">
-    <img src="{{image}}" alt="{{title}}" loading="lazy" class="thumbnail">
-    <video src="{{video}}" muted loop playsinline aria-hidden="true" class="preview-video"></video>
+  <a class="card-media" href="{{articleUrl}}" aria-label="Abrir {{title}}">
+    <img src="assets/images/covers/{{titleMedia}}{{#if gif}}.gif{{else}}.jpg{{/if}}" alt="{{title}}" loading="lazy" class="card-media-thumbnail">
+    <video src="assets/videos/{{titleMedia}}.mp4" muted loop playsinline aria-hidden="true" class="card-media-preview-video"></video>
   </a>
   <div class="card-footer">
-    <h3 class="narrativa-titulo">{{title}}</h3>
-    <div class="actions">
-      <a href="{{actionWebUrl}}" target="_blank" rel="noopener noreferrer" title="Ver web de {{title}}" aria-label="Ver web de {{title}}">
-        <i class="fas fa-globe" aria-hidden="true"></i>
+    <h3 class="card-title">{{title}}</h3>
+    <div class="card-actions">
+      <a href="{{articleUrl}}" target="_blank" rel="noopener noreferrer" title="Ver narrativa "{{title}}" en ABC">
+        <img src="assets/images/abc-icon.webp" aria-hidden="true">
       </a>
-      <a href="{{actionMockupUrl}}" target="_blank" rel="noopener noreferrer" title="Ver mockup de {{title}}" aria-label="Ver mockup de {{title}}">
-        <i class="fas fa-desktop" aria-hidden="true"></i>
+      <a href="{{netlifyUrl}}" target="_blank" rel="noopener noreferrer" title="Ver narrativa de "{{title}}" en Netlify">
+        <img src="assets/images/netlify-icon.png" aria-hidden="true">
       </a>
     </div>
   </div>

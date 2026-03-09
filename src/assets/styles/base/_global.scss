@@ -1,9 +1,49 @@
-@use '../base/variables' as *;
+@use './variables'as *;
 
-html {
-  scroll-behavior: unset !important;
+@font-face {
+    font-family: 'Micrograph Regular';
+    src: url(//static.vocstatic.com/voc26/latest/assets/fonts/mcr.woff2) format("woff2"), url(//static.vocstatic.com/voc26/latest/assets/fonts/mcr.woff) format("woff"), url(//static.vocstatic.com/voc26/latest/assets/fonts/mcr.ttf) format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'Micrograph Semibold';
+    src: url(//static.vocstatic.com/voc26/latest/assets/fonts/mcs.woff2) format("woff2"), url(//static.vocstatic.com/voc26/latest/assets/fonts/mcs.woff) format("woff"), url(//static.vocstatic.com/voc26/latest/assets/fonts/mcs.ttf) format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+}
+
+:root {
+  --bg-color: #{$cb2};
+  --text-color: #{$cb1};
+  --card-bg: #{$cb3};
+}
+
+[data-theme="dark"] {
+  --bg-color: #{$cb9};
+  --text-color: #{$cb2};
+  --card-bg: #{$cb9};
+
+  .logo {
+    filter: brightness(0) invert(1);
+  }
 }
 
 body {
-  touch-action: pan-y;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: $mcr;
+  transition: all 0.3s ease;
+  margin: 0;
+  padding: 20px;
+}
+
+img {
+  border-style: none;
+  display: block;
+  width: 100%;
+  height: auto;
 }

@@ -4,20 +4,18 @@
       "title": "Marzo 2026",
       "cards": [
         {
-          "title": "Narrativa marzo 1",
-          "url": "#",
-          "image": "#",
-          "video": "#",
-          "actionWebUrl": "#",
-          "actionMockupUrl": "#"
+          "title": "Ultras: La ‘kale borroka’ del fútbol",
+          "articleUrl": "https://www.abc.es/espana/ultras-kale-borroka-futbol-20260308041254-nt.html",
+          "titleMedia": "03-ultras",
+          "gif": false,
+          "netlifyUrl": "https://narrativa-gruposultra.netlify.app/"
         },
         {
-          "title": "Narrativa marzo 2",
-          "url": "#",
-          "image": "#",
-          "video": "#",
-          "actionWebUrl": "#",
-          "actionMockupUrl": "#"
+          "title": "Más allá del reloj: un médico en 24 horas de guardia",
+          "articleUrl": "https://www.abc.es/sociedad/anatomia-guardia-medica-horas-20260301124231-nt.html",
+          "titleMedia": "02-urgencias",
+          "gif": true,
+          "netlifyUrl": "https://narrativa-24horasurgencias.netlify.app/"
         }
       ]
     },
@@ -25,13 +23,12 @@
       "title": "Febrero 2026",
       "cards": [
         {
-          "title": "Narrativa febrero 1",
-          "url": "#",
-          "image": "#",
-          "video": "#",
-          "actionWebUrl": "#",
-          "actionMockupUrl": "#"
-        }
+          "title": "Viaje a la Dinamarca sin inmigrantes que imita Europa",
+          "articleUrl": "https://www.abc.es/internacional/dinamarca-quiere-sade-imita-europa-20260218194319-nt.html",
+          "titleMedia": "01-modelomigratorio",
+          "gif": true,
+          "netlifyUrl": "https://narrativa-nuevomodelomigratorio.netlify.app/"
+        }        
       ]
     }
   ]
