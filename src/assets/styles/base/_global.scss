@@ -20,12 +20,24 @@
   --bg-color: #{$cb2};
   --text-color: #{$cb1};
   --card-bg: #{$cb3};
+  --border-top-color: #{$cp1};
+  --tag-bg-color: #{$cp5};
+  --tag-border-color: #{$cp4};
+  --tag-match-bg-color: #{$cp11};
+  --tag-match-border-color: #{$cp8};
+  --focus-ring-color: #{$cp8};
 }
 
 [data-theme="dark"] {
   --bg-color: #{$cb9};
   --text-color: #{$cb2};
   --card-bg: #{$cb9};
+  --border-top-color: #{$cb2};
+  --tag-bg-color: rgba(255, 255, 255, .08);
+  --tag-border-color: rgba(255, 255, 255, .24);
+  --tag-match-bg-color: rgba(102, 186, 255, .18);
+  --tag-match-border-color: #{$cp9};
+  --focus-ring-color: #{$cp9};
 
   .logo {
     filter: brightness(0) invert(1);
@@ -33,12 +45,47 @@
 }
 
 body {
+  border-top: 5px solid var(--border-top-color);
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: $mcr;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   margin: 0;
   padding: 20px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 1000;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  top: 12px;
 }
 
 img {

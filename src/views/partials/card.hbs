@@ -1,4 +1,4 @@
-<article class="card">
+<article class="card" data-tags="{{#each tags}}{{this}}{{#unless @last}}|{{/unless}}{{/each}}">
   <a class="card-media" href="{{articleUrl}}" aria-label="Abrir {{title}}">
     <img src="assets/images/covers/{{titleMedia}}{{#if gif}}.gif{{else}}.jpg{{/if}}" alt="{{title}}" loading="lazy" class="card-media-thumbnail">
     <video src="assets/videos/{{titleMedia}}.mp4" muted loop playsinline aria-hidden="true" class="card-media-preview-video"></video>
@@ -6,12 +6,22 @@
   <div class="card-footer">
     <h3 class="card-title">{{title}}</h3>
     <div class="card-actions">
-      <a href="{{articleUrl}}" target="_blank" rel="noopener noreferrer" title="Ver narrativa "{{title}}" en ABC">
-        <img src="assets/images/abc-icon.webp" aria-hidden="true">
+      <a href="{{articleUrl}}" target="_blank" rel="noopener noreferrer" title="Ver narrativa de {{title}} en ABC" aria-label="Ver narrativa de {{title}} en ABC">
+        <img src="assets/images/abc-icon.webp" alt="" aria-hidden="true">
       </a>
-      <a href="{{netlifyUrl}}" target="_blank" rel="noopener noreferrer" title="Ver narrativa de "{{title}}" en Netlify">
-        <img src="assets/images/netlify-icon.png" aria-hidden="true">
+      <a href="{{netlifyUrl}}" target="_blank" rel="noopener noreferrer" title="Ver narrativa de {{title}} en Netlify" aria-label="Ver narrativa de {{title}} en Netlify">
+        <img src="assets/images/netlify-icon.png" alt="" aria-hidden="true">
       </a>
     </div>
   </div>
+
+  {{#if tags}}
+    <ul class="card-tags" aria-label="Etiquetas de {{title}}">
+      {{#each tags}}
+        <li class="card-tags__item">
+          <span class="card-tag" data-tag="{{this}}">{{this}}</span>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
 </article>
