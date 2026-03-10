@@ -55,16 +55,16 @@
         const offset = getOffset();
         const y = window.scrollY + trigger.getBoundingClientRect().top;
 
-        window.scrollTo({
-          top: y + offset,
-          behavior: "auto"
-        });
-
         document.body.classList.add('is-overflow');
         scrollIndicator.classList.add('is-hidden');
 
         video.currentTime = 0;
         video.play();
+
+        window.scrollTo({
+          top: y + offset,
+          behavior: "auto"
+        });
       });
     }, {
       threshold: 0,
