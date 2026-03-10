@@ -4,6 +4,10 @@ html {
   scroll-behavior: unset !important;
 }
 
+body {
+  touch-action: pan-y;
+}
+
 @media (max-width: $screen-xs) {
   .v-h-a {
     position: relative;
