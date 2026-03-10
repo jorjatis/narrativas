@@ -74,7 +74,7 @@ body {
 
           .v-a-t {
             &__l {
-              animation: titleLetter .8s cubic-bezier(.2, .65, .3, 1) forwards;
+              animation: titleLetter 2s cubic-bezier(.2, .65, .3, 1) forwards;
               animation-delay: var(--d);
             }
           }
@@ -84,7 +84,6 @@ body {
       @keyframes titleLetter {
         to {
           opacity: 1;
-          transform: translateY(0);
           filter: blur(0);
         }
       }
@@ -92,7 +91,6 @@ body {
       &__l {
         display: inline-block;
         opacity: 0;
-        transform: translateY(20px);
         filter: blur(8px);
       }
     }

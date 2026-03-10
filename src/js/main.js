@@ -39,16 +39,18 @@
     const video = document.querySelector('.n-sticky video');
     const scrollIndicator = document.querySelector('.scr-ind');
 
+    if (!trigger || !video) return;
+
+    let hasPlayed = false;
+
     const getOffset = () => {
       return window.matchMedia('(max-width: 669px)').matches ? 52 : 58;
     };
 
-    if (!trigger || !video) return;
-
-    const observer = new IntersectionObserver((entries, obs) => {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
 
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting || hasPlayed) return;
 
         const offset = getOffset();
         const y = window.scrollY + trigger.getBoundingClientRect().top;
@@ -63,8 +65,6 @@
 
         video.currentTime = 0;
         video.play();
-
-        obs.unobserve(trigger);
       });
     }, {
       threshold: 0,
@@ -74,10 +74,14 @@
     observer.observe(trigger);
 
     video.addEventListener('ended', () => {
+      hasPlayed = true;
+
       document.body.classList.remove('is-overflow');
+
       document.querySelector('.v-a-t-c')?.classList.add('is-visible');
-      scrollIndicator.classList.remove('is-hidden');
-      scrollIndicator.classList.add('is-visible');
+
+      scrollIndicator?.classList.remove('is-hidden');
+      scrollIndicator?.classList.add('is-visible');
     });
   }
 
