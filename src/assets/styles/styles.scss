@@ -5,3 +5,7 @@
 
 // Re-estilos de kraken
 @use './base/kraken-styles';
+
+// Componentes
+@use './components/scroll-indicator';
+@use './components/sticky';

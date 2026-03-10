@@ -20,9 +20,14 @@ body {
   justify-content: center;
 }
 
+.v-h.v-h--t3 {
+  margin-bottom: 0;
+}
+
 .v-w .v-a--d-s-1 {
   display: block;
   height: auto;
+  margin-top: -58px;
 
   .v-a-inf-c {
     .v-a-p-t,
@@ -36,9 +41,20 @@ body {
         fill: $cb1;
       }
     }
+
+    .v-a-t {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100dvh;
+      margin-top: -100vh;
+      z-index: 1;
+    }
   }
 
   .v-a-img-c {
+    overflow: unset;
+
     &:after {
       content: none;
     }

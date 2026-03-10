@@ -1,0 +1,59 @@
+@use '../base/variables'as *;
+
+.scr-ind {
+  position: absolute;
+  inset: 0 0 40px;
+  z-index: 40;
+  pointer-events: none;
+
+  &__c {
+    position: sticky;
+    top: calc(100vh - 82px);
+    display: flex;
+    justify-content: center;
+  }
+
+  &__m {
+    position: relative;
+    display: block;
+    width: 28px;
+    height: 44px;
+    border: 2px solid $cb2;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, .15);
+    box-shadow: 0 0 24px rgba(0, 0, 0, .2);
+  }
+
+  &__w {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 4px;
+    height: 9px;
+    border-radius: 999px;
+    background: $cb2;
+    transform: translateX(-50%);
+    animation: scroll-wheel 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes scroll-wheel {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(12px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+}

@@ -1,0 +1,60 @@
+@use '../base/variables'as *;
+
+.n-a-preh {
+  position: relative;
+}
+
+.n-sticky {
+  &__sec {
+    position: sticky;
+    top: 0;
+  }
+
+  &__i {
+    video {
+      height: 100dvh;
+      object-fit: cover;
+    }
+  }
+
+  .n-step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 100vh;
+    padding-top: 52px;
+    z-index: 10;
+
+    @media (min-width: $screen-xs) {
+      padding-top: 58px;
+    }
+
+    &[data-step="2"] {
+      min-height: calc(100vh + 69px);
+    }
+
+    &__c {
+      width: 100%;
+      max-width: 300px;
+      padding: 20px;
+      border: 2px solid $cb1;
+      border-radius: 10px;
+      background: $cb2;
+
+      p {
+        font: 14px/1 $mcr;
+        text-align: center;
+
+        b {
+          display: block;
+          font-family: $mcs;
+          font-size: 18px;
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}
