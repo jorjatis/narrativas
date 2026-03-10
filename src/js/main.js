@@ -1,17 +1,34 @@
 (function () {
+  function wrapTitle() {
+    const title = document.querySelector('.v-a-t');
+    if (!title) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'v-a-t-c';
+
+    title.parentNode.insertBefore(wrapper, title);
+    wrapper.appendChild(title);
+  }
+
   function splitTitleLetters() {
     const title = document.querySelector('.v-a-t');
     if (!title) return;
 
-    const text = title.textContent;
-    title.textContent = '';
+    const text = title.textContent.trim();
+    title.innerHTML = '';
 
-    [...text].forEach(letter => {
+    [...text].forEach(char => {
+
+      if (char === ' ') {
+        title.appendChild(document.createTextNode('\u00A0'));
+        return;
+      }
+
       const span = document.createElement('span');
-      span.textContent = letter === ' ' ? '\u00A0' : letter;
+      span.className = 'v-a-t__l';
+      span.textContent = char;
 
-      const delay = (Math.random() * 0.6).toFixed(2);
-      span.style.setProperty('--d', `${delay}s`);
+      span.style.setProperty('--d', (Math.random() * 0.6).toFixed(2) + 's');
 
       title.appendChild(span);
     });
@@ -25,16 +42,29 @@
 
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          document.body.classList.add('is-overflow');
-          video.currentTime = 0;
-          video.play();
 
-          obs.unobserve(trigger);
-        }
+        if (!entry.isIntersecting) return;
+
+        // corregimos la posición exacta del scroll
+        const y = window.scrollY + trigger.getBoundingClientRect().top;
+
+        window.scrollTo({
+          top: y,
+          behavior: "auto"
+        });
+
+        // bloqueamos scroll
+        document.body.classList.add('is-overflow');
+
+        // reproducimos vídeo
+        video.currentTime = 0;
+        video.play();
+
+        // evitamos que vuelva a dispararse
+        obs.unobserve(trigger);
+
       });
     }, {
-      root: null,
       threshold: 0,
       rootMargin: "0px 0px -100% 0px"
     });
@@ -43,13 +73,14 @@
 
     video.addEventListener('ended', () => {
       document.body.classList.remove('is-overflow');
-      document.querySelector('.v-a-t').classList.add('is-visible');
+      document.querySelector('.v-a-t')?.classList.add('is-visible');
     });
   }
 
   function initAll() {
-    // splitTitleLetters();
-    // initVideoStep();
+    wrapTitle();
+    splitTitleLetters();
+    initVideoStep();
   }
 
   document.addEventListener('DOMContentLoaded', initAll);

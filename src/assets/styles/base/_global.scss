@@ -1,7 +1,12 @@
 @use '../base/variables' as *;
 
 html {
-  scroll-behavior: unset !important;
+  // scroll-behavior: unset !important;
+  scroll-behavior: auto;
+}
+
+.n-step[data-step="2"] {
+  scroll-margin-top: 0;
 }
 
 body {
@@ -43,12 +48,17 @@ body {
     }
 
     .v-a-t {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      opacity: 0;
+      text-align: center;
       height: 100dvh;
+      display: grid;
+      place-items: center;
       margin-top: -100vh;
       z-index: 1;
+
+      &.is-visible {
+        opacity: 1;
+      }
     }
   }
 
@@ -63,4 +73,22 @@ body {
 
 .v-cmp-crd {
   margin-top: 60px;
+}
+
+.v-a-t__l{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(20px);
+}
+
+.v-a-t.is-visible .v-a-t__l{
+  animation: titleLetter .6s ease forwards;
+  animation-delay:var(--d);
+}
+
+@keyframes titleLetter{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
