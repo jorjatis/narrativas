@@ -37,6 +37,11 @@
   function initVideoStep() {
     const trigger = document.querySelector('.n-step[data-step="2"]');
     const video = document.querySelector('.n-sticky video');
+    const scrollIndicator = document.querySelector('.scr-ind');
+
+    const getOffset = () => {
+      return window.matchMedia('(max-width: 669px)').matches ? 52 : 58;
+    };
 
     if (!trigger || !video) return;
 
@@ -45,24 +50,21 @@
 
         if (!entry.isIntersecting) return;
 
-        // corregimos la posición exacta del scroll
+        const offset = getOffset();
         const y = window.scrollY + trigger.getBoundingClientRect().top;
 
         window.scrollTo({
-          top: y,
+          top: y + offset,
           behavior: "auto"
         });
 
-        // bloqueamos scroll
         document.body.classList.add('is-overflow');
+        scrollIndicator.classList.add('is-hidden');
 
-        // reproducimos vídeo
         video.currentTime = 0;
         video.play();
 
-        // evitamos que vuelva a dispararse
         obs.unobserve(trigger);
-
       });
     }, {
       threshold: 0,
@@ -73,7 +75,9 @@
 
     video.addEventListener('ended', () => {
       document.body.classList.remove('is-overflow');
-      document.querySelector('.v-a-t')?.classList.add('is-visible');
+      document.querySelector('.v-a-t-c')?.classList.add('is-visible');
+      scrollIndicator.classList.remove('is-hidden');
+      scrollIndicator.classList.add('is-visible');
     });
   }
 
