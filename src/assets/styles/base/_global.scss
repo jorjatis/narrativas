@@ -21,6 +21,9 @@ body {
 }
 
 .v-w .v-a--d-s-1 {
+  display: block;
+  height: auto;
+
   .v-a-inf-c {
     .v-a-p-t,
     .v-a-t,
@@ -32,6 +35,12 @@ body {
       svg {
         fill: $cb1;
       }
+    }
+  }
+
+  .v-a-img-c {
+    &:after {
+      content: none;
     }
   }
 }
