@@ -1,4 +1,21 @@
 (function () {
+  function setRealViewportHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+
+  function initViewportFix() {
+    setRealViewportHeight();
+
+    window.addEventListener('orientationchange', () => {
+      setTimeout(setRealViewportHeight, 150);
+    });
+
+    window.visualViewport?.addEventListener('resize', () => {
+      setRealViewportHeight();
+    });
+  }
+
   function wrapTitle() {
     const title = document.querySelector('.v-a-t');
     if (!title) return;
@@ -67,7 +84,7 @@
         if (!entry.isIntersecting || played) return;
 
         const offset = getOffset();
-        const y = window.scrollY + trigger.getBoundingClientRect().top;
+        const y = trigger.offsetTop;
         const targetY = y + offset;
 
         requestAnimationFrame(() => {
@@ -108,6 +125,8 @@
   }
 
   function initAll() {
+    initViewportFix();
+
     wrapTitle();
     splitTitleLetters();
     initVideoStep();
