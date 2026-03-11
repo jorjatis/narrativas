@@ -35,53 +35,75 @@
   }
 
   function initVideoStep() {
+    const html = document.documentElement;
+
     const trigger = document.querySelector('.n-step[data-step="2"]');
     const video = document.querySelector('.n-sticky video');
     const scrollIndicator = document.querySelector('.scr-ind');
 
     if (!trigger || !video) return;
 
-    let hasPlayed = false;
+    let played = false;
 
-    const getOffset = () => {
-      return window.matchMedia('(max-width: 669px)').matches ? 52 : 58;
-    };
+    const getOffset = () =>
+      window.matchMedia('(max-width: 669px)').matches ? 52 : 58;
 
-    const observer = new IntersectionObserver((entries) => {
+    function forceScroll(targetY) {
+      let frames = 8;
+
+      function tick() {
+        window.scrollTo(0, targetY);
+        frames--;
+        if (frames > 0) {
+          requestAnimationFrame(tick);
+        }
+      }
+
+      tick();
+    }
+
+    const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
-
-        if (!entry.isIntersecting || hasPlayed) return;
+        if (!entry.isIntersecting || played) return;
 
         const offset = getOffset();
         const y = window.scrollY + trigger.getBoundingClientRect().top;
+        const targetY = y + offset;
 
-        document.body.classList.add('is-overflow');
-        scrollIndicator.classList.add('is-hidden');
+        requestAnimationFrame(() => {
+          html.classList.add('no-snap');
+          trigger?.style.setProperty('min-height', '150vh');
+          forceScroll(targetY);
 
-        video.currentTime = 0;
-        video.play();
+          document.body.classList.add('is-overflow');
+          scrollIndicator?.classList.add('is-hidden');
 
-        window.scrollTo({
-          top: y + offset,
-          behavior: "auto"
+          video.currentTime = 0;
+          video.play();
         });
       });
     }, {
       threshold: 0,
-      rootMargin: "0px 0px -100% 0px"
+      rootMargin: "0px 0px -50% 0px"
     });
 
     observer.observe(trigger);
 
     video.addEventListener('ended', () => {
-      hasPlayed = true;
+      trigger?.style.removeProperty('min-height');
 
-      document.body.classList.remove('is-overflow');
+      played = true;
+
+      setTimeout(() => {
+        document.body.classList.remove('is-overflow');    
+      }, 1000);
 
       document.querySelector('.v-a-t-c')?.classList.add('is-visible');
 
       scrollIndicator?.classList.remove('is-hidden');
       scrollIndicator?.classList.add('is-visible');
+
+      observer.unobserve(trigger);
     });
   }
 
@@ -92,4 +114,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', initAll);
+  // window.addEventListener('load', () => {
+  //   initAll();
+  // });
 })();

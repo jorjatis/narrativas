@@ -18,6 +18,7 @@
   }
 
   .n-step {
+    scroll-snap-align: center;
     position: relative;
     display: flex;
     flex-direction: column;

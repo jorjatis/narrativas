@@ -1,16 +1,21 @@
 @use '../base/variables'as *;
 
 html {
-  // scroll-behavior: unset !important;
-  scroll-behavior: auto;
-}
+  scroll-behavior: unset !important;
+  scroll-snap-type: y proximity;
 
-.n-step[data-step="2"] {
-  scroll-margin-top: 0;
+  &.no-snap {
+    scroll-snap-type: none;
+  }
 }
 
 body {
   touch-action: pan-y;
+
+  &.is-overflow {
+    overscroll-behavior: none;
+    touch-action:none;
+  }
 }
 
 @media (max-width: $screen-xs) {
