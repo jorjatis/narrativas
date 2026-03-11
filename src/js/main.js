@@ -88,7 +88,6 @@
         const targetY = y + offset;
 
         requestAnimationFrame(() => {
-          html.classList.add('no-snap');
           trigger?.style.setProperty('min-height', '150vh');
           forceScroll(targetY);
 
@@ -119,6 +118,7 @@
 
       scrollIndicator?.classList.remove('is-hidden');
       scrollIndicator?.classList.add('is-visible');
+      scrollIndicator?.classList.add('is-absolute');
 
       observer.unobserve(trigger);
     });

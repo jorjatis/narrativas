@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sticky Mobile Safe</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, sans-serif;
+background:black; /* evita flash blanco */
+}
+
+/* sección de scroll */
+
+.scroll-section{
+height:300vh;
+position:relative;
+}
+
+/* sticky */
+
+.sticky{
+position:sticky;
+top:0;
+height:100vh;
+overflow:hidden;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+transform:translateZ(0);
+will-change:transform;
+}
+
+/* imagen más grande que viewport */
+
+.sticky img{
+width:100%;
+height:120vh;
+object-fit:cover;
+}
+
+/* contenido después */
+
+.content{
+padding:120px 10%;
+font-size:22px;
+line-height:1.6;
+background:white;
+}
+
+.content:nth-child(even){
+background:#f3f3f3;
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="scroll-section">
+
+<div class="sticky">
+<img src="https://picsum.photos/1920/1080">
+</div>
+
+</section>
+
+<section class="content">
+<h2>Bloque de texto 1</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+</section>
+
+<section class="content">
+<h2>Bloque de texto 2</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+</section>
+
+<section class="content">
+<h2>Bloque de texto 3</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+</section>
+
+</body>
+</html>

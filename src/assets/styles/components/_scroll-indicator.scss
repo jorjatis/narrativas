@@ -1,10 +1,20 @@
 @use '../base/variables'as *;
 
 .scr-ind {
-  position: absolute;
-  inset: 0 0 40px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 40px;
   z-index: 40;
   pointer-events: none;
+
+  &.is-absolute {
+    position: absolute;
+    left: unset;
+    transform: unset;
+    bottom: unset;
+    inset: 0 0 40px;
+  }
 
   &__c {
     position: sticky;

@@ -2,13 +2,6 @@
 
 html {
   scroll-behavior: unset !important;
-  @media (min-width: $screen-xs) {
-    scroll-snap-type: y proximity;
-
-    &.no-snap {
-      scroll-snap-type: none;
-    }
-  }
 }
 
 body {
@@ -49,7 +42,7 @@ body {
 .v-w .v-a--d-s-1 {
   display: block;
   height: auto;
-  margin-top: -58px;
+  
 
   .v-a-inf-c {
     .v-a-p-t,
@@ -76,6 +69,10 @@ body {
         margin-top: -100vh;
         z-index: 1;
 
+        @media (max-width: $screen-xs) {
+          margin-top: calc(-100vh - 98px);
+        }
+
         &.is-visible {
           opacity: 1;
 
@@ -101,6 +98,12 @@ body {
         filter: blur(8px);
       }
     }
+
+    .v-a-s-t {
+      @media (max-width: $screen-xs) {
+        margin-top: 134px;
+      }
+    }
   }
 
   .v-a-img-c {
@@ -110,8 +113,4 @@ body {
       content: none;
     }
   }
-}
-
-.v-cmp-crd {
-  margin-top: 60px;
 }
