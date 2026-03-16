@@ -1,0 +1,44 @@
+<link href="https://cdn.jsdelivr.net/npm/jarallax@2/dist/jarallax.min.css" rel="stylesheet">
+
+<style>
+  .parallax-container {
+    position: relative;
+    width: 100vw;
+    max-width: 1440px;
+    left: 50%;
+    transform: translateX(-50%);
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .parallax-video {
+    width: 100%;
+    height: 100%;
+  }
+
+  .jarallax-video video {
+  height: 140%;
+  will-change: transform;
+}
+</style>
+
+<figure class="parallax-container">
+  <div class="parallax-video"></div>
+</figure>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jarallax@2/dist/jarallax.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jarallax@2/dist/jarallax-video.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  jarallaxVideo();
+
+  jarallax(document.querySelectorAll('.parallax-video'), {
+    speed: 0,
+    videoSrc: 'mp4:./assets/videos/video-short.mp4',
+  });
+
+});
+</script>

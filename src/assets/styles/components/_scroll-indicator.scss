@@ -20,7 +20,10 @@
     position: sticky;
     top: calc(100vh - 82px);
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    gap: 16px;
   }
 
   &__m {
@@ -44,6 +47,14 @@
     background: $cb2;
     transform: translateX(-50%);
     animation: scroll-wheel 1.6s ease-in-out infinite;
+  }
+
+  &__txt {
+    font-family: $mcr;
+    font-size: 14px;
+    text-align: center;
+    color: $cb2;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, .8);
   }
 }
 

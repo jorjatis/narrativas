@@ -1,0 +1,17 @@
+<div class="n-vid-blk n-vid-blk--{{id}}">
+  {{#if twoVideos}}
+    <figure class="n-vid-blk__i n-vid-blk__i--1">
+      <video muted playsinline loop preload="metadata" src="{{video1}}"></video>
+    </figure>
+
+    <figure class="n-vid-blk__i n-vid-blk__i--2">
+      <video muted playsinline loop preload="metadata" src="{{video2}}"></video>
+    </figure>
+
+    {{#if threeVideos}}
+      <figure class="n-vid-blk__i n-vid-blk__i--3">
+        <video muted playsinline loop preload="metadata" src="{{video3}}"></video>
+      </figure>
+    {{/if}}
+  {{/if}}
+</div>

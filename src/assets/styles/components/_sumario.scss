@@ -1,0 +1,41 @@
+@use '../base/variables'as *;
+
+.n-sumr {
+  width: 100%;
+  max-width: 495px;
+  margin: 96px auto;
+
+  &--1 {
+    max-width: 275px;
+  }
+
+  &__num {
+    display: block;
+    margin: 0 0 24px;
+    font-family: $axs;
+    font-size: 60px;
+    line-height: 50px;
+    text-transform: uppercase;
+    text-align: center;
+    color: $cb1;
+  }
+
+  &__txt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    font-family: $mcr;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+
+    &:before,
+    &:after {
+      content: '';
+      width: 131px;
+      height: 1px;
+      background: $cb7;
+    }
+  }
+}

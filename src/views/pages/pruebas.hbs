@@ -1,95 +1,62 @@
+{{> base/head }}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sticky Mobile Safe</title>
+<div class="v-w">
+  {{!-- Contenido principal --}}
+  <main class="v-w-c {{#if hasPaywall}}v-w-c--1{{/if}} v-d-c">
+    <article class="v-d-w">
+      {{!-- Contenido articulo --}}
+      <div class="v-c">
+        <div class="v-d v-d--1 v-d--s v-d--abc">
+          <div class="paywall">
 
-<style>
+            <p class="v-d-p">Son ultras, de extrema derecha, pero también de extrema izquierda, y a pesar de eso sus odios y alianzas no responden siempre a unas ideas políticas. Utilizan el fútbol para dar salida a su violencia ciega.</p>
+            <p class="v-d-p">Proliferan en casi todos los estadios, sobre todo de Primera y Segunda División -el Villarreal es la excepción-, pero también en divisiones inferiores, y suponen un problema de primer orden para la Policía; más concretamente para los especialistas de la Comisaría General y brigadas provinciales de Información, que son los que intentan poner coto a sus desmanes, a veces sin toda la colaboración deseable de la administración y del propio sistema judicial. Pero no desisten. No pueden hacerlo, porque hay vidas en juego, como ya se ha visto en varias ocasiones.</p>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+            <div class="v-c-cmp">
+              {{> ./includes/videos-block
+                id="1"
+                twoVideos=true
+                video1="https://s1.abcstatics.com/abc/www/multimedia/internacional/2026/03/14/01%20CONSTRUCCI%C3%93N_A.mp4"
+                video2="https://s1.abcstatics.com/abc/www/multimedia/internacional/2026/03/14/01%20CONSTRUCCI%C3%93N_B.mp4"
+              }}
+            </div>
 
-body{
-font-family:Arial, sans-serif;
-background:black; /* evita flash blanco */
-}
+            <p class="v-d-p">Son ultras, de extrema derecha, pero también de extrema izquierda, y a pesar de eso sus odios y alianzas no responden siempre a unas ideas políticas. Utilizan el fútbol para dar salida a su violencia ciega.</p>
+            <p class="v-d-p">Proliferan en casi todos los estadios, sobre todo de Primera y Segunda División -el Villarreal es la excepción-, pero también en divisiones inferiores, y suponen un problema de primer orden para la Policía; más concretamente para los especialistas de la Comisaría General y brigadas provinciales de Información, que son los que intentan poner coto a sus desmanes, a veces sin toda la colaboración deseable de la administración y del propio sistema judicial. Pero no desisten. No pueden hacerlo, porque hay vidas en juego, como ya se ha visto en varias ocasiones.</p>
 
-/* sección de scroll */
+            <div class="v-c-cmp">
+              {{> ./includes/videos-block
+                id="2"
+                twoVideos=true
+                video1="https://s1.abcstatics.com/abc/www/multimedia/internacional/2026/03/14/01%20CONSTRUCCI%C3%93N_A.mp4"
+                video2="https://s1.abcstatics.com/abc/www/multimedia/internacional/2026/03/14/01%20CONSTRUCCI%C3%93N_B.mp4"
+              }}
+            </div>
 
-.scroll-section{
-height:300vh;
-position:relative;
-}
+            <p class="v-d-p">Son ultras, de extrema derecha, pero también de extrema izquierda, y a pesar de eso sus odios y alianzas no responden siempre a unas ideas políticas. Utilizan el fútbol para dar salida a su violencia ciega.</p>
+            <p class="v-d-p">Proliferan en casi todos los estadios, sobre todo de Primera y Segunda División -el Villarreal es la excepción-, pero también en divisiones inferiores, y suponen un problema de primer orden para la Policía; más concretamente para los especialistas de la Comisaría General y brigadas provinciales de Información, que son los que intentan poner coto a sus desmanes, a veces sin toda la colaboración deseable de la administración y del propio sistema judicial. Pero no desisten. No pueden hacerlo, porque hay vidas en juego, como ya se ha visto en varias ocasiones.</p>
 
-/* sticky */
+            <div class="v-c-cmp">
+              {{> ./includes/videos-block
+                id="3"
+                twoVideos=true
+                threeVideos=true
+                video1="https://s1.abcstatics.com/abc/www/multimedia/internacional/2026/03/14/01%20CONSTRUCCI%C3%93N_A.mp4"
+                video2="https://s1.abcstatics.com/abc/www/multimedia/internacional/2026/03/14/01%20CONSTRUCCI%C3%93N_B.mp4"
+                video3="https://s1.abcstatics.com/abc/www/multimedia/internacional/2026/03/14/01%20CONSTRUCCI%C3%93N_B.mp4"
+              }}
+            </div>
 
-.sticky{
-position:sticky;
-top:0;
-height:100vh;
-overflow:hidden;
+            <p class="v-d-p">Son ultras, de extrema derecha, pero también de extrema izquierda, y a pesar de eso sus odios y alianzas no responden siempre a unas ideas políticas. Utilizan el fútbol para dar salida a su violencia ciega.</p>
+            <p class="v-d-p">Proliferan en casi todos los estadios, sobre todo de Primera y Segunda División -el Villarreal es la excepción-, pero también en divisiones inferiores, y suponen un problema de primer orden para la Policía; más concretamente para los especialistas de la Comisaría General y brigadas provinciales de Información, que son los que intentan poner coto a sus desmanes, a veces sin toda la colaboración deseable de la administración y del propio sistema judicial. Pero no desisten. No pueden hacerlo, porque hay vidas en juego, como ya se ha visto en varias ocasiones.</p>
 
-display:flex;
-align-items:center;
-justify-content:center;
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
 
-transform:translateZ(0);
-will-change:transform;
-}
-
-/* imagen más grande que viewport */
-
-.sticky img{
-width:100%;
-height:120vh;
-object-fit:cover;
-}
-
-/* contenido después */
-
-.content{
-padding:120px 10%;
-font-size:22px;
-line-height:1.6;
-background:white;
-}
-
-.content:nth-child(even){
-background:#f3f3f3;
-}
-
-</style>
-</head>
-
-<body>
-
-<section class="scroll-section">
-
-<div class="sticky">
-<img src="https://picsum.photos/1920/1080">
 </div>
 
-</section>
 
-<section class="content">
-<h2>Bloque de texto 1</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
-</section>
-
-<section class="content">
-<h2>Bloque de texto 2</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
-</section>
-
-<section class="content">
-<h2>Bloque de texto 3</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
-</section>
-
-</body>
-</html>
+{{> base/foot }}

@@ -1,0 +1,133 @@
+@use '../base/variables'as *;
+
+.n-vid-blk {
+  position: relative;
+  width: 100vw;
+  max-width: 1440px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 80px;
+  margin-bottom: 80px;
+  padding-left: 27px;
+  padding-right: 27px;
+
+  @media (min-width: $screen-xs) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  video {
+    object-fit: cover;
+    height: 100%;
+  }
+
+  &__i {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  &--1 {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @media (min-width: $screen-xs) {
+      gap: 200px;
+    }
+
+    .n-vid-blk__i {
+      &--1 {
+        max-width: 711px;
+        align-self: flex-start;
+        margin-right: 10%;
+
+        @media (min-width: $screen-xs) {
+          margin-right: 0;
+        }
+      }
+
+      &--2 {
+        max-width: 420px;
+        align-self: flex-end;
+
+        @media (min-width: $screen-xs) {
+          margin-right: 21%;
+        }
+      }
+    }
+  }
+
+  &--2 {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+
+    @media (max-width: $screen-xs) {
+      flex-direction: column;
+      gap: 40px;
+    }
+    
+    .n-vid-blk__i {
+      &--1 {
+        max-width: 513px;
+        align-self: flex-start;
+        margin-right: 10%;
+
+        @media (min-width: $screen-xs) {
+          margin-right: 0;
+        }
+      }
+
+      &--2 {
+        max-width: 353px;
+        align-self: flex-end;
+        margin-left: 10%;
+
+        @media (min-width: $screen-xs) {
+          margin-left: 0;
+          margin-top: 13%;
+        }
+      }
+    }
+  }
+
+  &--3 {
+    display: flex;
+    flex-direction: column;
+
+    .n-vid-blk__i {
+      &--1 {
+        max-width: 649px;
+        align-self: flex-end;
+        margin-left: 8%;
+
+        @media (min-width: $screen-xs) {
+          margin-left: 0;
+          margin-right: 8%;
+        }
+      }
+
+      &--2 {
+        max-width: 439px;
+
+        @media (max-width: $screen-xs) {
+          margin-right: 10%;
+          margin-top: -50px;
+        }
+      }
+
+      &--3 {
+        max-width: 563px;
+        align-self: flex-end;
+        margin-top: 136px;
+        margin-right: 15%;
+
+        @media (max-width: $screen-xs) {
+          margin-right: 0;
+          margin-left: 15%;
+          margin-top: -20px;
+        }
+      }
+    }
+  }
+}
