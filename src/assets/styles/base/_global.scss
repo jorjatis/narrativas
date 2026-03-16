@@ -20,24 +20,28 @@
   --bg-color: #{$cb2};
   --text-color: #{$cb1};
   --card-bg: #{$cb3};
+  --card-border-color: rgba(0, 0, 0, .08);
   --border-top-color: #{$cp1};
   --tag-bg-color: #{$cp5};
   --tag-border-color: #{$cp4};
   --tag-match-bg-color: #{$cp4};
   --tag-match-border-color: #{$cp1};
   --focus-ring-color: #{$cp8};
+  --muted-color: rgba(0, 0, 0, .62);
 }
 
 [data-theme="dark"] {
   --bg-color: #{$cb9};
   --text-color: #{$cb2};
-  --card-bg: #{$cb9};
+  --card-bg: #{rgba($cb2, .04)};
+  --card-border-color: rgba(255, 255, 255, .14);
   --border-top-color: #{$cb2};
   --tag-bg-color: rgba(255, 255, 255, .08);
   --tag-border-color: rgba(255, 255, 255, .24);
   --tag-match-bg-color: rgba(102, 186, 255, .18);
   --tag-match-border-color: #{$cp9};
   --focus-ring-color: #{$cp9};
+  --muted-color: rgba(255, 255, 255, .68);
 
   .logo {
     filter: brightness(0) invert(1);
@@ -51,7 +55,13 @@ body {
   font-family: $mcr;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   margin: 0;
-  padding: 20px;
+  min-width: 320px;
+  padding: 20px 20px 40px;
+}
+
+.site-shell {
+  width: min(1680px, 100%);
+  margin: 0 auto;
 }
 
 :focus-visible {
@@ -93,4 +103,10 @@ img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+@media (max-width: $screen-xs) {
+  body {
+    padding: 18px 16px 40px;
+  }
 }

@@ -1,33 +1,18 @@
-<header>
-  <div class="header-left">
-    <img src="assets/images/logo-abc.svg" alt="Logo" class="logo">
-    <h1>Narrativas</h1>
-  </div>
-  <div class="header-actions">
-    <div class="header-search" id="header-search">
-      <div class="header-search__row">
-        <button type="button" id="tag-search-toggle" class="header-search__toggle header-search__toggle--search" title="Buscar por etiqueta" aria-label="Buscar por etiqueta" aria-controls="tag-search-panel" aria-expanded="false">
-          <i class="fas fa-search" aria-hidden="true"></i>
-        </button>
+<header class="site-header">
+  <div class="site-header__top">
+    <a class="site-header__logo-link" href="./" aria-label="Ir al inicio de Narrativas visuales">
+      <img src="assets/images/logo-abc.svg" alt="" aria-hidden="true" class="logo">
+    </a>
 
-        <div class="header-search__panel" id="tag-search-panel" hidden>
-          <label class="sr-only" for="tag-search-input">Buscar por etiquetas</label>
-          <input id="tag-search-input" class="header-search__input" type="search" autocomplete="off" inputmode="search" placeholder="Etiqueta… (ej: video)" />
-          <button type="button" id="tag-search-clear" class="header-search__clear" aria-label="Limpiar busqueda">
-            <i class="fas fa-xmark" aria-hidden="true"></i>
-          </button>
-        </div>
-
-        <button type="button" id="tag-visibility-toggle" class="header-search__toggle header-search__toggle--tags" title="Mostrar etiquetas" aria-label="Mostrar etiquetas" aria-pressed="false">
-          <i class="fas fa-tags" aria-hidden="true"></i>
-        </button>
-      </div>
-
-      <p class="header-search__status" id="tag-search-status" aria-live="polite"></p>
-    </div>
-
-    <button type="button" id="theme-toggle" title="Cambiar modo" aria-label="Cambiar modo de color">
-      <i class="fas fa-moon" aria-hidden="true"></i>
+    <button type="button" id="theme-toggle" class="theme-toggle" title="Cambiar modo" aria-label="Cambiar modo de color">
+      <span class="theme-toggle__icon" aria-hidden="true" data-theme-toggle-icon>&#9790;</span>
     </button>
+
+    <p class="site-header__eyebrow">Portfolio de proyectos</p>
+    <h1>Narrativas visuales</h1>
   </div>
+
+  <p class="site-header__intro">
+    Selección de narrativas visuales publicadas en ABC. Cada pieza enlaza al reportaje original y a su versión en Netlify.
+  </p>
 </header>

@@ -1,16 +1,28 @@
 export function initCardPreviewHover() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (prefersReducedMotion || !supportsHover) {
+    return;
+  }
+
   document.querySelectorAll('.card').forEach(card => {
     let timer;
     const video = card.querySelector('.card-media-preview-video');
+    const mediaLink = card.querySelector('.card-media');
 
-    card.addEventListener('mouseenter', () => {
+    if (!video || !mediaLink) {
+      return;
+    }
+
+    mediaLink.addEventListener('mouseenter', () => {
       timer = setTimeout(() => {
         video.style.opacity = '1';
         video.play();
-      }, 500);
+      }, 180);
     });
 
-    card.addEventListener('mouseleave', () => {
+    mediaLink.addEventListener('mouseleave', () => {
       clearTimeout(timer);
       video.pause();
       video.currentTime = 0;
