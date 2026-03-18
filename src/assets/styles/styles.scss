@@ -5,3 +5,8 @@
 
 // Re-estilos de kraken
 @use './base/kraken-styles';
+
+// Componentes
+@use './components/pre-header';
+@use './components/scroll-indicator';
+@use './components/sumario';

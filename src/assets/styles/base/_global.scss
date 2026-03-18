@@ -20,19 +20,37 @@ body {
   justify-content: center;
 }
 
-.v-w .v-a--d-s-1 {
-  .v-a-inf-c {
-    .v-a-p-t,
-    .v-a-t,
-    .v-a-s-t {
-      color: $cb1;
-    }
+.v-w {
+  .v-a--d-s-1 {
+    height: auto;
 
-    .v-i {
-      svg {
-        fill: $cb1;
+    .v-a-inf-c {
+      grid-area: unset;
+      
+      .v-a-p-t,
+      .v-a-t,
+      .v-a-s-t {
+        color: $cb1;
+      }
+
+      .v-i {
+        svg {
+          fill: $cb1;
+        }
       }
     }
+
+    .v-a-img-c {
+      overflow: unset;
+      
+      &:after {
+        content: none;
+      }
+    }
+  }
+
+  .v-d-w {
+    background: $cb4;
   }
 }
 

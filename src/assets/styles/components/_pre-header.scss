@@ -1,0 +1,133 @@
+@use '../base/variables' as *;
+
+.n-preh {
+  .sky {
+    position: relative;
+    width: 100%;
+    min-height: 100dvh;
+    background: linear-gradient(180deg,rgba(102, 186, 255, 1) 0%, rgba(67, 121, 167, 1) 100%);
+
+    &__c {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 1200px;
+      min-height: 100dvh;
+      margin: 0 auto;
+    }
+
+    .cloud {
+      position: absolute;
+      --base-transform: translate(0, 0);
+      animation-name: floatingCloud;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+
+      @keyframes floatingCloud {
+        0% {
+          transform: var(--base-transform) rotate(0deg);
+        }
+        50% {
+          transform: var(--base-transform)
+            translate(var(--x), var(--y))
+            rotate(var(--r, 2deg));
+        }
+        100% {
+          transform: var(--base-transform) rotate(0deg);
+        }
+      }
+
+      &--1 {
+        top: -60px;
+        left: 80px;
+        width: 338px;
+        z-index: 101;
+        --x: 10px;
+        --y: -15px;
+        --r: 2deg;
+        animation-duration: 6s;
+        animation-delay: 0s;
+      }
+
+      &--2 {
+        top: 6px;
+        right: 30px;
+        width: 602px;
+        z-index: 3;
+        --x: -8px;
+        --y: -12px;
+        --r: -3deg;
+        animation-duration: 7s;
+        animation-delay: 1s;
+      }
+
+      &--3 {
+        --base-transform: translate(-290px, 150px) scaleX(-1);
+        width: 240px;
+        z-index: 1;
+        --x: 6px;
+        --y: -18px;
+        --r: 1.5deg;
+        animation-duration: 5.5s;
+        animation-delay: 0.5s;
+      }
+    }
+  }
+
+  &__title {
+    position: relative;
+    font-family: $axs;
+    font-size: 160px;
+    line-height: 90%;
+    letter-spacing: -1.6px;
+    text-transform: uppercase;
+    text-align: center;
+    color: $cb2;
+    z-index: 2;
+
+    @media (min-width: $screen-xs) {
+      top: -56px
+    }
+  }
+
+  .shape-bg {
+    position: absolute;
+    max-width: 1400px;
+    left: 50%;
+    bottom: -100px;
+    margin: 0 auto;
+    padding: 0 40px;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    &-block {
+      position: absolute;
+      max-width: 1320px;
+      width: calc(100% - 80px);
+      height: 100%;
+      top: 100px;
+      left: 50%;
+      margin: 0 auto;
+      padding: 0 40px;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.20);
+      z-index: 0;
+    }
+  }
+
+  .rob-vid {
+    position: relative;
+    background: linear-gradient(0deg,rgba(31, 31, 31, 1) 0%, rgba(67, 121, 167, 1) 100%);
+    
+    video {
+      position: relative;
+      max-width: 450px;
+      margin: 0 auto;
+      transform: translateY(-110px);
+      z-index: 1;
+    }
+  }
+}
