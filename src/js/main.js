@@ -1,19 +1,32 @@
-(function () {
-  const { gsap, ScrollTrigger } = window;
+import { ScrollTrigger } from './vendors/gsap.min.js'; // Si lo necesito
 
-  if (!gsap || !ScrollTrigger) {
-    console.warn("GSAP o ScrollTrigger no están disponibles.");
-    return;
+import moduleMockup from './modules/moduleMockup';
+
+const modules = [
+  moduleMockup,
+].filter(Boolean);
+
+export function initAll() {
+  modules.forEach(fn => fn());
+
+  if (ScrollTrigger) {
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
   }
+}
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  function initAll() {
-
-    ScrollTrigger.refresh();
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    initAll();
+function start() {
+  window.scrollTo({
+    top: 0,
+    behavior: "auto"
   });
-})();
+
+  initAll();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', start);
+} else {
+  start();
+}

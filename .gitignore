@@ -16,3 +16,4 @@ AppData/
 *.tmp
 # Local Netlify folder
 .netlify
+./netlify.toml

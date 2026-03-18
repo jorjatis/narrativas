@@ -18,10 +18,14 @@ module.exports = (env, argv) => {
     entry: './src/config.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: isProduction ? '[name].[contenthash].js' : '[name].js',
-      chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].js',
+      filename: isProduction
+        ? 'js/[name].[contenthash].js'
+        : 'js/[name]-webpack.js',
+      chunkFilename: isProduction
+        ? 'js/[name].[contenthash].js'
+        : 'js/[name].js',
       clean: true,
-      publicPath: '/', 
+      publicPath: '/',
     },
     resolve: {
       alias: {
@@ -32,6 +36,7 @@ module.exports = (env, argv) => {
         '@data': path.resolve(__dirname, 'src/data')
       }
     },
+    devtool: isProduction ? false : 'eval-source-map',
     module: {
       rules: [
         {
@@ -46,11 +51,31 @@ module.exports = (env, argv) => {
           test: /\.(c|sc|sa)ss$/,
           use: [
             MiniCssExtractPlugin.loader,
-            'css-loader',
-            'postcss-loader',
-            { loader: 'resolve-url-loader', options: { sourceMap: true } },
-            { loader: 'sass-loader', options: { sourceMap: true } }
-          ]
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: !isProduction,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: !isProduction,
+              },
+            },
+            {
+              loader: 'resolve-url-loader',
+              options: {
+                sourceMap: !isProduction,
+              },
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
+          ],
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -59,8 +84,18 @@ module.exports = (env, argv) => {
       ],
     },
     optimization: {
+      minimize: isProduction,
+      runtimeChunk: 'single',
       splitChunks: {
-        cacheGroups: styleChunksCacheGroups ? styleChunksCacheGroups() : {},
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+          ...(styleChunksCacheGroups ? styleChunksCacheGroups() : {})
+        },
       },
     },
     plugins: [
@@ -68,14 +103,14 @@ module.exports = (env, argv) => {
         const outputPath = path
           .relative('src/views/pages', filePath)
           .replace(/\.hbs$/, '.html');
-        
+
         const pageName = path.basename(filePath, '.hbs');
         const dataFileJs = path.resolve(__dirname, `src/data/${pageName}.js`);
         const dataFileJson = path.resolve(__dirname, `src/data/${pageName}.json`);
 
         return new HtmlWebpackPlugin({
           template: filePath,
-          filename: outputPath, // Sin la "/" inicial para evitar errores en Windows/algunos servers
+          filename: outputPath.replace(/\\/g, '/'), // Sin la "/" inicial para evitar errores en Windows/algunos servers
           inject: 'body',
           templateParameters: () => {
             if (fs.existsSync(dataFileJs)) {
@@ -107,14 +142,22 @@ module.exports = (env, argv) => {
       open: true,
       hot: true,
       historyApiFallback: true,
-      watchFiles: ['src/**/*.{hbs,js,json,scss}'],
+      watchFiles: {
+        paths: ['src/**/*'],
+        options: {
+          ignored: /node_modules/,
+        },
+      },
       client: {
         overlay: {
           errors: true,   // Muestra errores de compilación (Webpack)
-          warnings: false, 
+          warnings: false,
           runtimeErrors: false, // <--- Esto desactiva el "BOOM" por errores de JS como el de Adobe
         },
       },
+    },
+    stats: {
+      errorDetails: true,
     },
   };
 };
