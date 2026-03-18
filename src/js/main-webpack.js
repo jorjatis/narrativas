@@ -1,3 +1,5 @@
+// import { ScrollTrigger } from './vendors/gsap.min.js'; // Si lo necesito
+
 import moduleMockup from './modules/moduleMockup';
 
 const modules = [
@@ -7,9 +9,9 @@ const modules = [
 export function initAll() {
   modules.forEach(fn => fn());
 
-  if (window.ScrollTrigger) {
+  if (ScrollTrigger) {
     requestAnimationFrame(() => {
-      window.ScrollTrigger.refresh();
+      ScrollTrigger.refresh();
     });
   }
 }
