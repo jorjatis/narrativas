@@ -18,12 +18,8 @@ module.exports = (env, argv) => {
     entry: './src/config.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: isProduction
-        ? 'js/[name].[contenthash].js'
-        : 'js/[name]-webpack.js',
-      chunkFilename: isProduction
-        ? 'js/[name].[contenthash].js'
-        : 'js/[name].js',
+      filename: 'js/[name].js',
+      chunkFilename: 'js/[name].js',
       clean: true,
       publicPath: '/',
     },
@@ -125,7 +121,7 @@ module.exports = (env, argv) => {
         });
       }),
       new MiniCssExtractPlugin({
-        filename: 'assets/styles/[name].[contenthash].css',
+        filename: 'assets/styles/[name].css',
       }),
       new CopyWebpackPlugin({
         patterns: [
