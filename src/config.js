@@ -31,6 +31,14 @@ if (process.env.NODE_ENV !== 'production') {
     // Detectar página actual
     const path = window.location.pathname;
     let currentPage = path.split('/').pop().replace('.html', '') || 'index';
+
+    function getPageData(page) {
+      if (data[page]) return data[page];
+
+      console.warn(`⚠️ No hay data para "${page}", usando index.json`);
+
+      return data['index'] || {};
+    }
     
     // Si estás en una subcarpeta (ej: /pages/contacto), ajustamos el nombre
     if (path.includes('/views/pages/')) {
@@ -40,7 +48,8 @@ if (process.env.NODE_ENV !== 'production') {
     // Solo renderizamos si el body está vacío (evita pisar el trabajo de HtmlWebpackPlugin)
     if (templates[currentPage]) {
       console.log(`%c Renderizando plantilla: ${currentPage}`, "color: green; font-weight: bold");
-      document.body.innerHTML = templates[currentPage](data[currentPage] || {});
+      const pageData = getPageData(currentPage);
+      document.body.innerHTML = templates[currentPage](pageData);
     } else {
       console.warn(`No se encontró la plantilla local para: ${currentPage}. Es posible que estés viendo el HTML estático de Webpack.`);
     }

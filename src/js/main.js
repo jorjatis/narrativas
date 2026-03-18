@@ -1,4 +1,4 @@
-import { ScrollTrigger } from './vendors/gsap.min.js'; // Si lo necesito
+// import { ScrollTrigger } from './vendors/gsap.min.js'; // Si lo necesito
 
 import moduleMockup from './modules/moduleMockup';
 
