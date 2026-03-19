@@ -1,7 +1,9 @@
-import moduleMockup from './modules/moduleMockup';
+import animScrollHeader from './modules/animScrollHeader';
+import nave3d from './modules/nave3d';
 
 const modules = [
-  moduleMockup,
+  animScrollHeader,
+  nave3d,
 ].filter(Boolean);
 
 export function initAll() {
@@ -17,4 +19,4 @@ function start() {
   initAll();
 }
 
-document.addEventListener('DOMContentLoaded', start);
+window.addEventListener('load', start);

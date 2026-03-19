@@ -13,7 +13,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "copy-webpack-plugin": "^12.0.2",
+    "copy-webpack-plugin": "^14.0.0",
     "css-loader": "^7.1.2",
     "glob": "^11.0.0",
     "handlebars": "^4.7.8",
@@ -35,6 +35,8 @@
     "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
-    "gsap": "^3.14.2"
+    "gsap": "^3.14.2",
+    "lil-gui": "^0.21.0",
+    "three": "^0.183.2"
   }
 }

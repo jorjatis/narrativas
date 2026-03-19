@@ -1,1 +1,54 @@
 @use '../base/variables' as *;
+
+body {
+  .v-btn,
+  .v-ath,
+  .v-d-p,
+  .v-cmp-crd,
+  .v-cmp-crd .v-u__p a,
+  .v-tpc,
+  .v-a-p-t,
+  .v-a-t,
+  .v-a-s-t,
+  .v-op,
+  .v-prp__tm,
+  .v-prp__a,
+  .v-f__a,
+  .v-f__p,
+  .v-f .v-log--1 .v-log__p,
+  .v-f .v-log--2 .v-log__p {
+    color: $cb2;
+  }
+
+  .v-btn .v-i svg {
+    fill: $cb2;
+  }
+
+  .v-btn,
+  .v-cnt--t3,
+  .v-d-n,
+  .v-d-n__w--1,
+  .v-f__w--1,
+  .v-f__w--1 .v-f__g {
+    border-color: $cb2;
+  }
+
+  .v-ath__b--4 .line {
+    stroke: $cb2;
+  }
+
+  .v-prp__l:before {
+    background: $cb2;
+  }
+
+  .v-f .v-log--1 .v-log__i,
+  .v-f .v-log--2 .v-log__i {
+    filter: brightness(0) invert(1);
+  }
+}
+
+body {
+  .v-h-a .v-btn {
+    color: $cp1;
+  }
+}
