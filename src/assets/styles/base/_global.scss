@@ -6,6 +6,13 @@ html {
 
 body {
   touch-action: pan-y;
+  background: $cb4;
+}
+
+.v-f {
+  .v-f__w--3:before {
+    background: $cb4;
+  }
 }
 
 @media (max-width: $screen-xs) {
@@ -47,10 +54,6 @@ body {
         content: none;
       }
     }
-  }
-
-  .v-d-w {
-    background: $cb4;
   }
 }
 

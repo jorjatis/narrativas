@@ -1,17 +1,11 @@
-import moduleMockup from './modules/moduleMockup';
+import scrambleInfoContainerTexts from './modules/scrambleInfoContainerTexts';
 
 const modules = [
-  moduleMockup,
+  scrambleInfoContainerTexts,
 ].filter(Boolean);
 
 export function initAll() {
   modules.forEach(fn => fn());
-
-  if (window.ScrollTrigger) {
-    requestAnimationFrame(() => {
-      window.ScrollTrigger.refresh();
-    });
-  }
 }
 
 function start() {
@@ -23,8 +17,4 @@ function start() {
   initAll();
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', start);
-} else {
-  start();
-}
+document.addEventListener('DOMContentLoaded', start);
