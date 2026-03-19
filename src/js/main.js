@@ -1,7 +1,7 @@
-import scrambleInfoContainerTexts from './modules/scrambleInfoContainerTexts';
+import moduleMockup from './modules/moduleMockup';
 
 const modules = [
-  scrambleInfoContainerTexts,
+  moduleMockup,
 ].filter(Boolean);
 
 export function initAll() {
