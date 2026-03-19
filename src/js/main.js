@@ -1,7 +1,9 @@
+import scrollIndicatorPosition from './modules/scrollIndicatorPosition';
 import scrambleInfoContainerTexts from './modules/scrambleInfoContainerTexts';
 
 const modules = [
-  scrambleInfoContainerTexts,
+  scrollIndicatorPosition
+  // scrambleInfoContainerTexts,
 ].filter(Boolean);
 
 export function initAll() {

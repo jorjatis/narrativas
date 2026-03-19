@@ -1,6 +1,7 @@
 @use './base/variables' as *;
 // @use './base/variables-custom' as *;
 
+@use './base/animations';
 @use './base/global';
 
 // Re-estilos de kraken
@@ -9,4 +10,5 @@
 // Componentes
 @use './components/pre-header';
 @use './components/scroll-indicator';
+@use './components/ladillo';
 @use './components/sumario';
