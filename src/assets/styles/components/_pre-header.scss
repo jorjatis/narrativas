@@ -2,7 +2,22 @@
 
 .v-w {
   .v-a--d-s-1 {
-    margin-bottom: 0;
+    display: block;
+    margin-bottom: 280px;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -280px;
+      left: 0;
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(180deg, #000000 1.86%, rgba(233, 233, 233, 0.00) 81.07%);
+    }
+
+    .v-a-inf-c {
+      display: none;
+    }
   }
 }
 

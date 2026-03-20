@@ -4,7 +4,6 @@ export default function scrollIndicatorPosition() {
 
   if (!scrInd || !container) return;
 
-  // Creamos un "sentinel" al final del contenedor
   const sentinel = document.createElement('div');
   sentinel.style.position = 'absolute';
   sentinel.style.bottom = '0';
@@ -15,18 +14,34 @@ export default function scrollIndicatorPosition() {
 
   container.appendChild(sentinel);
 
+  let lastScrollY = window.scrollY;
+
   const observer = new IntersectionObserver(
     ([entry]) => {
-      if (entry.isIntersecting) {
-        // Hemos llegado al final del contenedor
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > lastScrollY;
+
+      if (entry.isIntersecting && scrollingDown) {
+        // Llegas al final bajando
         scrInd.classList.add('is-absolute');
-      } else {
+      }
+
+      if (entry.isIntersecting && !scrollingDown) {
+        // Estás en el final pero subiendo → aún no quitamos
+        // esperamos a salir del sentinel
+      }
+
+      if (!entry.isIntersecting && !scrollingDown) {
+        // Has salido del final hacia arriba
         scrInd.classList.remove('is-absolute');
       }
+
+      lastScrollY = currentScrollY;
     },
     {
       root: null,
-      threshold: 0
+      threshold: 0,
+      rootMargin: "0px 0px -30px 0px"
     }
   );
 
