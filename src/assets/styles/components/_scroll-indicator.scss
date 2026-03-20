@@ -7,9 +7,18 @@
   transform: translateX(-50%);
   z-index: 3;
   pointer-events: none;
+  opacity: 0; 
+  transition: opacity 0.4s ease;
+
+  &.is-visible {
+    opacity: 1;
+  }
 
   &.is-absolute {
     position: absolute;
+    bottom: 30px; 
+    opacity: 1;
+    transition: none; 
   }
 
   &__c {

@@ -22,11 +22,11 @@
     "paragraphPaywall": "Lo anterior no es una ficción. Es la historia de Sade, un cristiano en un país musulmán que dejó su tierra perseguido por su fe. <strong>«Temía por mi vida, así que tuve que irme»</strong>, cuenta. Sade lleva más de una década como inmigrante <span class=\"paywall pw-open\">irregular en suelo europeo."
   },
   "ladillos": {
-    "ladillo1": { "number": "1", "title": "La invitación", "imageSrc": "img-ladillo-01.jpg" },
-    "ladillo2": { "number": "2", "title": "Necrópolis", "title2": "digitales", "imageSrc": "img-ladillo-02.jpg" },
-    "ladillo3": { "number": "3", "title": "Los servidores", "title2": "privados de", "title3": "‘Second Life’", "imageSrc": "img-ladillo-03.jpg" },
-    "ladillo4": { "number": "4", "title": "El trono de cristal", "imageSrc": "img-ladillo-04.jpg" },
-    "ladillo5": { "number": "5", "title": "La cicatriz invisible", "title2": "y el fin", "title3": "de la inocencia", "imageSrc": "img-ladillo-05.jpg" }
+    "ladillo1": { "number": "1", "title": "La invitación" },
+    "ladillo2": { "number": "2", "title": "Necrópolis", "title2": "digitales" },
+    "ladillo3": { "number": "3", "title": "Los servidores", "title2": "privados de", "title3": "‘Second Life’" },
+    "ladillo4": { "number": "4", "title": "El trono de cristal" },
+    "ladillo5": { "number": "5", "title": "La cicatriz invisible", "title2": "y el fin", "title3": "de la inocencia" }
   },
   "sumarios": {
     "sumario1": { "number": "1", "txt": "sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumariosumario" },

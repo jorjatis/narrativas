@@ -1,0 +1,15 @@
+@use '../base/variables' as *;
+
+.n-vid-webm {
+  margin-top: 50px;
+  transform: translateX(30px);
+
+  @media (min-width: $screen-xs) {
+    margin-top: 120px;
+    transform: translateX(80px);
+  }
+
+  @media (min-width: $screen-sm) {
+    transform: translateX(230px);
+  }
+}

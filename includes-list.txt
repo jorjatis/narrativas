@@ -13,14 +13,7 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-vi
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/includes/inc-sumario-04.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/includes/inc-sumario-05.html
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/images/img-ladillo-01.jpg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/images/img-ladillo-02.jpg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/images/img-ladillo-03.jpg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/images/img-ladillo-04.jpg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/images/img-ladillo-05.jpg
-
-
-
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/includes/inc-video-01.html
 
 
 
@@ -43,3 +36,6 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/22/pederastas-en-vi
 <!--#include virtual="/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/includes/inc-sumario-03.html"-->
 <!--#include virtual="/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/includes/inc-sumario-04.html"-->
 <!--#include virtual="/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/includes/inc-sumario-05.html"-->
+
+// Video:
+<!--#include virtual="/comun/narrativas/redaccion/2026/03/22/pederastas-en-videojuegos/includes/inc-video-01.html"-->
