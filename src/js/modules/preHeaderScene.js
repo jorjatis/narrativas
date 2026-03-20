@@ -27,11 +27,11 @@ export default function preHeaderScene() {
     // 2. SHAPE BG (reveal)
     tl.fromTo(
       section.querySelector(".shape-bg"),
-      { 
+      {
         clipPath: "inset(100% 0 0 0)",
         WebkitClipPath: "inset(100% 0 0 0)"
       },
-      { 
+      {
         clipPath: "inset(0% 0 0 0)",
         WebkitClipPath: "inset(0% 0 0 0)",
         duration: 1.2,

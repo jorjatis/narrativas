@@ -29,10 +29,9 @@
     "ladillo5": { "number": "5", "title": "La cicatriz invisible", "title2": "y el fin", "title3": "de la inocencia" }
   },
   "sumarios": {
-    "sumario1": { "number": "1", "txt": "sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumariosumario" },
-    "sumario2": { "number": "2", "txt": "sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumariosumario" },
-    "sumario3": { "number": "3", "txt": "sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumariosumario" },
-    "sumario4": { "number": "4", "txt": "sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumariosumario" },
-    "sumario5": { "number": "5", "txt": "sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumario sumariosumario" }
+    "sumario1": { "number": "1", "txt": "Los pedófilos usan avatares de niños para identificarse entre sí" },
+    "sumario2": { "number": "2", "txt": "«Es un terreno donde ni la empresa a cargo puede intervenir»" },
+    "sumario3": { "number": "3", "txt": "«Si estás obligado a impedir un resultado y no actúas, puedes ser responsable»" },
+    "sumario4": { "number": "4", "txt": "«Ya no puedo dejarle solo con una pantalla»" }
   }
 }
