@@ -4,17 +4,8 @@
 @use './base/global';
 
 // Re-estilos de kraken
-@use './base/kraken-styles';
+@use './kraken-components/kraken-styles';
 
 // Componentes Kraken
-@use './kraken-components/ladillo';
-@use './kraken-components/sumario';
-@use './kraken-components/scroll-step';
 
 // Componentes
-@use './components/pre-header';
-@use './components/scroll-indicator';
-
-@use './components/nave-3d';
-@use './components/stars-noise-bg';
-@use './components/video-block';

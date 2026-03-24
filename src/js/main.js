@@ -1,11 +1,7 @@
-import domChangeEls from './modules/domChangeEls';
-import starsTwinkleBg from './modules/starsTwinkleBg';
-import animScrollHeader from './modules/animScrollHeader';
+// import domChangeEls from './modules/domChangeEls';
 
 const modules = [
-  domChangeEls,
-  starsTwinkleBg,
-  animScrollHeader
+  // domChangeEls
 ].filter(Boolean);
 
 export function initAll() {
