@@ -1,0 +1,45 @@
+@use '../base/variables'as *;
+
+.n-vid-blk {
+  margin: 140px 0;
+
+  span {
+    display: block;
+    font-family: $ats;
+    font-size: 20px;
+    line-height: 140%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FF860E;
+  }
+
+  p {
+    margin-top: 8px;
+    font-family: $mcr;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 125%;
+    text-align: center;
+    color: $cb2;
+    opacity: .8;
+  }
+
+  figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 64px;
+    padding: 76px 24px;
+    border: 1px solid #7f7f7f;
+    border-radius: 20px;
+
+    @media (min-width: $screen-sm) {
+      width: 930px;
+      margin-left: calc((-930px / 2) + 50%);
+    }
+
+    img {
+      max-width: 450px;
+    }
+  }
+}

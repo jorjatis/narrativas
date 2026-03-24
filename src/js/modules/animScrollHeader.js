@@ -21,7 +21,7 @@ export default function animScrollHeader() {
   });
 
   // =====================================================
-  // INTRO (al cargar)
+  // INTRO
   // =====================================================
 
   const introTl = gsap.timeline();
@@ -32,13 +32,13 @@ export default function animScrollHeader() {
       duration: 1,
       ease: "power2.out"
     })
-    .to(".v-a-t", {
+    .to(".v-a--d-s-1 .v-a-inf-c .v-a-t", {
       autoAlpha: 1,
       y: 0,
       duration: 0.6,
       ease: "power2.out"
     }, "-=0.4")
-    .to(".v-a-p-t", {
+    .to(".v-a--d-s-1 .v-a-inf-c .v-a-p-t", {
       autoAlpha: 1,
       y: 0,
       duration: 0.6,
@@ -46,28 +46,29 @@ export default function animScrollHeader() {
     }, "-=0.5");
 
   // =====================================================
-  // FLOATING (MUY SUTIL, SIN ROMPER SCROLL)
+  // FLOATING DE LA CAPSULA
   // =====================================================
 
-  gsap.to(".artemis-capsule", {
-    y: "+=6",
-    duration: 2.5,
-    ease: "sine.inOut",
-    yoyo: true,
-    repeat: -1
-  });
+  // gsap.to(".artemis-capsule", {
+  //   y: "+=6",
+  //   duration: 2.5,
+  //   ease: "sine.inOut",
+  //   yoyo: true,
+  //   repeat: -1
+  // });
 
   // =====================================================
-  // FASE 1 — SCROLL (pin + desmontaje)
+  // FASE 1 — SCROLL
   // =====================================================
 
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".v-a--d-s-1",
+      trigger: ".v-a-wrapper",
       start: "top top",
       end: "+=800",
       scrub: true,
-      pin: true,
+      pin: ".v-a--d-s-1",
+      pinSpacing: true,
       anticipatePin: 1
     }
   });
@@ -80,37 +81,47 @@ export default function animScrollHeader() {
 
   // Separación capas
   tl.to(".artemis-media--01", {
-    y: -220,
+    marginTop: -90,
     ease: "power2.out"
   }, 0);
 
   tl.to(".artemis-media--02", {
-    y: -110,
-    x: 10,
+    marginTop: 140,
     ease: "power2.out"
   }, 0.05);
 
   tl.to(".artemis-media--03", {
-    y: -5,
-    x: 12,
+    marginTop: 300,
+    x: 14,
+    rotate: -2,
     ease: "power2.out"
   }, 0.1);
 
-  tl.to(".artemis-media--04", {
-    y: 80,
-    x: 30,
-    scale: 0.8,
-    ease: "power2.out"
-  }, 0.15);
-
   // Empuje del texto
   tl.to(".v-a--d-s-1 .v-a-inf-c", {
-    y: 80,
+    marginTop: 310,
     ease: "none"
   }, 0.1);
 
   // =====================================================
-  // 🧩 FASE 2 — Subtítulo
+  // FASE 2 — Indicador de scroll
+  // =====================================================
+
+  ScrollTrigger.create({
+    trigger: ".v-d-w",
+    start: "top+=300 top",
+    once: true,
+    onEnter: () => {
+      gsap.to(".scr-ind", {
+        autoAlpha: 0,
+        duration: 0.4,
+        ease: "power2.out"
+      });
+    }
+  });
+
+  // =====================================================
+  // FASE 3 — Subtítulo
   // =====================================================
 
   ScrollTrigger.create({
@@ -119,15 +130,15 @@ export default function animScrollHeader() {
     once: true,
     onEnter: () => {
 
-      gsap.set(".v-a--d-s-1 .v-a-s-t", {
+      gsap.set(".v-d--abc > .v-a-s-t", {
         display: "block",
         opacity: 0,
         y: 40
       });
 
       requestAnimationFrame(() => {
-        gsap.to(".v-a--d-s-1 .v-a-s-t", {
-          opacity: 0.4,
+        gsap.to(".v-d--abc > .v-a-s-t", {
+          opacity: 1,
           y: 0,
           duration: 1.2,
           ease: "expo.out"
@@ -136,7 +147,6 @@ export default function animScrollHeader() {
 
     }
   });
-
 
   ScrollTrigger.refresh();
 }

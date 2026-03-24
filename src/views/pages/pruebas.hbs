@@ -1,11 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-  <h1>{{metadata.infoContainer.title}}</h1>
+
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+    .n-titles {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      max-width: 340px;
+      height: 110px;
+      margin: 0 auto 24px;
+    }
+
+    .n-titles span {
+      display: block;
+      font-family: 'ABC Text Semibold', serif;
+      font-size: 20px;
+      line-height: 140%;
+      text-transform: uppercase;
+      text-align: center;
+      color: #FFF;
+    }
+
+    .n-titles p {
+      font-family: 'Micrograph Regular', sans-serif;
+      font-size: 16px;
+      font-style: italic;
+      line-height: 125%;
+      text-align: center;
+      color: #FFF;
+    }
+
+    .n-scroll {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .n-scroll-top {
+      position: relative;
+    }
+
+    .n-scroll-top-i:not(:first-child) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+
+    .n-scroll-top-i.is-active {
+      opacity: 1;
+    }
+
+    .n-scroll-top-i {
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .n-scroll-top-i--01 {
+      z-index: 4;
+    }
+
+    .n-scroll-top-i--02 {
+      z-index: 3;
+    }
+
+    .n-scroll-top-i--03 {
+      z-index: 2;
+    }
+
+    .n-scroll-top-i--04 {
+      z-index: 1;
+    }
+
+    .n-scroll-bot {
+      position: absolute;
+      right: -20%;   /* 👈 sobresale un poco */
+      bottom: -10%;
+      transform: scale(2);
+      transform-origin: center;
+      pointer-events: none;
+      z-index: 10;
+    }
+  </style>
+
+
+  <div class="n-scroll">
+    <div class="n-scroll-top">
+      <div class="n-scroll-top-i n-scroll-top-i--01 is-active">
+        <div class="n-titles">
+          <span>1. Inicio de la mision</span>
+          <p>Tras el lanzamiento, los astronautas orbitarán la Tierra 24 h. mientras prueban la nave y el soporte vital.
+          </p>
+        </div>
+        <figure class="n-earth">
+          <img src="assets/images/tierra-1.jpg" alt="">
+        </figure>
+      </div>
+
+      <div class="n-scroll-top-i n-scroll-top-i--02">
+        <div class="n-titles">
+          <span>2. Test de Manejo</span>
+          <p>Separación de la Orión para las pruebas de manejo manual.</p>
+        </div>
+        <figure class="n-earth">
+          <img src="assets/images/tierra-2.jpg" alt="">
+        </figure>
+      </div>
+
+      <div class="n-scroll-top-i n-scroll-top-i--03">
+        <div class="n-titles">
+          <span>3. Viaje de ida</span>
+          <p>Una vez alcanzada la velocidad adecuada, la misión iniciará su trayectoria hacia la luna.</p>
+        </div>
+        <figure class="n-earth">
+          <img src="assets/images/tierra-3.jpg" alt="">
+        </figure>
+      </div>
+
+      <div class="n-scroll-top-i n-scroll-top-i--04">
+        <div class="n-titles">
+          <span>4. Etapa final</span>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas dolores facilis.</p>
+        </div>
+        <figure class="n-earth">
+          <img src="assets/images/tierra-4.jpg" alt="">
+        </figure>
+      </div>
+    </div>
+
+    <div class="n-scroll-bot">
+      <figure>
+        <img src="assets/images/luna.png" alt="">
+      </figure>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const items = gsap.utils.toArray(".n-scroll-top-i");
+  const moon = document.querySelector(".n-scroll-bot");
+
+  let moonHidden = false;
+
+  // 🌍 POSICIÓN RESPONSIVE INICIAL
+  function positionMoon() {
+    const container = document.querySelector(".n-scroll-top");
+    const rect = container.getBoundingClientRect();
+
+    // 👉 posición relativa segura (ajustable)
+    const x = rect.width * 0.35;
+    const y = rect.height * 0.25;
+
+    gsap.set(moon, {
+      x: x,
+      y: y
+    });
+  }
+
+  // init + resize
+  positionMoon();
+  window.addEventListener("resize", positionMoon);
+
+  // 🔥 TIMELINE
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".n-scroll",
+      start: "top top",
+      end: "+=400%",
+      pin: true,
+      scrub: true,
+      markers: true,
+      onUpdate: (self) => {
+        const progress = self.progress;
+
+        const index = Math.min(
+          items.length - 1,
+          Math.floor(progress * items.length)
+        );
+
+        setActive(index);
+
+        // 🌑 Fade OUT independiente al entrar en el 4
+        if (index === 3 && !moonHidden) {
+          moonHidden = true;
+
+          gsap.to(moon, {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out"
+          });
+        }
+
+        // 🔁 Si vuelves atrás
+        if (index < 3 && moonHidden) {
+          moonHidden = false;
+
+          gsap.to(moon, {
+            opacity: 1,
+            duration: 0.3,
+            ease: "none"
+          });
+        }
+      }
+    }
+  });
+
+  // STEP 1
+tl.to(moon, {
+  scale: 1.4,
+  xPercent: -50,
+  yPercent: -40,
+  ease: "none"
+}, 0);
+
+// STEP 2
+tl.to(moon, {
+  scale: 1,
+  xPercent: -90,
+  yPercent: -60,
+  ease: "none"
+}, 0.25);
+
+// STEP 3
+tl.to(moon, {
+  scale: 0.7,
+  xPercent: -120,
+  yPercent: -95,
+  ease: "none"
+}, 0.5);
+
+  // 🔁 ACTIVACIÓN DE SECCIONES
+  function setActive(index) {
+    items.forEach((el, i) => {
+      el.classList.toggle("is-active", i === index);
+    });
+  }
+
+  ScrollTrigger.matchMedia({
+
+  "(max-width: 768px)": function() {
+
+    tl.to(moon, {
+      scale: 1.2,
+      xPercent: -15,
+      yPercent: -10,
+      ease: "none"
+    }, 0);
+
+    tl.to(moon, {
+      scale: 0.9,
+      xPercent: -25,
+      yPercent: -20,
+      ease: "none"
+    }, 0.25);
+
+    tl.to(moon, {
+      scale: 0.6,
+      xPercent: -35,
+      yPercent: -30,
+      ease: "none"
+    }, 0.5);
+
+  }
+
+});
+
+});
+
+
+</script>
+
 </body>
+
 </html>

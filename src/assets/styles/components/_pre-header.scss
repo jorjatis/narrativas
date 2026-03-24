@@ -25,13 +25,8 @@ body:has(.v-h-a) {
   .v-a--d-s-1 {
     display: block;
     min-height: 100dvh;
-    margin-bottom: 320px;
     margin-top: -98px;
     padding-top: calc(50vh - 180px);
-
-    @media (min-width: $screen-sm) {
-      margin-bottom: 240px;
-    }
 
     .v-a-img-c {
       z-index: 2;
@@ -77,59 +72,57 @@ body:has(.v-h-a) {
       z-index: 1;
 
       .v-a-p-t,
-      .v-a-t,
-      .v-a-s-t {
+      .v-a-t {
         color: $cb2;
       }
 
-      .v-a-t {
+      .v-a-p-t {
+        margin-top: 24px;
         font-family: $axs;
-        font-size: 110px;
-        order: -1;
+        font-size: 90px;
 
-        @media (min-width: $screen-sm) {
+        @media (min-width: $screen-xs) {
+          margin-top: 0;
           font-size: 110px;
         }
       }
 
-      .v-a-p-t {
+      .v-a-t {
         position: relative;
         display: block;
-        max-width: 320px;
+        max-width: 500px;
         width: 100%;
         margin: 24px auto 0;
         font-family: $adl;
-        font-size: 32px;
-        line-height: 36px;
+        font-size: 24px;
+        line-height: 28px;
         text-transform: unset;
         text-align: center;
-      }
 
-      .v-a-s-t {
-        display: none;
-        max-width: 342px;
-        width: 100%;
-        margin: 72px auto 0;
-        font-family: $adl;
-        font-style: italic;
-        font-size: 22px;
-        line-height: 30px;
-        text-align: center;
-        opacity: .4;
-
-        &:before {
-          content: '';
-          display: block;
-          width: 2px;
-          height: 42px;
-          margin: 0 auto 20%;
-          background: #FF860E;
+        @media (min-width: $screen-sm) {
+          font-size: 32px;
+          line-height: 36px;
         }
       }
     }
 
     .v-i {
       display: none;
+    }
+  }
+
+  .v-d--abc {
+    .v-a-s-t {
+      max-width: 610px;
+      width: 100%;
+      margin: 160px auto 120px;
+      font-family: $adl;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 30px;
+      text-align: center;
+      opacity: 0;
+      color: $cb6;
     }
   }
 }

@@ -1,0 +1,17 @@
+@use '../base/variables'as *;
+
+.n-step {
+  display: block;
+  max-width: 428px;
+  margin-left: 15%;
+  margin-right: 15%;
+  padding: 32px 24px;
+  font-family: $mcr;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: $cb2;
+  border: 1px solid $cb2;
+  border-radius: 20px;
+}

@@ -1,0 +1,117 @@
+@use '../base/variables'as *;
+
+.noise-bg {
+  &:after {
+    content: '';
+    position: fixed;
+    top: -100%;
+    left: -100%;
+    width: 400%;
+    height: 400%;
+    animation: noiseBgAnim 18s steps(10) infinite;
+    background: url("https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/images/noise-bg.png") repeat;
+    opacity: .4;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+@keyframes noiseBgAnim {
+  0% {
+    transform: translate(0, 0)
+  }
+
+  10% {
+    transform: translate(-3%, -6%)
+  }
+
+  20% {
+    transform: translate(-9%, 3%)
+  }
+
+  30% {
+    transform: translate(12%, -9%)
+  }
+
+  40% {
+    transform: translate(-15%, 12%)
+  }
+
+  50% {
+    transform: translate(-3%, -3%)
+  }
+
+  60% {
+    transform: translate(12%, 0%)
+  }
+
+  70% {
+    transform: translate(0%, 12%)
+  }
+
+  80% {
+    transform: translate(3%, 3%)
+  }
+
+  90% {
+    transform: translate(-15%, 15%)
+  }
+
+  100% {
+    transform: translate(0, 0)
+  }
+}
+
+.stars-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .5;
+}
+
+.star {
+  position: absolute;
+  background: $cb2;
+
+  &--t1 {
+    width: 1px;
+    height: 1px;
+    box-shadow: 0 0 2px $cb2;
+    animation: starAnim1 3s infinite ease-in-out;
+  }
+
+  &--t2 {
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 4px $cb2;
+    animation: starAnim2 5s infinite ease-in-out;
+  }
+
+  &--t3 {
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 6px $cb2;
+    animation: starAnim3 7s infinite ease-in-out;
+  }
+}
+
+@keyframes starAnim1 {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+@keyframes starAnim2 {
+  0%, 100% { opacity: 1; }
+  30% { opacity: 0; }
+  60% { opacity: 0.5; }
+}
+
+@keyframes starAnim3 {
+  0%, 100% { opacity: 1; }
+  40% { opacity: 0; }
+  80% { opacity: 0.7; }
+}
