@@ -3,9 +3,13 @@
 .scr-ind {
   position: fixed;
   width: 100%;
-  bottom: 15%;
+  bottom: 30px;
   left: 0;
   pointer-events: none;
+
+  @media (min-width: $screen-xs) {
+    bottom: 15%;
+  }
 
   &__c {
     display: flex;

@@ -49,13 +49,13 @@ export default function animScrollHeader() {
   // FLOATING DE LA CAPSULA
   // =====================================================
 
-  // gsap.to(".artemis-capsule", {
-  //   y: "+=6",
-  //   duration: 2.5,
-  //   ease: "sine.inOut",
-  //   yoyo: true,
-  //   repeat: -1
-  // });
+  gsap.to(".artemis-capsule", {
+    y: "+=6",
+    duration: 2.5,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1
+  });
 
   // =====================================================
   // FASE 1 — SCROLL
@@ -86,12 +86,12 @@ export default function animScrollHeader() {
   }, 0);
 
   tl.to(".artemis-media--02", {
-    marginTop: 140,
+    marginTop: 139,
     ease: "power2.out"
   }, 0.05);
 
   tl.to(".artemis-media--03", {
-    marginTop: 300,
+    marginTop: 291,
     x: 14,
     rotate: -2,
     ease: "power2.out"
@@ -99,7 +99,7 @@ export default function animScrollHeader() {
 
   // Empuje del texto
   tl.to(".v-a--d-s-1 .v-a-inf-c", {
-    marginTop: 310,
+    marginTop: 272,
     ease: "none"
   }, 0.1);
 

@@ -1,17 +1,23 @@
 @use '../base/variables'as *;
 
-.n-step {
-  display: block;
-  max-width: 428px;
-  margin-left: 15%;
-  margin-right: 15%;
-  padding: 32px 24px;
-  font-family: $mcr;
-  font-style: italic;
-  font-size: 16px;
-  line-height: 20px;
-  text-align: center;
-  color: $cb2;
-  border: 1px solid $cb2;
-  border-radius: 20px;
+.v-cmp-scs {
+  &__s {
+    max-width: 428px;
+    padding: 32px 24px;
+    text-align: center;
+    color: $cp15;
+    border: 1px solid $cp15;
+    border-radius: 20px;
+    background: transparent;
+  }
+
+  &__t {
+    font-family: $mcs;
+  }
+
+  &__p {
+    font-family: $mcr;
+    font-size: 16px;
+    line-height: 20px;
+  }
 }

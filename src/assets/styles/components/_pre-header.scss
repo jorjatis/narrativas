@@ -26,16 +26,30 @@ body:has(.v-h-a) {
     display: block;
     min-height: 100dvh;
     margin-top: -98px;
-    padding-top: calc(50vh - 180px);
+    padding-top: calc(50vh - 140px);
+    margin-bottom: 200px;
+
+    @media (min-width: 420px) {
+      padding-top: calc(50vh - 150px);
+    }
+
+    @media (min-width: $screen-xs) {
+      margin-bottom: 180px;
+      padding-top: calc(50vh - 180px);
+    }
 
     .v-a-img-c {
       z-index: 2;
 
       .artemis-capsule {
         position: relative;
-        width: 190px;
+        width: 150px;
         margin: 0 auto;
         rotate: 42deg;
+
+        @media (min-width: $screen-xs) {
+          width: 190px;
+        }
 
         .artemis-media {
           position: relative;
@@ -68,18 +82,24 @@ body:has(.v-h-a) {
     .v-a-inf-c {
       flex: 0;
       justify-content: flex-start;
+      margin-top: -10px;
       padding-bottom: 0;
       z-index: 1;
 
       .v-a-p-t,
       .v-a-t {
-        color: $cb2;
+        color: $cp15;
       }
 
       .v-a-p-t {
         margin-top: 24px;
         font-family: $axs;
         font-size: 90px;
+        line-height: 1;
+
+        @media (max-width: 350px) {
+          font-size: 82px;
+        }
 
         @media (min-width: $screen-xs) {
           margin-top: 0;
@@ -92,14 +112,14 @@ body:has(.v-h-a) {
         display: block;
         max-width: 500px;
         width: 100%;
-        margin: 24px auto 0;
+        margin: 0 auto;
         font-family: $adl;
         font-size: 24px;
         line-height: 28px;
         text-transform: unset;
         text-align: center;
 
-        @media (min-width: $screen-sm) {
+        @media (min-width: $screen-xs) {
           font-size: 32px;
           line-height: 36px;
         }
