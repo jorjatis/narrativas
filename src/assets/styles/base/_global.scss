@@ -15,6 +15,12 @@ body {
   }
 }
 
+@media (max-width: $screen-xs) {
+  body .v-h-a ~ .v-w .v-a--d {
+      min-height: auto
+  }
+}
+
 .ai2html {
   display: flex;
   justify-content: center;
@@ -22,6 +28,7 @@ body {
 
 .v-w {
   .v-a--d-s-1 {
+    display: block;
     height: auto;
 
     .v-a-inf-c {
