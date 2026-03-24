@@ -1,7 +1,7 @@
-// import domChangeEls from './modules/domChangeEls';
+import menuDvd from './modules/menuDvd';
 
 const modules = [
-  // domChangeEls
+  menuDvd
 ].filter(Boolean);
 
 export function initAll() {
