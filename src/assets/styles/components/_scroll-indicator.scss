@@ -1,15 +1,11 @@
 @use '../base/variables'as *;
 
 .scr-ind {
-  position: fixed;
+  position: absolute;
   width: 100%;
   bottom: 30px;
   left: 0;
   pointer-events: none;
-
-  @media (min-width: $screen-xs) {
-    bottom: 15%;
-  }
 
   &__c {
     display: flex;

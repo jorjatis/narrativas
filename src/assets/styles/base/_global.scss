@@ -15,11 +15,11 @@ body {
   }
 }
 
-@media (max-width: $screen-xs) {
-  body .v-h-a ~ .v-w .v-a--d {
-      min-height: auto
-  }
-}
+// @media (max-width: $screen-xs) {
+//   body .v-h-a ~ .v-w .v-a--d {
+//       min-height: auto
+//   }
+// }
 
 .ai2html {
   display: flex;
@@ -28,11 +28,16 @@ body {
 
 .v-w {
   .v-a--d-s-1 {
-    display: block;
-    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    // height: auto;
 
     .v-a-inf-c {
       grid-area: unset;
+      justify-content: center;
+      padding-bottom: 0;
       
       .v-a-p-t,
       .v-a-t,
@@ -41,6 +46,8 @@ body {
       }
 
       .v-i {
+        display: none;
+
         svg {
           fill: $cb1;
         }
@@ -49,6 +56,10 @@ body {
 
     .v-a-img-c {
       overflow: unset;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: lightgrey;
       
       &:after {
         content: none;

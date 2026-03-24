@@ -4,8 +4,9 @@
 @use './base/global';
 
 // Re-estilos de kraken
-@use './kraken-components/kraken-styles';
 
 // Componentes Kraken
 
 // Componentes
+@use './components/scroll-indicator';
+@use './components/pre-article-header';
