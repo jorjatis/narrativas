@@ -1,0 +1,10 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+
+.v-n-ss-map {
+  .v-n-ss-blk {
+    &__c {
+      max-width: 822px;
+    }
+  }
+}

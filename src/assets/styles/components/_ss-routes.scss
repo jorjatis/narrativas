@@ -1,0 +1,148 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+
+.v-n-ss-routes {
+  .v-n-nav-days {
+    display: none;
+    margin-bottom: 48px;
+
+    @media (min-width: $screen-sm) {
+      display: block;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 12px;
+
+      li {
+        flex: 1 0 0;
+
+        &.is-active {
+          button {
+            color: $cb2;
+            background: $nc1;
+            transition: unset;
+            pointer-events: none;
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 9px 0;
+        font: 14px/1 $mcs;
+        text-align: center;
+        color: $nc1;
+        background: $nc2;
+        border-radius: 2px;
+        transition: opacity 0.3s ease, background 0.3s ease;
+
+        &:hover {
+          opacity: .7;
+        }
+      }
+    }
+  }
+
+  .v-n-blk {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 6%;
+
+    .v-n-nav-hermandad {
+      display: none;
+
+      @media (min-width: $screen-sm) {
+        display: block;
+        padding-top: 50px;
+      }
+
+      > span {
+        display: block;
+        margin-bottom: 16px;
+        font: 14px/1 $mcr;
+        text-transform: uppercase;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        li {
+          width: 100%;
+          max-width: 182px;
+
+          &.is-active {
+            button {
+              color: $cb2;
+              background: $nc1;
+              transition: unset;
+              pointer-events: none;
+            }
+          }
+        }
+
+        button {
+          width: 100%;
+          padding: 13px 12px;
+          font: 16px/1 $mcs;
+          color: $nc1;
+          border: 1px solid $nc1;
+          border-radius: 2px;
+          background: $cb2;
+          transition: opacity 0.3s ease, background 0.3s ease;
+
+          &:hover {
+            color: $cb2;
+            background: $nc1;
+            opacity: .5;
+          }
+        }
+      }
+    }
+
+    figure {
+      width: 100%;
+      max-width: 660px;
+      margin: 0 auto;
+
+      img {
+        opacity: 0;
+
+        &.is-loaded {
+          opacity: 1;
+          transition: opacity 0.3s ease;
+        }
+      }
+    }
+  }
+
+  .v-n-drp-c {
+    display: flex;
+    margin-bottom: 24px;
+
+    @media (min-width: $screen-sm) {
+      display: none;
+    }
+  }
+
+  .v-n-drp {
+    &--1 {
+      max-width: 112px;
+    }
+
+    &--2 {
+      max-width: 194px;
+    }
+  }
+}

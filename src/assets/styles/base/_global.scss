@@ -8,13 +8,6 @@ body {
   touch-action: pan-y;
 }
 
-@media (max-width: $screen-xs) {
-  .v-h-a {
-    position: relative;
-    z-index: 1;
-  }
-}
-
 .ai2html {
   display: flex;
   justify-content: center;
@@ -22,10 +15,14 @@ body {
 
 .v-w {
   .v-a--d-s-1 {
-    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .v-a-inf-c {
       grid-area: unset;
+      justify-content: flex-start;
+      padding: 0;
       
       .v-a-p-t,
       .v-a-t,
@@ -34,6 +31,8 @@ body {
       }
 
       .v-i {
+        display: none;
+
         svg {
           fill: $cb1;
         }
@@ -52,4 +51,17 @@ body {
 
 .v-cmp-crd {
   margin-top: 60px;
+}
+
+.is-visible {
+  display: block;
+}
+
+.is-fw {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }

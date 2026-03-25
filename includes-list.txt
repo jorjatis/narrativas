@@ -1,12 +1,2 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/includes/inc-pre-header.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/includes/inc-scroll-earth-moon.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/includes/inc-stars-bg.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/includes/inc-video-block.html
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/images/artemis-01.png
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/images/artemis-02.png  
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/images/artemis-03.png
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/images/noise-bg.png
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/artemis2/images/mockup-video-block-astronauta.jpg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/includes/inc-ss-routes.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/includes/inc-ss-map.html
