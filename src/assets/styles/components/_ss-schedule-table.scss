@@ -1,0 +1,36 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+
+.v-n-ss-sch {
+  width: 100%;
+  max-width: 426px;
+  margin: 0 auto;
+  border-collapse: collapse;
+
+  thead {
+    th {
+      padding-bottom: 12px;
+      font: 14px/40px $mcr;
+      text-align: left;
+      text-transform: uppercase;
+    }
+  }
+
+  tbody {
+    tr {
+      &:not(:last-child) {
+        border-bottom: 1px solid #ddd;
+      }
+    }
+
+    td {
+      font-family: $mcs;
+      font-size: 14px;
+      line-height: 40px;
+    }
+
+    td:first-child {
+      color: $nc1;
+    }
+  }
+}

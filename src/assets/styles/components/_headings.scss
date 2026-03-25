@@ -10,8 +10,13 @@
   &__t {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 12px;
     font: 24px/1 $ads;
+    text-align: center;
+
+    @media (min-width: $screen-xs) {
+      gap: 24px;
+    }
 
     &:before, 
     &:after {

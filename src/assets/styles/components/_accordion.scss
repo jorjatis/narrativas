@@ -1,0 +1,51 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+
+.v-n-acc {
+  &__i {
+    border-top: 1px solid $cb1;
+    border-bottom: 1px solid $cb1;
+
+    &:first-child {
+      border-bottom: 0;
+    }
+  }
+
+  &__trg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px 10px;
+    cursor: pointer;
+
+    &[aria-expanded="true"] {
+      .v-n-i {
+        rotate: -90deg;
+      }
+
+      + .v-n-acc__pnl {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    &-t {
+      font: 16px/1 $mcs;
+      color: $nc1;
+    }
+
+    .v-n-i {
+      rotate: 90deg;
+      transition: rotate 0.3s ease;
+    }
+  }
+
+  &__pnl {
+    max-height: 0;    
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: max-height 0.35s ease, opacity 0.2s ease 0.1s, transform 0.2s ease 0.1s;
+  }
+}

@@ -3,12 +3,14 @@ import moveEls from './helpers/moveEls';
 
 // NOTE: Components
 import dropdown from './modules/dropdown';
+import accordion from './modules/accordion';
 import data from './modules/ssRoutes-data.js';
 import ssRoutes from './modules/ssRoutes';
 
 export function initAll() {
   moveEls('.v-a--d-s-1 .v-a-s-t', '.v-d--abc', "prepend");
   dropdown();
+  accordion();
 
   ssRoutes(data);
 }
