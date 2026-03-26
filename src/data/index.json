@@ -1,5 +1,8 @@
 {
   "metadata": {
+    "edition": { "sevilla": true },
+    "subedition": { "pasionensevilla": true },
+    "coverUrl": "https://s1.abcstatics.com/abc/www/multimedia/espana/2026/03/08/ultras-1920x1080-blanco.jpg",
     "img": {
       "exists": true,
       "preArticleHeader": true,

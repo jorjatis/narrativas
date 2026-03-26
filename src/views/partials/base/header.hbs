@@ -22,7 +22,11 @@
       <div class="v-h__w v-h__w--2">
         <div class="v-log v-log--1">
           <a href="#" class="v-log__a" title="[TEXTO ANCHOR TEXT]">
-            <img class="v-log__i" src="assets/images/logos/logo-abc.svg" alt="[ALTERNATIVE TEXT]">
+            {{#if metadata.edition.sevilla}}
+              <img class="v-log__i" src="assets/images/logos/logo-ABCSevilla.svg" alt="[ALTERNATIVE TEXT]">
+            {{else}}
+              <img class="v-log__i" src="assets/images/logos/logo-abc.svg" alt="[ALTERNATIVE TEXT]">
+            {{/if}}
           </a>
         </div>
       </div>

@@ -4,10 +4,9 @@
 .v-n-acc {
   &__i {
     border-top: 1px solid $cb1;
-    border-bottom: 1px solid $cb1;
-
-    &:first-child {
-      border-bottom: 0;
+    
+    &:last-child {
+      border-bottom: 1px solid $cb1;
     }
   }
 

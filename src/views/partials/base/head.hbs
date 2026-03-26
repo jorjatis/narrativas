@@ -17,27 +17,28 @@
   
   <title>{{metadata.infoContainer.title}}</title>
 
+  {{!-- NOTE: Metas --}}
+  <meta name="title" content="{{metadata.infoContainer.title}}"/>
+  <meta name="description" content="{{metadata.infoContainer.description}}"/>
+  <meta property="og:title" content="{{metadata.infoContainer.title}}"/>
+  <meta property="og:description" content="{{metadata.infoContainer.description}}"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:locale" content="es_ES"/>
+  <meta property="og:site_name" content="Diario ABC"/>
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image" content="{{metadata.coverUrl}}"/>
+  <meta property="og:image:width" content="1024"/>
+  <meta property="og:image:height" content="512"/>
+  <meta name="twitter:title" content="{{metadata.coverUrl}}"/>
+  <meta name="twitter:description" content="{{metadata.infoContainer.description}}"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image:src" content="{{metadata.infoContainer.title}}"/>
+  <meta name="twitter:image:width" content="1200"/>
+  <meta name="twitter:image:height" content="630"/>
+  <meta name="twitter:widgets:csp" content="on">
+
   {{!-- NOTE: Favicons --}}
-  <link rel="shortcut icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/favicon-2016.ico" type="image/x-icon">
-  <link rel="icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/favicon-2016.ico">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/upper-touch-icon.png">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-60x60.png" sizes="60x60">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-57x57.png" sizes="57x57">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-72x72.png" sizes="72x72">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-76x76.png" sizes="76x76">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-114x114.png" sizes="114x114">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-120x120.png" sizes="120x120">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-144x144.png" sizes="144x144">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-152x152.png" sizes="152x152">
-  <link rel="apple-touch-icon" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-180x180.png" sizes="180x180">
-  <link rel="icon" type="image/png" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/favicon-32x32.png" sizes="32x32">
-  <link rel="icon" type="image/png" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="https://s1.abcstatics.com/comun/2018/img/iconos-metas/favicon-192x192.png" sizes="192x192">
-  <meta name="msapplication-square70x70logo" content="https://s1.abcstatics.com/comun/2018/img/iconos-metas/smalltile.png">
-  <meta name="msapplication-wide310x150logo" content="https://s1.abcstatics.com/comun/2018/img/iconos-metas/widetile.png">
-  <meta name="msapplication-square150x150logo" content="https://s1.abcstatics.com/comun/2018/img/iconos-metas/mediumtile.png">
-  <meta name="msapplication-square310x310logo" content="https://s1.abcstatics.com/comun/2018/img/iconos-metas/largetile.png">
+  {{> ./base/head-favicons }}
 </head>
 <body>  
   {{!-- Estilos advertising mockup --}}
