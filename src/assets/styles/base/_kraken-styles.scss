@@ -45,6 +45,17 @@ body {
   .v-f .v-log--2 .v-log__i {
     filter: brightness(0) invert(1);
   }
+
+  .v-h__w--3 {
+    .v-btn--2 {
+      color: $cp1;
+      border-color: $cp1;
+
+      svg {
+        fill: $cp1;
+      }
+    }
+  }
 }
 
 body {
