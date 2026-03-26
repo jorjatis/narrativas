@@ -44,13 +44,14 @@ export default function ssMap(DATA) {
         >
           <table class="v-n-ss-sch">
             <thead>
-              <tr><th>Hora</th><th>Hermandad</th></tr>
+              <tr><th>Hora</th><th>Hermandad</th><th></th></tr>
             </thead>
             <tbody>
               ${data[day].map(row => `
                 <tr>
                   <td>${row.hora}</td>
-                  <td>${row.hermandad} ${row.tipo ? `<small>${row.tipo}</small>` : ''}</td>
+                  <td>${row.hermandad}</td>
+                  <td>${row.tipo}</td>
                 </tr>
               `).join('')}
             </tbody>

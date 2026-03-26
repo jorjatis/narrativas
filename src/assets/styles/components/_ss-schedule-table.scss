@@ -26,11 +26,17 @@
     td {
       font-family: $mcs;
       font-size: 14px;
-      line-height: 40px;
-    }
+      line-height: 1;
+      padding: 14px 0;
+      vertical-align: text-top;
 
-    td:first-child {
-      color: $nc1;
+      &:first-child {
+        color: $nc1;
+      }
+
+      &:last-child {
+        font-family: $mcr;
+      }
     }
   }
 }
