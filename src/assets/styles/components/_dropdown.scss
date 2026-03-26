@@ -31,6 +31,12 @@
     }
   }
 
+  &__lbl {
+    display: block;
+    margin-bottom: 8px;
+    font: 12px/1 $mcr;
+  }
+
   &__trg {
     width: 100%;
     display: flex;
