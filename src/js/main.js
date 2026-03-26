@@ -1,5 +1,6 @@
 // NOTE: Helpers
 import moveEls from './helpers/moveEls';
+import fadeOnScroll from './helpers/fadeOnScroll.js';
 
 // NOTE: Components
 import dropdown from './modules/dropdown';
@@ -9,6 +10,7 @@ import ssRoutes from './modules/ssRoutes';
 
 export function initAll() {
   moveEls('.v-a--d-s-1 .v-a-s-t', '.v-d--abc', "prepend");
+  fadeOnScroll('.scr-ind')
   dropdown();
   accordion();
 

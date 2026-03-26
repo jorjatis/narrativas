@@ -1,10 +1,3 @@
-/**
- * Mueve un elemento en el DOM usando selectores
- * @param {string} el - Selector del elemento a mover
- * @param {string} target - Selector del elemento destino
- * @param {"prepend"|"append"|"before"|"after"} position
- */
-
 export default function moveEls(el, target, position = "prepend") {
   const element = document.querySelector(el);
   const targetEl = document.querySelector(target);
