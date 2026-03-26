@@ -49,51 +49,14 @@ export default function animScrollHeader() {
   // FLOATING DE LA CAPSULA
   // =====================================================
 
-  // gsap.to(".artemis-capsule", {
-  //   y: "+=6",
-  //   duration: 2.5,
-  //   ease: "sine.inOut",
-  //   yoyo: true,
-  //   repeat: -1
-  // });
-
-  // =====================================================
-  // FASE 1 — SCROLL
-  // =====================================================
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".v-a-wrapper",
-      start: "top top",
-      end: "+=800",
-      scrub: true,
-      pin: ".v-a--d-s-1",
-      pinSpacing: true,
-      anticipatePin: 1
-    }
+  gsap.to(".artemis-capsule", {
+    y: "+=12",
+    x: "+=6",
+    duration: 2,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1
   });
-
-  tl.to(".artemis-media--01", {
-    y: -55,
-    x: 138,
-    rotate: 79,
-    ease: "power2.out"
-  }, 0);
-
-  tl.to(".artemis-media--02", {
-    y: -25,
-    x: 1,
-    rotate: 50,
-    scale: 0.85,
-    ease: "power2.out"
-  }, 0.05);
-
-  tl.to(".artemis-media--03", {
-    y: 65,
-    x: -102,
-    rotate: 20,
-    ease: "power2.out"
-  }, 0.1);
 
   // =====================================================
   // FASE 2 — Indicador de scroll

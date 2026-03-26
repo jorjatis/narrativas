@@ -45,6 +45,7 @@ body:has(.v-h-a) {
         position: relative;
         width: 150px;
         margin: 0 auto;
+        rotate: 25deg;
 
         @media (min-width: $screen-xs) {
           width: 190px;
@@ -53,26 +54,8 @@ body:has(.v-h-a) {
         .artemis-media {
           position: relative;
 
-          &:not(:first-child) {
-            position: absolute;
-            top: 0;
-            left: 0;
-          }
-
           &--01 {
             z-index: 4;
-          }
-
-          &--02 {
-            z-index: 3;
-          }
-
-          &--03 {
-            z-index: 2;
-          }
-
-          &--04 {
-            z-index: 1;
           }
         }
       }
