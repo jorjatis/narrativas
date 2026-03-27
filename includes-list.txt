@@ -3,5 +3,9 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/incl
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/includes/inc-ss-map.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/includes/inc-bottom.html
 
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/includes/inc-ss-cifra-01.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/includes/inc-ss-cifra-02.html
+
+
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/images/cabecera.png
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/images/icn-sss-cabecera.png

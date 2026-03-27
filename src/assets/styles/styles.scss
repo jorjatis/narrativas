@@ -3,10 +3,8 @@
 
 @use './base/global';
 
-// Re-estilos de kraken
-@use './kraken-components/kraken-styles';
-
 // Componentes Kraken
+@use './kraken-components/ladillo';
 
 // Componentes
 @use './components/scroll-indicator';
@@ -19,3 +17,4 @@
 @use './components/ss-routes';
 @use './components/ss-map';
 @use './components/ss-schedule-table';
+@use './components/ss-cifra';
