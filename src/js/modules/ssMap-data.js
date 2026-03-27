@@ -1,5 +1,5 @@
 export default {
-  "Pl. Encarnación": {
+  "Plaza de la Encarnación": {
     "Domingo 29": [
       {
         hora: "3:00 p. m.",
@@ -92,51 +92,6 @@ export default {
       {
         hora: "6:00 a. m.",
         hermandad: "Los Gitanos",
-        tipo: "2º Paso"
-      }
-    ]
-  },
-  "Alameda de Hércules": {
-    "Domingo 29": [
-      {
-        hora: "3:30 p. m.",
-        hermandad: "La Hiniesta",
-        tipo: "Cruz de guía (inicio)"
-      },
-      {
-        hora: "5:00 p. m.",
-        hermandad: "La Hiniesta",
-        tipo: "2º Paso"
-      },
-      {
-        hora: "8:00 p. m.",
-        hermandad: "La Amargura",
-        tipo: "2º Paso"
-      }
-    ],
-    "Miércoles 1": [
-      {
-        hora: "4:30 p. m.",
-        hermandad: "El Carmen Doloroso",
-        tipo: "2º Paso"
-      }
-    ],
-    "Jueves 2": [
-      {
-        hora: "6:30 p. m.",
-        hermandad: "Montesión",
-        tipo: "Cruz de guía (inicio)"
-      }
-    ],
-    "Domingo 5": [
-      {
-        hora: "9:30 a. m.",
-        hermandad: "La Resurrección",
-        tipo: "Cruz de guía (inicio)"
-      },
-      {
-        hora: "10:00 a. m.",
-        hermandad: "La Resurrección",
         tipo: "2º Paso"
       }
     ]
@@ -521,7 +476,7 @@ export default {
       }
     ]
   },
-  "Pl. Salvador": {
+  "Plaza del Salvador": {
     "Domingo 29": [
       {
         hora: "11:00 p. m.",

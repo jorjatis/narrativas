@@ -8,6 +8,15 @@
     padding: 0 20px;
     background: $nc1;
 
+    &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('https://s1.abcstatics.com/comun/narrativas/redaccion/2026/03/29/semanasanta/images/trama-bg.jpg');
+      opacity: 0.3;
+      z-index: 0;
+    }
+
     @media (min-width: $screen-xs) {
       flex-direction: row;
       gap: 0;

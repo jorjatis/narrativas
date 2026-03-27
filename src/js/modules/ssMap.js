@@ -49,7 +49,7 @@ export default function ssMap(DATA) {
             <tbody>
               ${data[day].map(row => `
                 <tr>
-                  <td>${row.hora}</td>
+                  <td>${row.hora.replace(' ', '<span class="space"></span>')}</td>
                   <td>${row.hermandad}</td>
                   <td>${row.tipo}</td>
                 </tr>
