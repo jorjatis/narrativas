@@ -145,4 +145,25 @@
       max-width: 194px;
     }
   }
+
+  .v-btn {
+    min-height: 32px;
+    height: auto;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: $nc1;
+    background: $nc2;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      color: $nc1;
+      background: $nc2;
+      border-color: transparent;
+      opacity: .7;
+    }
+
+    &-c {
+      margin-top: 32px;
+    }
+  }
 }

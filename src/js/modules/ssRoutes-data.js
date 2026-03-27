@@ -4,7 +4,8 @@ export default {
       id: "la-paz",
       name: "La Paz",
       desktop: "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/la-borriquita-escritorio.png",
-      mobile: "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/la-borriquita-movil.png"
+      mobile: "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/la-borriquita-movil.png",
+      url: "https://www.tu-sitio.com/procesiones/la-paz"
     },
     {
       id: "la-cena",

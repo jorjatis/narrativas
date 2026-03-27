@@ -1,6 +1,6 @@
 export default {
   "Pl. Encarnación": {
-    "Domingo Ramos": [
+    "Domingo 29": [
       {
         hora: "3:00 p. m.",
         hermandad: "La Cena",
@@ -32,7 +32,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Lunes Santo": [
+    "Lunes 30": [
       {
         hora: "3:30 p. m.",
         hermandad: "La Redención",
@@ -44,7 +44,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Miércoles Santo": [
+    "Miércoles 1": [
       {
         hora: "4:30 p. m.",
         hermandad: "La Sed",
@@ -71,7 +71,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Jueves Santo": [
+    "Jueves 2": [
       {
         hora: "4:30 p. m.",
         hermandad: "La Exaltación",
@@ -97,7 +97,7 @@ export default {
     ]
   },
   "Alameda de Hércules": {
-    "Domingo Ramos": [
+    "Domingo 29": [
       {
         hora: "3:30 p. m.",
         hermandad: "La Hiniesta",
@@ -114,21 +114,21 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Miércoles Santo": [
+    "Miércoles 1": [
       {
         hora: "4:30 p. m.",
         hermandad: "El Carmen Doloroso",
         tipo: "2º Paso"
       }
     ],
-    "Jueves Santo": [
+    "Jueves 2": [
       {
         hora: "6:30 p. m.",
         hermandad: "Montesión",
         tipo: "Cruz de guía (inicio)"
       }
     ],
-    "Domingo Resurrección": [
+    "Domingo 5": [
       {
         hora: "9:30 a. m.",
         hermandad: "La Resurrección",
@@ -142,7 +142,7 @@ export default {
     ]
   },
   "Reyes Católicos": {
-    "Domingo Ramos": [
+    "Domingo 29": [
       {
         hora: "5:00 p. m.",
         hermandad: "La Estrella",
@@ -164,7 +164,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Lunes Santo": [
+    "Lunes 30": [
       {
         hora: "5:30 p. m.",
         hermandad: "San Gonzalo",
@@ -176,7 +176,7 @@ export default {
         tipo: "Cruz de guía (inicio)"
       }
     ],
-    "Miércoles Santo": [
+    "Miércoles 1": [
       {
         hora: "6:00 p. m.",
         hermandad: "El Baratillo",
@@ -205,7 +205,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Viernes Santo": [
+    "Viernes 3": [
       {
         hora: "6:00 p. m.",
         hermandad: "El Cachorro",
@@ -234,7 +234,7 @@ export default {
     ]
   },
   "Cuesta del Bacalao": {
-    "Domingo Ramos": [
+    "Domingo 29": [
       {
         hora: "6:00 p. m.",
         hermandad: "La Cena",
@@ -261,7 +261,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Lunes Santo": [
+    "Lunes 30": [
       {
         hora: "7:30 p. m.",
         hermandad: "La Redención",
@@ -273,7 +273,7 @@ export default {
         tipo: "Paso"
       }
     ],
-    "Martes Santo": [
+    "Martes 31": [
       {
         hora: "9:00 p. m.",
         hermandad: "San Esteban",
@@ -290,7 +290,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Miércoles Santo": [
+    "Miércoles 1": [
       {
         hora: "7:00 p. m.",
         hermandad: "El Carmen Doloroso",
@@ -307,7 +307,7 @@ export default {
         tipo: "Paso"
       }
     ],
-    "Jueves Santo": [
+    "Jueves 2": [
       {
         hora: "7:30 p. m.",
         hermandad: "Los Negritos",
@@ -326,14 +326,14 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Viernes Santo": [
+    "Viernes 3": [
       {
         hora: "12:00 a. m.",
         hermandad: "La Mortaja",
         tipo: "Cruz de guía (inicio)"
       }
     ],
-    "Sábado Santo": [
+    "Sábado 4": [
       {
         hora: "8:00 p. m.",
         hermandad: "La Trinidad",
@@ -342,7 +342,7 @@ export default {
     ]
   },
   "Cuesta del Rosario": {
-    "Domingo Ramos": [
+    "Domingo 29": [
       {
         hora: "6:30 p. m.",
         hermandad: "La Cena",
@@ -369,7 +369,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Lunes Santo": [
+    "Lunes 30": [
       {
         hora: "3:00 p. m.",
         hermandad: "San Pablo",
@@ -401,7 +401,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Martes Santo": [
+    "Martes 31": [
       {
         hora: "8:00 p. m.",
         hermandad: "El Cerro",
@@ -418,7 +418,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Miércoles Santo": [
+    "Miércoles 1": [
       {
         hora: "8:00 p. m.",
         hermandad: "La Sed",
@@ -430,7 +430,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Jueves Santo": [
+    "Jueves 2": [
       {
         hora: "4:30 p. m.",
         hermandad: "Los Negritos",
@@ -464,7 +464,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Viernes Santo": [
+    "Viernes 3": [
       {
         hora: "8:00 p. m.",
         hermandad: "San Isidoro",
@@ -481,7 +481,7 @@ export default {
         tipo: "Cruz de guía (inicio)"
       }
     ],
-    "Sábado Santo": [
+    "Sábado 4": [
       {
         hora: "4:00 p. m.",
         hermandad: "El Sol",
@@ -513,7 +513,7 @@ export default {
         tipo: "3er Paso"
       }
     ],
-    "Domingo Resurrección": [
+    "Domingo 5": [
       {
         hora: "2:00 p. m.",
         hermandad: "La Resurrección",
@@ -522,14 +522,14 @@ export default {
     ]
   },
   "Pl. Salvador": {
-    "Domingo Ramos": [
+    "Domingo 29": [
       {
         hora: "11:00 p. m.",
         hermandad: "El Amor",
         tipo: "Cruz de guía (inicio)"
       }
     ],
-    "Lunes Santo": [
+    "Lunes 30": [
       {
         hora: "9:30 p. m.",
         hermandad: "Santa Marta",
@@ -541,7 +541,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Martes Santo": [
+    "Martes 31": [
       {
         hora: "5:00 p. m.",
         hermandad: "La Candelaria",
@@ -553,7 +553,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Miércoles Santo": [
+    "Miércoles 1": [
       {
         hora: "5:00 p. m.",
         hermandad: "San Bernardo",
@@ -580,7 +580,7 @@ export default {
         tipo: "Cruz de guía (inicio)"
       }
     ],
-    "Jueves Santo": [
+    "Jueves 2": [
       {
         hora: "9:00 p. m.",
         hermandad: "La Exaltación",
@@ -589,7 +589,7 @@ export default {
     ]
   },
   "Arco del Postigo": {
-    "Miércoles Santo": [
+    "Miércoles 1": [
       {
         hora: "7:00 p. m.",
         hermandad: "El Buen Fin",
@@ -606,7 +606,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Jueves Santo": [
+    "Jueves 2": [
       {
         hora: "10:00 p. m.",
         hermandad: "La Quinta Angustia",
@@ -615,7 +615,7 @@ export default {
     ]
   },
   "Capilla del Baratillo": {
-    "Domingo Ramos": [
+    "Domingo 29": [
       {
         hora: "10:30 p. m.",
         hermandad: "La Estrella",
@@ -627,7 +627,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Lunes Santo": [
+    "Lunes 30": [
       {
         hora: "9:30 p. m.",
         hermandad: "San Gonzalo",
@@ -639,7 +639,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Miércoles Santo": [
+    "Miércoles 1": [
       {
         hora: "5:30 p. m.",
         hermandad: "El Baratillo",
@@ -668,7 +668,7 @@ export default {
         tipo: "2º Paso"
       }
     ],
-    "Viernes Santo": [
+    "Viernes 3": [
       {
         hora: "11:00 p. m.",
         hermandad: "El Cachorro",

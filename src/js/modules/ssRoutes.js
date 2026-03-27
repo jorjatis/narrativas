@@ -54,6 +54,7 @@ export default function ssRoutes(DATA) {
 
     // Cargar la imagen de la primera hermandad por defecto
     updateImage(items[0]);
+    updateLink(items[0]);
     updateSelectTrigger(2, items[0].name);
   }
 
@@ -101,6 +102,13 @@ export default function ssRoutes(DATA) {
     renderHermandades(dayName);
   }
 
+  function updateLink(item) {
+    const linkBtn = root.querySelector('.v-btn-c--c a.v-btn');
+    if (!item || !linkBtn) return;
+
+    linkBtn.href = item.url || '#';
+  }
+
   function bindEvents() {
     root.addEventListener('click', e => {
       // Click en DÍA
@@ -129,6 +137,7 @@ export default function ssRoutes(DATA) {
         const item = DATA[dayName].find(i => i.id === id);
         updateSelectTrigger(2, btnHerm.textContent.trim());
         updateImage(item);
+        updateLink(item);
       }
     });
 

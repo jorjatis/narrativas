@@ -13,15 +13,15 @@
     "infoContainer": {
       "exists": true,
       "pretitle": "Semana Santa de Sevilla",
-      "title": "Todo lo que debes saber",
-      "description": "\"El asunto no es si va a haber más muertos por los ultras del fútbol; la única incógnita es cuándo\", advierten fuentes policiales, \"porque la violencia va a más\"",
+      "title": "La fiesta total: manual de uso y cifras de un fenómeno de masas",
+      "description": "Casi 70.000 nazarenos, 500.000 personas en las calles, un impacto económico de 500 millones de euros con escenario y modelo de siglos que está siempre a la vanguardia",
       "chevronDown": true
     },
     "firma": {
-      "author": "Carlota Pérez (texto)",
-      "coauthor": "e Ignacio Gil (fotos y vídeos)",
-      "location": "Copenhague (Dinamarca), Calais (Francia) y Cardiff (Gales)"
+      "authorImg": "https://s1.abcstatics.com/comun/2015/img/autor/autor-6230-foto-6.jpeg?width=90",
+      "authorName": "Pepe Trashorras",
+      "authorUrl": "https://www.abc.es/autor/pepe-trashorras-6230/"
     },
-    "paragraphPaywall": "Lo anterior no es una ficción. Es la historia de Sade, un cristiano en un país musulmán que dejó su tierra perseguido por su fe. <strong>«Temía por mi vida, así que tuve que irme»</strong>, cuenta. Sade lleva más de una década como inmigrante <span class=\"paywall pw-open\">irregular en suelo europeo."
+    "paragraphPaywall": "La Semana Santa es una fiesta de gran arraigo en toda España, pero que en Sevilla de forma total a todos los niveles. Las procesiones, que no son sino estaciones de penitencia de las hermandades a la Catedral, constituyen la mayor manifestación pública de fe <span class=\"paywall pw-open\">por las calles de la ciudad, un rito que hunde sus raíces en el siglo XVI.</span>"
   }
 }
