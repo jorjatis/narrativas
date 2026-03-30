@@ -1,15 +1,13 @@
+import fadeOnScroll from './modules/fadeOnScroll';
 import domChangeEls from './modules/domChangeEls';
 import starsTwinkleBg from './modules/starsTwinkleBg';
 import animScrollHeader from './modules/animScrollHeader';
 
-const modules = [
-  domChangeEls,
-  starsTwinkleBg,
-  animScrollHeader
-].filter(Boolean);
-
 export function initAll() {
-  modules.forEach(fn => fn());
+  fadeOnScroll('.scr-ind'),
+  domChangeEls(),
+  starsTwinkleBg(),
+  animScrollHeader()
 }
 
 function start() {

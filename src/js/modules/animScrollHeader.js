@@ -12,9 +12,9 @@ export default function animScrollHeader() {
     y: 20
   });
 
-  gsap.set(".v-a--d-s-1 .v-a-s-t", {
-    y: 40
-  });
+  // gsap.set(".v-a--d-s-1 .v-a-s-t", {
+  //   y: 40
+  // });
 
   gsap.set(".v-a--d-s-1 .v-a-inf-c", {
     y: 0
@@ -56,23 +56,6 @@ export default function animScrollHeader() {
     ease: "sine.inOut",
     yoyo: true,
     repeat: -1
-  });
-
-  // =====================================================
-  // FASE 2 — Indicador de scroll
-  // =====================================================
-
-  ScrollTrigger.create({
-    trigger: ".v-d-w",
-    start: "top+=300 top",
-    once: true,
-    onEnter: () => {
-      gsap.to(".scr-ind", {
-        autoAlpha: 0,
-        duration: 0.4,
-        ease: "power2.out"
-      });
-    }
   });
 
   // =====================================================
