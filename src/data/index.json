@@ -1,8 +1,27 @@
 {
   "months": [
     {
+      "title": "Abril 2026",
+      "cards": [
+         {
+          "title": "Artemis 2: Por qué no es (ni de lejos) una repetición del Apolo VIII",
+          "articleUrl": "#",
+          "titleMedia": "07-artemis-2",
+          "gif": true,
+          "netlifyUrl": "https://narrativa-artemis2.netlify.app/"
+        }
+      ]
+    },
+    {
       "title": "Marzo 2026",
       "cards": [
+         {
+          "title": "Semana Santa de Sevilla: La fiesta total: manual de uso y cifras de un fenómeno de masas",
+          "articleUrl": "https://www.abc.es/sevilla/pasionensevilla/noticias-semana-santa-sevilla/narrativa-semana-santa-20260328024744-nts.html",
+          "titleMedia": "06-ssanta-sevilla",
+          "gif": true,
+          "netlifyUrl": "https://narrativa-semanasanta.netlify.app/"
+        },
         {
           "title": "Los pedxxx que acechan a tu hijo en Roblox (y tú ni te enteras)",
           "articleUrl": "https://www.abc.es/cultura/silenciosa-infiltracion-pedofilia-mundos-digitales-20260322041759-nt.html",
