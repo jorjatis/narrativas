@@ -1,11 +1,13 @@
 {
   "name": "proyecto",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.js",  
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "npm run clean && webpack --mode production",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "deploy": "netlify deploy --prod --dir=dist",
+    "build:deploy": "npm run build && npm run deploy"
   },
   "author": "",
   "license": "ISC",
