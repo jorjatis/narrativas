@@ -1,19 +1,21 @@
 @use '../base/variables'as *;
 
-.v-cmp-scs {
-  &__s {
-    max-width: 428px;
-    padding: 32px 24px;
-    text-align: center;
-    color: $cp15;
-    border: 1px solid $cp15;
-    border-radius: 20px;
-    background: $cb1;
-  }
+.v-c-cmp {
+  .v-cmp-scs {
+    &__s {
+      max-width: 428px;
+      padding: 32px 24px;
+      text-align: center;
+      color: $cp15;
+      border: 1px solid $cp15;
+      border-radius: 20px;
+      background: $cb1;
+    }
 
-  &__p {
-    font-family: $mcr;
-    font-size: 16px;
-    line-height: 20px;
+    &__p {
+      font-family: $mcr;
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 }

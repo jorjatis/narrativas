@@ -20,5 +20,41 @@
       "location": "Copenhague (Dinamarca), Calais (Francia) y Cardiff (Gales)"
     },
     "paragraphPaywall": "Lo anterior no es una ficción. Es la historia de Sade, un cristiano en un país musulmán que dejó su tierra perseguido por su fe. <strong>«Temía por mi vida, así que tuve que irme»</strong>, cuenta. Sade lleva más de una década como inmigrante <span class=\"paywall pw-open\">irregular en suelo europeo."
+  },
+  "scrollStory": {
+    "scrollPlanetas": {
+      "scrollyImgs": [
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/1-scrolling_00-desk.jpg?width=964", "hasInfo": true },
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/1-scrolling_01-desk.jpg?width=964" },
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/1-scrolling_02-desk.jpg?width=964" },
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/1-scrolling_03-desk.jpg?width=964" },
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/1-scrolling_04-desk.jpg?width=964" }
+      ],
+      "scrollySteps": [
+        { "title": "1. INICIO DE LA MISIÓN", "txt": "Orion está diseñada para adaptarse al 99 % de la población humana, un rango mayor que cualquier otro proyecto pasado, presente o futuro de la NASA", "hasInfo": true },
+        { "title": "2. TEST DE MANEJO", "txt": "Separación de la Orión para las pruebas de manejo manual" },
+        { "title": "3. VIAJE DE IDA", "txt": "Una vez alcanzada la velocidad adecuada, la misión iniciará su trayectoria hacia la Luna" },
+        { "title": "4. SOBREVUELO LUNAR", "txt": "La Orión alcanzará los 6.513 km de altitud en el punto más lejano del vuelo sobre la superficie" },
+        { "title": "5. VUELTA A LA TIERRA", "txt": "Tras haber rodeado la Luna, Orión vuelve a la Tierra. Aprovechará la gravedad terrestre para regresar y amerizar en el Pacífico, donde un barco recogerá a la tripulación y la cápsula" }
+      ]
+    },
+    "scrollNave": {
+      "scrollyImgs": [
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/2-scrolling-1-desk.jpg?width=964" },
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/2-scrolling-2-desk.jpg?width=964" },
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/2-scrolling-3-desk.jpg?width=964" },
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/2-scrolling-4-desk.jpg?width=964" },
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/2-scrolling-5-desk.jpg?width=964" },
+        { "src": "https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/2-scrolling-6-desk.jpg?width=964" }
+      ],
+      "scrollySteps": [
+        { "txt": "En su parte posterior está el mayor escudo térmico fabricado. Soporta hasta 2.760 ºC durante la reentrada" },
+        { "txt": "Se divide en dos espacios: zona de aviónica y depósitos (combustible, helio y oxigeno), y la zona habitable presurizada" },
+        { "txt": "En la Orión, piloto y copiloto se colocan en dos asientos encima de los destinados a los técnicos de la misión" },
+        { "txt": "En el espacio liberado se pueden extender hasta cuatro sacos de dormir sujetos por la zona de la cabeza" },
+        { "txt": "Nada" },
+        { "txt": "La cápsula llevará una maquina de remo para el ejercicio diario" }
+      ]
+    }
   }
 }

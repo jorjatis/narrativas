@@ -109,14 +109,18 @@ module.exports = (env, argv) => {
           filename: outputPath.replace(/\\/g, '/'), // Sin la "/" inicial para evitar errores en Windows/algunos servers
           inject: 'body',
           templateParameters: () => {
+            let data = {};
+
             if (fs.existsSync(dataFileJs)) {
-              delete require.cache[require.resolve(dataFileJs)]; // Limpia cache para live reload
-              return require(dataFileJs);
+              delete require.cache[require.resolve(dataFileJs)];
+              data = require(dataFileJs);
+            } else if (fs.existsSync(dataFileJson)) {
+              data = JSON.parse(fs.readFileSync(dataFileJson, 'utf8'));
             }
-            if (fs.existsSync(dataFileJson)) {
-              return JSON.parse(fs.readFileSync(dataFileJson, 'utf8'));
-            }
-            return {};
+
+            return {
+              ...data
+            };
           }
         });
       }),

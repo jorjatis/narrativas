@@ -4,10 +4,10 @@ import starsTwinkleBg from './modules/starsTwinkleBg';
 import animScrollHeader from './modules/animScrollHeader';
 
 export function initAll() {
-  fadeOnScroll('.scr-ind'),
-  domChangeEls(),
-  starsTwinkleBg(),
-  animScrollHeader()
+  fadeOnScroll('.scr-ind');
+  domChangeEls();
+  starsTwinkleBg();
+  animScrollHeader();
 }
 
 function start() {

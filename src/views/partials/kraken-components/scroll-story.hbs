@@ -1,0 +1,57 @@
+<div class="v-c-cmp v-c-cmp--l">
+  <style>
+    .v-cmp-scs__f {
+      display: grid;
+      grid-template-columns: 100%
+    }
+
+    .v-cmp-scs__g {
+      grid-area: 1/1;
+      opacity: 0;
+      transition: opacity .3s
+    }
+
+    .v-cmp-scs__w--1 {
+      top: 50px;
+      height: calc(100vh - 50px)
+    }
+
+    @media (min-width:699px) {
+      .v-cmp-scs__w--1 {
+        top: 58px;
+        height: calc(100vh - 58px)
+      }
+    }
+
+    .v-c-cmp--l .v-cmp-scs__w--1 {
+      align-content: center
+    }
+  </style>
+  <div class="v-cmp-scs">
+    <div class="v-cmp-scs__c">
+      <div class="v-cmp-scs__w v-cmp-scs__w--1">
+        <figure class="v-cmp-scs__f">
+          {{#each scrollyImgs}}
+            <div class="v-cmp-scs__g v-cmp-scs__g--{{actualIndex @index}}" {{#if hasInfo}}style="opacity: 1;"{{/if}}>
+              <img class="v-cmp-scs__i v-cmp-scs__i--{{inc @index}}" src="{{src}}" alt="Scroll Story imagen {{actualIndex @index}}">
+            </div>
+          {{/each}}
+        </figure>
+      </div>
+      <div class="v-cmp-scs__w v-cmp-scs__w--2">
+        {{#each scrollySteps}}
+          <div class="v-cmp-scs__s is-active" data-step="{{inc @index}}" {{#if hasInfo}}style="transform: translateY(100px);"{{/if}}>
+            <div class="v-cmp-scs__p">
+              {{#if title}}
+                <h2 class="v-cmp-scs__t">{{title}}</h2>
+              {{/if}}
+              <div class="v-cmp-scs__p">
+                {{txt}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

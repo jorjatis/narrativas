@@ -1,58 +1,130 @@
-<div class="v-c-cmp">
+  <div class="v-c-cmp">
   {{> ./includes/scroll-indicator }}
   {{> ./includes/stars-noise-bg }}
-</div>
+  </div>
+  
+  <!-- NOTE: ai2html -->
+  {{> ./ai2html/1-cohetes }}
 
-<p class="v-d-p">Los motivos para ir a la Luna no son los mismos ahora que a finales de los sesenta. Entonces fuimos 'de visita', y sólo para que Estados Unidos pudiera demostrar al mundo que podía llegar antes que sus rivales de la Unión Soviética. En total, los doce hombres que pisaron la Luna entre 1969 y 1972 apenas permanecieron allí unas 300 horas. Pero ahora volvemos para quedarnos, para explotar sus recursos... y para establecer una primera 'cabeza de puente' en nuestra ya imparable carrera hacia la conquista del Sistema Solar.</p>
-<p class="v-d-p">Estos días la Tierra contiene el aliento ante el inminente (y de nuevo histórico) lanzamiento de la misión Artemis 2. Y en cierto modo resulta inevitable que la memoria colectiva vuelva al mes de diciembre de 1968.</p>
-<p class="v-d-p">Aquella Navidad, Frank Borman, Jim Lovell y Bill Anders se convirtieron en los primeros seres humanos en abandonar la gravedad terrestre para rodear la Luna a bordo del Apolo 8. Fue una gesta de audacia, miedo y... urgencia política.</p>
-<p class="v-d-p">Ahora, en febrero de 2026, cuatro nuevos astronautas (Reid Wiseman, Victor Glover, Christina Koch y Jeremy Hansen) se disponen a volver y a hacer, aparentemente, lo mismo. Pero no es así. Las diferencias entre ambas misiones son abismales, tanto como la distancia que separa una regla de cálculo de un superordenador cuántico.</p>
+  <p class="v-d-p" style="">Los motivos para ir a la Luna no son los mismos ahora que a finales de los sesenta. Entonces unas 300 horas.</p>
 
-{{!-- NOTE: Ladillo Kraken --}}
-{{> ./kraken-components/ladillo txt="Propósitos diferentes" }}
+  {{!-- NOTE: Sumario Kraken --}}
+  <div class="v-c-cmp">
+  {{> ./kraken-components/sumario txt="Apolo 8 fue un 'tiro a ciegas' nacido de la paranoia de la Guerra Fría; Artemis 2 no es un sprint, sino el montaje del 'campamento base' para llegar a Marte" }}
+  </div> 
 
-<p class="v-d-p">Para empezar, esta vez se trata mucho más que de un viaje turístico alrededor de nuestro satélite. <a href="#">Y es que el Apolo 8 fue</a>, en cierto sentido, una misión nacida de la paranoia. La CIA tenía informes (que al final resultaron ser exagerados) de que los soviéticos iban a lanzar una nave tripulada alrededor de la Luna antes de finales del 68. Y la NASA, presa del pánico, le quitó el Módulo Lunar (que no estaba listo) a su nave y decidió enviar el Módulo de Mando solo, en un auténtico 'tiro a ciegas' cuyo único objetivo era llegar antes. Fue una pura y simple carrera de velocidad.</p>
+  <p class="v-d-p" style="">Pero ahora volvemos para quedarnos, <a href="https://www.abc.es/ciencia/recursos-tierra-acaban-puede-espacio-nueva-mina-20250321194754-nt.html" title="para explotar sus recursos">para explotar sus recursos</a>... y para establecer una primera 'cabeza de puente' en nuestra ya imparable carrera hacia la conquista del Sistema Solar.</p>
+  
+  {{!-- NOTE: ai2html --}}
+  {{> ./ai2html/2-misiones}}
 
-{{!-- NOTE: Sumario Kraken --}}
-<div class="v-c-cmp">
-{{> ./kraken-components/sumario txt="La nave Orión no frenará para orbitar la Luna: realizará una trayectoria de 'retorno libre' que, si todo falla, devolverá a los astronautas a casa gracias a la pura gravedad" }}
-</div> 
+  <p class="v-d-p" style="">Estos días la Tierra contiene el aliento ante el inminente (y de nuevo histórico) lanzamiento de la misión Artemis II. Y en cierto modo resulta inevitable que la memoria colectiva vuelva al mes de diciembre de 1968.</p>
+  <p class="v-d-p" style="">Aquella Navidad, Frank Borman, Jim Lovell y Bill Anders se convirtieron en los primeros seres humanos en abandonar la gravedad terrestre para rodear la Luna a bordo del 8. Fue una gesta de audacia, miedo y... urgencia política.</p>
+  
+  {{!-- NOTE: Imagen Kraken --}}
+  {{> ./kraken-components/image large=true url="https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/03_FOTO.jpg" txt="Tripulación principal del Apollo 8 vista dentro del modelo de prueba durante la salida del agua" author="(NASA)"}}
 
-<p class="v-d-p">Artemis 2, en cambio, no es un sprint; es más bien el montaje del campamento base para un maratón. No vamos a la Luna para ganar a nadie (aunque la competencia con China está ahí), sino para aprender a vivir allí. Como bien ha dicho la NASA: en el programa Apolo, la ciencia era la guinda del pastel; en Artemis, la ciencia 'es' el pastel. Esta misión busca probar los sistemas de soporte vital de la nave Orión en el espacio profundo durante 10 días, confirmando que podemos mantener a seres humanos vivos no solo para ir a la Luna, sino para el siguiente objetivo que ya brilla en el horizonte: Marte.</p>
+  <p class="v-d-p" style="">Ahora, en febrero de 2026, <a href="https://www.abc.es/ciencia/artemis-nasa-luna-astronautas-20250924144319-nt.html"title="cuatro nuevos astronautas">cuatro nuevos astronautas</a> (Reid Wiseman, Victor Glover, Christina Koch y Jeremy Hansen) se disponen a volver y a hacer, aparentemente, lo mismo. Pero no es así. Las diferencias entre ambas misiones son abismales, tanto como la distancia que separa una regla de cálculo de un superordenador cuántico.</p>
 
-{{!-- NOTE: Ladillo Kraken --}}
-{{> ./kraken-components/ladillo txt="Una trayectoria segura" }}
+  {{!-- NOTE: Ladillo Kraken --}}
+  {{> ./kraken-components/ladillo txt="Propósitos diferentes" }}
 
-<p class="v-d-p">Muchos creen que Artemis 2 va a orbitar la Luna de la misma forma en que lo hizo Apolo 8. Pero nada más lejos de la realidad. El Apolo 8, de hecho, realizó una 'Inserción en Órbita Lunar' (LOI), algo que en el argot ha quedado registrado como la 'órbita de la muerte'. Y no es para menos. Para llevarla a cabo, los tripulantes tuvieron que encender su motor principal en el lado oculto de la Luna con objeto de frenar y dejarse atrapar por la gravedad de nuestro satélite. Fue una maniobra arriesgada y aterradora: si el motor no se encendía, la nave saldría disparada al espacio profundo sin posibilidad de regreso, lo que habría significado la muerte segura de los astronautas; si, por el contrario, el motor se encendía durante demasiado tiempo, la nave se estrellarìa contra la Luna, con consecuencias igualmente fatales; y lo más importante, si el motor fallaba al intentar volver a casa (la llamada 'Inyección Trans-Tierra'), el Apolo 8 se quedaría 'atrapado' en una órbita eterna, con sus tripulantes girando alrededor de la Luna para siempre como cadáveres congelados.</p>
+  <p class="v-d-p" style="">Para empezar, esta vez se trata mucho más que de un viaje turístico alrededor de nuestro satélite. Y es que el Apolo 8 fue, en cierto sentido, una misión nacida de la paranoia. </p>
+  <p class="v-d-p" style="">La CIA tenía informes (que al final resultaron ser exagerados) de que los soviéticos iban a lanzar una nave tripulada alrededor de la Luna antes de finales del 68. Y la NASA, presa del pánico, le quitó el Módulo Lunar (que no estaba listo) a su nave y decidió enviar el Módulo de Mando solo, en un auténtico 'tiro a ciegas' cuyo único objetivo era llegar antes. Fue una pura y simple carrera de velocidad.</p>
+  
+  {{!-- NOTE: ai2html --}}
+  {{> ./ai2html/3-partes-cohete}}
 
-{{!-- NOTE: Video block del astronauta --}}
-{{> ./includes/video-block }}
+  <p class="v-d-p" style="">Artemis II, en cambio, no es un sprint; es más bien el montaje del campamento base para un maratón. No vamos a la Luna para ganar a nadie (aunque la competencia con China está ahí), sino para aprender a vivir allí. Como bien ha dicho la NASA: en el programa Apolo, la ciencia era la guinda del pastel; en Artemis, laciencia 'es' el pastel.</p>
+  <p class="v-d-p" style="">Esta misión busca probar los sistemas de soporte vital de la nave Orión en el espacio profundo durante 10 días, confirmando que podemos mantener a seres humanos vivos no solo para ir a la Luna, sino para el siguiente objetivo que ya brilla en el horizonte: Marte.</p>
+  
+  {{!-- NOTE: Ladillo Kraken --}}
+  {{> ./kraken-components/ladillo txt="Una trayectoria segura" }}
 
-<p class="v-d-p">Incluso en Julio del año siguiente, cuando Armstrong, Collins y Aldrin aterrizaron por fin en la Luna con el módulo Eagle del Apolo XI, el control de misión barajaba apenas un 40% de probabilidades de éxito. Recordemos que Armstrong, en el último momento y a solo 150 metros del suelo, tuvo que tomar el control manual del módulo de aterrizaje, casi ya sin combustible, para no posarse justo encima de un cráter lleno de rocas. En la actualidad, sería impensable afrontar una misión con ese mismo grado de incertidumbre.</p>
-<p class="v-d-p">El viaje de Artemis 2, sin embargo, juega con cartas mucho más seguras: la 'trayectoria de retorno libre híbrida'. Imaginemos un inmenso número ocho trazado entre la Tierra y la Luna. La nave Orión no frenará para entrar en órbita baja como hizo su predecesora. En vez de eso, utilizará la gravedad lunar como una honda. Pasará por detrás de la Luna y la propia gravedad del satélite la «escupirá» de vuelta hacia la Tierra sin necesidad de encendidos críticos de motor (aunque se harán pequeñas correcciones). Es decir, que si todo falla en la nave, la física de Newton se encargará de traer la nave a casa.</p>
-<p class="v-d-p">Y aún más, esta trayectoria tiene un récord bajo la manga: Artemis 2 llevará a los astronautas miles de kilómetros más allá de la Luna, alcanzando una distancia de la Tierra superior a los 400.000 km. Lo cual supone llegar más lejos en el espacio de lo que cualquier ser humano (incluidos los del Apolo) haya estado jamás.</p>
+  <p class="v-d-p" style="">Muchos creen que Artemis II va a orbitar la Luna de la misma forma en que lo hizo Apolo 8. Pero nada más lejos de la realidad. El Apolo 8, de hecho, realizó una 'Inserción en Órbita Lunar' (LOI), algo que en el argot ha quedado registrado como la 'órbita de la muerte'. Y no es para menos. </p>
+  
+  {{!- NOTE: Scroll story Kraken}}
+  {{> ./kraken-components/scroll-story scrollStory.scrollPlanetas }}
 
-{{!-- NOTE: Ladillo Kraken --}}
-{{> ./kraken-components/ladillo txt="Del reloj de pulsera a la nave inteligente" }}
+  <p class="v-d-p" style="">Para llevarla a cabo, los tripulantes tuvieron que encender su motor principal en el lado oculto de la Luna con objeto de frenar y dejarse atrapar por la gravedad de nuestro satélite. </p>
+  <p class="v-d-p" style="">Fue una maniobra arriesgada y aterradora: si el motor no se encendía, la nave saldría disparada al espacio profundo sin posibilidad de regreso, lo que habría significado la muerte segura de los astronautas; si, por el contrario, el motor se encendía durante demasiado tiempo, la nave se estrellaría contra la Luna, con consecuencias igualmente fatales.</p>
 
-<p class="v-d-p">Otra diferencia fundamental entre ambas misiones radica, por supuesto, en la tecnología. Desde luego, resulta inquietante pensar que el ordenador del Apolo 8 (el famoso AGC) tenía menos potencia de procesamiento que una calculadora de bolsillo moderna, o incluso que un simple cargador de USB. Y es que, en 1968, los astronautas volaban 'a mano', usando sextantes para mirar las estrellas y calcular su posición si fallaba la radio. Era una mecánica analógica, heroica y con múltiples posibilidades de cometer errores fatales.</p>
-<p class="v-d-p">La nave Orion de Artemis es una bestia diferente. Es más grande (lleva 4 tripulantes en lugar de 3) y es, esencialmente, un robot autónomo que vela por la seguridad de los humanos que van dentro. Posee una capacidad de computación 20.000 veces más rápida y tiene 128.000 veces más memoria que Apolo. Y sus sistemas de 'cabina de cristal' (pantallas digitales en lugar de interruptores físicos) gestionan la navegación en tiempo real.</p>
-<p class="v-d-p">Para muchos, sin embargo, la mayor diferencia está en el cohete propulsor. El viejo Saturno V era, desde luego, una auténtica maravilla de la fuerza bruta. Pero el nuevo SLS (Space Launch System) es su heredero hipervitaminado. Aunque visualmente parecidos, el SLS genera un 15% más de empuje al despegue que el Saturno V (8,8 millones de libras, equivalente a 39 millones de Newtons). Es el cohete operativo más potente jamás construido, y su potencia es equiparable a la de más de 25.000 locomotoras juntas.</p>
+  {{!-- NOTE: Sumario Kraken --}}
+  <div class="v-c-cmp">
+  {{> ./kraken-components/sumario txt="La nave Orión no frenará para orbitar la Luna: realizará una trayectoria de 'retorno libre' que, si todo falla, devolverá a los astronautas a casa gracias a la pura gravedad" }}
+  </div> 
 
-{{!-- NOTE: Ladillo Kraken --}}
-{{> ./kraken-components/ladillo txt="Radiación, el peligro invisible" }}
+  <p class="v-d-p" style="">Y lo más importante, si el motor fallaba al intentar volver a casa (la llamada 'Inyección Trans-Tierra'), el Apolo 8 se quedaría 'atrapado' en una órbita eterna, con sus tripulantes girando alrededor de la Luna para siempre como cadáveres congelados.</p>
 
-<p class="v-d-p">Este es un punto que a menudo se pasa por alto, pero que es crucial en Artemis. En los años 60, el Apolo 8 atravesó rápidamente los Cinturones de Van Allen (zonas de alta radiación atrapada por el campo magnético terrestre), cruzando los dedos para que no pasara nada. No se sabía mucho sobre los efectos a largo plazo de esa radiación y se decidió asumir, también, ese riesgo.</p>
-<p class="v-d-p">Pero en Artemis 2, la nave Orión pasará deliberadamente más tiempo en zonas de radiación y llevará sensores activos para medirla. ¿Por qué? Porque si queremos ir a Marte, un viaje de seis a nueve meses, necesitamos saber exactamente cómo proteger a la tripulación de los rayos cósmicos y las tormentas solares. Apolo esquivó la bala; Artemis quiere estudiar a fondo la pistola.</p>
+  {{!-- NOTE: Imagen Kraken --}}
+  {{> ./kraken-components/image url="https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/06_FOTO.jpg" txt="Traslado del SLS y la nave Orión a la rampa de lanzamiento en el Centro Espacial Kennedy" author="(Joel Kowsky / NASA)"}}
 
-{{!-- NOTE: Ladillo Kraken --}}
-{{> ./kraken-components/ladillo txt="Dos tripulaciones, dos criterios" }}
+  <p class="v-d-p" style="">Incluso en julio del año siguiente, cuando Armstrong, Collins y Aldrin aterrizaron por fin en la Luna con el módulo Eagle del Apolo XI, el control de misión barajaba apenas un 40% de probabilidades de éxito.</p>
+  <p class="v-d-p" style="">Recordemos que Armstrong, en el último momento y a solo 150 metros del suelo, tuvo que tomar el control manual del módulo de aterrizaje, casi ya sin combustible, para no posarse justo encima de un cráter lleno de rocas. En la actualidad, sería impensable afrontar una misión con ese mismo grado de incertidumbre.</p>
+  
+  {{!-- NOTE: ai2html --}}
+  {{> ./ai2html/3-partes-cohete}}
 
-<p class="v-d-p">Llega la hora de mirar las fotos de la tripulación. En el Apolo 8 teníamos a tres hombres blancos, militares, pilotos de pruebas, todos cortados por el mismo patrón. Eran soldados, guerreros de la Guerra Fría. En Artemis 2, la tripulación es un espejo mucho más variado (y fiel) de la humanidad que los envía. Tenemos a Christina Koch (que será la primera mujer en viajar más allá de la órbita baja), a Victor Glover (el primer astronauta negro en una misión lunar) y a Jeremy Hansen (el primer canadiense, rompiendo el monopolio exclusivo de EE.UU. en la Luna). Aunque puede que toda esta diversidad no sea más que un espejismo. La administración Trump, en efecto, ha eliminado de la web de la NASA todas las alusiones sobre la presencia femenina y afroamericana en la misión Artemis 3 que, esta vez sí, pisará la Luna en 2027.</p>
-<p class="v-d-p">A pesar de ello, y corrección política aparte, se trata más bien de una cuestión de puro pragmatismo. Porque la exploración espacial del siglo XXI, lo quiera Trump o no, es colaborativa. Estados Unidos ya no puede (ni quiere) pagar la factura solo. El programa Apolo supuso un esfuerzo titánico para el país que lo puso en marcha. Cuatrocientas mil personas participaron en el proyecto, y los costes fueron astronómicos. Al cambio actual, el 'precio' de ir a la Luna fue entonces de unos 250.000 millones de dólares. Que se gastaron, además, sin tener ni una sola garantía de éxito.</p>
-<p class="v-d-p">Artemis, sin embargo, se basa en una alianza internacional y comercial (NASA, ESA, JAXA, CSA, SpaceX, Boeing) que permite un ecosistema, y unos objetivos de exploración, mucho más amplios. Si antes se trataba sólo de llegar a la Luna para demostrar una superioridad tecnológica, ahora la idea es establecer allí una presencia humana a largo plazo, desarrollar las tecnologías que nos permitirán ir a Marte y más allá, usando nuestro satélite natural como punto de partida para la expansión del ser humano por el Sistema Solar.</p>
-<p class="v-d-p">En definitiva, Apolo 8 fue un acto de audacia desesperada que nos regaló la famosa foto de la 'Salida de la Tierra' (en la que nuestro planeta se aparece sobre el horizonte lunar) y cambió nuestra conciencia ecológica para siempre. Artemis 2, por el contrario, es la madurez tecnológica de una especie que ya no se conforma con visitar la Luna, sino que se prepara para quedarse a vivir en ella.</p>
+  <p class="v-d-p" style="">El viaje de Artemis II, sin embargo, juega con cartas mucho más seguras: la 'trayectoria de retorno libre híbrida'. Imaginemos un inmenso número ocho trazado entre la Tierra y la Luna. La nave Orión no frenará para entrar en órbita baja como hizo su predecesora. En vez de eso, utilizará la gravedad lunar como una honda. </p>
+  <p class="v-d-p" style="">Pasará por detrás de la Luna y la propia gravedad del satélite la «escupirá» de vuelta hacia la Tierra sin necesidad de encendidos críticos de motor (aunque se harán pequeñas correcciones). Es decir, que si todo falla en la nave, la física de Newton se encargará de traer la nave a casa.</p>
+  
+  {{!-- NOTE: Imagen Kraken --}}
+  {{> ./kraken-components/image large=true url="https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/08_FOTO.jpg" txt="Simulaciones de lanzamiento en el Centro Espacial Kennedy para la misión Artemis II y pruebas de seguridad con el maniquí «Campos»" author="(Kim Shiflettn (NASA) y Rick Eldridge (USAF))"}}
 
-{{!-- <div class="v-c-cmp">
-  {{> ./includes/nave-3d }}
-</div> --}}
+  <p class="v-d-p" style="">Y aún más, esta trayectoria tiene un récord bajo la manga: Artemis II llevará a los astronautas miles de kilómetros más allá de la Luna, alcanzando una distancia de la Tierra superior a los 400.000 km. Lo cual supone llegar más lejos en el espacio de lo que cualquier ser humano (incluidos los del Apolo) haya estado jamás.</p>
+
+  {{!-- NOTE: Ladillo Kraken --}}
+  {{> ./kraken-components/ladillo txt="Del reloj de pulsera a la nave inteligente" }}
+
+  <p class="v-d-p" style="">Otra diferencia fundamental entre ambas misiones radica, por supuesto, en la tecnología. Desde luego, resulta inquietante pensar que el ordenador del Apolo 8 (el famoso AGC) tenía menos potencia de procesamiento que una calculadora de bolsillo moderna, o incluso que un simple cargador de USB.</p>
+  <p class="v-d-p" style="">Y es que, en 1968, los astronautas volaban 'a mano', usando sextantes para mirar las estrellas y calcular su posición si fallaba la radio. Era una mecánica analógica, heroica y con múltiples posibilidades de cometer errores fatales.</p>
+  <p class="v-d-p" style="">La nave Orion de Artemis es una bestia diferente. Es más grande (lleva 4 tripulantes en lugar de 3) y es, esencialmente, un robot autónomo que vela por la seguridad de los humanos que van dentro. </p>
+ 
+  {{!- NOTE: Scroll story Kraken-}}
+    {{> ./kraken-components/scroll-story scrollStory.scrollNave }}
+
+  <p class="v-d-p" style="">Posee una capacidad de computación 20.000 veces más rápida y tiene 128.000 veces más memoria que Apolo. Y sus sistemas de 'cabina de cristal' (pantallas digitales en lugar de interruptores físicos) gestionan la navegación en tiempo real.</p>
+  <p class="v-d-p" style="">Para muchos, sin embargo, la mayor diferencia está en el cohete propulsor. El viejo Saturno V era, desde luego, una auténtica maravilla de la fuerza bruta. </p>
+
+  {{!-- NOTE: Sumario Kraken --}}
+  <div class="v-c-cmp">
+  {{> ./kraken-components/sumario txt="El ordenador del Apolo tenía menos potencia que un cargador USB; hoy, la Orión es una nave inteligente capaz de gestionarse sola si la tripulación queda incapacitada" }}
+  </div> 
+
+  <p class="v-d-p" style="">Pero el nuevo SLS (Space Launch System) es su heredero hipervitaminado. Aunque visualmente parecidos, el SLS genera un 15% más de empuje al despegue que el Saturno V (8,8 millones de libras, equivalente a 39 millones de Newtons). Es el cohete operativo más potente jamás construido, y su potencia es equiparable a la de más de 25.000 locomotoras juntas.</p>
+
+  {{!-- NOTE: Ladillo Kraken --}}
+  {{> ./kraken-components/ladillo txt="Radiación, el peligro invisible" }}
+
+  <p class="v-d-p" style="">Este es un punto que a menudo se pasa por alto, pero que es crucial en Artemis. En los años 60, el Apolo 8 atravesó rápidamente los Cinturones de Van Allen (zonas de alta radiación atrapada por el campo magnético terrestre), cruzando los dedos para que no pasara nada. No se sabía mucho sobre los efectos a largo plazo de esa radiación y se decidió asumir, también, ese riesgo.</p>
+
+  {{!-- NOTE: ai2html --}}
+  {{ ./ai2html/5-trajes }}
+
+  <p class="v-d-p" style="">Pero en Artemis II, la nave Orión pasará deliberadamente más tiempo en zonas de radiación y llevará sensores activos para medirla. ¿Por qué? Porque si queremos ir a Marte, un viaje de seis a nueve meses, necesitamos saber exactamente cómo proteger a la tripulación de los rayos cósmicos y las tormentas solares. Apolo esquivó la bala; Artemis quiere estudiar a fondo la pistola.</p>
+
+   {{!-- NOTE: Ladillo Kraken --}}
+  {{> ./kraken-components/ladillo txt="Dos tripulaciones, dos criterios" }}
+
+  <p class="v-d-p" style="">Llega la hora de mirar las fotos de la tripulación. En el Apolo 8 teníamos a tres hombres blancos, militares, pilotos de pruebas, todos cortados por el mismo patrón. Eran soldados, guerreros de la Guerra Fría. </p>
+  <p class="v-d-p" style="">En Artemis II, la tripulación es un espejo mucho más variado (y fiel) de la humanidad que los envía. Tenemos a Christina Koch (que será la primera mujer en viajar más allá de la órbita baja), a Victor Glover (el primer astronauta negro en una misión lunar) y a Jeremy Hansen (el primer canadiense, rompiendo el monopolio exclusivo de EE.UU. en la Luna). </p>
+
+  {{!-- NOTE: ai2html --}}
+  {{ ./ai2html/6-tripulacion}}
+
+  <p class="v-d-p" style="">Aunque puede que toda esta diversidad no sea más que un espejismo. La administración Trump, en efecto, ha eliminado de la web de la NASA todas las alusiones sobre la presencia femenina y afroamericana en la misión Artemis III que, esta vez sí, pisará la Luna en 2027.</p>
+  <p class="v-d-p" style="">A pesar de ello, y corrección política aparte, se trata más bien de una cuestión de puro pragmatismo. Porque la exploración espacial del siglo XXI, lo quiera Trump o no, es colaborativa. Estados Unidos ya no puede (ni quiere) pagar la factura solo. </p>
+
+  {{!-- NOTE: Sumario Kraken --}}
+  <div class="v-c-cmp">
+  {{> ./kraken-components/sumario txt="Artemis 2 llevará a los seres humanos a más de 400.000 kilómetros de la Tierra, adentrándose en la oscuridad del espacio profundo mucho más allá de donde llegó cualquier A" }}
+  </div> 
+
+  <p class="v-d-p" style="">El programa Apolo supuso un esfuerzo titánico para el país que lo puso en marcha. Cuatrocientas mil personas participaron en el proyecto, y los costes fueron astronómicos. Al cambio actual, el 'precio' de ir a la Luna fue entonces de unos 250.000 millones de dólares. Que se gastaron, además, sin tener ni una sola garantía de éxito.</p>
+  <p class="v-d-p" style="">Artemis, sin embargo, se basa en una alianza internacional y comercial (NASA, ESA, JAXA, CSA, SpaceX, Boeing) que permite un ecosistema, y unos objetivos de exploración, mucho más amplios. </p>
+
+  {{!-- NOTE: Imagen Kraken --}}
+  {{> ./kraken-components/image large=true url="https://s1.abcstatics.com/abc/www/multimedia/ciencia/2026/03/31/13_FOTO.jpg" txt="El cohete Space Launch System" author="(Joel Kowsky (NASA))"}}
+
+  <p class="v-d-p" style="">Si antes se trataba sólo de llegar a la Luna para demostrar una superioridad tecnológica, ahora la idea es establecer allí una presencia humana a largo plazo, desarrollar las tecnologías que nos permitirán ir a Marte y más allá, usando nuestro satélite natural como punto de partida para la expansión del ser humano por el Sistema Solar.</p>
+  <p class="v-d-p" style="">En definitiva, Apolo 8 fue un acto de audacia desesperada que nos regaló la famosa foto de la 'Salida de la Tierra' (en la que nuestro planeta se aparece sobre el horizonte lunar) y cambió nuestra conciencia ecológica para siempre. Artemis II, por el contrario, es la madurez tecnológica de una especie que ya no se conforma con visitar la Luna, sino que se prepara para quedarse a vivir en ella.</p>
