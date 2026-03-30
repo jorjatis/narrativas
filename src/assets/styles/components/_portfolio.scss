@@ -110,14 +110,15 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 26px 20px;
 }
 
 .card {
   min-width: 0;
-  display: grid;
+  display: flex;
   gap: 12px;
+  flex-direction: column;
 }
 
 .card-media {
@@ -190,7 +191,7 @@
   min-height: calc(2 * 1.06em);
   align-self: start;
   font-family: $ads;
-  font-size: clamp(20px, 1.45vw, 28px);
+  font-size: clamp(22px, 1.45vw, 24px);
   line-height: 1.06;
   overflow-wrap: break-word;
   text-wrap: pretty;
