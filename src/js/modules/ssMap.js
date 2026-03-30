@@ -97,4 +97,6 @@ export default function ssMap(DATA) {
   }
 
   bindEvents();
+
+  points[0]?.click();
 }

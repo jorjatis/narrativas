@@ -15,7 +15,7 @@ import ssMap from './modules/ssMap';
 export function initAll() {
   moveEls('.v-a--d-s-1 .v-a-s-t', '.v-d--abc', "prepend");
   moveEls('.v-a--d-s-1 .v-n-pre-a-ath', '.v-d--abc .v-a-s-t', "after");
-  fadeOnScroll('.scr-ind')
+  fadeOnScroll('.scr-ind');
   dropdown();
   accordion();
   ssRoutes(dataRoutes);

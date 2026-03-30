@@ -1,12 +1,13 @@
-<p class="v-d-p" style="">Su envergadura trasciende su principal aspecto, el religioso, para adquirir también un importante plano familiar, social, cultural y artístico e incluso económico y turístico. Así, durante una semana, la capital andaluza vive por y para las cofradías, un acontecimiento que atraviesa de forma transversal a la sociedad sevillana.</p>
+<p class="v-d-p">Su envergadura trasciende de lo religioso para adquirir también un importante plano familiar, social, cultural y artístico e incluso económico y turístico. Así, durante una semana, la capital andaluza vive por y para las cofradías, un acontecimiento que atraviesa de forma transversal a la sociedad sevillana.</p>
 
 {{!-- NOTE: Ladillo Kraken --}}
 {{> ./kraken-components/ladillo 
   txt="La carrera oficial, escenario común de las cofradías"
 }}
 
-<p class="v-d-p" style="">La carrera oficial de la Semana Santa de Sevilla tiene su origen en el siglo XVIII, después de que se estableciera que todas las hermandades debían ir con sus pasos a la Catedral. Aunque ha sufrido algunos cambios, el recorrido común actual se realiza desde 1917 y consta de 1.070 metros de longitud a lo largo de los cuales se distribuyen las 35.500 sillas en las que los abonados ven pasar las procesiones.</p>
-<p class="v-d-p" style="">Todas las cofradías entran por la Campana, donde se sitúan el palquillo de autoridades y las cámaras de televisión. Desde ahí discurren unas detrás de otras hasta la Catedral, el primer templo de la ciudad, donde hacen estación de penitencia los cerca de 70.000 nazarenos y más de 120 pasos que salen a la calle entre el Domingo de Ramos y el de Resurrección.</p>
+<p class="v-d-p">Con procesiones por toda la ciudad, si hay un tramo icónico de la Semana Santa de Sevilla ese es la carrera oficial: un recorrido de apenas un kilómetro y aforo limitado.</p>
+<p class="v-d-p">La carrera oficial tiene su origen en el siglo XVIII, después de que se estableciera que todas las hermandades debían ir con sus pasos a la Catedral. Aunque ha sufrido algunos cambios, el recorrido común actual se realiza desde 1917 y consta de 1.070 metros de longitud a lo largo de los cuales se distribuyen las 35.500 sillas en las que los abonados ven pasar las procesiones.</p>
+<p class="v-d-p">Todas las cofradías entran por la Campana, donde se sitúan el palquillo de autoridades y las cámaras de televisión. Desde ahí discurren unas detrás de otras hasta la Catedral, el primer templo de la ciudad, donde hacen estación de penitencia los cerca de 70.000 nazarenos y más de 120 pasos que salen a la calle entre el Domingo de Ramos y el de Resurrección.</p>
 
 {{!-- NOTE: Ai2Html - Scroll horizontal --}}
 <div class="v-c-cmp v-c-cmp--xl">
@@ -200,7 +201,7 @@
   </style>
   <div id="b-voc-ScrollWrapp" class="b-voc-scroll-wrapper">
     <div class="b-voc-scroll-sticky" id="sticky">
-      <div class="b-voc-scroll-contenido" id="belscrollcontenido" style="">
+      <div class="b-voc-scroll-contenido" id="belscrollcontenido">
         <div id="g-scroll-horz-semanasanta-scroll" class="g-artboard" style="width:3643px;height:1200px" data-aspect-ratio="3.036" data-min-width="0">
           <div style="padding:0"></div>
           <img id="g-scroll-horz-semanasanta-scroll-img" class="g-scroll-horz-semanasanta-scroll-img g-aiImg" alt="" src="https://s1.abcstatics.com/abc/www/multimedia/sevilla/2026/03/28/scroll-horz-semanasanta-scroll.jpg">
@@ -330,71 +331,97 @@
   <script>
     function scrollControl() {
       const scrollWrappers = document.querySelectorAll('.b-voc-scroll-wrapper');
+
       scrollWrappers.forEach(wrapper => {
         const sticky = wrapper.querySelector('.b-voc-scroll-sticky');
         const contenido = wrapper.querySelector('.b-voc-scroll-contenido');
+
         if (sticky && contenido) {
-          const idpos1 = sticky.getBoundingClientRect().top;
           const maxWidth = contenido.scrollWidth;
-          wrapper.style.height = (maxWidth - window.innerWidth + window.innerHeight) + 'px';
-          const scrollPos = wrapper.getBoundingClientRect().top;
-          if (idpos1 == 0) {
-            contenido.style.left = (scrollPos) + 'px';
-          }
+          const scrollHeight = maxWidth - window.innerWidth + window.innerHeight;
+
+          wrapper.style.height = scrollHeight + 'px';
+
+          const rect = wrapper.getBoundingClientRect();
+
+          let progress = -rect.top;
+
+          progress = Math.max(0, Math.min(progress, scrollHeight - window.innerHeight));
+
+          contenido.style.transform = `translateX(-${progress}px)`;
         }
       });
+
       requestAnimationFrame(scrollControl);
     }
+
     window.requestAnimationFrame(scrollControl);
   </script>
 </div>
 
-<p class="v-d-p" style="">Pese a que el precio de las sillas sube paulatinamente, estas cuentan con una larga lista de espera de sevillanos. Los ingresos que dejan repercuten directamente en las subvenciones que reciben todas las hermandades.</p>
-<p class="v-d-p" style="">La carrera oficial se encuentra en pleno Centro de la capital hispalense. Mientras algunas hermandades están muy cerca y apenas pasan cuatro horas en la calle, las que acuden desde los barrios periféricos deben recorrer largos kilometrajes (en torno a 10,5 kilómetros las dos cofradías que llegan desde más lejos, San Pablo y el Cerro) para llegar desde su templo y regresar al mismo.</p>
-<p class="v-d-p" style="">Algunas salidas procesionales duran entre 14 y 15 horas. Hay otras, las más nuevas, que salen solamente por sus barrios en las jornadas del Viernes de Dolores y el Sábado de Pasión, algunas por la imposibilidad física de llegar al Casco Antiguo, y otras por la falta de espacio en la Semana Santa, donde cada año las cofradías son más largas y tardan más en pasar.</p>
+<p class="v-d-p">Pese a que el precio de las sillas sube paulatinamente, estas cuentan con <strong>una larga lista de espera</strong>. Los ingresos que dejan (más de 4 millones de euros) repercuten directamente en las subvenciones que reciben todas las hermandades.</p>
+<p class="v-d-p">La carrera oficial se encuentra en pleno centro de la capital hispalense. Mientras algunas hermandades están muy cerca y apenas pasan cuatro horas en la calle, las que acuden desde los barrios periféricos deben recorrer largos kilometrajes (en torno a 10,5 kilómetros las dos cofradías que llegan desde más lejos, San Pablo y el Cerro) para llegar desde su templo y regresar al mismo.</p>
+<p class="v-d-p">Algunas salidas procesionales duran entre 14 y 15 horas. Hay otras, las más nuevas, que salen solamente por sus barrios en las jornadas del Viernes de Dolores y el Sábado de Pasión, algunas por la imposibilidad física de llegar al Casco Antiguo, y otras por la falta de espacio en la Semana Santa, donde cada año las cofradías son más largas y tardan más en pasar.</p>
 
 {{!-- NOTE: Ladillo Kraken --}}
 {{> ./kraken-components/ladillo 
-  txt="Sevilla, ciudad de la Semana Santa"
+  txt="Las procesiones y dónde verlas"
 }}
 
-<p class="v-d-p" style="">Fuera de la carrera oficial se vive otra Semana Santa en la que el público y las hermandades son uno. El callejero de Sevilla adquiere un protagonismo muy especial por ser el escenario en movimiento por el que discurren las cofradías y en el que todo el mundo puede disfrutarlas. Se mire donde se mire hay pasos y nazarenos.</p>
+<p class="v-d-p">Fuera de la carrera oficial se vive otra Semana Santa, en la que el público y las hermandades son uno. El callejero de Sevilla adquiere un protagonismo muy especial por ser el escenario en movimiento por el que discurren las cofradías y en el que todo el mundo puede disfrutarlas. Se mire donde se mire hay pasos y nazarenos.</p>
 
 {{!-- NOTE: Rutas Semana Santa --}}
 <div class="v-c-cmp v-c-cmp--l">
   {{> ./includes/ss-routes }}
 </div>
 
-<p class="v-d-p" style="">Hay puntos especialmente destacados que concentran una buena cantidad de cofrades, como la plaza del Salvador, de donde salen las cofradías de la Borriquita, el Amor y Pasión, y pasan muchas otras; o las cercanas cuesta del Rosario y cuesta del Bacalao, donde muchos pasos se lucen subiéndolas al completo sin detenerse mientras suenan marchas procesionales una detrás de otra.</p>
-<p class="v-d-p" style="">Al otro lado del recorrido oficial, el arco del Postigo ofrece estampas emblemáticas con el discurrir de numerosos cortejos procesionales, y algo más adelante, la calle Adriano se convierte en uno de los puntos más multitudinarios cuando la capilla del Baratillo acoge la esperada presentación de las hermandades de Triana en el itinerario de regreso a su barrio.</p>
+<p class="v-d-p">Hay puntos especialmente destacados que concentran una buena cantidad de cofrades, como la plaza del Salvador, de donde salen las cofradías de la Borriquita, el Amor y Pasión, y pasan muchas otras; o las cercanas cuesta del Rosario y cuesta del Bacalao, donde muchos pasos se lucen subiéndolas al completo sin detenerse mientras suenan marchas procesionales una detrás de otra.</p>
+<p class="v-d-p">Al otro lado del recorrido oficial, el arco del Postigo ofrece estampas emblemáticas con el discurrir de numerosos cortejos procesionales, y algo más adelante, la calle Adriano se convierte en uno de los puntos más multitudinarios cuando la capilla del Baratillo acoge la esperada presentación de las hermandades de Triana en el itinerario de regreso a su barrio.</p>
 
 {{!-- NOTE: Mapa puntos Semana Santa --}}
 <div class="v-c-cmp v-c-cmp--l">
   {{> ./includes/ss-map }}
 </div>
 
-<p class="v-d-p" style="">Quienes busquen espacios algo más amplios para ver con mayor comodidad las cofradías, tienen opciones más que interesantes en enclaves como la plaza de la Encarnación, donde la modernidad de las Setas se funde con la tradición barroca de los pasos; la Alameda de Hércules, un clásico de la infancia donde numerosas familias con niños han pedido sus primeros caramelos en las primeras horas de la tarde; o una calle ancha como Reyes Católicos, que acoge el discurrir de populosas hermandades tanto a la ida hacia la Catedral como de vuelta a sus templos.</p>
-<p class="v-d-p" style="">61 cofradías recorren tanto las principales arterias de la ciudad como los callejones menos transitados y las calles de los barrios más alejados del Centro. Las jornadas más repletas de procesiones cuentan hasta nueve distintas, como ocurre el Domingo de Ramos, el Lunes y el Miércoles Santo; mientras que el Sábado Santo 'sólo' salen cinco, y el Domingo de Resurrección, una.</p>
-<p class="v-d-p" style="">Entre todo este maremágnum de pasos e imágenes, se encuentran devociones tan capitales como la Esperanza Macarena, la Esperanza de Triana, el Señor del Gran Poder o el de la Salud de los Gitanos, que salen en la Madrugada del Viernes Santo; el Cachorro, que lo hace en la tarde de esa jornada; o grandes dolorosas como la Virgen de la Estrella y la Amargura, que procesionan el Domingo de Ramos.</p>
+<p class="v-d-p">Quienes busquen espacios algo más amplios para ver con mayor comodidad las cofradías, tienen opciones más que interesantes en enclaves como la plaza de la Encarnación, donde la modernidad de las Setas se funde con la tradición barroca de los pasos; la Alameda de Hércules, un clásico de la infancia donde numerosas familias con niños han pedido sus primeros caramelos en las primeras horas de la tarde; o una calle ancha como Reyes Católicos, que acoge el discurrir de populosas hermandades tanto a la ida hacia la Catedral como de vuelta a sus templos.</p>
+<p class="v-d-p">Sesenta y una cofradías recorren tanto las principales arterias de la ciudad como los callejones menos transitados y las calles de los barrios más alejados del Centro. Hay jornadas repletas de procesiones, con hasta nueve distintas, como ocurre el Domingo de Ramos, el Lunes y el Miércoles Santo; mientras que el Sábado Santo 'sólo' salen cinco, y el Domingo de Resurrección, una.</p>
+<p class="v-d-p">Entre todo este maremágnum de pasos e imágenes, se encuentran devociones tan capitales como la Esperanza Macarena, la Esperanza de Triana, el Señor del Gran Poder o el de la Salud de los Gitanos, que salen en la Madrugada del Viernes Santo; el Cachorro, que lo hace en la tarde de esa jornada; o grandes dolorosas como la Virgen de la Estrella y la Amargura, que procesionan el Domingo de Ramos.</p>
 
 {{!-- NOTE: Scrolly Methode --}}
+{{> ./kraken-components/scroll-story }}
 
-<p class="v-d-p" style="">La dualidad de Sevilla se hace palpable en todos sus aspectos, y la Semana Santa no se queda atrás: hay hermandades de centro y de barrio, las hay que llevan música y que van en silencio, así como dos grandes imágenes de la Virgen como son la Macarena y la Esperanza de Triana que concentran multitudes llegadas de todas partes y cuyas filas de nazarenos se cuentan por varios miles.</p>
-<p class="v-d-p" style="">El nazareno es una de las figuras clave de la Semana Santa. Desde el anonimato que le confiere llevar el rostro tapado por el antifaz, constituye el elemento más puro de las cofradías. Con túnicas de diferentes materiales y colores en función de la hermandad, recorren el itinerario alumbrando con una vela el discurrir de sus imágenes o cargando una cruz a modo de penitencia.</p>
-<p class="v-d-p" style="">Los de las hermandades de barrio reparten caramelos, estampitas e incluso cera para que los niños sevillanos hagan crecer sus tradicionales bolas de cera.</p>
+<p class="v-d-p">La dualidad de Sevilla se hace palpable en todos sus aspectos, y la Semana Santa no se queda atrás: hay hermandades de centro y de barrio, las hay que llevan música y que van en silencio, así como dos grandes imágenes de la Virgen como son la Macarena y la Esperanza de Triana que concentran multitudes llegadas de todas partes y cuyas filas de nazarenos se cuentan por varios miles.</p>
+
+{{!-- NOTE: Ladillo Kraken --}}
+{{> ./kraken-components/ladillo 
+  txt="La estructura de una procesión"
+}}
+
+<p class="v-d-p">Cada hermandad saca a la calle una cofradía que está compuesta por partes bien diferenciadas. La cruz de guía abre el cortejo de nazarenos, que están repartidos en tramos separados por distintas insignias, estandartes, pendones y banderas, cada uno con su significado y de un gran valor artístico. Los nazarenos pueden llevar cirios, como hace la mayoría, o cruces a modo de penitencia. Antes de los pasos van los acólitos portando los ciriales, unas velas muy altas que anuncian la llegada de los pasos.</p>
+<p class="v-d-p">El grueso de las hermandades lleva dos pasos: el de Cristo en primer lugar, a menudo acompañado de muchas figuras representando una escena de los evangelios; y el de la Virgen bajo palio, que puede ir sola o acompañada de una imagen de San Juan, cerrando la procesión. Los pasos llevan las bandas detrás de los mismos. Sin embargo, en algunos casos, las hermandades sacan tres pasos, con dos Cristos diferentes representando distintos pasajes evangélicos. Sólo dos hermandades sacan únicamente un paso representando a María sola al pie de la cruz, sin palio que la cobije. Todo ello aporta una gran diversidad a la Semana Santa.</p>
 
 {{!-- NOTE: Ai2Html --}}
+{{> ./ai2html/01-partes-palio }}
 
-<p class="v-d-p" style="">Pero en las procesiones son muchas las posibles funciones: desde los costaleros que cargan los pasos, pasando por el capataz que manda por dónde tienen que ir, hasta los músicos que tocan tras las imágenes o los monaguillos y acólitos que perfuman de incienso las calles antecediendo la llegada de los pasos.</p>
-<p class="v-d-p" style="">Fuera de los cortejos, los devotos deshojan flores para preparar las lluvias de pétalos que ofrecen a las vírgenes desde los balcones, donde los saeteros aclaran sus gargantas para lanzar su oración en forma del canto más profundo y visceral.</p>
-<p class="v-d-p" style="">IMAGEN QUE ROMPAA TODO EL ANCHO (DE ALGUNA PROCESIÓN, PENDIENTE DE JUAN</p>
+<p class="v-d-p">El nazareno es una de las figuras clave de la Semana Santa. Desde el anonimato que le confiere llevar el rostro tapado por el antifaz, constituye el elemento más puro de las cofradías. Con túnicas de diferentes materiales y colores en función de la hermandad, recorren el itinerario alumbrando con una vela el discurrir de sus imágenes o cargando una cruz a modo de penitencia.</p>
+<p class="v-d-p">Los de las hermandades de barrio reparten caramelos, estampitas e incluso cera para que los niños sevillanos hagan crecer sus tradicionales bolas de cera.</p>
+<p class="v-d-p">Pero en las procesiones son muchas las posibles funciones: desde los costaleros que cargan los pasos o el capataz, que manda por dónde tienen que ir, hasta los músicos o los monaguillos y acólitos que perfuman de incienso las calles antecediendo la llegada de los pasos.</p>
+<p class="v-d-p">Fuera de los cortejos, los devotos deshojan flores para preparar las lluvias de pétalos que ofrecen a las vírgenes desde los balcones, donde los saeteros aclaran sus gargantas para lanzar su oración en forma del canto más profundo y visceral.</p>
+
+{{!-- NOTE: Imagen Kraken --}}
+{{> ./kraken-components/image
+  classes="v-c-cmp--xl"
+  src="https://s1.abcstatics.com/abc/www/multimedia/sevilla/2026/03/28/semana-santa.jpg" 
+  txt="Nazarenos de la Hermandad de La O por la calle Castilla, el Viernes Santo en Sevilla"
+  author="(EFE/Raúl Caro)"
+}}
 
 {{!-- NOTE: Ladillo Kraken --}}
 {{> ./kraken-components/ladillo 
   txt="La Semana Santa de Sevilla, en cifras"
 }}
 
-<p class="v-d-p" style="">Puede ser difícil comprender la magnitud de la importancia, el impacto y la repercusión de la Semana Santa en Sevilla si no se ha vivido sobre el terreno. Sin embargo, una serie de cifras sobre todo lo que mueve pueden ser muy ilustrativas.</p>
+<p class="v-d-p">Puede ser difícil comprender la magnitud de la importancia, el impacto y la repercusión de la Semana Santa en Sevilla si no se ha vivido sobre el terreno. Sin embargo, una serie de cifras sobre todo lo que mueve pueden ser muy ilustrativas.</p>
 
 {{!-- NOTE: Cifra --}}
 <div class="v-c-cmp">
@@ -412,8 +439,8 @@
   </div>
 </div>
 
-<p class="v-d-p" style="">Con más de 67.000 nazarenos, es la más numerosa de toda España en participación directa de los cofrades. en el caso de la hermandad más numerosa, la Macarena, superan los 4.000, con un récord que se bate año tras año.</p>
-<p class="v-d-p" style="">Solo durante la Madrugada, la jornada más multitudinaria, se ponen en la calle más de 14.000 nazarenos entre las seis hermandades que la conforman. Además, 46 bandas diferentes ponen sus sones tras los pasos, cada vez con más integrantes. Algunas de estas formaciones musicales las integran hasta180 músicos que hacen las delicias del público.</p>
+<p class="v-d-p">Con más de 67.000 nazarenos, es la más numerosa de toda España en participación directa de los cofrades. en el caso de la hermandad más numerosa, la Macarena, superan los 4.000, con un récord que se bate año tras año.</p>
+<p class="v-d-p">Solo durante la Madrugada, la jornada más multitudinaria, se ponen en la calle más de 14.000 nazarenos entre las seis hermandades que la conforman. Además, 46 bandas diferentes ponen sus sones tras los pasos, cada vez con más integrantes. Algunas de estas formaciones musicales las integran hasta180 músicos que hacen las delicias del público.</p>
 
 {{!-- NOTE: Cifra --}}
 <div class="v-c-cmp">
@@ -431,6 +458,6 @@
   </div>
 </div>
 
-<p class="v-d-p" style="">La carrera oficial también deja unos números que merecen ser reseñados. Los precios de las 35.500 sillas que se montan entre la Campana y la Catedral no han dejado de subir en los últimos años. En la actualidad oscilan <strong>entre los 90,50 y los 197,96 euros por localidad</strong>, y pueden llegar hasta los 1.016,77 euros en el caso de los cotizados palcos de la plaza de San Francisco. </p>
-<p class="v-d-p" style="">Los ingresos que estas sillas arrojan alcanzaron el año pasado los, 4,6 millones de euros, un dinero que se emplea para las subvenciones que se otorgan a cada una de las hermandades. Pero es que los balcones para verlas pasar cuestan de media 6.000 euros. En total, se estima que el impacto económico del turismo que llega a la ciudad durante estos días es de unos 500 millones, con la ocupación hotelera por las nubes.</p>
-<p class="v-d-p" style="">Todo ello va de la mano de un importante despliegue de las fuerzas de seguridad y los servicios públicos (limpieza, transporte público, etc.). La Policía Nacional moviliza a unos 1.900 agentes, mientras que casi un millar de agentes de Policía Local trabajan sobre el terreno durante toda la semana. Coordinados entre ellos y con Protección Civil, el CECOP hace de intermediario. Este órgano municipal se encarga de gestionar emergencias, eventos masivos como este y la seguridad ciudadana. Todo en aras de que la Semana Santa salga un año más a pedir de boca.</p>
+<p class="v-d-p">La carrera oficial también deja unos números que merecen ser reseñados. Los precios de las 35.500 sillas que se montan entre la Campana y la Catedral no han dejado de subir en los últimos años. En la actualidad oscilan <strong>entre los 90,50 y los 197,96 euros por localidad</strong>, y pueden llegar hasta los 1.016,77 euros en el caso de los cotizados palcos de la plaza de San Francisco. </p>
+<p class="v-d-p">Los ingresos que estas sillas arrojan alcanzaron el año pasado los, 4,6 millones de euros, un dinero que se emplea para las subvenciones que se otorgan a cada una de las hermandades. Pero es que los balcones para verlas pasar cuestan de media 6.000 euros. En total, se estima que el impacto económico del turismo que llega a la ciudad durante estos días es de unos 500 millones, con la ocupación hotelera por las nubes.</p>
+<p class="v-d-p">Todo ello va de la mano de un importante despliegue de las fuerzas de seguridad y los servicios públicos (limpieza, transporte público, etc.). La Policía Nacional moviliza a unos 1.900 agentes, mientras que casi un millar de agentes de Policía Local trabajan sobre el terreno durante toda la semana. Coordinados entre ellos y con Protección Civil, el CECOP hace de intermediario. Este órgano municipal se encarga de gestionar emergencias, eventos masivos como este y la seguridad ciudadana. Todo en aras de que la Semana Santa salga un año más a pedir de boca.</p>

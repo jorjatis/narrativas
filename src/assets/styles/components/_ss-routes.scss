@@ -113,8 +113,12 @@
 
     figure {
       width: 100%;
-      max-width: 660px;
+      max-width: 321px;
       margin: 0 auto;
+
+      @media (min-width: $screen-xs) {
+        max-width: 660px;
+      }
 
       img {
         opacity: 0;
