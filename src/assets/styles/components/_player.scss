@@ -1,0 +1,270 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+
+// Reproductor de audio/video
+$abc: false !default;
+$ppll: false !default;
+
+// ** v-ply--fx -> Player fixed
+
+// Tipos
+// ---------------------------------------
+// ** v-ply--t1 -> Player soundcite
+// ** v-ply--t2 -> Player noticia
+// ** v-ply--t3 -> Player componente
+// ** v-ply--t4 -> Player podcast
+
+#icon-play {
+  left: 1px;
+  width: 12px;
+  height: 14px;
+
+  @if $abc {
+    fill: $cp1;
+  } @else if $ppll {
+    fill: $p-cp1;
+  }
+}
+
+#icon-pause {
+  opacity: 0;
+  transform: rotate(-90deg);
+  width: 12px;
+  height: 12px;
+
+  @if $abc {
+    fill: $cp1;
+  } @else if $ppll {
+    fill: $p-cp1;
+  }
+}
+
+.v-ply {
+  &__c {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__w--2 {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 4px 8px;
+  }
+
+  &__g--1 {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__g--2 {
+    //grid-column: 1;
+    //height: 10px;
+    height: 4px;
+  }
+
+  &__g--3 {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+  }
+
+  &__b {
+    position: relative;
+    width: $play-button-xs;
+    height: $play-button-xs;
+
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      transition: .3s;
+      border-radius: 50%;
+
+      @if $abc {
+        border: 1px solid $cp3;
+      } @else if $ppll {
+        border: 1px solid $p-cp1;
+      }
+    }
+
+    &:hover {
+      &:before {
+        //background: $cp1;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__i {
+    display: grid;
+    place-items: center;
+    height: 100%;
+
+    svg {
+      position: relative;
+      grid-area: 1/1;
+      transform: rotate(0deg);
+      transition: transform .2s, opacity .2s;
+      transition-delay: 0s, .1s;
+      transition-timing-function: ease-in-out;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border-left: 2px solid transparent;
+      border-right: 2px solid transparent;
+      animation: a9 1.5s linear infinite;
+      display: none;
+
+      @if $abc {
+        border-top: 2px solid $cp1;
+      } @else if $ppll {
+        border-top: 2px solid $p-cp1;
+      }
+    }
+  }
+
+  &__t {
+    margin-bottom: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &__p {
+    transition: padding .3s;
+
+    @if $abc {
+      color: $cp1;
+    } @else if $ppll {
+      color: $p-cp1;
+    }
+  }
+
+  &__r {
+    width: 28px;
+    height: 32px;
+    transition: transform .3s;
+
+    svg {
+      @if $abc {
+        fill: $cp1;
+      } @else if $ppll {
+        fill: $p-cp1;
+      }
+    }
+  }
+
+  &__v {
+    position: relative;
+  }
+
+  .v-asn {
+    display: none;
+    position: absolute;
+    left: 0;
+  }
+
+  audio {
+    display: none;
+  }
+
+  progress {
+    overflow: hidden;
+    border-radius: 4px;
+    height: 4px;
+    //@include progress-background($cp7, null);
+  }
+
+  &.is-touch {
+    .v-ply {
+      &__r--r {
+        &:active {
+          transform: rotate(45deg);
+        }
+      }
+
+      &__r--l {
+        &:active {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  &.not-touch {
+    .v-ply {
+      &__r--r {
+        &:hover {
+          transform: rotate(45deg);
+        }
+      }
+
+      &__r--l {
+        &:hover {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  &.is-play {
+    #icon-play {
+      opacity: 0;
+      transform: rotate(90deg);
+
+      @if $ppll {
+        fill: $cb2;
+      }
+    }
+
+    #icon-pause {
+      opacity: 1;
+      transform: rotate(0deg);
+
+      @if $ppll {
+        fill: $cb2;
+      }
+    }
+
+    @if $ppll {
+      .v-ply__b {
+        &:before {
+          background: $p-cp1;
+        }
+      }
+    }
+
+    .v-asn {
+      display: block;
+
+      ~ .v-ply__p {
+        padding-left: (18px + 5px); // NOTE: 18px -> ancho icono / 5px -> gap
+      }
+    }
+  }
+
+  &.is-load {
+    .v-ply {
+      &__b {
+        cursor: auto;
+        pointer-events: none;
+      }
+
+      &__i {
+        &:after {
+          display: block;
+        }
+      }
+    }
+  }
+}

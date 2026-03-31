@@ -1,0 +1,99 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+
+.v-w {
+  .v-a--d-s-1 {
+
+    .v-a-inf-c {
+      display: none;
+    }
+
+    .v-a-img-c {
+      display: flex;
+      justify-content: center;
+      align-items: center; 
+      background: $n1;
+
+      &:before {
+        content: '';
+        width: 80px;
+        height: 75px;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-600px);
+        opacity: 0;
+        background: url('../../images/abc_apertura_izq.svg') no-repeat;
+        z-index: -1;
+      }
+      &:after {
+        content: '';
+        width: 38px;
+        height: 50px;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(600px);
+        opacity: 0;
+        background: url('../../images/abc_apertura_der.svg') no-repeat;
+        z-index: -1;
+      }
+
+      &.mover {
+        &:before {
+          bottom: -75px;
+          opacity: 1;
+          animation: caer 5s cubic-bezier(0.2, 0.8, 0.4, 1);
+        }
+        &:after {
+          bottom: -48px;
+          opacity: 1;
+          animation: caer2 5s cubic-bezier(0.2, 0.8, 0.4, 1);
+        } 
+      }
+    }
+  }
+}
+
+.v-d--abc .v-a-inf-c {
+  .v-a-s-t {
+    font: 22px/26px $adl;
+    letter-spacing: -0.11px;
+    text-align: center;
+    color: $cb1;
+    margin: 132px 0 74px;
+  }
+
+  &:after {
+    content: '';
+    height: 48px;
+    width: 80px;
+    display: block;
+    background: url('../../images/abc_dados.png') no-repeat;
+    margin: 0 auto 50px;
+  }
+}
+
+/* Animación de caída */
+@keyframes caer {
+  0% {
+    bottom: 0;
+    opacity: 1;
+  }
+  100% {
+    bottom: -75px;
+    opacity: 1;
+  }
+}
+@keyframes caer2 {
+  0% {
+    bottom: 0;
+    opacity: 1;
+  }
+  100% {
+    bottom: -48px;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,205 @@
+<p class="v-d-p">Son ultras, de extrema derecha, pero también de extrema izquierda, y a pesar de eso sus odios y alianzas no responden siempre a unas ideas políticas. Utilizan el fútbol para dar salida a su violencia ciega. Proliferan en casi todos los estadios, sobre todo de Primera y Segunda División -el Villareal es la excepción-, pero también en divisiones inferiores, y suponen un problema de primer orden para la Policía; más concretamente para los especialistas de la comisaría general y brigadas provinciales de Información, que son los que intentan poner coto a sus desmanes, a veces sin toda la colaboración deseable de la administración y del propio sistema judicial. Pero no desisten. No pueden hacerlo, porque hay vidas en juego, como ya se ha visto en varias ocasiones.</p>
+
+<nav class="bl-nav">
+  <ul>
+    <li class="is-active"><a href="#">Prólogo</a></li>
+    <li><a href="#">Episodio 1</a></li>
+    <li><a href="#">Episodio 2</a></li>
+    <li><a href="#">Episodio 3</a></li>
+    <li class="is-disabled"><a href="#">Episodio 4</a></li>
+    <li class="is-disabled"><a href="#">Episodio 5</a></li>
+    <li class="is-disabled"><a href="#">Episodio 6</a></li>
+  </ul>
+</nav>
+
+<!-- Scroll container -->
+<div class="bl-main">
+  <div class="bl-scroll" id="bl-scroll-id">  
+      <div class="bl-content-wrapper active-1">
+        <div class="bl-arrows">
+          <span class="bl-arrow bl-arrow--left">
+            <svg width="7" height="12" viewBox="0 0 7 12" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.45365 5.99976L6.5269 10.0728C6.66523 10.2113 6.73607 10.3853 6.7394 10.595C6.74257 10.8045 6.67173 10.9818 6.5269 11.1268C6.3819 11.2716 6.20623 11.344 5.9999 11.344C5.79357 11.344 5.6179 11.2716 5.4729 11.1268L0.97865 6.63251C0.88515 6.53884 0.81915 6.44009 0.78065 6.33626C0.74215 6.23243 0.7229 6.12026 0.7229 5.99976C0.7229 5.87926 0.74215 5.76709 0.78065 5.66326C0.81915 5.55943 0.88515 5.46068 0.97865 5.36701L5.4729 0.872758C5.6114 0.734425 5.78548 0.663591 5.99515 0.660258C6.20465 0.657091 6.3819 0.727925 6.5269 0.872758C6.67173 1.01776 6.74415 1.19342 6.74415 1.39976C6.74415 1.60609 6.67173 1.78176 6.5269 1.92676L2.45365 5.99976Z"></path>
+              </svg>
+            </span>
+          <span class="bl-arrow bl-arrow--right">
+            <svg width="7" height="12" viewBox="0 0 7 12" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.2905 6.0005L0.21725 1.9275C0.0789167 1.789 0.00808339 1.61492 0.00475006 1.40525C0.00158339 1.19575 0.0724167 1.0185 0.21725 0.8735C0.36225 0.728667 0.537916 0.65625 0.74425 0.65625C0.950583 0.65625 1.12625 0.728667 1.27125 0.8735L5.7655 5.36775C5.859 5.46142 5.925 5.56017 5.9635 5.664C6.002 5.76783 6.02125 5.88 6.02125 6.0005C6.02125 6.121 6.002 6.23317 5.9635 6.337C5.925 6.44083 5.859 6.53958 5.7655 6.63325L1.27125 11.1275C1.13275 11.2658 0.958666 11.3367 0.749 11.34C0.5395 11.3432 0.36225 11.2723 0.21725 11.1275C0.0724167 10.9825 0 10.8068 0 10.6005C0 10.3942 0.0724167 10.2185 0.21725 10.0735L4.2905 6.0005Z"></path>
+            </svg>
+            </span>
+        </div>
+
+        <div class="bl-content">
+            <div class="bl-anim">
+              <img src="https://s3.abcstatics.com/comun/especiales/bandas-latinas/media/ABC_ParaQueLlore_01.jpg" alt="Episodio 1" />
+            </div>
+
+            <div class="bl-txt-blk">
+                <div class="bl-txt-blk__top">
+                  <div class="bl-chapter">
+                    <div class="bl-chapter__txt">
+                      <span class="bl-chapter__n">1</span>
+                    </div>
+                  </div>
+                  <span class="bl-txt-blk__t">La escucha</span>
+                </div>
+
+                <div class="bl-players">
+                  <div class="bl-player bl-player-1">
+                    {{> kraken-components/player }}
+                  </div>
+
+                  <div class="bl-player bl-player-2">
+                    <div class="voc-d-c-aud-p" id="audio-player" data-voc-component="audio-player">
+                      <button id="play-pause-btn" class="voc-d-c-aud-p__btn">
+                        <span></span>
+                      </button>
+                      <div class="voc-d-c-aud-p__bar">
+                        <span class="voc-d-c-aud-p__prog-ball"></span>
+                        <progress id="progress-bar" max="1" value="0">
+                        </progress>
+                        <div id="time-info" class="voc-d-c-aud-p__time">
+                          <div class="voc-d-c-aud-p__time-display">
+                            <span id="current-time">0:00</span><span id="duration">28:30</span>
+                          </div>                  
+                        </div>
+                        <audio id="audio-src" src="https://traffic.omny.fm/d/clips/7e594858-42ba-4ecb-86d8-ad1a002e5281/79259aba-a69a-4b77-9f0b-b156010396e4/ba82e8f3-3511-4a7c-aed6-b15700b8e780/audio.mp3">
+                          Tu navegador no soporta el elemento de audio.
+                        </audio>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bl-player bl-player-3">
+                    <div class="voc-d-c-aud-p" id="audio-player" data-voc-component="audio-player">
+                      <button id="play-pause-btn" class="voc-d-c-aud-p__btn">
+                        <span></span>
+                      </button>
+                      <div class="voc-d-c-aud-p__bar">
+                        <span class="voc-d-c-aud-p__prog-ball"></span>
+                        <progress id="progress-bar" max="1" value="0">
+                        </progress>
+                        <div id="time-info" class="voc-d-c-aud-p__time">
+                          <div class="voc-d-c-aud-p__time-display">
+                            <span id="current-time">0:00</span><span id="duration">32:23</span>
+                          </div>                  
+                        </div>
+                        <audio id="audio-src" src="https://traffic.omny.fm/d/clips/7e594858-42ba-4ecb-86d8-ad1a002e5281/79259aba-a69a-4b77-9f0b-b156010396e4/fc1093b5-bc98-4bb8-9748-b15e00a64f86/audio.mp3">
+                          Tu navegador no soporta el elemento de audio.
+                        </audio>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bl-player bl-player-4">
+                    <div class="voc-d-c-aud-p" id="audio-player" data-voc-component="audio-player">
+                      <button id="play-pause-btn" class="voc-d-c-aud-p__btn">
+                        <span></span>
+                      </button>
+                      <div class="voc-d-c-aud-p__bar">
+                        <span class="voc-d-c-aud-p__prog-ball"></span>
+                        <progress id="progress-bar" max="1" value="0">
+                        </progress>
+                        <div id="time-info" class="voc-d-c-aud-p__time">
+                          <div class="voc-d-c-aud-p__time-display">
+                            <span id="current-time">0:00</span><span id="duration">27:00</span>
+                          </div>                  
+                        </div>
+                        <audio id="audio-src" src="https://traffic.omny.fm/d/clips/7e594858-42ba-4ecb-86d8-ad1a002e5281/79259aba-a69a-4b77-9f0b-b156010396e4/40ff5580-cd1c-4f6c-9323-b16700d92fa1/audio.mp3">
+                          Tu navegador no soporta el elemento de audio.
+                        </audio>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bl-player bl-player-5">
+                    <div class="voc-d-c-aud-p" id="audio-player" data-voc-component="audio-player">
+                      <button id="play-pause-btn" class="voc-d-c-aud-p__btn">
+                        <span></span>
+                      </button>
+                      <div class="voc-d-c-aud-p__bar">
+                        <span class="voc-d-c-aud-p__prog-ball"></span>
+                        <progress id="progress-bar" max="1" value="0">
+                        </progress>
+                        <div id="time-info" class="voc-d-c-aud-p__time">
+                          <div class="voc-d-c-aud-p__time-display">
+                            <span id="current-time">0:00</span><span id="duration">26:38</span>
+                          </div>                  
+                        </div>
+                        <audio id="audio-src" src="https://traffic.omny.fm/d/clips/7e594858-42ba-4ecb-86d8-ad1a002e5281/79259aba-a69a-4b77-9f0b-b156010396e4/98c61d69-a9b0-487f-9bcc-b16f0079a992/audio.mp3">
+                          Tu navegador no soporta el elemento de audio.
+                        </audio>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bl-player bl-player-6">
+                    <div class="voc-d-c-aud-p" id="audio-player" data-voc-component="audio-player">
+                      <button id="play-pause-btn" class="voc-d-c-aud-p__btn">
+                        <span></span>
+                      </button>
+                      <div class="voc-d-c-aud-p__bar">
+                        <span class="voc-d-c-aud-p__prog-ball"></span>
+                        <progress id="progress-bar" max="1" value="0">
+                        </progress>
+                        <div id="time-info" class="voc-d-c-aud-p__time">
+                          <div class="voc-d-c-aud-p__time-display">
+                            <span id="current-time">0:00</span><span id="duration">23:47</span>
+                          </div>                  
+                        </div>
+                        <audio id="audio-src" src="https://traffic.omny.fm/d/clips/7e594858-42ba-4ecb-86d8-ad1a002e5281/79259aba-a69a-4b77-9f0b-b156010396e4/e0fc9b82-4906-44dc-abec-b17300e5b4d5/audio.mp3">
+                          Tu navegador no soporta el elemento de audio.
+                        </audio>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bl-player bl-player-7">
+                    <div class="voc-d-c-aud-p" id="audio-player" data-voc-component="audio-player">
+                      <button id="play-pause-btn" class="voc-d-c-aud-p__btn">
+                        <span></span>
+                      </button>
+                      <div class="voc-d-c-aud-p__bar">
+                        <span class="voc-d-c-aud-p__prog-ball"></span>
+                        <progress id="progress-bar" max="1" value="0">
+                        </progress>
+                        <div id="time-info" class="voc-d-c-aud-p__time">
+                          <div class="voc-d-c-aud-p__time-display">
+                            <span id="current-time">0:00</span><span id="duration">28:35</span>
+                          </div>                  
+                        </div>
+                        <audio id="audio-src" src="https://traffic.omny.fm/d/clips/7e594858-42ba-4ecb-86d8-ad1a002e5281/79259aba-a69a-4b77-9f0b-b156010396e4/24082b48-53f4-4e03-ac27-b17d007ecb88/audio.mp3">
+                          Tu navegador no soporta el elemento de audio.
+                        </audio>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bl-player bl-player-8">
+                    <div class="voc-d-c-aud-p" id="audio-player" data-voc-component="audio-player">
+                      <button id="play-pause-btn" class="voc-d-c-aud-p__btn">
+                        <span></span>
+                      </button>
+                      <div class="voc-d-c-aud-p__bar">
+                        <span class="voc-d-c-aud-p__prog-ball"></span>
+                        <progress id="progress-bar" max="1" value="0">
+                        </progress>
+                        <div id="time-info" class="voc-d-c-aud-p__time">
+                          <div class="voc-d-c-aud-p__time-display">
+                            <span id="current-time">0:00</span><span id="duration">27:07</span>
+                          </div>                  
+                        </div>
+                        <audio id="audio-src" src="https://traffic.omny.fm/d/clips/7e594858-42ba-4ecb-86d8-ad1a002e5281/79259aba-a69a-4b77-9f0b-b156010396e4/28c25fa6-4401-410b-ac8e-b184007e93fd/audio.mp3">
+                          Tu navegador no soporta el elemento de audio.
+                        </audio>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p>Estas personas habitaron otro mundo, con otras reglas. Fueron Testigos de Jehová. Cuesta creer lo que les ocurrió y a veces puede que también nos resulte difícil entender por qué. Sus historias son duras y tristes, pero antes de escucharlas hay que saber cómo acercarnos a ellas.</p>
+                <a href="https://www.abc.es/sociedad/escucha-20240422100737-nt.html#vca=enlace-interno&vso=abc-es&vmc=testigos-jehova&vli=portada" target="_blank" class="v-btn v-btn-g v-btn--l">Leer más</a>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

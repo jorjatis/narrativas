@@ -1,0 +1,69 @@
+@use '../base/variables'as *;
+
+.scr-ind {
+  position: absolute;
+  width: 100%;
+  bottom: 30px;
+  left: 0;
+  pointer-events: none;
+
+  &__c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  &__m {
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 30px;
+    border: 2px solid $cb2;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, .15);
+    box-shadow: 0 0 24px rgba(0, 0, 0, .2);
+  }
+
+  &__w {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    width: 3px;
+    height: 6px;
+    border-radius: 999px;
+    background: $cb2;
+    transform: translateX(-50%);
+    animation: scroll-wheel 1.6s ease-in-out infinite;
+  }
+
+  &__txt {
+    font-family: $mcr;
+    font-size: 12px;
+    text-align: center;
+    color: $cb2;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, .8);
+  }
+}
+
+@keyframes scroll-wheel {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px);
+  }
+}

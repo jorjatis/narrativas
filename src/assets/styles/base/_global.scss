@@ -1,0 +1,65 @@
+@use '../base/variables' as *;
+
+html {
+  scroll-behavior: unset !important;
+}
+
+body {
+  touch-action: pan-y;
+}
+
+// @media (max-width: $screen-xs) {
+//   body .v-h-a ~ .v-w .v-a--d {
+//       min-height: auto
+//   }
+// }
+
+.ai2html {
+  display: flex;
+  justify-content: center;
+}
+
+.v-w {
+  .v-a--d-s-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    // height: auto;
+
+    .v-a-inf-c {
+      grid-area: unset;
+      justify-content: center;
+      padding-bottom: 0;
+      
+      .v-a-p-t,
+      .v-a-t,
+      .v-a-s-t {
+        color: $cb1;
+      }
+
+      .v-i {
+        display: none;
+
+        svg {
+          fill: $cb1;
+        }
+      }
+    }
+
+    .v-a-img-c {
+      overflow: unset;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      
+      &:after {
+        content: none;
+      }
+    }
+  }
+}
+
+.v-cmp-crd {
+  margin-top: 60px;
+}

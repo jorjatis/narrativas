@@ -1,0 +1,34 @@
+<div class="v-a v-a--d v-a--d-s-1">
+  {{#if metadata.img.exists}}
+  <div class="v-a-img-c">
+    {{#if metadata.img.preArticleHeader}}
+      {{> ../includes/pre-article-header }}
+    {{else}}
+      <figure class="v-a-fig">
+        <div class="v-a-lnk">
+          <img class="v-a-img" loading="lazy" src="{{#if metadata.img.src}}{{metadata.img.src}}{{else}}https://picsum.photos/748/523"{{/if}} alt="{{#if metadata.infoContainer.title}}{{metadata.infoContainer.title}}{{else}}[ALTERNATIVE TEXT]{{/if}}">
+        </div>
+        {{#if metadata.img.figcaption}}
+          <figcaption class="v-fc">
+            <span class="v-fc__t">{{#if metadata.img.figcaptionText}}{{metadata.img.figcaptionText}}{{else}}La presidenta del Congreso.{{/if}}</span>
+          </figcaption>
+        {{/if}}
+      </figure>
+    {{/if}}
+  </div>
+  {{/if}}
+  {{#if metadata.infoContainer.exists}}
+  <div class="v-a-inf-c">
+    {{#if metadata.infoContainer.pretitle}}<p class="v-a-p-t"><span class="v-a-p-t__p">{{metadata.infoContainer.pretitle}}</span></p>{{/if}}
+    {{#if metadata.infoContainer.title}}<h1 class="v-a-t">{{metadata.infoContainer.title}}</h1>{{/if}}
+    {{#if metadata.infoContainer.description}}<h2 class="v-a-s-t">{{metadata.infoContainer.description}}</h2>{{/if}}
+    {{#if metadata.infoContainer.chevronDown}}
+      <span class="v-i">
+        <svg width="8" height="5" viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.99919 4.78467C3.91885 4.78467 3.84408 4.77184 3.77485 4.74617C3.70563 4.72051 3.6398 4.67651 3.57735 4.61417L0.581188 1.61801C0.488965 1.52568 0.441743 1.40962 0.439521 1.26984C0.43741 1.13017 0.484632 1.01201 0.581188 0.915341C0.677854 0.818786 0.794965 0.770508 0.932521 0.770508C1.07008 0.770508 1.18719 0.818786 1.28385 0.915341L3.99919 3.63084L6.71452 0.915341C6.80685 0.823119 6.92291 0.775897 7.06269 0.773675C7.20235 0.771563 7.32052 0.818786 7.41719 0.915341C7.51374 1.01201 7.56202 1.12912 7.56202 1.26667C7.56202 1.40423 7.51374 1.52134 7.41719 1.61801L4.42102 4.61417C4.35858 4.67651 4.29274 4.72051 4.22352 4.74617C4.1543 4.77184 4.07952 4.78467 3.99919 4.78467Z"></path>
+        </svg>
+      </span>
+    {{/if}}
+  {{/if}}
+  </div>
+</div>

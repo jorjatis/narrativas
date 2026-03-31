@@ -1,0 +1,10 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+
+.n-preh {
+  .anim-intro img {
+    max-width: 680px;
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,26 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+
+.v-cnt--t3 {
+  .v-cnt__c {
+    justify-content: center;
+  }
+
+  .v-cnt__t {
+    color: $cb1;
+    text-align: center;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    flex-direction: column;
+
+    &:before {
+      content: '';
+      width: 204px;
+      height: 122px;
+      display: block;
+      background: url('../../images/abc-creditos.png') no-repeat;
+    }
+  }
+}
