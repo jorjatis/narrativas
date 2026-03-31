@@ -1,5 +1,4 @@
-@use '../base/variables' as *;
-@use '../base/variables-custom' as *;
+@use '../abstracts' as *;
 
 .bl-main {
   position: relative;
@@ -29,53 +28,9 @@
   }
 }
 
-// Menu
-  .bl-nav {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    width: 100dvw;
-    padding: 36px 0;
-    background: $n1;
-    top: 58px;
-    transition: background-color 0.6s ease-in-out;
-
-    &.bl-b {
-      background: $cb1;
-    }
-
-    ul {
-      display: flex;
-      list-style: none;
-      padding: 0;
-      column-gap: 36px;
-      justify-content: center;
-    }
-
-    li {
-      height: 21px;
-    }
-
-    a {
-      text-decoration: none;
-      color: $cb2;
-      text-transform: uppercase;
-      font-family: $mcs;
-      font-size: 16px;
-      line-height: 21px;
-
-      &:hover {
-        text-decoration: line-through;
-        text-decoration-color: $cb1;
-      }
-    }
-  }
-
 /* de testigos */
 
-.bl-scroll .bl-nav ul li {
+.bl-scroll .v-n-dvd-nav ul li {
   height: auto;
   display: flex;
   justify-content: center;
@@ -85,21 +40,21 @@
 }
 
 @media (min-width: 768px) {
-  .bl-scroll .bl-nav ul li {
+  .bl-scroll .v-n-dvd-nav ul li {
     height: 100%;
     flex: unset;
     justify-content: center;
     padding: 0 6px;
   }
 }
-.bl-scroll .bl-nav ul li.is-active:not(.disabled):hover {
+.bl-scroll .v-n-dvd-nav ul li.is-active:not(.disabled):hover {
   opacity: 0.7;
 }
 
-.bl-scroll .bl-nav ul li.is-disabled {
+.bl-scroll .v-n-dvd-nav ul li.is-disabled {
   opacity: 0.5;
 }
-.bl-scroll .bl-nav ul li.is-disabled:after {
+.bl-scroll .v-n-dvd-nav ul li.is-disabled:after {
   content: "";
   position: absolute;
   left: 0;
@@ -111,20 +66,20 @@
   pointer-events: none;
 }
 @media (min-width: 490px) {
-  .bl-scroll .bl-nav ul li.is-disabled:after {
+  .bl-scroll .v-n-dvd-nav ul li.is-disabled:after {
     top: 6px;
     width: 80%;
     left: 10%;
   }
 }
 @media (min-width: 768px) {
-  .bl-scroll .bl-nav ul li.is-disabled:after {
+  .bl-scroll .v-n-dvd-nav ul li.is-disabled:after {
     top: 16px;
     left: -5px;
     width: calc(100% + 10px);
   }
 }
-.bl-scroll .bl-nav ul li button {
+.bl-scroll .v-n-dvd-nav ul li button {
   font: 12px/1 "Basier Square Regular";
   text-transform: uppercase;
   color: #FFF;
@@ -132,17 +87,17 @@
   z-index: 1;
 }
 @media (min-width: 490px) {
-  .bl-scroll .bl-nav ul li button {
+  .bl-scroll .v-n-dvd-nav ul li button {
     font-size: 14px;
   }
 }
 @media (min-width: 900px) {
-  .bl-scroll .bl-nav ul li button {
+  .bl-scroll .v-n-dvd-nav ul li button {
     font-size: 16px;
   }
 }
 @media (min-width: 1140px) {
-  .bl-scroll .bl-nav ul li button {
+  .bl-scroll .v-n-dvd-nav ul li button {
     font-size: 18px;
   }
 }

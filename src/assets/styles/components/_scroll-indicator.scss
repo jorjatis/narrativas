@@ -1,4 +1,4 @@
-@use '../base/variables'as *;
+@use '../abstracts' as *;
 
 .scr-ind {
   position: absolute;
@@ -6,6 +6,8 @@
   bottom: 30px;
   left: 0;
   pointer-events: none;
+  transition: opacity .3s ease;
+  z-index: 10;
 
   &__c {
     display: flex;

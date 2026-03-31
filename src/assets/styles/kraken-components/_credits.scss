@@ -1,0 +1,46 @@
+@use '../abstracts' as *;
+
+.v-c-cmp {
+  .v-cmp-crd {
+    .v-cnt__c {
+      justify-content: center;
+    }
+
+    .v-cnt__t {
+      align-items: flex-end;
+      margin-bottom: 20px;
+      font-size: 30px;
+
+      &:before, 
+      &:after {
+        content: '';
+        position: relative;
+      }
+
+      &:before {
+        top: 12px;
+        left: 12px;
+        width: 34px;
+        height: 152px;
+        background: url('https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/12/bandaslatinas/images/flames-izq.png') no-repeat;
+      }
+
+      &:after {
+        top: 7px;
+        right: 28px;
+        width: 43px;
+        height: 95px;
+        background: url('https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/12/bandaslatinas/images/flames-der.png') no-repeat;
+        background-size: contain;
+      }
+    }
+
+    .v-u {
+      &__p {
+        a {
+          color: $ncp1;
+        }
+      }
+    }
+  }
+}

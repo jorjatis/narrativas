@@ -1,0 +1,85 @@
+/**
+ * ------------------------------------------------------------
+ * FONT-REM MIXIN
+ * ------------------------------------------------------------
+ *
+ * Mixin para definir tipografías usando rem de forma consistente.
+ *
+ * ✔ Convierte automáticamente font-size a rem
+ * ✔ Permite line-height, font-weight y font-family
+ * ✔ Genera shorthand `font` cuando es posible
+ * ✔ Soporta !important opcional
+ * ✔ Sin warnings (compatible con Dart Sass moderno)
+ *
+ * USO:
+ * @include font-rem(size, line-height, weight, family, important);
+ *
+ * EJEMPLOS:
+ *
+ * @include font-rem(16px, 1.5, 400, 'Inter');
+ * → font: 400 1rem/1.5 Inter;
+ *
+ * @include font-rem(18px, 1.4);
+ * → font-size: 1.125rem;
+ *   line-height: 1.4;
+ *
+ * @include font-rem(16px, null, 600, 'Roboto', true);
+ * → font: 600 1rem Roboto !important;
+ *
+ * ------------------------------------------------------------
+ */
+
+@use "sass:meta";
+@use "sass:math";
+
+@function to-rem($value, $base: 16) {
+  @if meta.type-of($value)=='number'and not math.is-unitless($value) {
+    @return math.div($value, $base) * 1rem;
+  }
+
+  @return $value;
+}
+
+@mixin font-rem($size,
+  $line-height: null,
+  $weight: null,
+  $family: null,
+  $important: false) {
+  $font-size: to-rem($size);
+
+  @if $line-height !=null and meta.type-of($line-height)=='number'and not math.is-unitless($line-height) {
+    $line-height: to-rem($line-height);
+  }
+
+  $important-suffix: '';
+
+  @if $important {
+    $important-suffix: ' !important';
+  }
+
+  $line-height-suffix: '';
+
+  @if $line-height {
+    $line-height-suffix: '/'+ $line-height;
+  }
+
+  @if $family !=null {
+    font: #{$weight} #{$font-size}#{$line-height-suffix} #{$family}#{$important-suffix};
+  }
+
+  @else {
+    font-size: #{$font-size}#{$important-suffix};
+
+    @if $line-height {
+      line-height: #{$line-height}#{$important-suffix};
+    }
+
+    @if $weight {
+      font-weight: #{$weight}#{$important-suffix};
+    }
+
+    @if $family {
+      font-family: #{$family}#{$important-suffix};
+    }
+  }
+}

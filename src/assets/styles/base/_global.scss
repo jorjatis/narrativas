@@ -1,4 +1,4 @@
-@use '../base/variables' as *;
+@use '../abstracts' as *;
 
 html {
   scroll-behavior: unset !important;
@@ -6,13 +6,21 @@ html {
 
 body {
   touch-action: pan-y;
+
+  &:has(.v-h-a) {
+    .v-a--d-s-1 {
+      height: calc(100svh - 106px);
+
+      @media (min-width: $screen-sm) {
+        height: calc(100svh - 58px);
+      }
+    }
+  }
 }
 
-// @media (max-width: $screen-xs) {
-//   body .v-h-a ~ .v-w .v-a--d {
-//       min-height: auto
-//   }
-// }
+.v-h--t3 .v-hpr {
+  display: block;
+}
 
 .ai2html {
   display: flex;
@@ -23,9 +31,7 @@ body {
   .v-a--d-s-1 {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
-    // height: auto;
 
     .v-a-inf-c {
       grid-area: unset;
@@ -40,10 +46,6 @@ body {
 
       .v-i {
         display: none;
-
-        svg {
-          fill: $cb1;
-        }
       }
     }
 
@@ -62,4 +64,21 @@ body {
 
 .v-cmp-crd {
   margin-top: 60px;
+}
+
+.is-visible {
+  display: block;
+}
+
+.is-transparent {
+  opacity: 0;
+}
+
+.is-fw {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }

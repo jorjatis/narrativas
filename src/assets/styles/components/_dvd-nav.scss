@@ -1,0 +1,144 @@
+@use '../abstracts' as *;
+
+// body:not(:has(.v-h-a)) {
+//   .v-n-dvd-nav {
+//     top: 58px;
+
+//     @media (min-width: $screen-sm) {
+//       top: 106px;
+//     } 
+//   }
+// }
+
+// NOTE: Como lo movemos a esta posicion por js, para engañar al ojo / 32px -> 92px
+.v-n-dvd-nav {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  padding: 0 20px;
+  background: $cb1;
+  z-index: 10;
+
+  @media (min-width: $screen-sm) {
+    top: 32px;
+    padding: 0 40px;
+    background: transparent;
+  }
+
+  &.is-fixed {
+    position: fixed;
+    top: 0;
+    transform: translateY(52px);
+    background: $cb1;
+    transition: transform .3s ease;
+
+    @media (min-width: $screen-xs) {
+      transform: translateY(60px);
+    }
+
+    // li {
+    //   &.is-active {
+    //     button {
+    //       span {
+    //         color: $ncp1;
+    //       }
+    //     }
+    //   }
+    // }
+
+    // button {
+    //   span {
+    //     color: $cb2;
+    //   }
+
+    //   svg {
+    //     path {
+    //       fill: $ncp1;
+    //     }
+    //   }
+    // }
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 36px;
+    max-width: 980px;
+    width: 100%;
+    min-height: 32px;
+    padding: 6px;
+    margin: 0 auto;
+  }
+
+  li {
+    flex: 1 0 auto;
+
+    &.is-disabled {
+      pointer-events: none;
+    }
+
+    &.is-active {
+      button {
+        span {
+          color: $ncp1;
+
+          // @media (min-width: $screen-sm) {
+          //   color: $cb2;
+          // }
+        }
+      }
+    }
+  }
+
+  button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .3s ease;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    span {
+      font: 16px/1 $mcs;
+      text-transform: uppercase;
+      color: $cb2;
+
+      // @media (min-width: $screen-sm) {
+      //   color: $cb1;
+      // }
+    }
+
+    svg {
+      position: absolute;
+      top: 5px;
+      clip-path: inset(0 100% 0 0);
+      width: 105px;
+      animation: sprayReveal 0.5s ease-out forwards;
+
+      path {
+        fill: $ncp1;
+
+        // @media (min-width: $screen-sm) {
+        //   fill: $cb2;
+        // }
+      }
+    }
+
+    @keyframes sprayReveal {
+      to {
+        clip-path: inset(0 0% 0 0);
+      }
+    }
+  }
+}
+
+// Escalonamiento de la animacion desde el primer disabled al ultimo que haya
+@for $i from 4 through 7 {
+  .v-n-dvd-nav li:nth-child(#{$i}) svg {
+    animation-delay: #{0.1s * $i};
+  }
+}
