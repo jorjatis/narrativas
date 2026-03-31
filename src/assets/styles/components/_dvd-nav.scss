@@ -49,7 +49,8 @@
 
       svg {
         path {
-          fill: $ncp1;
+          fill: none;
+          stroke: $ncp1;
         }
       }
     }
@@ -98,10 +99,12 @@
           animation: sprayReveal 0.5s ease-out forwards;
 
           path {
-            fill: $ncp1;
+            fill: none;
+            stroke: $ncp1;
 
             @media (min-width: $screen-sm) {
-              fill: $cb2;
+              fill: none;
+              stroke: $cb2;
             }
           }
         }
@@ -139,10 +142,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     transition: opacity .3s ease;
 
     &:hover {
       opacity: .7;
+    }
+
+    &:disabled {
+      cursor: default;
     }
 
     span {

@@ -5,9 +5,9 @@ import fadeOnScroll from './helpers/fadeOnScroll';
 
 // NOTE: Components
 import animSprayHeader from './modules/animSprayHeader';
+import audioPlayer from './modules/audioPlayer';
+import dvdScroller from './modules/dvdScroller';
 import dvdNavSticky from './modules/dvdNavSticky';
-
-// import blScroll from './modules/blScroll';
 
 export function initAll() {
   moveEls('.v-a--d-s-1 .v-a-s-t', '.v-d--abc', "prepend");
@@ -15,9 +15,11 @@ export function initAll() {
   fadeOnScroll('.scr-ind');
 
   animSprayHeader();
-  dvdNavSticky();
 
-  // blScroll();
+  const playerApi = audioPlayer();
+  dvdScroller(playerApi);
+  
+  dvdNavSticky();
 }
 
 function start() {

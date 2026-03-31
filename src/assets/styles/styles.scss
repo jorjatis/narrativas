@@ -3,10 +3,10 @@
 
 // Base
 @use './base/global';
+@use './base/animations';
 
 // Componentes Kraken
 @use './kraken-components/credits';
-@use './kraken-components/player';
 
 // Componentes
 @use './components/scroll-indicator';
