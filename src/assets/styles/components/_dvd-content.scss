@@ -1,5 +1,106 @@
 @use '../abstracts' as *;
 
+.v-n-dvd {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: #0000002d;
+}
+
+.v-n-dvd-ep {
+  flex: 1 0 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  &__img {
+    max-width: 450px;
+    width: 100%;
+    max-height: 450px;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  &__inf-c {
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 450px;
+    width: 100%;
+    margin: 20px auto 0;
+  }
+
+  &__t-c {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__n {
+    width: 48px;
+    height: 48px;
+  }
+
+  &__t {
+    max-width: 313px;
+    width: 100%;
+    font: 24px/116% $ads;
+  }
+
+  .v-ply {
+    &__b {
+      &:before {
+        border-color: $cb1;
+      }
+    }
+
+    #icon-play,
+    #icon-pause {
+      fill: $cb1;
+    }
+
+    &__t {
+      display: none;
+    }
+
+    .v-asn__i {
+      background: $ncp1;
+    }
+
+    &__p {
+      color: $cb1;
+    }
+  }
+
+  &__p {
+    align-self: center;
+    width: 680px;
+    font: 16px/150% $adl;
+  }
+
+  .v-btn-c {
+    margin-top: 32px;
+  }
+  
+  .v-btn {
+    align-self: center;
+    min-width: 172px;
+    background: $cb1;
+
+    &:hover {
+      background: $ncp1;
+    }
+  }
+}
+
+
+
+
+
+
 .bl-main {
   position: relative;
   left: 50%;

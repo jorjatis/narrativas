@@ -7,7 +7,7 @@ import fadeOnScroll from './helpers/fadeOnScroll';
 import animSprayHeader from './modules/animSprayHeader';
 import dvdNavSticky from './modules/dvdNavSticky';
 
-import blScroll from './modules/blScroll';
+// import blScroll from './modules/blScroll';
 
 export function initAll() {
   moveEls('.v-a--d-s-1 .v-a-s-t', '.v-d--abc', "prepend");
@@ -17,7 +17,7 @@ export function initAll() {
   animSprayHeader();
   dvdNavSticky();
 
-  blScroll();
+  // blScroll();
 }
 
 function start() {

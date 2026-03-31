@@ -1,23 +1,19 @@
 @use '../abstracts' as *;
 
-// body:not(:has(.v-h-a)) {
-//   .v-n-dvd-nav {
-//     top: 58px;
-
-//     @media (min-width: $screen-sm) {
-//       top: 106px;
-//     } 
-//   }
-// }
-
-// NOTE: Como lo movemos a esta posicion por js, para engañar al ojo / 32px -> 92px
 .v-n-dvd-nav {
   position: absolute;
   top: 0;
   width: 100vw;
-  padding: 0 20px;
   background: $cb1;
   z-index: 10;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (min-width: $screen-sm) {
     top: 32px;
@@ -36,46 +32,93 @@
       transform: translateY(60px);
     }
 
-    // li {
-    //   &.is-active {
-    //     button {
-    //       span {
-    //         color: $ncp1;
-    //       }
-    //     }
-    //   }
-    // }
+    li {
+      &.is-active {
+        button {
+          span {
+            color: $ncp1;
+          }
+        }
+      }
+    }
 
-    // button {
-    //   span {
-    //     color: $cb2;
-    //   }
+    button {
+      span {
+        color: $cb2;
+      }
 
-    //   svg {
-    //     path {
-    //       fill: $ncp1;
-    //     }
-    //   }
-    // }
+      svg {
+        path {
+          fill: $ncp1;
+        }
+      }
+    }
   }
 
   ul {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 36px;
-    max-width: 980px;
-    width: 100%;
     min-height: 32px;
-    padding: 6px;
     margin: 0 auto;
+
+    @media (min-width: $screen-sm) {
+      justify-content: space-between;
+      gap: 0;
+      min-width: auto;
+      max-width: 980px;
+      width: 100%;
+    }
   }
 
   li {
     flex: 1 0 auto;
 
+    &:first-child {
+      @media (max-width: $screen-sm) {
+        padding-left: 30px;
+      }
+    }
+
+    &:last-child {
+      @media (max-width: $screen-sm) {
+        padding-right: 30px;
+      }
+    }
+
     &.is-disabled {
       pointer-events: none;
+
+      button {
+        svg {
+          position: absolute;
+          top: 5px;
+          clip-path: inset(0 100% 0 0);
+          width: 105px;
+          animation: sprayReveal 0.5s ease-out forwards;
+
+          path {
+            fill: $ncp1;
+
+            @media (min-width: $screen-sm) {
+              fill: $cb2;
+            }
+          }
+        }
+
+        @keyframes sprayReveal {
+          to {
+            clip-path: inset(0 0% 0 0);
+          }
+        }
+      }
+
+      // Escalonamiento de la animacion desde el primer disabled al ultimo que haya
+      @for $i from 4 through 7 {
+        &:nth-of-type(#{$i}) button svg {
+          animation-delay: #{0.2s * $i};
+        }
+      }
     }
 
     &.is-active {
@@ -83,9 +126,9 @@
         span {
           color: $ncp1;
 
-          // @media (min-width: $screen-sm) {
-          //   color: $cb2;
-          // }
+          @media (min-width: $screen-sm) {
+            color: $cb2;
+          }
         }
       }
     }
@@ -107,38 +150,9 @@
       text-transform: uppercase;
       color: $cb2;
 
-      // @media (min-width: $screen-sm) {
-      //   color: $cb1;
-      // }
-    }
-
-    svg {
-      position: absolute;
-      top: 5px;
-      clip-path: inset(0 100% 0 0);
-      width: 105px;
-      animation: sprayReveal 0.5s ease-out forwards;
-
-      path {
-        fill: $ncp1;
-
-        // @media (min-width: $screen-sm) {
-        //   fill: $cb2;
-        // }
+      @media (min-width: $screen-sm) {
+        color: $cb1;
       }
     }
-
-    @keyframes sprayReveal {
-      to {
-        clip-path: inset(0 0% 0 0);
-      }
-    }
-  }
-}
-
-// Escalonamiento de la animacion desde el primer disabled al ultimo que haya
-@for $i from 4 through 7 {
-  .v-n-dvd-nav li:nth-child(#{$i}) svg {
-    animation-delay: #{0.1s * $i};
   }
 }

@@ -1,98 +1,42 @@
-{{!-- Reproductor audio/video 
-
-// ** v-ply--fx -> Player fixed
-
-// Tipos
-// ---------------------------------------
-// ** v-ply--t1 -> Player soundcite
-// ** v-ply--t2 -> Player noticia 
-// ** v-ply--t3 -> Player componente
-// ** v-ply--t4 -> Player podcast
---}}
-
-{{#if (or playerPaywall player.playerPaywall)}}
-<div data-05a9fe6971e0b460653=""> {{!-- NOTE: El dato numérico no es siempre este, evolok lo va cambiando --}}
-{{/if}}
-
-{{#unless (or playerVideo player.playerVideo)}}
-<div data-voc-react="">
-{{/unless}}
-
-  <div class="v-ply {{playerClasses}} {{#if (or playerActive player.playerActive)}}is-active is-play{{/if}}" data-voc-component="player">
-    <div class="v-ply__c {{playerContainerClasses}}">
-      <div class="v-ply__w v-ply__w--1">
-        {{#if (or playerRewind player.playerRewind)}}
-          <div class="v-ply__g v-ply__g--1">
-            {{#> button class="v-ply__r v-ply__r--l"}}{{#if (or playerRewind10 player.playerRewind10)}}{{> icons/icon-rwd-10}}{{else}}{{> icons/icon-rwd-30}}{{/if}}{{/button}}
-        {{/if}}
-
-          <button class="v-ply__b" {{#if customPlayerID}}popovertarget="{{customPlayerID}}"{{/if}}>     
+<div class="v-cmp-ply">
+  <div data-voc-react="">
+    <div class="v-ply v-ply--t3 not-touch" data-voc-component="player">
+      <div class="v-ply__c">
+        <div class="v-ply__w v-ply__w--1">
+          <button class="v-ply__b">
             <span class="v-ply__i">
-              {{> icons/icon-play}}
-              {{> icons/icon-pause}}
+              <svg id="icon-play" width="15" height="18" viewBox="0 0 15 18" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.167999 16.4068V1.5927C0.167999 1.1527 0.318899 0.791595 0.620899 0.509295C0.922799 0.227395 1.2752 0.0863953 1.678 0.0863953C1.8038 0.0863953 1.9357 0.104595 2.0738 0.140995C2.2119 0.177095 2.3437 0.231596 2.4692 0.304296L14.1292 7.7273C14.3581 7.8834 14.5296 8.07029 14.6438 8.28809C14.7582 8.50609 14.8155 8.74339 14.8155 8.99979C14.8155 9.25609 14.7582 9.49339 14.6438 9.71139C14.5296 9.92919 14.3581 10.1161 14.1292 10.2723L2.4692 17.6952C2.3434 17.768 2.2112 17.8224 2.0726 17.8585C1.9342 17.8949 1.8021 17.9131 1.6763 17.9131C1.2732 17.9131 0.921199 17.7721 0.620099 17.4902C0.318699 17.208 0.167999 16.8468 0.167999 16.4068Z"></path>
+              </svg>
+              <svg id="icon-pause" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.2091 0.0345001C2.4996 0.0345001 2.7508 0.1438 2.9612 0.3631C3.1716 0.5826 3.2769 0.8446 3.2769 1.1476V8.8524C3.2769 9.1554 3.1716 9.4174 2.9612 9.6369C2.7508 9.8562 2.4996 9.9655 2.2091 9.9655H1.1013C0.811 9.9655 0.5605 9.856 0.3502 9.6369C0.1398 9.4174 0.0345001 9.1554 0.0345001 8.8524V1.1476C0.0345001 0.8446 0.1398 0.5826 0.3502 0.3631C0.5605 0.144 0.811 0.0345001 1.1013 0.0345001H2.2091Z"></path>
+                <path d="M8.8987 0.0345001C9.189 0.0345001 9.4395 0.144 9.6498 0.3631C9.8602 0.5826 9.9655 0.8446 9.9655 1.1476V8.8524C9.9655 9.1554 9.8602 9.4174 9.6498 9.6369C9.4395 9.856 9.189 9.9655 8.8987 9.9655H7.7909C7.5004 9.9655 7.2492 9.8562 7.0388 9.6369C6.8284 9.4174 6.7231 9.1554 6.7231 8.8524V1.1476C6.7231 0.8446 6.8284 0.5826 7.0388 0.3631C7.2492 0.1438 7.5004 0.0345001 7.7909 0.0345001H8.8987Z"></path>
+              </svg>
             </span>
           </button>
-        
-        {{#if (or playerRewind player.playerRewind)}}
-            {{#> button class="v-ply__r v-ply__r--r"}}{{#if (or playerRewind10 player.playerRewind10)}}{{> icons/icon-fwd-10}}{{else}}{{> icons/icon-fwd-30}}{{/if}}{{/button}}
-          </div>
-        {{/if}}
-      </div>
-
-      {{#unless (or playerButton player.playerButton)}}
-        <div class="v-ply__w v-ply__w--2">
-          {{#if (or playerHasTitle player.playerHasTitle)}}
-            <p class="v-ply__t">{{{or customPlayerTitle prlayer.customPlayerTitle "Escucha la noticia"}}}</p>
-          {{/if}}
-
-          {{#unless (or playerNotProgress player.playerNotProgress)}}
-            <div class="v-ply__g v-ply__g--2">
-              <div class="v-ply__v">
-                <progress {{#if (or playerActive player.playerActive)}}{{#if (or playerProgressZero player.playerProgressZero)}}value="0" max="0"{{else}}value="100" max="427"{{/if}}{{else}}value="0" max="0"{{/if}}></progress>
-
-                {{#if (or playerHasMarker player.playerHasMarker)}}
-                  <span class="v-ply__m"></span>
-                {{/if}}
-              </div>
-            </div>
-          {{/unless}}
-
-          {{#unless (or playerNotTime player.playerNotTime)}}
-            <p class="v-ply__g v-ply__g--3">
-              {{#if (or playerHasAnimationSound player.playerHasAnimationSound)}}
-                {{> animation-sound}}
-              {{/if}}
-
-              <span class="v-ply__p">
-                {{#if (or customPlayerTime player.customPlayerTime)}}
-                  {{customPlayerTime}}
-                {{else if (or playerActive player.playerActive)}}
-                  02:30 / 08:00
-                {{else}}
-                  8 min
-                {{/if}}
-              </span>
-            </p>
-          {{/unless}}
         </div>
-      {{/unless}}
-
-      {{#if (or playerHasClose player.playerHasClose)}}
-        {{#> button class="v-x"}}{{> icons/icon-close}}{{/button}}
-      {{/if}}
-
-      {{#if (or playerVideo player.playerVideo)}}
-      {{else if (or playerButton player.playerButton)}}
-      {{else}}
+        <div class="v-ply__w v-ply__w--2">
+          <p class="v-ply__t">La venta de la filial británica del Sabadell al Santander ejemplo de título muy largo</p>
+          <div class="v-ply__g v-ply__g--2">
+            <div class="v-ply__v">
+              <progress value="0" max="0"></progress>
+            </div>
+          </div>
+          <p class="v-ply__g v-ply__g--3">
+            <span class="v-asn">
+              <span class="v-asn__c">
+                <span class="v-asn__i v-asn__i--1"></span>
+                <span class="v-asn__i v-asn__i--2"></span>
+                <span class="v-asn__i v-asn__i--3"></span>
+                <span class="v-asn__i v-asn__i--4"></span>
+                <span class="v-asn__i v-asn__i--5"></span>
+              </span>
+            </span>
+            <span class="v-ply__p">8 min</span>
+          </p>
+        </div>
         <audio src=""></audio>
-      {{/if}}
+      </div>
     </div>
   </div>
-  
-{{#unless (or playerVideo player.playerVideo)}}
 </div>
-{{/unless}}
-
-{{#if playerPaywall}}
-</div>
-{{/if}}
