@@ -12,15 +12,15 @@
   .v-h {
     &__c {
       border-bottom-color: $ncp1;
-      background: $ncp1;;
+      background: $ncp1;
     }
 
     &__w {
       &--3 {
         .v-btn { 
           &--2 {
-            border-color: $cb1;
-            color: $cb1;
+            border-color: $cb2;
+            color: $cb2;
 
             &:hover {
               opacity: .5;
@@ -28,7 +28,7 @@
 
             .v-i {
               svg {
-                fill: $cb1;
+                fill: $cb2;
               }
             }
           }
