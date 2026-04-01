@@ -3,7 +3,7 @@ export default function dvdNavSticky() {
   if (!nav) return;
 
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 150) {
+    if (window.scrollY > 250) {
       nav.classList.add('is-fixed');
     } else {
       nav.classList.remove('is-fixed');
