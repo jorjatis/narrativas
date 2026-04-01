@@ -21,7 +21,6 @@
     top: 0;
     transform: translateX(-50%);
     z-index: 2;
-    opacity: 0;
 
     @media (min-width: $screen-sm) {
       max-width: 680px;
@@ -46,7 +45,7 @@
   }
 }
 
-.manchas-c {
+.manchas {
   position: absolute;
   bottom: 0;
   display: flex;
@@ -59,8 +58,9 @@
   @media (min-width: $screen-xs) {
     padding: 0 120px 0 60px;
   }
-
-  .mancha-izq {
+  
+  .mancha-izq-c,
+  .mancha-dcha-c {
     position: relative;
     z-index: -1;
 
@@ -69,50 +69,17 @@
       transform-origin: top center;
       will-change: transform, opacity;
       z-index: -1;
-
-      &:nth-child(1) {
-        margin-top: -35px;
-        margin-left: -40px;
-        width: 210px;
-        height: auto;
-      }
-
-      &:nth-child(2) {
-        width: 114px;
-        height: auto;
-      }
     }
   }
 
-  .mancha-dcha {
-    position: relative;
-    z-index: -1;
+  .mancha-izq--1 { margin-top: -35px; margin-left: -40px; width: 210px; }
+  .mancha-izq--2 { width: 114px; }
+  .mancha-izq--3 { margin-left: 8px; width: 30px; }
+  .mancha-izq--4 { margin-left: 90px; width: 23px; }
 
-    img {
-      position: absolute;
-      transform-origin: top center;
-      will-change: transform, opacity;
-      z-index: -1;
-
-      &:nth-child(1) {
-        margin-top: -20px;
-        margin-left: -25px;
-        width: 74px;
-        height: auto;
-      }
-
-      &:nth-child(2) {
-        margin-left: 4px;
-        width: 45px;
-        height: auto;
-      }
-
-      &:nth-child(3) {
-        width: 20px;
-        height: auto;
-      }
-    }
-  }
+  .mancha-dcha--1 { margin-top: -20px; margin-left: -25px; width: 74px; }
+  .mancha-dcha--2 { margin-left: 4px; width: 45px; }
+  .mancha-dcha--3 { width: 20px; }
 }
 
 .v-w {
