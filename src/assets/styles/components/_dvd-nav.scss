@@ -40,6 +40,16 @@
           }
         }
       }
+
+      &.is-disabled {
+        button {
+          svg {
+            path {              
+              stroke: $ncp1;
+            }
+          }
+        }
+      }
     }
 
     button {

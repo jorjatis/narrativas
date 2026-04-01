@@ -226,16 +226,16 @@
   }
 
   &__p {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
+    display: none;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     align-self: center;
     width: 100%;
     font: 16px/150% $adl;
     overflow: hidden;
 
-    @media (min-width: 350px) {
-      -webkit-line-clamp: 3;
+    @media (min-width: $screen-xs) {
+      display: -webkit-box;
     }
 
     @media (min-width: 750px) {
