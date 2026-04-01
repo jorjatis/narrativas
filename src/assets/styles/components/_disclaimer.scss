@@ -1,0 +1,11 @@
+@use '../abstracts' as *;
+
+.v-n-disclaimer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 395px;
+  margin: 120px auto 60px;
+  font: 12px/1 $mcr;
+  text-align: center;
+}
