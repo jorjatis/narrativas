@@ -82,6 +82,14 @@ body {
   animation: fadeOut 0.3s ease-out forwards;
 }
 
+.is-fade-in-translate-y {
+  animation: fadeInTranslateY 0.2s ease-in-out forwards;
+}
+
+.is-fade-out-translate-y {
+  animation: fadeOutTranslateY 0.3s ease-out forwards;
+}
+
 .is-fw {
   width: 100vw;
   position: relative;

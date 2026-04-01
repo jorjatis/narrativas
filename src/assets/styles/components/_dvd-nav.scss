@@ -84,6 +84,7 @@
 
   li {
     flex: 1 0 auto;
+    opacity: 0;
 
     &:first-child {
       @media (max-width: $screen-sm) {
@@ -167,6 +168,7 @@
       font: 16px/1 $mcs;
       text-transform: uppercase;
       color: $cb2;
+      transition: color .3s ease;
 
       @media (min-width: $screen-sm) {
         color: $cb1;

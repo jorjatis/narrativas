@@ -150,6 +150,7 @@ export default function dvdScroller(player) {
 
     state.episodes.forEach((ep) => {
         const li = document.createElement('li');
+        li.classList.add('is-fade-in');
         if (ep.disabled) li.classList.add('is-disabled');
 
         const btn = document.createElement('button');
@@ -252,8 +253,8 @@ export default function dvdScroller(player) {
     dom.container.style.pointerEvents = 'none';
 
     // 1. Fade Out
-    dom.container.classList.remove('is-fade-in');
-    dom.container.classList.add('is-fade-out');
+    dom.container.classList.remove('is-fade-in-translate-y');
+    dom.container.classList.add('is-fade-out-translate-y');
 
     await new Promise(resolve => {
       dom.container.addEventListener('animationend', resolve, { once: true });
@@ -273,8 +274,8 @@ export default function dvdScroller(player) {
     }
 
     // 3. Fade In
-    dom.container.classList.remove('is-fade-out');
-    dom.container.classList.add('is-fade-in');
+    dom.container.classList.remove('is-fade-out-translate-y');
+    dom.container.classList.add('is-fade-in-translate-y');
 
     dom.container.style.pointerEvents = '';
   };
