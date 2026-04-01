@@ -10,6 +10,10 @@ const formatAudioDuration = (seconds) => {
   return `${m}:${s}`;
 };
 
+const formatTime = (current, total) => {
+  return `${formatAudioDuration(current)} / ${formatAudioDuration(total)}`;
+};
+
 /* =========================
   AudioPlayer Module
 ========================= */
@@ -48,7 +52,7 @@ export default function audioPlayer() {
   const updateProgressUI = () => {
     if (!dom.progress || !dom.audio.duration) return;
     dom.progress.value = dom.audio.currentTime;
-    dom.duration.textContent = formatAudioDuration(dom.audio.currentTime) + ' / ' + formatAudioDuration(dom.audio.duration);
+    dom.duration.textContent = formatTime(dom.audio.currentTime, dom.audio.duration);
   };
 
   const seek = (e) => {
@@ -60,7 +64,7 @@ export default function audioPlayer() {
     const newTime = percentage * dom.audio.duration;
 
     dom.progress.value = newTime;
-    dom.duration.textContent = formatAudioDuration(newTime) + ' / ' + formatAudioDuration(dom.audio.duration);
+    dom.duration.textContent = formatTime(newTime, dom.audio.duration);
   };
 
   const bindEvents = () => {

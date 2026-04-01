@@ -24,7 +24,10 @@ export function initAll() {
 
 function start() {
   initAll();
-  ScrollTrigger.refresh();
+  
+  if (window.ScrollTrigger) {
+    window.ScrollTrigger.refresh();
+  }
 }
 
 // NOTE: Para prod el evento load de window, se borra, dejamos solo:

@@ -38,6 +38,7 @@
     width: 100%;
     margin: 0 auto;
     object-fit: contain;
+    user-select: none;
 
     @media (max-width: $screen-xs) {
       max-width: 250px;

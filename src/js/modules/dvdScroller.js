@@ -72,28 +72,13 @@ const EPISODES = [
   },
 ];
 
-/* =========================
-  Utils
-========================= */
-
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-const formatAudioDuration = (seconds) => {
-  if (!Number.isFinite(seconds) || seconds <= 0) return 'Sin audio';
-
-  const m = Math.floor(seconds / 60);
-  const s = Math.round(seconds % 60)
-    .toString()
-    .padStart(2, '0');
-
-  return `${m}:${s}`;
-};
 
 /* =========================
   Main Component
 ========================= */
 
-export default function dvdScroller() {
+export default function dvdScroller(player) {
   const root = document.querySelector('.v-n-dvd');
   const navList = document.querySelector('[data-dvd-nav-list]');
   const gsap = window.gsap;
@@ -152,14 +137,7 @@ export default function dvdScroller() {
     text: root.querySelector('[data-dvd-text]'),
     link: root.querySelector('[data-dvd-link]'),
     prev: root.querySelector('[data-dvd-prev]'),
-    next: root.querySelector('[data-dvd-next]'),
-
-    player: root.querySelector('.v-ply'),
-    playerButton: root.querySelector('.v-ply__b'),
-    playerTitle: root.querySelector('.v-ply__t'),
-    playerDuration: root.querySelector('.v-ply__p'),
-    playerProgress: root.querySelector('progress'),
-    audio: root.querySelector('audio'),
+    next: root.querySelector('[data-dvd-next]')
   };
 
   /* =========================
@@ -219,40 +197,8 @@ export default function dvdScroller() {
     Player
   ========================= */
 
-  const resetPlayer = () => {
-    if (!dom.audio) return;
-
-    dom.audio.pause();
-    dom.audio.currentTime = 0;
-    dom.audio.removeAttribute('src');
-    dom.audio.load();
-
-    if (dom.playerProgress) {
-      dom.playerProgress.value = 0;
-      dom.playerProgress.max = 0;
-    }
-  };
-
   const updatePlayer = (ep) => {
-    if (!dom.player || !dom.audio) return;
-
-    resetPlayer();
-
-    const hasAudio = Boolean(ep.audioSrc);
-
-    dom.player.classList.toggle('is-empty', !hasAudio);
-    dom.playerButton.disabled = !hasAudio;
-
-    if (dom.playerTitle) {
-      dom.playerTitle.textContent = ep.title;
-    }
-
-    dom.playerDuration.textContent = hasAudio ? 'Cargando...' : 'Sin audio';
-
-    if (!hasAudio) return;
-
-    dom.audio.src = ep.audioSrc;
-    dom.audio.load();
+    player?.loadEpisode(ep);
   };
 
   /* =========================
@@ -300,7 +246,6 @@ export default function dvdScroller() {
 
     const currentId = ++state.transitionId;
 
-    // Comprobamos el nuevo atributo en el contenedor
     if (dom.container.dataset.dvdEpisodeActive === String(ep.originalIndex)) return;
 
     dom.container.style.pointerEvents = 'none';
@@ -410,14 +355,6 @@ export default function dvdScroller() {
       if (!btn) return;
       goToStep(Number(btn.dataset.dvdStep));
     });
-
-    if (dom.audio && dom.playerDuration) {
-      dom.audio.addEventListener('loadedmetadata', () => {
-        dom.playerDuration.textContent = formatAudioDuration(
-          dom.audio.duration,
-        );
-      });
-    }
   };
 
   /* =========================
