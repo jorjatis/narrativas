@@ -72,6 +72,7 @@
     gap: 36px;
     min-height: 32px;
     margin: 0 auto;
+    opacity: 0;
 
     @media (min-width: $screen-sm) {
       justify-content: space-between;
@@ -84,7 +85,6 @@
 
   li {
     flex: 1 0 auto;
-    opacity: 0;
 
     &:first-child {
       @media (max-width: $screen-sm) {

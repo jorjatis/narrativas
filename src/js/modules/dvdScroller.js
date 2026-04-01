@@ -164,14 +164,12 @@ export default function dvdScroller(player) {
             btn.setAttribute('aria-disabled', 'true');
         }
 
-        // Si está deshabilitado, ponemos el SVG ARRIBA y luego el texto
         if (ep.disabled) {
             btn.innerHTML = `
               ${DISABLED_EPISODE_MARK}
               <span>${ep.navLabel}</span>
             `;
         } else {
-            // Si está habilitado, solo el texto normal
             btn.innerHTML = `<span>${ep.navLabel}</span>`;
         }
 
@@ -181,11 +179,21 @@ export default function dvdScroller(player) {
 
     navList.innerHTML = '';
     navList.appendChild(fragment);
+    navList.classList.add('is-fade-in');
 };
 
   const updateNav = (activeIndex) => {
+    let active = activeIndex;
+
+    const rect = root.getBoundingClientRect();
+    const threshold = window.innerHeight * 0.3;
+
+    if (rect.top > threshold) {
+      active = -1;
+    }
+
     [...navList.children].forEach((li, i) => {
-      const isActive = i === activeIndex;
+      const isActive = i === active;
       li.classList.toggle('is-active', isActive);
 
       const btn = li.querySelector('button');
@@ -209,7 +217,6 @@ export default function dvdScroller(player) {
 
   const renderEpisode = (ep) => {
     return new Promise((resolve) => {
-      // 1. Actualizamos textos y links (esto es instantáneo)
       if (dom.number) dom.number.innerHTML = ep.numberSvg;
       if (dom.title) dom.title.textContent = ep.title;
       if (dom.text) dom.text.textContent = ep.text;
@@ -252,7 +259,6 @@ export default function dvdScroller(player) {
 
     dom.container.style.pointerEvents = 'none';
 
-    // 1. Fade Out
     dom.container.classList.remove('is-fade-in-translate-y');
     dom.container.classList.add('is-fade-out-translate-y');
 
@@ -265,7 +271,6 @@ export default function dvdScroller(player) {
       return;
     }
 
-    // 2. Carga (renderEpisode ahora actualiza el dataset internamente)
     await renderEpisode(ep);
 
     if (currentId !== state.transitionId) {
@@ -273,7 +278,6 @@ export default function dvdScroller(player) {
       return;
     }
 
-    // 3. Fade In
     dom.container.classList.remove('is-fade-out-translate-y');
     dom.container.classList.add('is-fade-in-translate-y');
 
@@ -286,6 +290,8 @@ export default function dvdScroller(player) {
 
   const setStep = (step) => {
     const next = clamp(step, 0, state.enabledEpisodes.length - 1);
+
+    updateNav(state.enabledEpisodes[next].originalIndex);
 
     if (next === state.currentStep && state.isReady) return;
 
@@ -315,6 +321,20 @@ export default function dvdScroller(player) {
     dom.next.classList.toggle('is-hidden', isLast);
   };
 
+  const preload = () => {
+    const st = state.timeline?.scrollTrigger;
+    const initialStep = st ? getStepFromScroll(st) : 0;
+    
+    const ep = state.enabledEpisodes[initialStep];
+    if (ep) {
+      renderEpisode(ep);
+      updateArrows();
+      state.currentStep = initialStep;
+      
+      updateNav(ep.originalIndex);
+    }
+  };
+
   /* =========================
     ScrollTrigger
   ========================= */
@@ -331,11 +351,24 @@ export default function dvdScroller(player) {
         trigger: root,
         pin: true,
         start: 'top top',
-        end: () =>
-          `+=${state.enabledEpisodes.length * window.innerHeight}`,
+        end: () => `+=${state.enabledEpisodes.length * window.innerHeight}`,
         onUpdate: (st) => setStep(getStepFromScroll(st)),
-        onRefresh: (st) => setStep(getStepFromScroll(st))
+        onEnter: (st) => setStep(getStepFromScroll(st)),
+        onEnterBack: (st) => setStep(getStepFromScroll(st)),
+        onLeaveBack: () => updateNav(-1),
+        onRefresh: (st) => updateNav(getStepFromScroll(st))
       },
+    });
+
+    ScrollTrigger.create({
+      trigger: root,
+      start: 'top 30%', 
+      end: 'bottom top',
+      onUpdate: () => {
+        const st = state.timeline.scrollTrigger;
+        if (st) updateNav(getStepFromScroll(st));
+      },
+      onLeaveBack: () => updateNav(-1)
     });
   };
 
@@ -364,7 +397,7 @@ export default function dvdScroller(player) {
   ========================= */
 
   renderNav();
-  setStep(0);
   bindEvents();
   initScroll();
+  preload();
 }

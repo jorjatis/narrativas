@@ -1,41 +1,64 @@
-@use '../abstracts' as *;
+@use '../abstracts'as *;
 
 .v-c-cmp {
   .v-cmp-crd {
-    .v-cnt__c {
-      justify-content: center;
-    }
+    .v-cnt {
+      margin-bottom: 40px;
+      border: 0;
 
-    .v-cnt__t {
-      align-items: flex-end;
-      margin-bottom: 20px;
-      font-size: 30px;
-
-      &:before, 
-      &:after {
-        content: '';
-        position: relative;
+      &__c {
+        justify-content: center;
       }
 
-      &:before {
-        top: 12px;
-        left: 12px;
-        width: 34px;
-        height: 152px;
-        background: url('https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/12/bandaslatinas/images/flames-izq.png') no-repeat;
-      }
+      &__t {
+        align-items: flex-end;
+        margin-bottom: 20px;
+        font-size: 30px;
 
-      &:after {
-        top: 7px;
-        right: 28px;
-        width: 43px;
-        height: 95px;
-        background: url('https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/12/bandaslatinas/images/flames-der.png') no-repeat;
-        background-size: contain;
+        &:before,
+        &:after {
+          content: '';
+          position: relative;
+        }
+
+        &:before {
+          top: 12px;
+          left: 12px;
+          width: 34px;
+          height: 152px;
+          background: url('https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/12/bandaslatinas/images/flames-izq.png') no-repeat;
+        }
+
+        &:after {
+          top: 7px;
+          right: 28px;
+          width: 43px;
+          height: 95px;
+          background: url('https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/12/bandaslatinas/images/flames-der.png') no-repeat;
+          background-size: contain;
+        }
       }
     }
 
     .v-u {
+      &__l {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+
+        &:before,
+        &:after {
+          content: '/';
+          transform: translateY(-2px);
+          width: auto;
+          height: auto;
+          font-weight: bold;
+          color: $ncp1;
+          background: transparent;
+          border-radius: unset;
+        }
+      }
+
       &__p {
         a {
           color: $ncp1;
