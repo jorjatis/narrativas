@@ -7,6 +7,22 @@
   min-height: 100dvh;
 }
 
+@media (any-pointer: coarse) {
+  .v-n-dvd {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+@media (any-pointer: fine) {
+  .v-n-dvd {
+    touch-action: auto;
+    user-select: auto;
+    -webkit-user-select: auto;
+  }
+}
+
 .v-n-dvd-ep {
   flex: 1 0 0;
   position: relative;
@@ -38,6 +54,7 @@
     width: 100%;
     margin: 0 auto;
     object-fit: contain;
+    pointer-events: none;
     user-select: none;
 
     @media (max-width: $screen-xs) {
@@ -157,11 +174,7 @@
     }
 
     &--p {
-      left: 0;
-
-      @media (min-width: $screen-xs) {
-        left: 16px;
-      }
+      left: 16px;
 
       @media (min-width: $screen-sm) {
         left: 32px;
@@ -169,11 +182,7 @@
     }
 
     &--n {
-      right: 0;
-
-      @media (min-width: $screen-sm) {
-        right: 16px;
-      }
+      right: 16px; 
 
       @media (min-width: $screen-sm) {
         right: 32px;

@@ -84,10 +84,11 @@ export default function dvdScroller(player) {
   const navList = document.querySelector('[data-dvd-nav-list]');
   const gsap = window.gsap;
   const ScrollTrigger = window.ScrollTrigger;
+  const Observer = window.Observer;
 
   if (!root || !navList || !gsap || !ScrollTrigger) return;
 
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, Observer);
 
   /* =========================
     State
@@ -101,7 +102,8 @@ export default function dvdScroller(player) {
     stepMap: new Map(),
     timeline: null,
     transition: null,
-    transitionId: 0
+    transitionId: 0,
+    isDragging: false
   };
 
   /* =========================
@@ -150,7 +152,6 @@ export default function dvdScroller(player) {
 
     state.episodes.forEach((ep) => {
         const li = document.createElement('li');
-        li.classList.add('is-fade-in');
         if (ep.disabled) li.classList.add('is-disabled');
 
         const btn = document.createElement('button');
@@ -179,7 +180,7 @@ export default function dvdScroller(player) {
 
     navList.innerHTML = '';
     navList.appendChild(fragment);
-    navList.classList.add('is-fade-in');
+    navList.parentElement.classList.add('is-fade-in');
 };
 
   const updateNav = (activeIndex) => {
@@ -393,6 +394,50 @@ export default function dvdScroller(player) {
   };
 
   /* =========================
+    Touch Gestures (Swipe)
+  ========================= */
+
+  const initTouch = () => {
+    const isTouch = window.matchMedia("(any-pointer: coarse)").matches;
+    if (!isTouch) return;
+
+    Observer.create({
+      target: root,
+      type: "touch",
+      tolerance: 60,
+      
+      onPress: () => {
+        state.isDragging = false;
+      },
+
+      onLeft: () => {
+        if (state.isDragging) return; 
+        
+        if (state.currentStep < state.enabledEpisodes.length - 1) {
+          state.isDragging = true;
+          goToStep(state.currentStep + 1);
+        }
+      },
+      
+      onRight: () => {
+        if (state.isDragging) return;
+        
+        if (state.currentStep > 0) {
+          state.isDragging = true;
+          goToStep(state.currentStep - 1);
+        }
+      },
+
+      onRelease: () => {
+        state.isDragging = false;
+      },
+
+      preventDefault: false,
+      lockAxis: true
+    });
+  };
+
+  /* =========================
     Init
   ========================= */
 
@@ -400,4 +445,5 @@ export default function dvdScroller(player) {
   bindEvents();
   initScroll();
   preload();
+  initTouch();
 }
