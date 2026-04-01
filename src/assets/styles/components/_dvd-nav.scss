@@ -68,6 +68,7 @@
   }
 
   ul {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 36px;
@@ -77,14 +78,29 @@
     @media (min-width: $screen-sm) {
       justify-content: space-between;
       gap: 0;
-      min-width: auto;
       max-width: 980px;
       width: 100%;
     }
   }
 
   li {
-    flex: 1 0 auto;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 480px) {
+      width: 22vw;
+    }
+
+    @media (max-width: 380px) {
+      width: 28vw;
+    }
+
+    @media (min-width: $screen-sm) {
+      flex: 1 0 auto;
+      width: auto;
+    }
 
     &:first-child {
       @media (max-width: $screen-sm) {
@@ -127,7 +143,6 @@
         }
       }
 
-      // Escalonamiento de la animacion desde el primer disabled al ultimo que haya
       @for $i from 4 through 7 {
         &:nth-of-type(#{$i}) button svg {
           animation-delay: #{0.2s * $i};
@@ -156,8 +171,10 @@
     cursor: pointer;
     transition: opacity .3s ease;
 
-    &:hover {
-      opacity: .7;
+    @media (hover: hover) {
+      &:hover {
+        opacity: .7;
+      }
     }
 
     &:disabled {

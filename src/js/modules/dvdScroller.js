@@ -96,6 +96,7 @@ export default function dvdScroller(player) {
 
   const state = {
     currentStep: 0,
+    currentNavStep: -1,
     isReady: false,
     episodes: [],
     enabledEpisodes: [],
@@ -185,7 +186,6 @@ export default function dvdScroller(player) {
 
   const updateNav = (activeIndex) => {
     let active = activeIndex;
-
     const rect = root.getBoundingClientRect();
     const threshold = window.innerHeight * 0.3;
 
@@ -193,15 +193,37 @@ export default function dvdScroller(player) {
       active = -1;
     }
 
+    const changed = state.currentNavStep !== active;
+    state.currentNavStep = active;
+
     [...navList.children].forEach((li, i) => {
       const isActive = i === active;
       li.classList.toggle('is-active', isActive);
-
+      
       const btn = li.querySelector('button');
       if (btn) {
         btn.setAttribute('aria-current', isActive);
       }
     });
+
+    const activeLi = navList.querySelector('.is-active');
+
+    if (activeLi && changed) {
+      const scrollContainer = navList.parentElement; 
+      
+      const containerWidth = scrollContainer.offsetWidth;
+      const itemWidth = activeLi.offsetWidth;
+      const itemOffset = activeLi.offsetLeft;
+      
+      const scrollTarget = itemOffset - (containerWidth / 2) + (itemWidth / 2);
+
+      gsap.to(scrollContainer, {
+        scrollLeft: scrollTarget,
+        duration: 0.4,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    }
   };
 
   /* =========================
@@ -404,12 +426,10 @@ export default function dvdScroller(player) {
     Observer.create({
       target: root,
       type: "touch",
-      tolerance: 60,
-      
+      tolerance: 60,      
       onPress: () => {
         state.isDragging = false;
       },
-
       onLeft: () => {
         if (state.isDragging) return; 
         
@@ -417,8 +437,7 @@ export default function dvdScroller(player) {
           state.isDragging = true;
           goToStep(state.currentStep + 1);
         }
-      },
-      
+      },      
       onRight: () => {
         if (state.isDragging) return;
         
@@ -427,11 +446,9 @@ export default function dvdScroller(player) {
           goToStep(state.currentStep - 1);
         }
       },
-
       onRelease: () => {
         state.isDragging = false;
       },
-
       preventDefault: false,
       lockAxis: true
     });

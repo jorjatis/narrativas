@@ -163,8 +163,10 @@
       stroke-width: 2;
     }
 
-    &:hover:not(:disabled) {
-      opacity: .7;
+    @media (hover: hover) {
+      &:hover:not(:disabled) {
+        opacity: .7;
+      }
     }
 
     &:disabled,
