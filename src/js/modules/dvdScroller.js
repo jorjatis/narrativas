@@ -354,7 +354,7 @@ export default function dvdScroller() {
 
     const y = state.timeline.scrollTrigger.start + step * window.innerHeight;
 
-    window.scrollTo({ top: y, behavior: 'smooth' });
+    window.scrollTo({ top: y });
   };
 
   const updateArrows = () => {
