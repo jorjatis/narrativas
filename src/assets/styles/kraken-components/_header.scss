@@ -1,0 +1,59 @@
+@use '../abstracts' as *;
+
+.v-h.v-h--t3 {
+  &.is-fixed {
+    .v-hpr {
+      @media (min-width: $screen-sm) {
+        background: #E7EBF1;
+      }
+    }
+  }
+
+  .v-h {
+    &__c {
+      border-bottom-color: $ncp1;
+      background: $ncp1;;
+    }
+
+    &__w {
+      &--3 {
+        .v-btn { 
+          &--2 {
+            border-color: $cb1;
+            color: $cb1;
+
+            &:hover {
+              opacity: .5;
+            }  
+
+            .v-i {
+              svg {
+                fill: $cb1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .v-hmb {
+    &:hover {
+      svg {
+        fill: $cb1;
+      }
+    }
+
+    svg {
+      fill: $cb2;
+      transition: fill .3s;
+    }
+  }
+
+  .v-hpr {
+    @media (min-width: $screen-sm) {
+      background: $ncp1;
+      transition: background .3s;
+    }
+  }
+}
