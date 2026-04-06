@@ -1,20 +1,23 @@
-export default function fadeLottieToImage(delay = 5000) {
+export default function fadeLottieWithOptionalImage(delay = 5000) {
   const lottieEl = document.querySelector('[data-lottie]');
-  const imgEl = document.querySelector('[data-image]');
+  // const imgEl = document.querySelector('[data-image]'); // Comentada por ahora
 
-  if (!lottieEl || !imgEl) return;
+  if (!lottieEl /* || !imgEl */) return;
 
   let executed = false;
 
+  // Estilos iniciales
   Object.assign(lottieEl.style, {
     opacity: 1,
     transition: "opacity 0.5s ease"
   });
 
+  /*
   Object.assign(imgEl.style, {
     opacity: 0,
     transition: "opacity 1s ease"
   });
+  */
 
   const runAnimation = () => {
     if (executed) return;
@@ -22,7 +25,8 @@ export default function fadeLottieToImage(delay = 5000) {
 
     lottieEl.style.opacity = 0;
     if (lottieEl.pause) lottieEl.pause();
-    imgEl.style.opacity = 1;
+
+    // imgEl.style.opacity = 1; // Comentado por ahora
   };
 
   // Solo delay (control manual)
