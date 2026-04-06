@@ -186,6 +186,7 @@
       text-transform: uppercase;
       color: $cb2;
       transition: color .3s ease;
+      white-space: nowrap;
 
       @media (min-width: $screen-sm) {
         color: $cb1;

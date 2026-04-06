@@ -1,30 +1,34 @@
-
-/**
- * Hace fade-out a un Lottie y fade-in a una imagen después de X milisegundos.
- *
- * @param {string} lottieSelector - Selector CSS del lottie-player.
- * @param {string} imageSelector - Selector CSS de la imagen final.
- * @param {number} [delay=5000] - Tiempo en ms antes de aplicar el efecto.
- */
-
-export default function fadeLottieToImage(lottieSelector, imageSelector, delay = 5000) {
-  const lottieEl = document.querySelector(lottieSelector);
-  const imgEl = document.querySelector(imageSelector);
+export default function fadeLottieToImage(delay = 5000) {
+  const lottieEl = document.querySelector('[data-lottie]');
+  const imgEl = document.querySelector('[data-image]');
 
   if (!lottieEl || !imgEl) return;
 
-  // Inicializa opacidad
-  lottieEl.style.opacity = 1;
-  lottieEl.style.transition = "opacity 0.5s";
+  let executed = false;
 
-  imgEl.style.opacity = 0;
-  imgEl.style.transition = "opacity 1s";
+  Object.assign(lottieEl.style, {
+    opacity: 1,
+    transition: "opacity 0.5s ease"
+  });
 
-  setTimeout(() => {
-    // Fade-out Lottie
+  Object.assign(imgEl.style, {
+    opacity: 0,
+    transition: "opacity 1s ease"
+  });
+
+  const runAnimation = () => {
+    if (executed) return;
+    executed = true;
+
     lottieEl.style.opacity = 0;
-
-    // Fade-in Imagen
+    if (lottieEl.pause) lottieEl.pause();
     imgEl.style.opacity = 1;
-  }, delay);
+  };
+
+  // Solo delay (control manual)
+  // setTimeout(runAnimation, delay);
+
+  lottieEl.addEventListener("complete", () => {
+    setTimeout(runAnimation, delay);
+  });
 }

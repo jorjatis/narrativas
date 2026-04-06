@@ -14,7 +14,7 @@ export function initAll() {
   moveEls('.v-a--d-s-1 .v-a-s-t', '.v-d--abc', "prepend");
   removeEls('.v-a--d-s-1 .v-a-inf-c');
   fadeOnScroll('.scr-ind');
-  // fadeLottieToImage('#anim1', '#finalImg', 7000);
+  fadeLottieToImage('[data-lottie]', '[data-image]', 20000);
 
   animSprayHeader();
 
