@@ -16,6 +16,11 @@ body {
       }
     }
   }
+
+  .v-h-a {
+    position: relative;
+    z-index: 3;
+  }
 }
 
 .voc-wrapper>.voc-container {

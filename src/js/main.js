@@ -5,6 +5,7 @@ import fadeOnScroll from './helpers/fadeOnScroll';
 import fadeLottieToImage from './helpers/fadeLottieToImage.js';
 
 // NOTE: Components
+import animPreHeader from './modules/animPreHeader';
 import animSprayHeader from './modules/animSprayHeader';
 import audioPlayer from './modules/audioPlayer';
 import dvdScroller from './modules/dvdScroller';
@@ -16,6 +17,7 @@ export function initAll() {
   fadeOnScroll('.scr-ind');
   fadeLottieToImage('2000');
 
+  animPreHeader();
   animSprayHeader();
 
   const playerApi = audioPlayer();

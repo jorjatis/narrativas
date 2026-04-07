@@ -16,7 +16,6 @@ export default function animSprayHeader() {
     }
   });
 
-  // 👉 EXPLOSIÓN (solo el primero)
   if (izq[0]) {
     tl.from(izq[0], {
       scale: 0,
@@ -35,7 +34,6 @@ export default function animSprayHeader() {
     }, "<0.2");
   }
 
-  // 👉 CHORROS (EXCLUYENDO el primero)
   if (izq.length > 1) {
     tl.from(izq.slice(1), {
       y: () => gsap.utils.random(-60, -100),

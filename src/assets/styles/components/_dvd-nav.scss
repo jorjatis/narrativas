@@ -90,11 +90,7 @@
     justify-content: center;
 
     @media (max-width: 480px) {
-      width: 22vw;
-    }
-
-    @media (max-width: 380px) {
-      width: 28vw;
+      width: 105px;
     }
 
     @media (min-width: $screen-sm) {
@@ -121,9 +117,7 @@
         svg {
           position: absolute;
           top: 5px;
-          clip-path: inset(0 100% 0 0);
           width: 105px;
-          animation: sprayReveal 0.5s ease-out forwards;
 
           path {
             fill: none;
@@ -134,18 +128,6 @@
               stroke: $cb2;
             }
           }
-        }
-
-        @keyframes sprayReveal {
-          to {
-            clip-path: inset(0 0% 0 0);
-          }
-        }
-      }
-
-      @for $i from 4 through 7 {
-        &:nth-of-type(#{$i}) button svg {
-          animation-delay: #{0.2s * $i};
         }
       }
     }

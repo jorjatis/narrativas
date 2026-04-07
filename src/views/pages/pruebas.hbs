@@ -1,96 +1,142 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Escena Responsive</title>
+  <meta charset="UTF-8">
+  <title>Wave Up Transition</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      box-sizing: border-box;
     }
 
-    body {
+    .fondo {
+      width: 100%;
       height: 100dvh;
-    }
-
-    .scene {
-      height: 100dvh;
+      background: #e63946;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      text-align: center;
-      gap: 20px;
     }
 
-    .scene img {
+    .blanco {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      max-width: 400px;
-      height: auto;
-      object-fit: contain;
-      transition: 0.3s ease;
+      height: 100%;
+      background: white;
     }
 
-    h1 {
-      font-size: 2rem;
+    .onda {
+      position: absolute;
+      bottom: -150px;
+    }
+
+    svg {
+      width: 100%;
+      height: 150px;
+      display: block;
+      rotate: 180deg;
+      position: relative;
+      top: -1px;
     }
 
     p {
-      font-size: 1rem;
+      display: block;
       max-width: 500px;
+      margin: 200px auto 500px;
+      font: 18px/1 Helvetica;
+      text-align: center;
     }
 
-    button {
-      padding: 12px 24px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      background: #007bff;
-      color: white;
-      cursor: pointer;
+    #lottie {
+      position: absolute;
+      rotate: 180deg;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
     }
-
-    /* Responsive horizontal (pantallas pequeñas) */
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.6rem;
-      }
-
-      p {
-        font-size: 0.9rem;
-      }
-    }
-
-    /* 🔑 Responsive vertical (pantallas bajas) */
-    @media (max-height: 600px) {
-      .scene img {
-        max-width: 250px;
-      }
-    }
-
-    @media (max-height: 450px) {
-      .scene img {
-        max-width: 180px;
-      }
-    }
-
   </style>
 </head>
+
 <body>
 
-  <section class="scene">
-    <img src="https://placehold.co/400x300" alt="Imagen ejemplo" />
-    <h1>Título principal</h1>
-    <p>
-      Este es un texto descriptivo. Se mantiene legible mientras la imagen se adapta
-      al tamaño disponible en pantalla.
-    </p>
-    <button>Haz clic</button>
-  </section>
+  <div class="fondo">
+    <div id="lottie"></div>
+    <div class="blanco">
+      <div class="onda">
+        <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+          <path id="wave" fill="white" d="M0,60 C300,120 600,0 900,60 C1200,120 1440,0 1440,60 L1440,150 L0,150 Z">
+          </path>
+        </svg>
+      </div>
+    </div>
+    <img src="https://s1.abcstatics.com/comun/especiales/bandas-latinas/images/abc_apertura.png">
+  </div>
+
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, dolorum quae at in rem nulla excepturi minima
+    facere rerum, illum quasi libero, iste perferendis. Reiciendis voluptas explicabo modi ratione velit?</p>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const wave = document.querySelector("#wave");
+
+      // 🌊 Animación continua de la onda
+      gsap.to(wave, {
+        duration: 0.7,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        attr: {
+          d: "M0,60 C300,0 600,120 900,60 C1200,0 1440,120 1440,60 L1440,150 L0,150 Z"
+        }
+      });
+
+      // 🎬 LOTTIE
+      const animation = lottie.loadAnimation({
+        container: document.getElementById('lottie'),
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        path: 'https://s1.abcstatics.com//comun/narrativas/redaccion/2026/04/12/bandaslatinas/json/cabecera-bandas-latinas-ojo.json'
+      });
+
+      let started = false;
+
+      // ⏱ Esperar a que el JSON esté listo
+      animation.addEventListener('DOMLoaded', () => {
+
+        // 🔄 Control por progreso real del Lottie
+        animation.addEventListener('enterFrame', () => {
+
+          const progress = animation.currentFrame / animation.totalFrames;
+
+          // 👉 Ajusta este valor (0.6 = 60%)
+          if (progress > 0.4 && !started) {
+            started = true;
+
+            // ⬆️ Subida de la pantalla blanca
+            gsap.to(".blanco", {
+              y: "-120%",
+              duration: 1.5,
+              ease: "power2.inOut"
+            });
+          }
+
+        });
+
+      });
+
+    });
+  </script>
 
 </body>
+
 </html>
