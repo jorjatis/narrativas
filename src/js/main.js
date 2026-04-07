@@ -1,11 +1,10 @@
 // NOTE: Helpers
-import moveEls from './helpers/moveEls';
 import fadeOnScroll from './helpers/fadeOnScroll';
 
 // NOTE: Components
 
 export function initAll() {
-
+  fadeOnScroll('.scr-ind');
 }
 
 function start() {

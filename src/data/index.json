@@ -13,7 +13,7 @@
     "infoContainer": {
       "exists": true,
       "pretitle": false,
-      "title": "Cuba contra Cuba",
+      "title": "Cuba <span>contra</span> Cuba",
       "description": "Balance íntimo de un fracaso",
       "chevronDown": true
     },
