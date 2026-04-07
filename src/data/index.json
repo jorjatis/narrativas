@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "edition": { "sevilla": true },
-    "subedition": { "pasionensevilla": true },
+    "edition": { "sevilla": false },
+    "subedition": { "pasionensevilla": false },
     "coverUrl": "https://s1.abcstatics.com/abc/www/multimedia/espana/2026/03/08/ultras-1920x1080-blanco.jpg",
     "img": {
       "exists": true,
@@ -12,9 +12,9 @@
     },
     "infoContainer": {
       "exists": true,
-      "pretitle": "Semana Santa de Sevilla",
-      "title": "La fiesta total: manual de uso y cifras de un fenómeno de masas",
-      "description": "Casi 70.000 nazarenos, 500.000 personas en las calles, un impacto económico de 500 millones de euros con escenario y modelo de siglos que está siempre a la vanguardia",
+      "pretitle": false,
+      "title": "Cuba contra Cuba",
+      "description": "Balance íntimo de un fracaso",
       "chevronDown": true
     },
     "firma": {
