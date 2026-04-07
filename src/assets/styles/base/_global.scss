@@ -18,6 +18,11 @@ body {
   }
 }
 
+.voc-wrapper>.voc-container {
+  max-width: initial;
+  padding:0
+}
+
 .v-h--t3 .v-hpr {
   display: block;
 }
