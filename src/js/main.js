@@ -2,9 +2,12 @@
 import fadeOnScroll from './helpers/fadeOnScroll';
 
 // NOTE: Components
+import parallaxPreHeader from './modules/parallaxPreHeader';
 
 export function initAll() {
   fadeOnScroll('.scr-ind');
+
+  parallaxPreHeader();
 }
 
 function start() {
