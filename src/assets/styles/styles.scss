@@ -1,6 +1,9 @@
 @use './base/variables' as *;
 @use './base/variables-custom' as *;
 
+@use './base/actions';
+@use './base/animations';
+@use './base/accesibility';
 @use './base/global';
 
 // Componentes Kraken

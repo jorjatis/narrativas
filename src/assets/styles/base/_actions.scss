@@ -1,0 +1,31 @@
+@use '../base/variables' as *;
+
+.is-block {
+  display: block;
+}
+
+.is-transparent {
+  opacity: 0;
+}
+
+.is-fw {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.blur-y-in {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(12px);
+  transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
