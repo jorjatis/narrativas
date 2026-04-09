@@ -67,3 +67,9 @@ body {
 .v-cmp-crd {
   margin-top: 60px;
 }
+
+.v-c-cmp > .v-d-p {
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}
