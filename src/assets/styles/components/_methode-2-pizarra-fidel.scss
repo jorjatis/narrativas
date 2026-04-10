@@ -1,0 +1,47 @@
+@use '../base/variables' as *;
+
+.v-n-mth {
+  &--2 {
+    margin-top: 200px;
+    margin-bottom: 0;
+
+    @media (min-width: 850px) {
+      margin-bottom: 182px;
+    }
+
+    > p {
+      margin-bottom: 42px;
+
+      @media (min-width: 850px) {
+        margin-bottom: 115px;
+      }
+    }
+
+    .v-n-mth__c {
+      position: relative;
+
+      @media (min-width: 850px) {
+        width: 800px;
+        margin-left: calc((-800px / 2) + 50%);
+      }
+
+      @media (min-width: 1150px) {
+        width: 1069px;
+        margin-left: calc((-1069px / 2) + 50%);
+      }
+
+      > p {    
+        margin-top: 42px;
+
+        @media (min-width: 850px) {
+          position: absolute;
+          top: 35.5%;
+          right: 0;
+          max-width: 290px;
+          width: 100%;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

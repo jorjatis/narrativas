@@ -1,0 +1,52 @@
+@use '../base/variables' as *;
+
+.v-n-mth {
+  &--5 {
+    margin-top: 160px;
+    margin-bottom: -24px;
+
+    > .v-d-p {
+      margin-bottom: 50px;
+    }
+
+    .v-n-mth__c {
+      position: relative;
+      left: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+      padding-bottom: 82px;
+      background: #e7eac0;
+
+      @media (max-width: $screen-xs) {
+        padding-bottom: 24px;
+      }
+
+      @media (min-width: 1900px) {
+        left: unset;
+        width: 1900px;
+        margin-left: calc((-1900px / 2) + 50%);
+      }
+
+      .v-d-p {
+        @media (min-width: 1200px) {
+          max-width: 325px;
+        }
+
+        &-c {
+          max-width: 649px;
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+          padding-left: 20px;
+          padding-right: 20px;
+
+          @media (min-width: 1200px) {
+            max-width: 875px;
+            margin-top: -325px;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}

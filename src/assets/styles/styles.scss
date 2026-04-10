@@ -6,8 +6,23 @@
 @use './base/accesibility';
 @use './base/global';
 
-// Componentes Kraken
-
 // Componentes
 @use './components/scroll-indicator';
 @use './components/pre-article-header';
+
+@use './components/methode-2-pizarra-fidel';
+@use './components/methode-3-texto-pre-che-ninos';
+@use './components/methode-4-che-ninos';
+@use './components/methode-5-abuelos-granma';
+@use './components/methode-6-mapa-trump-rubio';
+@use './components/methode-7-cuatro-revolucionarios';
+@use './components/methode-8-fidel-atril';
+
+.v-n-mth {
+  .v-d {
+    position: relative;
+    max-width: 649px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

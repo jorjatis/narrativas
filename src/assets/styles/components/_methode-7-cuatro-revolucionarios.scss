@@ -1,0 +1,63 @@
+@use '../base/variables' as *;
+
+.v-n-mth {
+  &--7 {
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    margin-top: -24px;
+    margin-left: -50vw;
+    padding-top: 24px;
+    background: #e3e5b2;
+
+    @media (min-width: $screen-xs) {
+      padding-top: 80px;
+    }
+
+    @media (min-width: 1900px) {
+      left: unset;
+      width: 1900px;
+      margin-left: calc((-1900px / 2) + 50%);
+    }
+
+    .v-n-mth__c--1 {
+      display: flex;
+      flex-direction: column;
+      gap: 82px;
+      margin-bottom: 190px;
+    }
+
+    .v-n-mth__c--2 {
+      position: relative;
+
+      .v-d-p {
+        position: absolute;
+        top: 26%;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 254px;
+        z-index: 1;
+      }
+
+      figure {
+        position: relative;
+        width: 1300px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @media (min-width: 1300px) {
+          width: 100%;
+          left: unset;
+          transform: unset;
+        }
+      }
+    }
+
+    .v-n-mth-bbl {
+      max-width: 250px;
+      background: $cb2;
+      width: 100%;
+      z-index: 1;
+    }
+  }
+}
