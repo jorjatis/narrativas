@@ -23,11 +23,6 @@ body {
   }
 }
 
-.voc-wrapper>.voc-container {
-  max-width: initial;
-  padding:0
-}
-
 .v-h--t3 .v-hpr {
   display: block;
 }
@@ -107,4 +102,31 @@ body {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+}
+
+/* Arreglos con narwhal */
+
+.voc-wrapper>.voc-container {
+  max-width: initial;
+  padding:0
+}
+
+.v-hpr__c {
+  background: $cb1;
+}
+
+.v-h__w--3 .v-btn-c {
+  width: initial;
+
+  .v-btn:hover {
+    background: transparent;
+
+    .v-btn:hover {
+      fill: #6E89A9
+    }
+  }
+}
+
+.v-u--t2 .v-u__l:before {
+  margin-right: 0;
 }

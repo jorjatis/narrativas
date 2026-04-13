@@ -1,6 +1,8 @@
 @use '../abstracts' as *;
 
 .v-h.v-h--t3 {
+  background: $cb2;
+
   &.is-fixed {
     .v-hpr {
       @media (min-width: $screen-sm) {
@@ -10,16 +12,11 @@
   }
 
   .v-h {
-    &__c {
-      border-bottom-color: $ncp1;
-      background: $ncp1;
-    }
-
     &__w {
       &--3 {
         .v-btn { 
           &--2 {
-            border-color: $cb2;
+            /*border-color: $cb2;
             color: $cb2;
 
             &:hover {
@@ -30,7 +27,7 @@
               svg {
                 fill: $cb2;
               }
-            }
+            }*/
           }
         }
       }
@@ -40,12 +37,12 @@
   .v-hmb {
     &:hover {
       svg {
-        fill: $cb1;
+        //fill: $cb1;
       }
     }
 
     svg {
-      fill: $cb2;
+      //fill: $cb2;
       transition: fill .3s;
     }
   }

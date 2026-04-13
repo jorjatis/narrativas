@@ -123,7 +123,11 @@
   &__t {
     max-width: 313px;
     width: 100%;
-    font: 24px/116% $ads;
+    font: 20px/116% $ads;
+
+    @media (min-width: $screen-xs) {
+      font-size: 24px;
+    }
   }
 
   &__arr {
@@ -179,7 +183,7 @@
       left: 16px;
 
       @media (min-width: $screen-sm) {
-        left: 32px;
+        left: 500px;
       }
     }
 
@@ -187,7 +191,7 @@
       right: 16px; 
 
       @media (min-width: $screen-sm) {
-        right: 32px;
+        right: 500px;
       }
     }
   }
@@ -195,6 +199,38 @@
   .v-ply {
     &.is-empty {
       opacity: .55;
+    }
+
+    &.is-active {
+      .v-ply__i svg {
+        transform: none;
+
+        &#icon-play {
+          opacity: 1;
+        }
+        
+        path {
+          fill: $cb1;
+        }
+      }
+      &.is-paused {
+        .v-ply__i svg {
+          &#icon-play {
+            opacity: 1;
+          }
+        }
+      }
+      &.is-play {
+       .v-ply__i svg {
+          &#icon-play {
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+    &__c {
+      display: grid;      
     }
 
     &__b {
@@ -206,6 +242,20 @@
       &:before {
         border-color: $cb1;
       }
+    }
+
+    &__i {
+      width: auto;
+
+      &:before {
+        content: none;
+      }
+    }
+
+    &__g {
+      display: flex;
+      align-items: initial;
+      gap: 0;
     }
 
     #icon-play,
@@ -238,7 +288,7 @@
 
   &__p {
     display: none;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     align-self: center;
     width: 100%;
