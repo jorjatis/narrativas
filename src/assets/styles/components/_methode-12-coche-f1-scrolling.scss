@@ -1,0 +1,72 @@
+@use '../base/variables' as *;
+
+.v-n-mth {
+  &--12 {
+    .v-n-scrolly {
+      &__bg {
+        .bg-item {
+          &[data-bg="0"] {
+            img {
+              max-width: 1080px;
+              height: 80%;
+              object-fit: contain;
+              padding: 0 40px;
+            }
+          }
+
+          &[data-bg="1"] {
+            .bg-c {
+              justify-content: space-between;
+            }
+
+            .bg-img {
+              &--1 {
+                width: 30%;
+              }
+
+              &--2 {
+                width: 30%;
+              }
+            }
+          }
+
+          &[data-bg="2"] {
+            .bg-img {
+              &--1 {
+                width: 500px;
+                transform: translateX(-50%);
+              }
+            }
+          }
+        }
+      }
+
+      &__steps {
+        .step {
+          .v-d-p {
+            width: 100%;
+          }
+
+          &[data-step="0"] {
+            .v-d-p {
+              max-width: 395px;
+            }
+          }
+
+          &[data-step="1"] {
+            .v-d-p {
+              max-width: 350px;
+            }
+          }
+
+          &[data-step="2"] {
+            .v-d-p {
+              max-width: 300px;
+              transform: translateX(calc(50% + 100px));
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,12 +6,16 @@ import observeInView from './helpers/observeInView';
 
 // NOTE: Components
 import parallaxPreHeader from './modules/parallaxPreHeader';
+import animateMapamundiPlato from './modules/animateMapamundiPlato';
+import scrolly from './modules/scrolly';
 
 export function initAll() {
   removeEls('.v-a--d-s-1 > .v-a-inf-c');
   fadeOnScroll('.scr-ind');
 
   parallaxPreHeader();
+  animateMapamundiPlato();
+  scrolly();
 
   // Efecto blur in en textos
   observeInView({

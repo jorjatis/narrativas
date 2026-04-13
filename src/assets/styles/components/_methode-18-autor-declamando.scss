@@ -1,0 +1,25 @@
+@use '../base/variables' as *;
+
+.v-n-mth {
+  &--18 {
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    margin-top: -24px;
+    margin-left: -50vw;
+
+    @media (min-width: 1900px) {
+      left: unset;
+      width: 1900px;
+      margin-left: calc((-1900px / 2) + 50%);
+    }
+
+    .v-d-p {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      max-width: 370px;
+    }
+  }
+}

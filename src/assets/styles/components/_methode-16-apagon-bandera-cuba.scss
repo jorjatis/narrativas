@@ -1,0 +1,79 @@
+@use '../base/variables' as *;
+
+.v-n-mth {
+  &--16 {
+    margin-top: -24px;
+
+    .v-n-mth-fig {
+      position: relative;
+      left: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+
+      @media (min-width: 1900px) {
+        left: unset;
+        width: 1900px;
+        margin-left: calc((-1900px / 2) + 50%);
+      }
+
+      .v-d-p {
+        position: absolute;
+      }
+
+      &--1 {
+        .v-d-p {
+          left: 50%;
+          bottom: 0;
+          transform: translateX(30%);
+          max-width: 330px;
+          color: $cb2;
+        }
+      }
+
+      &--3 {
+        .v-d-p {
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          max-width: 280px;
+          color: $cb2;
+        }
+      }
+
+      &--4 {
+        .v-d-p-c {
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          gap: 150px;
+          max-width: 280px;
+          margin-left: 10%;
+
+          .v-d-p {
+            position: relative;
+          }
+        }
+      }
+
+      &--5 {
+        .v-d-p {
+          top: 0;
+          left: 50%;
+          transform: translateX(-150%);
+          max-width: 280px;
+          color: $cb2;
+        }
+      }
+
+      &--6 {
+        .v-d-p {
+          top: 30%;
+          left: 50%;
+          transform: translateX(50%);
+          max-width: 280px;
+          color: $cb2;
+        }
+      }
+    }
+  }
+}

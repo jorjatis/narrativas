@@ -1,0 +1,65 @@
+@use '../base/variables' as *;
+
+.v-n-mth {
+  &--11 {
+    margin-top: 60px;
+
+    @media (min-width: 800px) {
+      margin-top: 160px;
+    }
+
+    .v-n-mth__c {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 160px;
+
+      @media (min-width: 800px) {
+        margin-top: 240px;
+      }
+
+      .v-d-p-c {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+        z-index: 2;
+      }
+
+      figure {
+        position: relative;
+        width: 170%;
+        transform: rotate(90deg);
+
+        @media (min-width: 800px) {
+          width: 210%;
+        }
+
+        @media (min-width: $screen-sm) {
+          width: 250%;
+        }
+
+        @media (min-width: 1400px) {
+          width: 1860px;
+        }
+
+        .v-n-img {
+          &--1 {
+            position: relative;
+            z-index: 1;
+          }
+          
+          &--2 {
+            position: absolute;
+            bottom: 0;
+            transform-origin: top center;
+            transform: rotate(90deg);
+            z-index: 2;
+          }
+        }
+      }
+    }
+  }
+}

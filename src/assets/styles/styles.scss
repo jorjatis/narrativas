@@ -9,6 +9,7 @@
 // Componentes
 @use './components/scroll-indicator';
 @use './components/pre-article-header';
+@use './components/scrolly';
 
 @use './components/methode-2-pizarra-fidel';
 @use './components/methode-3-texto-pre-che-ninos';
@@ -17,6 +18,16 @@
 @use './components/methode-6-mapa-trump-rubio';
 @use './components/methode-7-cuatro-revolucionarios';
 @use './components/methode-8-fidel-atril';
+@use './components/methode-9-pre-bloqueo';
+@use './components/methode-10-muro-che-reportera';
+@use './components/methode-11-mapamundi-plato';
+@use './components/methode-12-coche-f1-scrolling';
+@use './components/methode-13-bocadillo-cerdo';
+@use './components/methode-14-fotos-fractura';
+@use './components/methode-15-padre-paseando-gente';
+@use './components/methode-16-apagon-bandera-cuba';
+@use './components/methode-17-balseros';
+@use './components/methode-18-autor-declamando';
 
 .v-n-mth {
   .v-d {

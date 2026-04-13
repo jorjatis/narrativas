@@ -1,0 +1,29 @@
+@use '../base/variables' as *;
+
+.v-n-mth {
+  &--14 {
+    margin-top: 220px;
+
+    figure {
+      position: relative;
+      left: 50%;
+      width: 100vw;
+      margin-top: 64px;
+      margin-bottom: 48px;
+      margin-left: -50vw;
+
+      @media (min-width: 1200px) {
+        left: unset;
+        width: 1100px;
+        margin-left: calc((-1100px / 2) + 50%);
+      }
+    }
+
+    .v-d-p {
+      &--2 {
+        margin-bottom: 105px;
+        text-align: center;
+      }
+    }
+  }
+}

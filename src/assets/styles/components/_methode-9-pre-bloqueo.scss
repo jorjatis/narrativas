@@ -1,0 +1,20 @@
+@use '../base/variables' as *;
+
+.v-n-mth {
+  &--9 {
+    margin-top: 116px;
+
+    figure {
+      position: relative;
+      left: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+
+      @media (min-width: 1900px) {
+        left: unset;
+        width: 1900px;
+        margin-left: calc((-1900px / 2) + 50%);
+      }
+    }
+  }
+}

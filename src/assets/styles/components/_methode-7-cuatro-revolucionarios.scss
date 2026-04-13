@@ -39,11 +39,14 @@
         z-index: 1;
       }
 
-      figure {
-        position: relative;
-        width: 1300px;
-        left: 50%;
-        transform: translateX(-50%);
+      figure {        
+
+        @media (min-width: 1000px) {
+          position: relative;
+          width: 1300px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
 
         @media (min-width: 1300px) {
           width: 100%;
@@ -53,10 +56,21 @@
       }
     }
 
+    .v-d {
+      z-index: 1;
+
+      &--2 {
+        display: flex;
+        justify-content: flex-end;
+        text-align: right;
+
+      }
+    }
+
     .v-n-mth-bbl {
       max-width: 250px;
-      background: $cb2;
       width: 100%;
+      background: $cb2;
       z-index: 1;
     }
   }

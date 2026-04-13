@@ -7,6 +7,11 @@
     width: 100vw;
     margin-top: -24px;
     margin-left: -50vw;
+    padding-bottom: 130px;
+
+    @media (min-width: $screen-xs) {
+      padding-bottom: 80px;
+    }
 
     @media (min-width: 1900px) {
       left: unset;
@@ -14,11 +19,45 @@
       margin-left: calc((-1900px / 2) + 50%);
     }
 
-    figure {
-      width: 1300px;
-      
+    > figure {
+      position: relative;
+      width: 1000px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      @media (min-width: $screen-xs) {
+        width: 1300px;
+      }
+
       @media (min-width: 1300px) {
         width: 100%;
+        left: unset;
+        transform: unset;
+      }
+    }
+
+    .atril {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 610px;
+
+      @media (min-width: $screen-xs) {
+        width: 730px;
+      }
+
+      .v-d-p {
+        position: absolute;
+        max-width: 300px;
+        text-align: center;
+
+        @media (min-width: $screen-xs) {
+          max-width: 396px;
+        }
       }
     }
   }
