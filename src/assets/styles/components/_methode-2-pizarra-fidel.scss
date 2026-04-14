@@ -2,11 +2,8 @@
 
 .v-n-mth {
   &--2 {
-    margin-bottom: 0;
-
     @media (min-width: $screen-xs) {
       margin-top: 80px;
-      margin-bottom: 160px;
     }
 
     > p {
