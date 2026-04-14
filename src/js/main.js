@@ -8,12 +8,14 @@ import observeInView from './helpers/observeInView';
 import parallaxPreHeader from './modules/parallaxPreHeader';
 import animateMapamundiPlato from './modules/animateMapamundiPlato';
 import scrolly from './modules/scrolly';
+import animateFidelAtril from './modules/animateFidelAtril';
 
 export function initAll() {
   removeEls('.v-a--d-s-1 > .v-a-inf-c');
   fadeOnScroll('.scr-ind');
 
   parallaxPreHeader();
+  animateFidelAtril();
   animateMapamundiPlato();
   scrolly();
 
