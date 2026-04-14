@@ -2,10 +2,15 @@
 
 .v-n-mth {
   &--11 {
-    margin-top: 60px;
+    margin-top: 80px;
 
-    @media (min-width: 800px) {
-      margin-top: 160px;
+    > .v-d-p {
+      display: block;
+      margin-top: 64px;
+
+      @media (min-width: $screen-xs) {
+        display: none;
+      }
     }
 
     .v-n-mth__c {
@@ -14,24 +19,35 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin-bottom: 160px;
-
-      @media (min-width: 800px) {
-        margin-top: 240px;
-      }
 
       .v-d-p-c {
         position: absolute;
         display: flex;
         flex-direction: column;
         gap: 80px;
-        z-index: 2;
+        z-index: 3;
+        max-width: 231px;
+        text-align: center;
+
+        @media (min-width: $screen-xs) {
+          max-width: 100%;
+          text-align: left;
+        }
+
+        .v-d-p {
+          &--2 {
+            display: none; 
+
+            @media (min-width: $screen-xs) {
+              display: block;
+            }
+          }
+        }
       }
 
       figure {
         position: relative;
         width: 170%;
-        transform: rotate(90deg);
 
         @media (min-width: 800px) {
           width: 210%;
@@ -54,9 +70,8 @@
           &--2 {
             position: absolute;
             bottom: 0;
-            transform-origin: top center;
-            transform: rotate(90deg);
             z-index: 2;
+            transform-origin: top center;
           }
         }
       }
