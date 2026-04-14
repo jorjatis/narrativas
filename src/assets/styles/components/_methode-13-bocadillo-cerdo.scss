@@ -2,18 +2,33 @@
 
 .v-n-mth {
   &--13 {
+    margin-top: 150px;
+
     > .v-d-p {
-      margin-bottom: 150px;
+      margin-bottom: 40px;
+
+      @media (min-width: 520px) {
+        margin-bottom: 120px;
+      }
     }
 
     .v-n-mth__c {
       position: relative;
 
       > .v-d-p {
-        position: absolute;
-        bottom: 100px;
-        right: -250px;
-        max-width: 270px;
+        margin-top: 52px;
+
+        @media (min-width: 950px) {
+          position: absolute;
+          bottom: 100px;
+          right: -150px;
+          max-width: 270px;
+          margin-top: 0;
+        }
+
+        @media (min-width: 1150px) {
+          right: -220px;
+        }
       }
     }
 
@@ -21,13 +36,30 @@
       position: relative;
 
       .v-n-mth-bbl {
-        position: absolute;
-        top: 20px;
-        right: 0;
+        position: relative;
         max-width: 264px;
         width: 100%;
-        background: $cb2;
         z-index: 1;
+        margin-left: auto;
+        margin-bottom: -50px;
+
+        @media (min-width: 520px) {
+          position: absolute;
+          top: 20px;
+          right: 0;
+          margin: 0;
+        }
+
+        img {
+          width: 40px;
+          margin-left: auto;
+          margin-right: 40px;
+          transform: translate(-60px, 10px) rotate(10deg);
+
+          @media (min-width: 520px) {
+            margin: 0px auto;
+          }
+        }
       }
 
       img {

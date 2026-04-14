@@ -2,6 +2,8 @@
 
 .v-n-mth {
   &--12 {
+    margin-top: 150px;
+
     .v-n-scrolly {
       &__bg {
         .bg-item {
@@ -17,6 +19,7 @@
           &[data-bg="1"] {
             .bg-c {
               justify-content: space-between;
+              column-gap: 15%;
             }
 
             .bg-img {
@@ -31,10 +34,18 @@
           }
 
           &[data-bg="2"] {
+            .bg-c {
+              justify-content: space-between;
+              column-gap: 15%;
+            }
+
             .bg-img {
               &--1 {
-                width: 500px;
-                transform: translateX(-50%);
+                width: 30%;
+              }
+
+              &--2 {
+                width: 30%;
               }
             }
           }
@@ -45,26 +56,41 @@
         .step {
           .v-d-p {
             width: 100%;
+            max-width: 350px;
+            padding: 20px;
+            background: $cb2;
+            border: 1px solid $cb1;
           }
+        }
+      }
+    }
 
-          &[data-step="0"] {
-            .v-d-p {
-              max-width: 395px;
-            }
-          }
+    .v-n-mth__c {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
 
-          &[data-step="1"] {
-            .v-d-p {
-              max-width: 350px;
-            }
-          }
+      @media (min-width: 1100px) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10%;
+        width: 1100px;
+        margin-left: calc((-1100px / 2) + 50%);
+        transform: translateX(-10%);
+      }
 
-          &[data-step="2"] {
-            .v-d-p {
-              max-width: 300px;
-              transform: translateX(calc(50% + 100px));
-            }
-          }
+      figure {
+        @media (max-width: 1099px) {
+          transform: translateX(-10%);
+        }
+      }
+
+      .v-d-p {
+        width: 100%;
+
+        @media (min-width: 1100px) {
+          max-width: 305px;
         }
       }
     }
