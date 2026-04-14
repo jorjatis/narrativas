@@ -1,18 +1,13 @@
 @use '../base/variables' as *;
 
 .v-n-mth {
-  &--7 {
+  &--7 {    
     position: relative;
     left: 50%;
     width: 100vw;
     margin-top: -24px;
     margin-left: -50vw;
-    padding-top: 24px;
-    background: #e3e5b2;
-
-    @media (min-width: $screen-xs) {
-      padding-top: 80px;
-    }
+    background: #e7eac0;
 
     @media (min-width: 1900px) {
       left: unset;
@@ -20,58 +15,154 @@
       margin-left: calc((-1900px / 2) + 50%);
     }
 
-    .v-n-mth__c--1 {
-      display: flex;
-      flex-direction: column;
-      gap: 82px;
-      margin-bottom: 190px;
-    }
-
-    .v-n-mth__c--2 {
-      position: relative;
-
-      .v-d-p {
-        position: absolute;
-        top: 26%;
-        left: 50%;
-        transform: translateX(-50%);
-        max-width: 254px;
-        z-index: 1;
-      }
-
-      figure {        
-
-        @media (min-width: 1000px) {
-          position: relative;
-          width: 1300px;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        @media (min-width: 1300px) {
-          width: 100%;
-          left: unset;
-          transform: unset;
-        }
-      }
-    }
-
-    .v-d {
-      z-index: 1;
-
-      &--2 {
-        display: flex;
-        justify-content: flex-end;
-        text-align: right;
-
-      }
+    @media (min-width: $screen-xs) {
+      padding-top: 80px;
     }
 
     .v-n-mth-bbl {
+      position: absolute;
       max-width: 250px;
       width: 100%;
-      background: $cb2;
+      transform: translateX(-50%);
       z-index: 1;
+
+      &--1 {
+        position: relative;
+        transform: unset;
+        margin-top: 48px;
+        margin-left: auto;
+        margin-right: 20px;
+
+        @media (min-width: 451px) {
+          position: absolute;
+          left: 70%;
+          transform: translateX(-50%);
+          margin: 0;
+        }
+
+        @media (min-width: 801px) {
+          left: unset;
+          right: 9%;
+        }
+
+        @media (min-width: 1000px) {
+          left: 37%;
+          right: unset;
+        }
+
+        img {
+          width: 40px;
+          margin: 0px auto;
+          transform: translate(-30px, 5px) rotate(30deg);
+
+          @media (min-width: 451px) {
+            width: 35px;
+            transform: translate(-20px, 5px) rotate(0deg);
+          }
+
+          @media (min-width: 801px) {
+            width: 50px;
+            transform: translate(-30px, 15px) rotate(10deg);
+          }
+        }
+      }
+
+      &--2 {
+        top: 40%;
+        left: 26%;
+        max-width: 130px;
+
+        @media (min-width: 350px) {
+          top: 43%;
+        }
+
+        @media (min-width: 451px) {
+          top: 40%;
+        }
+
+        @media (min-width: 460px) {
+          top: 43%;
+          left: 30%;
+        }
+
+        @media (min-width: 550px) {
+          top: 46%;
+          left: 26%;
+          max-width: 250px;
+        }
+
+        @media (min-width: 1000px) {
+          top: 14%;
+          right: 14%;
+          left: unset;
+        }
+
+        @media (min-width: 1200px) {
+          top: 11%;
+          right: 20%;
+        }
+        
+        img {
+          width: 30px;
+          margin: 0px auto;
+          transform: translate(-5px, 5px) rotate(-30deg) scaleX(-1);
+
+          @media (min-width: 550px) {
+            width: 40px;
+            transform: translate(5px, 10px) rotate(-20deg) scaleX(-1);
+          }
+        }
+      }
+    }
+    
+    .v-n-mth__c {
+      &--2 {
+        position: relative;
+
+        > .v-d-p {
+          max-width: 649px;
+          margin: 24px auto 0;
+          padding-left: 20px;
+          padding-right: 20px;
+
+          @media (min-width: 1000px) {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 254px;
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+          }
+        }
+
+        figure {  
+          @media (min-width: 451px) {
+            margin-top: 80px;
+            padding-top: 80px;
+          }
+
+          @media (min-width: 1000px) {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1300px;
+            margin-top: 120px;
+            padding-top: 60px;
+          }
+
+          @media (min-width: 1300px) {
+            width: 100%;
+            left: unset;
+            transform: unset;
+          }
+
+          @media (min-width: 1550px) {
+            padding-top: 20px;
+          }
+        }
+      }
     }
   }
 }
