@@ -6,9 +6,10 @@ import observeInView from './helpers/observeInView';
 
 // NOTE: Components
 import parallaxPreHeader from './modules/parallaxPreHeader';
+import animateFidelAtril from './modules/animateFidelAtril';
 import animateMapamundiPlato from './modules/animateMapamundiPlato';
 import scrolly from './modules/scrolly';
-import animateFidelAtril from './modules/animateFidelAtril';
+import parallaxEnding from './modules/parallaxEnding';
 
 export function initAll() {
   removeEls('.v-a--d-s-1 > .v-a-inf-c');
@@ -18,6 +19,7 @@ export function initAll() {
   // animateFidelAtril();
   // animateMapamundiPlato();
   // scrolly();
+  parallaxEnding();
 
   // // Efecto blur in en textos
   // observeInView({

@@ -2,24 +2,41 @@
 
 .v-n-mth {
   &--18 {
-    position: relative;
-    left: 50%;
-    width: 100vw;
     margin-top: -24px;
-    margin-left: -50vw;
 
-    @media (min-width: 1900px) {
-      left: unset;
-      width: 1900px;
-      margin-left: calc((-1900px / 2) + 50%);
+    .v-n-mth__c {
+      position: relative;
+      left: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+      overflow: hidden;
+
+      @media (min-width: 1900px) {
+        left: unset;
+        width: 1900px;
+        margin-left: calc((-1900px / 2) + 50%);
+      }
     }
 
-    .v-d-p {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      max-width: 370px;
+    .v-n-img {
+      &--1 {
+        position: relative;
+        z-index: 2;
+      }
+
+      &--2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+    }
+
+    .v-d-p-c {
+      margin-top: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
   }
 }
