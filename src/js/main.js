@@ -16,7 +16,7 @@ export function initAll() {
 
   // parallaxPreHeader();
   // animateFidelAtril();
-  // animateMapamundiPlato();
+  animateMapamundiPlato();
   scrolly();
 
   // // Efecto blur in en textos

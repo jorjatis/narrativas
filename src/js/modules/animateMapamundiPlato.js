@@ -13,7 +13,7 @@ export default function animateMapamundiPlato() {
     }
   });
 
-  tl.to(".v-n-mth--11 .v-n-img--1", {
+  tl.to([".v-n-mth--11 .v-n-img--1", ".v-n-mth--11 .v-n-img--3"], {
     rotate: 180,
     ease: "none",
     duration: 1 
