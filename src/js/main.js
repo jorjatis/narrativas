@@ -16,22 +16,12 @@ export function initAll() {
 
   // parallaxPreHeader();
   // animateFidelAtril();
-  animateMapamundiPlato();
-  scrolly();
+  // animateMapamundiPlato();
+  // scrolly();
 
   // // Efecto blur in en textos
   // observeInView({
-  //   target: '.v-n-preh-txt p.blur-y-in',
-  //   threshold: 0.4,
-  //   once: true,
-  //   onEnter: (entry) => {
-  //     entry.target.classList.add('is-visible');
-  //   }
-  // });
-
-  // // Efecto blur in en info-container
-  // observeInView({
-  //   target: '.v-a--d-s-1 .v-a-img-c .v-a-inf-c.blur-y-in',
+  //   target: '.blur-y-in',
   //   threshold: 0.5,
   //   once: true,
   //   onEnter: (entry) => {
