@@ -5,11 +5,17 @@
     margin-top: 80px;
 
     > .v-d-p {
-      display: block;
+      position: relative;
+      z-index: 1;
       margin-top: 64px;
 
-      @media (min-width: $screen-xs) {
-        display: none;
+      span {
+        display: block;
+        margin-bottom: 24px;
+
+        @media (min-width: $screen-xs) {
+          display: none;
+        }
       }
     }
 

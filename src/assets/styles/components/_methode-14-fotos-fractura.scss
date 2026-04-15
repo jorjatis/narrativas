@@ -2,7 +2,11 @@
 
 .v-n-mth {
   &--14 {
-    margin-top: 220px;
+    margin-top: 64px;
+    
+    @media (min-width: $screen-xs) {
+      margin-top: 220px;
+    }
 
     figure {
       position: relative;
@@ -19,8 +23,14 @@
       }
     }
 
-    .v-d-p {
-      &--2 {
+    .v-d-p-c {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    > .v-d-p {
+      &--1 {
         margin-bottom: 105px;
         text-align: center;
       }

@@ -4,6 +4,12 @@
   &--15 {
     position: relative;
 
+    > .v-d-p-c {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
     .v-n-mth__c {
       position: relative;
       left: 50%;
@@ -26,6 +32,20 @@
 
       &--2 {
         background: $cb1;
+
+        .v-d-p-c {
+          display: flex;
+          flex-direction: column;
+          gap: 120px;
+
+          .v-d-p {
+            color: $cb2;
+
+            &--2 {
+              text-align: center;
+            }
+          }
+        }
       }
     }
 
@@ -252,20 +272,6 @@
         position: absolute;
         left: 50%;
         max-width: 420px;
-      }
-    }
-
-    .v-d-p-c {
-      display: flex;
-      flex-direction: column;
-      gap: 120px;
-
-      .v-d-p {
-        color: $cb2;
-
-        &--2 {
-          text-align: center;
-        }
       }
     }
   }

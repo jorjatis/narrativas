@@ -35,8 +35,8 @@ export default function animateFidelAtril() {
   //   end: "45% center"
   // });
 
-  createAnimation("(max-width: 349px)", -350);
-  createAnimation("(min-width: 350px) and (max-width: 500px)", -405);
+  createAnimation("(max-width: 349px)", -220);
+  createAnimation("(min-width: 350px) and (max-width: 500px)", -305);
   createAnimation("(min-width: 501px) and (max-width: 698px)", -515);
   createAnimation("(min-width: 699px) and (max-width: 849px)", -665);
   createAnimation("(min-width: 850px) and (max-width: 1299px)", -715);
