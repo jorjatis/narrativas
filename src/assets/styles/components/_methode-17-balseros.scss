@@ -1,4 +1,4 @@
-@use '../base/variables' as *;
+@use '../base/variables'as *;
 
 .v-n-mth {
   &--17 {
@@ -15,24 +15,32 @@
         width: 1900px;
         margin-left: calc((-1900px / 2) + 50%);
       }
+    }  
 
-      &--1 {
-        .v-d-p {
-          left: 50%;
-          top: 0;
-          transform: translateX(-150%);
-          max-width: 340px;
-          color: $cb2;
-        }
-      }
+    .v-d-p {
+      position: absolute;
+      z-index: 1;
+      color: $cb2;
+    }
 
+    .v-n-mth__c {
+      position: relative;
+
+      &--1,
       &--2 {
         .v-d-p {
-          left: 50%;
           top: 0;
-          transform: translateX(-150%);
-          max-width: 270px;
-          color: $cb2;
+          max-width: 340px;
+          width: 100%;
+
+          @media (min-width: 800px) {
+            left: 50%;
+            transform: translateX(-100%);
+          }
+
+          @media (min-width: 1200px) {
+            transform: translateX(-150%);
+          }
         }
       }
 
@@ -41,14 +49,10 @@
           left: 50%;
           top: 0;
           transform: translateX(-50%);
+          width: 100%;
           max-width: 609px;
-          color: $cb2;
         }
       }
-    }
-
-    .v-d-p {
-      position: absolute;
     }
   }
 }
