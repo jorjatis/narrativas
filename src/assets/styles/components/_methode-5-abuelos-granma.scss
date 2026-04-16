@@ -26,6 +26,14 @@
           max-width: 325px;
         }
 
+        &__hlt {
+          display: inline;
+          background: #e5e3b494;
+          padding: 0px 0px 0px 0;
+          -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+        }
+
         &-c {
           max-width: 649px;
           width: 100%;

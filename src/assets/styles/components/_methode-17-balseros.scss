@@ -36,6 +36,20 @@
       }
     }
 
+    .gaviota-shadow-over {
+      position: absolute;
+      width: auto;
+      height: 20%;
+      top: 0;
+      left: 30%;
+      z-index: -1;
+      opacity: .7;
+
+      @media (min-width: 800px) {
+        height: 30%;
+      }
+    }
+
     .v-d-p {
       position: absolute;
       z-index: 1;
