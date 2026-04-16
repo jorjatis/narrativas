@@ -11,6 +11,10 @@
       margin-left: -50vw;
       overflow: hidden;
 
+      @media (max-width: 800px) {
+        display: none;
+      }
+
       @media (min-width: 1900px) {
         left: unset;
         width: 1900px;

@@ -10,7 +10,6 @@ import animateFidelAtril from './modules/animateFidelAtril';
 import animateMapamundiPlato from './modules/animateMapamundiPlato';
 import scrolly from './modules/scrolly';
 import animateGaviotaOver from './modules/animateGaviotaOver';
-import parallaxEnding from './modules/parallaxEnding';
 
 export function initAll() {
   removeEls('.v-a--d-s-1 > .v-a-inf-c');
@@ -21,7 +20,6 @@ export function initAll() {
   animateMapamundiPlato();
   scrolly();
   animateGaviotaOver();
-  parallaxEnding();
 
   // Efecto blur in en textos
   observeInView({

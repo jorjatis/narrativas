@@ -336,71 +336,79 @@ body:has(.v-h-a) {
 
 .v-w {
   .v-a--d-s-1 {
+    position: relative;
     flex-direction: column;
     height: auto;
     margin-bottom: 120px;
     margin-top: -68px;
+    z-index: 1;
     
     @media (min-width: $screen-xs) {
       margin-top: -96px;
     }
 
-    .v-a-inf-c {
-      position: relative;
-      z-index: 2;
-      margin-top: -50px;
+    > .v-a-inf-c {
+      display: none;
+    }
 
-      @media (min-width: 720px) {
-        margin-top: 100px;
-      }
+    .v-a-img-c {
+      .v-a-inf-c {
+        position: relative;
+        z-index: 2;
+        margin-top: -50px;
 
-      @media (min-width: 950px) {
-        margin-top: 0px;
-      }
-
-      @media (min-width: 1200px) {
-        margin-top: -30%;
-      }
-
-      @media (min-width: 1500px) {
-        margin-top: -50%;
-      }
-
-      .v-a-t {
-        max-width: 255px;
-        margin: 0 auto;
-        font: 97px/1 $axs;
-        letter-spacing: -1.3px;
-        text-transform: uppercase;
-        text-align: center;
-
-        @media (min-width: $screen-xs) {
-          font-size: 133px;
+        @media (min-width: 720px) {
+          margin-top: 100px;
         }
 
-        span {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          margin-bottom: -6px;
-          font-size: 49px;
-          letter-spacing: -.5px;
+        @media (min-width: 950px) {
+          margin-top: 0px;
+        }
 
-          &:before,
-          &:after {
-            content: '';
-            width: 19px;
-            height: 19px;
-            aspect-ratio: 1;
-            background: #C91516;
-            clip-path: polygon(50% 0,79% 90%,2% 35%,98% 35%,21% 90%); 
+        @media (min-width: 1200px) {
+          margin-top: -20%;
+        }
+
+        @media (min-width: 1500px) {
+          margin-top: -30%;
+        }
+
+        .v-a-t {
+          max-width: 255px;
+          margin: 0 auto;
+          font: 97px/1 $axs;
+          letter-spacing: -1.3px;
+          text-transform: uppercase;
+          text-align: center;
+
+          @media (min-width: $screen-xs) {
+            font-size: 133px;
+          }
+
+          span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: -6px;
+            font-size: 49px;
+            letter-spacing: -.5px;
+
+            &:before,
+            &:after {
+              content: '';
+              width: 19px;
+              height: 19px;
+              aspect-ratio: 1;
+              background: #C91516;
+              clip-path: polygon(50% 0,79% 90%,2% 35%,98% 35%,21% 90%); 
+            }
           }
         }
-      }
 
-      .v-a-s-t {
-        margin-top: 42px;
+        .v-a-s-t {
+          margin-top: 42px;
+        }
       }
     }
   }

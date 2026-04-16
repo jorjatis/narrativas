@@ -29,6 +29,11 @@
 @use './components/methode-17-balseros';
 @use './components/methode-18-autor-declamando';
 
+.v-d-w > .v-c {
+  position: relative;
+  z-index: 1;
+}
+
 .v-n-mth {
   .v-d {
     position: relative;
@@ -38,26 +43,74 @@
   }
 }
 
-.v-c-cmp.v-c-cmp--xl {
-  position: absolute;
-  transform: translateY(39.8%);
+.v-c-cmp .v-cmp-m--t1:has(.video-player) {
+  max-width: 100%;
+}
+
+.v-c-cmp:has(.v-cmp-m--t1) {
+  display: block;
+  position: relative;
   z-index: 5;
   left: 50%;
   width: 100vw;
   margin-left: -50vw;
   overflow: hidden;
+  margin-top: -24px;
+
+  @media (min-width: 801px) {
+    display: none;
+  }
+
+  &:before {
+    content: '';
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: block;
+    background: linear-gradient(180deg, rgba(83, 147, 228, 1) 0%, rgb(145 186 238) 100%);
+
+    @media (min-width: 801px) {
+      content: none;
+    }
+  }
+}
+
+.v-c-cmp.v-c-cmp--xl {
+  display: none;
+
+  @media (min-width: 801px) {
+    display: block;
+    position: absolute;
+    transform: translateY(40.6%);
+    z-index: 5;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    overflow: hidden;
+  }
+
+  @media (min-width: 1000px) {
+    transform: translateY(38.7%);
+  }
+
+  @media (min-width: 1500px) {
+    transform: translateY(39.8%);
+  }
 
   @media (min-width: 1900px) {
     width: 1900px;
     left: 50%;
     margin-left: 0;
-    transform: translateX(-50%) translateY(39.8%);
+    transform: translateX(-50%) translateY(40.6%);
   }
 }
 
-.v-c-cmp--xl .video-player .video-js .vjs-voc-bigplaybutton-info-title {
-  display: none !important;
-}
+// .v-c-cmp--xl .video-player .video-js .vjs-voc-bigplaybutton-info-title,
+// .v-c-cmp .v-cmp-m--t1 .vjs-voc-config-vertical.video-js .vjs-voc-bigplaybutton-info-title {
+//   display: none !important;
+// }
 
 .v-c-cmp--xl .video-player .video-js .vjs-voc-bigplaybutton-info {
   display: flex !important;
@@ -65,17 +118,17 @@
   justify-content: center;
 }
 
+.v-c-cmp--xl .video-player .video-js .vjs-voc-bigplaybutton-info-title {
+  margin-top: 20px;
+  text-align: center;
+}
+
 .v-c-cmp--xl .video-player .video-js .vjs-big-play-button {
   height: 100% !important;
   background: none !important;
+  padding: 0;
 }
 
-.v-c-cmp--xl .video-player .video-js .vjs-big-play-button:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 10%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .835294) 100%);
+.v-c-cmp--xl video-js {
+  background: transparent !important;
 }
