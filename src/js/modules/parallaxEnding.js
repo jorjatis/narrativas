@@ -37,7 +37,9 @@ export default function parallaxEnding() {
         trigger: ".v-n-mth--18 .v-n-mth-fig",
         start: "center center",
         end: "75% center",
-        scrub: true
+        scrub: true,
+        onLeave: () => ScrollTrigger.refresh(),
+        onEnterBack: () => ScrollTrigger.refresh()
       }
     });
   }

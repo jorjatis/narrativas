@@ -35,6 +35,13 @@
     
     .v-n-mth__c {
       position: relative;
+      
+      @media (max-width: 800px) {
+        width: 100vw;
+        overflow: hidden;
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
       &--1 {
         .v-d-p-c {
@@ -133,15 +140,20 @@
 
       &--5 {
         .v-d-p {
+          left: 20px;
           max-width: 280px;
           color: $cb2;
+
+          @media (min-width: 801px) {
+            left: unset;
+          }
         }
       }
 
       &--6 {
         .v-d-p {
           top: 50%;
-          left: 0;
+          left: 20px;
           max-width: 280px;
           color: $cb2;
 

@@ -8,6 +8,7 @@
     margin-top: -24px;
     margin-left: -50vw;
     background: #e5e3b4;
+    overflow-x: hidden;
 
     @media (min-width: 1900px) {
       left: unset;
@@ -16,7 +17,7 @@
     }
 
     @media (min-width: $screen-xs) {
-      padding-top: 80px;
+      padding-top: 60px;
     }
 
     .v-n-mth-bbl {

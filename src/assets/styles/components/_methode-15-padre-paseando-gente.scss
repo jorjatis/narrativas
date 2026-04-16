@@ -33,6 +33,10 @@
       &--2 {
         background: $cb1;
 
+        @media (min-width: 800px) {
+          padding-bottom: 120px;
+        }
+
         .v-d-p-c {
           display: flex;
           flex-direction: column;

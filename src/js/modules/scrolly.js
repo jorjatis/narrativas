@@ -12,72 +12,47 @@ export default function scrolly() {
 
   let currentBg = -1;
 
-  // 👉 CONFIG
   const config = {
     fadeIn: 0.8,
-    fadeOut: 0.3,
+    fadeOut: 0.4,
     start: "top center",
     end: "bottom center",
   };
 
   gsap.set(backgrounds, { opacity: 0 });
 
-  steps.forEach((step) => {
-    const bgIndex = parseInt(step.dataset.bg);
-
-    ScrollTrigger.create({
-      trigger: step,
-      start: config.start,
-      end: config.end,
-
-      onEnter: () => {
-        setActiveStep(step);
-        setBackground(bgIndex);
-      },
-
-      onEnterBack: () => {
-        setActiveStep(step);
-        setBackground(bgIndex);
-      },
-    });
-  });
-
-  function setBackground(index) {
-    if (index === currentBg) return;
+  function setBackground(index, immediate = false) {
+    if (index === currentBg || index < 0) return;
 
     const nextBg = backgrounds[index];
-    const prevBg = backgrounds[currentBg];
+    const otherBgs = Array.from(backgrounds).filter((_, i) => i !== index);
 
-    gsap.killTweensOf(backgrounds);
+    backgrounds.forEach((bg, i) => {
+      if (i !== index) {
+        bg.classList.remove("is-active");
+        const video = bg.querySelector("video");
+        if (video) video.pause();
+      }
+    });
 
-    if (prevBg) {
-      prevBg.classList.remove("is-active");
-
-      gsap.to(prevBg, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power1.out",
-      });
-
-      const video = prevBg.querySelector("video");
-      if (video) video.pause();
-    }
+    gsap.to(otherBgs, {
+      opacity: 0,
+      duration: immediate ? 0 : config.fadeOut,
+      ease: "power1.out",
+      overwrite: true
+    });
 
     if (nextBg) {
       nextBg.classList.add("is-active");
-
-      gsap.fromTo(
-        nextBg,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-        }
-      );
-
       const video = nextBg.querySelector("video");
-      if (video) video.play();
+      if (video) video.play().catch(() => {});
+
+      gsap.to(nextBg, {
+        opacity: 1,
+        duration: immediate ? 0 : config.fadeIn,
+        ease: "power2.out",
+        overwrite: true
+      });
     }
 
     currentBg = index;
@@ -89,37 +64,56 @@ export default function scrolly() {
   }
 
   function updateInitialState() {
-    let activeStep = null;
-
+    let stepToActivate = null;
+    const vCenter = window.innerHeight / 2;
+    
     steps.forEach((step) => {
       const rect = step.getBoundingClientRect();
-
-      if (
-        rect.top <= window.innerHeight / 2 &&
-        rect.bottom >= window.innerHeight / 2
-      ) {
-        activeStep = step;
+      if (rect.top <= vCenter && rect.bottom >= vCenter) {
+        stepToActivate = step;
       }
     });
 
-    if (activeStep) {
-      setActiveStep(activeStep);
-      setBackground(parseInt(activeStep.dataset.bg));
-    } else {
-      const first = steps[0];
-      if (first) {
-        setActiveStep(first);
-        setBackground(parseInt(first.dataset.bg));
+    if (!stepToActivate) {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollY > maxScroll / 2) {
+        stepToActivate = steps[steps.length - 1];
+      } else {
+        stepToActivate = steps[0];
       }
+    }
+
+    if (stepToActivate) {
+      setActiveStep(stepToActivate);
+      setBackground(parseInt(stepToActivate.dataset.bg), true);
     }
   }
 
-  ScrollTrigger.refresh();
+  steps.forEach((step) => {
+    const bgIndex = parseInt(step.dataset.bg);
+
+    ScrollTrigger.create({
+      trigger: step,
+      start: config.start,
+      end: config.end,
+      markers: true,
+      onToggle: (self) => {
+        if (self.isActive) {
+          setActiveStep(step);
+          setBackground(bgIndex);
+        }
+      }
+    });
+  });
+
   updateInitialState();
 
   ScrollTrigger.addEventListener("refresh", updateInitialState);
 
   return () => {
     ScrollTrigger.getAll().forEach((st) => st.kill());
+    ScrollTrigger.removeEventListener("refresh", updateInitialState);
   };
 }

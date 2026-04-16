@@ -19,7 +19,6 @@
         left: unset;
         width: 1900px;
         margin-left: calc((-1900px / 2) + 50%);
-        padding-bottom: 50px;
       }
 
       .v-d-p {
@@ -39,7 +38,7 @@
           @media (min-width: 1200px) {
             max-width: 875px;
             position: absolute;
-            bottom: 0;
+            bottom: 70px;
             left: 50%;
             transform: translateX(-50%);
             margin-top: 0;
@@ -47,6 +46,7 @@
 
           @media (min-width: 1500px) { 
             left: 45%;
+            bottom: 100px;
           }
         }
       }

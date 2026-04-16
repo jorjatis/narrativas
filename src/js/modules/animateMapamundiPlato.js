@@ -7,8 +7,8 @@ export default function animateMapamundiPlato() {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".v-n-mth--11 figure",
-      start: "25% center",
-      end: "bottom center",
+      start: "20% center",
+      end: "80% center",
       scrub: true
     }
   });

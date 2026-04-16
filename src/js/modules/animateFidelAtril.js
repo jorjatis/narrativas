@@ -9,7 +9,7 @@ export default function animateFidelAtril() {
   const createAnimation = (query, endValue, options = {}) => {
     const {
       start = "15% center",
-      end = "30% center"
+      end = () => `${window.innerHeight * .7} center`,
     } = options;
 
     mm.add(query, () => {
@@ -22,7 +22,9 @@ export default function animateFidelAtril() {
             trigger: ".v-n-mth--8 > figure",
             start,
             end,
-            scrub: true
+            scrub: true,
+            onLeave: () => ScrollTrigger.refresh(),
+            onEnterBack: () => ScrollTrigger.refresh()
           }
         }
       );
@@ -36,9 +38,19 @@ export default function animateFidelAtril() {
   // });
 
   createAnimation("(max-width: 349px)", -220);
-  createAnimation("(min-width: 350px) and (max-width: 500px)", -305);
+  createAnimation("(min-width: 350px) and (max-width: 500px)", -305, {
+    start: "15% center",
+    end: () => `${window.innerHeight * .55} center`
+  });
   createAnimation("(min-width: 501px) and (max-width: 698px)", -515);
-  createAnimation("(min-width: 699px) and (max-width: 849px)", -665);
-  createAnimation("(min-width: 850px) and (max-width: 1299px)", -715);
-  createAnimation("(min-width: 1300px)", "-55%");
+  createAnimation("(min-width: 699px) and (max-width: 849px)", -640);
+  createAnimation("(min-width: 850px) and (max-width: 1023px)", -715);
+  createAnimation("(min-width: 1024px) and (max-width: 1299px)", -715, {
+    start: "10% center",
+    end: () => `${window.innerHeight * .7} center`
+  });
+  createAnimation("(min-width: 1300px)", "-55%", {
+    start: "10% center",
+    end: () => `${window.innerHeight * .8} center`
+  });
 }

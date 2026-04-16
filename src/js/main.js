@@ -9,44 +9,46 @@ import parallaxPreHeader from './modules/parallaxPreHeader';
 import animateFidelAtril from './modules/animateFidelAtril';
 import animateMapamundiPlato from './modules/animateMapamundiPlato';
 import scrolly from './modules/scrolly';
+import animateGaviotaOver from './modules/animateGaviotaOver';
 import parallaxEnding from './modules/parallaxEnding';
 
 export function initAll() {
   removeEls('.v-a--d-s-1 > .v-a-inf-c');
   fadeOnScroll('.scr-ind');
 
-  parallaxPreHeader();
-  animateFidelAtril();
-  animateMapamundiPlato();
+  // parallaxPreHeader();
+  // animateFidelAtril();
+  // animateMapamundiPlato();
   scrolly();
-  parallaxEnding();
+  // animateGaviotaOver();
+  // parallaxEnding();
 
-  // Efecto blur in en textos
-  observeInView({
-    target: '.blur-y-in',
-    threshold: 0.5,
-    once: true,
-    onEnter: (entry) => {
-      entry.target.classList.add('is-visible');
-    }
-  });
+  // // Efecto blur in en textos
+  // observeInView({
+  //   target: '.blur-y-in',
+  //   threshold: 0.5,
+  //   once: true,
+  //   onEnter: (entry) => {
+  //     entry.target.classList.add('is-visible');
+  //   }
+  // });
 
-  // Lottie grafiti
-  const anim = loadLottie({
-    container: '#lottie-grafiti',
-    path: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/lotties/1-cabecera-gota-grafiti.json',
-    loop: false,
-    autoplay: false
-  });
+  // // Lottie grafiti
+  // const anim = loadLottie({
+  //   container: '#lottie-grafiti',
+  //   path: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/lotties/1-cabecera-gota-grafiti.json',
+  //   loop: false,
+  //   autoplay: false
+  // });
 
-  observeInView({
-    target: '#lottie-grafiti',
-    threshold: 0.5,
-    once: true,
-    onEnter: () => {
-      anim?.play();
-    }
-  });
+  // observeInView({
+  //   target: '#lottie-grafiti',
+  //   threshold: 0.5,
+  //   once: true,
+  //   onEnter: () => {
+  //     anim?.play();
+  //   }
+  // });
 }
 
 function start() {

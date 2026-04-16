@@ -74,9 +74,7 @@ function setupLayers({ getOffsetHeader }) {
   });
 
   // Peñón + bloque 02
-  gsap.to([
-    ".v-n-preh-prlx__l--02"
-  ], {
+  gsap.to(".v-n-preh-prlx__l--02", {
     marginTop: -221,
     force3D: true,
     ease: "none",
@@ -84,7 +82,9 @@ function setupLayers({ getOffsetHeader }) {
       trigger: ".v-n-preh-prlx__l--01",
       start: "top top",
       end: "50% top",
-      scrub: true
+      scrub: true,
+      onLeave: () => ScrollTrigger.refresh(),
+      onEnterBack: () => ScrollTrigger.refresh()
     }
   });
 
@@ -112,7 +112,7 @@ function setupLayers({ getOffsetHeader }) {
     scrollTrigger: {
       trigger: ".grafiti-c",
       start: "top center",
-      end: () => `${window.innerHeight * 1} center`,
+      end: () => `${window.innerHeight * .5} center`,
       scrub: true
     }
   });
