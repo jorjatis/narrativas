@@ -5,11 +5,14 @@
     position: relative;
     margin-top: -24px;
 
-    .gaviota-over-c {
+    .gaviota-over {
       position: absolute;
       left: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100vw;
-      min-height: 100dvh;
+      height: 100dvh;
       margin-left: -50vw;
       z-index: 5;
       overflow: hidden;
@@ -19,18 +22,14 @@
         width: 1900px;
         margin-left: calc((-1900px / 2) + 50%);
       }
-    }
-
-    .gaviota-over {
-      will-change: transform;
-      z-index: 5;
       
       img {
-        width: 300px;
+        width: auto;
+        height: 40%;
         animation: gaviotaFloat 4.5s ease-in-out infinite alternate;
 
         @media (min-width: 800px) {
-          width: 500px;
+          height: 90%;
         }
       }
     }

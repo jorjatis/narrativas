@@ -13,29 +13,15 @@
 
       &__bg {
         .bg-item {
-          &[data-bg="0"] {
-            img {
-              max-width: 1080px;
-              height: 80%;
-              object-fit: contain;
-              padding: 0 40px;
-            }
+          img {
+            max-width: 1080px;
+            height: 80%;
+            object-fit: contain;
           }
 
           &[data-bg="1"] {
-            .bg-c {
-              justify-content: space-between;
-              column-gap: 15%;
-            }
-
             .bg-grp {
               position: relative;
-              display: flex;
-              align-items: center;
-              width: 100%;
-              height: 100%;
-              justify-content: space-between;
-              column-gap: 15%;
               opacity: 0;
               transition: opacity .3s ease;
 
@@ -45,18 +31,6 @@
 
               &:not(:first-child) {
                 position: absolute;
-                top: 0;
-                left: 0;
-              }
-            }
-
-            .bg-img {
-              &--1 {
-                width: 30%;
-              }
-
-              &--2 {
-                width: 30%;
               }
             }
           }
@@ -80,6 +54,7 @@
       display: flex;
       flex-direction: column-reverse;
       gap: 40px;
+      margin-top: 60px;
 
       @media (min-width: 1100px) {
         flex-direction: row;
@@ -87,6 +62,7 @@
         align-items: center;
         gap: 10%;
         width: 1100px;
+        margin-top: 100px;
         margin-left: calc((-1100px / 2) + 50%);
         transform: translateX(-10%);
       }

@@ -22,10 +22,8 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/i
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/desk-12-armario.webp
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/desk-12-scroll1.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/desk-12-scroll2-1.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/desk-12-scroll2-2.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/desk-12-scroll3-1.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/desk-12-scroll3-2.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/desk-12-scroll2.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/desk-12-scroll3.webp
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/desk-13-padre-bocadillo.webp
 
@@ -88,6 +86,8 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/i
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-11-mapamundi-3.webp
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-12-scroll1.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-12-scroll2.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-12-scroll3.webp
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-14-foto-fractura.webp
 
@@ -109,6 +109,9 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/i
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-17-balseros-1.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-17-balseros-2.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-17-balseros-3.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-17-balseros-4.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-17-gaviota.webp
+
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-18-miami-1.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/19/cubacontracuba/images/mov-18-miami-2.webp

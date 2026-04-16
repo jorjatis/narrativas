@@ -2,7 +2,11 @@
 
 .v-n-mth {
   &--9 {
-    margin-top: 116px;
+    margin-top: 80px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: 180px;
+    }
 
     figure {
       position: relative;

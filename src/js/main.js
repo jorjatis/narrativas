@@ -18,12 +18,12 @@ export function initAll() {
 
   // parallaxPreHeader();
   // animateFidelAtril();
-  // animateMapamundiPlato();
-  scrolly();
+  animateMapamundiPlato();
+  // scrolly();
   // animateGaviotaOver();
   // parallaxEnding();
 
-  // // Efecto blur in en textos
+  // Efecto blur in en textos
   // observeInView({
   //   target: '.blur-y-in',
   //   threshold: 0.5,

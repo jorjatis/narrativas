@@ -9,6 +9,7 @@ export default function animateMapamundiPlato() {
       trigger: ".v-n-mth--11 figure",
       start: "20% center",
       end: "80% center",
+      markers: true,
       scrub: true
     }
   });

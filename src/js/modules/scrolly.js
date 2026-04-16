@@ -98,7 +98,6 @@ export default function scrolly() {
       trigger: step,
       start: config.start,
       end: config.end,
-      markers: true,
       onToggle: (self) => {
         if (self.isActive) {
           setActiveStep(step);

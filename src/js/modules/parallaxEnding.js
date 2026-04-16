@@ -24,7 +24,7 @@ export default function parallaxEnding() {
     },
 
     "(max-width: 767px)": () => {
-      createParallax(80);
+      createParallax(100);
     }
   });
 
