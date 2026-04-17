@@ -130,6 +130,14 @@
           }
         }
       }
+
+      &.is-prologue {
+        pointer-events: auto;
+
+        svg {
+          display: none;
+        }
+      }
     }
 
     &.is-active {
