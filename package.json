@@ -40,6 +40,7 @@
     "lil-gui": "^0.21.0",
     "lottie-web": "^5.13.0",
     "netlify-cli": "^25.0.1",
+    "scrolly-video": "^0.0.24",
     "three": "^0.183.2"
   }
 }
