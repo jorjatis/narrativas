@@ -22,6 +22,6 @@
       "authorName": "Pepe Trashorras",
       "authorUrl": "https://www.abc.es/autor/pepe-trashorras-6230/"
     },
-    "paragraphPaywall": false
+    "paragraphPaywall": "Parrafo anterior al div con la clase de paywall. Si no hay paywall, en data/index.json, poner \"paragrahPaywall\" en false"
   }
 }
