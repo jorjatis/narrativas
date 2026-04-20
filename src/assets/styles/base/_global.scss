@@ -6,7 +6,6 @@ html {
 
 body {
   touch-action: pan-y;
-  background: #faf7ef;
 }
 
 // body .v-h-a ~ .v-w .v-a--d {
@@ -27,10 +26,6 @@ body {
 
 .v-w {
   .v-a--d-s-1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     .v-a-inf-c {
       grid-area: unset;
       justify-content: flex-start;
