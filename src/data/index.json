@@ -3,7 +3,21 @@
     {
       "title": "Abril 2026",
       "cards": [
-         {
+        {
+          "title": "Para que llore mi madre, que llore la tuya: Una historia de bandas latinas",
+          "articleUrl": "https://www.abc.es/podcast/narrativo/podcast-bandas-latinas/",
+          "titleMedia": "09-bandas-latinas",
+          "gif": false,
+          "netlifyUrl": "https://narrativa-bandaslatinas.netlify.app/"
+        },
+        {
+          "title": "Cuba contra Cuba: Relato íntimo de un fracaso",
+          "articleUrl": "https://www.abc.es/ciencia/lejos-repeticion-apolo-viii-20260331204004-nt.html",
+          "titleMedia": "08-cuba-contra-cuba",
+          "gif": true,
+          "netlifyUrl": "https://narrativa-cubacontracuba.netlify.app/"
+        },
+        {
           "title": "Artemis 2: Por qué no es (ni de lejos) una repetición del Apolo VIII",
           "articleUrl": "https://www.abc.es/ciencia/lejos-repeticion-apolo-viii-20260331204004-nt.html",
           "titleMedia": "07-artemis-2",
@@ -15,7 +29,7 @@
     {
       "title": "Marzo 2026",
       "cards": [
-         {
+        {
           "title": "Semana Santa de Sevilla: La fiesta total: manual de uso y cifras de un fenómeno de masas",
           "articleUrl": "https://www.abc.es/sevilla/pasionensevilla/noticias-semana-santa-sevilla/narrativa-semana-santa-20260328024744-nts.html",
           "titleMedia": "06-ssanta-sevilla",
