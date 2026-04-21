@@ -20,8 +20,12 @@ export function initAll() {
   animPreHeader();
   animSprayHeader();
 
-  const playerApi = audioPlayer();
-  dvdScroller(playerApi);
+  // Player del teaser
+  audioPlayer(document.querySelector('#teaser'));
+
+  // Player del DVD (este es el que pasas al scroller)
+  const dvdPlayer = audioPlayer(document.querySelector('.v-n-dvd'));
+  dvdScroller(dvdPlayer);
   
   dvdNavSticky();
 }

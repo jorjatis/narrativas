@@ -17,8 +17,8 @@ const formatTime = (current, total) => {
 /* =========================
   AudioPlayer Module
 ========================= */
-export default function audioPlayer() {
-  const container = document.querySelector('.v-ply');
+export default function audioPlayer(root = document) {
+  const container = root.querySelector('.v-ply');
   if (!container) return null;
 
   const dom = {
@@ -133,8 +133,24 @@ export default function audioPlayer() {
     dom.audio.load();
   };
 
+  const init = () => {
+    if (!dom.audio) return;
+
+    if (dom.audio.src) {
+      dom.duration.textContent = 'Cargando...';
+      
+      if (dom.progress) {
+        dom.progress.value = 0;
+        dom.progress.max = 0;
+      }
+
+      dom.audio.load();
+    }
+  };
+
   // Inicializar eventos al ejecutar la función
   bindEvents();
+  init();
 
   // Exponemos solo lo que el scroller necesita usar
   return {

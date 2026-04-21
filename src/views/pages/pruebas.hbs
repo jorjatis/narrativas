@@ -4,138 +4,69 @@
 <head>
   <meta charset="UTF-8">
   <title>Wave Up Transition</title>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    .fondo {
-      width: 100%;
-      height: 100dvh;
-      background: #e63946;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .blanco {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-    }
-
-    .onda {
-      position: absolute;
-      bottom: -150px;
-    }
-
-    svg {
-      width: 100%;
-      height: 150px;
-      display: block;
-      rotate: 180deg;
-      position: relative;
-      top: -1px;
-    }
-
-    p {
-      display: block;
-      max-width: 500px;
-      margin: 200px auto 500px;
-      font: 18px/1 Helvetica;
-      text-align: center;
-    }
-
-    #lottie {
-      position: absolute;
-      rotate: 180deg;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
+    audio {
+      display: block !important;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="fondo">
-    <div id="lottie"></div>
-    <div class="blanco">
-      <div class="onda">
-        <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
-          <path id="wave" fill="white" d="M0,60 C300,120 600,0 900,60 C1200,120 1440,0 1440,60 L1440,150 L0,150 Z">
-          </path>
-        </svg>
+  <div class="v-cmp-ply" id="teaser">
+  <span class="v-ply__t1">Escucha el teaser</span>
+  <div class="v-ply v-ply--t3">
+    <div class="v-ply__c">
+      <div class="v-ply__w v-ply__w--1">
+        <button class="v-ply__b">
+          <span class="v-ply__i">
+            <svg id="icon-play" width="15" height="18" viewBox="0 0 15 18" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0.167999 16.4068V1.5927C0.167999 1.1527 0.318899 0.791595 0.620899 0.509295C0.922799 0.227395 1.2752 0.0863953 1.678 0.0863953C1.8038 0.0863953 1.9357 0.104595 2.0738 0.140995C2.2119 0.177095 2.3437 0.231596 2.4692 0.304296L14.1292 7.7273C14.3581 7.8834 14.5296 8.07029 14.6438 8.28809C14.7582 8.50609 14.8155 8.74339 14.8155 8.99979C14.8155 9.25609 14.7582 9.49339 14.6438 9.71139C14.5296 9.92919 14.3581 10.1161 14.1292 10.2723L2.4692 17.6952C2.3434 17.768 2.2112 17.8224 2.0726 17.8585C1.9342 17.8949 1.8021 17.9131 1.6763 17.9131C1.2732 17.9131 0.921199 17.7721 0.620099 17.4902C0.318699 17.208 0.167999 16.8468 0.167999 16.4068Z">
+              </path>
+            </svg>
+            <svg id="icon-pause" width="10" height="10" viewBox="0 0 10 10" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M2.2091 0.0345001C2.4996 0.0345001 2.7508 0.1438 2.9612 0.3631C3.1716 0.5826 3.2769 0.8446 3.2769 1.1476V8.8524C3.2769 9.1554 3.1716 9.4174 2.9612 9.6369C2.7508 9.8562 2.4996 9.9655 2.2091 9.9655H1.1013C0.811 9.9655 0.5605 9.856 0.3502 9.6369C0.1398 9.4174 0.0345001 9.1554 0.0345001 8.8524V1.1476C0.0345001 0.8446 0.1398 0.5826 0.3502 0.3631C0.5605 0.144 0.811 0.0345001 1.1013 0.0345001H2.2091Z">
+              </path>
+              <path
+                d="M8.8987 0.0345001C9.189 0.0345001 9.4395 0.144 9.6498 0.3631C9.8602 0.5826 9.9655 0.8446 9.9655 1.1476V8.8524C9.9655 9.1554 9.8602 9.4174 9.6498 9.6369C9.4395 9.856 9.189 9.9655 8.8987 9.9655H7.7909C7.5004 9.9655 7.2492 9.8562 7.0388 9.6369C6.8284 9.4174 6.7231 9.1554 6.7231 8.8524V1.1476C6.7231 0.8446 6.8284 0.5826 7.0388 0.3631C7.2492 0.1438 7.5004 0.0345001 7.7909 0.0345001H8.8987Z">
+              </path>
+            </svg>
+          </span>
+        </button>
       </div>
+      <div class="v-ply__w v-ply__w--2">
+        <div class="v-ply__g v-ply__g--2">
+          <div class="v-ply__v">
+            <progress value="0" max="0"></progress>
+          </div>
+        </div>
+        <p class="v-ply__g v-ply__g--3">
+          <span class="v-asn">
+            <span class="v-asn__c">
+              <span class="v-asn__i v-asn__i--1"></span>
+              <span class="v-asn__i v-asn__i--2"></span>
+              <span class="v-asn__i v-asn__i--3"></span>
+              <span class="v-asn__i v-asn__i--4"></span>
+              <span class="v-asn__i v-asn__i--5"></span>
+            </span>
+          </span>
+          <span class="v-ply__p"></span>
+        </p>
+      </div>
+      <audio src="https://traffic.omny.fm/d/clips/7e594858-42ba-4ecb-86d8-ad1a002e5281/d75f9815-4fc8-4483-835a-b41801179bd6/8c6fadb8-0666-4a51-b3eb-b4180118f313/audio.mp3?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6IkxaN2hmRjdqUEVxOW1MUVlBUmVqWUEiLCJ0eXAiOiJKV1QifQ.eyJjbGlwIjoiOGM2ZmFkYjgtMDY2Ni00YTUxLWIzZWItYjQxODAxMThmMzEzIiwiYWRzIjowfQ.MKlGZS9kDc9MegCxiiQZqUAjsL49NMLBYguaO7gS0E0"></audio>
     </div>
-    <img src="https://s1.abcstatics.com/comun/especiales/bandas-latinas/images/abc_apertura.png">
   </div>
+</div>
+<p class="v-d-p">Ezequiel fue uno de esos niños. Un niño que quiso un nombre, un título, y que el miedo que infundía le abriera paso. Lo consiguió. Se hizo llamar líder. Se hizo temer. Y en ese miedo se perdió.</p>
 
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, dolorum quae at in rem nulla excepturi minima
-    facere rerum, illum quasi libero, iste perferendis. Reiciendis voluptas explicabo modi ratione velit?</p>
+<p class="v-d-p">Este podcast cuenta la historia real de Ezequiel, aunque ese no sea su verdadero nombre. Aunque no pueda compartirlo por su seguridad. Su camino marcado por las calles y los cuchillos le llevó a ser el líder de una banda, mientras se desdibujaban las líneas entre lo que es ser víctima y ser verdugo. Porque Ezequiel estuvo en el infierno desde muy pequeño, pero también era quien infligía el daño. «Cerraba los ojos y solo veía sangre».</p>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
+<p class="v-d-p">Latin Kings y Ñetas, Dominican Don’t Play y su eterna rivalidad con los Trinitarios protagonizan las noticias casi a diario. Pero, surgen muchas preguntas. ¿Son solo latinos? ¿Cómo son desde dentro? ¿Es posible salir? ¿Qué papel juegan las mujeres?...</p>
 
-      const wave = document.querySelector("#wave");
-
-      // 🌊 Animación continua de la onda
-      gsap.to(wave, {
-        duration: 0.7,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        attr: {
-          d: "M0,60 C300,0 600,120 900,60 C1200,0 1440,120 1440,60 L1440,150 L0,150 Z"
-        }
-      });
-
-      // 🎬 LOTTIE
-      const animation = lottie.loadAnimation({
-        container: document.getElementById('lottie'),
-        renderer: 'svg',
-        loop: false,
-        autoplay: true,
-        path: 'https://s1.abcstatics.com//comun/narrativas/redaccion/2026/04/12/bandaslatinas/json/cabecera-bandas-latinas-ojo.json'
-      });
-
-      let started = false;
-
-      // ⏱ Esperar a que el JSON esté listo
-      animation.addEventListener('DOMLoaded', () => {
-
-        // 🔄 Control por progreso real del Lottie
-        animation.addEventListener('enterFrame', () => {
-
-          const progress = animation.currentFrame / animation.totalFrames;
-
-          // 👉 Ajusta este valor (0.6 = 60%)
-          if (progress > 0.4 && !started) {
-            started = true;
-
-            // ⬆️ Subida de la pantalla blanca
-            gsap.to(".blanco", {
-              y: "-120%",
-              duration: 1.5,
-              ease: "power2.inOut"
-            });
-          }
-
-        });
-
-      });
-
-    });
-  </script>
+<p class="v-d-p">Este podcast es el resultado de decenas de entrevistas y meses de investigación. Las voces de Rosa, Alexander, Emilia, Javier… acompañarán a la de Ezequiel en este juego de lealtades, drogas, fiestas y violencia, pero también de búsqueda de pertenencia, cariño y aceptación.</p>
 
 </body>
 
