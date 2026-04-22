@@ -8,24 +8,41 @@ body {
   touch-action: pan-y;
 }
 
-// body .v-h-a ~ .v-w .v-a--d {
-//   @media (max-width: $screen-sm) {
-//     height: calc(100vh - 106px);
-//   }
+body:has(.v-h-a) {
+  .v-w {
+    .v-a--d-s-1 {
+      margin-top: -118px;
 
-//   @media (max-width: $screen-xs) {
-//     height: calc(100vh - 50px - 48px);
-//     min-height: unset;
-//   }
-// }
+      @media (min-width: $screen-xs) {
+        margin-top: -147px;
+      }
+
+      @media (min-width: $screen-sm) {
+        margin-top: -98px;
+      }
+    }
+  }
+}
 
 .ai2html {
   display: flex;
   justify-content: center;
 }
 
+.v-h-a {
+  position: relative;
+  z-index: 12;
+}
+
 .v-w {
   .v-a--d-s-1 {
+    height: auto;
+    margin-top: -70px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: -98px;
+    }
+    
     .v-a-inf-c {
       grid-area: unset;
       justify-content: flex-start;

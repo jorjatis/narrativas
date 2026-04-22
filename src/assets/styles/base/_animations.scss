@@ -1,5 +1,19 @@
 @keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
   to {
     opacity: 1;
+  }
+}
+
+@keyframes markerUp {
+  from {
+    background-size: 100% 0%;
+  }
+
+  to {
+    background-size: 100% 100%;
   }
 }

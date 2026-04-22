@@ -1,0 +1,24 @@
+@use '../base/variables'as *;
+
+.v-n-cmp-scrolly-vid {
+  height: 300vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transition: opacity .3s ease-in;
+
+  &.is-loaded {
+    opacity: 1;
+  }
+}
+
+#v-n-scrolly-vid {
+  video, canvas {
+    object-fit: contain;
+    height: 70vh !important;
+    min-height: 70vh !important;
+    image-rendering: -webkit-optimize-contrast;
+    backface-visibility: hidden; 
+    transform: translate(-50%, -40%) translateZ(0) !important;
+  }
+}

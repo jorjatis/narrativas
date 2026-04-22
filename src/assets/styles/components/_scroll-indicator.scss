@@ -22,10 +22,8 @@
     display: block;
     width: 20px;
     height: 30px;
-    border: 2px solid $cb2;
+    border: 2px solid $cb1;
     border-radius: 16px;
-    background: rgba(0, 0, 0, .15);
-    box-shadow: 0 0 24px rgba(0, 0, 0, .2);
   }
 
   &__w {
@@ -35,7 +33,7 @@
     width: 3px;
     height: 6px;
     border-radius: 999px;
-    background: $cb2;
+    background: $cb1;
     transform: translateX(-50%);
     animation: scroll-wheel 1.6s ease-in-out infinite;
   }
@@ -44,8 +42,7 @@
     font-family: $mcr;
     font-size: 12px;
     text-align: center;
-    color: $cb2;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, .8);
+    color: $cb1;
   }
 }
 

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Video Responsive</title>
+  <style>
+    .v-n-cmp-scrolly-vid {
+      display: block;
+    }
+
+    .v-n-scrolly-vid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      will-change: contents; 
+      transform: translateZ(0); 
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="v-n-cmp-scrolly-vid">
+    <video class="v-n-scrolly-vid" tabindex="0" preload="metadata" muted playsinline webkit-playsinline>
+      <source class="src-mobile" src="assets/images/prueba-mov-1kf-640.mp4" type="video/mp4">
+      <source class="src-desktop" src="assets/images/prueba-desk-1kf-1200.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var scrollyVidContainerHeight = document.querySelector(".v-n-cmp-scrolly-vid");
+      var scrollyVid = document.querySelector('.v-n-scrolly-vid');
+      var playbackConst = 500;
+      var lastPos = -1;
+
+      // 1. Guardamos las rutas de los sources originales ANTES de borrarlos
+      var rutaMobile = document.querySelector('.src-mobile').src;
+      var rutaDesktop = document.querySelector('.src-desktop').src;
+
+      // 2. Definimos el Media Query
+      const mediaQuery = window.matchMedia("(max-width: 699px)");
+
+      // 3. Función para asignar el video
+      function loadVideo() {
+        scrollyVid.innerHTML = '';
+        var source = document.createElement('source');
+
+        if (mediaQuery.matches) {
+          source.src = rutaMobile;
+          console.log("Cambiando a modo móvil");
+        } else {
+          source.src = rutaDesktop;
+          console.log("Cambiando a modo desktop");
+        }
+
+        source.type = 'video/mp4';
+        scrollyVid.appendChild(source);
+        scrollyVid.load();
+      }
+
+      // 4. Escuchar el cambio de resolución (Resize inteligente)
+      // Esto detecta exactamente cuando pasas de 699px a 700px
+      mediaQuery.addEventListener('change', function (e) {
+        loadVideo();
+      });
+
+      // Ejecución inicial
+      loadVideo();
+
+      // 5. Lógica de Scroll
+      function render() {
+        var currentPos = window.pageYOffset;
+        if (lastPos !== currentPos) {
+          lastPos = currentPos;
+          var frameNumber = currentPos / playbackConst;
+
+          // Esto evita que el script le diga al video "ve al segundo X" si el video todavía está "buscando" el frame anterior.
+          if (isFinite(frameNumber) && scrollyVid.readyState >= 2 && !scrollyVid.seeking) {
+            if (frameNumber > scrollyVid.duration) frameNumber = scrollyVid.duration; 
+            if (frameNumber < 0) frameNumber = 0;
+            scrollyVid.currentTime = frameNumber;
+          }
+        }
+        window.requestAnimationFrame(render);
+      }
+
+      scrollyVid.addEventListener('loadedmetadata', function () {
+        // Recalculamos la altura cada vez que el video cambie
+        scrollyVidContainerHeight.style.height = Math.floor(scrollyVid.duration * playbackConst) + window.innerHeight + "px";
+      });
+
+      window.requestAnimationFrame(render);
+    });
+  </script>
+</body>
+
+</html>
