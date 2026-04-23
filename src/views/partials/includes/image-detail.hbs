@@ -1,0 +1,25 @@
+<div class="v-n-img-det">
+  <div class="v-a-img-c v-a-img-c--fw-xs">
+    <figure class="v-a-fig">
+      <div class="v-a-lnk">
+        <img class="v-a-img" loading="lazy" src="{{img}}" alt="[ALTERNATIVE TEXT]">
+      </div>
+      {{#if figcaption}}
+        <figcaption class="v-fc">
+          <span class="v-fc__t">{{figcaptionTitle}}</span>
+          {{#if figcaptionAuthor}}<span class="v-fc__p">({{figcaptionAuthor}})</span>{{/if}}
+        </figcaption>
+      {{/if}}
+    </figure>
+  </div>
+
+  <div class="v-n-img-det__d">
+    <div class="v-n-img-det__box">
+      <span class="v-n-img-det__t">{{detailTitle}}</span>
+      <p class="v-n-img-det__p">{{detailDescription}}</p>
+    </div>
+    <figure class="v-n-img-det__fig">
+      <img src="{{detailImage}}" alt="" class="v-n-img-det__img">
+    </figure>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+@use '../base/variables'as *;
+
+.v-c-cmp {
+  .v-cmp-suh {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 163px;
+    margin: 88px auto;
+    padding: 24px;
+
+    @media (min-width: 350px) {
+      min-width: 300px;
+      max-width: 350px;
+      padding: 36px;
+    }
+
+    &:before, &:after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      background-repeat: no-repeat;
+    }
+
+    &:before {
+      bottom: 100%;
+      left: 0;
+      width: 100%;
+      height: 32px;
+      background-image: url("../../../assets/images/sumario-arriba.webp");
+    }
+
+    &:after {
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 31px;
+      background-image: url("../../../assets/images/sumario-abajo.webp");
+    }
+
+    h3 {
+      width: 100%;
+      max-width: 325px;
+      font-family: $mcs;
+      font-size: 22px;
+      line-height: 30px;
+      text-transform: uppercase;
+      text-align: center;
+
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        background-repeat: no-repeat;
+      }
+
+      &:before {
+        top: 0;
+        right: 100%;
+        width: 50px;
+        height: 100%;
+        background-image: url("../../../assets/images/sumario-izq.webp");
+      }
+
+      &:after {
+        top: 0;
+        left: 100%;
+        width: 50px;
+        height: 100%;
+        background-image: url("../../../assets/images/sumario-der.webp");
+      }
+    }
+  }
+}

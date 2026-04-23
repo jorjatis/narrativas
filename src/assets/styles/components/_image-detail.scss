@@ -1,0 +1,78 @@
+@use '../base/variables'as *;
+
+.v-n-img-det {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 52px;
+  margin-bottom: 36px;
+
+  @media (min-width: $screen-xs) {
+    gap: 42px;
+    margin-top: 88px;
+    margin-bottom: 56px;
+  }
+
+  @media (min-width: $screen-sm) {
+    flex-direction: row;
+    width: 964px;
+    margin-left: calc((-964px / 2) + 50%);
+  }
+
+  @media (min-width: 1170px) {
+    width: 1106px;
+    margin-left: calc((-1106px / 2) + 50%);
+  }
+
+  .v-a-img-c {
+    .v-fc {
+      &__t {
+        color: $cb9;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  &__d {
+    align-self: start;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 24px;
+    width: 100%;
+    padding: 12px 0;
+    border-top: 1px solid $cb1;
+    border-bottom: 1px solid $cb1;
+
+    @media (min-width: $screen-sm) {
+      flex-direction: column;
+      max-width: 213px;
+    }
+  }
+
+  &__t {
+    font-family: $mcs;
+    font-size: 16px;
+    line-height: 125%;
+    color: $cb9;
+    text-transform: uppercase;
+  }
+
+  &__p {
+    font-family: $mcr;
+    font-size: 16px;
+    line-height: 125%;
+    color: $cb9;
+  }
+
+  &__fig {
+    flex: 1 0 auto;
+    aspect-ratio: 1;
+    width: 104px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  &__img {
+    object-fit: cover;
+  }
+}
