@@ -37,29 +37,11 @@ body:has(.v-h-a) {
     &--1 {
       height: calc(100vh - 50px);
       margin-top: 50px;
-      // background-color: #db9898;
 
       @media (min-width: $screen-xs) {
         height: calc(100vh - 58px);
         margin-top: 58px;
       }
-    }
-
-    &--2 {
-      // background-color: #cddb98;
-    }
-
-    &--3 {
-      // background-color: #98c8db;
-    }
-
-    &--4 {
-      // background-color: #c898db;
-      z-index: 4;
-    }
-
-    &--5 {
-      // background-color: #98d7db;
     }
   }
 
@@ -280,7 +262,7 @@ body:has(.v-h-a) {
       padding: 0 20px;
 
       @media (min-width: 340px) {
-        margin-top: -40vh;
+        margin-top: -25vh;
       }
 
       @media (min-width: 600px) {
@@ -288,6 +270,7 @@ body:has(.v-h-a) {
       }
 
       .v-a-t {
+        position: relative;
         max-width: 198px;
         width: 100%;
         font-family: $adl;
@@ -298,6 +281,34 @@ body:has(.v-h-a) {
         @media (min-width: $screen-xs) {
           max-width: 264px;
           font-size: 40px;
+        }
+
+        &:before, &:after {
+          content: "";
+          position: absolute;
+          pointer-events: none;
+          background-repeat: no-repeat;
+          transform: rotate(-3deg);
+        }
+
+        &:before {
+          bottom: -105px; 
+          left: -70px;
+          width: 227px;
+          height: 100%;
+          background-image: url("../../../assets/images/titulo-abajo-izq.webp");
+
+          @media (min-width: $screen-xs) {
+            bottom: -165px;
+          }
+        }
+
+        &:after {
+          top: -110px;
+          right: -60px;
+          width: 299px;
+          height: 100%;
+          background-image: url("../../../assets/images/titulo-arriba-der.webp");
         }
 
         &__i {
@@ -327,6 +338,11 @@ body:has(.v-h-a) {
 
       .v-a-s-t {
         max-width: 550px;
+        margin-top: 150px;
+
+        @media (max-width: $screen-xs) {
+          margin-bottom: 64px;
+        }
       }
     }
   }

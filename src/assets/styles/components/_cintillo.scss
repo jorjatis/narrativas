@@ -7,12 +7,12 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    max-width: 250px;
     min-height: 163px;
     margin: 88px auto;
     padding: 24px;
 
-    @media (min-width: 350px) {
-      min-width: 300px;
+    @media (min-width: 450px) {
       max-width: 350px;
       padding: 36px;
     }

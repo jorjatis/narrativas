@@ -25,6 +25,20 @@
   }
 
   .v-a-img-c {
+    .v-a-lnk {
+      &:before {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        background-repeat: no-repeat;
+        bottom: 100%;
+        left: 0;
+        width: 120px;
+        height: 32px;
+        background-image: url("../../../assets/images/sumario-arriba.webp");
+      }
+    }
+    
     .v-fc {
       &__t {
         color: $cb9;
@@ -34,6 +48,7 @@
   }
 
   &__d {
+    position: relative;
     align-self: start;
     display: flex;
     flex-direction: row-reverse;
@@ -46,6 +61,23 @@
     @media (min-width: $screen-sm) {
       flex-direction: column;
       max-width: 213px;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      top: 100%;
+      right: 0;
+      width: 230px;
+      height: 32px;
+      background-image: url("../../../assets/images/sumario-abajo.webp");
+
+      @media (min-width: $screen-sm) {
+        left: 0;
+        right: unset;
+      }
     }
   }
 
