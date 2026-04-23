@@ -301,7 +301,7 @@ body:has(.v-h-a) {
           left: -70px;
           width: 227px;
           height: 100%;
-          background-image: url("../../../assets/images/titulo-abajo-izq.webp");
+          background-image: url("https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/titulo-abajo-izq.webp");
 
           @media (min-width: $screen-xs) {
             bottom: -165px;
@@ -310,10 +310,14 @@ body:has(.v-h-a) {
 
         &:after {
           top: -110px;
-          right: -60px;
+          right: -50px;
           width: 299px;
           height: 100%;
-          background-image: url("../../../assets/images/titulo-arriba-der.webp");
+          background-image: url("https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/titulo-arriba-der.webp");
+
+          @media (min-width: 340px) {
+            right: -60px;
+          }
         }
 
         &__i {
