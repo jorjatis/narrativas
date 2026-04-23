@@ -1,8 +1,27 @@
 {
   "months": [
     {
+      "title": "Mayo 2026",
+      "cards": [
+        {
+          "title": "Santa María de Garoña",
+          "articleUrl": "",
+          "titleMedia": "11-santa-maria-garona",
+          "gif": false,
+          "netlifyUrl": "https://narrativa-santamariadegarona.netlify.app/"
+        }
+      ]
+    },
+    {
       "title": "Abril 2026",
       "cards": [
+        {
+          "title": "Los anuncios más vistos del régimen iraní",
+          "articleUrl": "",
+          "titleMedia": "10-murales-regimen-irani",
+          "gif": false,
+          "netlifyUrl": "https://narrativas-murales-regimen-irani.netlify.app/"
+        },
         {
           "title": "Para que llore mi madre, que llore la tuya: Una historia de bandas latinas",
           "articleUrl": "https://www.abc.es/podcast/narrativo/podcast-bandas-latinas/",
