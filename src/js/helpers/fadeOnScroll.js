@@ -1,15 +1,21 @@
-export default function fadeOnScroll(element, distance = 60) {
+export default function fadeOnScroll(selector, distance = 60) {
+  const el = document.querySelector(selector);
+  if (!el) return;
+
+  let ticking = false;
+
   window.addEventListener("scroll", () => {
-    const el = document.querySelector(element);
-    
-    if (!element) return;
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        el.classList.toggle(
+          "is-transparent",
+          window.scrollY >= distance
+        );
 
-    const scrollTop = window.scrollY;
+        ticking = false;
+      });
 
-    if (scrollTop >= distance) {
-      el.classList.add("is-transparent");
-    } else {
-      el.classList.remove("is-transparent");
+      ticking = true;
     }
   });
 }
