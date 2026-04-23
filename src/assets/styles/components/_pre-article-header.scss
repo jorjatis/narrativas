@@ -162,7 +162,12 @@ body:has(.v-h-a) {
 
     &--8 {
       top: 0;
-      left: 38.5%;
+      right: 0;
+
+      @media (min-width: 400px) { 
+        left: 38.5%;
+        right: unset;
+      }
     }
 
     &--9 {
