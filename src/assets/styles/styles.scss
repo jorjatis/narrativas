@@ -10,3 +10,10 @@
 @use './components/pre-article-header';
 @use './components/cintillo';
 @use './components/image-detail';
+
+.v-c-cmp {
+  .v-cmp-suh {
+    color: $cp1;
+    text-align: center;
+  }
+}

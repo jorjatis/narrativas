@@ -1,4 +1,4 @@
-<div class="v-n-img-det">
+<div class="v-n-img-det {{#if noDetail}}v-n-img-det--no-det{{/if}}">
   <div class="v-a-img-c v-a-img-c--fw-xs">
     <figure class="v-a-fig">
       <div class="v-a-lnk">
@@ -13,13 +13,15 @@
     </figure>
   </div>
 
-  <div class="v-n-img-det__d">
-    <div class="v-n-img-det__box">
-      <span class="v-n-img-det__t">{{detailTitle}}</span>
-      <p class="v-n-img-det__p">{{detailDescription}}</p>
+  {{#unless noDetail}}
+    <div class="v-n-img-det__d">
+      <div class="v-n-img-det__box">
+        <span class="v-n-img-det__t">{{detailTitle}}</span>
+        <p class="v-n-img-det__p">{{detailDescription}}</p>
+      </div>
+      <figure class="v-n-img-det__fig">
+        <img src="{{detailImage}}" alt="" class="v-n-img-det__img">
+      </figure>
     </div>
-    <figure class="v-n-img-det__fig">
-      <img src="{{detailImage}}" alt="" class="v-n-img-det__img">
-    </figure>
-  </div>
+  {{/unless}}
 </div>

@@ -13,8 +13,8 @@
     "infoContainer": {
       "exists": true,
       "pretitle": false,
-      "title": "Los anuncios más vistos del <span class=\"v-a-t__i v-a-t__i--1\">régimen</span> <span class=\"v-a-t__i v-a-t__i--2\">iraní</span>",
-      "description": "\"El asunto no es si va a haber más muertos por los ultras del fútbol; la única incógnita es cuándo\", advierten fuentes policiales, \"porque la violencia va a más\"",
+      "title": "<strong>Lego, IA y murales:</strong> La propaganda de Irán contra Trump",
+      "description": "Las paredes de las grandes ciudades de la República Islámica se llenan de lonas y pintadas propagandísticas que conviven con nuevas tendencias occidentales",
       "chevronDown": true
     },
     "firma": {
@@ -22,6 +22,6 @@
       "authorName": "Pepe Trashorras",
       "authorUrl": "https://www.abc.es/autor/pepe-trashorras-6230/"
     },
-    "paragraphPaywall": "Parrafo anterior al div con la clase de paywall. Si no hay paywall, en data/index.json, poner \"paragrahPaywall\" en false"
+    "paragraphPaywall": "La guerra entre EE.UU. e Irán se encuentra en una tregua indefinida y frágil desde el pasado martes, tal y como anunció el presidente Donald Trump. «Creo que la situación actual es la peor para la República Islámica; no hay negociación pero tampoco guerra», <span class=\"paywall pw-open\">explica a este diario Javier Gil Guerrero, investigador del Instituto Cultura y Sociedad de la Universidad de Navarra y autor de 'La sombra del Ayatolá: Una historia de la República Islámica de Irán' (Ciudadela Libros).</span>"
   }
 }

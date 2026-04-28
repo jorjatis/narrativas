@@ -2,6 +2,21 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvisto
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/js/scripts.js
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-pre-header.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-cintillo-01.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-cintillo-02.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-cintillo-03.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-cintillo-04.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-cintillo-05.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-cintillo-06.html
+
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-foto-detalle-01.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-foto-detalle-02.html
+
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-foto-sin-detalle-01.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-foto-sin-detalle-02.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-foto-sin-detalle-03.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-foto-sin-detalle-04.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/includes/inc-foto-sin-detalle-05.html
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/1.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/2.webp
@@ -21,3 +36,12 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvisto
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/16.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/17.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/18.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/detalle-1510146891.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/detalle-1510501072.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/mural-1510146891.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/mural-1510501072.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/mural-portaviones.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/mural-mano.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/mural-ayatola.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/mural-redes.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/mural-ataudes.webp

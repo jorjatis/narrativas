@@ -36,8 +36,10 @@ body:has(.v-h-a) {
 
 .v-w {
   .v-a--d-s-1 {
+    display: block;
     height: auto;
     margin-top: -70px;
+    margin-bottom: 120px;
 
     @media (min-width: $screen-xs) {
       margin-top: -98px;

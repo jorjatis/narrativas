@@ -38,13 +38,6 @@
         background-image: url("https://s1.abcstatics.com/comun/narrativas/redaccion/2026/04/26/anunciosmasvistoregimenirani/images/sumario-arriba.webp");
       }
     }
-    
-    .v-fc {
-      &__t {
-        color: $cb9;
-        text-transform: uppercase;
-      }
-    }
   }
 
   &__d {
@@ -106,5 +99,19 @@
 
   &__img {
     object-fit: cover;
+  }
+}
+
+.v-n-img-det--no-det {
+  .v-a-img-c {
+    width: 100%;
+
+    @media (min-width: $screen-sm) {
+      max-width: 709px;
+    }
+
+    @media (min-width: 1170px) {
+      max-width: 851px;
+    }
   }
 }
