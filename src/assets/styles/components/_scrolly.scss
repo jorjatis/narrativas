@@ -1,15 +1,10 @@
 @use '../base/variables' as *;
 
-/* ===============================
-   SCROLLY BASE
-================================= */
-
 .v-n-scrolly {
   position: relative;
   left: 50%;
   width: 100vw;
   margin-left: -50vw;
-  padding: 0 20px;
 
   @media (min-width: 1900px) {
     left: unset;
@@ -17,66 +12,79 @@
     margin-left: calc((-1900px / 2) + 50%);
   }
 
-  /* ===============================
-     STICKY VIEWPORT
-  ================================= */
-
   &__sticky {
     position: sticky;
-    top: 0;
-    height: 100vh;
+    top: 52px;
     width: 100%;
+    height: calc(100vh - 52px);
     overflow: hidden;
 
-    display: flex;
-    flex-direction: column;
-  }
 
-  /* ===============================
-     BACKGROUND (CAPA VISUAL)
-  ================================= */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (min-width: $screen-xs) {
+      top: 60px;
+      height: calc(100vh - 60px);
+    }
+  }
 
   &__bg {
     position: absolute;
     inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     width: 100%;
     height: 100%;
-  }
-
-  .bg-item {
-    position: absolute;
-    inset: 0;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 50px;
 
-    opacity: 0;
-    pointer-events: none;
-    will-change: opacity;
 
-    &.is-active {
-      opacity: 1;
-      pointer-events: auto;
+    // .bg-c {
+    //   position: relative;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   width: 100%;
+    //   height: 100%;
+    // }
+
+    .static {
+      max-width: 445px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      background: lightgrey;
     }
 
-    img,
-    video {
-      width: auto;
-      max-width: 100%;
-      max-height: 80vh;
-      object-fit: contain;
+    .bg-c {
+      position: relative;
+    }
+
+    .bg-item {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      opacity: 0;
+      will-change: opacity;
+      pointer-events: none;
+      
+      &[data-bg="0"] {
+        position: relative;
+        background: red;
+      }
+
+      &[data-bg="1"] {
+        background: green;
+      }
+
+      &[data-bg="2"] {
+        background: blue;
+      }
     }
   }
-
-  /* ===============================
-     STEPS (SCROLL)
-  ================================= */
 
   &__steps {
     position: relative;
