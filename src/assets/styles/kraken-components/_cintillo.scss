@@ -1,0 +1,21 @@
+@use '../base/variables' as *;
+
+.v-c-cmp {
+  .v-cmp-suh {
+    margin: 116px 0 48px;
+
+    svg {
+      max-width: 358px;
+      margin: 0 auto;
+    }
+
+    h3 {
+      font-family: $axs;
+      font-size: 32px;
+      line-height: 28px;
+      text-transform: uppercase;
+      text-align: center;
+      color: $cb9;
+    }
+  }
+}

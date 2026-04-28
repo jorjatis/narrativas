@@ -10,6 +10,8 @@ import initScrollyVideo from './utils/scrollyVideo';
 
 // NOTE: Components
 import highlights from './modules/highlights';
+import scrolly from './modules/scrolly';
+import scrollyEpiAnimation from './modules/scrolly-epi-anim';
 
 // NOTE: Envuelve el contenido del subtítulo en un span para la animacion del fondo amarillo
 const prepareSubtitles = () => {
@@ -47,6 +49,7 @@ const initObservers = () => {
 export function initAll() {
   fadeOnScroll('.scr-ind');
   initScrollyVideo(100);
+  scrolly();
 
   prepareSubtitles();
   moveEls('.v-a--d-s-1 > .v-a-inf-c', '.v-a--d-s-1 > .v-a-img-c', 'prepend');
@@ -57,6 +60,7 @@ export function initAll() {
   document.body.classList.add('is-loaded');
   
   highlights();
+  scrollyEpiAnimation();
 
   ScrollTrigger.refresh();
 }

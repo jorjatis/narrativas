@@ -5,45 +5,14 @@
 @use './base/animations';
 @use './base/global';
 
+// Kraken componentes
+@use './kraken-components/cintillo';
+@use './kraken-components/strongs';
+
 // Componentes
 @use './components/scroll-indicator';
 @use './components/pre-article-header';
 @use './components/scrolly-video';
+@use './components/scrolly';
+@use './components/scrolly-epi';
 
-.v-d-p {
-  strong {
-    display: inline;
-    padding: 0 2px;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    background: $cb2;
-    background-image: linear-gradient(to top, #f3f178 40%, transparent 40%);
-    background-repeat: no-repeat;
-    background-position: bottom left;
-    background-size: 100% 0%;
-
-    &.is-marked {
-      animation: markerUp .5s ease-out forwards;
-    }
-  }
-}
-
-.v-c-cmp {
-  .v-cmp-suh {
-    margin: 116px 0 48px;
-
-    svg {
-      max-width: 358px;
-      margin: 0 auto;
-    }
-
-    h3 {
-      font-family: $axs;
-      font-size: 32px;
-      line-height: 28px;
-      text-transform: uppercase;
-      text-align: center;
-      color: $cb9;
-    }
-  }
-}
