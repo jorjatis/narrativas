@@ -1,4 +1,4 @@
-export default function fadeOnScroll(element, distance = 60) {
+export default function fadeOnScroll(selector, distance = 60) {
   const el = document.querySelector(selector);
   if (!el) return;
 

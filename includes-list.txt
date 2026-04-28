@@ -1,7 +1,7 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/santamariadegarona/css/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/santamariadegarona/js/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/css/styles.css
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/js/scripts.js
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/santamariadegarona/includes/inc-pre-header.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-pre-header.html
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/santamariadegarona/videos/prueba-desk-1kf-1200.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/santamariadegarona/videos/prueba-mov-1kf-640.mp4
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/videos/prueba-desk-1kf-1200.mp4
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/videos/prueba-mov-1kf-640.mp4
