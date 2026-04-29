@@ -1,0 +1,65 @@
+@use '../base/variables'as *;
+
+.v-n-zoom-ship {
+  margin-top: 120px;
+  margin-bottom: 120px;
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 1440px;
+  margin-left: -50vw;
+  overflow: hidden;
+
+  @media (min-width: 1440px) {
+    left: unset;
+    width: 1440px;
+    margin-left: calc((-1440px / 2) + 50%);
+  }
+
+  figure {
+    img {
+      transform: scale(5.5) translateZ(0);
+      transform-origin: 107.5% 100%;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+  }
+
+  .ship-text {
+    position: absolute;
+    transform: translateY(-50%);
+    max-width: 320px;
+    opacity: 0;
+    pointer-events: none;
+    font-family: $mcr;
+    font-size: 20px;
+    line-height: 24px;
+    color: $cb2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &--1 {
+      @media (min-width: $screen-xs) {
+        top: 40%;
+        left: 5%;
+        bottom: unset;
+        right: unset;
+        color: $cb2;
+        transform: unset;
+      }
+    }
+
+    &--2 {
+      @media (min-width: $screen-xs) {
+        top: unset;
+        left: unset;
+        bottom: 10%;
+        right: 5%;
+        color: $cb1;
+        transform: unset;
+      }
+    }
+  }
+}
+

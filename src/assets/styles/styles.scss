@@ -5,14 +5,7 @@
 @use './base/animations';
 @use './base/global';
 
-// Kraken componentes
-@use './kraken-components/cintillo';
-@use './kraken-components/strongs';
-
 // Componentes
 @use './components/scroll-indicator';
 @use './components/pre-article-header';
-@use './components/scrolly-video';
-@use './components/scrolly';
-@use './components/scrolly-epi';
-
+@use './components/zoom-ship';

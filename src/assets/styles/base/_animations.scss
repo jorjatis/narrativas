@@ -2,18 +2,27 @@
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
 }
 
-@keyframes markerUp {
+@keyframes slideToRight {
   from {
-    background-size: 100% 0%;
+    transform: translateX(-20px);
   }
-
   to {
-    background-size: 100% 100%;
+    transform: translateX(0);
   }
+}
+
+@keyframes zoomOut {
+  to {
+    transform: scale(1)
+  }
+}
+
+@keyframes mover-loop {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
 }
