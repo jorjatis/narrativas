@@ -44,7 +44,8 @@
   }
 
   &:has(.step[data-step="3"].is-active),
-  &:has(.step[data-step="4"].is-active) {
+  &:has(.step[data-step="4"].is-active),
+  &:has(.step[data-step="5"].is-active) {
     .v-n-epi-lvls__i--3 {
       .v-n-epi-lvls__t {
         animation: markerUp .5s ease-out forwards; 
@@ -204,25 +205,54 @@
         @media (min-width: $screen-xs) {
           position: absolute;
           top: 20%;
-          right: -20%;
+          left: -22%;      
         }
       }
 
       .v-n-epi__box--2 {
         @media (min-width: $screen-xs) {
           position: absolute;
-          top: 20%;
-          right: -20%;
+          top: 42%;
+          right: -22%;
         }
       }
     }
 
     &[data-bg="4"] {
-      span {
+      .v-n-epi__txt {
         display: block;
         max-width: 130px;
         font: 16px/20px $mcs;
         color: $cb9;
+
+        &--1 {
+          @media (min-width: $screen-xs) {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 8%;
+          }
+        }
+
+        &--2 {
+          @media (min-width: $screen-xs) {
+            position: absolute;
+            right: -6%;
+            top: 52%;
+          }
+
+          &:before {
+            @media (min-width: $screen-xs) {
+              content: '';
+              width: 1px;
+              height: 90px;
+              position: absolute;
+              left: -8px;
+              top: 4px;
+              background: $cb9;
+            }
+          }
+        }
       }
     }
   }
