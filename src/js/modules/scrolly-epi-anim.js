@@ -61,15 +61,12 @@ export default function scrollyEpiAnimation() {
     .to(".epi-gafas", { opacity: 1, x: -50 }, 0)
     .to(".epi-casco", { opacity: 1, x: 25, y: -80 }, 0)
 
-    // 👇 separación clara entre fases
-    .add("tagsStart", "+=0.4")
-
     // TAGS
     .to(".epi-tag", {
       width: "100%",
       duration: 0.4,
       stagger: 0.05
-    }, "tagsStart")
+    }, "<")
 
     .to(".epi-tag__line", {
       width: "100%",
@@ -81,7 +78,6 @@ export default function scrollyEpiAnimation() {
       y: 0,
       opacity: 1,
       duration: 0.25,
-      stagger: 0.05
     }, "-=0.2");
 
   // -------------------------
