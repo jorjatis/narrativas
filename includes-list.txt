@@ -1,9 +1,9 @@
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/barco.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/mapa-cabecera2.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/ondas-10.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/mar-cabecera3.svg
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/petrolero.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/trozo-barco-10.webp
 
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-10-barco.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-10-ondas.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-10-fondo-L.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-10-fondo-M.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-10-fondo-S.webp

@@ -18,57 +18,31 @@ export default function zoomShip() {
 
       tl.fromTo(text1,
         { x: -100, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.3 },
-        0.8
+        { x: 0, opacity: 1, duration: 0.2 },
+        0.85
       );
-
-      tl.to(text1, {
-        y: -100,
-        opacity: 0,
-        duration: 0.3
-      }, 1.2);
 
       tl.fromTo(text2,
-        { x: 100, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.3 },
-        0.6
+        { y: 0, opacity: 1 },
+        { y: 100, opacity: 0, duration: 0.2 },
+        0.1
       );
-
-      tl.to(text2, {
-        y: -100,
-        opacity: 0,
-        duration: 0.3
-      }, 1.2);
     });
 
     mm.add("(max-width: 698px)", () => {
       const tl = createBaseTimeline(img);
 
       tl.fromTo(text2,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4 }
+        { y: 0, opacity: 1 },
+        { y: -50, opacity: 0, duration: 0.2 },
+        0.3
       );
-
-      tl.to(text2, { duration: 0.4 });
-
-      tl.to(text2, {
-        y: -50,
-        opacity: 0,
-        duration: 0.3
-      });
 
       tl.fromTo(text1,
         { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4 }
+        { y: 0, opacity: 1, duration: 0.3 },
+        0.8
       );
-
-      tl.to(text1, { duration: 0.4 });
-
-      tl.to(text1, {
-        y: -50,
-        opacity: 0,
-        duration: 0.3
-      });
     });
 
     function createBaseTimeline(img) {

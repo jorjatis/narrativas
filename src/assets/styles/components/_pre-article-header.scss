@@ -6,19 +6,6 @@
 body.is-loaded {
   .v-w {
     .v-a--d-s-1 {
-      .v-a-img-c {
-        figure {
-          animation: zoomOut 1s ease-out forwards;
-        }
-
-        .barco {
-          img {
-            animation: fadeIn 0.5s ease-in forwards;
-            animation-delay: .5s;
-          }
-        }
-      }
-
       .v-a-inf-c {
         .v-a-p-t {
           animation: fadeIn 0.5s ease-in forwards;
@@ -34,6 +21,25 @@ body.is-loaded {
   }
 }
 
+.v-n-preh {
+  position: relative;
+  width: 100%;
+
+  &-img-bg {
+    position: relative;
+  }
+
+  &-anim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 1600px;
+    height: 100%;
+    z-index: 1;
+  }
+}
+
 .v-w {
   .v-a--d-s-1 {
     display: flex;
@@ -43,127 +49,48 @@ body.is-loaded {
 
     .v-a-img-c {
       position: unset;
+      width: 600px;
+      margin-left: calc((-600px / 2) + 50%);
+      margin-right: auto;
 
-      figure {
-        transform: scale(3);
-        width: 600px;
-        margin-left: calc((-600px / 2) + 50%);
-
-        @media (min-width: 350px) {
-          width: 800px;
-          margin-left: calc((-800px / 2) + 50%);
-        }
-
-        @media (min-width: 600px) {
-          width: 1000px;
-          margin-left: calc((-1000px / 2) + 50%);
-        }
-
-        @media (min-width: 800px) {
-          width: 1200px;
-          margin-left: calc((-1200px / 2) + 50%);
-        }
-
-        @media (min-width: 1200px) {
-          width: 1600px;
-          margin-left: calc((-1600px / 2) + 50%);
-        }
+      @media (min-width: 350px) {
+        width: 800px;
+        margin-left: calc((-800px / 2) + 50%);
       }
 
-      .barco {
-        position: absolute;
-        width: 30px;
-        will-change: transform;
-        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.15));
+      @media (min-width: 600px) {
+        width: 1000px;
+        margin-left: calc((-1000px / 2) + 50%);
+      }
 
-        @media (min-width: 600px) {
-          width: 40px;
-        }
+      @media (min-width: 800px) {
+        width: 1200px;
+        margin-left: calc((-1200px / 2) + 50%);
+      }
 
-        img {
-          opacity: 0;
-        }
-
-        &--1 {
-          top: 39%;
-          left: 44%;
-          transform: translate(-50%, -50%);
-          rotate: -20deg;
-
-          @media (min-width: 350px) {
-            top: 38%;
-          }
-
-          @media (min-width: 600px) {
-            top: 35%;
-          }
-
-          @media (min-width: 699px) {
-            offset-path: url(#orbita-1);
-            animation: mover-loop 76s linear infinite;
-            left: 50%;
-          }
-
-          @media (min-width: 800px) {
-            top: 32%;
-          }
-
-          @media (min-width: 900px) and (min-height: 1100px) {
-            top: 38%;
-          }
-        }
-
-        &--2 {
-          top: 50%;
-          left: 15%;
-          transform: translate(-50%, -50%);
-          rotate: -30deg;
-
-          @media (min-width: 500px) {
-            left: 30%;
-          }
-
-          @media (min-width: 699px) {
-            offset-path: url(#orbita-2);
-            animation: mover-loop 72s linear infinite;
-            left: 40%;
-          }
-        }
-
-        &--3 {
-          top: 57%;
-          right: 8%;
-          transform: translate(-50%, -50%);
-          rotate: 12deg;
-
-          @media (min-width: 500px) {
-            right: 22%;
-          }
-
-          @media (min-width: 699px) {
-            offset-path: url(#orbita-3);
-            animation: mover-loop 74s linear infinite;
-          }
-
-          @media (min-width: 800px) {
-            right: 28%;
-          }
-        }
+      @media (min-width: 1200px) {
+        width: 1600px;
+        margin-left: calc((-1600px / 2) + 50%);
       }
     }
 
     .v-a-inf-c {
       position: absolute;
+      max-width: 290px;
+
+      @media (min-width: 450px) {
+        max-width: 332px;
+      }
+
+      @media (min-width: 750px) {
+        top: 45%;
+        transform: translate(-50%, -50%);
+      }
 
       .v-a-p-t {
-        max-width: 290px;
         margin-bottom: 24px;
         opacity: 0;
-        text-align: right;
-
-        @media (min-width: 450px) {
-          max-width: 340px;
-        }
+        text-align: left;
 
         &__p {
           font-family: $axs;
@@ -189,7 +116,6 @@ body.is-loaded {
 
       .v-a-t {
         position: relative;
-        left: 22%;
         max-width: 215px;
         font-family: $atl;
         font-size: 20px;

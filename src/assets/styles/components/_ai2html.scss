@@ -1,7 +1,7 @@
 @use '../base/variables' as *;
 
 .v-c-cmu {
-  &:has(#v-g-ormuz0103-box) {
+  &:has(#v-g-ormuz0104-box) {
     background-image: url(https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-10-fondo-XS.webp);
     background-repeat: repeat-x;
     background-size: contain;
@@ -110,7 +110,7 @@
     }
   }
 
-  &:has(#v-g-ormuz011-box) {
+  &:has(#v-g-ormuz0112-box) {
     background-image: url(https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-11-fondo-XS.webp);
     background-repeat: repeat-x;
     background-size: contain;
@@ -128,7 +128,7 @@
       background-image: url(https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-11-fondo-L.webp);
     }
 
-    #v-g-ormuz011-box {
+    #v-g-ormuz0112-box {
       overflow: visible;
     }
   }
