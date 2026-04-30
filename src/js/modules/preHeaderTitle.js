@@ -1,7 +1,7 @@
 export default function preHeaderTitle() {
-  const h1 = document.querySelector('.v-a-t');
+  const title = document.querySelector('.v-a-p-t__p');
 
-  h1.innerHTML = h1.textContent.replace(
+  title.innerHTML = title.textContent.replace(
     ' de ',
     ' <span>de</span> '
   );
