@@ -64,7 +64,11 @@ export default function scrolly() {
       activeStep.classList.add("is-active");
     }
 
+    let initialized = false;
+
     function updateInitialState() {
+      if (initialized) return;
+
       let stepToActivate = null;
       const vCenter = window.innerHeight / 2;
 
@@ -76,18 +80,15 @@ export default function scrolly() {
       });
 
       if (!stepToActivate) {
-        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-
-        stepToActivate = scrollY > maxScroll / 2
-          ? steps[steps.length - 1]
-          : steps[0];
+        stepToActivate = steps[0];
       }
 
       if (stepToActivate) {
         setActiveStep(stepToActivate);
         setBackground(parseInt(stepToActivate.dataset.bg), true);
       }
+
+      initialized = true;
     }
 
     steps.forEach((step) => {
@@ -108,6 +109,10 @@ export default function scrolly() {
 
     updateInitialState();
 
-    ScrollTrigger.addEventListener("refresh", updateInitialState);
+    ScrollTrigger.create({
+      trigger: container,
+      start: "top bottom",
+      onRefresh: () => updateInitialState()
+    });
   });
 }
