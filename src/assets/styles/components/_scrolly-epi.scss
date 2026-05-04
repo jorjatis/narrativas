@@ -65,6 +65,14 @@
     }
   }
 
+  .v-n-scrolly__bg {
+    margin-top: 32px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: 0;
+    }
+  }
+
   .bg-item {
     figure {
       width: auto;
@@ -88,6 +96,10 @@
     .v-n-epi__box {
       display: inline-flex;
       gap: 8px;
+
+      @media (max-width: $screen-xs) {
+        flex-direction: row-reverse;
+      }
 
       &-inf-c {
         max-width: 110px;
@@ -175,9 +187,29 @@
         }
       }
 
+      .v-n-epi-c {
+        > figure {
+          @media (max-width: $screen-xs) {
+            display: none;
+          }
+        }
+      }
+
+      .v-n-epi__arn {
+        @media (max-width: $screen-xs) {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          align-items: center;
+          margin-top: 24px;
+        }
+      }
+
       p {       
         width: 100%;
+        max-width: 288px;
         font: 14px/16px $mcr;        
+        text-align: center;
 
         @media (min-width: $screen-xs) {
           position: absolute;
@@ -216,42 +248,73 @@
           right: -22%;
         }
       }
+
+      .v-n-epi-c {
+        > figure {
+          @media (max-width: $screen-xs) {
+            display: none;
+          }
+        }
+      }
+
+      .v-n-epi__arn {
+        @media (max-width: $screen-xs) {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          align-items: center;
+          margin-top: 24px;
+        }
+      }
     }
 
     &[data-bg="4"] {
       .v-n-epi__txt {
         display: block;
-        max-width: 130px;
+        max-width: 105px;
         font: 16px/20px $mcs;
         color: $cb9;
 
+        @media (min-width: 521px) {
+          max-width: 130px;
+        }
+
         &--1 {
-          @media (min-width: $screen-xs) {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 8%;
-          }
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 8%;
         }
 
         &--2 {
-          @media (min-width: $screen-xs) {
-            position: absolute;
+          position: absolute;
+          right: 6%;
+          top: 50%;
+
+          @media (min-width: 521px) {
             right: -6%;
             top: 52%;
           }
 
           &:before {
-            @media (min-width: $screen-xs) {
-              content: '';
-              width: 1px;
-              height: 90px;
-              position: absolute;
-              left: -8px;
-              top: 4px;
-              background: $cb9;
-            }
+            content: '';
+            width: 1px;
+            height: 90px;
+            position: absolute;
+            left: -8px;
+            top: 4px;
+            background: $cb9;
           }
+        }
+      }
+
+      .v-n-epi-c {
+        position: relative;
+        left: -30px;
+
+        @media (min-width: 521px) {
+          position: unset;
+          left: unset;
         }
       }
     }
@@ -264,6 +327,10 @@
   transform: translateX(-50%);
   width: 410px;
   height: 494px;
+
+  @media (max-width: 420px) {
+    width: 320px;
+  }
 
   .epi-tag {
     position: absolute;
@@ -293,52 +360,97 @@
 
     &--comunicacion {
       max-width: 151px;
-      top: 14.2%;
+      top: 13%;
       left: 2%;
+
+      @media (max-width: 420px) {
+        max-width: 85px;
+        top: 3%;
+        left: 5%;
+        flex-direction: column-reverse;
+        gap: 6px;
+        overflow: visible !important;
+      }
     }
 
     &--gafas {
       max-width: 85px;
       top: 28%;
       left: 12%;
+
+      @media (max-width: 420px) {
+        max-width: 53px;
+        left: 6%;
+      }
     }
 
     &--guantes {
       max-width: 110px;
       top: 58%;
       left: 10%;
+
+      @media (max-width: 420px) {
+        max-width: 71px;
+        left: 5%;
+      }
     }
 
     &--zapatos {
       max-width: 172px;
-      bottom: 0px;
+      bottom: 7%;
       left: 5%;
+
+      @media (max-width: 420px) {
+        max-width: 120px;
+        left: 4%;
+      }
     }
 
     &--casco {
       max-width: 142px;
-      right: 2%;
+      right: 6%;
       top: 3%;
+
+      @media (max-width: 420px) {
+        max-width: 95px;
+        right: 7%;
+      }
     }
 
     &--cubrecabeza {
       max-width: 165px;
-      right: 4%;
+      right: 7%;
       top: 20%;
+
+      @media (max-width: 420px) {
+        max-width: 125px;
+      }
     }
 
     &--buzo {
       max-width: 131px;
       right: 7%;
       top: 43%;
+
+      @media (max-width: 420px) {
+        max-width: 85px;
+        right: 9%;
+      }
     }
 
     &--suela {
-      max-width: 158px;
-      bottom: -4%;
+      max-width: 160px;
+      bottom: 2%;
       right: 5%;
+
+      @media (max-width: 420px) {
+        max-width: 110px;
+        right: 8%;
+      }
     }
   }
+
+  
 }
 
 .v-n-epi-inf-c {
@@ -433,5 +545,91 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: $screen-xs) and (max-height: 770px) {
+  .v-n-scrolly__static {
+    padding: 0 14px;
+  }
+
+  .v-n-epi-inf-c .v-n-epi-desc__sub {
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .v-n-epi-inf-c .v-n-epi-lvls {
+    margin-top: 12px;
+    gap: 4px;
+  }
+
+  .v-n-epi-inf-c .v-n-epi-lvls__bot {
+    padding-bottom: 4px;
+  }
+
+  .v-n-epi-inf-c .v-n-epi-lvls__i {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .v-n-epi-inf-c .v-n-epi-lvls__sub {
+    font-size: 12px;
+  }
+
+  .v-n-scrolly--epi .bg-item figure {
+    height: 345px;
+  }
+
+  .v-n-scrolly--epi .bg-item figure img {
+    height: 335px;
+  }
+
+  .v-n-epi-tags {
+    height: 335px
+  }
+
+  .v-n-epi-tags .epi-tag__txt {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  .v-n-epi-tags .epi-tag--comunicacion {
+    max-width: 98px;
+    top: -2%;
+  }
+
+  .v-n-epi-tags .epi-tag--gafas {
+    max-width: 64px;
+  }
+
+  .v-n-epi-tags .epi-tag--guantes {
+    max-width: 88px;
+  }
+
+  .v-n-epi-tags .epi-tag--zapatos {
+    max-width: 123px;
+    bottom: 0%;
+  }
+
+  .v-n-epi-tags .epi-tag--casco {
+    top: 0%
+  }
+
+  .v-n-epi-tags .epi-tag--buzo {
+    max-width: 105px;
+  }
+
+  .v-n-epi-tags .epi-tag--suela {
+    max-width: 117px;
+  }
+
+  .v-n-scrolly--epi .bg-item[data-bg="2"] .v-n-epi__arn {
+    margin-top: 2px;
+  }
+
+  .v-n-scrolly--epi .bg-item .v-n-epi__box figure {
+    width: 78px;
+    height: 78px;
   }
 }
