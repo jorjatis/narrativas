@@ -9,6 +9,13 @@
           "titleMedia": "11-santa-maria-garona",
           "gif": false,
           "netlifyUrl": "https://narrativa-santamariadegarona.netlify.app/"
+        },
+        {
+          "title": "Cierre de Ormuz",
+          "articleUrl": "https://www.abc.es/economia/cierre-ormuz-bloqueo-temblar-economia-mundial-20260502200728-nt.html",
+          "titleMedia": "11-cierre-de-ormuz",
+          "gif": true,
+          "netlifyUrl": "https://narrativa-cierredeormuz.netlify.app/"
         }
       ]
     },
