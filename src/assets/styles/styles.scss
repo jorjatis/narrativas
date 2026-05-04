@@ -10,3 +10,28 @@
 @use './components/pre-article-header';
 @use './components/zoom-ship';
 @use './components/ai2html';
+
+#datawrapper-chart-XWxij {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.v-a--d-s-1 {
+  .v-a-inf-c {
+    .v-a-s-t {
+      display: none;
+    }
+  }
+}
+
+.v-d--1 {
+  .v-a-s-t {
+    margin: 16px auto 120px;
+    font-family: $adl;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: -0.11px;
+    color: $cb1;
+    text-align: center;
+  }
+}

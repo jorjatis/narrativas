@@ -19,7 +19,7 @@
       background-image: url(https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-10-fondo-L.webp);
     }
 
-    #v-g-ormuz0103-box {
+    #v-g-ormuz0104-box {
       overflow: visible;
     }
 
@@ -130,6 +130,37 @@
 
     #v-g-ormuz0112-box {
       overflow: visible;
+    }
+
+    [id$="-S"],
+    [id$="-XS"] {
+      overflow: visible;
+
+      &:before {
+        content: "";
+        position: absolute;
+        right: 100%;
+        width: 100%;
+        background-size: contain;
+        background-repeat: repeat-x;
+        background-position: 0px 0px;
+      }
+    }
+
+    [id$="-XS"] {
+      &:before {
+        top: 291px;
+        height: 125px;
+        background-image: url(https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-11-barco-xs.webp);
+      }
+    }
+
+    [id$="-S"] {
+      &:before {
+        top: 393px;
+        height: 119px;
+        background-image: url(https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/cierredeormuz/images/graf-11-barco-s.webp);
+      }
     }
   }
 }

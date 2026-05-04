@@ -34,6 +34,11 @@ body:has(.v-h-a) {
   z-index: 12;
 }
 
+.v-d .v-ath--t1 {
+  position: relative;
+  z-index: 1;
+}
+
 .v-w {
   .v-a--d-s-1 {
     height: auto;
@@ -41,11 +46,6 @@ body:has(.v-h-a) {
 
     @media (min-width: $screen-xs) {
       margin-top: -98px;
-    }
-
-    + .v-c {
-      position: relative;
-      z-index: 1;
     }
     
     .v-a-inf-c {

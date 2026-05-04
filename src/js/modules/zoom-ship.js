@@ -13,8 +13,9 @@ export default function zoomShip() {
 
     const mm = gsap.matchMedia();
 
+    // 💻 Desktop
     mm.add("(min-width: 699px)", () => {
-      const tl = createBaseTimeline(img);
+      const tl = createBaseTimeline(img, 400); // original
 
       tl.fromTo(text1,
         { x: -100, opacity: 0 },
@@ -29,8 +30,9 @@ export default function zoomShip() {
       );
     });
 
+    // 📱 Mobile
     mm.add("(max-width: 698px)", () => {
-      const tl = createBaseTimeline(img);
+      const tl = createBaseTimeline(img, 200); // 👈 mitad del scroll
 
       tl.fromTo(text2,
         { y: 0, opacity: 1 },
@@ -45,7 +47,7 @@ export default function zoomShip() {
       );
     });
 
-    function createBaseTimeline(img) {
+    function createBaseTimeline(img, endValue = 400) {
       gsap.set(img, {
         scale: 5.5,
         transformOrigin: "103% 100%",
@@ -56,7 +58,7 @@ export default function zoomShip() {
         scrollTrigger: {
           trigger: ".v-n-zoom-ship",
           start: "center center",
-          end: "+=400%",
+          end: `+=${endValue}%`, // 👈 dinámico
           scrub: 1,
           pin: true
         }

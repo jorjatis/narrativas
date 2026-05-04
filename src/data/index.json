@@ -14,14 +14,13 @@
       "exists": true,
       "pretitle": "Cierre de Ormuz",
       "title": "El bloqueo que hace temblar la economía mundial",
-      "description": false,
+      "description": "La subida del combustible fue solo el inicio. La crisis en Oriente Próximo amenaza ya a las hipotecas, la cesta de la compra e incluso a vuelos comerciales.",
       "chevronDown": true
     },
     "firma": {
       "authorImg": "https://s1.abcstatics.com/comun/2015/img/autor/autor-6230-foto-6.jpeg?width=90",
       "authorName": "Pepe Trashorras",
       "authorUrl": "https://www.abc.es/autor/pepe-trashorras-6230/"
-    },
-    "paragraphPaywall": "Parrafo anterior al div con la clase de paywall. Si no hay paywall, en data/index.json, poner \"paragrahPaywall\" en false"
+    }
   }
 }
