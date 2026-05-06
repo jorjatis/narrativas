@@ -4,18 +4,19 @@ export default function fadeOnScroll(selector, distance = 60) {
 
   let ticking = false;
 
+  const update = () => {
+    el.classList.toggle(
+      "is-transparent",
+      window.scrollY >= distance
+    );
+
+    ticking = false;
+  };
+
   window.addEventListener("scroll", () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        el.classList.toggle(
-          "is-transparent",
-          window.scrollY >= distance
-        );
+    if (ticking) return;
 
-        ticking = false;
-      });
-
-      ticking = true;
-    }
-  });
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
 }

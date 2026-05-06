@@ -38,5 +38,11 @@ body.is-loaded .v-n-scrolly-vid {
       height: 1px;
       background: $cb2;
     }
+
+    video {
+      @media (min-width: $screen-xs) {
+        max-height: 50vh;
+      }
+    }
   }
 }

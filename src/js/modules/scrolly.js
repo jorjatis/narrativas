@@ -9,110 +9,68 @@ export default function scrolly() {
 
   containers.forEach((container) => {
     const steps = container.querySelectorAll(".step");
-    const backgrounds = container.querySelectorAll(".bg-item");
+    const bgData = Array.from(container.querySelectorAll(".bg-item")).map(el => ({
+      el,
+      video: el.querySelector("video") || null
+    }));
 
-    let currentBg = -1;
+    let currentIndex = -1;
 
     const config = {
-      fadeIn: 0.8,
-      fadeOut: 0.4,
+      fadeIn: 0.6,
+      fadeOut: 0.3,
       start: "top center",
       end: "bottom center",
     };
 
-    gsap.set(backgrounds, { opacity: 0 });
+    gsap.set(bgData.map(b => b.el), { opacity: 0 });
 
-    function setBackground(index, immediate = false) {
-      if (index === currentBg || index < 0) return;
+    function activate(index, immediate = false) {
+      if (index === currentIndex || index < 0) return;
 
-      const nextBg = backgrounds[index];
-      const otherBgs = Array.from(backgrounds).filter((_, i) => i !== index);
-
-      backgrounds.forEach((bg, i) => {
-        if (i !== index) {
-          bg.classList.remove("is-active");
-          const video = bg.querySelector("video");
-          if (video) video.pause();
-        }
-      });
-
-      gsap.to(otherBgs, {
-        opacity: 0,
-        duration: immediate ? 0 : config.fadeOut,
-        ease: "power1.out",
-        overwrite: true
-      });
-
-      if (nextBg) {
-        nextBg.classList.add("is-active");
-        const video = nextBg.querySelector("video");
-        if (video) video.play().catch(() => {});
-
-        gsap.to(nextBg, {
-          opacity: 1,
-          duration: immediate ? 0 : config.fadeIn,
-          ease: "power2.out",
-          overwrite: true
-        });
+      const duration = immediate ? 0 : config.fadeIn;
+      
+      if (currentIndex !== -1) {
+        const prev = bgData[currentIndex];
+        prev.el.classList.remove("is-active");
+        if (prev.video) prev.video.pause();
+        gsap.to(prev.el, { opacity: 0, duration: config.fadeOut, overwrite: true });
+        steps[currentIndex]?.classList.remove("is-active");
       }
 
-      currentBg = index;
-    }
-
-    function setActiveStep(activeStep) {
-      steps.forEach((step) => step.classList.remove("is-active"));
-      activeStep.classList.add("is-active");
-    }
-
-    let initialized = false;
-
-    function updateInitialState() {
-      if (initialized) return;
-
-      let stepToActivate = null;
-      const vCenter = window.innerHeight / 2;
-
-      steps.forEach((step) => {
-        const rect = step.getBoundingClientRect();
-        if (rect.top <= vCenter && rect.bottom >= vCenter) {
-          stepToActivate = step;
-        }
-      });
-
-      if (!stepToActivate) {
-        stepToActivate = steps[0];
+      const next = bgData[index];
+      if (next) {
+        next.el.classList.add("is-active");
+        steps[index]?.classList.add("is-active");
+        if (next.video) next.video.play().catch(() => {});
+        gsap.to(next.el, { opacity: 1, duration, overwrite: true });
       }
 
-      if (stepToActivate) {
-        setActiveStep(stepToActivate);
-        setBackground(parseInt(stepToActivate.dataset.bg), true);
-      }
-
-      initialized = true;
+      currentIndex = index;
     }
 
-    steps.forEach((step) => {
-      const bgIndex = parseInt(step.dataset.bg);
+    steps.forEach((step, index) => {
+      const bgIndex = parseInt(step.dataset.bg, 10);
 
       ScrollTrigger.create({
         trigger: step,
         start: config.start,
         end: config.end,
         onToggle: (self) => {
-          if (self.isActive) {
-            setActiveStep(step);
-            setBackground(bgIndex);
-          }
+          if (self.isActive) activate(bgIndex);
+        },
+        onRefresh: (self) => {
+          if (self.isActive) activate(bgIndex, true);
         }
       });
     });
 
-    updateInitialState();
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
 
-    ScrollTrigger.create({
-      trigger: container,
-      start: "top bottom",
-      onRefresh: () => updateInitialState()
+      if (currentIndex === -1) {
+        activate(0, true);
+      }
     });
   });
 }

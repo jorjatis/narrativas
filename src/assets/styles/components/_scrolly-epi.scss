@@ -1,18 +1,19 @@
-@use '../base/variables' as *;
+@use '../base/variables'as *;
 
 .v-n-scrolly--epi {
+
   &:has(.step[data-step="0"].is-active),
   &:has(.step[data-step="1"].is-active) {
     .v-n-epi-lvls__i--1 {
       .v-n-epi-lvls__t {
-        animation: markerUp .5s ease-out forwards; 
+        animation: markerUp .5s ease-out forwards;
       }
 
       .v-n-epi-lvls__sub {
         display: block;
         opacity: 1;
         left: 0;
-        animation: fadeIn .2s ease-in forwards; 
+        animation: fadeIn .2s ease-in forwards;
       }
     }
 
@@ -25,7 +26,7 @@
   &:has(.step[data-step="2"].is-active) {
     .v-n-epi-lvls__i--2 {
       .v-n-epi-lvls__t {
-        animation: markerUp .5s ease-out forwards; 
+        animation: markerUp .5s ease-out forwards;
       }
 
       .v-n-epi-lvls__sub {
@@ -33,7 +34,7 @@
         left: 50%;
         display: block;
         opacity: 1;
-        animation: fadeIn .2s ease-in forwards; 
+        animation: fadeIn .2s ease-in forwards;
       }
     }
 
@@ -48,14 +49,14 @@
   &:has(.step[data-step="5"].is-active) {
     .v-n-epi-lvls__i--3 {
       .v-n-epi-lvls__t {
-        animation: markerUp .5s ease-out forwards; 
+        animation: markerUp .5s ease-out forwards;
       }
 
       .v-n-epi-lvls__sub {
         display: block;
         opacity: 1;
         right: 0;
-        animation: fadeIn .2s ease-in forwards; 
+        animation: fadeIn .2s ease-in forwards;
       }
     }
 
@@ -188,7 +189,7 @@
       }
 
       .v-n-epi-c {
-        > figure {
+        >figure {
           @media (max-width: $screen-xs) {
             display: none;
           }
@@ -205,10 +206,10 @@
         }
       }
 
-      p {       
+      p {
         width: 100%;
         max-width: 288px;
-        font: 14px/16px $mcr;        
+        font: 14px/16px $mcr;
         text-align: center;
 
         @media (min-width: $screen-xs) {
@@ -237,7 +238,7 @@
         @media (min-width: $screen-xs) {
           position: absolute;
           top: 20%;
-          left: -22%;      
+          left: -22%;
         }
       }
 
@@ -250,7 +251,7 @@
       }
 
       .v-n-epi-c {
-        > figure {
+        >figure {
           @media (max-width: $screen-xs) {
             display: none;
           }
@@ -450,7 +451,7 @@
     }
   }
 
-  
+
 }
 
 .v-n-epi-inf-c {
@@ -509,7 +510,7 @@
         background-repeat: no-repeat;
         background-position: bottom left;
         background-size: 100% 0%;
-        font-family: $mcs;      
+        font-family: $mcs;
       }
 
       &__sub {
@@ -548,96 +549,114 @@
   }
 }
 
+@media (max-width: $screen-xs) and (max-height: 599px) {
+  .v-n-scrolly--epi {
+    .v-n-scrolly__bg {
+      margin-top: 32px;
+    }
+  }
+}
+
+@media (max-width: $screen-xs) and (min-height: 600px) and (max-height: 770px) {
+  .v-n-scrolly--epi {
+    .v-n-scrolly__bg {
+      margin-top: 72px;
+    }
+  }
+}
+
 @media (max-width: $screen-xs) and (max-height: 770px) {
-  .v-n-scrolly__static {
-    padding: 0 14px;
-  }
+  .v-n-scrolly--epi {
+    .v-n-scrolly__static {
+      padding: 0 14px;
+    }
 
-  .v-n-epi-inf-c .v-n-epi-desc__sub {
-    margin-top: 2px;
-    font-size: 14px;
-    line-height: 16px;
-  }
+    .v-n-epi-inf-c .v-n-epi-desc__sub {
+      margin-top: 2px;
+      font-size: 14px;
+      line-height: 16px;
+    }
 
-  .v-n-epi-inf-c .v-n-epi-lvls {
-    margin-top: 12px;
-    gap: 4px;
-  }
+    .v-n-epi-inf-c .v-n-epi-lvls {
+      margin-top: 12px;
+      gap: 4px;
+    }
 
-  .v-n-epi-inf-c .v-n-epi-lvls__bot {
-    padding-bottom: 4px;
-  }
+    .v-n-epi-inf-c .v-n-epi-lvls__bot {
+      padding-bottom: 4px;
+    }
 
-  .v-n-epi-inf-c .v-n-epi-lvls__i {
-    font-size: 14px;
-    line-height: 18px;
-  }
+    .v-n-epi-inf-c .v-n-epi-lvls__i {
+      font-size: 14px;
+      line-height: 18px;
+    }
 
-  .v-n-epi-inf-c .v-n-epi-lvls__sub {
-    font-size: 12px;
-  }
+    .v-n-epi-inf-c .v-n-epi-lvls__sub {
+      font-size: 12px;
+    }
 
-  .v-n-scrolly--epi .bg-item figure {
-    height: 345px;
-  }
+    .bg-item figure {
+      height: 345px;
+    }
 
-  .v-n-scrolly--epi .bg-item figure img {
-    height: 335px;
-  }
+    .bg-item figure img {
+      height: 335px;
+    }
 
-  .v-n-epi-tags {
-    height: 335px
-  }
+    .v-n-epi-tags {
+      height: 335px
+    }
 
-  .v-n-epi-tags .epi-tag__txt {
-    font-size: 14px;
-    line-height: 14px;
-  }
+    .v-n-epi-tags .epi-tag__txt {
+      font-size: 14px;
+      line-height: 14px;
+    }
 
-  .v-n-epi-tags .epi-tag--comunicacion {
-    max-width: 98px;
-    top: -2%;
-  }
+    .v-n-epi-tags .epi-tag--comunicacion {
+      max-width: 98px;
+      top: 4%;
+    }
 
-  .v-n-epi-tags .epi-tag--gafas {
-    max-width: 64px;
-  }
+    .v-n-epi-tags .epi-tag--gafas {
+      max-width: 64px;
+    }
 
-  .v-n-epi-tags .epi-tag--guantes {
-    max-width: 88px;
-  }
+    .v-n-epi-tags .epi-tag--guantes {
+      max-width: 88px;
+    }
 
-  .v-n-epi-tags .epi-tag--zapatos {
-    max-width: 123px;
-    bottom: 0%;
-  }
+    .v-n-epi-tags .epi-tag--zapatos {
+      max-width: 123px;
+      bottom: 0%;
+    }
 
-  .v-n-epi-tags .epi-tag--casco {
-    top: 0%
-  }
+    .v-n-epi-tags .epi-tag--casco {
+      top: 0%
+    }
 
-  .v-n-epi-tags .epi-tag--buzo {
-    max-width: 105px;
-  }
+    .v-n-epi-tags .epi-tag--buzo {
+      max-width: 105px;
+    }
 
-  .v-n-epi-tags .epi-tag--suela {
-    max-width: 117px;
-  }
+    .v-n-epi-tags .epi-tag--suela {
+      max-width: 117px;
+    }
 
-  .v-n-scrolly--epi .bg-item[data-bg="2"] .v-n-epi__arn {
-    margin-top: 2px;
-  }
+    .bg-item[data-bg="2"] .v-n-epi__arn {
+      margin-top: 2px;
+    }
 
-  .v-n-scrolly--epi .bg-item .v-n-epi__box figure {
-    width: 78px;
-    height: 78px;
-  }
+    .bg-item .v-n-epi__box figure {
+      width: 78px;
+      height: 78px;
+    }
 
-  .v-n-scrolly--epi .bg-item[data-bg="4"] .v-n-epi__txt--1 {
-    top: 2%;
-  }
+    .bg-item[data-bg="4"] .v-n-epi__txt--1 {
+      top: 2%;
+    }
 
-  .v-n-scrolly--epi .bg-item[data-bg="4"] .v-n-epi__txt--2 {
-    top: 30%;
+    .bg-item[data-bg="4"] .v-n-epi__txt--2 {
+      top: 30%;
+    }
   }
 }

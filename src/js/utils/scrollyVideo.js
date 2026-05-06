@@ -2,60 +2,62 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function initScrollyVideo(playbackConst = 500) {
-  const scrollyVidContainerHeight = document.querySelector(".v-n-cmp-scrolly-vid");
-  const scrollyVid = document.querySelector('.v-n-scrolly-vid video');
+  const container = document.querySelector(".v-n-cmp-scrolly-vid");
+  const video = container?.querySelector('video');
   
-  if (!scrollyVid || !scrollyVidContainerHeight) return;
+  if (!video || !container) return;
 
-  let lastPos = -1;
-
-  // 1. Extraemos las rutas de los data-attributes (evita el parpadeo)
-  const rutaMobile = scrollyVid.getAttribute('data-src-mobile');
-  const rutaDesktop = scrollyVid.getAttribute('data-src-desktop');
-
+  const rutaMobile = video.getAttribute('data-src-mobile');
+  const rutaDesktop = video.getAttribute('data-src-desktop');
   const mediaQuery = window.matchMedia("(max-width: 699px)");
 
-  // 2. Función para asignar el video
   function loadVideo() {
     const selectedSrc = mediaQuery.matches ? rutaMobile : rutaDesktop;
+    if (video.dataset.current === selectedSrc) return;
 
-    // Solo actualizamos si la fuente es distinta (evita recargas innecesarias en resize)
-    if (scrollyVid.dataset.current === selectedSrc) return;
-
-    scrollyVid.innerHTML = `<source src="${selectedSrc}" type="video/mp4">`;
-    scrollyVid.dataset.current = selectedSrc; // Guardamos estado actual
-    scrollyVid.load();
-    
-    console.log("Cargando:", selectedSrc);
+    video.src = selectedSrc;
+    video.dataset.current = selectedSrc;
+    video.muted = true;
+    video.preload = "auto";
+    video.setAttribute("playsinline", "");
+    video.load();
   }
 
-  // 3. Listener de cambio de resolución
   mediaQuery.addEventListener('change', loadVideo);
-
-  // Ejecución inicial inmediata
   loadVideo();
 
-  // 4. Lógica de Scroll (Optimizada con Math.min/max)
-  function render() {
-    const currentPos = window.pageYOffset;
-    
-    if (lastPos !== currentPos) {
-      lastPos = currentPos;
-      const frameNumber = currentPos / playbackConst;
+  const videoProxy = { time: 0 };
+  let st = null; 
 
-      if (isFinite(frameNumber) && scrollyVid.readyState >= 2 && !scrollyVid.seeking) {
-        // Encapsulamos el tiempo entre 0 y la duración del video
-        scrollyVid.currentTime = Math.min(Math.max(frameNumber, 0), scrollyVid.duration);
+  const initVideoTimeline = () => {
+    if (st) st.kill();
+    if (!video.duration) return;
+
+    const scrollDistance = video.duration * playbackConst;
+
+    st = ScrollTrigger.create({
+      trigger: container,
+      start: "top top",
+      end: `+=${scrollDistance}`,
+      pin: true,
+      scrub: 0.5,
+      onUpdate: (self) => {
+        videoProxy.time = self.progress * video.duration;
+        if (video.readyState >= 2 && !video.seeking) {
+          video.currentTime = videoProxy.time;
+        }
+      },
+      onRefresh: (self) => {
+        if (self && video.readyState >= 2) {
+          video.currentTime = video.duration * self.progress;
+        }
       }
-    }
-    window.requestAnimationFrame(render);
+    });
+  };
+
+  if (video.readyState >= 1) {
+    initVideoTimeline();
+  } else {
+    video.addEventListener('loadeddata', initVideoTimeline, { once: true });
   }
-
-  scrollyVid.addEventListener('loadedmetadata', function () {
-    scrollyVidContainerHeight.style.height = Math.floor(scrollyVid.duration * playbackConst) + window.innerHeight + "px";
-
-    ScrollTrigger.refresh();
-  });
-
-  window.requestAnimationFrame(render);
 }

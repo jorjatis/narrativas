@@ -27,6 +27,13 @@ body:has(.v-h-a) {
 .ai2html {
   display: flex;
   justify-content: center;
+  margin-top: 80px !important;
+  margin-bottom: 80px !important;
+
+  @media (min-width: $screen-xs) {
+    margin-top: 112px !important;
+    margin-bottom: 112px !important;
+  }
 }
 
 .v-h-a {

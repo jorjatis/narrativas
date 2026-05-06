@@ -4,24 +4,17 @@ export default function moveEls(el, target, position = "prepend") {
 
   if (!element || !targetEl) return;
 
-  switch (position) {
-    case "prepend":
-      targetEl.prepend(element);
-      break;
+  const actions = {
+    prepend: () => targetEl.prepend(element),
+    append: () => targetEl.append(element),
+    before: () => targetEl.before(element),
+    after: () => targetEl.after(element),
+  };
 
-    case "append":
-      targetEl.append(element);
-      break;
-
-    case "before":
-      targetEl.before(element);
-      break;
-
-    case "after":
-      targetEl.after(element);
-      break;
-
-    default:
-      console.warn(`Posición no válida: ${position}`);
+  if (!actions[position]) {
+    console.warn(`Posición no válida: ${position}`);
+    return;
   }
+
+  actions[position]();
 }

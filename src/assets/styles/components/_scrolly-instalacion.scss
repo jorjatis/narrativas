@@ -20,6 +20,14 @@
 }
 
 .v-n-inst {
+  > figure {
+    img {
+      @media (min-width: $screen-xs) {
+        max-height: 70vh;
+      }
+    }
+  }
+
   &-t {
     margin-bottom: 4px;
     font: 16px/1 $mcs;
