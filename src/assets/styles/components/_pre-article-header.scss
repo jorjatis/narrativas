@@ -9,8 +9,8 @@ body.is-loaded {
       .v-a-inf-c {
         opacity: 1;
 
-        .v-a-s-t { 
-          span {
+        .v-a-p-t { 
+          &__p {
             animation: markerUp .5s ease-out forwards;
             animation-delay: .5s;
           }
@@ -38,31 +38,36 @@ body.is-loaded {
       }
 
       .v-a-t {
+        order: -1;
         max-width: 360px;
         font-family: $axs;
-        font-size: 72px;
-        line-height: 60px;
+        font-size: 68px;
+        line-height: 56px;
         color: $cb9;
-        text-transform: uppercase;
 
         @media (min-width: $screen-xs) {
-          max-width: 470px;
+          max-width: 650px;
           font-size: 96px;
           line-height: 85px;
         }
       }
 
-      .v-a-s-t {
-        max-width: 300px;
-        margin-top: 6px;
-        font-size: 20px;        
+      .v-a-p-t {
+        max-width: 310px;
+        margin-top: 8px;
+        margin-bottom: 0;
+        font-family: $atl;
+        font-size: 20px;
+        line-height: 26px;
+        text-transform: unset;
 
         @media (min-width: $screen-xs) {
           max-width: 609px;
           font-size: 22px;
+          line-height: 28px;
         }
 
-        span {
+        &__p {
           display: inline;
           padding: 0 2px;
           box-decoration-break: clone;

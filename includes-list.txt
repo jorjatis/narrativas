@@ -1,6 +1,11 @@
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/css/styles.css
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/js/scripts.js
 
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-01.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-02.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-03.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-04.html
+
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-pre-header.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-scroll-traje.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-scroll-instalacion.html
@@ -26,3 +31,9 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegaron
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/videos/prueba-desk-1kf-1200.mp4
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/videos/prueba-mov-1kf-640.mp4
+
+
+<!--#include virtual="/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-01.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-02.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-03.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-04.html" -->

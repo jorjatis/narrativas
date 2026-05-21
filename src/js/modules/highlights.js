@@ -6,10 +6,16 @@ export default function highlights() {
 
   const items = document.querySelectorAll('.v-d-p strong');
   if (items.length === 0) return;
-  
-  ScrollTrigger.batch(items, {
-    start: "top 80%",
-    onEnter: batch => gsap.to(batch, { overwrite: true, className: "is-marked" }),
-    once: true
+
+  items.forEach((target) => {
+    gsap.to(target, {
+      scrollTrigger: {
+        trigger: target,
+        start: "top 80%",
+        end: "bottom bottom",
+        toggleClass: "is-marked",
+        once: true
+      }
+    });
   });
 }

@@ -12,9 +12,9 @@
     },
     "infoContainer": {
       "exists": true,
-      "pretitle": false,
-      "title": "Santa María de Garoña",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
+      "pretitle": "El fin de Santa María de Garoña",
+      "title": "Así desaparece una central nuclear",
+      "description": false,
       "chevronDown": true
     },
     "firma": {

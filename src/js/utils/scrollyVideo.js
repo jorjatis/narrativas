@@ -2,62 +2,72 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function initScrollyVideo(playbackConst = 500) {
-  const container = document.querySelector(".v-n-cmp-scrolly-vid");
-  const video = container?.querySelector('video');
+  const scrollyVidContainerHeight = document.querySelector(".v-n-cmp-scrolly-vid");
+  const scrollyVid = document.querySelector('.v-n-scrolly-vid video');
   
-  if (!video || !container) return;
+  if (!scrollyVid || !scrollyVidContainerHeight) return;
 
-  const rutaMobile = video.getAttribute('data-src-mobile');
-  const rutaDesktop = video.getAttribute('data-src-desktop');
+  let lastPos = -1;
+
+  const rutaMobile = scrollyVid.getAttribute('data-src-mobile');
+  const rutaDesktop = scrollyVid.getAttribute('data-src-desktop');
+
   const mediaQuery = window.matchMedia("(max-width: 699px)");
 
   function loadVideo() {
     const selectedSrc = mediaQuery.matches ? rutaMobile : rutaDesktop;
-    if (video.dataset.current === selectedSrc) return;
 
-    video.src = selectedSrc;
-    video.dataset.current = selectedSrc;
-    video.muted = true;
-    video.preload = "auto";
-    video.setAttribute("playsinline", "");
-    video.load();
+    if (scrollyVid.dataset.current === selectedSrc) return;
+
+    scrollyVid.innerHTML = `<source src="${selectedSrc}" type="video/mp4">`;
+    scrollyVid.dataset.current = selectedSrc;
+    scrollyVid.load();
+    
+    console.log("Cargando:", selectedSrc);
   }
 
   mediaQuery.addEventListener('change', loadVideo);
+
   loadVideo();
 
-  const videoProxy = { time: 0 };
-  let st = null; 
+  function render() {
+    const currentPos = window.pageYOffset;
+    
+    if (lastPos !== currentPos) {
+      lastPos = currentPos;
+      const frameNumber = currentPos / playbackConst;
 
-  const initVideoTimeline = () => {
-    if (st) st.kill();
-    if (!video.duration) return;
+      if (isFinite(frameNumber) && scrollyVid.readyState >= 2 && !scrollyVid.seeking) {
+        scrollyVid.currentTime = Math.min(Math.max(frameNumber, 0), scrollyVid.duration);
+      }
+    }
+    window.requestAnimationFrame(render);
+  }
 
-    const scrollDistance = video.duration * playbackConst;
+  scrollyVid.addEventListener('loadedmetadata', function () {
+    scrollyVidContainerHeight.style.height = Math.floor(scrollyVid.duration * playbackConst) + window.innerHeight + "px";
 
-    st = ScrollTrigger.create({
-      trigger: container,
-      start: "top top",
-      end: `+=${scrollDistance}`,
-      pin: true,
-      scrub: 0.5,
-      onUpdate: (self) => {
-        videoProxy.time = self.progress * video.duration;
-        if (video.readyState >= 2 && !video.seeking) {
-          video.currentTime = videoProxy.time;
-        }
-      },
-      onRefresh: (self) => {
-        if (self && video.readyState >= 2) {
-          video.currentTime = video.duration * self.progress;
-        }
+    ScrollTrigger.refresh();
+  });
+
+  window.requestAnimationFrame(render);
+}
+
+function highlights() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const items = document.querySelectorAll('.v-d-p strong');
+  if (items.length === 0) return;
+
+  items.forEach((target) => {
+    gsap.to(target, {
+      scrollTrigger: {
+        trigger: target,
+        start: "top 80%",
+        end: "bottom bottom",
+        toggleClass: "is-marked",
+        once: true
       }
     });
-  };
-
-  if (video.readyState >= 1) {
-    initVideoTimeline();
-  } else {
-    video.addEventListener('loadeddata', initVideoTimeline, { once: true });
-  }
+  });
 }

@@ -40,15 +40,10 @@ const initObservers = () => {
   if (!infoContainer) return;
 
   const resizeObserver = new ResizeObserver(adjustVideoMargin);
-
   resizeObserver.observe(infoContainer);
-
+  
+  // También ajustamos al cargar imágenes o fuentes
   window.addEventListener('load', adjustVideoMargin);
-
-  return () => {
-    resizeObserver.disconnect();
-    window.removeEventListener('load', adjustVideoMargin);
-  };
 };
 
 export function initAll() {

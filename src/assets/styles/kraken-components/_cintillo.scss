@@ -4,7 +4,7 @@
   .v-cmp-suh {
     margin: 116px 0 48px;
 
-    svg {
+    img {
       max-width: 358px;
       margin: 0 auto;
     }
@@ -16,6 +16,8 @@
       text-transform: uppercase;
       text-align: center;
       color: $cb9;
+      max-width: 250px;
+      margin: 0 auto;
     }
   }
 }
