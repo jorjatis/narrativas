@@ -14,14 +14,13 @@
       "exists": true,
       "pretitle": "El fin de Santa María de Garoña",
       "title": "Así desaparece una central nuclear",
-      "description": false,
+      "description": "Mientras el futuro de Almaraz sigue en el aire, en Garoña continúan los trabajos de desmontaje de la planta energética, un trabajo de años para retirar infraestructura, tratar los residuos y gestionar el combustible gastado",
       "chevronDown": true
     },
     "firma": {
       "authorImg": "https://s1.abcstatics.com/comun/2015/img/autor/autor-6230-foto-6.jpeg?width=90",
       "authorName": "Pepe Trashorras",
       "authorUrl": "https://www.abc.es/autor/pepe-trashorras-6230/"
-    },
-    "paragraphPaywall": "Parrafo anterior al div con la clase de paywall. Si no hay paywall, en data/index.json, poner \"paragrahPaywall\" en false"
+    }
   }
 }

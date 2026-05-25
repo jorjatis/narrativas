@@ -1,39 +1,4 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/css/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/js/scripts.js
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-01.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-02.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-03.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-04.html
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-pre-header.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-scroll-traje.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-scroll-instalacion.html
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-box-aire.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-box-buzo-extra.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-box-capucha.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-box-guantes.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-box-mascara.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-full.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-full-mururoa.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-parts-botas.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-parts-casco.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-parts-comunicador.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-parts-cubrecabeza.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-parts-gafas.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-parts-guante-der.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-parts-guante-izq.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/epi-parts-mono.webp  
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/instalacion-before.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/images/instalacion-after.webp
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/videos/prueba-desk-1kf-1200.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/05/3/santamariadegarona/videos/prueba-mov-1kf-640.mp4
+https://s1.abcstatics.com/
 
 
-<!--#include virtual="/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-01.html" -->
-<!--#include virtual="/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-02.html" -->
-<!--#include virtual="/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-03.html" -->
-<!--#include virtual="/comun/narrativas/redaccion/2026/05/3/santamariadegarona/includes/inc-cintillo-04.html" -->
+<!--#include virtual="" -->
