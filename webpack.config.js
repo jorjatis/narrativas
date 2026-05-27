@@ -125,6 +125,7 @@ module.exports = (env, argv) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
+          { from: 'public', to: '', noErrorOnMissing: true },
           { from: 'src/assets/images', to: 'assets/images', noErrorOnMissing: true },
           { from: 'src/assets/videos', to: 'assets/videos', noErrorOnMissing: true },
           { from: 'src/favicon.ico', to: '', noErrorOnMissing: true },
@@ -133,7 +134,15 @@ module.exports = (env, argv) => {
       })
     ],
     devServer: {
-      static: path.resolve(__dirname, 'dist'),
+      static: [
+        {
+          directory: path.resolve(__dirname, 'dist'),
+        },
+        {
+          directory: path.resolve(__dirname, 'public'),
+          publicPath: '/',
+        },
+      ],
       port: 8080,
       open: true,
       hot: true,

@@ -5,9 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import fadeOnScroll from './helpers/fadeOnScroll';
 
 // NOTE: Utils
-
-// NOTE: Components
-
 export function initAll() {
   fadeOnScroll('.scr-ind');
 
