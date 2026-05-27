@@ -1,14 +1,14 @@
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 // NOTE: Helpers
 import fadeOnScroll from './helpers/fadeOnScroll';
+
+// NOTE: Modules
+import papaViewer from './modules/papa-viewer';
 
 // NOTE: Utils
 export function initAll() {
   fadeOnScroll('.scr-ind');
 
-  ScrollTrigger.refresh();
+  papaViewer();
 }
 
 // NOTE: Para prod el evento load de window, se borra, dejamos solo:
