@@ -8,6 +8,8 @@
   flex-direction: column;
   justify-content: center;
   gap: 16px;
+  margin-top: 60px;
+  margin-bottom: 60px;
 
   @media (min-width: 380px) {
     gap: 24px;
@@ -17,6 +19,8 @@
     flex-direction: row-reverse;
     gap: 16px;
     width: 800px;
+    margin-top: 82px;
+    margin-bottom: 82px;
     margin-left: calc((-800px / 2) + 50%);
   }
   
@@ -347,9 +351,14 @@
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
+    display: block;
     pointer-events: none;
     animation: scrollHint 1.6s ease-in-out infinite;
     transition: opacity .3s ease;
+
+    @media (min-width: 820px) {
+      display: none;
+    }
 
     &.is-hidden {
       opacity: 0;

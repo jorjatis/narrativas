@@ -320,6 +320,10 @@ export default function papaViewer() {
     });
   }
 
+  function capitalize(text) {
+    return text.replace(/\b\w/g, l => l.toUpperCase());
+  }
+
   function renderColors(colors) {
     if (!colorsContainer) return;
 
@@ -328,6 +332,8 @@ export default function papaViewer() {
     if (!colors?.length) return;
 
     colors.forEach(color => {
+      const label = capitalize(color);
+
       const span = document.createElement('span');
 
       span.className = 'item-color';
@@ -335,6 +341,8 @@ export default function papaViewer() {
       span.style.backgroundColor = COLOR_MAP[color];
 
       span.setAttribute('aria-label', color);
+
+      span.setAttribute('title', label);
 
       colorsContainer.append(span);
     });
@@ -426,17 +434,16 @@ export default function papaViewer() {
       return;
     }
 
-    itemsContainer.addEventListener('scroll', () => {
-      const scrollLeft = itemsContainer.scrollLeft;
-
-      if (scrollLeft > 12) {
-        scrollHint.classList.add('is-hidden');
-      } else {
-        scrollHint.classList.remove('is-hidden');
-      }
-    });
+    if (itemsContainer.scrollLeft > 12) {
+      scrollHint.classList.add('is-hidden');
+    } else {
+      scrollHint.classList.remove('is-hidden');
+    }
   }
 
   renderItems();
   handleScrollHint();
+
+  itemsContainer.addEventListener('scroll', handleScrollHint);
+  window.addEventListener('resize', handleScrollHint);
 }
