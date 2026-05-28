@@ -16,8 +16,8 @@ const popeItems = [
     colors: ['blanco'],
     simbolismo: 'Pureza, santidad y la alegría de la Resurrección.',
     uso: 'Veste talar de base que cubre todo el cuerpo. Es la identidad diaria del Papa. Tiene uso cotidiano: audiencias públicas, viajes oficiales y actos no litúrgicos.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/sotana.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/sotana.webp',
     detailImage: null
   },
 
@@ -27,8 +27,8 @@ const popeItems = [
     colors: ['blanco'],
     simbolismo: 'La dignidad del pastor y la protección del rebaño bajo su guía.',
     uso: 'Capa corta, abierta por delante y sujeta al cuello, que cae sobre los hombros y los codos por encima de la sotana. Uso diario sobre la sotana en actos cotidianos y oficiales.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/pelegrina.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/pelegrina.webp',
     detailImage: null
   },
 
@@ -38,8 +38,8 @@ const popeItems = [
     colors: ['blanco'],
     simbolismo: 'Entrega del Pontífice a su misión: la castidad, la pureza y la prontitud para el servicio eclesiástico.',
     uso: 'Banda de seda que ciñe la cintura sobre la sotana y desciende por la pierna izquierda. Uso permanente: cotidiano y bajo los ornamentos litúrgicos.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/faja.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/faja.webp',
     detailImage: null
   },
 
@@ -49,8 +49,8 @@ const popeItems = [
     colors: ['negro'],
     simbolismo: 'Los de color burdeos evocaban la sangre de los mártires de la Iglesia, los pies que llevan el Evangelio de la paz y la sumisión a Cristo.',
     uso: 'Calzado del Pontífice. Uso cotidiano, oficial y litúrgico por igual.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/zapatos.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/zapatos.webp',
     detailImage: null
   },
 
@@ -60,8 +60,8 @@ const popeItems = [
     colors: ['blanco'],
     simbolismo: 'Consagración, reserva y sumisión total a Dios.',
     uso: 'Pequeño gorro de seda rojoondo que cubre la cdoradonilla. Se lleva bajo de la mitra. Uso permanente: vida cotidiana, audiencias y ceremonias.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/solideo.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/solideo.webp',
     detailImage: null
   },
 
@@ -71,9 +71,9 @@ const popeItems = [
     colors: ['dorado', 'plateado'],
     simbolismo: 'Sucesión directa del apóstol San Pedro como pescador de hombres y sello de fidelidad a la Iglesia.',
     uso: 'Anillo oficial del Pontífice colocado en el dedo anular de la mano derecha. Se deforma tras su muerte o renuncia.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/anillo-pescador.webp',
-    detailImage: 'assets/images/details/anillo-pescador.webp'
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/anillo-pescador.webp',
+    detailImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/details/anillo-pescador.webp'
   },
 
   {
@@ -82,8 +82,8 @@ const popeItems = [
     colors: ['blanco'],
     simbolismo: 'La pureza bautismal y la dignidad del estado clerical.',
     uso: 'Vestidura similar a un alba corta hecha con encajes que se lleva sobre la sotana.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/roquete.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/roquete.webp',
     detailImage: null
   },
 
@@ -93,8 +93,8 @@ const popeItems = [
     colors: ['rojo'],
     simbolismo: 'Poder jurisdiccional y función de gobierno universal sobre la Iglesia.',
     uso: 'Capa corta que cubre los hombros y se abotona por delante.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/muceta.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/muceta.webp',
     detailImage: null
   },
 
@@ -104,8 +104,8 @@ const popeItems = [
     colors: ['blanco'],
     simbolismo: 'La pureza del alma lavada por la sangre de Cristo.',
     uso: 'Túnica amplia y larga que cubre desde el cuello hasta los pies.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/alba.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/alba.webp',
     detailImage: null
   },
 
@@ -115,8 +115,8 @@ const popeItems = [
     colors: ['blanco', 'dorado'],
     simbolismo: 'La pureza, la castidad y la presteza para el servicio divino.',
     uso: 'Cordón que se amarra a la cintura para ajustar el alba al cuerpo.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/cingulo.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/cingulo.webp',
     detailImage: null
   },
 
@@ -126,9 +126,9 @@ const popeItems = [
     colors: ['dorado', 'plateado'],
     simbolismo: 'La fe en la victoria de Cristo y el compromiso público de testimonio evangélico.',
     uso: 'Cruz que cuelga sobre el pecho mediante un cordón o cadena.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/cruz-pectoral.webp',
-    detailImage: 'assets/images/details/cruz-pectoral.webp'
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/cruz-pectoral.webp',
+    detailImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/details/cruz-pectoral.webp'
   },
 
   {
@@ -137,8 +137,8 @@ const popeItems = [
     colors: ['blanco', 'rojo', 'morado', 'verde'],
     simbolismo: 'Su condición sacerdotal y la autoridad espiritual del orden sagrado.',
     uso: 'Banda larga de tela que se cuelga del cuello sobre el pecho.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/estola.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/estola.webp',
     detailImage: null
   },
 
@@ -148,8 +148,8 @@ const popeItems = [
     colors: ['blanco', 'dorado'],
     simbolismo: 'La plenitud del Sacramento del Orden y el espíritu de servicio al prójimo.',
     uso: 'Túnica con mangas que el Papa viste debajo de la casulla.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/dalmatica.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/dalmatica.webp',
     detailImage: null
   },
 
@@ -159,8 +159,8 @@ const popeItems = [
     colors: ['blanco', 'rojo', 'verde', 'morado'],
     simbolismo: 'Simboliza revestirse de Cristo.',
     uso: 'Vestidura exterior principal abierta por los lados y sin mangas.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/casulla.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/casulla.webp',
     detailImage: null
   },
 
@@ -170,8 +170,8 @@ const popeItems = [
     colors: ['blanco', 'rojo', 'verde', 'morado'],
     simbolismo: 'El escudo de la gracia y la protección de Dios.',
     uso: 'Capa larga abierta por delante y sujeta por un broche.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/capa-pluvial.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/capa-pluvial.webp',
     detailImage: null
   },
 
@@ -181,8 +181,8 @@ const popeItems = [
     colors: ['blanco', 'dorado'],
     simbolismo: 'La unidad entre la Iglesia de Oriente y Occidente.',
     uso: 'Pequeña capa doble de seda que se coloca sobre el alba.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/fanon.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/fanon.webp',
     detailImage: null
   },
 
@@ -192,8 +192,8 @@ const popeItems = [
     colors: ['blanco', 'negro', 'rojo'],
     simbolismo: 'Símbolo del obispo como buen pastor.',
     uso: 'Banda de lana colocada sobre los hombros encima de la casulla.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/palio.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/palio.webp',
     detailImage: null
   },
 
@@ -203,8 +203,8 @@ const popeItems = [
     colors: ['blanco', 'dorado'],
     simbolismo: 'El esplendor de la santidad y la cdoradona de gloria.',
     uso: 'Tocado alto de dos picos con cintas que cuelgan sobre la espalda.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/mitra.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/mitra.webp',
     detailImage: null
   },
 
@@ -214,8 +214,8 @@ const popeItems = [
     colors: ['dorado', 'plateado'],
     simbolismo: 'El cayado del pastor y la guía del rebaño de Dios.',
     uso: 'Bastón pastoral que el Papa sostiene con su mano izquierda.',
-    thumbImg: 'assets/images/items/anillo-pescador.webp',
-    figureImage: 'assets/images/figure/ferula.webp',
+    thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
+    figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/ferula.webp',
     detailImage: null
   }
 ]
@@ -239,7 +239,7 @@ export default function papaViewer() {
     '.item-desc__grp--usage .item-desc__p'
   );
 
-  const papaFigure = document.querySelector('.papa-fig');
+  const papaImage = document.querySelector('.papa-img');
 
   const detailImageContainer = document.querySelector(
     '.item-desc__grp--detail-img'
@@ -349,27 +349,9 @@ export default function papaViewer() {
   }
 
   function renderFigureImage(src) {
-    if (!papaFigure) return;
+    if (!papaImage || !src) return;
 
-    const oldImg = papaFigure.querySelector('.papa-overlay');
-
-    if (oldImg) {
-      oldImg.remove();
-    }
-
-    if (!src) return;
-
-    const img = document.createElement('img');
-
-    img.src = src;
-
-    img.className = 'papa-overlay';
-
-    img.alt = '';
-
-    img.setAttribute('aria-hidden', 'true');
-
-    papaFigure.append(img);
+    papaImage.src = src;
   }
 
   function renderDetailImage(src) {

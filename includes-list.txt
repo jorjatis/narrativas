@@ -1,4 +1,11 @@
-https://s1.abcstatics.com/
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/styles.css
+
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-papa-viewer.html
+
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/papa-img.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp
 
 
-<!--#include virtual="" -->
+
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-papa-viewer.html" -->
