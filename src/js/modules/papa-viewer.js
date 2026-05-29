@@ -9,10 +9,13 @@ const COLOR_MAP = {
   azul: '#4A90E2'
 }
 
-const popeItems = [
+const POPE_ITEMS = [
   {
     id: 'sotana',
     label: 'Sotana',
+    category: 'vestidos',    
+    multiple: true,
+    zIndex: 1,
     colors: ['blanco'],
     simbolismo: 'Pureza, santidad y la alegría de la Resurrección.',
     uso: 'Veste talar de base que cubre todo el cuerpo. Es la identidad diaria del Papa. Tiene uso cotidiano: audiencias públicas, viajes oficiales y actos no litúrgicos.',
@@ -24,6 +27,9 @@ const popeItems = [
   {
     id: 'pelegrina',
     label: 'Pelegrina',
+    category: 'vestidos',    
+    multiple: true,
+    zIndex: 1,
     colors: ['blanco'],
     simbolismo: 'La dignidad del pastor y la protección del rebaño bajo su guía.',
     uso: 'Capa corta, abierta por delante y sujeta al cuello, que cae sobre los hombros y los codos por encima de la sotana. Uso diario sobre la sotana en actos cotidianos y oficiales.',
@@ -35,6 +41,9 @@ const popeItems = [
   {
     id: 'faja',
     label: 'Faja',
+    category: 'vestidos',    
+    multiple: true,
+    zIndex: 1,
     colors: ['blanco'],
     simbolismo: 'Entrega del Pontífice a su misión: la castidad, la pureza y la prontitud para el servicio eclesiástico.',
     uso: 'Banda de seda que ciñe la cintura sobre la sotana y desciende por la pierna izquierda. Uso permanente: cotidiano y bajo los ornamentos litúrgicos.',
@@ -46,6 +55,9 @@ const popeItems = [
   {
     id: 'zapatos',
     label: 'Zapatos',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['negro'],
     simbolismo: 'Los de color burdeos evocaban la sangre de los mártires de la Iglesia, los pies que llevan el Evangelio de la paz y la sumisión a Cristo.',
     uso: 'Calzado del Pontífice. Uso cotidiano, oficial y litúrgico por igual.',
@@ -57,6 +69,9 @@ const popeItems = [
   {
     id: 'solideo',
     label: 'Solideo',
+    category: 'trajecitos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco'],
     simbolismo: 'Consagración, reserva y sumisión total a Dios.',
     uso: 'Pequeño gorro de seda rojoondo que cubre la cdoradonilla. Se lleva bajo de la mitra. Uso permanente: vida cotidiana, audiencias y ceremonias.',
@@ -68,17 +83,23 @@ const popeItems = [
   {
     id: 'anillo-pescador',
     label: 'Anillo del pescador',
+    category: 'trajecitos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['dorado', 'plateado'],
     simbolismo: 'Sucesión directa del apóstol San Pedro como pescador de hombres y sello de fidelidad a la Iglesia.',
     uso: 'Anillo oficial del Pontífice colocado en el dedo anular de la mano derecha. Se deforma tras su muerte o renuncia.',
     thumbImg: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp',
     figureImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/figure/anillo-pescador.webp',
-    detailImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/details/anillo-pescador.webp'
+    detailImage: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/anillo-pescador.webp'
   },
 
   {
     id: 'roquete',
     label: 'Roquete',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco'],
     simbolismo: 'La pureza bautismal y la dignidad del estado clerical.',
     uso: 'Vestidura similar a un alba corta hecha con encajes que se lleva sobre la sotana.',
@@ -90,6 +111,9 @@ const popeItems = [
   {
     id: 'muceta',
     label: 'Muceta',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['rojo'],
     simbolismo: 'Poder jurisdiccional y función de gobierno universal sobre la Iglesia.',
     uso: 'Capa corta que cubre los hombros y se abotona por delante.',
@@ -101,6 +125,9 @@ const popeItems = [
   {
     id: 'alba',
     label: 'Alba',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco'],
     simbolismo: 'La pureza del alma lavada por la sangre de Cristo.',
     uso: 'Túnica amplia y larga que cubre desde el cuello hasta los pies.',
@@ -112,6 +139,9 @@ const popeItems = [
   {
     id: 'cingulo',
     label: 'Cíngulo',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco', 'dorado'],
     simbolismo: 'La pureza, la castidad y la presteza para el servicio divino.',
     uso: 'Cordón que se amarra a la cintura para ajustar el alba al cuerpo.',
@@ -123,6 +153,9 @@ const popeItems = [
   {
     id: 'cruz-pectoral',
     label: 'Cruz pectoral',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['dorado', 'plateado'],
     simbolismo: 'La fe en la victoria de Cristo y el compromiso público de testimonio evangélico.',
     uso: 'Cruz que cuelga sobre el pecho mediante un cordón o cadena.',
@@ -134,6 +167,9 @@ const popeItems = [
   {
     id: 'estola',
     label: 'Estola',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco', 'rojo', 'morado', 'verde'],
     simbolismo: 'Su condición sacerdotal y la autoridad espiritual del orden sagrado.',
     uso: 'Banda larga de tela que se cuelga del cuello sobre el pecho.',
@@ -145,6 +181,9 @@ const popeItems = [
   {
     id: 'dalmatica-pontifical',
     label: 'Dalmática pontifical',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco', 'dorado'],
     simbolismo: 'La plenitud del Sacramento del Orden y el espíritu de servicio al prójimo.',
     uso: 'Túnica con mangas que el Papa viste debajo de la casulla.',
@@ -156,6 +195,9 @@ const popeItems = [
   {
     id: 'casulla',
     label: 'Casulla',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco', 'rojo', 'verde', 'morado'],
     simbolismo: 'Simboliza revestirse de Cristo.',
     uso: 'Vestidura exterior principal abierta por los lados y sin mangas.',
@@ -167,6 +209,9 @@ const popeItems = [
   {
     id: 'capa-pluvial',
     label: 'Capa pluvial',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco', 'rojo', 'verde', 'morado'],
     simbolismo: 'El escudo de la gracia y la protección de Dios.',
     uso: 'Capa larga abierta por delante y sujeta por un broche.',
@@ -178,6 +223,9 @@ const popeItems = [
   {
     id: 'fanon',
     label: 'Fanón',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco', 'dorado'],
     simbolismo: 'La unidad entre la Iglesia de Oriente y Occidente.',
     uso: 'Pequeña capa doble de seda que se coloca sobre el alba.',
@@ -189,6 +237,9 @@ const popeItems = [
   {
     id: 'palio',
     label: 'Palio',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco', 'negro', 'rojo'],
     simbolismo: 'Símbolo del obispo como buen pastor.',
     uso: 'Banda de lana colocada sobre los hombros encima de la casulla.',
@@ -200,6 +251,9 @@ const popeItems = [
   {
     id: 'mitra',
     label: 'Mitra',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['blanco', 'dorado'],
     simbolismo: 'El esplendor de la santidad y la cdoradona de gloria.',
     uso: 'Tocado alto de dos picos con cintas que cuelgan sobre la espalda.',
@@ -211,6 +265,9 @@ const popeItems = [
   {
     id: 'ferula',
     label: 'Férula',
+    category: 'vestidos',    
+    multiple: false,
+    zIndex: 1,
     colors: ['dorado', 'plateado'],
     simbolismo: 'El cayado del pastor y la guía del rebaño de Dios.',
     uso: 'Bastón pastoral que el Papa sostiene con su mano izquierda.',
@@ -220,14 +277,57 @@ const popeItems = [
   }
 ]
 
+const POPE_PRESETS = {
+  liturgia: {
+    label: 'Liturgia',
+    items: [
+      'sotana',
+      'pelegrina',
+      'zapatos',
+      'anillo-pescador'
+    ],
+    description: {
+      title: 'Liturgia',
+      simbolismo: 'Vestimenta litúrgica papal.',
+      uso: 'Ceremonias y celebraciones.'
+    }
+  },
+
+  oficial: {
+    label: 'Oficial',
+    items: [
+      'sotana',
+      'zapatos'
+    ],
+    description: {
+      title: 'Oficial',
+      simbolismo: 'Representación institucional.',
+      uso: 'Audiencias y recepciones.'
+    }
+  },
+
+  otro: {
+    label: 'Otro',
+    items: [
+      'pelegrina',
+      'anillo-pescador'
+    ],
+    description: {
+      title: 'Otro',
+      simbolismo: 'Combinación alternativa.',
+      uso: 'Uso personalizado.'
+    }
+  }
+};
+
 export default function papaViewer() {
+  const BASE_ITEM_ID = 'sotana';
+
   const itemsContainer = document.querySelector('.items-c');
 
   if (!itemsContainer) return;
 
   const title = document.querySelector('.item-label--main');
-
-  const titleGroup = document.querySelector('.item-label');
 
   const colorsContainer = document.querySelector('.item-colors');
 
@@ -239,62 +339,64 @@ export default function papaViewer() {
     '.item-desc__grp--usage .item-desc__p'
   );
 
-  const papaImage = document.querySelector('.papa-img');
-
   const detailImageContainer = document.querySelector(
     '.item-desc__grp--detail-img'
   );
 
-  const colorsGroup = document.querySelector(
-    '.item-desc__grp--colors'
+  const papaFigureItems = document.querySelector(
+    '.papa-fig-items'
   );
 
-  const simbolismoGroup = document.querySelector(
-    '.item-desc__grp--symbolism'
+  const presetButtons = document.querySelectorAll(
+    '.presets-btn'
   );
 
-  const usoGroup = document.querySelector(
-    '.item-desc__grp--usage'
+  const resetButton = document.querySelector(
+    '.papa-reset'
   );
 
-  const detailImageGroup = document.querySelector(
-    '.item-desc__grp--detail-img'
-  );
+  const state = {
+    activePreset: null,
 
-  const scrollHint = document.querySelector(
-    '.items-scroll-hint'
-  );
+    selectedItems: [
+      getItemById(BASE_ITEM_ID)
+    ],
 
-  function clearActive() {
-    const buttons = document.querySelectorAll('.item-btn');
+    focusedItem: getItemById(BASE_ITEM_ID)
+  };
 
-    buttons.forEach(button => {
-      button.classList.remove('is-active');
+  function capitalize(text) {
+    return text.replace(/\b\w/g, l => l.toUpperCase());
+  }
 
-      button.removeAttribute('aria-current');
+  function getItemById(id) {
+    return POPE_ITEMS.find(item => item.id === id);
+  }
+
+  function sortItemsByCategory(items) {
+    return [...items].sort((a, b) => {
+      return a.category.localeCompare(b.category);
     });
   }
 
-  function toggleGroup(element, hasContent) {
-    if (!element) return;
-
-    element.hidden = !hasContent;
-  }
-
-  function renderItems() {
+  function renderItemsGrid() {
     itemsContainer.innerHTML = '';
 
-    popeItems.forEach((item, index) => {
+    const sortedItems = sortItemsByCategory(
+      POPE_ITEMS
+    );
+
+    sortedItems.forEach(item => {
       const li = document.createElement('li');
 
       li.className = 'item';
 
       li.innerHTML = `
         <button
-          class="item-btn ${index === 0 ? 'is-active' : ''}"
-          ${index === 0 ? 'aria-current="true"' : ''}
+          class="item-btn"
           type="button"
           data-item="${item.id}"
+          data-item-category="${item.category}"
         >
           <div class="item-img-c">
             <img
@@ -310,23 +412,150 @@ export default function papaViewer() {
         </button>
       `;
 
-      const button = li.querySelector('.item-btn');
+      const button = li.querySelector(
+        '.item-btn'
+      );
 
       button.addEventListener('click', () => {
-        selectItem(item.id, button);
+        handleItemClick(item.id);
       });
 
       itemsContainer.append(li);
     });
   }
 
-  function capitalize(text) {
-    return text.replace(/\b\w/g, l => l.toUpperCase());
+  function renderGridState() {
+    const items =
+      itemsContainer.querySelectorAll('.item');
+
+    items.forEach(itemEl => {
+      const button =
+        itemEl.querySelector('.item-btn');
+
+      const id = button.dataset.item;
+
+      const item = getItemById(id);
+
+      const isActive =
+        state.selectedItems.some(
+          selected => selected.id === id
+        );
+
+      button.classList.toggle(
+        'is-active',
+        isActive
+      );
+
+      if (isActive) {
+        button.setAttribute(
+          'aria-current',
+          'true'
+        );
+      } else {
+        button.removeAttribute(
+          'aria-current'
+        );
+      }
+
+      const existingRemove =
+        itemEl.querySelector('.item-remove');
+
+      const canRemove =
+        isActive &&
+        id !== BASE_ITEM_ID;
+
+      if (canRemove && !existingRemove) {
+        const removeBtn =
+          document.createElement('button');
+
+        removeBtn.className =
+          'item-remove';
+
+        removeBtn.type = 'button';
+
+        removeBtn.setAttribute(
+          'aria-label',
+          `Quitar ${item.label}`
+        );
+
+        removeBtn.innerHTML = '×';
+
+        removeBtn.addEventListener(
+          'click',
+          event => {
+            event.stopPropagation();
+
+            removeItem(id);
+          }
+        );
+
+        itemEl.append(removeBtn);
+      }
+
+      if (!canRemove && existingRemove) {
+        existingRemove.remove();
+      }
+    });
+  }
+
+  function renderFigure() {
+    papaFigureItems.innerHTML = '';
+
+    const sorted = [
+      ...state.selectedItems
+    ].sort((a, b) => {
+      return a.zIndex - b.zIndex;
+    });
+
+    sorted.forEach(item => {
+      const wrapper =
+        document.createElement('div');
+
+      wrapper.className = 'papa-fig-item';
+
+      wrapper.dataset.itemId = item.id;
+
+      wrapper.style.zIndex = item.zIndex;
+
+      wrapper.innerHTML = `
+        <img
+          src="${item.figureImage}"
+          alt=""
+          aria-hidden="true"
+        >
+      `;
+
+      wrapper.addEventListener('click', () => {
+        focusItem(item);
+      });
+
+      papaFigureItems.append(wrapper);
+    });
+  }
+
+  function renderPresetState() {
+    presetButtons.forEach(button => {
+      const isActive =
+        button.dataset.preset ===
+        state.activePreset;
+
+      button.classList.toggle(
+        'is-active',
+        isActive
+      );
+    });
+  }
+
+  function renderResetVisibility() {
+    if (!resetButton) return;
+
+    const hasExtraItems =
+      state.selectedItems.length > 1;
+
+    resetButton.hidden = !hasExtraItems;
   }
 
   function renderColors(colors) {
-    if (!colorsContainer) return;
-
     colorsContainer.innerHTML = '';
 
     if (!colors?.length) return;
@@ -334,29 +563,30 @@ export default function papaViewer() {
     colors.forEach(color => {
       const label = capitalize(color);
 
-      const span = document.createElement('span');
+      const item =
+        document.createElement('div');
 
-      span.className = 'item-color';
+      item.className =
+        'item-colors-item';
 
-      span.style.backgroundColor = COLOR_MAP[color];
+      item.innerHTML = `
+        <span
+          class="item-color"
+          style="background-color: ${COLOR_MAP[color]}"
+          title="${label}"
+          aria-hidden="true"
+        ></span>
 
-      span.setAttribute('aria-label', color);
+        <span class="item-color-label">
+          ${label}
+        </span>
+      `;
 
-      span.setAttribute('title', label);
-
-      colorsContainer.append(span);
+      colorsContainer.append(item);
     });
   }
 
-  function renderFigureImage(src) {
-    if (!papaImage || !src) return;
-
-    papaImage.src = src;
-  }
-
   function renderDetailImage(src) {
-    if (!detailImageContainer) return;
-
     detailImageContainer.innerHTML = '';
 
     if (!src) return;
@@ -372,60 +602,225 @@ export default function papaViewer() {
     detailImageContainer.append(img);
   }
 
-  function selectItem(id, button) {
-    const item = popeItems.find(item => item.id === id);
+  function renderDescription(data) {
+    title.textContent =
+      data.label ||
+      data.title ||
+      '';
+
+    simbolismoText.textContent =
+      data.simbolismo || '';
+
+    usoText.textContent =
+      data.uso || '';
+
+    renderColors(data.colors);
+
+    renderDetailImage(data.detailImage);
+  }
+
+  function renderState() {
+    renderGridState();
+
+    renderFigure();
+
+    renderPresetState();
+
+    renderResetVisibility();
+
+    if (state.focusedItem) {
+      renderDescription(
+        state.focusedItem
+      );
+    }
+  }
+
+  function focusItem(item) {
+    state.focusedItem = item;
+
+    renderState();
+  }
+
+  function removeItem(id) {
+    if (id === BASE_ITEM_ID) return;
+
+    const removedIndex =
+      state.selectedItems.findIndex(
+        item => item.id === id
+      );
+
+    state.selectedItems =
+      state.selectedItems.filter(
+        item => item.id !== id
+      );
+
+    state.activePreset = null;
+
+    const removedWasFocused =
+      state.focusedItem?.id === id;
+
+    if (removedWasFocused) {
+      const previousItem =
+        state.selectedItems[
+          removedIndex - 1
+        ];
+
+      state.focusedItem =
+        previousItem ||
+        state.selectedItems.at(-1) ||
+        getItemById(BASE_ITEM_ID);
+    }
+
+    renderState();
+  }
+
+  function addItem(item) {
+    const categoryItems =
+      state.selectedItems.filter(
+        selected =>
+          selected.category ===
+          item.category
+      );
+
+    if (!item.multiple) {
+      categoryItems.forEach(existing => {
+        removeItem(existing.id);
+      });
+    } else {
+      categoryItems
+        .filter(
+          existing => !existing.multiple
+        )
+        .forEach(existing => {
+          removeItem(existing.id);
+        });
+    }
+
+    const alreadyExists =
+      state.selectedItems.some(
+        selected => selected.id === item.id
+      );
+
+    if (!alreadyExists) {
+      state.selectedItems.push(item);
+    }
+
+    state.focusedItem = item;
+
+    state.activePreset = null;
+
+    renderState();
+  }
+
+  function handleItemClick(id) {
+    const item = getItemById(id);
 
     if (!item) return;
 
-    clearActive();
+    const alreadySelected =
+      state.selectedItems.some(
+        selected => selected.id === item.id
+      );
 
-    button.classList.add('is-active');
-
-    button.setAttribute('aria-current', 'true');
-
-    title.textContent = item.label;
-
-    simbolismoText.textContent = item.simbolismo || '';
-
-    usoText.textContent = item.uso || '';
-
-    renderColors(item.colors);
-
-    renderFigureImage(item.figureImage);
-
-    renderDetailImage(item.detailImage);
-
-    toggleGroup(colorsGroup, item.colors?.length);
-
-    toggleGroup(simbolismoGroup, item.simbolismo);
-
-    toggleGroup(usoGroup, item.uso);
-
-    toggleGroup(detailImageGroup, item.detailImage);
-  }
-
-  function handleScrollHint() {
-    if (!scrollHint) return;
-
-    const hasOverflow =
-      itemsContainer.scrollWidth > itemsContainer.clientWidth;
-
-    if (!hasOverflow) {
-      scrollHint.classList.add('is-hidden');
+    if (alreadySelected) {
+      focusItem(item);
 
       return;
     }
 
-    if (itemsContainer.scrollLeft > 12) {
-      scrollHint.classList.add('is-hidden');
-    } else {
-      scrollHint.classList.remove('is-hidden');
-    }
+    addItem(item);
   }
 
-  renderItems();
-  handleScrollHint();
+  function activatePreset(presetId) {
+    const preset = POPE_PRESETS[presetId];
 
-  itemsContainer.addEventListener('scroll', handleScrollHint);
-  window.addEventListener('resize', handleScrollHint);
+    if (!preset) return;
+
+    state.activePreset = presetId;
+
+    state.selectedItems = [
+      getItemById(BASE_ITEM_ID),
+
+      ...preset.items
+        .filter(id => id !== BASE_ITEM_ID)
+        .map(getItemById)
+        .filter(Boolean)
+    ];
+
+    state.focusedItem = {
+      ...preset.description,
+
+      colors: [],
+
+      detailImage: null
+    };
+
+    renderState();
+  }
+
+  function initPresets() {
+    presetButtons.forEach(button => {
+      button.addEventListener(
+        'click',
+        () => {
+          const presetId =
+            button.dataset.preset;
+
+          const preset =
+            POPE_PRESETS[presetId];
+
+          if (!preset) return;
+
+          if (
+            state.activePreset ===
+            presetId
+          ) {
+            state.focusedItem = {
+              ...preset.description,
+
+              colors: [],
+
+              detailImage: null
+            };
+
+            renderState();
+
+            return;
+          }
+
+          activatePreset(presetId);
+        }
+      );
+    });
+  }
+
+  function resetState() {
+    state.selectedItems = [
+      getItemById(BASE_ITEM_ID)
+    ];
+
+    state.focusedItem =
+      getItemById(BASE_ITEM_ID);
+
+    state.activePreset = null;
+
+    renderState();
+  }
+
+  function initReset() {
+    if (!resetButton) return;
+
+    resetButton.addEventListener(
+      'click',
+      resetState
+    );
+  }
+
+  renderItemsGrid();
+
+  renderState();
+
+  initPresets();
+
+  initReset();
 }

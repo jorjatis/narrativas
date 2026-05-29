@@ -1,10 +1,9 @@
-@keyframes scrollHint {
-  0%,
-  100% {
-    transform: translateY(-50%) translateX(0);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  50% {
-    transform: translateY(-50%) translateX(6px);
+  to {
+    opacity: 1;
   }
 }

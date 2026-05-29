@@ -1,34 +1,61 @@
 <div class="papa-viewer">
   <section class="papa-viewer-main">
+    <div class="papa-presets">
+      <p class="presets-desc"><span>o con</span><span>Con</span>sulta un estilo determinado</p>
+      <ul class="presets-list">
+        <li class="presets-item">
+          <button class="presets-btn" data-preset="liturgia" type="button">
+            <span>Liturgia</span>
+          </button>
+        </li>
+        <li class="presets-item">
+          <button class="presets-btn" data-preset="oficial" type="button">
+            <span>Oficial</span>
+          </button>
+        </li>
+        <li class="presets-item">
+          <button class="presets-btn" data-preset="otro" type="button">
+            <span>Otro</span>
+          </button>
+        </li>
+      </ul>
+    </div>
     <h3 class="item-label item-label--main">Sotana</h3>
     <figure class="papa-fig">
+      <button class="papa-reset" type="button" aria-label="Reiniciar vestimenta" hidden>↺</button>
+      <div class="papa-fig-items"></div>
       <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/papa-img.webp" alt="" class="papa-img" aria-hidden="true">
       <figcaption class="sr-only">
         Vestimenta litúrgica del Papa
       </figcaption>
     </figure>
-    <aside class="item-desc">
-      <div class="item-desc__grp item-desc__grp--colors">
-        <h4 class="item-desc__title">Color</h4>
-        <div class="item-colors">
-          <span class="item-color" title="Blanco" aria-label="blanco" style="background-color: rgb(255, 255, 255);"></span>
-        </div>        
-      </div>
-      <div class="item-desc__grp item-desc__grp--symbolism">
-        <h4 class="item-desc__title">Simbolismo</h4>
-        <p class="item-desc__p">Pureza, santidad y la alegría de la Resurrección.</p>
-      </div>
-      <div class="item-desc__grp item-desc__grp--usage">
-        <h4 class="item-desc__title">Uso</h4>
-        <p class="item-desc__p">Veste talar de base que cubre todo el cuerpo. Es la identidad diaria del Papa. Tiene uso cotidiano: audiencias públicas, viajes oficiales y actos no litúrgicos.</p>
-      </div>
-      <div class="item-desc__grp item-desc__grp--detail-img">
-      </div>
-    </aside>
+    <div class="item-desc-c">
+      <aside class="item-desc">
+        <div class="item-desc__grp item-desc__grp--colors">
+          <h4 class="item-desc__title">Color</h4>
+          <div class="item-colors">
+            <div class="item-colors-item">
+              <span class="item-color" title="Blanco" style="background-color: rgb(255, 255, 255);" aria-hidden="true"></span>
+              <span class="item-color-label">Blanco</span>
+            </div>
+          </div>        
+        </div>
+        <div class="item-desc__grp item-desc__grp--symbolism">
+          <h4 class="item-desc__title">Simbolismo</h4>
+          <p class="item-desc__p">Pureza, santidad y la alegría de la Resurrección.</p>
+        </div>
+        <div class="item-desc__grp item-desc__grp--usage">
+          <h4 class="item-desc__title">Uso</h4>
+          <p class="item-desc__p">Veste talar de base que cubre todo el cuerpo. Es la identidad diaria del Papa. Tiene uso cotidiano: audiencias públicas, viajes oficiales y actos no litúrgicos.</p>
+        </div>
+        <div class="item-desc__grp item-desc__grp--detail-img">
+        </div>
+      </aside>
+    </div>
   </section>
   <nav class="papa-viewer-items">
-    <p class="items-desc">Pulsa sobre las prendas para más info<span>rmación</span>:</p>
-    <ul class="items-c">
+    <p class="items-desc"><span>O pulsa</span> <span>Pulsa</span> sobre las prendas para más info<span>rmación</span></p>
+    <ul class="items-c is-overflowable">
       <li class="item">
         <button class="item-btn" type="button">
           <div class="item-img-c"></div>
@@ -138,8 +165,5 @@
         </button>
       </li>
     </ul>
-    <div class="items-scroll-hint" aria-hidden="true">
-      <svg width="7" height="12" viewBox="0 0 7 12" xmlns="http://www.w3.org/2000/svg"><path d="M4.2905 6.0005L0.21725 1.9275C0.0789167 1.789 0.00808339 1.61492 0.00475006 1.40525C0.00158339 1.19575 0.0724167 1.0185 0.21725 0.8735C0.36225 0.728667 0.537916 0.65625 0.74425 0.65625C0.950583 0.65625 1.12625 0.728667 1.27125 0.8735L5.7655 5.36775C5.859 5.46142 5.925 5.56017 5.9635 5.664C6.002 5.76783 6.02125 5.88 6.02125 6.0005C6.02125 6.121 6.002 6.23317 5.9635 6.337C5.925 6.44083 5.859 6.53958 5.7655 6.63325L1.27125 11.1275C1.13275 11.2658 0.958666 11.3367 0.749 11.34C0.5395 11.3432 0.36225 11.2723 0.21725 11.1275C0.0724167 10.9825 0 10.8068 0 10.6005C0 10.3942 0.0724167 10.2185 0.21725 10.0735L4.2905 6.0005Z"></path></svg>
-    </div>
   </nav>
 </div>
