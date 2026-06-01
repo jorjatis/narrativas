@@ -78,7 +78,19 @@
   }
 }
 
+.papamovil-preh-c {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+
+  > * {
+    grid-area:1 / 1;
+  }
+}
+
 .papamovil-main {
+  display: none;
   position: relative;
   width: 100%;
   max-width: 674px;
@@ -86,6 +98,8 @@
   padding-top: 50%;
   padding-left: 20px;
   padding-right: 20px;
+  will-change: transform;
+  transform-origin: center center;
 
   @media (min-width: 320px) {
     padding-top: 45%;
@@ -267,6 +281,98 @@
   }
 }
 
+.papamovil-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 20px;
+  column-gap: 20px;
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @media (min-width: $screen-xs) {
+    transform: translateY(-40px);
+    row-gap: 20px;
+  }
+
+  @media (min-width: 750px) {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 52px;
+    transform: unset; 
+  }
+
+  .papamovil {
+    &-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+
+      @media (min-width: 750px) {
+        gap: 8px;
+      }
+    }
+
+    &-fig {
+      width: 100%;
+      max-width: 110px;
+      margin-bottom: 4px;
+
+      @media (min-width: 510px) {
+        max-width: 180px;
+        margin: 0;
+      }
+
+      @media (min-width: 750px) {
+        max-width: 214px;
+      }
+    }
+
+    &-title {
+      font: 12px/14px $mcs;
+      color: $cb1;
+      text-transform: uppercase;
+      text-align: center;
+
+      @media (min-width: 450px) {
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      @media (min-width: 510px) {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      > span {
+        display: none;
+
+        @media (min-width: 450px) {
+          display: inline-block;
+        }
+      }
+    }
+
+    &-year {
+      font: 12px/1 $mcs;
+      color: $cp1;
+      text-align: center;
+
+      @media (min-width: 510px) {
+        font-size: 14px;
+      }
+
+      > span {
+        display: none;
+
+        @media (min-width: 450px) {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
 
 // NOTE: Medidas para portatil con altura reducida
 @media (min-width: 1024px) and (max-width: 1179px) {

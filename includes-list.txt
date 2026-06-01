@@ -1,10 +1,10 @@
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/scripts.js
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/styles.css
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/includes/
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/includes/inc-pre-header.html
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/papamovil-06.webp
 
 
 
-<!--#include virtual="/comun/narrativas/redaccion/2026/06/06/papamovil/" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/06/papamovil/includes/inc-pre-header.html" -->
