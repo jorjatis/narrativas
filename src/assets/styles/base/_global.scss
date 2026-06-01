@@ -11,6 +11,7 @@ body {
 body:has(.v-h-a) {
   .v-w {
     .v-a--d-s-1 {
+      min-height: calc(100dvh + 1px);
       margin-top: -118px;
 
       @media (min-width: $screen-xs) {
