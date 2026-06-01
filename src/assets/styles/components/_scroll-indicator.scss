@@ -8,6 +8,7 @@
   pointer-events: none;
   transition: opacity .3s ease;
   z-index: 10;
+  opacity: 0;
 
   &__c {
     display: flex;
