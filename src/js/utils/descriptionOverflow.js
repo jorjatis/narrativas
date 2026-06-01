@@ -36,6 +36,16 @@ export default function descriptionOverflow() {
     scrollHint
   } = overflowUI;
 
+  scrollHint.addEventListener(
+    'click',
+    () => {
+      itemDesc.scrollTo({
+        top: itemDesc.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  );
+
   function hasOverflow(element) {
     return (
       element.scrollHeight >
@@ -62,7 +72,9 @@ export default function descriptionOverflow() {
 
     if (!overflow) {
       topShadow.hidden = true;
+
       bottomShadow.hidden = true;
+
       scrollHint.hidden = true;
 
       return;
@@ -88,10 +100,14 @@ export default function descriptionOverflow() {
     scrollHint.hidden = !isTop;
   }
 
-  function update() {
+  function update(resetScroll = false) {
     syncHeight();
 
     requestAnimationFrame(() => {
+      if (resetScroll) {
+        itemDesc.scrollTop = 0;
+      }
+
       updateUI();
     });
   }
@@ -105,11 +121,13 @@ export default function descriptionOverflow() {
 
   window.addEventListener(
     'resize',
-    update
+    () => update()
   );
 
   const resizeObserver =
-    new ResizeObserver(update);
+    new ResizeObserver(() => {
+      update();
+    });
 
   resizeObserver.observe(itemDesc);
 
@@ -120,9 +138,11 @@ export default function descriptionOverflow() {
   };
 }
 
-export function refreshDescriptionOverflow() {
+export function refreshDescriptionOverflow(
+  resetScroll = false
+) {
   if (updateFn) {
-    updateFn();
+    updateFn(resetScroll);
   }
 }
 
@@ -142,14 +162,16 @@ function createDescriptionOverflowUI(
     'item-desc__shadow item-desc__shadow--bottom';
 
   const scrollHint =
-    document.createElement('div');
+    document.createElement('button');
 
   scrollHint.className =
     'item-desc__scroll-hint';
 
+  scrollHint.type = 'button';
+
   scrollHint.setAttribute(
-    'aria-hidden',
-    'true'
+    'aria-label',
+    'Ver más contenido'
   );
 
   scrollHint.innerHTML = '↓';
