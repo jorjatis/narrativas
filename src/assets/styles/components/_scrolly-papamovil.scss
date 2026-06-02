@@ -1,0 +1,59 @@
+@use '../base/variables' as *;
+
+.scrolly-papamovil {
+  .v-n-scrolly {
+    &__sticky {
+      z-index: 1;
+    }
+  }
+
+  .inf-c {
+    max-width: 440px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .title {
+    margin-bottom: 8px;
+    font: 20px/28px $ats;
+    color: $cb9;
+  }
+
+  .desc {
+    margin-bottom: 16px;
+    font: 16px/20px $mcr;
+    color: $cb7;
+  }
+
+  .btn-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .btn-i {
+    min-width: 106px;
+    height: 22px;
+    padding: 0 8px;
+    font: 12px/1 $mcs;
+    color: $cp1;
+    border: 1px solid $cp1;
+    border-radius: 2px;
+    transition: opacity .3s ease, color .3s ease, background 0.3s ease;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &.is-active {
+      color: $cb2;
+      background: $cp1;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

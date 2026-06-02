@@ -4,6 +4,7 @@ import moveEls from './helpers/moveEls';
 import removeEls from './helpers/removeEls';
 
 // NOTE: Utils
+import scrolly from './utils/scrolly';
 
 // NOTE: Modules
 import papamovilFlip from './modules/papamovilFlip';
@@ -16,6 +17,8 @@ export function initAll() {
   removeEls('.v-a--d-s-1 .v-a-inf-c > .v-i');
 
   papamovilFlip();
+
+  scrolly();
 }
 
 // NOTE: Para prod el evento load de window, se borra, dejamos solo:

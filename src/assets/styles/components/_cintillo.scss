@@ -1,0 +1,54 @@
+@use '../base/variables' as *;
+
+.v-n-cintillo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px;
+  margin-bottom: 32px;
+
+  @media (min-width: $screen-xs) {
+    margin-top: 112px;
+  }
+
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    padding: 0 20px;
+
+    @media (min-width: 980px) {
+      width: 940px;
+      margin-left: calc(-940px / 2 + 50%);
+    }
+
+    @media (min-width: 1280px) {
+      width: 1240px;
+      margin-left: calc(-1240px / 2 + 50%);
+    }
+  }
+
+  &:after {
+    height: 8px;
+    background: $cp6;
+    opacity: .5;
+    order: 2;
+  }
+
+  &:before {
+    height: 1px;
+    background: $cp4;
+    opacity: .6;
+    order: 1;
+  }
+
+  .v-cmp-suh {
+    margin-top: 40px;
+    margin-bottom: 0;
+    font: 32px/34px $axs;
+    text-align: center;
+    text-transform: uppercase;
+    color: $cp1;
+    order: 3;
+  }
+}

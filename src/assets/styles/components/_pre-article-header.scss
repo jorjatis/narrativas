@@ -83,11 +83,7 @@
 body.is-loaded {
   .v-w .v-a--d-s-1 .v-a-inf-c,
   .papamovil-main {
-    opacity: 1;
-  }
-
-  .papamovil-main {
-    transition-delay: .1s;
+    animation: fadeIn .3s ease forwards;
   }
 }
 
@@ -325,6 +321,7 @@ body.is-loaded {
       flex-direction: column;
       align-items: center;
       gap: 4px;
+      opacity: 0;
 
       @media (min-width: 750px) {
         gap: 8px;
