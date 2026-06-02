@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
+  gap: 24px;
   margin-top: 60px;
   margin-bottom: 60px;
 
@@ -32,6 +32,7 @@
 }
 
 .papa-viewer-main {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(130px, 0.5fr) 1fr;
   grid-template-rows: auto auto 1fr;
@@ -41,7 +42,6 @@
       "papa-presets papa-presets";
   justify-content: center;
   column-gap: 16px;
-  min-height: 390px;
 
   @media (min-width: 380px) {
     grid-template-columns: minmax(160px, 0.5fr) 1fr;
@@ -65,7 +65,35 @@
 
   @media (min-width: 1140px) {
     grid-template-columns: 290px 300px;    
-    column-gap: 110px;
+    column-gap: 50px;
+  }
+
+  .papa-shadow {
+    position: absolute;
+    bottom: -10px;
+    left: -20px;
+    width: calc(100% + 40px);
+    grid-column: 1 / span 2;
+    grid-row: 2 / span 1;
+    height: calc(100% + 20px);
+    transform: unset;
+    opacity: .6;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(193deg, #F9FAFB 49.52%, #DAE2EE 81.63%);
+
+    @media (min-width: 820px) {
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      height: 84%;
+      grid-column: unset;
+      grid-row: unset;
+    }
+
+    @media (min-width: 1140px) {
+      height: 87%;
+    }
   }
 
   .item-label--main {
@@ -79,6 +107,7 @@
     font: 14px/150% $mcs;
     text-transform: uppercase;
     color: $cp2;
+    z-index: 2;
 
     &[hidden] {
       &:after {
@@ -109,22 +138,10 @@
     position: relative;
     align-self: center;
     width: 100%; 
+    z-index: 2;
 
     @media (min-width: 540px) {
       align-self: flex-start;
-    }
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: $cp4;
-      border-radius: 100%;
-      filter: blur(30px);
-      z-index: -1;
     }
 
     img {
@@ -179,6 +196,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    z-index: 2;
 
     @media (min-width: 820px) {
       gap: 24px;
@@ -224,11 +242,13 @@
 
     .item-colors {
       display: flex;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 8px 12px;
       margin-top: 12px;
 
       @media (min-width: 380px) {
-        gap: 32px;
+        gap: 16px;
+        flex-wrap: nowrap;
       }
 
       &-item {
@@ -257,7 +277,9 @@
 
 .papa-presets {
   grid-area: papa-presets;
-  margin-top: 32px;
+  margin-top: 24px;
+  z-index: 2;
+  margin-bottom: -12px;
 
   @media (max-height: 820px) and (max-width: 470px) {
     display: none;
@@ -303,21 +325,23 @@
     justify-content: center;
     align-items: center;
     height: 37px;
-    padding: 0 32px;
+    padding: 0 20px;
     font-family: $mcs;
     font-size: 16px;
     line-height: normal;
     text-align: center;
-    color: $cb2;
-    background: $cp3;
+    color: $cp1;
+    border: 1px solid $cp1;
     border-radius: 2px;
     transition: .3s;
 
     &:hover {
+      color: $cb2;
       background: $cp1;
     }
 
     &.is-active {
+      color: $cb2;
       background: $cp1;
     }
   }
@@ -331,7 +355,7 @@
   @media (min-width: 820px) {
     width: 100%;
     margin-left: 0;
-    max-width: 320px;
+    max-width: 330px;
   }
 
   .items-desc {
@@ -363,21 +387,15 @@
 
   .items-c {
     display: flex;
-    gap: 32px;
     overflow-x: auto;
     scrollbar-width: none;
     padding-inline: 20px;
-
-    @media (min-width: 380px) {
-      gap: 42px;
-    }
 
     @media (min-width: 820px) {
       position: relative;
       left: -8px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 28px 0;
       overflow: visible;
       padding-inline: 0;
     }
@@ -397,24 +415,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    height: 110px;
     scroll-snap-align: start;
     transition: opacity .2s ease-in;
-
+    padding-top: 12px;
+    
     @media (min-width: 380px) {
-      gap: 12px;
+      height: 130px;
     }
 
     @media (min-width: 820px) {
       scroll-snap-align: none;
+      padding-top: 0;
     }
-    
-    &:not(:has(.is-active)) {
-      opacity: .5;
-    }
+  
+    &.is-active {
+      background: linear-gradient(180deg, var(--azul-abc-5-f-3-f-5-f-8, #F3F5F8) 0%, var(--azul-abc-10-e-7-ebf-1, #E7EBF1) 100%);
 
-    &:hover {
-      opacity: 1;
+      .item-label {
+        font-family: $mcs;
+      }
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -427,20 +447,14 @@
       }
     }
 
-    &:after {
-      content: '';
-      width: 25px;
-      height: 2px;
-      background: $cb1;
-    }
-
     &-btn {
       flex: 1 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      min-width: 66px;
+      min-width: 82px;
+      padding: 0px 6px;
 
       @media (min-width: 380px) {
         gap: 8px;
@@ -448,24 +462,8 @@
 
       @media (min-width: 820px) {
         gap: 16px;
-      }
-
-      &.is-active {
-        .item-img-c {
-          img {
-            @media (min-width: 820px) {
-              transform: scale(1.25);
-            }
-
-            @media (min-width: 1140px) {
-              transform: scale(1.5);
-            }
-          }
-        }
-
-        .item-label {
-          font-family: $mcs;
-        }
+        min-width: 66px;
+        padding-top: 26px;
       }
     }
 
@@ -552,11 +550,8 @@
 
   .item-desc {
     position: relative;
-
     overflow-y: auto;
-
     scrollbar-width: none;
-
     -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
@@ -569,17 +564,11 @@
 
     &__shadow {
       position: absolute;
-
       left: 0;
-
       width: 100%;
-
       height: 56px;
-
       pointer-events: none;
-
       z-index: 10;
-
       transition: opacity .2s ease;
 
       &[hidden] {
@@ -588,66 +577,40 @@
 
       &--top {
         top: 0;
-
-        background:
-          linear-gradient(
-            to bottom,
-            rgba(255,255,255,1),
-            rgba(255,255,255,0)
-          );
+        background: linear-gradient(to bottom,rgba($cb2,1), rgba($cb1,0));
       }
 
       &--bottom {
-        bottom: 0;
+        bottom: -10px;
+        background: linear-gradient(to top,rgba($cb2,1), rgba($cb1,0));
 
-        background:
-          linear-gradient(
-            to top,
-            rgba(255,255,255,1),
-            rgba(255,255,255,0)
-          );
+        @media (min-width: 820px) {
+          bottom: 0;
+        }
       }
     }
 
     &__scroll-hint {
       position: absolute;
-
       left: 50%;
-
       bottom: 12px;
-
       width: 28px;
       height: 28px;
-
       margin-left: -14px;
-
       border-radius: 100%;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
-      background: rgba(255,255,255,.92);
-
+      background: rgba($cb2,.92);
       backdrop-filter: blur(8px);
-
-      box-shadow:
-        0 4px 12px rgba(0,0,0,.08);
-
+      box-shadow: 0 4px 12px rgba($cb1,.08);
       z-index: 20;
-
-      animation:
-        itemDescScrollHint 1.4s ease-in-out infinite;
-
-      transition:
-        opacity .2s ease,
-        transform .2s ease;
+      animation: itemDescScrollHint 1.4s ease-in-out infinite;
+      transition: opacity .2s ease, transform .2s ease;
 
       &[hidden] {
         opacity: 0;
-
-        transform:
-          translateY(8px);
+        transform: translateY(8px);
       }
     }
   }

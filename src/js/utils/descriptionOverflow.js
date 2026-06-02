@@ -9,18 +9,24 @@ export default function descriptionOverflow() {
       '.item-desc-c'
     );
 
-  const papaFigure =
-    document.querySelector('.papa-fig');
-
   const itemLabelMain =
     document.querySelector(
       '.item-label--main'
     );
 
+  const papaShadow =
+    document.querySelector(
+      '.papa-shadow'
+    );
+
+  const papaFig =
+    document.querySelector(
+      '.papa-fig'
+    );
+
   if (
     !itemDesc ||
-    !itemDescContainer ||
-    !papaFigure
+    !itemDescContainer
   ) {
     return null;
   }
@@ -54,16 +60,41 @@ export default function descriptionOverflow() {
   }
 
   function syncHeight() {
-    const figureHeight =
-      papaFigure.offsetHeight;
+    const isDesktop =
+      window.innerWidth >= 820;
 
-    const labelHeight =
-      window.innerWidth >= 820
-        ? itemLabelMain.offsetHeight + 32
-        : 0;
+    const referenceElement =
+      isDesktop
+        ? papaShadow
+        : papaFig;
+
+    if (!referenceElement) {
+      return false;
+    }
+
+    const referenceHeight =
+      referenceElement.offsetHeight;
+
+    let maxHeight =
+      referenceHeight;
+
+    // NOTE:
+    // Desktop/tablet:
+    // descontamos el title
+    if (isDesktop) {
+      const labelHeight =
+        itemLabelMain
+          ? itemLabelMain.offsetHeight + 32
+          : 0;
+
+      maxHeight =
+        referenceHeight - labelHeight;
+    }
 
     itemDesc.style.maxHeight =
-      `${figureHeight - labelHeight}px`;
+      `${maxHeight}px`;
+
+    return true;
   }
 
   function updateUI() {
@@ -101,7 +132,12 @@ export default function descriptionOverflow() {
   }
 
   function update(resetScroll = false) {
-    syncHeight();
+    const synced =
+      syncHeight();
+
+    if (!synced) {
+      return;
+    }
 
     requestAnimationFrame(() => {
       if (resetScroll) {
@@ -121,7 +157,7 @@ export default function descriptionOverflow() {
 
   window.addEventListener(
     'resize',
-    () => update()
+    () => update(true)
   );
 
   const resizeObserver =
@@ -131,7 +167,19 @@ export default function descriptionOverflow() {
 
   resizeObserver.observe(itemDesc);
 
-  update();
+  if (papaShadow) {
+    resizeObserver.observe(
+      papaShadow
+    );
+  }
+
+  if (papaFig) {
+    resizeObserver.observe(
+      papaFig
+    );
+  }
+
+  update(true);
 
   return {
     update
@@ -155,11 +203,15 @@ function createDescriptionOverflowUI(
   topShadow.className =
     'item-desc__shadow item-desc__shadow--top';
 
+  topShadow.hidden = true;
+
   const bottomShadow =
     document.createElement('div');
 
   bottomShadow.className =
     'item-desc__shadow item-desc__shadow--bottom';
+
+  bottomShadow.hidden = true;
 
   const scrollHint =
     document.createElement('button');
@@ -168,6 +220,8 @@ function createDescriptionOverflowUI(
     'item-desc__scroll-hint';
 
   scrollHint.type = 'button';
+
+  scrollHint.hidden = true;
 
   scrollHint.setAttribute(
     'aria-label',
