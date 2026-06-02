@@ -6,33 +6,17 @@ export default function papamovilFlip () {
   gsap.registerPlugin(ScrollTrigger, Flip);
 
   const section = document.querySelector('.v-a--d-s-1');
-
+  
   if (!section) return;
 
   const infoMain = document.querySelector('.papamovil-inf-c');
-
   const car = document.querySelector('.js-main-car');
-
-  const target = document.querySelector(
-    '.papamovil-item--06 .papamovil-fig'
-  );
-
+  const target = document.querySelector('.papamovil-item--06 .papamovil-fig');
   const items = gsap.utils.toArray('.papamovil-item');
-
-  const itemTexts = gsap.utils.toArray(
-    '.papamovil-grid .papamovil-title, .papamovil-grid .papamovil-year'
-  );
-
-  const specs = gsap.utils.toArray([
-    '.papamovil-size',
-    '.papamovil-line'
-  ]);
+  const itemTexts = gsap.utils.toArray('.papamovil-grid .papamovil-title, .papamovil-grid .papamovil-year');
+  const specs = gsap.utils.toArray(['.papamovil-size', '.papamovil-line']);
 
   if (!car || !target) return;
-
-  // ---------------------------------------------------
-  // ESTADO INICIAL
-  // ---------------------------------------------------
 
   gsap.set(
     items.filter(item => !item.classList.contains('papamovil-item--06')),
@@ -51,10 +35,6 @@ export default function papamovilFlip () {
     y: 20
   });
 
-  // ---------------------------------------------------
-  // FLIP CALC
-  // ---------------------------------------------------
-
   const fitState = Flip.fit(
     car,
     target,
@@ -63,10 +43,6 @@ export default function papamovilFlip () {
       getVars: true
     }
   );
-
-  // ---------------------------------------------------
-  // TIMELINE
-  // ---------------------------------------------------
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -79,12 +55,10 @@ export default function papamovilFlip () {
     }
   });
 
-  // respiración inicial
   tl.to({}, {
     duration: 1
   });
 
-  // fade hero info
   tl.to(infoMain, {
     opacity: 0,
     y: -30,
@@ -99,7 +73,6 @@ export default function papamovilFlip () {
     ease: 'none'
   }, '<');
 
-  // items
   tl.to(items, {
     opacity: 1,
     y: 0,
@@ -108,7 +81,6 @@ export default function papamovilFlip () {
     ease: 'none'
   }, '-=0.2');
 
-  // textos
   tl.to(itemTexts, {
     opacity: 1,
     y: 0,
@@ -117,14 +89,12 @@ export default function papamovilFlip () {
     ease: 'none'
   }, '<');
 
-  // coche
   tl.to(car, {
     ...fitState,
     duration: 2,
     ease: 'none'
   }, '<');
 
-  // pausa final
   tl.to({}, {
     duration: 1.5
   });
