@@ -5,13 +5,17 @@ export default function fadeOnScroll(selector, distance = 60) {
   let ticking = false;
 
   const update = () => {
+    // Añade 'is-visible' solo si estás ARRIBA (scrollY menor que la distancia)
     el.classList.toggle(
-      "is-transparent",
-      window.scrollY >= distance
+      "is-visible",
+      window.scrollY < distance
     );
 
     ticking = false;
   };
+
+  // Evaluamos el estado inicial inmediatamente
+  update();
 
   window.addEventListener("scroll", () => {
     if (ticking) return;

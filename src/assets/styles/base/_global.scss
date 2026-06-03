@@ -41,6 +41,15 @@ body:has(.v-h-a) {
   z-index: 12;
 }
 
+.v-d--abc {
+  .v-a-s-t {
+    text-align: center;
+    font: 1.375rem/1.75rem ABC Text Light,serif;
+    color: $cb1;
+    margin: 0 0 124px;
+  }
+}
+
 .v-w {
   .v-a--d-s-1 {
     height: auto;
@@ -57,9 +66,12 @@ body:has(.v-h-a) {
       padding: 0;
       
       .v-a-p-t,
-      .v-a-t,
-      .v-a-s-t {
+      .v-a-t {
         color: $cb1;
+      }
+      
+      .v-a-s-t {
+        display: none;
       }
 
       .v-i {

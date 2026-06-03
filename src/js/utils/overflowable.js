@@ -10,11 +10,9 @@ export default function overflowable() {
 
 function createOverflowControls(container) {
   const wrapper = document.createElement('div');
-
   wrapper.className = 'overflow-wrapper';
 
   container.parentNode.insertBefore(wrapper, container);
-
   wrapper.append(container);
 
   const leftBtn = document.createElement('button');
@@ -35,9 +33,7 @@ function createOverflowControls(container) {
   wrapper.append(rightBtn);
 
   function hasOverflow() {
-    return (
-      container.scrollWidth > container.clientWidth
-    );
+    return container.scrollWidth > container.clientWidth;
   }
 
   function updateButtons() {
@@ -46,17 +42,24 @@ function createOverflowControls(container) {
     if (!overflow) {
       leftBtn.hidden = true;
       rightBtn.hidden = true;
-
+      // Quitamos las sombras si no hay desbordamiento
+      wrapper.classList.remove('has-shadow-left', 'has-shadow-right');
       return;
     }
 
     const scrollLeft = container.scrollLeft;
-
     const maxScroll = container.scrollWidth - container.clientWidth;
 
-    leftBtn.hidden = scrollLeft <= 4;
+    // Evaluamos las condiciones de visibilidad
+    const showLeft = scrollLeft > 4;
+    const showRight = scrollLeft < maxScroll - 4;
 
-    rightBtn.hidden = scrollLeft >= maxScroll - 4;
+    leftBtn.hidden = !showLeft;
+    rightBtn.hidden = !showRight;
+
+    // Añadimos o quitamos las clases de sombra dinámicamente
+    wrapper.classList.toggle('has-shadow-left', showLeft);
+    wrapper.classList.toggle('has-shadow-right', showRight);
   }
 
   function scroll(direction) {
@@ -66,13 +69,8 @@ function createOverflowControls(container) {
     });
   }
 
-  leftBtn.addEventListener( 'click', () => {
-    scroll('left');
-  });
-  
-  rightBtn.addEventListener( 'click', () => {
-    scroll('right');
-  });
+  leftBtn.addEventListener('click', () => scroll('left'));
+  rightBtn.addEventListener('click', () => scroll('right'));
 
   container.addEventListener('scroll', updateButtons);
   window.addEventListener('resize', updateButtons);

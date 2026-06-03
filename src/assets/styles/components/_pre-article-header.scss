@@ -2,3 +2,64 @@
 @use '../base/variables-custom' as *;
 @use '../base/actions' as *;
 @use '../base/animations' as *;
+
+body:has(.v-h-a) .v-w .v-a--d-s-1 {
+  min-height: calc(100dvh + 1px);
+}
+
+.v-h.v-h--t3 {
+  .v-h {
+    &__c {
+      background: transparent;
+      border-bottom-color: transparent;
+      transition: background .2s ease, border-color .2s ease;
+    }
+  }
+
+  &.is-fixed {
+    .v-h {
+      &__c {
+        background: $cb2;
+        border-bottom-color: $cp4;
+      }
+    }
+  }
+}
+
+.v-w { 
+  .v-a--d-s-1 {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 32px;
+    background: $cp6;
+
+    @media (max-width: 360px) {
+      gap: 16px;
+    }
+
+    .v-a-img-c {
+      .v-a-fig {
+        .v-a-lnk {
+          .v-a-img {
+            width: 100%;
+            height: 40vh;
+            margin: 0 auto;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+
+    .v-a-inf-c {
+      flex: 0 0 auto;
+      padding: 0 20px;
+
+      .v-a-t {
+        @media (max-width: 375px) {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}

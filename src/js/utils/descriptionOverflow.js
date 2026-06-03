@@ -1,244 +1,150 @@
 let updateFn = null;
 
 export default function descriptionOverflow() {
-  const itemDesc =
-    document.querySelector('.item-desc');
+  const itemDesc = document.querySelector('.item-desc');
+  const itemLabelMain = document.querySelector('.item-label--main');
+  const papaShadow = document.querySelector('.papa-shadow');
+  const papaFig = document.querySelector('.papa-fig');
 
-  const itemDescContainer =
-    document.querySelector(
-      '.item-desc-c'
-    );
+  if (!itemDesc) return null;
 
-  const itemLabelMain =
-    document.querySelector(
-      '.item-label--main'
-    );
+  let fakeTrack = itemDesc.querySelector('.item-desc__fake-track');
+  let fakeThumb = itemDesc.querySelector('.item-desc__fake-thumb');
 
-  const papaShadow =
-    document.querySelector(
-      '.papa-shadow'
-    );
-
-  const papaFig =
-    document.querySelector(
-      '.papa-fig'
-    );
-
-  if (
-    !itemDesc ||
-    !itemDescContainer
-  ) {
-    return null;
+  if (!fakeTrack) {
+    fakeTrack = document.createElement('div');
+    fakeTrack.className = 'item-desc__fake-track';
+    itemDesc.appendChild(fakeTrack);
   }
-
-  const overflowUI =
-    createDescriptionOverflowUI(
-      itemDescContainer
-    );
-
-  const {
-    topShadow,
-    bottomShadow,
-    scrollHint
-  } = overflowUI;
-
-  scrollHint.addEventListener(
-    'click',
-    () => {
-      itemDesc.scrollTo({
-        top: itemDesc.scrollHeight,
-        behavior: 'smooth'
-      });
-    }
-  );
-
-  function hasOverflow(element) {
-    return (
-      element.scrollHeight >
-      element.clientHeight
-    );
+  if (!fakeThumb) {
+    fakeThumb = document.createElement('div');
+    fakeThumb.className = 'item-desc__fake-thumb';
+    itemDesc.appendChild(fakeThumb);
   }
 
   function syncHeight() {
-    const isDesktop =
-      window.innerWidth >= 820;
+    const isDesktop = window.innerWidth >= 820;
 
-    const referenceElement =
-      isDesktop
-        ? papaShadow
-        : papaFig;
+    // SI ES ESCRITORIO: Limpiamos por completo el estilo inline y dejamos que fluya por CSS
+    if (isDesktop) {
+      itemDesc.style.maxHeight = ''; 
+      return true;
+    }
+
+    // SI ES MÓVIL: Calculamos la altura límite según la ilustración de referencia
+    const referenceElement = papaFig; 
 
     if (!referenceElement) {
       return false;
     }
 
-    const referenceHeight =
-      referenceElement.offsetHeight;
-
-    let maxHeight =
-      referenceHeight;
-
-    // NOTE:
-    // Desktop/tablet:
-    // descontamos el title
-    if (isDesktop) {
-      const labelHeight =
-        itemLabelMain
-          ? itemLabelMain.offsetHeight + 32
-          : 0;
-
-      maxHeight =
-        referenceHeight - labelHeight;
-    }
-
-    itemDesc.style.maxHeight =
-      `${maxHeight}px`;
-
+    const referenceHeight = referenceElement.offsetHeight;
+    itemDesc.style.maxHeight = `${referenceHeight}px`;
     return true;
   }
 
-  function updateUI() {
-    const overflow =
-      hasOverflow(itemDesc);
+  function updateScrollbar() {
+    const isDesktop = window.innerWidth >= 820;
 
-    if (!overflow) {
-      topShadow.hidden = true;
-
-      bottomShadow.hidden = true;
-
-      scrollHint.hidden = true;
-
+    // Si estamos en escritorio, forzamos la desactivación de lógica interna de la barra
+    if (isDesktop) {
+      fakeTrack.style.opacity = '0';
+      fakeThumb.style.opacity = '0';
+      itemDesc.classList.remove('has-shadow-top', 'has-shadow-bottom');
       return;
     }
 
-    const scrollTop =
-      itemDesc.scrollTop;
+    const { scrollTop, scrollHeight, clientHeight } = itemDesc;
 
-    const maxScroll =
-      itemDesc.scrollHeight -
-      itemDesc.clientHeight;
+    // Si el contenido cabe entero en móvil, limpiamos todo de forma fluida
+    if (scrollHeight <= clientHeight) {
+      fakeTrack.style.opacity = '0';
+      fakeThumb.style.opacity = '0';
+      itemDesc.classList.remove('has-shadow-top', 'has-shadow-bottom');
+      return;
+    }
 
-    const isTop =
-      scrollTop <= 4;
+    fakeTrack.style.opacity = '1';
+    fakeThumb.style.opacity = '1';
 
-    const isBottom =
-      scrollTop >= maxScroll - 4;
+    const isAtTop = scrollTop < 2;
+    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 2;
 
-    topShadow.hidden = isTop;
+    if (!isAtTop) {
+      itemDesc.classList.add('has-shadow-top');
+    } else {
+      itemDesc.classList.remove('has-shadow-top');
+    }
 
-    bottomShadow.hidden = isBottom;
+    if (!isAtBottom) {
+      itemDesc.classList.add('has-shadow-bottom');
+    } else {
+      itemDesc.classList.remove('has-shadow-bottom');
+    }
 
-    scrollHint.hidden = !isTop;
+    fakeTrack.style.height = `${clientHeight}px`;
+    fakeTrack.style.transform = `translateY(${scrollTop}px)`;
+
+    const thumbHeight = Math.max((clientHeight / scrollHeight) * clientHeight, 24);
+    fakeThumb.style.height = `${thumbHeight}px`;
+
+    const maxScroll = scrollHeight - clientHeight;
+    const scrollPercent = scrollTop / maxScroll;
+    const maxThumbTop = clientHeight - thumbHeight;
+    const thumbTop = scrollTop + (scrollPercent * maxThumbTop);
+
+    fakeThumb.style.transform = `translateY(${thumbTop}px)`;
   }
 
   function update(resetScroll = false) {
-    const synced =
-      syncHeight();
+    const synced = syncHeight();
 
-    if (!synced) {
-      return;
-    }
+    if (!synced) return;
 
-    requestAnimationFrame(() => {
-      if (resetScroll) {
+    if (resetScroll) {
+      requestAnimationFrame(() => {
         itemDesc.scrollTop = 0;
-      }
-
-      updateUI();
-    });
+        updateScrollbar();
+      });
+    } else {
+      updateScrollbar();
+    }
   }
 
   updateFn = update;
 
-  itemDesc.addEventListener(
-    'scroll',
-    updateUI
-  );
+  itemDesc.addEventListener('scroll', updateScrollbar);
+  
+  // Al redimensionar la ventana, reseteamos el scroll a 0 para limpiar dimensiones viejas
+  window.addEventListener('resize', () => update(true));
 
-  window.addEventListener(
-    'resize',
-    () => update(true)
-  );
+  let lastWidth = window.innerWidth;
 
-  const resizeObserver =
-    new ResizeObserver(() => {
-      update();
-    });
+  const resizeObserver = new ResizeObserver(() => {
+    const currentWidth = window.innerWidth;
+    
+    if (currentWidth !== lastWidth) {
+      lastWidth = currentWidth;
+      // Damos 10ms para que el CSS aplique su layout responsive antes de que JS mida las alturas
+      setTimeout(() => {
+        update(true);
+      }, 10);
+    } else {
+      update(false);
+    }
+  });
 
   resizeObserver.observe(itemDesc);
-
-  if (papaShadow) {
-    resizeObserver.observe(
-      papaShadow
-    );
-  }
-
-  if (papaFig) {
-    resizeObserver.observe(
-      papaFig
-    );
-  }
+  if (papaShadow) resizeObserver.observe(papaShadow);
+  if (papaFig) resizeObserver.observe(papaFig);
 
   update(true);
 
-  return {
-    update
-  };
+  return { update };
 }
 
-export function refreshDescriptionOverflow(
-  resetScroll = false
-) {
+export function refreshDescriptionOverflow(resetScroll = false) {
   if (updateFn) {
     updateFn(resetScroll);
   }
-}
-
-function createDescriptionOverflowUI(
-  container
-) {
-  const topShadow =
-    document.createElement('div');
-
-  topShadow.className =
-    'item-desc__shadow item-desc__shadow--top';
-
-  topShadow.hidden = true;
-
-  const bottomShadow =
-    document.createElement('div');
-
-  bottomShadow.className =
-    'item-desc__shadow item-desc__shadow--bottom';
-
-  bottomShadow.hidden = true;
-
-  const scrollHint =
-    document.createElement('button');
-
-  scrollHint.className =
-    'item-desc__scroll-hint';
-
-  scrollHint.type = 'button';
-
-  scrollHint.hidden = true;
-
-  scrollHint.setAttribute(
-    'aria-label',
-    'Ver más contenido'
-  );
-
-  scrollHint.innerHTML = '↓';
-
-  container.append(
-    topShadow,
-    bottomShadow,
-    scrollHint
-  );
-
-  return {
-    topShadow,
-    bottomShadow,
-    scrollHint
-  };
 }
