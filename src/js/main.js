@@ -8,6 +8,7 @@ import scrolly from './utils/scrolly';
 
 // NOTE: Modules
 import papamovilFlip from './modules/papamovilFlip';
+import ai2htmlScrollyPapaMovil from './modules/ai2html-scrollyPapaMovil';
 
 export function initAll() {
   document.body.classList.add("is-loaded");
@@ -19,6 +20,7 @@ export function initAll() {
   papamovilFlip();
 
   scrolly();
+  ai2htmlScrollyPapaMovil();
 }
 
 // NOTE: Para prod el evento load de window, se borra, dejamos solo:
