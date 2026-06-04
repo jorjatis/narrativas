@@ -1,0 +1,12 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+
+#g-vestimenta-papa-2026-2-box {
+  p {
+    font-family: $atl !important;
+
+    &.g-pstyle0 {
+      font-family: $mcs !important;
+    }
+  }
+}
