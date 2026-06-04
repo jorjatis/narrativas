@@ -3,6 +3,8 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-pre-header.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-papa-viewer.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-cintillo-01.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-cintillo-02.html
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/icn-alba.svg
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/images/items/icn-anillo.svg
@@ -50,3 +52,5 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/vestimentas-papa
 
 <!--#include virtual="/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-pre-header.html" -->
 <!--#include virtual="/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-papa-viewer.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-cintillo-01.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/06/vestimentas-papa/includes/inc-cintillo-02.html" -->
