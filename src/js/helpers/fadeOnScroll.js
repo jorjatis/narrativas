@@ -5,7 +5,6 @@ export default function fadeOnScroll(selector, distance = 60) {
   let ticking = false;
 
   const update = () => {
-    // Añade 'is-visible' solo si estás ARRIBA (scrollY menor que la distancia)
     el.classList.toggle(
       "is-visible",
       window.scrollY < distance
@@ -14,7 +13,6 @@ export default function fadeOnScroll(selector, distance = 60) {
     ticking = false;
   };
 
-  // Evaluamos el estado inicial inmediatamente
   update();
 
   window.addEventListener("scroll", () => {

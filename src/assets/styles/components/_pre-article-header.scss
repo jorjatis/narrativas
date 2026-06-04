@@ -46,6 +46,10 @@ body:has(.v-h-a) .v-w .v-a--d-s-1 {
             height: 40vh;
             margin: 0 auto;
             object-fit: contain;
+
+            @media (min-width: $screen-sm) {
+              height: 50vh;
+            }
           }
         }
       }
@@ -55,9 +59,18 @@ body:has(.v-h-a) .v-w .v-a--d-s-1 {
       flex: 0 0 auto;
       padding: 0 20px;
 
+      @media (min-width: $screen-xs) {
+        width: 700px;
+        max-width: unset;
+      }
+
       .v-a-t {
-        @media (max-width: 375px) {
-          font-size: 24px;
+        font: 36px / 1 "ABC XCond Semibold", serif;
+        font-weight: normal;
+        text-transform: uppercase;
+
+        @media (min-width: $screen-xs) {
+          font-size: 54px;
         }
       }
     }

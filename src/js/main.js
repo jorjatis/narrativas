@@ -10,6 +10,11 @@ import descriptionOverflow from './utils/descriptionOverflow';
 import papaViewer from './modules/papa-viewer';
 
 export function initAll() {
+  const headerTitle = document.querySelector('.v-a--d-s-1 .v-a-inf-c .v-a-t');
+  if (headerTitle) {
+    headerTitle.innerHTML = headerTitle.innerHTML.replace('?', '?<br>');
+  }
+  
   fadeOnScroll('.scr-ind');
   moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
 

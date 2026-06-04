@@ -262,8 +262,12 @@
     
     &__grp {
       &--detail-img {
-        width: 75%;
+        width: 100%;
         margin: 8px auto 0;
+
+        @media (min-width: 380px) {
+          width: 75%;
+        }
 
         @media (min-width: 1140px) {
           margin-top: 24px
@@ -279,7 +283,6 @@
 
       @media (min-width: 380px) {
         gap: 8px;
-        flex-wrap: nowrap;
       }
 
       &-item {
@@ -294,7 +297,7 @@
         height: 12px;
         transform: rotate(45deg);
 
-        &[title="Blanco"] {
+        &[title="Festivo"] {
           border: 2px solid #cfd8e2;
         }
 
@@ -374,13 +377,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 110px;
+    height: 92px;
     scroll-snap-align: start;
     transition: opacity .2s ease-in;
-    padding-top: 12px;
+    padding-top: 8px;
     
     @media (min-width: 380px) {
       height: 110px;
+      padding-top: 12px;
     }
 
     @media (min-width: 820px) {
