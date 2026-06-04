@@ -3,26 +3,12 @@ import fadeOnScroll from './helpers/fadeOnScroll';
 import moveEls from './helpers/moveEls';
 
 // NOTE: Utils
-import overflowable from './utils/overflowable';
-import descriptionOverflow from './utils/descriptionOverflow';
 
 // NOTE: Modules
-import papaViewer from './modules/papa-viewer';
 
 export function initAll() {
-  const headerTitle = document.querySelector('.v-a--d-s-1 .v-a-inf-c .v-a-t');
-  if (headerTitle) {
-    headerTitle.innerHTML = headerTitle.innerHTML.replace('?', '?<br>');
-  }
-  
   fadeOnScroll('.scr-ind');
   moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
-
-  papaViewer();
-
-  overflowable();
-
-  descriptionOverflow();
 }
 
 // NOTE: Para prod el evento load de window, se borra, dejamos solo:
