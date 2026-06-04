@@ -1,0 +1,118 @@
+@use '../base/variables' as *;
+
+.sf-scene {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+}
+
+.sf-scene-help-c {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  max-width: 1024px;
+  width: 100%;
+  padding: 0 20px; 
+  top: 40px;
+}
+
+.sf-scene-help {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 110px;
+  width: 100%;
+
+  &__i {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  svg {
+    height: 40px;
+  }
+
+  span {
+    display: block;
+    font-family: $mcr;
+    font-size: 14px;
+    line-height: 16px;
+    color: $cp1;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
+
+.sf-scene-3D {
+  position: relative;
+  height: calc(70vh - 52px);
+  min-height: 500px;
+  width: 100%;
+
+  @media (min-width: $screen-xs) {
+    height: calc(70vh - 60px);
+    min-height: 600px;
+  }
+}
+
+.sf-scene-fig {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+.sf-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: $cb2;
+  border: 1px solid $cp1;
+  border-radius: 2px;
+  box-sizing: border-box;
+  transform-origin: center center;
+  transition: transform .2s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  transform-style: preserve-3d;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.25);
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 18px;
+    background: $cp1;
+  }
+
+  &::after {
+    transform: rotate(90deg);
+  }
+}
