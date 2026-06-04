@@ -1,54 +1,42 @@
 @use '../base/variables' as *;
+@use '../base/variables-custom' as *;
 
-.v-n-cintillo {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-top: 64px;
-  margin-bottom: 32px;
+.v-n-suh {
+  max-width: 270px;
+  width: 100%;
+  margin: 96px auto 0;
 
-  @media (min-width: $screen-xs) {
-    margin-top: 112px;
-  }
+  &__sep {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0;
 
-  &:after,
-  &:before {
-    content: '';
-    display: block;
-    padding: 0 20px;
-
-    @media (min-width: 980px) {
-      width: 940px;
-      margin-left: calc(-940px / 2 + 50%);
+    &:before,
+    &:after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: $cb6;
     }
 
-    @media (min-width: 1280px) {
-      width: 1240px;
-      margin-left: calc(-1240px / 2 + 50%);
+    span {
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: #C90022;
+      transform: rotate(45deg);
     }
   }
 
-  &:after {
-    height: 8px;
-    background: $cp6;
-    opacity: .5;
-    order: 2;
-  }
-
-  &:before {
-    height: 1px;
-    background: $cp4;
-    opacity: .6;
-    order: 1;
-  }
-
-  .v-cmp-suh {
-    margin-top: 40px;
-    margin-bottom: 0;
-    font: 32px/34px $axs;
+  &__t {
+    font-family: $axs;
+    font-size: 32px;
+    line-height: 27px;
+    letter-spacing: -.16px;
     text-align: center;
     text-transform: uppercase;
     color: $cp1;
-    order: 3;
-  }
+  } 
 }

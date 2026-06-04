@@ -71,6 +71,10 @@
   }
 
   .v-d--abc {
+    @media (max-width: $screen-xs) {
+      margin-top: 64px;
+    }
+
     .v-a-s-t {
       margin: 60px auto 80px;
       font: 22px / 28px $atl;
@@ -224,10 +228,10 @@ body.is-loaded {
 
       &--height {
         display: none;
-        top: 50%;
+        top: 48%;
         left: 100%;
         transform: translateY(-50%);
-        height: 108%;
+        height: 112%;
 
         &:before {
           width: 1px;
@@ -241,10 +245,10 @@ body.is-loaded {
 
       &--width {
         top: 100%;
-        left: 50%;
+        left: 51.5%;
         transform: translateX(-50%);
         flex-direction: column;
-        width: 97%;
+        width: 90%;
 
         &:before {
           width: 100%;
@@ -253,6 +257,7 @@ body.is-loaded {
 
         @media (min-width: $screen-xs) {
           width: 89%;
+          left: 50%;
         }
       }
     }
@@ -260,7 +265,8 @@ body.is-loaded {
     &-line {
       position: absolute;
       
-      &--height {
+      &--height,
+      &--height-2 {
         bottom: -4%;
         right: 7%;
         width: 1px;
@@ -273,9 +279,21 @@ body.is-loaded {
         }
       }
 
-      &--width {
+      &--height-2 {
+        display: none;
+
+        @media (min-width: $screen-xs) {
+          left: 9.7%;
+          right: unset;
+          height: 32%;
+          display: block;
+        }
+      }
+
+      &--width,
+      &--width-2 {
         bottom: -4%;
-        left: 2%;
+        left: 9.4%;
         width: 1px;
         height: 30%;
         border-left: 1px dashed $cb9; 
@@ -290,6 +308,16 @@ body.is-loaded {
           border-left: unset;
         }
       }
+
+      &--width-2 {
+        top: 0;
+        bottom: unset;
+        display: none;
+
+        @media (min-width: $screen-xs) {
+          display: block;
+        }
+      }
     }
   }
 }
@@ -297,12 +325,17 @@ body.is-loaded {
 .papamovil-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  row-gap: 20px;
-  column-gap: 20px;
+  row-gap: 8px;
+  column-gap: 10px;
   max-width: 860px;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
+
+  @media (min-width: 340px) {
+    row-gap: 20px;
+    column-gap: 20px;
+  }
 
   @media (min-width: $screen-xs) {
     transform: translateY(-40px);
@@ -420,6 +453,10 @@ body.is-loaded {
       .v-a--d-s-1 {
         gap: 16px;
 
+        .v-a-inf-c {
+          margin-top: 90px;
+        }
+
         .v-a-p-t {
           font-size: 16px;
           line-height: 18px;
@@ -427,8 +464,8 @@ body.is-loaded {
 
         .v-a-t {
           margin-bottom: 8px;
-          font-size: 40px;
-          line-height: 36px;
+          font-size: 36px;
+          line-height: 32px;
         }
       }
 
@@ -446,7 +483,7 @@ body.is-loaded {
     }
   }
 
-  @media (max-height: 740px) {
+  @media (min-height: 569px) and (max-height: 740px) {
     body:has(.v-h-a) .v-w .v-a--d-s-1 {
       padding-top: 56px;
     }

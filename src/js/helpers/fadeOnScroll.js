@@ -6,12 +6,14 @@ export default function fadeOnScroll(selector, distance = 60) {
 
   const update = () => {
     el.classList.toggle(
-      "is-transparent",
-      window.scrollY >= distance
+      "is-visible",
+      window.scrollY < distance
     );
 
     ticking = false;
   };
+
+  update();
 
   window.addEventListener("scroll", () => {
     if (ticking) return;

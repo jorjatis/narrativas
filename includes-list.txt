@@ -2,9 +2,25 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/script
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/styles.css
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/includes/inc-pre-header.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/includes/inc-scroll-papamovil.html
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/papamovil-06.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/01.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/02.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/03.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/04.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/05.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/06.svg
+
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/estado1-330px.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/estado1-510px.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/estado1-699px.svg 
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/estado1-1025px.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/estado2-330px.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/estado2-510px.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/estado2-699px.svg 
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/06/papamovil/images/estado2-1025px.svg
 
 
 
 <!--#include virtual="/comun/narrativas/redaccion/2026/06/06/papamovil/includes/inc-pre-header.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/06/papamovil/includes/inc-scroll-papamovil.html" -->

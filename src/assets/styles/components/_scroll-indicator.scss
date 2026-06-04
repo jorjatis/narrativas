@@ -6,9 +6,15 @@
   bottom: 30px;
   left: 0;
   pointer-events: none;
-  transition: opacity .3s ease;
   z-index: 10;
   opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
 
   &__c {
     display: flex;

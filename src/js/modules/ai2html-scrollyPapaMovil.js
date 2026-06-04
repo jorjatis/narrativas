@@ -1,121 +1,91 @@
 export default function ai2htmlScrollyPapaMovil() {
-  if (!("querySelector" in document)) return;
+  if (typeof window === "undefined" || !("querySelector" in document)) return;
 
-  if (window.__papamovilAi2htmlSetup) {
-    window.__papamovilAi2htmlSetup();
-    return;
-  }
+  const initAi2Html = (containerId) => {
+      const container = document.getElementById(containerId);
+      if (!container) return;
 
-  const initialized = new WeakSet();
+      const namespace = "";
+      let observer;
+      let isFirstLoad = !!window.IntersectionObserver;
 
-  const select = (selector, context) =>
-    Array.prototype.slice.call(
-      (context || document).querySelectorAll(selector)
-    );
-
-  const hydrateImage = (image) => {
-    const src = image.getAttribute("data-src");
-
-    if (src && image.getAttribute("src") !== src) {
-      image.setAttribute("src", src);
-    }
-  };
-
-  const debounce = (callback, delay) => {
-    let timeout = null;
-    let lastRun = 0;
-
-    return () => {
-      const remaining = delay - (Date.now() - lastRun);
-
-      const run = () => {
-        lastRun = Date.now();
-        timeout = null;
-        callback();
+      const updateSrc = el => {
+          const src = el.getAttribute("data-src");
+          if (src && el.getAttribute("src") !== src) {
+              el.setAttribute("src", src);
+          }
       };
 
-      if (remaining <= 0 || remaining > delay) {
-        clearTimeout(timeout);
-        run();
-      } else if (!timeout) {
-        timeout = setTimeout(run, remaining);
-      }
-    };
-  };
+      const handleIntersection = entries => {
+          if (entries.reduce(((acc, entry) => acc || entry.isIntersecting), false)) {
+              isFirstLoad = false;
+              render();
+          }
+      };
 
-  const isInViewport = (node) => {
-    const box = node.getBoundingClientRect();
+      const queryAll = (selector, ctx) => {
+          return ctx ? Array.prototype.slice.call(ctx.querySelectorAll(selector)) : [];
+      };
 
-    return box.top < window.innerHeight && box.bottom > 0;
-  };
+      const render = () => {
+          const artboards = queryAll(`.${namespace}artboard:where([data-min-width],[data-max-width])`, container);
+          const width = window.innerWidth;
 
-  const setupAi2html = (container) => {
-    if (!container || initialized.has(container)) return;
-
-    initialized.add(container);
-
-    let observer = null;
-    let lazy = !!window.IntersectionObserver;
-
-    const render = () => {
-      const artboards = select(".artboard", container);
-
-      const availableWidth = document.documentElement.clientWidth;
-
-      artboards.forEach((artboard) => {
-        const minWidth = artboard.getAttribute("data-min-width");
-        const maxWidth = artboard.getAttribute("data-max-width");
-
-        const visible =
-          (minWidth === null || Number(minWidth) <= availableWidth) &&
-          (maxWidth === null || Number(maxWidth) >= availableWidth);
-
-        artboard.style.display = visible ? "block" : "none";
-
-        if (visible && !lazy) {
-          select(".f2h-img", artboard).forEach(hydrateImage);
-        }
-      });
-
-      if (lazy && !observer) {
-        if (isInViewport(container)) {
-          lazy = false;
-          render();
-        } else {
-          observer = new IntersectionObserver(
-            (entries) => {
-              if (entries.some((entry) => entry.isIntersecting)) {
-                lazy = false;
-
-                observer.disconnect();
-                observer = null;
-
-                render();
+          artboards.forEach(artboard => {
+              const minWidth = artboard.getAttribute("data-min-width");
+              const maxWidth = artboard.getAttribute("data-max-width");
+              
+              if (+minWidth <= width && (+maxWidth >= width || null === maxWidth)) {
+                  if (!isFirstLoad) {
+                      queryAll(`.${namespace}f2h-img`, artboard).forEach(updateSrc);
+                  }
+                  artboard.style.display = "block";
+              } else {
+                  artboard.style.display = "none";
               }
-            },
-            {
-              rootMargin: "400px 400px",
-            }
-          );
+          });
 
-          observer.observe(container);
-        }
-      }
-    };
+          if (isFirstLoad && !observer) {
+              const isVisible = el => {
+                  const rect = el.getBoundingClientRect();
+                  return rect.top < window.innerHeight && rect.bottom > 0;
+              };
 
-    render();
+              if (isVisible(container)) {
+                  isFirstLoad = false;
+                  render();
+              } else {
+                  observer = new IntersectionObserver(handleIntersection, { rootMargin: "400px 400px" });
+                  observer.observe(container);
+              }
+          }
+      };
 
-    document.addEventListener("DOMContentLoaded", render);
+      const throttle = (func, delay) => {
+          let timeout = null, lastRun = 0;
+          const run = () => {
+              lastRun = Date.now();
+              timeout = null;
+              func();
+          };
+          return function () {
+              const remaining = delay - (Date.now() - lastRun);
+              if (remaining <= 0 || remaining > delay) {
+                  clearTimeout(timeout);
+                  run();
+              } else if (!timeout) {
+                  timeout = setTimeout(run, remaining);
+              }
+          };
+      };
 
-    window.addEventListener("resize", debounce(render, 200));
+      const throttledResize = throttle(render, 200);
+
+      render();
+      window.addEventListener("resize", throttledResize);
   };
 
-  const setupAll = () =>
-    select(".figma2html[data-ai2html]").forEach(setupAi2html);
-
-  window.__papamovilAi2htmlSetup = setupAll;
-
-  setupAll();
-
-  document.addEventListener("DOMContentLoaded", setupAll);
+  const graficos = ["estado-uno-final-box", "estado-dos-final-box"];
+  
+  graficos.forEach(id => initAi2Html(id));
 }

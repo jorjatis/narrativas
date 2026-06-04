@@ -1,0 +1,200 @@
+@use '../base/variables' as *;
+
+#estado-uno-final-box { 
+		max-width: 1040px;
+		margin: 0;
+	}
+
+	#estado-uno-final-box p, #estado-uno-final-box .body { 
+		margin: 0;
+	}
+
+	#estado-uno-final-box .f2h-img { 
+		width: 100% !important;
+		top: 0;
+	}
+
+	#estado-uno-final-box .f2h-symbol { 
+		box-sizing: border-box;
+	}
+
+	#estado-uno-final-box :where(.frame, .f2h-text, .f2h-symbol) { 
+		position: absolute;
+	}
+
+	#estado-uno-final-box :where(.f2h-link, .f2h-img) { 
+		display: block;
+	}
+
+
+
+	#estado-uno-final-box #f2h-frame-330 { position: relative; overflow: unset; display: none; }
+
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-0 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-1 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-2 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-3 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-4 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-5 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-6 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-7 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-8 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-9 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-10 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-11 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-12 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-330 .f2h-text-13 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+
+	#estado-uno-final-box #f2h-frame-510 { position: relative; overflow: unset; display: none; }
+
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-0 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-1 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-2 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-3 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-4 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-5 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-6 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-7 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-8 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-9 { font-family: $mcr; font-style: italic; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-9 { font-family: $mcr; font-style: italic; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-10 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-11 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-12 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-510 .f2h-text-13 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+
+	#estado-uno-final-box #f2h-frame-699 { position: relative; overflow: unset; display: none; }
+
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-0 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-1 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-2 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-3 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-4 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-5 { font-family: $mcr; font-style: italic; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-5 { font-family: $mcr; font-style: italic; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-6 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-7 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-8 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-9 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-10 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-11 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-12 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-13 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-14 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-699 .f2h-text-15 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+
+	#estado-uno-final-box #f2h-frame-1025 { position: relative; overflow: unset; display: none; }
+
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-0 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-1 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-2 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-3 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-4 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-5 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-6 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-7 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-8 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-9 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-10 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-11 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-12 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-13 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-14 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-15 { font-family: $mcr; font-style: italic; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-uno-final-box #f2h-frame-1025 .f2h-text-15 { font-family: $mcr; font-style: italic; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+
+  #estado-dos-final-box { 
+		max-width: none;
+		margin: 0;
+	}
+
+	#estado-dos-final-box p, #estado-dos-final-box .body { 
+		margin: 0;
+	}
+
+	#estado-dos-final-box .f2h-img { 
+		width: 100% !important;
+		top: 0;
+	}
+
+	#estado-dos-final-box .f2h-symbol { 
+		box-sizing: border-box;
+	}
+
+	#estado-dos-final-box :where(.frame, .f2h-text, .f2h-symbol) { 
+		position: absolute;
+	}
+
+	#estado-dos-final-box :where(.f2h-link, .f2h-img) { 
+		display: block;
+	}
+
+
+
+	#estado-dos-final-box #f2h-frame-330 { position: relative; overflow: unset; display: none; }
+
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-0 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-1 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-2 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-3 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-4 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-5 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-6 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-7 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-8 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-9 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-10 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-11 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-12 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-330 .f2h-text-13 { font-family: $mcr; font-style: normal; font-size: 10px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(201, 0, 34, 1); mix-blend-mode: normal; }
+
+	#estado-dos-final-box #f2h-frame-510 { position: relative; overflow: unset; display: none; }
+
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-0 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-1 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-2 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-3 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-4 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-5 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-6 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-7 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-8 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(201, 0, 34, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-9 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-10 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-11 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-12 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-510 .f2h-text-13 { font-family: $mcs; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+
+	#estado-dos-final-box #f2h-frame-699 { position: relative; overflow: unset; display: none; }
+
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-0 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(201, 0, 34, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-1 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-2 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-3 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-4 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-5 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-6 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-7 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-8 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-9 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-10 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-11 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-12 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-699 .f2h-text-13 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+
+	#estado-dos-final-box #f2h-frame-1025 { position: relative; overflow: unset; display: none; }
+
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-0 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-1 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-2 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-3 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-4 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-5 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-6 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-7 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-8 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-9 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-10 { font-family: $mcs; font-style: normal; font-size: 16px; text-decoration: none; text-transform: none; line-height: 20px; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-11 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-12 { font-family: $mcr; font-style: normal; font-size: 14px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(32, 32, 32, 1); mix-blend-mode: normal; }
+	#estado-dos-final-box #f2h-frame-1025 .f2h-text-13 { font-family: $mcr; font-style: normal; font-size: 12px; text-decoration: none; text-transform: none; line-height: 1.2000000476837158; letter-spacing: 0px; color: rgba(201, 0, 34, 1); mix-blend-mode: normal; }

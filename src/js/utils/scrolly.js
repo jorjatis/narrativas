@@ -7,17 +7,15 @@ export default function scrolly() {
   const containers = document.querySelectorAll(".v-n-scrolly");
   if (!containers.length) return;
 
-  const mm = gsap.matchMedia();
-
   containers.forEach((container) => {
+    const steps = container.querySelectorAll(".step");
     const backgrounds = container.querySelectorAll(".bg-item");
     const scrollButtons = container.querySelectorAll("[data-scroll-bg]");
 
     let currentBg = -1;
-    let currentState = -1;
 
     const config = {
-      fadeIn: 0.6,
+      fadeIn: 0.8,
       fadeOut: 0.4,
       start: "top bottom",
       end: "+=100%"
@@ -25,143 +23,120 @@ export default function scrolly() {
 
     gsap.set(backgrounds, { opacity: 0 });
 
-    // Controla la opacidad del contenedor y activa los estados internos
-    function setVisualState(bgIndex, stateIndex, immediate = false) {
-      const isMobile = window.innerWidth <= 510;
-      
-      // A. CONTROL DEL CONTENEDOR PADRE (.bg-item)
+    function setBackground(index, immediate = false) {
+      if (index === currentBg || index < 0) return;
+
+      const nextBg = backgrounds[index];
+      const otherBgs = Array.from(backgrounds).filter((_, i) => i !== index);
+
       backgrounds.forEach((bg, i) => {
-        const isTargetBg = (i === bgIndex);
-
-        if (isTargetBg && bgIndex !== currentBg) {
-          bg.classList.add("is-active");
-          const video = bg.querySelector("video");
-          if (video) video.play().catch(() => {});
-
-          gsap.to(bg, {
-            opacity: 1,
-            duration: immediate ? 0 : config.fadeIn,
-            ease: "power2.out",
-            overwrite: "auto"
-          });
-        } else if (!isTargetBg) {
+        if (i !== index) {
           bg.classList.remove("is-active");
           const video = bg.querySelector("video");
           if (video) video.pause();
-
-          gsap.to(bg, {
-            opacity: 0,
-            duration: immediate ? 0 : config.fadeOut,
-            ease: "power1.out",
-            overwrite: "auto"
-          });
-        }
-
-        // B. CONTROL DE LOS ESTADOS INTERNOS (ai2html)
-        const children = bg.children; // [0: uno/tres, 1: dos/cuatro]
-        if (children.length >= 2) {
-          if (isTargetBg) {
-            // Si es desktop, forzamos siempre el primer hijo (estado uno o tres)
-            const activeChildIndex = isMobile ? (stateIndex - 1) : 0;
-            
-            children[0].classList.toggle("is-state-active", activeChildIndex === 0);
-            children[1].classList.toggle("is-state-active", activeChildIndex === 1);
-          } else {
-            children[0].classList.remove("is-state-active");
-            children[1].classList.remove("is-state-active");
-          }
         }
       });
 
-      currentBg = bgIndex;
-      currentState = stateIndex;
+      gsap.to(otherBgs, {
+        opacity: 0,
+        duration: immediate ? 0 : config.fadeOut,
+        ease: "power1.out",
+        overwrite: true
+      });
 
-      // Actualizar botones activos (Exterior / Interior)
+      if (nextBg) {
+        nextBg.classList.add("is-active");
+        const video = nextBg.querySelector("video");
+        if (video) video.play().catch(() => {});
+
+        gsap.to(nextBg, {
+          opacity: 1,
+          duration: immediate ? 0 : config.fadeIn,
+          ease: "power2.out",
+          overwrite: true
+        });
+      }
+
+      currentBg = index;
+
       scrollButtons.forEach((button) => {
         button.classList.toggle(
           "is-active",
-          parseInt(button.dataset.scrollBg) === bgIndex
+          parseInt(button.dataset.scrollBg) === index
         );
       });
     }
 
-    function setActiveStep(visibleSteps, activeStep) {
-      visibleSteps.forEach((step) => step.classList.remove("is-active"));
+    function setActiveStep(activeStep) {
+      steps.forEach((step) => step.classList.remove("is-active"));
       activeStep.classList.add("is-active");
     }
 
-    // --- CONFIGURACIÓN RESPONSIVE MEDIANTE GSAP ---
-    
-    // Escritorio (> 510px): Solo escucha los pasos comunes
-    mm.add("(min-width: 511px)", () => {
-      const steps = container.querySelectorAll(".step:not(.is-mobile-only)");
-      setupTriggers(steps, false);
-    });
+    scrollButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const bgIndex = parseInt(button.dataset.scrollBg);
+        const targetStep = container.querySelector(`.step[data-bg="${bgIndex}"]`);
+        
+        if (!targetStep) return;
 
-    // Móvil (<= 510px): Escucha los 4 pasos
-    mm.add("(max-width: 510px)", () => {
-      const steps = container.querySelectorAll(".step");
-      setupTriggers(steps, true);
-    });
+        const y = window.scrollY + targetStep.getBoundingClientRect().top - (window.innerHeight / 2) + 5;
 
-    function setupTriggers(visibleSteps, isMobile) {
-      visibleSteps.forEach((step) => {
-        const bgIndex = parseInt(step.dataset.bg);
-        const stateIndex = parseInt(step.dataset.state);
-
-        ScrollTrigger.create({
-          trigger: step,
-          start: config.start,
-          end: config.end,
-          onToggle: (self) => {
-            if (self.isActive) {
-              setActiveStep(visibleSteps, step);
-              setVisualState(bgIndex, stateIndex);
-            }
-          }
+        window.scrollTo({
+          top: y,
+          behavior: "instant"
         });
       });
+    });
 
-      // Calcular e inicializar el estado actual al cargar/redimensionar
+    let initialized = false;
+
+    function updateInitialState() {
+      if (initialized) return;
+
       let stepToActivate = null;
       const vCenter = window.innerHeight / 2;
 
-      visibleSteps.forEach((step) => {
+      steps.forEach((step) => {
         const rect = step.getBoundingClientRect();
         if (rect.top <= vCenter && rect.bottom >= vCenter) {
           stepToActivate = step;
         }
       });
 
-      if (!stepToActivate) stepToActivate = visibleSteps[0];
+      if (!stepToActivate) {
+        stepToActivate = steps[0];
+      }
 
       if (stepToActivate) {
-        setActiveStep(visibleSteps, stepToActivate);
-        setVisualState(
-          parseInt(stepToActivate.dataset.bg),
-          parseInt(stepToActivate.dataset.state),
-          true
-        );
+        setActiveStep(stepToActivate);
+        setBackground(parseInt(stepToActivate.dataset.bg), true);
       }
+
+      initialized = true;
     }
 
-    // Comportamiento de los botones superiores al hacer click
-    scrollButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const bgIndex = parseInt(button.dataset.scrollBg);
-        const isMobile = window.innerWidth <= 510;
+    steps.forEach((step) => {
+      const bgIndex = parseInt(step.dataset.bg);
 
-        // En móvil va al estado 1 de ese bloque, en desktop busca el paso activo que no sea móvil
-        const selector = isMobile
-          ? `.step[data-bg="${bgIndex}"][data-state="1"]`
-          : `.step[data-bg="${bgIndex}"]:not(.is-mobile-only)`;
-
-        const targetStep = container.querySelector(selector);
-        if (!targetStep) return;
-
-        const y = window.scrollY + targetStep.getBoundingClientRect().top - window.innerHeight;
-        window.scrollTo({ top: y, behavior: "instant" });
+      ScrollTrigger.create({
+        trigger: step,
+        start: config.start,
+        end: config.end,
+        onToggle: (self) => {
+          if (self.isActive) {
+            setActiveStep(step);
+            setBackground(bgIndex);
+          }
+        }
       });
+    });
+
+    updateInitialState();
+
+    ScrollTrigger.create({
+      trigger: container,
+      start: "top bottom",
+      onRefresh: () => updateInitialState()
     });
   });
 }
