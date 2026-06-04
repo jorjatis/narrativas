@@ -311,7 +311,8 @@
         height: 12px;
         transform: rotate(45deg);
 
-        &[title="Festivo"] {
+        &[title="Festivo"],
+        &[title="Blanco"] {
           border: 2px solid #cfd8e2;
         }
 
