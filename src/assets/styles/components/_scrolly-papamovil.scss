@@ -29,6 +29,10 @@
     font: 20px/28px $ats;
     color: $cb9;
 
+    @media (min-width: $screen-ms) {
+      margin-bottom: 16px;
+    }
+
 		@media (max-width: 375px) {
 			max-width: 250px;
 			margin: 0 auto 4px;
@@ -41,6 +45,10 @@
     margin-bottom: 16px;
     font: 16px/20px $mcr;
     color: $cb7;
+
+    @media (min-width: $screen-ms) {
+      margin-bottom: 24px;
+    }
 
 		@media (max-width: 340px) {
 			font-size: 12px;

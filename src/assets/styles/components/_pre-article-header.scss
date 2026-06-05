@@ -29,10 +29,6 @@
       gap: 52px;
     }
 
-    @media (min-width: $screen-xs) {
-      gap: 80px;
-    }
-
     .v-a-inf-c {
       flex: 0 0 auto;
       max-width: 576px;
@@ -47,18 +43,6 @@
     }
 
     .v-a-t {
-      order: -1;
-      margin: 0 0 16px;
-      font: 54px/1 $axs;
-      font-weight: normal;
-      text-transform: uppercase;
-
-      @media (min-width: $screen-xs) {
-        font-size: 62px;
-      }
-    }
-
-    .v-a-p-t {
       max-width: 400px;
       margin: 0;
       font: 20px/26px $atl;
@@ -66,6 +50,17 @@
 
       @media (min-width: $screen-xs) {
         font-size: 22px;
+      }
+    }
+
+    .v-a-p-t {
+      margin: 0 0 16px;
+      font: 54px/1 $axs;
+      font-weight: normal;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-xs) {
+        font-size: 62px;
       }
     }
   }
@@ -449,20 +444,31 @@ body.is-loaded {
 // NOTE: Medidas para movil con altura reducida
 @media (max-width: 380px) {
   @media (max-height: 568px) {
+    body:has(.v-h.is-fixed) {
+      .v-w { 
+        .v-a--d-s-1 {
+          .v-a-inf-c {
+            margin-top: 60px;
+          }
+        }
+      }
+    }
+
     .v-w { 
       .v-a--d-s-1 {
         gap: 16px;
 
         .v-a-inf-c {
           margin-top: 90px;
+          transition: margin-top .3s ease;
         }
 
-        .v-a-p-t {
+        .v-a-t {
           font-size: 16px;
           line-height: 18px;
         }
 
-        .v-a-t {
+        .v-a-p-t {
           margin-bottom: 8px;
           font-size: 36px;
           line-height: 32px;
@@ -492,12 +498,12 @@ body.is-loaded {
       .v-a--d-s-1 {
         gap: 24px;
 
-        .v-a-p-t {
+        .v-a-t {
           font-size: 16px;
           line-height: 18px;
         }
 
-        .v-a-t {
+        .v-a-p-t {
           margin-bottom: 12px;
           font-size: 46px;
           line-height: 42px;
