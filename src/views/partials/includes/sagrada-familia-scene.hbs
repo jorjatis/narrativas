@@ -1,5 +1,5 @@
-<div class="sf-scene">
-
+<div class="sf-scene" data-modal-container>
+  <div class="sf-scene__c">
     <div class="sf-scene-help-c">
       <div class="sf-scene-help">
         <div class="sf-scene-help__i">
@@ -14,20 +14,40 @@
     </div>
 
     <div class="sf-scene-3D">
-      <button class="sf-btn" type="button" data-modal-target="modal-sf-mural-1" data-modal-position="center"></button>
-
       <figure class="sf-scene-fig">
+        <div id="sf-scene-3D-hotspots">
+          <button class="sf-btn sf-btn--01" type="button" data-open-dynamic-scene="mural-1" data-modal-target="modal-sf-mural" data-modal-position="center"></button>
+          <button class="sf-btn sf-btn--02" type="button" data-open-dynamic-scene="mural-2" data-modal-target="modal-sf-mural" data-modal-position="center"></button>
+        </div>
         <img src="assets/images/sagrada-familia-mockup.png" alt="">
       </figure>
-    </div>
-</div>
 
-<div id="modal-sf-mural-1" class="v-n-modal" data-modal-type="popup">
-  <div class="v-n-modal__content">
-    <button class="v-n-modal__close" data-close-modal aria-label="Cerrar">&times;</button>
-    <div class="v-n-modal__body">
-      <h3>La Sagrada Familia</h3>
-      <p>Estilo y contenido libre...</p>
+      <div id="modal-sf-mural" class="v-n-modal sf-modal-mural" data-modal-type="popup-inline">
+        <div class="v-n-modal__content">
+          <button class="v-n-modal__close" data-close-modal aria-label="Cerrar">&times;</button>
+          <div class="v-n-modal__body">
+
+            <figure class="sf-statues-scene" data-modal-group="true">
+              <div id="sf-statues-scene-hotspots"></div>
+              <img id="sf-statues-scene-bg" src="" alt="Detalle del mural">
+            </figure>
+
+            <div id="modal-sf-info-statue" class="v-n-modal sf-popup-info-statue" data-modal-type="popup-inline">
+              <div class="v-n-modal__content">
+                <button class="v-n-modal__close" data-close-modal aria-label="Cerrar">&times;</button>
+                <div class="v-n-modal__body">
+                  <h4 id="pop-statue-title"></h4>
+                  <p id="pop-statue-desc"></p>
+                  <figure id="pop-statue-img">
+                    <img src="" alt="">
+                  </figure>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

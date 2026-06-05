@@ -1,0 +1,56 @@
+{
+  "mural-1": {
+    "backgroundImage": "assets/images/bg-modal-mockup.webp",
+    "altText": "Fachada de la Natividad - Detalle del mural escultórico superior",
+    "hotspots": [
+      {
+        "className": "sf-statue-item--01",
+        "statueImg": "assets/images/statue-mockup.webp",
+        "title": "Estatua de San José",
+        "description": "Detalle esculpido en la fachada de la Natividad...",
+        "image": "assets/images/detalle-jose.jpg"
+      },
+      {
+        "className": "sf-statue-item--02",
+        "statueImg": "assets/images/statue-mockup.webp",
+        "title": "Los Reyes Magos",
+        "description": "Representación de la adoración con realismo fotográfico...",
+        "image": "assets/images/detalle-reyes.jpg"
+      },
+      {
+        "className": "sf-statue-item--03",
+        "statueImg": "assets/images/statue-mockup.webp",
+        "title": "Lo que sea",
+        "description": "Bla bla bla bla...",
+        "image": "assets/images/detalle-blabla.jpg"
+      },
+      {
+        "className": "sf-statue-item--04",
+        "statueImg": "assets/images/statue-mockup.webp",
+        "title": "Lo que sea 2",
+        "description": "Bla bla bla bla... 2",
+        "image": "assets/images/detalle-blabla.jpg"
+      },
+      {
+        "className": "sf-statue-item--05",
+        "statueImg": "assets/images/statue-mockup.webp",
+        "title": "Lo que sea 3",
+        "description": "Bla bla bla bla... 3",
+        "image": "assets/images/detalle-blabla.jpg"
+      }
+    ]
+  },
+  "mural-2": {
+    "backgroundImage": "assets/images/bg-modal-mural2.webp",
+    "altText": "Fachada de la Pasión - Conjunto de esculturas angulares de Subirachs",
+    "hotspots": [
+      {
+        "className": "sf-statue-item--01",
+        "statueImg": "assets/images/statue-mockup.webp",
+        "title": "La Fachada de la Pasión",
+        "description": "Líneas angulosas y expresionistas diseñadas por Subirachs...",
+        "image": "assets/images/detalle-pasion.jpg"
+      }
+    ]
+  }
+}

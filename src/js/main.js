@@ -6,15 +6,19 @@ import moveEls from './helpers/moveEls';
 import modal from './utils/modal.js'; 
 
 // NOTE: Modules
+import initSagradaFamilia from './modules/sagrada-familia-controller.js';
+import sagradaFamiliaData from './modules/sagrada-familia-data.json';
 
 export function initAll() {
   fadeOnScroll('.scr-ind');
   moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
 
   modal();
+
+  initSagradaFamilia(sagradaFamiliaData);
 }
 
-// NOTE: Para prod el evento load de window, se borra, dejamos solo:
+// NOTE: Para prod el evento load de window se borra, dejamos solo:
 // initAll();
 
 window.addEventListener('load', initAll);
