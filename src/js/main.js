@@ -18,7 +18,7 @@ export function initAll() {
 
   initSagradaFamilia(sagradaFamiliaData);
 
-  initSagradaFamilia3D('#sf-3d-canvas', 'assets/images/models/sagrada-familia-final-3d.glb');
+  initSagradaFamilia3D('#sf-3d-canvas', 'sagrada-familia-final-3d.glb');
 }
 
 // NOTE: Para prod el evento load de window se borra, dejamos solo:

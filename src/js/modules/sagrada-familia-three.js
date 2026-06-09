@@ -1,19 +1,20 @@
+// =======================================================
+// IMPORTACIONES NATIVAS (VÍA IMPORTMAP)
+// =======================================================
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
+// =======================================================
+// FUNCIÓN INICIALIZADORA 3D ULTRA-FLUIDA (60 FPS)
+// =======================================================
 export function initSagradaFamilia3D(containerSelector) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
 
-  // =======================================================
-  // CONFIGURACIÓN DE LA RUTA BASE
-  // Modifica esta variable con la carpeta donde guardas tus 3D
-  // =======================================================
   const BASE_PATH = 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/models/'; 
 
-  // Obtener solo el nombre del archivo desde el HTML
   const sceneWrapper = container.closest('[data-model]');
   const modelName = sceneWrapper ? sceneWrapper.getAttribute('data-model') : null;
   
@@ -22,12 +23,8 @@ export function initSagradaFamilia3D(containerSelector) {
     return;
   }
 
-  // Concatenamos la ruta base con el nombre del archivo
   const modelPath = `${BASE_PATH}${modelName}`;
 
-  // =======================================================
-  // CONFIGURACIÓN DE LAZY LOAD (Intersection Observer)
-  // =======================================================
   const observerOptions = {
     root: null, 
     rootMargin: '0px',
@@ -45,9 +42,6 @@ export function initSagradaFamilia3D(containerSelector) {
 
   observer.observe(container);
 
-  // =======================================================
-  // FUNCIÓN PRINCIPAL DE THREE.JS
-  // =======================================================
   function startThreeJS() {
     const scene = new THREE.Scene();
     scene.background = null;
@@ -68,6 +62,8 @@ export function initSagradaFamilia3D(containerSelector) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    
+    renderer.outputColorSpace = THREE.SRGBColorSpace; 
 
     container.appendChild(renderer.domElement);
 
@@ -118,13 +114,13 @@ export function initSagradaFamilia3D(containerSelector) {
       const box = new THREE.Box3().setFromObject(sagradaFamiliaModel);
       const center = box.getCenter(new THREE.Vector3());
 
+      // Centramos el modelo en el origen (0, y, 0)
       sagradaFamiliaModel.position.x = -center.x;
       sagradaFamiliaModel.position.z = -center.z;
       sagradaFamiliaModel.position.y = -box.min.y;
 
       scene.add(sagradaFamiliaModel);
 
-      // Quitar el loader global de la pantalla
       const currentOverlay = document.querySelector('#sf-loading-overlay');
       if (currentOverlay) {
         currentOverlay.style.opacity = '0';
@@ -139,7 +135,6 @@ export function initSagradaFamilia3D(containerSelector) {
           hotspot.referenceObject = foundObject;
           const el = document.querySelector(hotspot.elementSelector);
           if (el) el.style.display = 'flex';
-          console.log('Hotspot encontrado:', hotspot.blenderName);
         } else {
           console.warn(`No se encontró ${hotspot.blenderName}`);
         }
@@ -150,14 +145,37 @@ export function initSagradaFamilia3D(containerSelector) {
       controls.update();
     });
 
+    // =======================================================
+    // NUEVA MATEMÁTICA VEGETAL RÁPIDA (0% LAG)
+    // =======================================================
     const worldPosition = new THREE.Vector3();
+    const cameraDirection = new THREE.Vector3();
 
     function updateHotspots() {
+      if (!sagradaFamiliaModel) return;
+
+      // Obtenemos la dirección hacia donde mira la cámara
+      camera.getWorldDirection(cameraDirection);
+
       hotspots.forEach((hotspot) => {
         const el = document.querySelector(hotspot.elementSelector);
         if (!el || !hotspot.referenceObject) return;
 
+        // 1. Obtener posición global del hotspot
         hotspot.referenceObject.getWorldPosition(worldPosition);
+
+        // 2. Calcular si el hotspot está en el lado opuesto (detrás del centro del modelo)
+        // Usamos la posición local del objeto con respecto al centro para saber su orientación.
+        // Como el modelo está centrado en X=0 y Z=0, worldPosition.x y .z nos dan su vector desde el centro.
+        const vH = new THREE.Vector3(worldPosition.x, 0, worldPosition.z).normalize();
+        const vC = new THREE.Vector3(cameraDirection.x, 0, cameraDirection.z).normalize();
+        
+        // Producto punto: si da mayor que 0, el hotspot y la cámara miran en direcciones similares
+        // (lo que significa que el hotspot está en la cara trasera apuntando lejos de la cámara)
+        const dotProduct = vH.dot(vC);
+        const isBehind = dotProduct > 0.15; // Ajusta este número (0.0 a 0.3) para graduar cuándo empieza a desvanecerse
+
+        // 3. Proyectar el punto 3D a la pantalla 2D
         worldPosition.project(camera);
 
         const x = (worldPosition.x * 0.5 + 0.5) * container.clientWidth;
@@ -166,11 +184,12 @@ export function initSagradaFamilia3D(containerSelector) {
         el.style.left = `${x}px`;
         el.style.top = `${y}px`;
 
-        if (worldPosition.z > 1) {
-          el.style.opacity = '0';
+        // 4. Cambiar opacidad de forma instantánea pero matemática sin procesar mallas
+        if (isBehind || worldPosition.z > 1) {
+          el.style.opacity = '0.15'; // Detrás del edificio
           el.style.pointerEvents = 'none';
         } else {
-          el.style.opacity = '1';
+          el.style.opacity = '1'; // Delante del edificio
           el.style.pointerEvents = 'auto';
         }
       });
