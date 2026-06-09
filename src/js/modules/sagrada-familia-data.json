@@ -1,55 +1,276 @@
 {
   "mural-1": {
-    "backgroundImage": "assets/images/bg-modal-mockup.webp",
-    "altText": "Fachada de la Natividad - Detalle del mural escultórico superior",
+    "backgroundImage": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/fondo-fachada-nacimiento.webp",
+    "locatorImage": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/icn-fachada-nacimiento.svg",
+    "altText": "Fachada del Nacimiento - Detalle del mural escultórico superior",
     "hotspots": [
       {
         "className": "sf-statue-item--01",
-        "statueImg": "assets/images/statue-mockup.webp",
-        "title": "Estatua de San José",
-        "description": "Detalle esculpido en la fachada de la Natividad...",
-        "image": "assets/images/detalle-jose.jpg"
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/1-huida-egipto.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/1-huida-egipto.webp",
+        "title": "Huida a Egipto",
+        "description": "En el primer grupo escultórico del portal de la Esperanza, un ángel guía a la Sagrada Familia, que huye a Egipto para salvar la vida del niño Jesús. Para el molde de la burra tuvieron que comprar el animal a una vendedora de tierra porque se negó a ceder a la burra.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/1-huida-egipto.webp",
+        "orientation": "horizontal"
       },
       {
         "className": "sf-statue-item--02",
-        "statueImg": "assets/images/statue-mockup.webp",
-        "title": "Los Reyes Magos",
-        "description": "Representación de la adoración con realismo fotográfico...",
-        "image": "assets/images/detalle-reyes.jpg"
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/2-matanza-inocentes.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/2-matanza-inocentes.webp",
+        "title": "Matanza de los inocentes",
+        "description": "Un soldado romano ejecuta la orden del rey Herodes de Judea, que ordenó degollar a todos los menores de dos años de Belén. A la derecha, la columna que separa el portal de la Esperanza, el de José, con su nombre esculpido.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/2-matanza-inocentes.webp",
+        "orientation": "vertical"
       },
       {
         "className": "sf-statue-item--03",
-        "statueImg": "assets/images/statue-mockup.webp",
-        "title": "Lo que sea",
-        "description": "Bla bla bla bla...",
-        "image": "assets/images/detalle-blabla.jpg"
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/3-nacimiento.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/3-nacimiento.webp",
+        "title": "Nacimiento",
+        "description": "El grupo escultórico se monta sobre el capitel de la columna del pórtico de la Caridad (el dedicado a Jesús). En él se observa al niño al abrigo de sus progenitores, María y José. Detrás, las figuras del buey y la mula",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/3-nacimiento.webp",
+        "orientation": "vertical"
       },
       {
         "className": "sf-statue-item--04",
-        "statueImg": "assets/images/statue-mockup.webp",
-        "title": "Lo que sea 2",
-        "description": "Bla bla bla bla... 2",
-        "image": "assets/images/detalle-blabla.jpg"
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/4-estrella-belen.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/4-estrella-belen.webp",
+        "title": "Estrella de Belén",
+        "description": "A partir de la escena del Nacimiento sale hacia arriba la Estrella de Belén que anuncia el nacimiento del Mesías. El astro deja una estela a su paso que también fue esculpida. Para modelar la estrella Gaudí se habría inspirado en el Cometa Halley.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/4-estrella-belen.webp",
+        "orientation": "vertical"
       },
       {
         "className": "sf-statue-item--05",
-        "statueImg": "assets/images/statue-mockup.webp",
-        "title": "Lo que sea 3",
-        "description": "Bla bla bla bla... 3",
-        "image": "assets/images/detalle-blabla.jpg"
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/1-adoracion-reyes.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/1-adoracion-reyes.webp",
+        "title": "Adoración de los Reyes",
+        "description": "Al lado de la columna con la inscripción de José que separa esta escena de la de la matanza de los inocentes, en el Portal de la Esperanza, se ubica la recreación en piedra de los tres Reyes de Oriente que ofrecen oro, incienso y mirra a Jesús.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/1-adoracion-reyes.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--06",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/2-adoracion-pastores.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/2-adoracion-pastores.webp",
+        "title": "Adoración de los pastores",
+        "description": "En la recreación de la adoración del pueblo al Mesías recién nacido, tres pastores and un niño, acompañados de un cordero y un perro llevan sus presentes para obsequiar al neonato.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/2-adoracion-pastores.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--07",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/6-anunciacion-virgen.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/6-anunciacion-virgen.webp",
+        "title": "Anunciación de la Virgen Mª",
+        "description": "Sobre la estrella de Belén y rodeada por las 59 cuentas esculpidas que forman un gran rosario en piedra, el arcángel Gabriel anuncia a María que es la elegida para alumbrar al Hijo de Dios.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/6-anunciacion-virgen.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--08",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/7-coronacion-maria.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/7-coronacion-maria.webp",
+        "title": "Coronación de María",
+        "description": "Situada en la parte superior del Portal de la Caridad y ante la mirada de un pastor y del propio San José, Jesús corona a su madre, la Virgen María como Reina del Cielo y de la tierra, una escena arropada por una colorida vidriera de fondo.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/7-coronacion-maria.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--09",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/8-cipres-arbol-vida.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/8-cipres-arbol-vida.webp",
+        "title": "Árbol de la Vida",
+        "description": "Un ciprés corona el portal de la Caridad. Representa al árbol de la vida. Rematado con una cruz en forma de Tau y un aspa que expresa el abrazo del Padre al Hijo junto a un paloma, símbolo del Espíritu Santo. Apoyadas en el tronco hay dos escalas: la de la virtud y la de la santidad, las vías de los humanos para alcanzar la divinidad.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/8-cipres-arbol-vida.webp",
+        "orientation": "vertical"
+      },
+      {
+        "className": "sf-statue-item--10",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/10-bodas-jose-maria.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/10-bodas-jose-maria.webp",
+        "title": "Las bodas de José y maría",
+        "description": "Escena de las nupcias. Gaudí usó el enmoldado de personas vivas (y animales) para las esculturas de esta fachada en su búsqueda de la “verdad expresiva”. Para María escogió a una mujer madura, San José era un cantero y para el niño una bebé de meses, nieta del escultor y amigo Llorenç Matamala.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/10-bodas-jose-maria.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--11",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/13-presentacion-jesus-templo.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/13-presentacion-jesus-templo.webp",
+        "title": "Presentación de Jesús",
+        "description": "El sacerdote Simeón toma en brazos al niño para bendecirlo acompañado de una anciana profetisa. El conjunto plasma la presentación de Jesús en el templo, donde sus padres llevaron a Jesús cuarenta días después de su nacimiento.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/13-presentacion-jesus-templo.webp",
+        "orientation": "vertical"
+      },
+      {
+        "className": "sf-statue-item--12",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/10-visita-maria-isabel.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/10-visita-maria-isabel.webp",
+        "title": "Visita a Isabel",
+        "description": "El portal de la Fe, dedicado a María, arranca en su parte inferior con la visita de la Virgen a su familiar Isabel, también embarazada pese a ser estéril y su avanzada edad, uno de los pasajes centrales del Evangelio de Lucas.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/10-visita-maria-isabel.webp",
+        "orientation": "vertical"
+      },
+      {
+        "className": "sf-statue-item--13",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/desktop/11-jesus-carpintero.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/estatuas/mobile/11-jesus-carpintero.webp",
+        "title": "Jesús carpintero",
+        "description": "Un joven San José trabaja en el taller de carpintería de su padre, ",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-nacimiento/11-jesus-carpintero.webp",
+        "orientation": "vertical"
       }
     ]
   },
   "mural-2": {
-    "backgroundImage": "assets/images/bg-modal-mural2.webp",
+    "backgroundImage": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/fondo-fachada-pasion.webp",
+    "locatorImage": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/icn-fachada-pasion.svg",
     "altText": "Fachada de la Pasión - Conjunto de esculturas angulares de Subirachs",
     "hotspots": [
       {
         "className": "sf-statue-item--01",
-        "statueImg": "assets/images/statue-mockup.webp",
-        "title": "La Fachada de la Pasión",
-        "description": "Líneas angulosas y expresionistas diseñadas por Subirachs...",
-        "image": "assets/images/detalle-pasion.jpg"
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/4-flagelacion-detalle.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/4-flagelacion-detalle.webp",
+        "title": "Flagelación",
+        "description": "Este grupo, de quintos metros de altura, se sitúa frente a las puertas principales de la fachada y entre las esculturas de Judas y Pedro. Representa el sufrimiento y la soledad provocados por sus apóstoles.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/4-flagelacion-detalle.webp",
+        "orientation": "vertical"
+      },
+      {
+        "className": "sf-statue-item--02",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/1-santa-cena.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/1-santa-cena.webp",
+        "title": "Santa Cena",
+        "description": "Jesús y los apóstoles celebran la eucaristía alrededor de una mesa.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/1-santa-cena.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--03",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/2-detencion-jesus.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/2-detencion-jesus.webp",
+        "title": "Detención de Jesús",
+        "description": "Soldados armados van a buscar a Jesucristo. Durante la lucha para evitar el arresto, Pedro (apóstol) corta una oreja del criado del sumo sacerdote (uno de los sacerdotes mantiene en la mano el miembro amputado). La falta de nitidez sugiere que la escena fue nocturna.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/2-detencion-jesus.webp",
+        "orientation": "vertical"
+      },
+      {
+        "className": "sf-statue-item--04",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/3-traicion-judas.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/3-traicion-judas.webp",
+        "title": "Traición de Judas",
+        "description": "Con su beso, Judas señala a los soldados a quién deben llevarse. A sus pies, una serpiente, símbolo del mal. En la pared, un cuadrado mágico: la suma de cualquier fila, columna o diagonal siempre da el mismo resultado. En este caso 33, la edad de la muerte de Cristo.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/3-traicion-judas.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--05",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/5-negacion-pedro.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/5-negacion-pedro.webp",
+        "title": "Negación de Pedro",
+        "description": "Pedro, que negó a su maestro tres veces, aparece con expresión avergonzada y arropado en un sábana Completan el conjunto el gallo y tres mujeres (una por cada una de las negaciones).",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/5-negacion-pedro.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--07",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/6-ecce-homo.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/6-ecce-homo.webp",
+        "title": "Ecce Homo",
+        "description": "“He aquí el hombre”, palabras pronunciadas por Poncio Pilato, sentado y apesadumbrado, al presentar a Jesucristo ante el pueblo. Escoltado por dos soldados, Cristo lleva la corona de espinas y el suelo se rompe a sus pies.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/6-ecce-homo.webp",
+        "orientation": "vertical"
+      },
+      {
+        "className": "sf-statue-item--08",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/7-pilatos.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/7-pilatos.webp",
+        "title": "Sentencia de Pilato",
+        "description": "Pilato, gobernador romano de Judea, se lava las manos. Prócula, su mujer, abandona la escena convencida de que se está condenando a un hombre inocente. Entre esta secuencia y la del Ecce Homo hay una columna con la inscripción “Tiberio, emperador de Roma”.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/7-pilatos.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--09",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/8-caida-jesus-tres-marias.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/8-caida-jesus-tres-marias.webp",
+        "title": "Caída de Jesús ante las tres Marías",
+        "description": "La Virgen María, María Magdalena y María de Cleofás lloran ante la primera caída de Jesús mientras porta la cruz hacia el monte del Calvario. Simón de Cirene le ayuda a levantarla.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/8-caida-jesus-tres-marias.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--10",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/9-jesus-consuela-mujeres-veronica.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/9-jesus-consuela-mujeres-veronica.webp",
+        "title": "Jesús consuela a las mujeres",
+        "description": "La segunda caída de Jesús, donde Verónica limpia la sangre de su rostro, contiene dos guiños a Antoni Gaudí. La figura más a la izquierda, un evangelista, reproduce el rostro del propio Gaudí. Los cascos de los soldados se inspiran en las chimeneas de la Casa Milà, diseñada y construida por el arquitecto.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/9-jesus-consuela-mujeres-veronica.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--11",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/11-soldados-tunica-jesus.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/11-soldados-tunica-jesus.webp",
+        "title": "Soldados jugándose la túnica de Jesús",
+        "description": "Tres soldados se juegan a los dados la túnica de Jesucristo.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/11-soldados-tunica-jesus.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--12",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/10-longino.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/10-longino.webp",
+        "title": "Longino sobre un caballo",
+        "description": "El soldado romano Longino atraviesa con su lanza el costado de la escultura de Jesús en la Cruz (la propia lanza se incrusta en la piedra). Longino acabaría siendo mártir de la Iglesia tras convertirse al cristianismo.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/10-longino.webp",
+        "orientation": "vertical"
+      },
+      {
+        "className": "sf-statue-item--13",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/12-crucifixion.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/12-crucifixion.webp",
+        "title": "La crucifixión",
+        "description": "Cristo crucificado con las tres Marías llorando mientra la Virgen María es consolada por Juan. Junto a la base de la cruz formada por unos perfiles laminados de acero, una calavera simboliza la muerte. La figura de Cristo cuelga inclinada para que pueda apreciarse desde abajo de manera frontal.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/12-crucifixion.webp",
+        "orientation": "vertical"
+      },
+      {
+        "className": "sf-statue-item--14",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/13-descendimiento-sepultura.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/13-descendimiento-sepultura.webp",
+        "title": "Descendimiento y la sepultura",
+        "description": "Representación del entierro de Jesus. Dos miembros del Sanedrín (Nicodemo y José de Arimatea) dejan apenados el cuerpo de Cristo en la tumba, mientras entre ellos aparece la Virgen María arrodillada y abatida.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/13-descendimiento-sepultura.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--15",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/14-sepulcro-vacio.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/14-sepulcro-vacio.webp",
+        "title": "Sepulcro vacío",
+        "description": "Obra del escultor Francesc Fajula. Un ángel anuncia la resurrección a Mª Magdalena, a María (madre de Santiago) y a Salomé. El agujero vacío del sepulcro contrasta con los colores de la vidriera de la resurrección.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/14-sepulcro-vacio.webp",
+        "orientation": "horizontal"
+      },
+      {
+        "className": "sf-statue-item--16",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/15-cruz-angeles.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/15-cruz-angeles.webp",
+        "title": "Cruz y ángeles",
+        "description": "Por encima del sepulcro se alza una cruz hecha en granito, con una geometría de doble giro de 7,5 metros <span>(la proporción que define la planta y alturas de todo el monumento)</span> de alto y 18 toneladas. Al pie de la cruz tres ángeles la velan: uno en actitud de veneración, otro que acaricia la cruz y uno que sostiene un cáliz con la sangre de Cristo",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/15-cruz-angeles.webp",
+        "orientation": "vertical"
+      },
+      {
+        "className": "sf-statue-item--17",
+        "statueImgDesktop": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/desktop/17-ascension-jesus.webp",
+        "statueImgMobile": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/estatuas/mobile/17-ascension-jesus.webp",
+        "title": "La ascensión de Jesús",
+        "description": "Entre los dos campanarios centrales, unidos por un puente, cuelga la figura de la ascensión, elaborada en bronce dorado.",
+        "image": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/fachada-pasion/17-ascension-jesus.webp",
+        "orientation": "vertical"
       }
     ]
   }

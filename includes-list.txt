@@ -2,6 +2,15 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/styles.css
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-pre-header.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-sagrada-3D.html
+
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/models/sagrada-familia-final-3d.glb
+
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/cronologia-gaudi-cronologia-gaudi-XS.png
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/cronologia-gaudi-cronologia-gaudi-S.png
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/cronologia-gaudi-cronologia-gaudi-M.png
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/cronologia-gaudi-cronologia-gaudi-L.png
 
 
 <!--#include virtual="/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-pre-header.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-sagrada-3D.html" -->

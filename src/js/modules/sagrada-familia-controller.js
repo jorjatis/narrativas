@@ -3,6 +3,10 @@ export default function initSagradaFamilia(jsonData) {
   const muralImg = document.getElementById('sf-statues-scene-bg');
   const hotspotsContainer = document.getElementById('sf-statues-scene-hotspots');
   
+  // 🎯 ELEMENTOS DEL LOCALIZADOR
+  const locatorImg = document.querySelector('.sf-statues-locator img');
+  const locatorPoint = document.querySelector('.sf-statues-locator .locator-point');
+
   const statueModal = document.getElementById('modal-sf-info-statue');
   const statueTitle = document.getElementById('pop-statue-title');
   const statueDesc = document.getElementById('pop-statue-desc');
@@ -10,9 +14,21 @@ export default function initSagradaFamilia(jsonData) {
 
   const sceneButtons = document.querySelectorAll('[data-open-dynamic-scene]');
   
-  // Guardamos la escena actual para poder recalcular en el resize
   let currentSceneData = null;
   let resizeObserver = null;
+  let updateSliderControlsGlobal = null; // 🔄 Referencia global para actualizar el slider al redimensionar
+
+  // FUNCIÓN LOCAL DE LIMPIEZA
+  const clearLocatorAndActiveStates = () => {
+    if (hotspotsContainer) {
+      hotspotsContainer.querySelectorAll('.sf-statue-item').forEach(item => item.classList.remove('is-active'));
+      hotspotsContainer.querySelectorAll('.sf-btn').forEach(b => b.classList.remove('is-active'));
+    }
+    if (locatorPoint) {
+      locatorPoint.className = 'locator-point';
+      locatorPoint.style.display = 'none';
+    }
+  };
 
   sceneButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -23,14 +39,18 @@ export default function initSagradaFamilia(jsonData) {
 
       const isMobile = window.innerWidth <= 699;
 
-      // Gestión de visibilidad inicial del popup interior
-      if (statueModal) {
-        if (isMobile) {
-          statueModal.classList.add('is-open');
-        } else {
-          statueModal.classList.remove('is-open');
-        }
+      clearLocatorAndActiveStates();
+
+      if (muralImg) {
+        muralImg.src = currentSceneData.backgroundImage;
+        muralImg.alt = currentSceneData.altText || "Detalle del mural";
       }
+
+      if (locatorImg && currentSceneData.locatorImage) {
+        locatorImg.src = currentSceneData.locatorImage;
+      }
+
+      renderHotspots(isMobile, true);
 
       if (muralModal) {
         const classesToRemove = Array.from(muralModal.classList).filter(c => c.startsWith('v-n-modal--mural-'));
@@ -38,34 +58,31 @@ export default function initSagradaFamilia(jsonData) {
         muralModal.classList.add(`v-n-modal--${sceneId}`);
       }
 
-      if (muralImg) {
-        muralImg.src = currentSceneData.backgroundImage;
-        muralImg.alt = currentSceneData.altText || "Detalle del mural";
+      if (statueModal) {
+        statueModal.classList.add('is-open');
       }
 
-      // Renderizamos los elementos base por primera vez
-      renderHotspots(isMobile);
-
-      // 🔄 Iniciamos la escucha reactiva del tamaño de la pantalla
       setupResizeTracking();
     });
   });
 
-  // Función interna para pintar los hotspots/estatuas
-  function renderHotspots(isMobile) {
+  function renderHotspots(isMobile, isInitialOpen = false) {
     if (!hotspotsContainer || !currentSceneData) return;
 
-    // Deshacemos cualquier envoltura previa para empezar de cero limpio
     destroyMobileSlider();
     hotspotsContainer.innerHTML = '';
+
+    let activateFirstStatue = null;
 
     currentSceneData.hotspots.forEach((hotspot, index) => {
       const itemContainer = document.createElement('div');
       itemContainer.className = `sf-statue-item ${hotspot.className || ''}`;
 
-      if (hotspot.statueImg) {
+      const targetStatueImg = isMobile ? hotspot.statueImgMobile : hotspot.statueImgDesktop;
+
+      if (targetStatueImg) {
         const imgStatue = document.createElement('img');
-        imgStatue.src = hotspot.statueImg;
+        imgStatue.src = targetStatueImg;
         imgStatue.className = 'sf-statue-item__img';
         imgStatue.alt = `Silueta de ${hotspot.title}`;
         itemContainer.appendChild(imgStatue);
@@ -84,17 +101,39 @@ export default function initSagradaFamilia(jsonData) {
         itemContainer.classList.add('is-active');
         btn.classList.add('is-active');
 
-        if (statueTitle) statueTitle.textContent = hotspot.title;
-        if (statueDesc) statueDesc.textContent = hotspot.description;
+        if (locatorPoint) {
+          locatorPoint.className = 'locator-point'; 
+          const positionIndex = String(index + 1).padStart(2, '0');
+          locatorPoint.classList.add(`is-statue-${positionIndex}`);
+          locatorPoint.style.display = 'block'; 
+        }
+
+        if (statueTitle) statueTitle.innerHTML = hotspot.title;
+        if (statueDesc) statueDesc.innerHTML = hotspot.description;
         
         if (statueImg) {
+          const imgContainer = statueImg.parentElement;
+
           if (hotspot.image) {
             statueImg.src = hotspot.image;
             statueImg.alt = `Fotografía en detalle de ${hotspot.title}`;
-            statueImg.parentElement.style.display = ''; 
+            imgContainer.style.display = ''; 
+
+            imgContainer.classList.remove('is-horizontal', 'is-vertical');
+            if (hotspot.orientation === 'horizontal') {
+              imgContainer.classList.add('is-horizontal');
+            } else if (hotspot.orientation === 'vertical') {
+              imgContainer.classList.add('is-vertical');
+            }
+
           } else {
-            statueImg.parentElement.style.display = 'none'; 
+            imgContainer.style.display = 'none'; 
+            imgContainer.classList.remove('is-horizontal', 'is-vertical');
           }
+        }
+
+        if (statueModal) {
+          statueModal.classList.add('is-open');
         }
       };
 
@@ -102,43 +141,46 @@ export default function initSagradaFamilia(jsonData) {
       itemContainer.appendChild(btn);
       hotspotsContainer.appendChild(itemContainer);
 
-      // Auto-activación del primer ítem en móvil
-      if (isMobile && index === 0) {
-        selectStatue();
+      if (index === 0) {
+        activateFirstStatue = selectStatue;
       }
     });
 
-    // Si tras pintar estamos en móvil, activamos el slider dinámico
+    if (activateFirstStatue) {
+      if (isInitialOpen) {
+        setTimeout(() => {
+          activateFirstStatue();
+        }, 100);
+      } else {
+        activateFirstStatue();
+      }
+    }
+
     if (isMobile) {
       setupMobileSlider();
     }
   }
 
-  // 🎯 DETECTOR REACTIVO DE RESIZE (699px)
   function setupResizeTracking() {
     if (resizeObserver) resizeObserver.disconnect();
-
     let lastIsMobile = window.innerWidth <= 699;
 
-    // Escuchamos los cambios del body para reaccionar al viewport de forma eficiente
     resizeObserver = new ResizeObserver(() => {
       const currentIsMobile = window.innerWidth <= 699;
 
-      // Solo recalculamos el DOM si cruzamos la frontera de los 699px en cualquier dirección
       if (currentIsMobile !== lastIsMobile) {
         lastIsMobile = currentIsMobile;
 
-        // Cambiar el estado del popup de información según corresponda
         if (statueModal) {
-          if (currentIsMobile) {
-            statueModal.classList.add('is-open');
-          } else {
-            statueModal.classList.remove('is-open');
-          }
+          statueModal.classList.add('is-open');
         }
 
-        // Volvemos a renderizar la estructura adaptada al nuevo tamaño
-        renderHotspots(currentIsMobile);
+        renderHotspots(currentIsMobile, false);
+      } else if (currentIsMobile) {
+        // ⚡ SI SEGUIMOS EN MOBILE PERO CAMBIA EL ANCHO DE PANTALLA: Reevaluamos el desborde
+        if (typeof updateSliderControlsGlobal === 'function') {
+          updateSliderControlsGlobal();
+        }
       }
     });
 
@@ -156,10 +198,6 @@ export default function initSagradaFamilia(jsonData) {
 
     hotspotsContainer.parentNode.insertBefore(wrapper, hotspotsContainer);
     wrapper.appendChild(hotspotsContainer);
-
-    // Evaluamos si el contenido desborda el espacio disponible en mobile
-    const hasOverflow = hotspotsContainer.scrollWidth > hotspotsContainer.clientWidth;
-    if (!hasOverflow) return;
     
     const svgArrowIcon = `<svg width="7" height="12" viewBox="0 0 7 12" xmlns="http://www.w3.org/2000/svg"><path d="M4.2905 6.0005L0.21725 1.9275C0.0789167 1.789 0.00808339 1.61492 0.00475006 1.40525C0.00158339 1.19575 0.0724167 1.0185 0.21725 0.8735C0.36225 0.728667 0.537916 0.65625 0.74425 0.65625C0.950583 0.65625 1.12625 0.728667 1.27125 0.8735L5.7655 5.36775C5.859 5.46142 5.925 5.56017 5.9635 5.664C6.002 5.76783 6.02125 5.88 6.02125 6.0005C6.02125 6.121 6.002 6.23317 5.9635 6.337C5.925 6.44083 5.859 6.53958 5.7655 6.63325L1.27125 11.1275C1.13275 11.2658 0.958666 11.3367 0.749 11.34C0.5395 11.3432 0.36225 11.2723 0.21725 11.1275C0.0724167 10.9825 0 10.8068 0 10.6005C0 10.3942 0.0724167 10.2185 0.21725 10.0735L4.2905 6.0005Z"></path></svg>`;
 
@@ -188,9 +226,23 @@ export default function initSagradaFamilia(jsonData) {
     wrapper.appendChild(shadowLeft);
     wrapper.appendChild(shadowRight);
 
+    // 🧠 FUNCIÓN DE CONTROL DINÁMICO E INTELIGENTE
     const updateSliderControls = () => {
+      const clientWidth = hotspotsContainer.clientWidth;
+      const scrollWidth = hotspotsContainer.scrollWidth;
       const scrollLeft = hotspotsContainer.scrollLeft;
-      const maxScroll = hotspotsContainer.scrollWidth - hotspotsContainer.clientWidth;
+      const maxScroll = scrollWidth - clientWidth;
+
+      if (scrollWidth <= clientWidth || maxScroll <= 0) {
+        wrapper.classList.remove('is-scrollable');
+        arrowLeft.style.display = 'none';
+        shadowLeft.style.opacity = '0';
+        arrowRight.style.display = 'none';
+        shadowRight.style.opacity = '0';
+        return;
+      }
+
+      wrapper.classList.add('is-scrollable');
 
       arrowLeft.style.display = scrollLeft <= 5 ? 'none' : 'flex';
       shadowLeft.style.opacity = scrollLeft <= 5 ? '0' : '1';
@@ -199,15 +251,51 @@ export default function initSagradaFamilia(jsonData) {
       shadowRight.style.opacity = scrollLeft >= maxScroll - 5 ? '0' : '1';
     };
 
+    updateSliderControlsGlobal = updateSliderControls;
     hotspotsContainer.addEventListener('scroll', updateSliderControls);
 
-    arrowLeft.addEventListener('click', () => {
-      hotspotsContainer.scrollBy({ left: -150, behavior: 'smooth' });
-    });
+    // 🎯 NUEVA LÓGICA: Navegar secuencialmente por los elementos activos y centrarlos
+    const navigateSlider = (direction) => {
+      const items = Array.from(hotspotsContainer.querySelectorAll('.sf-statue-item'));
+      if (items.length === 0) return;
 
-    arrowRight.addEventListener('click', () => {
-      hotspotsContainer.scrollBy({ left: 150, behavior: 'smooth' });
-    });
+      const activeIndex = items.findIndex(item => item.classList.contains('is-active'));
+      let targetIndex = activeIndex;
+
+      if (direction === 'next') {
+        targetIndex = activeIndex + 1 < items.length ? activeIndex + 1 : activeIndex;
+      } else if (direction === 'prev') {
+        targetIndex = activeIndex - 1 >= 0 ? activeIndex - 1 : activeIndex;
+      }
+
+      if (targetIndex !== activeIndex) {
+        const targetItem = items[targetIndex];
+        const targetBtn = targetItem.querySelector('.sf-btn');
+        
+        if (targetBtn) {
+          targetBtn.click(); // Actualiza textos e imágenes
+
+          // 📐 Cálculo matemático para centrar perfectamente el elemento:
+          // (Posición izquierda del elemento con respecto al padre + la mitad de su propio ancho) 
+          // menos la mitad del ancho del contenedor visible.
+          const containerWidth = hotspotsContainer.clientWidth;
+          const itemLeft = targetItem.offsetLeft;
+          const itemWidth = targetItem.clientWidth;
+
+          const targetScrollLeft = itemLeft + (itemWidth / 2) - (containerWidth / 2);
+
+          // Hacemos el scroll controlado únicamente dentro de su caja contenedora
+          hotspotsContainer.scrollTo({
+            left: targetScrollLeft,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    // Reemplazamos los antiguos scrollBy manuales por la navegación inteligente
+    arrowLeft.addEventListener('click', () => navigateSlider('prev'));
+    arrowRight.addEventListener('click', () => navigateSlider('next'));
 
     setTimeout(updateSliderControls, 50);
   }
@@ -219,18 +307,25 @@ export default function initSagradaFamilia(jsonData) {
       wrapper.parentNode.insertBefore(hotspotsContainer, wrapper);
       wrapper.remove();
     }
+    updateSliderControlsGlobal = null; // Limpieza de la referencia
   }
 
-  // Limpieza global si se cierra el popup de la estatua
-  if (statueModal) {
-    const closeStatueBtn = statueModal.querySelector('[data-close-modal]');
-    if (closeStatueBtn) {
-      closeStatueBtn.addEventListener('click', () => {
-        if (hotspotsContainer) {
-          hotspotsContainer.querySelectorAll('.sf-statue-item').forEach(item => item.classList.remove('is-active'));
-          hotspotsContainer.querySelectorAll('.sf-btn').forEach(b => b.classList.remove('is-active'));
+  // =========================================================================
+  // 🕵️‍♂️ OBSERVADORES REACTIVOS DE CIERRE
+  // =========================================================================
+  const handleModalCloseMutation = (mutationsList) => {
+    for (const mutation of mutationsList) {
+      if (mutation.attributeName === 'class') {
+        const target = mutation.target;
+        if (!target.classList.contains('is-open')) {
+          clearLocatorAndActiveStates();
         }
-      });
+      }
     }
-  }
+  };
+
+  const modalObserver = new MutationObserver(handleModalCloseMutation);
+
+  if (muralModal) modalObserver.observe(muralModal, { attributes: true });
+  if (statueModal) modalObserver.observe(statueModal, { attributes: true });
 }

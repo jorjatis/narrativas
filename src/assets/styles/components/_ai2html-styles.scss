@@ -1,0 +1,197 @@
+@use '../base/variables' as *;
+
+#v-g-cronologia-box {
+	width:100% !important;
+	overflow:hidden;
+	position:relative;
+	margin:0 auto !important;
+}
+#v-g-cronologia-box {
+	container-type:inline-size;
+	container-name:v-g-cronologia-box;
+}
+#v-g-cronologia-box {
+	max-width:1140px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#v-g-cronologia-box,
+#v-g-cronologia-box .v-g-artboard {
+	margin:0 auto;
+}
+#v-g-cronologia-box p {
+	margin:0;
+}
+#v-g-cronologia-box .v-g-aiAbs {
+	position:absolute;
+}
+#v-g-cronologia-box .v-g-aiImg {
+	position:absolute;
+	top:0;
+	display:block;
+	width:100% !important;
+}
+#v-g-cronologia-box .v-g-aiSymbol {
+	position:absolute;
+	box-sizing:border-box;
+}
+#v-g-cronologia-box .v-g-aiPointText p {
+	white-space:nowrap;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-XS {
+	position:relative;
+	overflow:hidden;
+}
+@container v-g-cronologia-box (width >= 510px) {
+#v-g-cronologia-gaudi-cronologia-gaudi-XS {
+	display:none;
+}
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-XS p {
+	font-family:Micrograph Regular, sans-serif;
+	font-weight:regular;
+	font-style:normal;
+	line-height:19px;
+	opacity:1;
+	letter-spacing:0em;
+	font-size:16px;
+	text-align:left;
+	color:rgb(0,0,0);
+	text-transform:none;
+	padding-bottom:0;
+	padding-top:0;
+	mix-blend-mode:normal;
+	height:auto;
+	position:static;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-XS .v-g-pstyle0 {
+	font-family:Micrograph Semibold, sans-serif;
+	font-weight:600;
+	line-height:22px;
+	font-size:18px;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-XS .v-g-pstyle1 {
+	font-family:Micrograph Semibold, sans-serif;
+	font-weight:600;
+	color:rgb(14,58,111);
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-XS .v-g-pstyle2 {
+	font-weight:400;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-M {
+	position:relative;
+	overflow:hidden;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-M {
+	display:none;
+}
+@container v-g-cronologia-box (width >= 699px) and (width < 1025px) {
+#v-g-cronologia-gaudi-cronologia-gaudi-M {
+	display:block;
+}
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-M p {
+	font-family:Micrograph Regular, sans-serif;
+	font-weight:regular;
+	font-style:normal;
+	line-height:19px;
+	opacity:1;
+	letter-spacing:0em;
+	font-size:16px;
+	text-align:left;
+	color:rgb(0,0,0);
+	text-transform:none;
+	padding-bottom:0;
+	padding-top:0;
+	mix-blend-mode:normal;
+	height:auto;
+	position:static;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-M .v-g-pstyle0 {
+	font-family:Micrograph Semibold, sans-serif;
+	font-weight:600;
+	color:rgb(14,58,111);
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-M .v-g-pstyle1 {
+	font-weight:400;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-L {
+	position:relative;
+	overflow:hidden;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-L {
+	display:none;
+}
+@container v-g-cronologia-box (width >= 1025px) {
+#v-g-cronologia-gaudi-cronologia-gaudi-L {
+	display:block;
+}
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-L p {
+	font-family:Micrograph Regular, sans-serif;
+	font-weight:regular;
+	font-style:normal;
+	line-height:19px;
+	opacity:1;
+	letter-spacing:0em;
+	font-size:16px;
+	text-align:left;
+	color:rgb(0,0,0);
+	text-transform:none;
+	padding-bottom:0;
+	padding-top:0;
+	mix-blend-mode:normal;
+	height:auto;
+	position:static;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-L .v-g-pstyle0 {
+	font-family:Micrograph Semibold, sans-serif;
+	font-weight:600;
+	color:rgb(14,58,111);
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-L .v-g-pstyle1 {
+	font-weight:400;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-S {
+	position:relative;
+	overflow:hidden;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-S {
+	display:none;
+}
+@container v-g-cronologia-box (width >= 510px) and (width < 699px) {
+#v-g-cronologia-gaudi-cronologia-gaudi-S {
+	display:block;
+}
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-S p {
+	font-family:Micrograph Regular, sans-serif;
+	font-weight:regular;
+	font-style:normal;
+	line-height:19px;
+	opacity:1;
+	letter-spacing:0em;
+	font-size:16px;
+	text-align:left;
+	color:rgb(0,0,0);
+	text-transform:none;
+	padding-bottom:0;
+	padding-top:0;
+	mix-blend-mode:normal;
+	height:auto;
+	position:static;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-S .v-g-pstyle0 {
+	font-family:Micrograph Semibold, sans-serif;
+	font-weight:600;
+	line-height:22px;
+	font-size:18px;
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-S .v-g-pstyle1 {
+	font-family:Micrograph Semibold, sans-serif;
+	font-weight:600;
+	color:rgb(14,58,111);
+}
+#v-g-cronologia-gaudi-cronologia-gaudi-S .v-g-pstyle2 {
+	font-weight:400;
+}

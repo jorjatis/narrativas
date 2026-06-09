@@ -5,15 +5,24 @@
   position: relative;
   left: 50%;
   right: 50%;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 36px;
+  margin-bottom: 36px;
   margin-left: -50vw;
   margin-right: -50vw;
+
+  @media (min-width: $screen-xs) {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
 
   &__c {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
+
+    @media (min-width: $screen-xs) {
+      padding: 0 20px;
+    }
   }
 }
 
@@ -22,16 +31,26 @@
   top: 36px;
   z-index: 10;
   max-width: 1100px;
-  width: 100%;
+  width: auto;
+  margin-left: 20px;
   pointer-events: none;
+  
+  @media (min-width: $screen-xs) {
+    margin: 0;
+  }
 }
 
 .sf-scene-help {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 110px;
+  gap: 16px;
+  max-width: 70px;
   width: 100%;
+
+  @media (min-width: $screen-xs) {
+    gap: 24px;
+    max-width: 110px;
+  }
 
   &__i {
     display: flex;
@@ -40,18 +59,34 @@
   }
 
   svg {
-    height: 40px;
+    height: 24px;
+
+    @media (min-width: $screen-xs) {
+      height: 40px;
+    }
   }
 
   span {
     display: block;
     font-family: $mcr;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 12px;
+    line-height: 14px;
     color: $cp1;
     text-transform: uppercase;
     text-align: center;
+
+    @media (min-width: $screen-xs) {
+      font-size: 14px;
+      line-height: 16px;
+    }
   }
+}
+
+#sf-3d-canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .sf-scene-3D {
@@ -60,11 +95,11 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(70vh - 52px);
+  height: calc(75vh - 52px);
   max-height: 840px;
 
   @media (min-width: $screen-xs) {
-    height: calc(100vh - 60px);
+    height: calc(90vh - 60px);
     min-height: 600px;
   }
 }
@@ -75,7 +110,7 @@
   height: 100%;
 
   @media (min-width: $screen-xs) {
-    height: 75%;
+    height: 100%;
   }
 
   img {
@@ -87,7 +122,6 @@
 }
 
 .sf-btn {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,7 +137,6 @@
   backface-visibility: hidden;
   -webkit-font-smoothing: subpixel-antialiased;
   transform-style: preserve-3d;
-
   position: absolute;
   top: 50%;
   left: 50%;
@@ -131,23 +164,19 @@
 
 .sf-scene-3D {
   #sf-scene-3D-hotspots {
-    .sf-btn {
-      &--01 { top: 50%; left: 50% }
-      &--02 { top: 62%; left: 44% }
-    }
+    position: relative;
+    z-index: 1;
   }
 
   .sf-modal-mural {
     position: absolute;
     top: 0;
-    left: -20px;
-    width: calc(100% + 39px);
+    width: 100%;
     height: 100%;
     z-index: 20;
 
     @media (min-width: $screen-xs) {
       top: 30px;
-      width: 100%;
       height: calc(100% - 60px);
     }
 
@@ -156,20 +185,20 @@
         max-width: none;
         width: 100%;
         height: 100%;
-        min-height: 560px;
         border-radius: 0;
-        padding: 12px 32px; 
+        padding: 12px 20px; 
         box-shadow: 0 0 16px 10px rgba(0, 0, 0, 0.05);
         
         @media (min-width: $screen-xs) {
           padding: 24px 96px;  
           box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.05);
           backdrop-filter: blur(6px);
+          overflow: hidden;
         }
       }
 
       &__close {
-        right: 32px;
+        right: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -179,12 +208,13 @@
         background: $cp1;
         text-indent: -9999px;
         transition: opacity .3s ease;
-        z-index: 10;
+        z-index: 30;
 
         @media (min-width: $screen-xs) {
           right: 16px;
           width: 48px;
           height: 48px;
+          z-index: 10;
         }
 
         &:hover {
@@ -217,7 +247,7 @@
       &__body {
         display: flex;
         flex-direction: column-reverse;
-        align-items: center;
+        align-items: flex-start;
         width: 100%;
         height: 100%;
       }
@@ -228,6 +258,36 @@
     align-self: flex-end;
     position: relative;
     width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &:has(.sf-slider-wrapper.is-scrollable) {
+      gap: 8px;
+    }
+
+    .sf-statues-locator {
+      flex: 0 0 auto;
+      position: relative;
+      display: block;
+      width: 60px;
+
+      @media (min-width: $screen-xs) {
+        display: none;
+      }
+
+      .locator-point {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 8px;
+        height: 8px;
+        background: $cp1;
+        border-radius: 100%;
+        transition: top .3s ease, left .3s ease;
+      }
+    }
 
     .sf-statue-item {
       @media (max-width: $screen-xs) {
@@ -240,6 +300,8 @@
         justify-content: center;
         width: 70px;
         height: 70px;
+        padding: 4px;
+        border: 1px solid $cp1;
       }
 
       @media (min-width: $screen-xs) {
@@ -263,6 +325,8 @@
         }
 
         &.is-active {
+          pointer-events: none;
+
           @media (max-width: $screen-xs) {
             transform: scale(1.12);
             border-color: $cp1;
@@ -272,7 +336,6 @@
 
           @media (min-width: $screen-xs) {
             background: $cp1;
-            pointer-events: none;
           }
 
           &::before,
@@ -305,7 +368,8 @@
         overflow-x: auto;
         overflow-y: hidden;
         scroll-behavior: smooth;
-        scroll-snap-type: x mandatory;
+        position: relative;
+        padding-right: 32px;
 
         &::-webkit-scrollbar { display: none; }
         -ms-overflow-style: none;
@@ -320,6 +384,12 @@
         .sf-btn,
         .sf-statue-item__img {
           @media (min-width: $screen-xs) {
+            opacity: 0.5;
+          }
+        }
+
+        .sf-btn {
+          @media (max-width: $screen-xs) {
             opacity: 0.5;
           }
         }
@@ -340,11 +410,41 @@
           }
         }
 
+        .sf-btn {
+          width: 24px;
+          height: 24px;
+          
+          @media (max-width: $screen-xs) {
+            opacity: 0;
+          }
+
+          &:before,
+          &:after {
+            height: 14px;
+          }
+        }
+
+        .sf-statue-item {
+          @media (max-width: $screen-xs) {
+            opacity: 0.4;
+          }
+        }
+
         .sf-statue-item.is-active {
+          @media (max-width: $screen-xs) {
+            opacity: 1
+          }
+
           .sf-btn,
           .sf-statue-item__img {
             @media (min-width: $screen-xs) {
               opacity: 1;
+            }
+          }
+
+          .sf-btn {
+            @media (max-width: $screen-xs) {
+              opacity: 0;
             }
           }
         }
@@ -356,7 +456,6 @@
       
       @media (min-width: $screen-xs) {
         display: block;
-        opacity: 0.25;
       }
     }
   }
@@ -364,19 +463,85 @@
   .v-n-modal--mural-1 {    
     .sf-statue-item {
       @media (min-width: $screen-xs) {
-        &--01 { 
-          top: 50%; 
-          left: 50%;
-        }
+        &--01 { top: 62%; left: 5.6%; width: 10%; z-index: 7; }
+        &--02 { top: 63.9%; left: 17.8%; width: 7%; z-index: 8; }
+        &--03 { top: 67.9%; left: 40.1%; width: 9%; z-index: 10; }
+        &--04 { top: 61%; left: 45.3%; width: 2.8%; z-index: 6; }
+        &--05 { top: 69%; left: 24%; width: 15%; z-index: 9; }
+        &--06 { top: 76%; left: 55.7%; width: 8%; z-index: 11; }
+        &--07 { top: 59.1%; left: 48.7%; width: 8.1%; z-index: 4; }
+        &--08 { top: 45.8%; left: 52.2%; width: 9.6%; z-index: 2; }
+        &--09 { top: 26%; left: 59.9%; width: 4.3%; z-index: 1; }
+        &--10 { top: 51.3%; left: 25.2%; width: 8.9%; z-index: 3; }
+        &--11 { top: 58.6%; left: 72.5%; width: 11.3%; z-index: 5; }
+        &--12 { top: 75%; left: 63.6%; width: 10.2%; z-index: 12; }
+        &--13 { top: 76.2%; left: 81.6%; width: 13.2%; z-index: 13; }
+      }
+    }
 
-        &--02 { 
-          top: 62%; 
-          left: 44%;
+    .sf-statues-locator {
+      .locator-point {
+        &.is-statue {
+          &-01 { top: 89.85%; left: 21.67%; }
+          &-02 { top: 87.36%; left: 30.00%; }
+          &-03 { top: 86.11%; left: 53.33%; }
+          &-04 { top: 68.64%; left: 50.00%; }
+          &-05 { top: 92.35%; left: 43.33%; }
+          &-06 { top: 92.35%; left: 56.67%; }
+          &-07 { top: 64.89%; left: 50.00%; }
+          &-08 { top: 58.66%; left: 50.00%; }
+          &-09 { top: 13.73%; left: 50.00%; }
+          &-10 { top: 67.39%; left: 26.67%; }
+          &-11 { top: 74.88%; left: 73.33%; }
+          &-12 { top: 87.36%; left: 70.00%; }
+          &-13 { top: 91.10%; left: 80.00%; }
         }
+      }
+    }
+  }
 
-        &--03 { 
-          top: 32%; 
-          left: 22%; 
+  .v-n-modal--mural-2 {    
+    .sf-statue-item {
+      @media (min-width: $screen-xs) {
+        &--01 { top: 65.5%; left: 19%; width: 9.1%; z-index: 17; }
+        &--02 { top: 46.8%; left: 0.7%; width: 16%; z-index: 11; }
+        &--03 { top: 50.9%; left: 16.6%; width: 9.8%; z-index: 12; }
+        &--04 { top: 54.7%; left: 24.6%; width: 13.8%; z-index: 13; }
+        &--05 { top: 62.4%; left: 45.8%; width: 13.8%; z-index: 14; }
+        // &--06 { top:0; left: 0; width: 0; z-index: 0; }
+        &--07 { top: 75.4%; left: 69%; width: 9.8%; z-index: 15; }
+        &--08 { top: 79.6%; left: 79.8%; width: 11.8%; z-index: 16; }
+        &--09 { top: 59.5%; left: 63.7%; width: 10.7%; z-index: 10; }
+        &--10 { top: 49.5%; left: 39.2%; width: 19%; z-index: 9; }
+        &--11 { top: 41.5%; left: 37.7%; width: 7.3%; z-index: 5; }
+        &--12 { top: 43%; left: 28.4%; width: 7.8%; z-index: 8; }
+        &--13 { top: 37%; left: 51.1%; width: 9.8%; z-index: 6; }
+        &--14 { top: 52.4%; left: 67.7%; width: 8.3%; z-index: 7; }
+        &--15 { top: 35.8%; left: 62.2%; width: 9.2%; z-index: 4; }
+        &--16 { top: 24.1%; left: 69.3%; width: 6.5%; z-index: 3; }
+        &--17 { top: 18.2%; left: 76.3%; width: 3%; z-index: 2; }
+      }
+    }
+
+    .sf-statues-locator {
+      .locator-point {
+        &.is-statue {
+          &-01 { top: 92.35%; left: 50.00%; }
+          &-02 { top: 88.61%; left: 15.00%; }
+          &-03 { top: 91.10%; left: 33.33%; }
+          &-04 { top: 88.61%; left: 36.67%; }
+          &-05 { top: 91.10%; left: 63.33%; }
+          &-06 { top: 91.10%; left: 76.67%; }
+          &-07 { top: 87.36%; left: 88.33%; }
+          &-08 { top: 72.38%; left: 68.33%; }
+          &-09 { top: 81.12%; left: 50.00%; }
+          &-10 { top: 72.38%; left: 31.67%; }
+          &-11 { top: 83.61%; left: 28.33%; }
+          &-12 { top: 68.64%; left: 50.00%; }
+          &-13 { top: 72.38%; left: 70.00%; }
+          &-14 { top: 49.92%; left: 50.00%; }
+          &-15 { top: 29.95%; left: 50.00%; }
+          &-16 { top: 12.48%; left: 50.00%; }
         }
       }
     }
@@ -398,19 +563,38 @@
         @media (min-width: $screen-xs) {
           position: absolute;
           top: 26px;
-          left: 100px;
-          max-width: 507px;
-          min-height: 220px;
+          left: 26px;
           height: auto;
           padding: 16px;
           border-radius: 2px;
           background: #f5f7f9;
           backdrop-filter: blur(7.5px);
         }
+
+        &:has(#pop-statue-img.is-vertical) {
+          @media (min-width: $screen-xs) {
+            max-width: 360px;
+            min-height: 220px;
+          }
+        }
+
+        &:has(#pop-statue-img.is-horizontal) {
+          @media (min-width: $screen-xs) {
+            max-width: 507px;
+            min-height: 220px;
+          }
+        }
       }
 
       &__body {
+        flex-direction: column;
         justify-content: flex-start;
+
+        @media (min-width: $screen-xs) {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          column-gap: 16px;
+        }
         
         @media (max-width: $screen-xs) {
           align-items: flex-start;
@@ -432,15 +616,89 @@
         }
       }
     }
+
+    #pop-statue {
+      &-title {        
+        position: relative;
+        margin-bottom: 12px;
+        font: 16px/18px $mcs;
+        color: $cp1;
+
+        @media (max-width: $screen-xs) {
+          order: 1;
+        }
+
+        @media (min-width: $screen-xs) {
+          grid-row: 1;
+          grid-column: 1 / span 2;
+          margin-bottom: 12px;
+        }
+
+        &:after {
+          content: '';
+          display: block;
+          width: 25px;
+          height: 1px;
+          margin-top: 8px;
+          background: $cp1;
+        }
+      }
+
+      &-desc {
+        font: 16px/18px $mcr;
+        color: $cb9;
+
+        @media (max-width: $screen-xs) {
+          order: 3;
+        }
+
+        @media (min-width: $screen-xs) {
+          grid-row: 2;
+          grid-column: 2;
+        }
+      }
+
+      &-img {
+        max-height: 159px;
+
+        @media (max-width: $screen-xs) {
+          order: 2;
+          margin-bottom: 12px;
+        }
+
+        @media (min-width: $screen-xs) {
+          grid-row: 2;
+          grid-column: 1;
+          max-height: 219px;
+        }
+
+        &.is-vertical {
+          @media (min-width: $screen-xs) {
+            width: 145px;
+            height: 217px;
+          }
+        }
+
+         &.is-horizontal {
+          @media (min-width: $screen-xs) {
+            width: 217px;
+            height: 145px;
+          }
+        }
+
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
   }
 
   @media (max-width: $screen-xs) {
     .sf-slider-wrapper {
       position: relative;
-      width: 100%;
-      margin-top: 16px;
-      margin-bottom: 24px;
-      padding: 0;
+      width: calc(100% - 36px);
     }
 
     .sf-slider-arrow {
@@ -472,7 +730,7 @@
       }
 
       &--right { 
-        right: 8px; 
+        right: 20px; 
 
         svg {
           transform: translateX(-1px) rotate(-180deg);
@@ -493,9 +751,147 @@
         left: 0;
         background: linear-gradient(to right, rgba(#fff, 1) 15%, rgba(#fff, 0));
       }
+
       &--right {
         right: 0;
         background: linear-gradient(to left, rgba(#fff, 1) 15%, rgba(#fff, 0));
+      }
+    }
+  }
+}
+
+#sf-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($cb2, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  transition: opacity 0.5s ease; 
+}
+
+.sf-loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  font-family: $mcr;
+  color: $cb8;
+}
+
+.sf-loader-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sf-loader-text .dots::after {
+  content: '';
+  animation: loading-dots 1.5s infinite steps(4);
+}
+
+@keyframes loading-dots {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+}
+
+.sf-loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid $cb5;
+  border-top: 4px solid $cp1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (min-width: 375px) and (max-width: 390px) {
+  @media (max-height: 690px) {
+    .sf-scene-3D {
+      .sf-popup-info-statue {
+        #pop-statue-title {
+          margin-bottom: 12px;
+        }
+
+        #pop-statue-img {
+          max-height: 139px;
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 374px) {
+  @media (max-height: 690px) {
+    .sf-scene-3D {
+      .sf-slider-wrapper {
+        width: calc(100% - 28px);
+      }
+
+      .sf-slider-arrow--right {
+        right: 10px;
+      }
+
+      .sf-statues-scene {
+        .sf-statues-locator {
+          width: 40px;
+        }
+
+        .sf-statue-item {
+          width: 45px;
+          height: 45px;
+        }
+
+        #sf-statues-scene-hotspots {
+          gap: 8px;
+          padding-right: 10px;
+        }
+      }
+
+      .sf-popup-info-statue {
+        #pop-statue-title {
+          margin-bottom: 6px;
+          font-size: 14px;
+          line-height: 14px;
+
+          &:after {
+            margin-top: 4px;
+          }
+        }
+
+        #pop-statue-img {
+          max-height: 129px;
+          margin-bottom: 8px;
+        }
+
+        #pop-statue-desc {
+          font-size: 14px;
+          line-height: 16px;
+
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  @media (min-height: 840px) {
+    .sf-scene-3D {
+      .sf-modal-mural {
+        max-height: 610px;
       }
     }
   }

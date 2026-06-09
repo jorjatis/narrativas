@@ -24,6 +24,21 @@ body:has(.v-h-a) {
   }
 }
 
+.v-h.v-h--t3 {
+  .v-h__c {
+    background: transparent;
+    border-color: transparent;
+    transition: background .3s ease, border-color .3s ease;
+  }
+}
+
+.v-h.v-h--t3.is-fixed {
+  .v-h__c {
+    background: $cb2;
+    border-color: $cp4;
+  }
+}
+
 .ai2html {
   display: flex;
   justify-content: center;
