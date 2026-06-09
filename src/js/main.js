@@ -1,6 +1,5 @@
 // NOTE: Helpers
 import fadeOnScroll from './helpers/fadeOnScroll';
-import moveEls from './helpers/moveEls';
 
 // NOTE: Utils
 import modal from './utils/modal.js'; 
@@ -12,7 +11,6 @@ import sagradaFamiliaData from './modules/sagrada-familia-data.json';
 
 export function initAll() {
   fadeOnScroll('.scr-ind');
-  moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
 
   modal();
 

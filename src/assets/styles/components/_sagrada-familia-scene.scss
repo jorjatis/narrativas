@@ -353,6 +353,7 @@
 
       &__img {
         transition: opacity .3s ease;
+        pointer-events: none;
       }
     }
     
@@ -416,6 +417,8 @@
           
           @media (max-width: $screen-xs) {
             opacity: 0;
+            width: 100%;
+            height: 100%;
           }
 
           &:before,
@@ -486,13 +489,31 @@
           &-02 { top: 87.36%; left: 30.00%; }
           &-03 { top: 86.11%; left: 53.33%; }
           &-04 { top: 68.64%; left: 50.00%; }
-          &-05 { top: 92.35%; left: 43.33%; }
+          &-05 { top: 92.35%; left: 43.33%; 
+
+            .sf-btn {
+              top: 0px;
+              left: -5px;
+            }
+          }
           &-06 { top: 92.35%; left: 56.67%; }
           &-07 { top: 64.89%; left: 50.00%; }
           &-08 { top: 58.66%; left: 50.00%; }
           &-09 { top: 13.73%; left: 50.00%; }
-          &-10 { top: 67.39%; left: 26.67%; }
-          &-11 { top: 74.88%; left: 73.33%; }
+          &-10 { top: 67.39%; left: 26.67%; 
+
+            .sf-btn {
+              top: 0px;
+              left: 10px;
+            }
+          }
+          &-11 { top: 74.88%; left: 73.33%; 
+
+            .sf-btn {
+              top: 0px;
+              left: 0px;
+            }
+          }
           &-12 { top: 87.36%; left: 70.00%; }
           &-13 { top: 91.10%; left: 80.00%; }
         }
@@ -503,22 +524,64 @@
   .v-n-modal--mural-2 {    
     .sf-statue-item {
       @media (min-width: $screen-xs) {
-        &--01 { top: 65.5%; left: 19%; width: 9.1%; z-index: 17; }
+        &--01 { 
+          top: 65.5%; left: 19%; width: 9.1%; z-index: 17; 
+          
+          .sf-btn {
+            top: 20px;
+            left: 0;
+          }
+        }
         &--02 { top: 46.8%; left: 0.7%; width: 16%; z-index: 11; }
         &--03 { top: 50.9%; left: 16.6%; width: 9.8%; z-index: 12; }
-        &--04 { top: 54.7%; left: 24.6%; width: 13.8%; z-index: 13; }
-        &--05 { top: 62.4%; left: 45.8%; width: 13.8%; z-index: 14; }
+        &--04 { 
+          top: 54.7%; left: 24.6%; width: 13.8%; z-index: 13; 
+
+          .sf-btn {
+            top: 20px;
+            left: 24px;
+          }
+        }
+        &--05 { 
+          top: 62.4%; left: 45.8%; width: 13.8%; z-index: 14; 
+
+          .sf-btn {
+            top: 10px;
+            left: 0px;
+          }
+        }
         // &--06 { top:0; left: 0; width: 0; z-index: 0; }
         &--07 { top: 75.4%; left: 69%; width: 9.8%; z-index: 15; }
         &--08 { top: 79.6%; left: 79.8%; width: 11.8%; z-index: 16; }
         &--09 { top: 59.5%; left: 63.7%; width: 10.7%; z-index: 10; }
         &--10 { top: 49.5%; left: 39.2%; width: 19%; z-index: 9; }
         &--11 { top: 41.5%; left: 37.7%; width: 7.3%; z-index: 5; }
-        &--12 { top: 43%; left: 28.4%; width: 7.8%; z-index: 8; }
-        &--13 { top: 37%; left: 51.1%; width: 9.8%; z-index: 6; }
+        &--12 { 
+          top: 43%; left: 28.4%; width: 7.8%; z-index: 8; 
+
+          .sf-btn {
+            top: 0;
+            left: 0; 
+          }
+        }
+        &--13 { 
+          top: 37%; left: 51.1%; width: 9.8%; z-index: 6; 
+
+          .sf-btn {
+            top: 10px;
+            left: 5px;
+          }
+        }
         &--14 { top: 52.4%; left: 67.7%; width: 8.3%; z-index: 7; }
         &--15 { top: 35.8%; left: 62.2%; width: 9.2%; z-index: 4; }
-        &--16 { top: 24.1%; left: 69.3%; width: 6.5%; z-index: 3; }
+        &--16 { 
+          top: 24.1%; left: 69.3%; width: 6.5%; z-index: 3; 
+
+          .sf-btn {
+            top: 0;
+            left: 0;
+          }
+        }
         &--17 { top: 18.2%; left: 76.3%; width: 3%; z-index: 2; }
       }
     }

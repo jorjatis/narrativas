@@ -12,9 +12,9 @@
     },
     "infoContainer": {
       "exists": true,
-      "pretitle": "Dirigido por Ridley Scott",
-      "title": "La Sagrada Familia en 3D",
-      "description": "Una familia sagrada en 3D",
+      "pretitle": false,
+      "title": "La Sagrada Familia, el evangelio en piedra que soñó Gaudí",
+      "description": "Un recorrido por la simbología del monumento a través de las fachadas concluidas del mayor templo cristiano del mundo y cuyo punto más alto bendice hoy León XIV",
       "chevronDown": true
     },
     "firma": {

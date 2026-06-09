@@ -34,7 +34,6 @@ body:has(.v-h-a) {
     }
 
     .v-a-inf-c {
-      flex-direction: column-reverse;
       gap: 16px;
       padding: 0 20px;
 
@@ -57,6 +56,12 @@ body:has(.v-h-a) {
         line-height: 26px;
         letter-spacing: -0.11px;
         text-transform: unset;
+      }
+
+      .v-a-s-t {
+        @media (max-width: $screen-xs) {
+          font-size: 18px;
+        }
       }
     }
   }

@@ -81,12 +81,23 @@ body:has(.v-h-a) {
       padding: 0;
       
       .v-a-p-t,
-      .v-a-t {
+      .v-a-t,
+      .v-a-s-t {
         color: $cb1;
       }
-      
+
+      .v-a-t {
+        order: 1;
+      }
+
       .v-a-s-t {
-        display: none;
+        order: 2;
+        margin: 0;
+      }
+
+      .v-a-p-t {
+        order: 3;
+        margin: 0;
       }
 
       .v-i {

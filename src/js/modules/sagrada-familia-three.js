@@ -75,6 +75,13 @@ export function initSagradaFamilia3D(containerSelector) {
     controls.minDistance = 51.5;
     controls.maxDistance = 350.0;
 
+    controls.touches = {
+      ONE: THREE.TOUCH.ROTATE,
+      TWO: THREE.TOUCH.DOLLY_PAN
+    };
+
+    renderer.domElement.style.touchAction = 'pan-y';
+
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambientLight);
 
