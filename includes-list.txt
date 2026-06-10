@@ -1,18 +1,7 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/scripts.js
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/styles.css
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/15/tu-once-ideal/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/15/tu-once-ideal/styles.css
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-pre-header.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-sagrada-3D.html
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/models/sagrada-familia-final-3d.glb
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/cronologia-gaudi-2-cronologia-gaudi-2-L.png
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/cronologia-gaudi-2-cronologia-gaudi-2-M.png
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/cronologia-gaudi-2-cronologia-gaudi-2-S.png
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/images/cronologia-gaudi-2-cronologia-gaudi-2-XS.png
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/15/tu-once-ideal/includes/inc-tu-once-ideal.html
 
 
-
-
-<!--#include virtual="/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-pre-header.html" -->
-<!--#include virtual="/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-sagrada-3D.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/15/tu-once-ideal/includes/inc-tu-once-ideal.html" -->

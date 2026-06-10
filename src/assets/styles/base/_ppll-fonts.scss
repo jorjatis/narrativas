@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "PPLL Vocento Light";
+  src: url(//static.vocstatic.com/voc26/1.0.114/assets/fonts/ppll/pvl.woff2) format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "PPLL Vocento Light Italic";
+  src: url(//static.vocstatic.com/voc26/1.0.114/assets/fonts/ppll/pvli.woff2) format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "PPLL Vocento Regular";
+  src: url(//static.vocstatic.com/voc26/1.0.114/assets/fonts/ppll/pvr.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "PPLL Vocento Semibold";
+  src: url(//static.vocstatic.com/voc26/1.0.114/assets/fonts/ppll/pvs.woff2) format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "PPLL Vocento Semibold Italic";
+  src: url(//static.vocstatic.com/voc26/1.0.114/assets/fonts/ppll/pvsi.woff2) format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "PPLL Vocento Extrabold";
+  src: url(//static.vocstatic.com/voc26/1.0.114/assets/fonts/ppll/pveb.woff2) format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "PPLL Sans Regular";
+  src: url(//static.vocstatic.com/voc26/1.0.114/assets/fonts/ppll/psr.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "PPLL Sans Medium";
+  src: url(//static.vocstatic.com/voc26/1.0.114/assets/fonts/ppll/psm.woff2) format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "PPLL Sans Semibold";
+  src: url(//static.vocstatic.com/voc26/1.0.114/assets/fonts/ppll/pss.woff2) format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap
+}
+
+$pvl: 'PPLL Vocento Light', serif;
+$pvli: 'PPLL Vocento Light Italic', serif;
+$pvr: 'PPLL Vocento Regular', serif;
+$pvs: 'PPLL Vocento Semibold', serif;
+$pvsi: 'PPLL Vocento Semibold Italic', serif;
+$pveb: 'PPLL Vocento Extrabold', serif;
+
+$psr: 'PPLL Sans Regular', serif;
+$psm: 'PPLL Sans Medium', serif;
+$pss: 'PPLL Sans Semibold', serif;
