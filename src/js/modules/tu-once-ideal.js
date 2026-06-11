@@ -12,9 +12,9 @@ const GENERAL_PLAYER_POSITIONS = {
   'centro-derecho': 'centro',
   'centro-izquierdo': 'centro',
   'mediapunta': 'centro',
-  'extremo-derecho': 'delantero',
+  'extremo-derecho': 'centro',
   'delantero-centro': 'delantero',
-  'extremo-izquierdo': 'delantero',
+  'extremo-izquierdo': 'centro',
   'delantero-derecho': 'delantero',
   'delantero-izquierdo': 'delantero'
 };
@@ -36,22 +36,65 @@ export default function initTuOnceIdeal() {
   const downloadBlock = document.querySelector('.v-n-toi-download');
   const downloadBtn = downloadBlock?.querySelector('.v-n-toi-download-btn');
   const resetBtn = downloadBlock?.querySelector('.v-n-toi-reset-btn');
+  
+  const nextStepBlock = document.querySelector('.v-n-toi-next-step');
 
   let activePlayerButton = null;
+  let checkScrollSpeed = null;
 
   if (!selectorItems.length || !selectedBlock || !popup) return;
 
-  function updateResetState() {
-    if (!resetBtn) return;
-    const playersCompleted = document.querySelectorAll('.v-n-toi-player[data-selected-player-id]').length;
-    if (playersCompleted === 0) {
-      resetBtn.setAttribute('disabled', 'true');
-    } else {
-      resetBtn.removeAttribute('disabled');
-    }
-  }
+  // ==========================================
+  // BOTÓN FLOANTE PARA PRUEBAS (AUTO-RELLENAR)
+  // ==========================================
+  const testBtn = document.createElement('button');
+  testBtn.type = 'button';
+  testBtn.innerText = '⚡ Auto-llenar 11';
+  testBtn.style.position = 'fixed';
+  testBtn.style.bottom = '20px';
+  testBtn.style.left = '20px';
+  testBtn.style.zIndex = '99999';
+  testBtn.style.padding = '10px 14px';
+  testBtn.style.background = '#ff0055';
+  testBtn.style.color = '#fff';
+  testBtn.style.border = 'none';
+  testBtn.style.borderRadius = '4px';
+  testBtn.style.cursor = 'pointer';
+  testBtn.style.fontWeight = 'bold';
+  testBtn.style.fontFamily = 'sans-serif';
+  testBtn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+  document.body.appendChild(testBtn);
 
-  updateResetState();
+  testBtn.addEventListener('click', () => {
+    const currentSystem = document.querySelector('.v-n-toi-selector__item.is-active')?.getAttribute('data-system');
+    if (!currentSystem) {
+      alert('Primero selecciona un sistema táctico (4/3/3, etc.) arriba.');
+      return;
+    }
+
+    const playersButtons = document.querySelectorAll('.v-n-toi-player');
+    if (!playersButtons.length) return;
+
+    playersButtons.forEach((btn) => {
+      const positionKey = btn.getAttribute('data-player-position');
+      const playersIds = data.formations[currentSystem]?.positions[positionKey] || [];
+      const mockPlayerId = playersIds[0]; // Cogemos el primer jugador disponible para esa posición
+
+      if (mockPlayerId && data.players[mockPlayerId]) {
+        const playerData = data.players[mockPlayerId];
+        const playerImgElement = btn.querySelector('.v-n-toi-player__img');
+        if (playerImgElement) {
+          playerImgElement.src = playerData.image;
+          playerImgElement.alt = `Foto de ${playerData.name}`;
+        }
+        btn.setAttribute('data-selected-player-id', mockPlayerId);
+      }
+    });
+    
+    closePopup();
+    console.log('⚡ Los 11 jugadores han sido rellenados con éxito.');
+  });
+  // ==========================================
 
   selectorItems.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -72,8 +115,11 @@ export default function initTuOnceIdeal() {
       systemContainer.classList.add(`v-n-toi-system--${systemClassForCss}`);
 
       closePopup();
-      generatePlayers(systemData.positions, playersContainer);
-      updateResetState();
+      generatePlayers(systemData.positions, playersContainer, system);
+
+      if (nextStepBlock) {
+        nextStepBlock.classList.add('is-hidden');
+      }
 
       selectedBlock.classList.remove('is-visible');
       selectedBlock.classList.add('is-active');
@@ -99,6 +145,12 @@ export default function initTuOnceIdeal() {
     const playerBtn = e.target.closest('.v-n-toi-player');
     if (!playerBtn) return;
 
+    e.stopPropagation();
+
+    clearInterval(checkScrollSpeed);
+
+    const isAnotherPopupOpen = popup.classList.contains('is-active') && activePlayerButton !== playerBtn;
+
     document.querySelectorAll('.v-n-toi-player').forEach(p => {
       p.classList.remove('is-active');
       p.setAttribute('aria-expanded', 'false');
@@ -116,7 +168,38 @@ export default function initTuOnceIdeal() {
     const playersIds = data.formations[currentSystem]?.positions[positionKey] || [];
     
     openPopup(positionKey, playersIds);
-    placePopup(playerBtn);
+
+    if (systemContainer) {
+      const headerElement = document.querySelector('.v-h--t3');
+      const headerHeight = headerElement ? headerElement.offsetHeight : 0;
+
+      const systemTop = systemContainer.getBoundingClientRect().top + window.scrollY;
+      const systemHeight = systemContainer.offsetHeight;
+      const windowHeight = window.innerHeight;
+
+      const targetScrollY = systemTop - (windowHeight / 2) + (systemHeight / 2) - (headerHeight / 2);
+
+      window.scrollTo({
+        top: targetScrollY,
+        behavior: 'smooth'
+      });
+    }
+
+    requestAnimationFrame(() => {
+      placePopup(playerBtn);
+      popup.classList.add('is-visible');
+    });
+
+    if (!isAnotherPopupOpen) {
+      checkScrollSpeed = setInterval(() => {
+        placePopup(playerBtn);
+      }, 16);
+
+      setTimeout(() => {
+        clearInterval(checkScrollSpeed);
+        placePopup(playerBtn);
+      }, 350);
+    }
   });
 
   popupCloseBtn.addEventListener('click', closePopup);
@@ -148,13 +231,23 @@ export default function initTuOnceIdeal() {
 
       if (leftPlayersToSelect > 0) {
         e.preventDefault();
-        showErrorMessage(`Te faltan ${leftPlayersToSelect} jugadores para descargar tu once ideal`);
+        
+        if (leftPlayersToSelect === 1) {
+          showErrorMessage('Te falta 1 jugador para descargar tu once ideal');
+        } else {
+          showErrorMessage(`Te faltan ${leftPlayersToSelect} jugadores para descargar tu once ideal`);
+        }
+        
       } else {
         if (!systemContainer) return;
 
         const originalText = downloadBtn.innerHTML;
         downloadBtn.innerHTML = '<span>Generando imagen...</span>';
         downloadBtn.style.pointerEvents = 'none';
+
+        // Salvaguarda los estilos en vivo antes de la foto para evitar cambiar tu archivo .css
+        const originalOverflow = systemContainer.style.overflow;
+        const originalBgImgFit = systemBgImg ? systemBgImg.style.objectFit : '';
 
         try {
           if (!window.html2canvas) {
@@ -196,8 +289,6 @@ export default function initTuOnceIdeal() {
 
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
-      if (resetBtn.hasAttribute('disabled')) return;
-
       closePopup();
       
       const players = document.querySelectorAll('.v-n-toi-player');
@@ -211,13 +302,22 @@ export default function initTuOnceIdeal() {
         }
       });
 
-      updateResetState();
+      selectorItems.forEach(i => i.classList.remove('is-active'));
 
-      const targetScrollElement = document.querySelector('.v-n-toi-selected .v-n-toi__pretxt');
-      if (targetScrollElement) {
-        targetScrollElement.scrollIntoView({
+      if (nextStepBlock) {
+        nextStepBlock.classList.remove('is-hidden');
+      }
+
+      selectedBlock.classList.remove('is-active', 'is-visible');
+      if (downloadBlock) {
+        downloadBlock.classList.remove('is-active');
+      }
+
+      const firstSelector = selectorItems[0];
+      if (firstSelector) {
+        firstSelector.scrollIntoView({
           behavior: 'smooth',
-          block: 'start'
+          block: 'center'
         });
       }
     });
@@ -266,7 +366,6 @@ export default function initTuOnceIdeal() {
 
       button.addEventListener('click', () => {
         selectPlayerForButton(id, playerData.image, playerData.name);
-        updateResetState();
       });
 
       li.appendChild(button);
@@ -289,40 +388,45 @@ export default function initTuOnceIdeal() {
 
     popup.style.position = 'absolute';
     
-    requestAnimationFrame(() => {
-      const gap = 10;
-      const targetRect = targetBtn.getBoundingClientRect();
-      const popupRect = popup.getBoundingClientRect();
-      const containerRect = systemContainer.getBoundingClientRect();
+    const gap = 10;
+    const targetRect = targetBtn.getBoundingClientRect();
+    const popupRect = popup.getBoundingClientRect();
+    const containerRect = systemContainer.getBoundingClientRect();
 
-      let topOffset = (targetRect.top - containerRect.top) + (targetRect.height / 2) - (popupRect.height / 2);
-      let leftOffset = (targetRect.left - containerRect.left) + targetRect.width + gap;
+    let topOffset = (targetRect.top - containerRect.top) + (targetRect.height / 2) - (popupRect.height / 2);
+    let leftOffset = (targetRect.left - containerRect.left) + targetRect.width + gap;
 
-      if ((targetRect.left + targetRect.width + gap + popupRect.width) > window.innerWidth) {
-        leftOffset = (targetRect.left - containerRect.left) - popupRect.width - gap;
-      }
+    if ((targetRect.left + targetRect.width + gap + popupRect.width) > window.innerWidth) {
+      leftOffset = (targetRect.left - containerRect.left) - popupRect.width - gap;
+    }
 
-      if (leftOffset < 0) {
-        leftOffset = gap;
-      }
+    if (leftOffset < 0) {
+      leftOffset = gap;
+    }
 
-      const absoluteTopInWindow = containerRect.top + topOffset;
-      if (absoluteTopInWindow + popupRect.height > window.innerHeight) {
-        topOffset = (targetRect.bottom - containerRect.top) - popupRect.height;
-      }
-      if (containerRect.top + topOffset < 0) {
-        topOffset = (targetRect.top - containerRect.top);
-      }
+    const absoluteTopInWindow = containerRect.top + topOffset;
+    if (absoluteTopInWindow + popupRect.height > window.innerHeight) {
+      topOffset = (targetRect.bottom - containerRect.top) - popupRect.height;
+    }
+    if (containerRect.top + topOffset < 0) {
+      topOffset = (targetRect.top - containerRect.top);
+    }
 
-      popup.style.top = `${topOffset}px`;
-      popup.style.left = `${leftOffset}px`;
-    });
+    popup.style.top = `${topOffset}px`;
+    popup.style.left = `${leftOffset}px`;
   }
 
   function closePopup() {
     if (!popup.classList.contains('is-active')) return;
     
-    popup.classList.remove('is-active');
+    clearInterval(checkScrollSpeed);
+    popup.classList.remove('is-visible');
+    setTimeout(() => {
+      popup.classList.remove('is-active');
+      popup.style.left = '';
+      popup.style.top = '';
+    }, 250);
+
     if (activePlayerButton) {
       activePlayerButton.classList.remove('is-active');
       activePlayerButton.setAttribute('aria-expanded', 'false');
@@ -367,14 +471,20 @@ export default function initTuOnceIdeal() {
   }
 }
 
-function generatePlayers(positions, container) {
+function generatePlayers(positions, container, currentSystem) {
   container.innerHTML = '';
 
   let playerIndex = 1;
 
   for (const positionKey in positions) {
     if (Object.prototype.hasOwnProperty.call(positions, positionKey)) {
-      const positionGeneral = GENERAL_PLAYER_POSITIONS[positionKey] || 'centro';
+      
+      let positionGeneral = GENERAL_PLAYER_POSITIONS[positionKey] || 'centro';
+      
+      if (currentSystem === '4/3/3' && (positionKey === 'extremo-derecho' || positionKey === 'extremo-izquierdo')) {
+        positionGeneral = 'delantero';
+      }
+
       const classIndex = String(playerIndex).padStart(2, '0');
 
       const button = document.createElement('button');
