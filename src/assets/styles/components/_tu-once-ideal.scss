@@ -166,10 +166,27 @@
   }
 
   .v-n-toi-system {
+    container-type: size;
     position: relative;
     width: 100%;
+    max-height: calc(100vh - 120px);
+    aspect-ratio: 3 / 4;
     max-width: 600px;
     margin: 0 auto;
+
+    &__bg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
   }
 
   .v-n-toi-system__players {
@@ -194,23 +211,49 @@
   .v-n-toi-player {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: clamp(50px, 14cqw, 100px);
+    width: clamp(50px, 13cqmin, 100px);
     aspect-ratio: 1;
     border-radius: 100%;
     transition: opacity .3s ease;
 
     img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+    }
+
+    &__name {
+      display: none;
+      position: absolute;
+      margin-top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      font: 14px / 1 $pvr;
+      color: $cb1;
+      padding: 4px;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $cb2;
+        rotate: -2deg;
+        z-index: -1;
+      }
     }
   }
 
   .v-n-toi-system--4-3-3 {
     .v-n-toi-player {
       &--01 { top: 11%; left: 54%; }
-      &--02 { top: 26%; left: 20%; }
-      &--03 { top: 26%; left: 41%; }
-      &--04 { top: 26%; left: 63%; }
-      &--05 { top: 26%; left: 85%; }
+      &--02 { top: 29%; left: 22%; }
+      &--03 { top: 29%; left: 42%; }
+      &--04 { top: 29%; left: 62%; }
+      &--05 { top: 29%; left: 80%; }
       &--06 { top: 52%; left: 25%; }
       &--07 { top: 52%; left: 50%; }
       &--08 { top: 52%; left: 75%; }
@@ -239,10 +282,10 @@
   .v-n-toi-system--4-4-2 {
     .v-n-toi-player {
       &--01 { top: 11%; left: 54%; }
-      &--02 { top: 26%; left: 20%; }
-      &--03 { top: 26%; left: 41%; }
-      &--04 { top: 26%; left: 63%; }
-      &--05 { top: 26%; left: 85%; }
+      &--02 { top: 28%; left: 20%; }
+      &--03 { top: 28%; left: 41%; }
+      &--04 { top: 28%; left: 63%; }
+      &--05 { top: 28%; left: 85%; }
       &--06 { top: 51%; left: 20%; }
       &--07 { top: 51%; left: 41%; }
       &--08 { top: 51%; left: 63%; }
@@ -261,6 +304,8 @@
   background: #1868FF;
   border: 4px solid #FFFFFF;
   z-index: 10;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
 
   @media (max-width: $screen-xs) {
     top: 50%;
@@ -270,6 +315,10 @@
 
   &.is-active {
     display: block;
+  }
+
+  &.is-visible {
+    opacity: 1;
   }
 
   &__player-type {
@@ -398,6 +447,55 @@
   }
 }
 
+.v-n-toi-system-footer {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+
+  &__flag {
+    position: relative;
+    margin-bottom: 12px;
+
+    span {
+      position: relative;
+      display: block;
+      padding: 10px;
+      font: 18px/1 $pvs;
+      text-transform: uppercase;
+      color: $cb2;
+      z-index: 1;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1868FF;
+      rotate: -2deg;
+    }
+  }
+
+  &__site {
+    span {
+      display: block;
+      text-align: center;
+      font: 16px/1 $pvr;
+      color: $cb1;
+    }
+
+    img {
+      width: auto;
+      height: 40px;
+      margin: 12px auto 0;
+    }
+  }
+}
+
 .v-n-toi-download {
   display: none;
 
@@ -493,3 +591,29 @@
     transform: translateX(-50%) translateY(0);
   }
 }
+
+// .v-n-toi-system {
+//   container-type: unset !important;
+//   width: 600px !important;
+//   height: 920px !important;
+//   max-width: unset !important;
+//   max-height: unset !important;
+//   aspect-ratio: unset !important;
+//   padding: 20px 0px 120px !important;
+//   background-color: #ffffff !important;
+// }
+
+// .v-n-toi-system__bg {
+//   width: 600px !important;
+//   height: 790px !important;
+// }
+
+// .v-n-toi-system__players {
+//   width: 600px !important;
+//   height: 800px !important;
+//   margin-top: 12px !important;
+// }
+
+// .v-n-toi-player {
+//   width: 90px !important;
+// }

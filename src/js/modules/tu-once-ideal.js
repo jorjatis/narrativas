@@ -44,9 +44,6 @@ export default function initTuOnceIdeal() {
 
   if (!selectorItems.length || !selectedBlock || !popup) return;
 
-  // ==========================================
-  // BOTÓN FLOANTE PARA PRUEBAS (AUTO-RELLENAR)
-  // ==========================================
   const testBtn = document.createElement('button');
   testBtn.type = 'button';
   testBtn.innerText = '⚡ Auto-llenar 11';
@@ -78,15 +75,22 @@ export default function initTuOnceIdeal() {
     playersButtons.forEach((btn) => {
       const positionKey = btn.getAttribute('data-player-position');
       const playersIds = data.formations[currentSystem]?.positions[positionKey] || [];
-      const mockPlayerId = playersIds[0]; // Cogemos el primer jugador disponible para esa posición
+      const mockPlayerId = playersIds[0];
 
       if (mockPlayerId && data.players[mockPlayerId]) {
         const playerData = data.players[mockPlayerId];
+        
         const playerImgElement = btn.querySelector('.v-n-toi-player__img');
         if (playerImgElement) {
           playerImgElement.src = playerData.image;
           playerImgElement.alt = `Foto de ${playerData.name}`;
         }
+        
+        const playerNameElement = btn.querySelector('.v-n-toi-player__name');
+        if (playerNameElement) {
+          playerNameElement.textContent = playerData.name;
+        }
+
         btn.setAttribute('data-selected-player-id', mockPlayerId);
       }
     });
@@ -94,7 +98,6 @@ export default function initTuOnceIdeal() {
     closePopup();
     console.log('⚡ Los 11 jugadores han sido rellenados con éxito.');
   });
-  // ==========================================
 
   selectorItems.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -245,15 +248,11 @@ export default function initTuOnceIdeal() {
         downloadBtn.innerHTML = '<span>Generando imagen...</span>';
         downloadBtn.style.pointerEvents = 'none';
 
-        // Salvaguarda los estilos en vivo antes de la foto para evitar cambiar tu archivo .css
-        const originalOverflow = systemContainer.style.overflow;
-        const originalBgImgFit = systemBgImg ? systemBgImg.style.objectFit : '';
-
         try {
           if (!window.html2canvas) {
             await new Promise((resolve, reject) => {
               const script = document.createElement('script');
-              script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+              script.src = 'https://cdn.jsdelivr.net/npm/html2canvas-pro@latest/dist/html2canvas-pro.min.js';
               script.async = true;
               script.onload = resolve;
               script.onerror = reject;
@@ -265,20 +264,62 @@ export default function initTuOnceIdeal() {
             useCORS: true,
             allowTaint: false,
             scale: 2,
-            backgroundColor: null
+            backgroundColor: '#ffffff',
+            onclone: (clonedDocument) => {
+              const clonedContainer = clonedDocument.querySelector('.v-n-toi-system');
+              if (clonedContainer) {
+                clonedContainer.style.width = '600px';
+                clonedContainer.style.height = '920px';
+                clonedContainer.style.containerType = 'unset';
+                clonedContainer.style.maxHeight = 'unset';
+                clonedContainer.style.aspectRatio = 'unset';
+                clonedContainer.style.maxWidth = 'unset';
+                clonedContainer.style.padding = '20px 0px 120px';
+                clonedContainer.style.backgroundColor = '#ffffff';
+              }
+
+              const clonedBg = clonedDocument.querySelector('.v-n-toi-system__bg');
+              if (clonedBg) {
+                clonedBg.style.width = '600px';
+                clonedBg.style.height = '790px';
+              }
+
+              const clonedPlayersContainer = clonedDocument.querySelector('.v-n-toi-system__players');
+              if (clonedPlayersContainer) {
+                clonedPlayersContainer.style.width = '600px';
+                clonedPlayersContainer.style.height = '800px';
+                clonedPlayersContainer.style.marginTop = '12px';
+              }
+
+              const clonedPlayers = clonedDocument.querySelectorAll('.v-n-toi-player');
+              clonedPlayers.forEach((player) => {
+                player.style.width = '90px';
+              });
+
+              const clonedPlayerNames = clonedDocument.querySelectorAll('.v-n-toi-player__name');
+              clonedPlayerNames.forEach((playerName) => {
+                playerName.style.display = 'block';
+              });
+
+              const clonedFooter = clonedDocument.querySelector('.v-n-toi-system-footer');
+              if (clonedFooter) {
+                clonedFooter.style.display = 'block';
+              }
+            }
           });
 
           const imageURL = canvas.toDataURL('image/png');
+
           const downloadLink = document.createElement('a');
           downloadLink.href = imageURL;
           downloadLink.download = 'mi-once-ideal.png';
-          
+
           document.body.appendChild(downloadLink);
           downloadLink.click();
           document.body.removeChild(downloadLink);
 
         } catch (error) {
-          console.error('Error al generar o cargar html2canvas:', error);
+          console.error('Error al generar la imagen:', error);
         } finally {
           downloadBtn.innerHTML = originalText;
           downloadBtn.style.pointerEvents = '';
@@ -300,6 +341,9 @@ export default function initTuOnceIdeal() {
           img.src = `assets/images/toi-icon-${type}.webp`;
           img.alt = '';
         }
+
+        const nameSpan = player.querySelector('.v-n-toi-player__name');
+        if (nameSpan) nameSpan.textContent = '';
       });
 
       selectorItems.forEach(i => i.classList.remove('is-active'));
@@ -444,6 +488,12 @@ export default function initTuOnceIdeal() {
       playerImgElement.alt = `Foto de ${name}`;
     }
 
+    // ACTUALIZADO: Buscar el span de texto e inyectar el nombre real del jugador
+    const playerNameElement = activePlayerButton.querySelector('.v-n-toi-player__name');
+    if (playerNameElement) {
+      playerNameElement.textContent = name;
+    }
+
     activePlayerButton.setAttribute('data-selected-player-id', id);
     closePopup();
   }
@@ -500,7 +550,11 @@ function generatePlayers(positions, container, currentSystem) {
       img.className = 'v-n-toi-player__img';
       img.alt = '';
 
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'v-n-toi-player__name';
+
       button.appendChild(img);
+      button.appendChild(nameSpan);
       container.appendChild(button);
 
       playerIndex++;
