@@ -211,7 +211,7 @@
   .v-n-toi-player {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: clamp(50px, 13cqmin, 100px);
+    width: clamp(50px, 15cqmin, 100px);
     aspect-ratio: 1;
     border-radius: 100%;
     transition: opacity .3s ease;
@@ -224,26 +224,11 @@
 
     &__name {
       display: none;
-      position: absolute;
-      margin-top: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: max-content;
       font: 14px / 1 $pvr;
+      text-align: center;
       color: $cb1;
       padding: 4px;
-
-      &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: $cb2;
-        rotate: -2deg;
-        z-index: -1;
-      }
+      background: white;
     }
   }
 
@@ -266,30 +251,30 @@
   .v-n-toi-system--4-2-3-1 {
     .v-n-toi-player {
       &--01 { top: 11%; left: 54%; }
-      &--02 { top: 26%; left: 20%; }
+      &--02 { top: 26%; left: 22%; }
       &--03 { top: 26%; left: 41%; }
-      &--04 { top: 26%; left: 63%; }
-      &--05 { top: 26%; left: 85%; }
+      &--04 { top: 26%; left: 62%; }
+      &--05 { top: 26%; left: 83%; }
       &--06 { top: 44%; left: 42%; }
       &--07 { top: 44%; left: 62%; }
-      &--08 { top: 60%; left: 20%; }
+      &--08 { top: 60%; left: 25%; }
       &--09 { top: 60%; left: 52%; }
-      &--10 { top: 60%; left: 85%; }
-      &--11 { top: 77%; left: 54%; }
+      &--10 { top: 60%; left: 80%; }
+      &--11 { top: 77%; left: 53%; }
     }
   }
 
   .v-n-toi-system--4-4-2 {
     .v-n-toi-player {
       &--01 { top: 11%; left: 54%; }
-      &--02 { top: 28%; left: 20%; }
+      &--02 { top: 28%; left: 21%; }
       &--03 { top: 28%; left: 41%; }
-      &--04 { top: 28%; left: 63%; }
-      &--05 { top: 28%; left: 85%; }
-      &--06 { top: 51%; left: 20%; }
-      &--07 { top: 51%; left: 41%; }
-      &--08 { top: 51%; left: 63%; }
-      &--09 { top: 51%; left: 85%; }
+      &--04 { top: 28%; left: 61%; }
+      &--05 { top: 28%; left: 81%; }
+      &--06 { top: 51%; left: 22%; }
+      &--07 { top: 51%; left: 42%; }
+      &--08 { top: 51%; left: 62%; }
+      &--09 { top: 51%; left: 83%; }
       &--10 { top: 77%; left: 42%; }
       &--11 { top: 77%; left: 64%; }
     }
@@ -455,28 +440,29 @@
   transform: translateX(-50%);
 
   &__flag {
-    position: relative;
     margin-bottom: 12px;
+    text-align: center;
 
     span {
       position: relative;
-      display: block;
+      display: inline-block;
+      max-width: 232px;
       padding: 10px;
       font: 18px/1 $pvs;
       text-transform: uppercase;
       color: $cb2;
-      z-index: 1;
-    }
 
-    &:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #1868FF;
-      rotate: -2deg;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #1868FF;
+        rotate: -2deg;
+        z-index: -1;
+      }
     }
   }
 
@@ -508,11 +494,7 @@
     gap: 10px;
     align-items: center;
     justify-content: center;
-    margin: 52px 0 52px;
-
-    @media (min-width: $screen-xs) {
-      margin-top: 82px;
-    }
+    margin: 52px 0;
   }
 
   .v-n-toi-download-btn {
@@ -591,29 +573,3 @@
     transform: translateX(-50%) translateY(0);
   }
 }
-
-// .v-n-toi-system {
-//   container-type: unset !important;
-//   width: 600px !important;
-//   height: 920px !important;
-//   max-width: unset !important;
-//   max-height: unset !important;
-//   aspect-ratio: unset !important;
-//   padding: 20px 0px 120px !important;
-//   background-color: #ffffff !important;
-// }
-
-// .v-n-toi-system__bg {
-//   width: 600px !important;
-//   height: 790px !important;
-// }
-
-// .v-n-toi-system__players {
-//   width: 600px !important;
-//   height: 800px !important;
-//   margin-top: 12px !important;
-// }
-
-// .v-n-toi-player {
-//   width: 90px !important;
-// }

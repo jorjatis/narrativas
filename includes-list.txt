@@ -1,7 +1,19 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/15/tu-once-ideal/scripts.js
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/15/tu-once-ideal/styles.css
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/scripts.js
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/styles.css
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/15/tu-once-ideal/includes/inc-tu-once-ideal.html
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/includes/inc-tuonceideal.html
+
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-icon-centro.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-icon-delantero.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-icon-interior.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-icon-portero.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-system-4231-desktop.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-system-4231-mobile.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-system-433-desktop.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-system-433-mobile.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-system-442-desktop.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-system-442-mobile.webp
+https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/toi-system-bg.webp
 
 
-<!--#include virtual="/comun/narrativas/redaccion/2026/06/15/tu-once-ideal/includes/inc-tu-once-ideal.html" -->
+<!--#include virtual="comun/html/2026/tu-once-ideal/inc-tuonceideal.html" -->
