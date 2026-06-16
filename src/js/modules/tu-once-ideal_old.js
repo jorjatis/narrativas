@@ -1,4 +1,4 @@
-import html2canvas from 'html2canvas';
+import { domToJpeg } from 'modern-screenshot';
 
 const data = {
   "formations": {
@@ -120,33 +120,24 @@ export default function initTuOnceIdeal() {
   
   const nextStepBlock = document.querySelector('.v-n-toi-next-step');
 
-  const footerLogo = document.querySelector('.v-n-toi-system-footer__site img');
-  if (footerLogo) {
-    let medio = 'abc';
+  const footerLogoContainer = document.querySelector('.v-n-toi-system-footer__site');
+  const siteLogo = document.querySelector('.v-log__i');
 
-    const host = window.location.hostname.toLowerCase();
+  if (footerLogoContainer && siteLogo) {
+    const svgSrc = siteLogo.getAttribute('src') || '';
 
-    if (
-      host &&
-      host !== 'localhost' &&
-      host !== '127.0.0.1' &&
-      !/^\d+\.\d+\.\d+\.\d+$/.test(host)
-    ) {
-      medio = host
-        .replace(/^www\./, '')
-        .split('.')[0];
+    const fileName = svgSrc
+      .split('/')
+      .pop()
+      ?.replace('.svg', '.png');
+
+    const footerImg = footerLogoContainer.querySelector('img');
+
+    if (footerImg && fileName) {
+      footerImg.src = `https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/logomedios/${fileName}`;
+      footerImg.alt = '';
+      footerImg.loading = 'eager';
     }
-
-    footerLogo.onerror = () => {
-      footerLogo.onerror = null;
-      footerLogo.src =
-        'https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/logomedios/logo-abc.png';
-    };
-
-    footerLogo.src =
-      `https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/logomedios/logo-${medio}.png`;
-
-    footerLogo.alt = medio;
   }
 
   let activePlayerButton = null;
@@ -154,76 +145,63 @@ export default function initTuOnceIdeal() {
 
   if (!selectorItems.length || !selectedBlock || !popup) return;
 
+  // 1. CORRECCIÓN DEL AUTO-LLENAR (testBtn)
   const testBtn = document.createElement('button');
   testBtn.type = 'button';
   testBtn.innerText = '⚡ Auto-llenar 11';
-  testBtn.style.position = 'fixed';
-  testBtn.style.bottom = '20px';
-  testBtn.style.left = '20px';
-  testBtn.style.zIndex = '99999';
-  testBtn.style.padding = '10px 14px';
-  testBtn.style.background = '#ff0055';
-  testBtn.style.color = '#fff';
-  testBtn.style.border = 'none';
-  testBtn.style.borderRadius = '4px';
-  testBtn.style.cursor = 'pointer';
-  testBtn.style.fontWeight = 'bold';
-  testBtn.style.fontFamily = 'sans-serif';
-  testBtn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
-
+  Object.assign(testBtn.style, {
+    position: 'fixed',
+    bottom: '20px',
+    left: '20px',
+    zIndex: '99999',
+    padding: '10px 14px',
+    background: '#ff0055',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+  });
   document.body.appendChild(testBtn);
 
   testBtn.addEventListener('click', () => {
-    const currentSystem = document
-      .querySelector('.v-n-toi-selector__item.is-active')
-      ?.getAttribute('data-system');
-
+    const currentSystem = document.querySelector('.v-n-toi-selector__item.is-active')?.getAttribute('data-system');
     if (!currentSystem) {
-      alert('Primero selecciona un sistema táctico.');
+      alert('Primero selecciona un sistema táctico (4/3/3, etc.) arriba.');
       return;
     }
 
-    const playerButtons = document.querySelectorAll('.v-n-toi-player');
+    const playersButtons = document.querySelectorAll('.v-n-toi-player');
+    if (!playersButtons.length) return;
 
-    playerButtons.forEach((btn) => {
+    playersButtons.forEach((btn) => {
       const positionKey = btn.getAttribute('data-player-position');
+      const playersIds = data.formations[currentSystem]?.positions[positionKey] || [];
+      const mockPlayerId = playersIds[0]; // Coge el primer jugador disponible para ese puesto
 
-      const playersIds =
-        data.formations[currentSystem]?.positions[positionKey] || [];
+      if (mockPlayerId && data.players[mockPlayerId]) {
+        const playerData = data.players[mockPlayerId];
+        
+        // Modificación del botón para que renderice correctamente el DOM
+        const playerImgElement = btn.querySelector('img');
+        if (playerImgElement) {
+          playerImgElement.src = playerData.image;
+          playerImgElement.alt = `Foto de ${playerData.name}`;
+        }
+        
+        const playerNameElement = btn.querySelector('.v-n-toi-player__name');
+        if (playerNameElement) {
+          playerNameElement.textContent = playerData.name;
+        }
 
-      if (!playersIds.length) return;
-
-      // Jugador aleatorio para pruebas
-      const randomPlayerId =
-        playersIds[Math.floor(Math.random() * playersIds.length)];
-
-      const playerData = data.players[randomPlayerId];
-
-      if (!playerData) return;
-
-      // Imagen
-      const img = btn.querySelector('img');
-      if (img) {
-        img.src = playerData.image;
-        img.alt = `Foto de ${playerData.name}`;
+        btn.setAttribute('data-selected-player-id', mockPlayerId);
       }
-
-      // Nombre
-      const nameEl = btn.querySelector('.v-n-toi-player__name');
-      if (nameEl) {
-        nameEl.textContent = playerData.name;
-      }
-
-      // ID seleccionado
-      btn.setAttribute(
-        'data-selected-player-id',
-        randomPlayerId
-      );
     });
-
+    
     closePopup();
-
-    console.log('⚡ Once rellenado automáticamente');
+    console.log('⚡ Los 11 jugadores han sido rellenados con éxito.');
   });
 
   selectorItems.forEach((btn) => {
@@ -351,156 +329,75 @@ export default function initTuOnceIdeal() {
   });
 
   if (downloadBtn) {
-    downloadBtn.addEventListener('click', handleDownload);
-  }
+    downloadBtn.addEventListener('click', (e) => {
+      const totalPlayersSelected = document.querySelectorAll('.v-n-toi-player').length;
+      const playersCompleted = document.querySelectorAll('.v-n-toi-player[data-selected-player-id]').length;
+      const leftPlayersToSelect = totalPlayersSelected - playersCompleted;
 
-  async function handleDownload(e) {
-    const leftPlayersToSelect = getMissingPlayers();
-
-    if (leftPlayersToSelect > 0) {
-      e.preventDefault();
-      showErrorMessage(`Te faltan ${leftPlayersToSelect} ${leftPlayersToSelect === 1 ? 'jugador' : 'jugadores'} para descargar tu once ideal`);
-      return;
-    }
-
-    setDownloadLoading(true);
-
-    try {
-      const canvas = await generateLineupCanvas();
-      downloadCanvas(canvas);
-    } catch (error) {
-      console.error('Error al generar la imagen:', error);
-    } finally {
-      setDownloadLoading(false);
-    }
-  }
-
-  function getMissingPlayers() {
-    const totalPlayers = document.querySelectorAll('.v-n-toi-player').length;
-    const selectedPlayers = document.querySelectorAll('.v-n-toi-player[data-selected-player-id]').length;
-    return totalPlayers - selectedPlayers;
-  }
-
-  let originalDownloadText = '';
-  function setDownloadLoading(isLoading) {
-    if (!downloadBtn) return;
-
-    if (isLoading) {
-      originalDownloadText = downloadBtn.innerHTML;
-      downloadBtn.innerHTML = '<span>Generando imagen...</span>';
-      downloadBtn.style.pointerEvents = 'none';
-    } else {
-      downloadBtn.innerHTML = originalDownloadText;
-      downloadBtn.style.pointerEvents = '';
-    }
-  }
-
-  async function generateLineupCanvas() {
-    await document.fonts.ready;
-
-    return html2canvas(systemContainer, {
-      useCORS: true,
-      allowTaint: false,
-      scale: 1,
-      backgroundColor: '#ffffff',
-      onclone: customizeClonedDocument
-    });
-  }
-
-  function customizeClonedDocument(clonedDocument) {
-    const clonedContainer = clonedDocument.querySelector('.v-n-toi-system');
-    
-    if (clonedContainer) {
-      Object.assign(clonedContainer.style, {
-        width: '600px',
-        height: '900px',
-        containerType: 'unset',
-        aspectRatio: 'unset',
-        maxWidth: 'unset',
-        maxHeight: 'unset',
-        padding: '20px 0 120px',
-        backgroundColor: '#ffffff'
-      });
-    }
-
-    const clonedBg = clonedDocument.querySelector('.v-n-toi-system__bg');
-    if (clonedBg) {
-      clonedBg.style.width = '600px';
-      clonedBg.style.height = '790px';
-    }
-
-    const clonedBgImg = clonedDocument.querySelector('.v-n-toi-system__bg img');
-    if (clonedBgImg) {
-      clonedBgImg.style.width = '484px';
-      clonedBgImg.style.height = '790px';
-    }
-
-    const clonedPlayersContainer = clonedDocument.querySelector('.v-n-toi-system__players');
-    if (clonedPlayersContainer) {
-      clonedPlayersContainer.style.width = '600px';
-      clonedPlayersContainer.style.height = '790px';
-      clonedPlayersContainer.style.marginTop = '12px';
-    }
-
-    clonedDocument.querySelectorAll('.v-n-toi-player').forEach((player) => {
-      player.style.width = '90px';
-    });
-
-    clonedDocument.querySelectorAll('.v-n-toi-player__name').forEach((name) => {
-      Object.assign(name.style, {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        paddingTop: '0',
-        paddingBottom: '10px'
-      });
-    });
-
-    const clonedFooter = clonedDocument.querySelector('.v-n-toi-system-footer');
-    if (clonedFooter) {
-      clonedFooter.style.display = 'block';
-    }
-
-    const clonedFooterLogo = clonedDocument.querySelector('.v-n-toi-system-footer__site img');
-
-    if (clonedFooterLogo) {
-      Object.assign(clonedFooterLogo.style, {
-        display: 'block',
-        width: 'auto',
-        height: '40px',
-        margin: '12px auto 0',
-        objectFit: 'contain'
-      });
-    }
-  }
-
-  function downloadCanvas(canvas) {
-    canvas.toBlob(blob => {
-      if (!blob) return;
-
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-
-      link.href = url;
-      link.download = getDownloadFilename();
-
-      document.body.appendChild(link);
-
-      try {
-        link.click();
-      } catch (err) {
-        window.open(url, '_blank');
+      if (leftPlayersToSelect > 0) {
+        e.preventDefault();
+        showErrorMessage(
+          `Te faltan ${leftPlayersToSelect} ${
+            leftPlayersToSelect === 1 ? 'jugador' : 'jugadores'
+          } para procesar tu once ideal`
+        );
+        return;
       }
 
-      document.body.removeChild(link);
+      domToJpeg(document.querySelector('.v-n-toi-system'), {
+        quality: 0.75,
+        scale: 2,
+        width: 600,
+        height: 900,
 
-      setTimeout(() => URL.revokeObjectURL(url), 5000);
-    }, 'image/jpeg', 0.85);
-  }
+        onCloneNode(cloned) {
+          if (!(cloned instanceof HTMLElement)) return;
 
-  function getDownloadFilename() {
-    return `mi-once-ideal-${Date.now()}.jpg`;
+          cloned.querySelectorAll('.v-n-toi-system').forEach(el => {
+            el.style.width = '600px';
+            el.style.height = '900px';
+            el.style.maxHeight = 'unset';
+            el.style.maxWidth = 'unset';
+            el.style.aspectRatio = 'unset';
+            el.style.containerType = 'unset';
+          });
+
+          cloned.querySelectorAll('.v-n-toi-system-footer').forEach(el => {
+            el.style.display = 'block';
+          });
+
+          cloned.querySelectorAll('.v-n-toi-player__name').forEach(el => {
+            el.style.display = 'block';
+          });
+
+          cloned.querySelectorAll('.v-n-toi-system__bg').forEach(el => {
+            el.style.width = '600px';
+            el.style.height = '790px';
+          });
+
+          cloned.querySelectorAll('.v-n-toi-system__bg img').forEach(el => {
+            el.style.width = '480px';
+            el.style.height = '790px';
+          });
+
+          cloned.querySelectorAll('.v-n-toi-system__players').forEach(el => {
+            el.style.width = '600px';
+            el.style.height = '780px';
+          });
+
+          cloned.querySelectorAll('.v-n-toi-player').forEach(player => {
+            player.style.width = '90px';
+            player.style.height = '90px';
+          });
+        }
+      })
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = 'once-ideal.jpg';
+        link.href = dataUrl;
+        link.click();
+      });
+    });
   }
 
   if (resetBtn) {
@@ -520,7 +417,7 @@ export default function initTuOnceIdeal() {
       });
 
       selectorItems.forEach(i => i.classList.remove('is-active'));
-      if (nextStepBlock) nextStepBlock.classList.remove('is-hidden');
+      if (nextStepBlock) nextStepBlock.remove('is-hidden');
 
       selectedBlock.classList.remove('is-active', 'is-visible');
       if (downloadBlock) downloadBlock.classList.remove('is-active');
@@ -636,7 +533,6 @@ export default function initTuOnceIdeal() {
 
     const playerImgElement = activePlayerButton.querySelector('img');
     if (playerImgElement) {
-      playerImgElement.crossOrigin = 'anonymous';
       playerImgElement.src = imageUrl;
       playerImgElement.alt = `Foto de ${name}`;
     }
@@ -694,7 +590,6 @@ function generatePlayers(positions, container, currentSystem) {
       button.setAttribute('aria-expanded', 'false');
 
       const img = document.createElement('img');
-      img.crossOrigin = 'anonymous';
       img.src = `https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/15/tu-once-ideal/images/toi-icon-${positionGeneral}.webp`;
       img.alt = '';
 
