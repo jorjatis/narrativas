@@ -1,0 +1,79 @@
+@use '../base/variables'as *;
+
+.scr-ind {
+  position: fixed;
+  width: 100%;
+  bottom: 30px;
+  left: 0;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+
+  @media (max-width: 360px) {
+    bottom: 12px;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  &__m {
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 30px;
+    border: 2px solid $cb1;
+    border-radius: 16px;
+  }
+
+  &__w {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    width: 3px;
+    height: 6px;
+    border-radius: 999px;
+    background: $cb1;
+    transform: translateX(-50%);
+    animation: scroll-wheel 1.6s ease-in-out infinite;
+  }
+
+  &__txt {
+    font-family: $mcr;
+    font-size: 12px;
+    text-align: center;
+    color: $cb1;
+  }
+}
+
+@keyframes scroll-wheel {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(5px);
+  }
+}

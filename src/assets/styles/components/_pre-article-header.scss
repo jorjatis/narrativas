@@ -1,0 +1,21 @@
+@use '../base/variables' as *;
+@use '../base/variables-custom' as *;
+@use '../base/actions' as *;
+@use '../base/animations' as *;
+
+.v-w {
+  .v-a--d-s-1 {
+    .v-a-s-t {
+      display: none;
+    }
+  }
+
+  .v-d--abc {
+    .v-a-s-t {
+      margin: 60px auto 80px;
+      font: 22px / 28px $atl;
+      text-align: center;
+      color: $cb1;
+    }
+  }
+}

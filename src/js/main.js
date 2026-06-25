@@ -1,12 +1,17 @@
 // NOTE: Helpers
+import fadeOnScroll from './helpers/fadeOnScroll';
+import moveEls from './helpers/moveEls';
 
 // NOTE: Utils
 
 // NOTE: Modules
-import initTuOnceIdeal from './modules/tu-once-ideal.js';
+import rankingCamisetas from './modules/rankingCamisetas';
 
 export function initAll() {
-  initTuOnceIdeal();
+  fadeOnScroll('.scr-ind');
+  moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
+
+  rankingCamisetas();
 }
 
 // NOTE: Para prod el evento load de window se borra, dejamos solo:
