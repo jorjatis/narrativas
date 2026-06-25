@@ -1,3 +1,44 @@
+<p class="v-n-rcl-cintillo">
+  Elige tu ránking de camisetas de la selección española de los mundiales
+</p>
+
 <div class="v-n-rcl">
-  <h1>Ranking de camisetas de la Roja</h1>
+  <div id="carouselWrapper" class="carousel-wrapper">
+      <button id="navLeft" class="nav-btn nav-btn-left">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 46 15"><path fill="#0e3a6f" d="M.293 6.657a1 1 0 0 0 0 1.414l6.364 6.364A1 1 0 1 0 8.07 13.02L2.414 7.364l5.657-5.657A1 1 0 0 0 6.657.293zM46 7.364v-1H1v2h45z"/></svg>
+      </button>
+      <div id="carouselTrack" class="carousel-track"></div>
+      <button id="navRight" class="nav-btn nav-btn-right">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 46 15"><path fill="#0e3a6f" d="M45.707 8.07a1 1 0 0 0 0-1.413L39.343.293a1 1 0 1 0-1.414 1.414l5.657 5.657-5.657 5.657a1 1 0 0 0 1.414 1.414zM45 7.365v-1H0v2h45z"/></svg>
+      </button>
+  </div>
+
+  <div id="thanksContainer" class="thanks-container">
+      <h3>¡Gracias por participar!</h3>
+      <p>Ya completaste tus 10 elecciones estelares. ¿Qué deseas hacer ahora?</p>
+  </div>
+
+  <div id="dropZone" class="drop-zone"></div>
+
+  <div class="action-group">
+    <button id="btnEditMode" class="v-btn v-btn--l">Editar selección</button>
+    <button id="btnShowResults" class="v-btn v-btn--l">Enviar</button>
+  </div>
+
+  <div id="resultsWrapper" class="results-wrapper">
+      <div id="captureArea" class="capture-area">
+          <div class="capture-title v-n-rcl-cintillo">Este es tu ránking de camisetas</div>
+          <div id="pyramidContainer" class="pyramid-container"></div>
+      </div>
+      <div id="statsArea"class="stats-area">
+          <div class="stats-title v-n-rcl-cintillo">La camiseta favorita de nuestros lectores</div>
+          <div id="statsGridFavourite" class="stats-grid"></div>
+          <div class="stats-title v-n-rcl-cintillo">El ránking de los lectores de abc</div>
+          <div id="statsGridReaders" class="stats-grid"></div>
+      </div>
+      <div class="results-actions">
+          <button id="btnDownload" class="v-btn v-btn--l">Descarga tu selección</button>
+          <button id="btnReplay" class="v-btn v-btn--l">Volver a seleccionar</button>
+      </div>
+  </div>
 </div>

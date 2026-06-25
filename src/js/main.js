@@ -2,8 +2,6 @@
 import fadeOnScroll from './helpers/fadeOnScroll';
 import moveEls from './helpers/moveEls';
 
-// NOTE: Utils
-
 // NOTE: Modules
 import rankingCamisetas from './modules/rankingCamisetas';
 
