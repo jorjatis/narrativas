@@ -1,15 +1,15 @@
 export default function rankingCamisetas() {
   const camisetasData = [
-    { id: 'esp_2026_1', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-01.webp', anio: '2026', torneo: 'USA-México-Canadá' },
-    { id: 'esp_2026_2', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-02.webp', anio: '2026', torneo: 'USA-México-Canadá' },
-    { id: 'esp_2022', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-03.webp', anio: '2022', torneo: 'Qatar' },
-    { id: 'esp_2014', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-04.webp', anio: '2014', torneo: 'Brasil' },
-    { id: 'esp_2010', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-05.webp', anio: '2010', torneo: 'Sudáfrica' },
-    { id: 'esp_2006', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-06.webp', anio: '2006', torneo: 'Alemania' },
-    { id: 'esp_2002', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-07.webp', anio: '2002', torneo: 'Corea-Japón' },
-    { id: 'esp_1998', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-08.webp', anio: '1998', torneo: 'Francia' },
-    { id: 'esp_1994', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-09.webp', anio: '1994', torneo: 'EEUU' },
-    { id: 'esp_1982', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mockup-camiseta-10.webp', anio: '1982', torneo: 'España' }
+    { id: 'esp_2026_1', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-a.webp', anio: '2026', torneo: 'USA-México-Canadá' },
+    { id: 'esp_2026_2', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-b.webp', anio: '2026', torneo: 'USA-México-Canadá' },
+    { id: 'esp_2022', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2022.webp', anio: '2022', torneo: 'Qatar' },
+    { id: 'esp_2014', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2014.webp', anio: '2014', torneo: 'Brasil' },
+    { id: 'esp_2010', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2010.webp', anio: '2010', torneo: 'Sudáfrica' },
+    { id: 'esp_2006', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2006.webp', anio: '2006', torneo: 'Alemania' },
+    { id: 'esp_2002', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2002.webp', anio: '2002', torneo: 'Corea-Japón' },
+    { id: 'esp_1998', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1998.webp', anio: '1998', torneo: 'Francia' },
+    { id: 'esp_1994', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1994.webp', anio: '1994', torneo: 'EEUU' },
+    { id: 'esp_1982', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1982.webp', anio: '1982', torneo: 'España' }
   ];
 
   const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbwanyzmEUo1Hk1jCImfdHsXr3_Hxqd8G28sRmGEu4Cg8kIalXGR_-IZBhBNP-yE_NIg/exec';
@@ -31,7 +31,6 @@ export default function rankingCamisetas() {
   const btnShowResults = document.getElementById('btnShowResults');
   const resultsWrapper = document.getElementById('resultsWrapper');
   const pyramidContainer = document.getElementById('pyramidContainer');
-  const statsGrid = document.getElementById('statsGrid');
   const btnDownload = document.getElementById('btnDownload');
   const btnReplay = document.getElementById('btnReplay');
   const navLeft = document.getElementById('navLeft');
@@ -41,14 +40,12 @@ export default function rankingCamisetas() {
   // BOTÓN FLOTANTE DE AUTOCOMPLETAR (SOLO PARA PRUEBAS / DESARROLLO)
   // =========================================================================
   function injectAutoFillButton() {
-    // Evitamos duplicar el botón si ya existe
     if (document.getElementById('btnAutoFillDev')) return;
 
     const btn = document.createElement('button');
     btn.id = 'btnAutoFillDev';
     btn.innerText = '🎲 Auto 10';
     
-    // Estilos inline para dejarlo fijo (fixed) en una esquina
     Object.assign(btn.style, {
       position: 'fixed',
       bottom: '20px',
@@ -70,52 +67,41 @@ export default function rankingCamisetas() {
     btn.addEventListener('mouseleave', () => btn.style.backgroundColor = '#ff5a5f');
 
     btn.addEventListener('click', () => {
-      // 1. Buscamos qué índices de la pirámide están vacíos actualmente
       let vacíos = [];
       slotsData.forEach((slot, index) => {
         if (slot === null) vacíos.push(index);
       });
 
-      // Si ya está llena la pirámide, no hace falta hacer nada
       if (vacíos.length === 0 || availablePool.length === 0) {
         alert('¡La selección ya está completa!');
         return;
       }
 
-      // Deshabilitamos temporalmente el botón durante el rellenado simultáneo
       btn.disabled = true;
       btn.style.opacity = '0.5';
 
-      // 2. Rellenamos cada hueco vacío de forma secuencial respetando las animaciones
       vacíos.forEach((targetIndex, order) => {
         setTimeout(() => {
           if (availablePool.length > 0) {
-            // Elegimos un índice aleatorio de las camisetas que quedan disponibles
             const randomPoolIndex = Math.floor(Math.random() * availablePool.length);
-            
-            // Movemos el slider del carrusel temporalmente a esa posición para que la animación salga desde ahí
             currentSliderIndex = randomPoolIndex;
             updateCarouselDOM();
-
-            // Lanzamos la interacción animada original hacia el hueco de la pirámide
             executeAnimatedInteraction('main', targetIndex);
           }
 
-          // Si es el último elemento en colocarse, reactivamos el botón
           if (order === vacíos.length - 1) {
             setTimeout(() => {
               btn.disabled = false;
               btn.style.opacity = '1';
             }, 500);
           }
-        }, order * 450); // 450ms de delay entre camisetas para que no se pisen las animaciones de 400ms
+        }, order * 450); 
       });
     });
 
     rootContainer.appendChild(btn);
   }
 
-  // Ejecutamos la inyección del botón dev
   injectAutoFillButton();
 
   function initSlots() {
@@ -136,13 +122,11 @@ export default function rankingCamisetas() {
       dropZone.appendChild(slot);
     }
 
-    // 1. CREACIÓN ÚNICA DE LA ESTRUCTURA INTERNA
     carouselTrack.innerHTML = '';
     for (let i = 0; i < 5; i++) {
       const item = document.createElement('div');
       item.classList.add('carousel-item');
       
-      // La estructura se inyecta vacía una sola vez aquí
       item.innerHTML = `
         <div class="shirt-card-info">
           <span class="shirt-anio"></span>
@@ -155,10 +139,8 @@ export default function rankingCamisetas() {
       carouselTrack.appendChild(item);
     }
 
-    // 2. LISTENERS DE ARRASTRE ESTABLES (No clonan nodos, evitan el flasheo)
     carouselTrack.querySelectorAll('.carousel-item').forEach(item => {
       item.addEventListener('dragstart', (e) => {
-        // Si no es la tarjeta central (habilitada mediante data-attribute), cancelamos el arrastre
         if (item.dataset.draggableEnabled !== "true") {
           e.preventDefault();
           return;
@@ -204,9 +186,7 @@ export default function rankingCamisetas() {
       const item = items[idx];
       if (!item) return;
 
-      // 🔥 SOLUCIÓN AQUÍ: Restauramos la visibilidad que 'executeAnimatedInteraction' ocultó
       item.style.visibility = 'visible';
-
       item.className = 'carousel-item';
 
       if (availablePool.length === 1 && offset !== 0) {
@@ -294,27 +274,27 @@ export default function rankingCamisetas() {
   function checkFaseStatus() {
     if (!rootContainer) return;
     
-    const placedCount = slotsData.filter(s => s !== null).length; // 
-    rootContainer.classList.remove('phase-selection', 'phase-locked', 'phase-edit'); // 
+    const placedCount = slotsData.filter(s => s !== null).length;
+    rootContainer.classList.remove('phase-selection', 'phase-locked', 'phase-edit');
 
-    if (placedCount === 10) { // 
-      carouselWrapper.style.display = 'none'; // 
-      thanksContainer.style.display = 'flex'; // 
-      if (actionGroup) actionGroup.style.display = 'flex'; // 🔥 Muestra los botones al terminar
+    if (placedCount === 10) {
+      carouselWrapper.style.display = 'none';
+      thanksContainer.style.display = 'flex';
+      if (actionGroup) actionGroup.style.display = 'flex';
       
-      if (isEditingMode) { // 
-        rootContainer.classList.add('phase-edit'); // 
+      if (isEditingMode) {
+        rootContainer.classList.add('phase-edit');
       } else {
-        rootContainer.classList.add('phase-locked'); // 
+        rootContainer.classList.add('phase-locked');
       }
     } else {
-      carouselWrapper.style.display = 'flex'; // 
-      thanksContainer.style.display = 'none'; // 
-      if (actionGroup) actionGroup.style.display = 'none'; // 🔥 Oculta los botones mientras juega
+      carouselWrapper.style.display = 'flex';
+      thanksContainer.style.display = 'none';
+      if (actionGroup) actionGroup.style.display = 'none';
       
-      isEditingMode = false; // 
-      btnEditMode.innerText = "Editar selección"; // 
-      rootContainer.classList.add('phase-selection'); // 
+      isEditingMode = false;
+      btnEditMode.innerText = "Editar selección";
+      rootContainer.classList.add('phase-selection');
     }
   }
 
@@ -443,84 +423,144 @@ export default function rankingCamisetas() {
     checkFaseStatus();
   });
 
+  // =========================================================================
+  // NUEVA LÓGICA DE ENVÍO DE RESULTADOS Y RENDERIZADO DUAL
+  // =========================================================================
+
   btnShowResults.addEventListener('click', () => {
     thanksContainer.style.display = 'none';
     if (actionGroup) actionGroup.style.display = 'none';
     resultsWrapper.style.display = 'block';
+    
     renderPyramidResults();
 
-    if (cacheEstadisticasGlobales) {
-      let estadisticasCombinadas = JSON.parse(JSON.stringify(cacheEstadisticasGlobales));
-      let puntosAsignadosPorCamiseta = {};
-      
-      slotsData.forEach((camiseta, index) => {
-        if (camiseta) {
-          puntosAsignadosPorCamiseta[camiseta.id] = 10 - index;
-        }
-      });
-
-      let totalPuntosSimuladosAnteriores = 100;
-      let puntosFinalesPorCamiseta = {};
-      let sumaTotalPuntosNuevos = 0;
-
-      camisetasData.forEach(cam => {
-        let key = cam.id;
-        let registroPrevio = estadisticasCombinadas.find(item => item.id === key);
-        let porcentajePrevio = registroPrevio ? registroPrevio.percent : 0;
-
-        let ptsPasado = (porcentajePrevio / 100) * totalPuntosSimuladosAnteriores;
-        let ptsAhora = puntosAsignadosPorCamiseta[key] || 0;
-
-        puntosFinalesPorCamiseta[key] = ptsPasado + ptsAhora;
-        sumaTotalPuntosNuevos += puntosFinalesPorCamiseta[key];
-      });
-
-      let datosGraficosFinales = estadisticasCombinadas.map(item => {
-        let key = item.id;
-        let nuevosPuntos = puntosFinalesPorCamiseta[key];
-        let nuevoPorcentaje = sumaTotalPuntosNuevos > 0 ? Math.round((nuevosPuntos / sumaTotalPuntosNuevos) * 100) : 0;
-        return {
-          id: item.id,
-          percent: nuevoPorcentaje
-        };
-      });
-
-      datosGraficosFinales.sort((a, b) => b.percent - a.percent);
-      renderRealStats(datosGraficosFinales);
-    } else {
-      statsGrid.innerHTML = '<p style="grid-column: span 2; text-align: center; color: #6b7280; padding: 20px 0;">Calculando estadísticas globales en vivo...</p>';
-    }
-
-    resultsWrapper.scrollIntoView({ behavior: 'smooth' });
-
-    const datosVotacion = {
-      id: "USER_" + Math.floor(Math.random() * 1000000),
-      fecha: new Date().toLocaleString('es-ES'),
-      puesto1: slotsData[0] ? slotsData[0].id : 'vacío',
-      puesto2: slotsData[1] ? slotsData[1].id : 'vacío',
-      puesto3: slotsData[2] ? slotsData[2].id : 'vacío',
-      puesto4: slotsData[3] ? slotsData[3].id : 'vacío',
-      puesto5: slotsData[4] ? slotsData[4].id : 'vacío',
-      puesto6: slotsData[5] ? slotsData[5].id : 'vacío',
-      puesto7: slotsData[6] ? slotsData[6].id : 'vacío',
-      puesto8: slotsData[7] ? slotsData[7].id : 'vacío',
-      puesto9: slotsData[8] ? slotsData[8].id : 'vacío',
-      puesto10: slotsData[9] ? slotsData[9].id : 'vacío'
+    const payload = {
+      id: "voto_" + Date.now(),
+      fecha: new Date().toISOString(),
+      puesto1: slotsData[0] ? slotsData[0].id : "",
+      puesto2: slotsData[1] ? slotsData[1].id : "",
+      puesto3: slotsData[2] ? slotsData[2].id : "",
+      puesto4: slotsData[3] ? slotsData[3].id : "",
+      puesto5: slotsData[4] ? slotsData[4].id : "",
+      puesto6: slotsData[5] ? slotsData[5].id : "",
+      puesto7: slotsData[6] ? slotsData[6].id : "",
+      puesto8: slotsData[7] ? slotsData[7].id : "",
+      puesto9: slotsData[8] ? slotsData[8].id : "",
+      puesto10: slotsData[9] ? slotsData[9].id : ""
     };
 
     fetch(URL_GOOGLE_SCRIPT, {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(datosVotacion)
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
     })
-      .then(response => response.text())
-      .then(textData => {
-        console.log('¡Voto consolidado con éxito en el Excel!');
-      })
-      .catch(error => {
-        console.error('Error al registrar el voto en segundo plano:', error);
-      });
+    .then(res => res.json())
+    .then(data => {
+      console.log("¡Voto guardado en la nube!", data);
+      recargarYRenderizarEstadisticas(payload.puesto1);
+    })
+    .catch(err => {
+      console.warn("Procesando estadísticas con caché local...");
+      renderizarEstadisticasUnificadas(cacheEstadisticasGlobales, payload.puesto1);
+    });
+
+    resultsWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+
+  function recargarYRenderizarEstadisticas(top1Id) {
+    fetch(URL_GOOGLE_SCRIPT)
+      .then(response => response.json())
+      .then(realData => {
+        cacheEstadisticasGlobales = realData;
+        renderizarEstadisticasUnificadas(realData, top1Id);
+      })
+      .catch(() => {
+        renderizarEstadisticasUnificadas(cacheEstadisticasGlobales, top1Id);
+      });
+  }
+
+  function renderizarEstadisticasUnificadas(serverData, top1Id) {
+    const gridFavourite = document.getElementById('statsGridFavourite');
+    const gridReaders = document.getElementById('statsGridReaders');
+
+    if (!gridFavourite || !gridReaders) return;
+
+    gridFavourite.innerHTML = '';
+    gridReaders.innerHTML = '';
+
+    let dataToUse = serverData;
+    
+    // Fallback si no hay red o Excel
+    if (!Array.isArray(dataToUse) || dataToUse.length === 0) {
+      let mockTotalTop1 = 120;
+      dataToUse = camisetasData.map((c, i) => {
+        const vecesTop = i === 3 ? 45 : i === 5 ? 30 : Math.floor(Math.random() * 8) + 1;
+        return {
+          id: c.id,
+          puntos: 1500 - (i * 120) + Math.floor(Math.random() * 40),
+          vecesTop: vecesTop,
+          percentTop: Math.round((vecesTop / mockTotalTop1) * 100)
+        };
+      });
+    }
+
+    // BLOQUE 1: LAS FAVORITAS (#statsGridFavourite) -> Ordenado por % de Puesto 1
+    const dataFavoritas = dataToUse.map(stat => {
+      const infoCamiseta = camisetasData.find(c => c.id === stat.id);
+      return { ...infoCamiseta, ...stat };
+    }).filter(item => item.id);
+
+    dataFavoritas.sort((a, b) => b.vecesTop - a.vecesTop);
+
+    dataFavoritas.forEach(item => {
+      const row = document.createElement('div');
+      row.classList.add('stat-row');
+      row.innerHTML = `
+        <img class="stat-shirt-preview" src="${item.img}" alt="${item.anio}">
+        <span class="stat-percent">${item.percentTop}%</span>
+        <div class="stat-bar-bg">
+          <div class="stat-bar-fill" style="width: 0%; background-color: ${item.id === top1Id ? '#1868FF' : '#111827'}"></div>
+        </div>
+      `;
+      gridFavourite.appendChild(row);
+
+      setTimeout(() => {
+        const bar = row.querySelector('.stat-bar-fill');
+        if (bar) bar.style.width = `${item.percentTop}%`;
+      }, 100);
+    });
+
+    // BLOQUE 2: LA DE LOS LECTORES (#statsGridReaders) -> Ordenado por Puntos Totales
+    const dataLectores = dataToUse.map(stat => {
+      const infoCamiseta = camisetasData.find(c => c.id === stat.id);
+      return { ...infoCamiseta, ...stat };
+    }).filter(item => item.id);
+
+    dataLectores.sort((a, b) => b.puntos - a.puntos);
+
+    const maxPuntosActuales = Math.max(...dataLectores.map(d => d.puntos), 1);
+
+    dataLectores.forEach(item => {
+      const row = document.createElement('div');
+      row.classList.add('stat-row');
+
+      const anchoProporcionalBarra = Math.round((item.puntos / maxPuntosActuales) * 100);
+
+      row.innerHTML = `
+        <img class="stat-shirt-preview" src="${item.img}" alt="${item.anio}">
+        <span class="stat-percent">${item.puntos} pts</span>
+        <div class="stat-bar-bg">
+          <div class="stat-bar-fill" style="width: 0%; background-color: ${item.id === top1Id ? '#1868FF' : '#111827'}"></div>
+        </div>
+      `;
+      gridReaders.appendChild(row);
+
+      setTimeout(() => {
+        const bar = row.querySelector('.stat-bar-fill');
+        if (bar) bar.style.width = `${anchoProporcionalBarra}%`;
+      }, 100);
+    });
+  }
 
   function renderPyramidResults() {
     pyramidContainer.innerHTML = '';
@@ -564,45 +604,6 @@ export default function rankingCamisetas() {
     });
   }
 
-  function renderRealStats(realData) {
-    statsGrid.innerHTML = '';
-
-    realData.forEach((data) => {
-      const row = document.createElement('div');
-      row.classList.add('stat-row');
-
-      const shirt = document.createElement('div');
-      shirt.classList.add('stat-shirt-preview');
-      shirt.style.backgroundColor = 'transparent';
-
-      const camisetaOriginal = camisetasData.find(c => c.id === data.id);
-
-      if (camisetaOriginal) {
-        shirt.innerHTML = `<img src="${camisetaOriginal.img}" alt="" style="width: 100%; height: 100%; object-fit: contain;">`;
-      }
-
-      const label = document.createElement('div');
-      label.classList.add('stat-percent');
-      label.innerText = `${data.percent}%`;
-
-      const barBg = document.createElement('div');
-      barBg.classList.add('stat-bar-bg');
-
-      const barFill = document.createElement('div');
-      barFill.classList.add('stat-bar-fill');
-
-      barBg.appendChild(barFill);
-      row.appendChild(shirt);
-      row.appendChild(label);
-      row.appendChild(barBg);
-      statsGrid.appendChild(row);
-
-      setTimeout(() => {
-        barFill.style.width = `${data.percent}%`;
-      }, 100);
-    });
-  }
-
   function precargarEstadisticasLectores() {
     fetch(URL_GOOGLE_SCRIPT)
       .then(response => response.json())
@@ -632,7 +633,7 @@ export default function rankingCamisetas() {
     currentSliderIndex = 0;
     resultsWrapper.style.display = 'none';
     initSlots();
-    rootContainer.scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   navLeft.addEventListener('click', () => {
@@ -640,75 +641,12 @@ export default function rankingCamisetas() {
     currentSliderIndex = (currentSliderIndex - 1 + availablePool.length) % availablePool.length;
     updateCarouselDOM();
   });
+  
   navRight.addEventListener('click', () => {
     if (availablePool.length === 0) return;
     currentSliderIndex = (currentSliderIndex + 1) % availablePool.length;
     updateCarouselDOM();
   });
-
-  // =========================================================================
-  // BOTÓN FLOTANTE DE AUTOCOMPLETAR INSTANTÁNEO (PARA PRUEBAS)
-  // =========================================================================
-  function injectAutoFillButton() {
-    if (document.getElementById('btnAutoFillDev')) return;
-
-    const btn = document.createElement('button');
-    btn.id = 'btnAutoFillDev';
-    btn.innerText = '⚡ Auto Rápido';
-    
-    Object.assign(btn.style, {
-      position: 'fixed',
-      bottom: '20px',
-      right: '20px',
-      zIndex: '999999',
-      backgroundColor: '#10b981',
-      color: '#ffffff',
-      border: 'none',
-      borderRadius: '50px',
-      padding: '12px 24px',
-      fontSize: '14px',
-      fontWeight: 'bold',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-      cursor: 'pointer',
-      transition: 'transform 0.2s, background-color 0.2s'
-    });
-
-    btn.addEventListener('mouseenter', () => btn.style.backgroundColor = '#059669');
-    btn.addEventListener('mouseleave', () => btn.style.backgroundColor = '#10b981');
-
-    btn.addEventListener('click', () => {
-      let vacios = [];
-      slotsData.forEach((slot, index) => {
-        if (slot === null) vacios.push(index);
-      });
-
-      if (vacios.length === 0 || availablePool.length === 0) {
-        alert('¡La selección ya está completa!');
-        return;
-      }
-
-      vacios.forEach((targetIndex) => {
-        if (availablePool.length > 0) {
-          const randomPoolIndex = Math.floor(Math.random() * availablePool.length);
-          const camisetaSeleccionada = availablePool[randomPoolIndex];
-          slotsData[targetIndex] = camisetaSeleccionada;
-          availablePool.splice(randomPoolIndex, 1);
-        }
-      });
-
-      updateSlotsDOM();
-      updateCarouselDOM();
-      checkFaseStatus();
-
-      if (slotsData.filter(s => s !== null).length === 10) {
-        thanksContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-
-    rootContainer.appendChild(btn);
-  }
-
-  injectAutoFillButton();
 
   initSlots();
 }
