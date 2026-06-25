@@ -1,3 +1,5 @@
+import html2canvas from 'html2canvas';
+
 export default function rankingCamisetas() {
   const camisetasData = [
     { id: 'esp_2026_1', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-a.webp', anio: '2026', torneo: 'USA-México-Canadá' },
@@ -37,7 +39,7 @@ export default function rankingCamisetas() {
   const navRight = document.getElementById('navRight');
 
   // =========================================================================
-  // BOTÓN FLOTANTE DE AUTOCOMPLETAR (SOLO PARA PRUEBAS / DESARROLLO)
+  // BOTÓN FLOTANTE DE AUTOCOMPLETAR
   // =========================================================================
   function injectAutoFillButton() {
     if (document.getElementById('btnAutoFillDev')) return;
@@ -250,8 +252,8 @@ export default function rankingCamisetas() {
           item.classList.add('shaking');
         }
 
-        if (availablePool.length === 0) {
-          item.setAttribute('draggable', isEditingMode ? 'true' : 'false');
+        if (availablePool.length === 0 && !isEditingMode) {
+          item.setAttribute('draggable', 'false');
         } else {
           item.setAttribute('draggable', 'true');
         }
@@ -424,13 +426,72 @@ export default function rankingCamisetas() {
   });
 
   // =========================================================================
-  // NUEVA LÓGICA DE ENVÍO DE RESULTADOS Y RENDERIZADO DUAL
+  // ESTADÍSTICAS OPTIMISTAS
   // =========================================================================
+  function obtenerEstadisticasOptimizadas(payload) {
+    let statsLocales = JSON.parse(JSON.stringify(cacheEstadisticasGlobales || []));
 
+    const puestos = [
+      payload.puesto1, payload.puesto2, payload.puesto3, payload.puesto4, payload.puesto5,
+      payload.puesto6, payload.puesto7, payload.puesto8, payload.puesto9, payload.puesto10
+    ];
+
+    puestos.forEach((idVoto, index) => {
+      if (!idVoto) return;
+      
+      const puntosASumar = 10 - index;
+      const esTop1 = (index === 0);
+
+      let camisetaStat = statsLocales.find(s => s.id === idVoto);
+
+      if (camisetaStat) {
+        camisetaStat.puntos = (camisetaStat.puntos || 0) + puntosASumar;
+        if (esTop1) {
+          camisetaStat.vecesTop = (camisetaStat.vecesTop || 0) + 1;
+        }
+      } else {
+        statsLocales.push({
+          id: idVoto,
+          puntos: puntosASumar,
+          vecesTop: esTop1 ? 1 : 0,
+          percentTop: 0
+        });
+      }
+    });
+
+    let nuevoTotalTop1 = statsLocales.reduce((sum, item) => sum + (item.vecesTop || 0), 0);
+    
+    statsLocales.forEach(item => {
+      item.percentTop = nuevoTotalTop1 > 0 
+        ? Math.round((item.vecesTop / nuevoTotalTop1) * 100) 
+        : 0;
+    });
+
+    return statsLocales;
+  }
+
+  // =========================================================================
+  // ACCIÓN DEL BOTÓN ENVIAR (CON AUTOCLOSE/LOCK DE EDICIÓN)
+  // =========================================================================
   btnShowResults.addEventListener('click', () => {
+    // Si estaba editando, forzar el guardado y bloqueo definitivo en UI
+    if (isEditingMode) {
+      isEditingMode = false;
+      btnEditMode.classList.remove('v-btn-g');
+      btnEditMode.innerText = "Editar selección";
+    }
+
+    // Ocultar contenedores iniciales y botones para evitar manipulación posterior
     thanksContainer.style.display = 'none';
     if (actionGroup) actionGroup.style.display = 'none';
     resultsWrapper.style.display = 'block';
+    
+    // Forzar redibujado de ranuras sin la clase shaking y deshabilitar draggables
+    updateSlotsDOM();
+    if (rootContainer) {
+      rootContainer.classList.remove('phase-edit', 'phase-selection');
+      rootContainer.classList.add('phase-locked');
+    }
     
     renderPyramidResults();
 
@@ -449,34 +510,32 @@ export default function rankingCamisetas() {
       puesto10: slotsData[9] ? slotsData[9].id : ""
     };
 
+    const statsOptimizadas = obtenerEstadisticasOptimizadas(payload);
+    renderizarEstadisticasUnificadas(statsOptimizadas, payload.puesto1);
+    
+    resultsWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
     fetch(URL_GOOGLE_SCRIPT, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log("¡Voto guardado en la nube!", data);
-      recargarYRenderizarEstadisticas(payload.puesto1);
-    })
-    .catch(err => {
-      console.warn("Procesando estadísticas con caché local...");
-      renderizarEstadisticasUnificadas(cacheEstadisticasGlobales, payload.puesto1);
+    }).catch(err => {
+      console.warn("Error enviando datos al Excel (silencioso):", err);
     });
-
-    resultsWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  function recargarYRenderizarEstadisticas(top1Id) {
-    fetch(URL_GOOGLE_SCRIPT)
-      .then(response => response.json())
-      .then(realData => {
-        cacheEstadisticasGlobales = realData;
-        renderizarEstadisticasUnificadas(realData, top1Id);
-      })
-      .catch(() => {
-        renderizarEstadisticasUnificadas(cacheEstadisticasGlobales, top1Id);
-      });
+  // Helper para reordenar un array en cascada vertical (Izquierda -> Abajo, luego Derecha -> Abajo)
+  function ordenarParaCascadaDosColumnas(array) {
+    if (window.innerWidth < 768) {
+      return array; // En móvil se queda correlativo del 1 al 10 en su columna única
+    }
+    const resultado = [];
+    const mitad = Math.ceil(array.length / 2);
+    for (let i = 0; i < mitad; i++) {
+      if (array[i]) resultado.push(array[i]);
+      if (array[i + mitad]) resultado.push(array[i + mitad]);
+    }
+    return resultado;
   }
 
   function renderizarEstadisticasUnificadas(serverData, top1Id) {
@@ -490,7 +549,6 @@ export default function rankingCamisetas() {
 
     let dataToUse = serverData;
     
-    // Fallback si no hay red o Excel
     if (!Array.isArray(dataToUse) || dataToUse.length === 0) {
       let mockTotalTop1 = 120;
       dataToUse = camisetasData.map((c, i) => {
@@ -504,18 +562,23 @@ export default function rankingCamisetas() {
       });
     }
 
-    // BLOQUE 1: LAS FAVORITAS (#statsGridFavourite) -> Ordenado por % de Puesto 1
-    const dataFavoritas = dataToUse.map(stat => {
+    // --- BLOQUE 1: LAS FAVORITAS ---
+    let dataFavoritas = dataToUse.map(stat => {
       const infoCamiseta = camisetasData.find(c => c.id === stat.id);
       return { ...infoCamiseta, ...stat };
     }).filter(item => item.id);
 
     dataFavoritas.sort((a, b) => b.vecesTop - a.vecesTop);
+    
+    // Inyectamos la propiedad de su posición real en el ranking antes de romper el orden para la cascada
+    dataFavoritas = dataFavoritas.map((item, index) => ({ ...item, rankingPos: index + 1 }));
+    const dataFavoritasCascada = ordenarParaCascadaDosColumnas(dataFavoritas);
 
-    dataFavoritas.forEach(item => {
+    dataFavoritasCascada.forEach(item => {
       const row = document.createElement('div');
       row.classList.add('stat-row');
       row.innerHTML = `
+        <span class="stat-position-badge">${item.rankingPos}</span>
         <img class="stat-shirt-preview" src="${item.img}" alt="${item.anio}">
         <span class="stat-percent">${item.percentTop}%</span>
         <div class="stat-bar-bg">
@@ -530,23 +593,27 @@ export default function rankingCamisetas() {
       }, 100);
     });
 
-    // BLOQUE 2: LA DE LOS LECTORES (#statsGridReaders) -> Ordenado por Puntos Totales
-    const dataLectores = dataToUse.map(stat => {
+    // --- BLOQUE 2: LA DE LOS LECTORES ---
+    let dataLectores = dataToUse.map(stat => {
       const infoCamiseta = camisetasData.find(c => c.id === stat.id);
       return { ...infoCamiseta, ...stat };
     }).filter(item => item.id);
 
     dataLectores.sort((a, b) => b.puntos - a.puntos);
-
+    
+    // Inyectamos la propiedad de su posición real en el ranking
+    dataLectores = dataLectores.map((item, index) => ({ ...item, rankingPos: index + 1 }));
     const maxPuntosActuales = Math.max(...dataLectores.map(d => d.puntos), 1);
+    const dataLectoresCascada = ordenarParaCascadaDosColumnas(dataLectores);
 
-    dataLectores.forEach(item => {
+    dataLectoresCascada.forEach(item => {
       const row = document.createElement('div');
       row.classList.add('stat-row');
 
       const anchoProporcionalBarra = Math.round((item.puntos / maxPuntosActuales) * 100);
 
       row.innerHTML = `
+        <span class="stat-position-badge">${item.rankingPos}</span>
         <img class="stat-shirt-preview" src="${item.img}" alt="${item.anio}">
         <span class="stat-percent">${item.puntos} pts</span>
         <div class="stat-bar-bg">
@@ -633,7 +700,7 @@ export default function rankingCamisetas() {
     currentSliderIndex = 0;
     resultsWrapper.style.display = 'none';
     initSlots();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    rootContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   navLeft.addEventListener('click', () => {
