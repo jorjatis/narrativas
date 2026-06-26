@@ -3,19 +3,51 @@
 </p>
 
 <div class="v-n-rcl">
+  <button id="btnOpenHelp" class="help-trigger-btn" aria-label="Mostrar ayuda">
+    <svg width="19" height="19" aria-hidden="true">
+      <path d="M8.75 14.25H10.25V8.5H8.75V14.25ZM10.073 6.55625C10.2295 6.40142 10.3077 6.20958 10.3077 5.98075C10.3077 5.75192 10.2303 5.56008 10.0755 5.40525C9.92067 5.25058 9.72883 5.17325 9.5 5.17325C9.27117 5.17325 9.07933 5.25058 8.9245 5.40525C8.76967 5.56008 8.69225 5.75192 8.69225 5.98075C8.69225 6.20958 8.7705 6.40142 8.927 6.55625C9.08333 6.71108 9.27433 6.7885 9.5 6.7885C9.72567 6.7885 9.91667 6.71108 10.073 6.55625ZM9.50175 19C8.18775 19 6.95267 18.7507 5.7965 18.252C4.64033 17.7533 3.63467 17.0766 2.7795 16.2218C1.92433 15.3669 1.24725 14.3617 0.74825 13.206C0.249417 12.0503 0 10.8156 0 9.50175C0 8.18775 0.249333 6.95267 0.748 5.7965C1.24667 4.64033 1.92342 3.63467 2.77825 2.7795C3.63308 1.92433 4.63833 1.24725 5.794 0.74825C6.94967 0.249417 8.18442 0 9.49825 0C10.8123 0 12.0473 0.249333 13.2035 0.748C14.3597 1.24667 15.3653 1.92342 16.2205 2.77825C17.0757 3.63308 17.7528 4.63833 18.2518 5.794C18.7506 6.94967 19 8.18442 19 9.49825C19 10.8123 18.7507 12.0473 18.252 13.2035C17.7533 14.3597 17.0766 15.3653 16.2218 16.2205C15.3669 17.0757 14.3617 17.7528 13.206 18.2518C12.0503 18.7506 10.8156 19 9.50175 19ZM9.5 17.5C11.7333 17.5 13.625 16.725 15.175 15.175C16.725 13.625 17.5 11.7333 17.5 9.5C17.5 7.26667 16.725 5.375 15.175 3.825C13.625 2.275 11.7333 1.5 9.5 1.5C7.26667 1.5 5.375 2.275 3.825 3.825C2.275 5.375 1.5 7.26667 1.5 9.5C1.5 11.7333 2.275 13.625 3.825 15.175C5.375 16.725 7.26667 17.5 9.5 17.5Z"/>
+    </svg>
+  </button>
+  <div id="helpModal" class="help-modal-backdrop">
+    <div class="help-modal-content">
+      <button id="btnCloseHelp" class="help-modal-close v-x" aria-label="Cerrar">
+        <svg width="24" height="24" aria-hidden="true">
+          <path d="M12.0006 13.0635L8.75438 16.3095C8.60954 16.4545 8.43396 16.5254 8.22763 16.522C8.02113 16.5189 7.84546 16.4449 7.70063 16.3C7.55579 16.1552 7.48338 15.978 7.48338 15.7683C7.48338 15.5586 7.55579 15.3814 7.70063 15.2365L10.9371 12L7.69113 8.7788C7.54613 8.63396 7.47529 8.45671 7.47863 8.24705C7.48179 8.03755 7.55579 7.86038 7.70063 7.71555C7.84546 7.57055 8.02271 7.49805 8.23238 7.49805C8.44204 7.49805 8.6193 7.57055 8.76413 7.71555L12.0006 10.9615L15.2219 7.71555C15.3667 7.57055 15.5423 7.49805 15.7486 7.49805C15.9551 7.49805 16.1308 7.57055 16.2756 7.71555C16.4308 7.87055 16.5084 8.0503 16.5084 8.2548C16.5084 8.4593 16.4308 8.63396 16.2756 8.7788L13.0391 12L16.2851 15.2463C16.4301 15.3911 16.5026 15.5667 16.5026 15.773C16.5026 15.9795 16.4301 16.1552 16.2851 16.3C16.1301 16.4552 15.9504 16.5328 15.7459 16.5328C15.5414 16.5328 15.3667 16.4552 15.2219 16.3L12.0006 13.0635Z"/>
+        </svg>
+      </button>
+      
+      <div class="help-modal-body">
+        <h3>Cómo crear tu ránking de camisetas de la selección</h3>
+        <ul>
+          <li>
+            <h4>1. Coloca en orden las camisetas</h4>
+            <p>Pulsa sobre la camiseta y arrástrala a una casilla.</p>
+            <p>O también puedes pulsar sobre una casilla para colocar la camiseta.</p>
+            <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/pop_up_camisetas_1.gif" alt="" aria-hidden>
+          </li>
+          <li>
+            <h4>2. Reordena tu selección</h4>
+            <p>Pulsa sobre la camiseta que quieres mover y arrástrala al lugar que desees.</p>
+            <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/pop_up_camisetas_2.gif" alt="" aria-hidden>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div id="carouselWrapper" class="carousel-wrapper">
       <button id="navLeft" class="nav-btn nav-btn-left">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 46 15"><path fill="#0e3a6f" d="M.293 6.657a1 1 0 0 0 0 1.414l6.364 6.364A1 1 0 1 0 8.07 13.02L2.414 7.364l5.657-5.657A1 1 0 0 0 6.657.293zM46 7.364v-1H1v2h45z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 8 11"><path d="M.986 5.65q0-.18.058-.336a.8.8 0 0 1 .198-.296L5.736.524a.75.75 0 0 1 .514-.22.7.7 0 0 1 .54.22q.217.217.217.527a.72.72 0 0 1-.217.527L2.732 5.65 6.79 9.724q.208.207.22.514a.7.7 0 0 1-.22.54.72.72 0 0 1-.527.217.72.72 0 0 1-.527-.217L1.242 6.283a.83.83 0 0 1-.256-.632"/></svg>
       </button>
       <div id="carouselTrack" class="carousel-track"></div>
       <button id="navRight" class="nav-btn nav-btn-right">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 46 15"><path fill="#0e3a6f" d="M45.707 8.07a1 1 0 0 0 0-1.413L39.343.293a1 1 0 1 0-1.414 1.414l5.657 5.657-5.657 5.657a1 1 0 0 0 1.414 1.414zM45 7.365v-1H0v2h45z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 8 11"><path d="M.986 5.65q0-.18.058-.336a.8.8 0 0 1 .198-.296L5.736.524a.75.75 0 0 1 .514-.22.7.7 0 0 1 .54.22q.217.217.217.527a.72.72 0 0 1-.217.527L2.732 5.65 6.79 9.724q.208.207.22.514a.7.7 0 0 1-.22.54.72.72 0 0 1-.527.217.72.72 0 0 1-.527-.217L1.242 6.283a.83.83 0 0 1-.256-.632"/></svg>
       </button>
   </div>
 
   <div id="thanksContainer" class="thanks-container">
-      <h3>¡Gracias por participar!</h3>
-      <p>Ya completaste tus 10 elecciones estelares. ¿Qué deseas hacer ahora?</p>
+    <p>¡Bien hecho!</p>
+    <p>Compara tu selección con la de otros lectores de abc</p>
+    <img src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mensaje-gracias.gif" alt="">
   </div>
 
   <div id="dropZone" class="drop-zone"></div>
@@ -26,19 +58,23 @@
   </div>
 
   <div id="resultsWrapper" class="results-wrapper">
-      <div id="captureArea" class="capture-area">
-          <div class="capture-title v-n-rcl-cintillo">Este es tu ránking de camisetas</div>
-          <div id="pyramidContainer" class="pyramid-container"></div>
+    <div id="captureArea" class="capture-area">
+      <div class="capture-title v-n-rcl-cintillo">Este es tu ránking de camisetas</div>
+      <div id="pyramidContainer" class="pyramid-container"></div>
+      <div id="captureLogo" class="capture-logo">
+        <span>Haz el tuyo en</span>
+        <img src="#">
       </div>
-      <div id="statsArea"class="stats-area">
-          <div class="stats-title v-n-rcl-cintillo">La camiseta favorita de nuestros lectores</div>
-          <div id="statsGridFavourite" class="stats-grid"></div>
-          <div class="stats-title v-n-rcl-cintillo">El ránking de los lectores de abc</div>
-          <div id="statsGridReaders" class="stats-grid"></div>
-      </div>
-      <div class="results-actions">
-          <button id="btnDownload" class="v-btn v-btn--l">Descarga tu selección</button>
-          <button id="btnReplay" class="v-btn v-btn--l">Volver a seleccionar</button>
-      </div>
+    </div>
+    <div id="statsArea"class="stats-area">
+        <div class="stats-title v-n-rcl-cintillo">La camiseta favorita de nuestros lectores</div>
+        <div id="statsGridFavourite" class="stats-grid"></div>
+        <div class="stats-title v-n-rcl-cintillo">El ránking de los lectores de abc</div>
+        <div id="statsGridReaders" class="stats-grid"></div>
+    </div>
+    <div class="results-actions">
+        <button id="btnDownload" class="v-btn v-btn--l">Descarga tu selección</button>
+        <button id="btnReplay" class="v-btn v-btn--l">Volver a seleccionar</button>
+    </div>
   </div>
 </div>

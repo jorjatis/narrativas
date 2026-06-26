@@ -22,6 +22,9 @@ export default function rankingCamisetas() {
   let draggedFrom = null;
   let isEditingMode = false;
   let cacheEstadisticasGlobales = null;
+  let ultimoVotoId = null;
+  let descargaRegistrada = false;
+  let votoEnviado = false;
 
   const rootContainer = document.querySelector('.v-n-rcl');
   const carouselWrapper = document.getElementById('carouselWrapper');
@@ -38,16 +41,13 @@ export default function rankingCamisetas() {
   const navLeft = document.getElementById('navLeft');
   const navRight = document.getElementById('navRight');
 
-  // =========================================================================
-  // BOTÓN FLOTANTE DE AUTOCOMPLETAR
-  // =========================================================================
   function injectAutoFillButton() {
     if (document.getElementById('btnAutoFillDev')) return;
 
     const btn = document.createElement('button');
     btn.id = 'btnAutoFillDev';
     btn.innerText = '🎲 Auto 10';
-    
+
     Object.assign(btn.style, {
       position: 'fixed',
       bottom: '20px',
@@ -69,36 +69,33 @@ export default function rankingCamisetas() {
     btn.addEventListener('mouseleave', () => btn.style.backgroundColor = '#ff5a5f');
 
     btn.addEventListener('click', () => {
-      let vacíos = [];
+      let vacios = [];
       slotsData.forEach((slot, index) => {
-        if (slot === null) vacíos.push(index);
+        if (slot === null) vacios.push(index);
       });
 
-      if (vacíos.length === 0 || availablePool.length === 0) {
+      if (vacios.length === 0 || availablePool.length === 0) {
         alert('¡La selección ya está completa!');
         return;
       }
 
-      btn.disabled = true;
-      btn.style.opacity = '0.5';
+      vacios.forEach((targetIndex) => {
+        if (availablePool.length > 0) {
+          const randomPoolIndex = Math.floor(Math.random() * availablePool.length);
 
-      vacíos.forEach((targetIndex, order) => {
-        setTimeout(() => {
-          if (availablePool.length > 0) {
-            const randomPoolIndex = Math.floor(Math.random() * availablePool.length);
-            currentSliderIndex = randomPoolIndex;
-            updateCarouselDOM();
-            executeAnimatedInteraction('main', targetIndex);
-          }
+          const camisetaElegida = availablePool.splice(randomPoolIndex, 1)[0];
 
-          if (order === vacíos.length - 1) {
-            setTimeout(() => {
-              btn.disabled = false;
-              btn.style.opacity = '1';
-            }, 500);
-          }
-        }, order * 450); 
+          slotsData[targetIndex] = camisetaElegida;
+        }
       });
+
+      updateSlotsDOM();
+      updateCarouselDOM();
+      checkFaseStatus();
+
+      if (slotsData.filter(s => s !== null).length === 10) {
+        thanksContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
 
     rootContainer.appendChild(btn);
@@ -106,8 +103,90 @@ export default function rankingCamisetas() {
 
   injectAutoFillButton();
 
+  const SITE_LOGOS = {
+    'elcorreo.com': 'logo-elcorreo.png',
+    'larioja.com': 'logo-larioja.png',
+    'ideal.es': 'logo-ideal.png',
+    'elcomercio.es': 'logo-elcomercio.png',
+    'hoy.es': 'logo-hoy.png',
+    'diariosur.es': 'logo-diariosur.png',
+    'diariovasco.com': 'logo-diariovasco.png',
+    'eldiariomontanes.es': 'logo-eldiariomontanes.png',
+    'elnortedecastilla.es': 'logo-elnortedecastilla.png',
+    'lasprovincias.es': 'logo-lasprovincias.png',
+    'laverdad.es': 'logo-laverdad.png',
+    'abc.es': 'logo-abc.png',
+    'lavozdigital.es': 'logo-lavozdecadiz.png',
+    'leonoticias.com': 'logo-leonoticias.png',
+    'todoalicante.es': 'logo-todoalicante.png',
+    'salamancahoy.es': 'logo-salamancahoy.png',
+    'burgosconecta.es': 'logo-burgosconecta.png',
+    'canarias7.es': 'logo-canarias7.png',
+    'huelva24.com': 'logo-huelva24.png'
+  };
+
+  function getCurrentSiteLogo() {
+    const hostname = window.location.hostname.replace(/^www\./, '').toLowerCase();
+    return SITE_LOGOS[hostname] || 'logo-abc.png';
+  }
+
+  function initGlobalLogos() {
+    const baseUrlLogos = 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/logomedios/';
+    const logoFileName = getCurrentSiteLogo();
+    const finalLogoUrl = `${baseUrlLogos}${logoFileName}`;
+
+    const captureLogoImg = document.querySelector('#captureLogo img');
+    if (captureLogoImg) {
+      captureLogoImg.src = finalLogoUrl;
+    }
+  }
+
+  initGlobalLogos();
+
+  const helpModal = document.getElementById('helpModal');
+  const btnOpenHelp = document.getElementById('btnOpenHelp');
+  const btnCloseHelp = document.getElementById('btnCloseHelp');
+
+  function openHelpModal() {
+    if (helpModal) helpModal.classList.add('is-active');
+  }
+
+  function closeHelpModal() {
+    if (helpModal) helpModal.classList.remove('is-active');
+  }
+
+  if (helpModal && btnOpenHelp && btnCloseHelp) {
+    openHelpModal();
+
+    btnOpenHelp.addEventListener('click', (e) => {
+      e.preventDefault();
+      openHelpModal();
+    });
+
+    btnCloseHelp.addEventListener('click', closeHelpModal);
+
+    helpModal.addEventListener('click', (e) => {
+      if (e.target === helpModal) {
+        closeHelpModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && helpModal.classList.contains('is-active')) {
+        closeHelpModal();
+      }
+    });
+  }
+
+  // 1. Pon estas 3 variables justo ARRIBA de la función initSlots() en tu archivo
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isTrackingTouch = false;
+
   function initSlots() {
     dropZone.innerHTML = '';
+    
+    // Generar los 10 Slots
     for (let i = 0; i < 10; i++) {
       const slot = document.createElement('div');
       slot.classList.add('slot');
@@ -117,18 +196,34 @@ export default function rankingCamisetas() {
       icon.classList.add('slot-icon');
       slot.appendChild(icon);
 
+      // Eventos de escritorio clásicos (se mantienen por compatibilidad)
       slot.addEventListener('dragover', (e) => e.preventDefault());
       slot.addEventListener('drop', (e) => handleDrop(e, i));
       slot.addEventListener('click', () => handleSlotClick(i));
 
+      // TRUCO ESTILO NYT: Al pulsar inmediatamente sobre un slot ocupado
+      slot.addEventListener('pointerdown', (e) => {
+        if (!slotsData[i]) return; // Solo si tiene una camiseta colocada
+
+        e.preventDefault();
+        
+        isTrackingTouch = true;
+        touchStartX = e.clientX;
+        touchStartY = e.clientY;
+        draggedFrom = i; 
+        
+        if (rootContainer) rootContainer.classList.add('is-dragging');
+      });
+
       dropZone.appendChild(slot);
     }
 
+    // Generar el Carrusel
     carouselTrack.innerHTML = '';
     for (let i = 0; i < 5; i++) {
       const item = document.createElement('div');
       item.classList.add('carousel-item');
-      
+
       item.innerHTML = `
         <div class="shirt-card-info">
           <span class="shirt-anio"></span>
@@ -141,20 +236,84 @@ export default function rankingCamisetas() {
       carouselTrack.appendChild(item);
     }
 
+    // Eventos del Carrusel
     carouselTrack.querySelectorAll('.carousel-item').forEach(item => {
+      // Escritorio nativo HTML5
       item.addEventListener('dragstart', (e) => {
         if (item.dataset.draggableEnabled !== "true") {
           e.preventDefault();
           return;
         }
         draggedFrom = 'main';
-        if (rootContainer) rootContainer.classList.add('is-dragging');
+        if (rootContainer) {
+          rootContainer.classList.add('is-dragging');
+          rootContainer.classList.add('is-dragging-from-main');
+        }
       });
 
       item.addEventListener('dragend', () => {
-        if (rootContainer) rootContainer.classList.remove('is-dragging');
+        if (rootContainer) {
+          rootContainer.classList.remove('is-dragging');
+          rootContainer.classList.remove('is-dragging-from-main');
+        }
+      });
+
+      // TRUCO ESTILO NYT: Iniciar arrastre inmediato al tocar la camiseta del carrusel
+      item.addEventListener('pointerdown', (e) => {
+        if (item.dataset.draggableEnabled !== "true") return;
+
+        e.preventDefault();
+        
+        isTrackingTouch = true;
+        touchStartX = e.clientX;
+        touchStartY = e.clientY;
+        draggedFrom = 'main';
+        
+        if (rootContainer) {
+          rootContainer.classList.add('is-dragging');
+          rootContainer.classList.add('is-dragging-from-main');
+        }
       });
     });
+
+    // LISTENERS GLOBALES EN LA VENTANA (Solo se registran una vez)
+    if (!window.hasPointerDragListeners) {
+      window.addEventListener('pointermove', (e) => {
+        if (!isTrackingTouch) return;
+        
+        // Bloqueo absoluto de scroll de iOS mientras se arrastra el dedo
+        if (e.cancelable) e.preventDefault();
+      }, { passive: false });
+
+      window.addEventListener('pointerup', (e) => {
+        if (!isTrackingTouch) return;
+        isTrackingTouch = false;
+        
+        if (rootContainer) {
+          rootContainer.classList.remove('is-dragging');
+          rootContainer.classList.remove('is-dragging-from-main');
+        }
+
+        // Calcula matemáticamente qué elemento hay debajo del dedo al levantarlo
+        const targetElement = document.elementFromPoint(e.clientX, e.clientY);
+        if (!targetElement) return;
+
+        const closestSlot = targetElement.closest('.slot');
+        if (closestSlot) {
+          const toIndex = parseInt(closestSlot.getAttribute('data-index')) - 1;
+          
+          if (draggedFrom === 'main') {
+            // Viene del carrusel: ejecuta la animación nativa que ya tienes
+            executeAnimatedInteraction('main', toIndex);
+          } else if (draggedFrom !== toIndex) {
+            // Viene de otro slot: ejecuta el intercambio
+            executeAnimatedInteraction(draggedFrom, toIndex);
+          }
+        }
+      });
+      
+      window.hasPointerDragListeners = true;
+    }
 
     updateSlotsDOM();
     updateCarouselDOM();
@@ -237,10 +396,10 @@ export default function rankingCamisetas() {
       if (existingItem) existingItem.remove();
 
       if (slotsData[i]) {
-        icon.innerText = '⇄';
+        icon.innerHTML = '<svg width="16" height="22" viewBox="0 0 16 22" aria-hidden="true"><path d="M1.1 15.05C0.733333 14.4167 0.458333 13.7667 0.275 13.1C0.0916667 12.4333 0 11.75 0 11.05C0 8.81667 0.775 6.91667 2.325 5.35C3.875 3.78333 5.76667 3 8 3H8.175L6.575 1.4L7.975 0L11.975 4L7.975 8L6.575 6.6L8.175 5H8C6.33333 5 4.91667 5.5875 3.75 6.7625C2.58333 7.9375 2 9.36667 2 11.05C2 11.4833 2.05 11.9083 2.15 12.325C2.25 12.7417 2.4 13.15 2.6 13.55L1.1 15.05ZM8.025 22L4.025 18L8.025 14L9.425 15.4L7.825 17H8C9.66667 17 11.0833 16.4125 12.25 15.2375C13.4167 14.0625 14 12.6333 14 10.95C14 10.5167 13.95 10.0917 13.85 9.675C13.75 9.25833 13.6 8.85 13.4 8.45L14.9 6.95C15.2667 7.58333 15.5417 8.23333 15.725 8.9C15.9083 9.56667 16 10.25 16 10.95C16 13.1833 15.225 15.0833 13.675 16.65C12.125 18.2167 10.2333 19 8 19H7.825L9.425 20.6L8.025 22Z"/></svg>';
         const item = document.createElement('div');
         item.classList.add('placed-item');
-        
+
         const camiseta = slotsData[i];
         item.innerHTML = `
           <div class="shirt-card-media">
@@ -268,14 +427,14 @@ export default function rankingCamisetas() {
 
         slot.appendChild(item);
       } else {
-        icon.innerText = '[ + ]';
+        icon.innerHTML = '<svg width="19" height="19" viewBox="0 0 19 19" aria-hidden="true"><path d="M8.75 10.25V13.5C8.75 13.7125 8.82192 13.8906 8.96575 14.0343C9.10958 14.1781 9.28775 14.25 9.50025 14.25C9.71292 14.25 9.891 14.1781 10.0345 14.0343C10.1782 13.8906 10.25 13.7125 10.25 13.5V10.25H13.5C13.7125 10.25 13.8906 10.1781 14.0343 10.0343C14.1781 9.89042 14.25 9.71225 14.25 9.49975C14.25 9.28708 14.1781 9.109 14.0343 8.9655C13.8906 8.82183 13.7125 8.75 13.5 8.75H10.25V5.5C10.25 5.2875 10.1781 5.10942 10.0343 4.96575C9.89042 4.82192 9.71225 4.75 9.49975 4.75C9.28708 4.75 9.109 4.82192 8.9655 4.96575C8.82183 5.10942 8.75 5.2875 8.75 5.5V8.75H5.5C5.2875 8.75 5.10942 8.82192 4.96575 8.96575C4.82192 9.10958 4.75 9.28775 4.75 9.50025C4.75 9.71292 4.82192 9.891 4.96575 10.0345C5.10942 10.1782 5.2875 10.25 5.5 10.25H8.75ZM9.50175 19C8.18775 19 6.95267 18.7507 5.7965 18.252C4.64033 17.7533 3.63467 17.0766 2.7795 16.2218C1.92433 15.3669 1.24725 14.3617 0.74825 13.206C0.249417 12.0503 0 10.8156 0 9.50175C0 8.18775 0.249333 6.95267 0.748 5.7965C1.24667 4.64033 1.92342 3.63467 2.77825 2.7795C3.63308 1.92433 4.63833 1.24725 5.794 0.74825C6.94967 0.249417 8.18442 0 9.49825 0C10.8123 0 12.0473 0.249333 13.2035 0.748C14.3597 1.24667 15.3653 1.92342 16.2205 2.77825C17.0757 3.63308 17.7528 4.63833 18.2518 5.794C18.7506 6.94967 19 8.18442 19 9.49825C19 10.8123 18.7507 12.0473 18.252 13.2035C17.7533 14.3597 17.0766 15.3653 16.2218 16.2205C15.3669 17.0757 14.3617 17.7528 13.206 18.2518C12.0503 18.7506 10.8156 19 9.50175 19ZM9.5 17.5C11.7333 17.5 13.625 16.725 15.175 15.175C16.725 13.625 17.5 11.7333 17.5 9.5C17.5 7.26667 16.725 5.375 15.175 3.825C13.625 2.275 11.7333 1.5 9.5 1.5C7.26667 1.5 5.375 2.275 3.825 3.825C2.275 5.375 1.5 7.26667 1.5 9.5C1.5 11.7333 2.275 13.625 3.825 15.175C5.375 16.725 7.26667 17.5 9.5 17.5Z"/></svg>';
       }
     });
   }
 
   function checkFaseStatus() {
     if (!rootContainer) return;
-    
+
     const placedCount = slotsData.filter(s => s !== null).length;
     rootContainer.classList.remove('phase-selection', 'phase-locked', 'phase-edit');
 
@@ -283,7 +442,7 @@ export default function rankingCamisetas() {
       carouselWrapper.style.display = 'none';
       thanksContainer.style.display = 'flex';
       if (actionGroup) actionGroup.style.display = 'flex';
-      
+
       if (isEditingMode) {
         rootContainer.classList.add('phase-edit');
       } else {
@@ -293,7 +452,7 @@ export default function rankingCamisetas() {
       carouselWrapper.style.display = 'flex';
       thanksContainer.style.display = 'none';
       if (actionGroup) actionGroup.style.display = 'none';
-      
+
       isEditingMode = false;
       btnEditMode.innerText = "Editar selección";
       rootContainer.classList.add('phase-selection');
@@ -301,6 +460,10 @@ export default function rankingCamisetas() {
   }
 
   function executeAnimatedInteraction(from, toIndex) {
+    if (from === 'main' && slotsData[toIndex] !== null) {
+      return;
+    }
+
     const slots = document.querySelectorAll('.slot');
     const targetSlot = slots[toIndex];
 
@@ -356,14 +519,8 @@ export default function rankingCamisetas() {
       rootContainer.style.pointerEvents = 'auto';
 
       if (from === 'main') {
-        if (!slotsData[toIndex]) {
-          slotsData[toIndex] = sourceData;
-          availablePool.splice(currentSliderIndex, 1);
-        } else {
-          let temp = slotsData[toIndex];
-          slotsData[toIndex] = sourceData;
-          availablePool[currentSliderIndex] = temp;
-        }
+        slotsData[toIndex] = sourceData;
+        availablePool.splice(currentSliderIndex, 1);
       } else if (typeof from === 'number') {
         let temp = slotsData[toIndex];
         slotsData[toIndex] = slotsData[from];
@@ -393,9 +550,9 @@ export default function rankingCamisetas() {
     flyer.style.pointerEvents = 'none';
     flyer.style.boxShadow = 'none';
     flyer.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
-    
+
     flyer.innerHTML = `<img src="${imgSrc}" style="width:100%; height:100%; object-fit:contain; box-sizing:border-box;">`;
-    
+
     rootContainer.appendChild(flyer);
     return flyer;
   }
@@ -425,9 +582,6 @@ export default function rankingCamisetas() {
     checkFaseStatus();
   });
 
-  // =========================================================================
-  // ESTADÍSTICAS OPTIMISTAS
-  // =========================================================================
   function obtenerEstadisticasOptimizadas(payload) {
     let statsLocales = JSON.parse(JSON.stringify(cacheEstadisticasGlobales || []));
 
@@ -438,7 +592,7 @@ export default function rankingCamisetas() {
 
     puestos.forEach((idVoto, index) => {
       if (!idVoto) return;
-      
+
       const puntosASumar = 10 - index;
       const esTop1 = (index === 0);
 
@@ -460,39 +614,36 @@ export default function rankingCamisetas() {
     });
 
     let nuevoTotalTop1 = statsLocales.reduce((sum, item) => sum + (item.vecesTop || 0), 0);
-    
+
     statsLocales.forEach(item => {
-      item.percentTop = nuevoTotalTop1 > 0 
-        ? Math.round((item.vecesTop / nuevoTotalTop1) * 100) 
+      item.percentTop = nuevoTotalTop1 > 0
+        ? Math.round((item.vecesTop / nuevoTotalTop1) * 100)
         : 0;
     });
 
     return statsLocales;
   }
 
-  // =========================================================================
-  // ACCIÓN DEL BOTÓN ENVIAR (CON AUTOCLOSE/LOCK DE EDICIÓN)
-  // =========================================================================
   btnShowResults.addEventListener('click', () => {
-    // Si estaba editando, forzar el guardado y bloqueo definitivo en UI
+    if (votoEnviado) return;
+    votoEnviado = true;
+
     if (isEditingMode) {
       isEditingMode = false;
       btnEditMode.classList.remove('v-btn-g');
       btnEditMode.innerText = "Editar selección";
     }
 
-    // Ocultar contenedores iniciales y botones para evitar manipulación posterior
     thanksContainer.style.display = 'none';
     if (actionGroup) actionGroup.style.display = 'none';
     resultsWrapper.style.display = 'block';
-    
-    // Forzar redibujado de ranuras sin la clase shaking y deshabilitar draggables
+
     updateSlotsDOM();
     if (rootContainer) {
       rootContainer.classList.remove('phase-edit', 'phase-selection');
       rootContainer.classList.add('phase-locked');
     }
-    
+
     renderPyramidResults();
 
     const payload = {
@@ -507,12 +658,18 @@ export default function rankingCamisetas() {
       puesto7: slotsData[6] ? slotsData[6].id : "",
       puesto8: slotsData[7] ? slotsData[7].id : "",
       puesto9: slotsData[8] ? slotsData[8].id : "",
-      puesto10: slotsData[9] ? slotsData[9].id : ""
+      puesto10: slotsData[9] ? slotsData[9].id : "",
+      descarga: "NO",
+      userAgent: navigator.userAgent,
+      origen: window.location.hostname
     };
+
+    ultimoVotoId = payload.id;
+    descargaRegistrada = false;
 
     const statsOptimizadas = obtenerEstadisticasOptimizadas(payload);
     renderizarEstadisticasUnificadas(statsOptimizadas, payload.puesto1);
-    
+
     resultsWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     fetch(URL_GOOGLE_SCRIPT, {
@@ -524,10 +681,9 @@ export default function rankingCamisetas() {
     });
   });
 
-  // Helper para reordenar un array en cascada vertical (Izquierda -> Abajo, luego Derecha -> Abajo)
   function ordenarParaCascadaDosColumnas(array) {
     if (window.innerWidth < 768) {
-      return array; // En móvil se queda correlativo del 1 al 10 en su columna única
+      return array;
     }
     const resultado = [];
     const mitad = Math.ceil(array.length / 2);
@@ -548,7 +704,7 @@ export default function rankingCamisetas() {
     gridReaders.innerHTML = '';
 
     let dataToUse = serverData;
-    
+
     if (!Array.isArray(dataToUse) || dataToUse.length === 0) {
       let mockTotalTop1 = 120;
       dataToUse = camisetasData.map((c, i) => {
@@ -562,29 +718,27 @@ export default function rankingCamisetas() {
       });
     }
 
-    // --- BLOQUE 1: LAS FAVORITAS ---
     let dataFavoritas = dataToUse.map(stat => {
       const infoCamiseta = camisetasData.find(c => c.id === stat.id);
       return { ...infoCamiseta, ...stat };
     }).filter(item => item.id);
 
     dataFavoritas.sort((a, b) => b.vecesTop - a.vecesTop);
-    
-    // Inyectamos la propiedad de su posición real en el ranking antes de romper el orden para la cascada
-    dataFavoritas = dataFavoritas.map((item, index) => ({ ...item, rankingPos: index + 1 }));
-    const dataFavoritasCascada = ordenarParaCascadaDosColumnas(dataFavoritas);
 
-    dataFavoritasCascada.forEach(item => {
+    dataFavoritas = dataFavoritas.map((item, index) => ({ ...item, rankingPos: index + 1 }));
+    const dataFavoritasCascada = dataFavoritas;
+
+    dataFavoritasCascada.forEach((item, index) => {
       const row = document.createElement('div');
       row.classList.add('stat-row');
       row.innerHTML = `
-        <span class="stat-position-badge">${item.rankingPos}</span>
-        <img class="stat-shirt-preview" src="${item.img}" alt="${item.anio}">
-        <span class="stat-percent">${item.percentTop}%</span>
-        <div class="stat-bar-bg">
-          <div class="stat-bar-fill" style="width: 0%; background-color: ${item.id === top1Id ? '#1868FF' : '#111827'}"></div>
-        </div>
-      `;
+    <span class="stat-position-badge">${index + 1}</span>
+    <img class="stat-shirt-preview" src="${item.img}" alt="${item.anio}">
+    <span class="stat-percent">${item.percentTop}%</span>
+    <div class="stat-bar-bg">
+      <div class="stat-bar-fill" style="width: 0%;"></div>
+    </div>
+  `;
       gridFavourite.appendChild(row);
 
       setTimeout(() => {
@@ -593,33 +747,31 @@ export default function rankingCamisetas() {
       }, 100);
     });
 
-    // --- BLOQUE 2: LA DE LOS LECTORES ---
     let dataLectores = dataToUse.map(stat => {
       const infoCamiseta = camisetasData.find(c => c.id === stat.id);
       return { ...infoCamiseta, ...stat };
     }).filter(item => item.id);
 
     dataLectores.sort((a, b) => b.puntos - a.puntos);
-    
-    // Inyectamos la propiedad de su posición real en el ranking
+
     dataLectores = dataLectores.map((item, index) => ({ ...item, rankingPos: index + 1 }));
     const maxPuntosActuales = Math.max(...dataLectores.map(d => d.puntos), 1);
-    const dataLectoresCascada = ordenarParaCascadaDosColumnas(dataLectores);
+    const dataLectoresCascada = dataLectores;
 
-    dataLectoresCascada.forEach(item => {
+    dataLectoresCascada.forEach((item, index) => {
       const row = document.createElement('div');
       row.classList.add('stat-row');
 
       const anchoProporcionalBarra = Math.round((item.puntos / maxPuntosActuales) * 100);
 
       row.innerHTML = `
-        <span class="stat-position-badge">${item.rankingPos}</span>
-        <img class="stat-shirt-preview" src="${item.img}" alt="${item.anio}">
-        <span class="stat-percent">${item.puntos} pts</span>
-        <div class="stat-bar-bg">
-          <div class="stat-bar-fill" style="width: 0%; background-color: ${item.id === top1Id ? '#1868FF' : '#111827'}"></div>
-        </div>
-      `;
+    <span class="stat-position-badge">${index + 1}</span>
+    <img class="stat-shirt-preview" src="${item.img}" alt="${item.anio}">
+    <span class="stat-percent">${item.puntos} pts</span>
+    <div class="stat-bar-bg">
+      <div class="stat-bar-fill" style="width: 0%;"></div>
+    </div>
+  `;
       gridReaders.appendChild(row);
 
       setTimeout(() => {
@@ -645,12 +797,12 @@ export default function rankingCamisetas() {
       indices.forEach((index) => {
         const pSlot = document.createElement('div');
         pSlot.classList.add('pyramid-slot');
-        
+
         const camiseta = slotsData[index];
 
         if (camiseta) {
           pSlot.style.backgroundColor = 'transparent';
-          
+
           const imgEl = document.createElement('img');
           imgEl.src = camiseta.img;
           imgEl.classList.add('pyramid-shirt-img');
@@ -675,21 +827,99 @@ export default function rankingCamisetas() {
     fetch(URL_GOOGLE_SCRIPT)
       .then(response => response.json())
       .then(realData => {
-        console.log("¡Estadísticas globales precargadas con éxito al iniciar!", realData);
         cacheEstadisticasGlobales = realData;
       })
       .catch(error => {
-        console.error("Error al precargar estadísticas iniciales desde Excel:", error);
+        console.error("Error al precargar estadísticas iniciales:", error);
       });
   }
 
   btnDownload.addEventListener('click', () => {
+    const textoOriginal = btnDownload.innerText;
+    btnDownload.innerText = 'Descargando...';
+    btnDownload.disabled = true;
+
     const captureTarget = document.getElementById('captureArea');
-    html2canvas(captureTarget, { scale: 2, useCORS: true }).then(canvas => {
+    if (!captureTarget) return;
+
+    html2canvas(captureTarget, {
+      scale: 2,
+      useCORS: true,
+      onclone: (clonedDocument) => {
+        const clonedTarget = clonedDocument.getElementById('captureArea');
+        const clonedTitle = clonedTarget?.querySelector('.capture-title');
+        const clonedPyramid = clonedTarget?.querySelector('.pyramid-container');
+        const clonedSlots = clonedTarget?.querySelectorAll('.pyramid-slot');
+        const clonedBadges = clonedTarget?.querySelectorAll('.pyramid-badge');
+        const clonedLogo = clonedDocument.getElementById('captureLogo');
+
+        if (clonedTarget) {
+          clonedTarget.style.width = '610px';
+          clonedTarget.style.height = '865px';
+          clonedTarget.style.padding = '55px 0 0';
+        }
+
+        if (clonedTitle) {
+          clonedTitle.style.display = 'block';
+          clonedTitle.style.paddingTop = '11px';
+          clonedTitle.style.width = '457px';
+        }
+
+        if (clonedPyramid) {
+          clonedPyramid.style.width = '610px';
+          clonedPyramid.style.height = '620px';
+        }
+
+        if (clonedSlots) {
+          clonedSlots.forEach(slot => {
+            slot.style.width = '140px';
+          });
+        }
+
+        if (clonedBadges) {
+          clonedBadges.forEach(badge => {
+            badge.style.display = 'block';
+            badge.style.paddingTop = '1px';
+            badge.style.lineHeight = '16px';
+            badge.style.fontSize = '16px';
+            badge.style.width = '25px';
+            badge.style.height = '25px';
+          });
+        }
+
+        if (clonedLogo) {
+          clonedLogo.style.display = 'block';
+        }
+      }
+    }).then(canvas => {
       const link = document.createElement('a');
       link.download = 'mis-favoritas-españa.png';
       link.href = canvas.toDataURL('image/png');
       link.click();
+      if (ultimoVotoId && !descargaRegistrada) {
+        fetch(URL_GOOGLE_SCRIPT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify({
+            action: 'download',
+            id: ultimoVotoId
+          })
+        })
+        .then(() => {
+          descargaRegistrada = true;
+        })
+        .catch(err => {
+          console.warn('Error registrando descarga', err);
+        });
+      }
+      btnDownload.innerText = textoOriginal;
+      btnDownload.disabled = false;
+    }).catch(err => {
+      console.error('Error al generar captura: ', err);
+      btnDownload.innerText = textoOriginal;
+      btnDownload.disabled = false;
     });
   });
 
@@ -708,7 +938,7 @@ export default function rankingCamisetas() {
     currentSliderIndex = (currentSliderIndex - 1 + availablePool.length) % availablePool.length;
     updateCarouselDOM();
   });
-  
+
   navRight.addEventListener('click', () => {
     if (availablePool.length === 0) return;
     currentSliderIndex = (currentSliderIndex + 1) % availablePool.length;
