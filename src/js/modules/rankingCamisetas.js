@@ -2,8 +2,8 @@ import html2canvas from 'html2canvas';
 
 export default function rankingCamisetas() {
   const camisetasData = [
-    { id: 'esp_2026_1', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-a.webp', anio: '2026', torneo: 'USA-México-Canadá' },
-    { id: 'esp_2026_2', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-b.webp', anio: '2026', torneo: 'USA-México-Canadá' },
+    { id: 'esp_2026_1', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-a.webp', anio: '2026', torneo: 'EEUU-México-Canadá' },
+    { id: 'esp_2026_2', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-b.webp', anio: '2026', torneo: 'EEUU-México-Canadá' },
     { id: 'esp_2022', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2022.webp', anio: '2022', torneo: 'Qatar' },
     { id: 'esp_2014', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2014.webp', anio: '2014', torneo: 'Brasil' },
     { id: 'esp_2010', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2010.webp', anio: '2010', torneo: 'Sudáfrica' },
@@ -20,11 +20,14 @@ export default function rankingCamisetas() {
   let currentSliderIndex = 0;
   let slotsData = Array(10).fill(null);
   let draggedFrom = null;
+  let draggedImg = null;
   let isEditingMode = false;
   let cacheEstadisticasGlobales = null;
   let ultimoVotoId = null;
   let descargaRegistrada = false;
+  let estadisticasCargadas = false;
   let votoEnviado = false;
+  let dragGhost = null;
 
   const rootContainer = document.querySelector('.v-n-rcl');
   const carouselWrapper = document.getElementById('carouselWrapper');
@@ -34,6 +37,8 @@ export default function rankingCamisetas() {
   const dropZone = document.getElementById('dropZone');
   const btnEditMode = document.getElementById('btnEditMode');
   const btnShowResults = document.getElementById('btnShowResults');
+  btnShowResults.disabled = true;
+  btnShowResults.innerText = 'Cargando datos...';
   const resultsWrapper = document.getElementById('resultsWrapper');
   const pyramidContainer = document.getElementById('pyramidContainer');
   const btnDownload = document.getElementById('btnDownload');
@@ -178,15 +183,42 @@ export default function rankingCamisetas() {
     });
   }
 
-  // 1. Pon estas 3 variables justo ARRIBA de la función initSlots() en tu archivo
   let touchStartX = 0;
   let touchStartY = 0;
   let isTrackingTouch = false;
 
+  function createGhost(imgSrc, x, y) {
+    removeGhost();
+
+    dragGhost = document.createElement('div');
+    dragGhost.className = 'drag-ghost';
+
+    dragGhost.innerHTML = `
+      <img src="${imgSrc}">
+    `;
+
+    document.body.appendChild(dragGhost);
+
+    moveGhost(x, y);
+  }
+
+  function moveGhost(x, y) {
+    if (!dragGhost) return;
+
+    dragGhost.style.left = `${x}px`;
+    dragGhost.style.top = `${y}px`;
+  }
+
+  function removeGhost() {
+    if (dragGhost) {
+      dragGhost.remove();
+      dragGhost = null;
+    }
+  }
+
   function initSlots() {
     dropZone.innerHTML = '';
-    
-    // Generar los 10 Slots
+
     for (let i = 0; i < 10; i++) {
       const slot = document.createElement('div');
       slot.classList.add('slot');
@@ -196,29 +228,27 @@ export default function rankingCamisetas() {
       icon.classList.add('slot-icon');
       slot.appendChild(icon);
 
-      // Eventos de escritorio clásicos (se mantienen por compatibilidad)
-      slot.addEventListener('dragover', (e) => e.preventDefault());
-      slot.addEventListener('drop', (e) => handleDrop(e, i));
       slot.addEventListener('click', () => handleSlotClick(i));
 
-      // TRUCO ESTILO NYT: Al pulsar inmediatamente sobre un slot ocupado
       slot.addEventListener('pointerdown', (e) => {
-        if (!slotsData[i]) return; // Solo si tiene una camiseta colocada
+        if (!slotsData[i]) return;
 
         e.preventDefault();
-        
+
         isTrackingTouch = true;
         touchStartX = e.clientX;
         touchStartY = e.clientY;
-        draggedFrom = i; 
-        
+        draggedFrom = i;
+        draggedImg = slotsData[i].img;
+
+        createGhost(draggedImg, e.clientX, e.clientY);
+
         if (rootContainer) rootContainer.classList.add('is-dragging');
       });
 
       dropZone.appendChild(slot);
     }
 
-    // Generar el Carrusel
     carouselTrack.innerHTML = '';
     for (let i = 0; i < 5; i++) {
       const item = document.createElement('div');
@@ -236,39 +266,20 @@ export default function rankingCamisetas() {
       carouselTrack.appendChild(item);
     }
 
-    // Eventos del Carrusel
     carouselTrack.querySelectorAll('.carousel-item').forEach(item => {
-      // Escritorio nativo HTML5
-      item.addEventListener('dragstart', (e) => {
-        if (item.dataset.draggableEnabled !== "true") {
-          e.preventDefault();
-          return;
-        }
-        draggedFrom = 'main';
-        if (rootContainer) {
-          rootContainer.classList.add('is-dragging');
-          rootContainer.classList.add('is-dragging-from-main');
-        }
-      });
-
-      item.addEventListener('dragend', () => {
-        if (rootContainer) {
-          rootContainer.classList.remove('is-dragging');
-          rootContainer.classList.remove('is-dragging-from-main');
-        }
-      });
-
-      // TRUCO ESTILO NYT: Iniciar arrastre inmediato al tocar la camiseta del carrusel
       item.addEventListener('pointerdown', (e) => {
         if (item.dataset.draggableEnabled !== "true") return;
 
         e.preventDefault();
-        
+
         isTrackingTouch = true;
         touchStartX = e.clientX;
         touchStartY = e.clientY;
         draggedFrom = 'main';
-        
+        draggedImg = availablePool[currentSliderIndex].img;
+
+        createGhost(availablePool[currentSliderIndex].img, e.clientX, e.clientY);
+
         if (rootContainer) {
           rootContainer.classList.add('is-dragging');
           rootContainer.classList.add('is-dragging-from-main');
@@ -276,42 +287,75 @@ export default function rankingCamisetas() {
       });
     });
 
-    // LISTENERS GLOBALES EN LA VENTANA (Solo se registran una vez)
     if (!window.hasPointerDragListeners) {
       window.addEventListener('pointermove', (e) => {
         if (!isTrackingTouch) return;
-        
-        // Bloqueo absoluto de scroll de iOS mientras se arrastra el dedo
+
+        moveGhost(e.clientX, e.clientY);
+
         if (e.cancelable) e.preventDefault();
       }, { passive: false });
 
       window.addEventListener('pointerup', (e) => {
         if (!isTrackingTouch) return;
         isTrackingTouch = false;
-        
+
+        removeGhost();
+
+        const deltaX = e.clientX - touchStartX;
+        const deltaY = e.clientY - touchStartY;
+
+        const SWIPE_THRESHOLD = 40;
+
+        if (
+          draggedFrom === 'main' &&
+          Math.abs(deltaX) > SWIPE_THRESHOLD &&
+          Math.abs(deltaX) > Math.abs(deltaY)
+        ) {
+
+          if (deltaX > 0) {
+            currentSliderIndex =
+              (currentSliderIndex - 1 + availablePool.length) %
+              availablePool.length;
+          }
+
+          else {
+            currentSliderIndex =
+              (currentSliderIndex + 1) %
+              availablePool.length;
+          }
+
+          updateCarouselDOM();
+
+          if (rootContainer) {
+            rootContainer.classList.remove('is-dragging');
+            rootContainer.classList.remove('is-dragging-from-main');
+          }
+
+          return;
+        }
+
         if (rootContainer) {
           rootContainer.classList.remove('is-dragging');
           rootContainer.classList.remove('is-dragging-from-main');
         }
 
-        // Calcula matemáticamente qué elemento hay debajo del dedo al levantarlo
         const targetElement = document.elementFromPoint(e.clientX, e.clientY);
         if (!targetElement) return;
 
         const closestSlot = targetElement.closest('.slot');
         if (closestSlot) {
           const toIndex = parseInt(closestSlot.getAttribute('data-index')) - 1;
-          
+
           if (draggedFrom === 'main') {
-            // Viene del carrusel: ejecuta la animación nativa que ya tienes
             executeAnimatedInteraction('main', toIndex);
           } else if (draggedFrom !== toIndex) {
-            // Viene de otro slot: ejecuta el intercambio
             executeAnimatedInteraction(draggedFrom, toIndex);
           }
         }
+
       });
-      
+
       window.hasPointerDragListeners = true;
     }
 
@@ -416,14 +460,6 @@ export default function rankingCamisetas() {
         } else {
           item.setAttribute('draggable', 'true');
         }
-
-        item.addEventListener('dragstart', () => {
-          draggedFrom = i;
-          if (rootContainer) rootContainer.classList.add('is-dragging');
-        });
-        item.addEventListener('dragend', () => {
-          if (rootContainer) rootContainer.classList.remove('is-dragging');
-        });
 
         slot.appendChild(item);
       } else {
@@ -557,12 +593,6 @@ export default function rankingCamisetas() {
     return flyer;
   }
 
-  function handleDrop(e, targetIndex) {
-    e.preventDefault();
-    if (rootContainer) rootContainer.classList.remove('is-dragging');
-    executeAnimatedInteraction(draggedFrom, targetIndex);
-  }
-
   function handleSlotClick(targetIndex) {
     if (availablePool.length > 0) {
       executeAnimatedInteraction('main', targetIndex);
@@ -625,6 +655,8 @@ export default function rankingCamisetas() {
   }
 
   btnShowResults.addEventListener('click', () => {
+    if (!estadisticasCargadas) return;
+    
     if (votoEnviado) return;
     votoEnviado = true;
 
@@ -827,10 +859,24 @@ export default function rankingCamisetas() {
     fetch(URL_GOOGLE_SCRIPT)
       .then(response => response.json())
       .then(realData => {
+        console.log('Estadísticas precargadas:', realData);
+
         cacheEstadisticasGlobales = realData;
+        estadisticasCargadas = true;
+
+        btnShowResults.disabled = false;
+        btnShowResults.innerText = 'Enviar';
       })
       .catch(error => {
-        console.error("Error al precargar estadísticas iniciales:", error);
+        console.error(
+          "Error al precargar estadísticas iniciales:",
+          error
+        );
+
+        estadisticasCargadas = true;
+
+        btnShowResults.disabled = false;
+        btnShowResults.innerText = 'Enviar';
       });
   }
 
@@ -907,12 +953,12 @@ export default function rankingCamisetas() {
             id: ultimoVotoId
           })
         })
-        .then(() => {
-          descargaRegistrada = true;
-        })
-        .catch(err => {
-          console.warn('Error registrando descarga', err);
-        });
+          .then(() => {
+            descargaRegistrada = true;
+          })
+          .catch(err => {
+            console.warn('Error registrando descarga', err);
+          });
       }
       btnDownload.innerText = textoOriginal;
       btnDownload.disabled = false;
@@ -928,6 +974,9 @@ export default function rankingCamisetas() {
     slotsData = Array(10).fill(null);
     isEditingMode = false;
     currentSliderIndex = 0;
+    votoEnviado = false;
+    ultimoVotoId = null;
+    descargaRegistrada = false;
     resultsWrapper.style.display = 'none';
     initSlots();
     rootContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });

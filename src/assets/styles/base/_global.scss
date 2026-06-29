@@ -11,16 +11,14 @@ body {
 body:has(.v-h-a) {
   .v-w {
     .v-a--d-s-1 {
-      min-height: calc(100dvh);
-      
-      @media (max-width: $screen-xs) {
-        margin-top: -118px;
-        padding-top: 98px;
+      margin-top: -118px;
+
+      @media (min-width: $screen-xs) {
+        margin-top: -147px;
       }
 
-      @media (min-width: $screen-xs) and (max-width: $screen-sm) {
-        margin-top: -146px;
-        padding-top: 106px;
+      @media (min-width: $screen-sm) {
+        margin-top: -98px;
       }
     }
   }
@@ -43,21 +41,23 @@ body:has(.v-h-a) {
   z-index: 12;
 }
 
+.v-d--abc {
+  .v-a-s-t {
+    text-align: center;
+    font: 1.375rem/1.75rem ABC Text Light,serif;
+    color: $cb1;
+    margin: 0 0 124px;
+  }
+}
+
 .v-w {
   .v-a--d-s-1 {
     height: auto;
     min-height: 100dvh;
     margin-top: -70px;
-    padding-top: 50px;
 
     @media (min-width: $screen-xs) {
       margin-top: -98px;
-      padding-top: 58px;
-    }
-
-    @media (min-width: $screen-sm) {
-      margin-top: -98px;
-      padding-top: 58px;
     }
     
     .v-a-inf-c {
@@ -66,9 +66,12 @@ body:has(.v-h-a) {
       padding: 0;
       
       .v-a-p-t,
-      .v-a-t,
-      .v-a-s-t {
+      .v-a-t {
         color: $cb1;
+      }
+      
+      .v-a-s-t {
+        display: none;
       }
 
       .v-i {
@@ -114,25 +117,4 @@ body:has(.v-h-a) {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-body.is-not-login {
-  .v-w-c--2 {
-    position: relative;
-    margin-top: -40px;
-    padding-top: 54px;
-
-    @media (min-width: $screen-xs) {
-      margin-top: -70px;
-      padding-top: 94px;
-    }
-  }
-
-  .v-f {
-    background: $cb2;
-  }
-
-  [data-voc26-rtim] ev-engagement:before {
-    top: -123px;
-  }
 }
