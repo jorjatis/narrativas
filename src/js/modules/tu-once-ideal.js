@@ -114,14 +114,15 @@ async function getCSV(url) {
 }
 
 async function loadData() {
-  const playersRows =
-    await getCSV(SHEETS.players);
-
-  const formationsRows =
-    await getCSV(SHEETS.formations);
-
-  const descriptionsRows =
-    await getCSV(SHEETS.descriptions);
+  const [
+    playersRows,
+    formationsRows,
+    descriptionsRows
+  ] = await Promise.all([
+    getCSV(SHEETS.players),
+    getCSV(SHEETS.formations),
+    getCSV(SHEETS.descriptions)
+  ]);
 
   data = {
     players: {},
