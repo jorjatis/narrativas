@@ -2,15 +2,15 @@ import html2canvas from 'html2canvas';
 
 export default function rankingCamisetas() {
   const camisetasData = [
-    { id: 'esp_2026_1', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-a.webp', anio: '2026', torneo: 'EEUU-México-Canadá' },
-    { id: 'esp_2026_2', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-b.webp', anio: '2026', torneo: 'EEUU-México-Canadá' },
+    { id: 'esp_2026_1', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-a.webp', anio: '2026', torneo: 'EE.UU., México y Canadá' },
+    { id: 'esp_2026_2', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-b.webp', anio: '2026', torneo: 'EE.UU., México y Canadá' },
     { id: 'esp_2022', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2022.webp', anio: '2022', torneo: 'Qatar' },
     { id: 'esp_2014', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2014.webp', anio: '2014', torneo: 'Brasil' },
     { id: 'esp_2010', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2010.webp', anio: '2010', torneo: 'Sudáfrica' },
     { id: 'esp_2006', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2006.webp', anio: '2006', torneo: 'Alemania' },
-    { id: 'esp_2002', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2002.webp', anio: '2002', torneo: 'Corea-Japón' },
+    { id: 'esp_2002', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2002.webp', anio: '2002', torneo: 'Corea del Sur y Japón' },
     { id: 'esp_1998', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1998.webp', anio: '1998', torneo: 'Francia' },
-    { id: 'esp_1994', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1994.webp', anio: '1994', torneo: 'EEUU' },
+    { id: 'esp_1994', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1994.webp', anio: '1994', torneo: 'EE.UU.' },
     { id: 'esp_1982', img: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1982.webp', anio: '1982', torneo: 'España' }
   ];
 
@@ -45,68 +45,7 @@ export default function rankingCamisetas() {
   const btnReplay = document.getElementById('btnReplay');
   const navLeft = document.getElementById('navLeft');
   const navRight = document.getElementById('navRight');
-
-  function injectAutoFillButton() {
-    if (document.getElementById('btnAutoFillDev')) return;
-
-    const btn = document.createElement('button');
-    btn.id = 'btnAutoFillDev';
-    btn.innerText = '🎲 Auto 10';
-
-    Object.assign(btn.style, {
-      position: 'fixed',
-      bottom: '20px',
-      right: '20px',
-      zIndex: '999999',
-      backgroundColor: '#ff5a5f',
-      color: '#ffffff',
-      border: 'none',
-      borderRadius: '50px',
-      padding: '12px 24px',
-      fontSize: '14px',
-      fontWeight: 'bold',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-      cursor: 'pointer',
-      transition: 'transform 0.2s, background-color 0.2s'
-    });
-
-    btn.addEventListener('mouseenter', () => btn.style.backgroundColor = '#e0484c');
-    btn.addEventListener('mouseleave', () => btn.style.backgroundColor = '#ff5a5f');
-
-    btn.addEventListener('click', () => {
-      let vacios = [];
-      slotsData.forEach((slot, index) => {
-        if (slot === null) vacios.push(index);
-      });
-
-      if (vacios.length === 0 || availablePool.length === 0) {
-        alert('¡La selección ya está completa!');
-        return;
-      }
-
-      vacios.forEach((targetIndex) => {
-        if (availablePool.length > 0) {
-          const randomPoolIndex = Math.floor(Math.random() * availablePool.length);
-
-          const camisetaElegida = availablePool.splice(randomPoolIndex, 1)[0];
-
-          slotsData[targetIndex] = camisetaElegida;
-        }
-      });
-
-      updateSlotsDOM();
-      updateCarouselDOM();
-      checkFaseStatus();
-
-      if (slotsData.filter(s => s !== null).length === 10) {
-        thanksContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-
-    rootContainer.appendChild(btn);
-  }
-
-  injectAutoFillButton();
+  let isAnimating = false;
 
   const SITE_LOGOS = {
     'elcorreo.com': 'logo-elcorreo.png',
@@ -135,6 +74,41 @@ export default function rankingCamisetas() {
     return SITE_LOGOS[hostname] || 'logo-abc.png';
   }
 
+  function getCurrentSiteName() {
+    const hostname = window.location.hostname
+      .replace(/^www\./, '')
+      .toLowerCase();
+
+    let siteName = hostname
+      .replace('.com', '')
+      .replace('.es', '');
+
+    const customNames = {
+      elcorreo: 'El Correo',
+      eldiariocomun: 'El Diario Común',
+      elcomercio: 'El Comercio',
+      diariosur: 'Diario SUR',
+      diariovasco: 'Diario Vasco',
+      eldiariomontanes: 'El Diario Montañés',
+      elnortedecastilla: 'El Norte de Castilla',
+      lasprovincias: 'Las Provincias',
+      laverdad: 'La Verdad',
+      lavozdigital: 'La Voz de Cádiz',
+      larioja: 'La Rioja',
+      leonoticias: 'Leonoticias',
+      todoalicante: 'TodoAlicante',
+      salamancahoy: 'Salamanca Hoy',
+      burgosconecta: 'Burgos Conecta',
+      canarias7: 'Canarias7',
+      huelva24: 'Huelva24',
+      abc: 'ABC',
+      hoy: 'HOY',
+      ideal: 'IDEAL'
+    };
+
+    return customNames[siteName] || 'ABC';
+  }
+
   function initGlobalLogos() {
     const baseUrlLogos = 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/logomedios/';
     const logoFileName = getCurrentSiteLogo();
@@ -143,6 +117,11 @@ export default function rankingCamisetas() {
     const captureLogoImg = document.querySelector('#captureLogo img');
     if (captureLogoImg) {
       captureLogoImg.src = finalLogoUrl;
+    }
+
+    const siteSpan = document.querySelector('#thanksContainer span');
+    if (siteSpan) {
+      siteSpan.textContent = getCurrentSiteName();
     }
   }
 
@@ -472,7 +451,7 @@ export default function rankingCamisetas() {
     if (!rootContainer) return;
 
     const placedCount = slotsData.filter(s => s !== null).length;
-    rootContainer.classList.remove('phase-selection', 'phase-locked', 'phase-edit');
+    rootContainer.classList.remove('phase-selection', 'phase-locked', 'phase-edit', 'phase-ended');
 
     if (placedCount === 10) {
       carouselWrapper.style.display = 'none';
@@ -496,80 +475,90 @@ export default function rankingCamisetas() {
   }
 
   function executeAnimatedInteraction(from, toIndex) {
+
+    if (isAnimating) return;
+    isAnimating = true;
+
+    if (typeof from === 'number') {
+
+      if (from === toIndex) {
+        isAnimating = false;
+        return;
+      }
+
+      const temp = slotsData[toIndex];
+      slotsData[toIndex] = slotsData[from];
+      slotsData[from] = temp;
+
+      updateSlotsDOM();
+      checkFaseStatus();
+
+      isAnimating = false;
+      return;
+    }
+
     if (from === 'main' && slotsData[toIndex] !== null) {
+      isAnimating = false;
       return;
     }
 
     const slots = document.querySelectorAll('.slot');
     const targetSlot = slots[toIndex];
 
-    let sourceEl = null;
-    let sourceData = null;
-    let targetData = slotsData[toIndex];
+    const sourceEl = document.querySelector('.carousel-item.pos-center');
 
-    if (from === 'main') {
-      sourceEl = document.querySelector('.carousel-item.pos-center');
-      sourceData = availablePool[currentSliderIndex];
-    } else if (typeof from === 'number') {
-      if (availablePool.length === 0 && !isEditingMode) return;
-      sourceEl = slots[from].querySelector('.placed-item');
-      sourceData = slotsData[from];
+    if (!sourceEl || availablePool.length === 0) {
+      isAnimating = false;
+      return;
     }
 
-    if (!sourceEl) return;
+    const sourceData = availablePool[currentSliderIndex];
 
     rootContainer.style.pointerEvents = 'none';
 
     const sourceRect = sourceEl.getBoundingClientRect();
     const targetRect = targetSlot.getBoundingClientRect();
 
-    const flyerSrc = createVisualFlyer(sourceRect, sourceData.img);
-    let flyerTgt = null;
-    if (targetData) {
-      flyerTgt = createVisualFlyer(targetRect, targetData.img);
-    }
-
-    sourceEl.style.visibility = 'hidden';
-    if (targetSlot.querySelector('.placed-item')) {
-      targetSlot.querySelector('.placed-item').style.visibility = 'hidden';
-    }
+    const flyerSrc = createVisualFlyer(
+      sourceRect,
+      sourceData.img
+    );
 
     void flyerSrc.offsetHeight;
-    if (flyerTgt) void flyerTgt.offsetHeight;
 
     flyerSrc.style.top = targetRect.top + 'px';
     flyerSrc.style.left = targetRect.left + 'px';
     flyerSrc.style.width = targetRect.width + 'px';
     flyerSrc.style.height = targetRect.height + 'px';
 
-    if (flyerTgt) {
-      flyerTgt.style.top = sourceRect.top + 'px';
-      flyerTgt.style.left = sourceRect.left + 'px';
-      flyerTgt.style.width = sourceRect.width + 'px';
-      flyerTgt.style.height = sourceRect.height + 'px';
-    }
-
     setTimeout(() => {
-      flyerSrc.remove();
-      if (flyerTgt) flyerTgt.remove();
-      rootContainer.style.pointerEvents = 'auto';
 
-      if (from === 'main') {
-        slotsData[toIndex] = sourceData;
-        availablePool.splice(currentSliderIndex, 1);
-      } else if (typeof from === 'number') {
-        let temp = slotsData[toIndex];
-        slotsData[toIndex] = slotsData[from];
-        slotsData[from] = temp;
+      flyerSrc.remove();
+
+      slotsData[toIndex] = sourceData;
+
+      availablePool.splice(currentSliderIndex, 1);
+
+      if (currentSliderIndex >= availablePool.length) {
+        currentSliderIndex =
+          Math.max(availablePool.length - 1, 0);
       }
+
+      rootContainer.style.pointerEvents = 'auto';
 
       updateSlotsDOM();
       updateCarouselDOM();
       checkFaseStatus();
 
-      if (slotsData.filter(s => s !== null).length === 10 && from === 'main') {
-        thanksContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      isAnimating = false;
+
+      if (slotsData.filter(s => s !== null).length === 10) {
+        thanksContainer.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
       }
+
     }, 400);
   }
 
@@ -594,9 +583,13 @@ export default function rankingCamisetas() {
   }
 
   function handleSlotClick(targetIndex) {
-    if (availablePool.length > 0) {
-      executeAnimatedInteraction('main', targetIndex);
-    }
+    if (isAnimating) return;
+
+    if (slotsData[targetIndex] !== null) return;
+
+    if (availablePool.length === 0) return;
+
+    executeAnimatedInteraction('main', targetIndex);
   }
 
   btnEditMode.addEventListener('click', () => {
@@ -656,7 +649,7 @@ export default function rankingCamisetas() {
 
   btnShowResults.addEventListener('click', () => {
     if (!estadisticasCargadas) return;
-    
+
     if (votoEnviado) return;
     votoEnviado = true;
 
@@ -672,8 +665,8 @@ export default function rankingCamisetas() {
 
     updateSlotsDOM();
     if (rootContainer) {
-      rootContainer.classList.remove('phase-edit', 'phase-selection');
-      rootContainer.classList.add('phase-locked');
+      rootContainer.classList.remove('phase-edit', 'phase-selection', 'phase-locked', 'phase-ended');
+      rootContainer.classList.add('phase-ended');
     }
 
     renderPyramidResults();
@@ -784,32 +777,33 @@ export default function rankingCamisetas() {
       return { ...infoCamiseta, ...stat };
     }).filter(item => item.id);
 
-    dataLectores.sort((a, b) => b.puntos - a.puntos);
+    dataLectores.sort((a, b) => b.media - a.media);
 
     dataLectores = dataLectores.map((item, index) => ({ ...item, rankingPos: index + 1 }));
-    const maxPuntosActuales = Math.max(...dataLectores.map(d => d.puntos), 1);
     const dataLectoresCascada = dataLectores;
 
     dataLectoresCascada.forEach((item, index) => {
       const row = document.createElement('div');
       row.classList.add('stat-row');
 
-      const anchoProporcionalBarra = Math.round((item.puntos / maxPuntosActuales) * 100);
-
       row.innerHTML = `
-    <span class="stat-position-badge">${index + 1}</span>
-    <img class="stat-shirt-preview" src="${item.img}" alt="${item.anio}">
-    <span class="stat-percent">${item.puntos} pts</span>
-    <div class="stat-bar-bg">
-      <div class="stat-bar-fill" style="width: 0%;"></div>
-    </div>
-  `;
-      gridReaders.appendChild(row);
+  <span class="stat-position-badge">${index + 1}</span>
 
-      setTimeout(() => {
-        const bar = row.querySelector('.stat-bar-fill');
-        if (bar) bar.style.width = `${anchoProporcionalBarra}%`;
-      }, 100);
+  <img
+    class="stat-shirt-preview"
+    src="${item.img}"
+    alt="${item.anio}"
+  >
+
+  <span class="stat-torneo">
+    ${item.torneo.toUpperCase()} '${item.anio.slice(-2)}
+  </span>
+
+  <span class="stat-percent">
+    ${item.media.toFixed(1).replace('.', ',')}
+  </span>
+`;
+      gridReaders.appendChild(row);
     });
   }
 
