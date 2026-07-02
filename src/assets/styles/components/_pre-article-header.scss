@@ -8,11 +8,11 @@ body:has(.v-h-a) {
   .v-w {
     .v-a--d-s-1 {
       .v-a-inf-c {
-        @media (max-width: 380px) {
+        @media (max-width: 390px) {
           margin-top: 0;
         }
 
-        @media (min-width: 380px) and (max-width: $screen-xs) {
+        @media (min-width: 390px) and (max-width: $screen-xs) {
           margin-top: -50px;
         }
 
@@ -28,11 +28,11 @@ body:has(.v-h.is-fixed) {
   .v-w {
     .v-a--d-s-1 {
       .v-a-inf-c {
-        @media (max-width: 380px) {
+        @media (max-width: 390px) {
           margin-top: -50px;
         }
 
-        @media (min-width: 380px) and (max-width: $screen-xs) {
+        @media (min-width: 390px) and (max-width: $screen-xs) {
           margin-top: -98px;
         }
 
@@ -479,13 +479,15 @@ body.is-loaded {
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 390px) {
   .v-w {
     .v-a--d-s-1 {
+      gap: 24px; 
+
       .v-a-p-t {
         margin-bottom: 8px;
-        font-size: 42px;
-        line-height: 38px;
+        font-size: 46px;
+        line-height: 42px;
       }
 
       .v-a-t {
@@ -499,7 +501,7 @@ body.is-loaded {
 @media (max-width: 360px) {
   .v-w {
     .v-a--d-s-1 {
-      gap: 8px; 
+      gap: 16px; 
 
       .v-a-p-t {
         margin-bottom: 8px;

@@ -115,3 +115,24 @@ body:has(.v-h-a) {
   white-space: nowrap;
   border: 0;
 }
+
+body.is-not-login {
+  .v-w-c--2 {
+    position: relative;
+    margin-top: -40px;
+    padding-top: 54px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: -70px;
+      padding-top: 94px;
+    }
+  }
+
+  .v-f {
+    background: $cb2;
+  }
+
+  [data-voc26-rtim] ev-engagement:before {
+    top: -123px;
+  }
+}
