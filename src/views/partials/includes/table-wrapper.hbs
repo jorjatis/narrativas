@@ -1,3 +1,38 @@
 <div class="v-n-table-wrapper">
-  Table wrapper
+
+  <div class="v-n-table-wrapper__top">
+
+    <input
+      id="communitySearch"
+      type="text"
+      placeholder="Buscar comunidad, provincia o localidad..."
+      disabled
+    >
+
+    <button
+      id="sortCommunitiesBtn"
+      disabled
+    >
+      Ordenar A-Z
+    </button>
+
+  </div>
+
+  <div
+    id="loadingMessage"
+    class="community-message"
+  >
+    Cargando datos...
+  </div>
+
+  <div id="communitiesContainer"></div>
+
+  <div
+    id="emptyResults"
+    class="community-message"
+    hidden
+  >
+    No se han encontrado resultados.
+  </div>
+
 </div>
