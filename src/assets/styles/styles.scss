@@ -12,3 +12,10 @@
 
 @use './base/ppll-fonts';
 @use './base/ppll-styles';
+
+.v-n-toi-system-footer__site .v-n-toi-system-footer__domain {
+  font-family: $mcs;
+  font-size: 18px;
+  line-height: 1;
+  margin-top: 8px;
+}

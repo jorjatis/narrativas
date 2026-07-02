@@ -1,4 +1,8 @@
-<style>.v-h ev-engagement{visibility:hidden}</style>
+<style>
+  .v-h ev-engagement {
+    visibility: hidden
+  }
+</style>
 
 {{!-- Bandera suscripción mobile > 1025px --}}
 <div class="v-h-a v-c">
@@ -9,44 +13,188 @@
 </div>
 
 {{!-- Cabecera --}}
-<header class="v-h v-h--t3" data-voc-component="header">
+<header class="v-h v-h--t2" data-voc-component="header" data-voc-scroll-story-header="">
   <div class="v-h__c">
-    <div class="v-h__g v-c">
+    <div class="v-h__g v-c" data-mrf-recirculation="Apertura">
       <div class="v-h__w v-h__w--1">
-        <button class="v-hmb" popovertarget="header-open" aria-controls="primary-nav">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19.375 17.75a.625.625 0 1 1 0 1.25H4.625a.625.625 0 1 1 0-1.25h14.75Zm-4.571-4.25a.625.625 0 0 1 0 1.25H4.625a.625.625 0 1 1 0-1.25h10.179Zm4.571-4.25a.625.625 0 1 1 0 1.25H4.625a.625.625 0 1 1 0-1.25h14.75Zm0-4.25a.625.625 0 1 1 0 1.25H4.625a.625.625 0 1 1 0-1.25h14.75Z"></path>
+        <button aria-label="Desplegar menú principal" class="v-hmb" popovertarget="header-open">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19.375 17.75a.625.625 0 1 1 0 1.25H4.625a.625.625 0 1 1 0-1.25h14.75Zm-4.571-4.25a.625.625 0 0 1 0 1.25H4.625a.625.625 0 1 1 0-1.25h10.179Zm4.571-4.25a.625.625 0 1 1 0 1.25H4.625a.625.625 0 1 1 0-1.25h14.75Zm0-4.25a.625.625 0 1 1 0 1.25H4.625a.625.625 0 1 1 0-1.25h14.75Z">
+            </path>
           </svg>
         </button>
       </div>
       <div class="v-h__w v-h__w--2">
         <div class="v-log v-log--1">
-          <a href="#" class="v-log__a" title="[TEXTO ANCHOR TEXT]">
-            {{#if metadata.edition.sevilla}}
-              <img class="v-log__i" src="assets/images/logos/logo-ABCSevilla.svg" alt="[ALTERNATIVE TEXT]">
-            {{else}}
-              <img class="v-log__i" src="assets/images/logos/logo-abc.svg" alt="[ALTERNATIVE TEXT]">
-            {{/if}}
+          <a href="https://www.abc.es" data-voc-vtm-id="logo-pt" data-voc-vtm-info="cabecera" class="v-log__a"
+            target="_self" rel="follow" data-mrf-link="https://www.abc.es/" cmp-ltrk="Apertura" cmp-ltrk-idx="0"
+            mrfobservableid="ab4708e5-02a5-4dde-8663-ca081a463fdb">
+            <img class="v-log__i" src="https://static1.vocstatic.com/voc26/latest/assets/images/logos/logo-abc.svg"
+              alt="ABC: últimas noticias y actualidad de España y el mundo" width="133" height="44">
           </a>
+        </div>
+        <div class="v-h__n v-h__n--1">
+          <ul class="v-h__u" id="edition-switch">
+            <li class="v-h__l" href="https://www.abc.es/" data_voc_vtm_id="cabecera-abc"
+              data_voc_vtm_info="logo-pt-abc-cabecera-abc" data-voc-change-edition="nacional" target="_self"
+              rel="follow" main_edition="true">
+              <a class="v-h__a  is-active " data-voc-portals="change-edition" href="https://www.abc.es/"
+                data_voc_vtm_id="cabecera-abc" data_voc_vtm_info="logo-pt-abc-cabecera-abc"
+                data-voc-change-edition="nacional" target="_self" rel="follow" main_edition="true"
+                data-mrf-link="https://www.abc.es/" cmp-ltrk="Apertura" cmp-ltrk-idx="0"
+                mrfobservableid="d0c9032e-5c86-46d9-97e8-a59b1bb967d4">Nacional</a>
+            </li>
+            <li class="v-h__l" href="https://www.abc.es/sevilla/" data_voc_vtm_id="cabecera-abc"
+              data_voc_vtm_info="logo-pt-abcdesevilla-cabecera-abc" data-voc-change-edition="sevilla" target="_self"
+              rel="follow" main_edition="false">
+              <a class="v-h__a " data-voc-portals="change-edition" href="https://www.abc.es/sevilla/"
+                data_voc_vtm_id="cabecera-abc" data_voc_vtm_info="logo-pt-abcdesevilla-cabecera-abc"
+                data-voc-change-edition="sevilla" target="_self" rel="follow" main_edition="false"
+                data-mrf-link="https://www.abc.es/sevilla/" cmp-ltrk="Apertura" cmp-ltrk-idx="1"
+                mrfobservableid="1ba70b64-faef-4036-824a-782285a93de3">Sevilla</a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="v-h__w v-h__w--3">
         <div class="v-btn-c">
-          <a class="v-btn v-btn--1 v-btn-g v-btn--s" href="#" title="[TEXTO ANCHOR TEXT]">Suscríbete</a>
-          <ev-engagement class="v-btn v-btn--1 v-btn-g v-btn--s" group-name="pastilla-abc" redirect="false" data-mrf-recirculation="Comienzo suscripción cabecera A"></ev-engagement>
-          <a class="v-btn v-btn--2 v-btn-i v-btn-i--l v-btn--s" href="#" title="[TEXTO ANCHOR TEXT]">
-            <span class="v-i">
-              <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.01468 10.5285C3.58135 10.108 4.19868 9.77599 4.86668 9.53233C5.53457 9.28877 6.24546 9.16699 6.99935 9.16699C7.75324 9.16699 8.46413 9.28877 9.13202 9.53233C9.80002 9.77599 10.4173 10.108 10.984 10.5285C11.3985 10.0729 11.7268 9.5456 11.9692 8.94649C12.2115 8.34738 12.3327 7.69866 12.3327 7.00033C12.3327 5.52255 11.8132 4.26421 10.7743 3.22533C9.73546 2.18644 8.47713 1.66699 6.99935 1.66699C5.52157 1.66699 4.26324 2.18644 3.22435 3.22533C2.18546 4.26421 1.66602 5.52255 1.66602 7.00033C1.66602 7.69866 1.78718 8.34738 2.02952 8.94649C2.27185 9.5456 2.60024 10.0729 3.01468 10.5285ZM6.99952 7.50033C6.39085 7.50033 5.87757 7.29144 5.45968 6.87366C5.04168 6.45577 4.83268 5.94249 4.83268 5.33383C4.83268 4.72516 5.04157 4.21188 5.45935 3.79399C5.87724 3.37599 6.39052 3.16699 6.99918 3.16699C7.60785 3.16699 8.12113 3.37588 8.53902 3.79366C8.95702 4.21155 9.16602 4.72483 9.16602 5.33349C9.16602 5.94216 8.95713 6.45544 8.53935 6.87333C8.12146 7.29133 7.60818 7.50033 6.99952 7.50033ZM6.99935 13.3337C6.1199 13.3337 5.2949 13.1683 4.52435 12.8375C3.75379 12.5067 3.08352 12.0563 2.51352 11.4862C1.9434 10.9162 1.49296 10.2459 1.16218 9.47533C0.831405 8.70477 0.666016 7.87977 0.666016 7.00033C0.666016 6.12088 0.831405 5.29588 1.16218 4.52533C1.49296 3.75477 1.9434 3.08449 2.51352 2.51449C3.08352 1.94438 3.75379 1.49394 4.52435 1.16316C5.2949 0.832381 6.1199 0.666992 6.99935 0.666992C7.87879 0.666992 8.70379 0.832381 9.47435 1.16316C10.2449 1.49394 10.9152 1.94438 11.4852 2.51449C12.0553 3.08449 12.5057 3.75477 12.8365 4.52533C13.1673 5.29588 13.3327 6.12088 13.3327 7.00033C13.3327 7.87977 13.1673 8.70477 12.8365 9.47533C12.5057 10.2459 12.0553 10.9162 11.4852 11.4862C10.9152 12.0563 10.2449 12.5067 9.47435 12.8375C8.70379 13.1683 7.87879 13.3337 6.99935 13.3337ZM6.99935 12.3337C7.60102 12.3337 8.18113 12.2369 8.73968 12.0433C9.29824 11.8497 9.79418 11.5789 10.2275 11.2312C9.79418 10.896 9.30468 10.6349 8.75902 10.4478C8.21324 10.2606 7.62668 10.167 6.99935 10.167C6.37202 10.167 5.78441 10.2595 5.23652 10.4445C4.68863 10.6296 4.20018 10.8918 3.77118 11.2312C4.20452 11.5789 4.70046 11.8497 5.25902 12.0433C5.81757 12.2369 6.39768 12.3337 6.99935 12.3337ZM6.99935 6.50033C7.33102 6.50033 7.60835 6.38877 7.83135 6.16566C8.05446 5.94266 8.16602 5.66533 8.16602 5.33366C8.16602 5.00199 8.05446 4.72466 7.83135 4.50166C7.60835 4.27855 7.33102 4.16699 6.99935 4.16699C6.66768 4.16699 6.39035 4.27855 6.16735 4.50166C5.94424 4.72466 5.83268 5.00199 5.83268 5.33366C5.83268 5.66533 5.94424 5.94266 6.16735 6.16566C6.39035 6.38877 6.66768 6.50033 6.99935 6.50033Z"></path>
+          <div class="v-hbt">
+            <a class="v-hbt__a" href="https://areapersonal.abc.es/gestion/datos-personales.html"
+              data-mrf-link="https://areapersonal.abc.es/gestion/datos-personales.html" cmp-ltrk="Apertura"
+              cmp-ltrk-idx="2" mrfobservableid="8962db63-b15d-4085-a67e-1e7e978e05b6">
+              <span class="v-hbt__f">
+                <img class="v-hbt__i gigya-user-thumbnail" alt=""
+                  src="https://lh3.googleusercontent.com/a/ACg8ocKzm62RVPufl2_uT78g6PmEsnnFAl5IBkeMvbTx2WP0aCn52pA=s96-c?sz=500">
+              </span>
+              <span class="v-hbt__t" data-voc-profile-full-name="">Jorge García Gómez</span>
+            </a>
+            <button class="v-b-i v-hbt__b" popovertarget="header-user-open">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" aria-hidden="true" focusable="false"
+                viewBox="0 0 14 24">
+                <path data-name="Unión 31" d="M0,11.991.009,12,0,12.009,11.9,24,14,21.88,4.2,12,14,2.12,11.9,0Z"
+                  transform="translate(14 24) rotate(180)"></path>
               </svg>
-            </span>Iniciar sesión </a>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <span class="v-hpr">
-    <span class="v-hpr__c"></span>
-  </span>
+  <span class="v-hpr"><span class="v-hpr__c" style="width: 0%;"></span></span>
 </header>
+
+{{!-- Ticker --}}
+<div class="v-tck v-c  v-tck--v1 v-tck--v1b" data-voc-component="ticker" data-mrf-recirculation="Apertura">
+  <div class="v-tck__c">
+    <span class="v-plv ">
+      <span class="v-plv__c">última hora</span>
+    </span>
+    <div class="v-tck__w">
+      <div class="v-tck__g">
+        <div class="v-tck__s v-tck--t1">
+          <a class="v-tck__a"
+            href="https://www.abc.es/espana/tribunal-apelacion-paris-absuelve-josu-ternera-ultimo-20260702142126-nt.html"
+            data-mrf-link="https://www.abc.es/espana/tribunal-apelacion-paris-absuelve-josu-ternera-ultimo-20260702142126-nt.html"
+            cmp-ltrk="Apertura" cmp-ltrk-idx="3" mrfobservableid="0a08e9c9-8127-4135-8441-96574b62d378">
+            Francia absuelve a Josu Ternera en su último juicio y abre la vía para su entrega a España
+          </a>
+        </div>
+      </div>
+    </div>
+    <button class="v-tck__b">
+      <svg width="8" height="13" aria-hidden="true" focusable="false" viewBox="0 0 8 13" fill="#0E3A6F"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M3.99829 10.9979L6.7035 8.3056C6.8026 8.2065 6.9186 8.1558 7.0515 8.1536C7.1843 8.1515 7.3025 8.2021 7.406 8.3056C7.5094 8.409 7.5611 8.5278 7.5611 8.6619C7.5611 8.7961 7.5094 8.915 7.406 9.0184L4.71745 11.7171C4.52179 11.9127 4.28207 12.0106 3.99829 12.0106C3.71451 12.0106 3.47479 11.9127 3.27912 11.7171L0.58029 9.0184C0.48118 8.9192 0.43229 8.8014 0.43362 8.6651C0.43484 8.5288 0.48718 8.409 0.59062 8.3056C0.69406 8.2021 0.81284 8.1515 0.94695 8.1536C1.08118 8.1558 1.20001 8.2065 1.30345 8.3056L3.99829 10.9979ZM3.99829 1.0029L1.30345 3.68507C1.20423 3.78418 1.08818 3.83307 0.95529 3.83173C0.8224 3.83051 0.70423 3.78162 0.60079 3.68507C0.49745 3.58162 0.44406 3.46279 0.44062 3.32857C0.43718 3.19446 0.48718 3.07568 0.59062 2.97223L3.27912 0.283727C3.47479 0.0880668 3.71451 -0.00977325 3.99829 -0.00977325C4.28207 -0.00977325 4.52179 0.0880668 4.71745 0.283727L7.406 2.97223C7.5051 3.07135 7.554 3.18907 7.5528 3.3254C7.5515 3.46173 7.4991 3.58162 7.3958 3.68507C7.2923 3.78162 7.1752 3.83051 7.0445 3.83173C6.9137 3.83307 6.7966 3.78418 6.6931 3.68507L3.99829 1.0029Z">
+        </path>
+      </svg></button>
+  </div>
+</div>
+
+{{!-- Tira del mundial --}}
+<div class="v-hsc v-c" data-mrf-recirculation="Apertura">
+  <div class="v-hsc__c">
+    <div class="v-hsc__w">
+      <a href="https://www.abc.es/deportes/futbol/mundial/" target="_self"
+        data-mrf-link="https://www.abc.es/deportes/futbol/mundial/" cmp-ltrk="Apertura" cmp-ltrk-idx="4"
+        mrfobservableid="049d294d-fdf4-40d9-bcef-55843dc7530a">
+        <img class="v-hsc__i" src="https://s1.abcstatics.com/rc/www/multimedia/plantillas/svg/logo-elmundial26-2.svg"
+          alt="Mundial 2026">
+      </a>
+      <nav class="v-hsc__n">
+        <ul class="v-hsc__u">
+          <li class="v-hsc__l">
+            <a class="v-hsc__a"
+              href="https://www.abc.es/deportes/futbol/mundial/espana-austria-horario-canal-television-ver-gratis-partido-mundial-20260702124750-nt.html"
+              target="_self"
+              data-mrf-link="https://www.abc.es/deportes/futbol/mundial/espana-austria-horario-canal-television-ver-gratis-partido-mundial-20260702124750-nt.html"
+              cmp-ltrk="Apertura" cmp-ltrk-idx="5" mrfobservableid="a59e8ff2-bd2b-40ac-9d67-0a04c298889e">
+              España - Austria
+            </a>
+          </li>
+          <li class="v-hsc__l">
+            <a class="v-hsc__a"
+              href="https://www.abc.es/deportes/futbol/mundial/alineacion-espana-hoy-ante-austria-novedades-luis-20260702060000-nt.html"
+              target="_self"
+              data-mrf-link="https://www.abc.es/deportes/futbol/mundial/alineacion-espana-hoy-ante-austria-novedades-luis-20260702060000-nt.html"
+              cmp-ltrk="Apertura" cmp-ltrk-idx="6" mrfobservableid="5e840f4d-6153-4446-b408-4d6d951bb4a6">
+              Alineación España
+            </a>
+          </li>
+          <li class="v-hsc__l">
+            <a class="v-hsc__a"
+              href="https://www.abc.es/deportes/futbol/mundial/partidos-hoy-jueves-mundial-horarios-donde-ver-television-20260702050000-nt.html"
+              target="_self"
+              data-mrf-link="https://www.abc.es/deportes/futbol/mundial/partidos-hoy-jueves-mundial-horarios-donde-ver-television-20260702050000-nt.html"
+              cmp-ltrk="Apertura" cmp-ltrk-idx="7" mrfobservableid="aa0fd875-8be3-438c-900a-e733b2030ab2">
+              Partidos hoy
+            </a>
+          </li>
+          <li class="v-hsc__l">
+            <a class="v-hsc__a" href="https://www.abc.es/deportes/futbol/mundial/2026/calendario-sd.html" target="_self"
+              data-mrf-link="https://www.abc.es/deportes/futbol/mundial/2026/calendario-sd.html" cmp-ltrk="Apertura"
+              cmp-ltrk-idx="8" mrfobservableid="a7c48da5-f305-49dc-98f4-4a85f294cafe">
+              Calendario
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div class="v-bdc v-c" aria-label="Breadcrumb" data-mrf-recirculation="Apertura">
+  <div class="v-bdc__c">
+    <div class="v-bdc__w">
+      <div class="v-bdc__n">
+        <ol class="v-bdc__u">
+          <li class="v-bdc__l v-bdc__l--t1">
+            <a class="v-bdc__a" href="https://www.abc.es" data-mrf-link="https://www.abc.es/" cmp-ltrk="Apertura"
+              cmp-ltrk-idx="9" mrfobservableid="f1426d4b-f7a1-4dfc-986d-3146a0af7682">
+              Portada</a>
+          </li>
+          <li class="v-bdc__l  v-bdc__l--t1 ">
+            <a class="v-bdc__a" href="https://www.abc.es/deportes/" data-mrf-link="https://www.abc.es/deportes/"
+              cmp-ltrk="Apertura" cmp-ltrk-idx="10" mrfobservableid="a292cb35-8a50-4909-867f-ffd2c67bebd6">
+              Deportes</a>
+          </li>
+          <li class="v-bdc__l  v-bdc__l--t1 ">
+            <a class="v-bdc__a" href="https://www.abc.es/deportes/futbol/"
+              data-mrf-link="https://www.abc.es/deportes/futbol/" cmp-ltrk="Apertura" cmp-ltrk-idx="11"
+              mrfobservableid="69b32a8d-052b-4265-b86f-64965389913c">
+              Fútbol</a>
+          </li>
+          <li class="v-bdc__l ">
+            <a class="v-bdc__a" href="https://www.abc.es/deportes/futbol/mundial/"
+              data-mrf-link="https://www.abc.es/deportes/futbol/mundial/" cmp-ltrk="Apertura" cmp-ltrk-idx="12"
+              mrfobservableid="f35e95a2-e8f1-49e3-8162-511e4532ab73">
+              Mundial 2026</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
 
 {{> ./header-menu-burger }}

@@ -1,86 +1,5 @@
 import html2canvas from 'html2canvas';
 
-// const data = {
-//   "formations": {
-//     "4/3/3": {
-//       "description": "El sistema 4/3/3 es el verdadero ADN de la selección española, un dibujo táctico que ha sabido evolucionar desde el clásico ‘tiki-taka’ de posesión infinita hacia un fútbol moderno, vertical y eléctrico gracias al desborde desde los carriles. Anclado en un centro del campo con un pivote inteligente que equilibra el bloque y complementado hoy por extremos puros de puro desborde, este esquema permite a La Roja adueñarse del ritmo del partido sin renunciar a la pegada ni a una presión tras pérdida asfixiante. En resumen: es la fórmula perfecta donde el control técnico se encuentra con el dinamismo actual.",
-//       "positions": {
-//         "portero": ["unai-simon", "raya", "joan-garcia"],
-//         "lateral-derecho": ["llorente", "porro"],
-//         "central-derecho": ["cubarsi", "pubill"],
-//         "central-izquierdo": ["laporte", "eric-garcia"],
-//         "lateral-izquierdo": ["cucurella", "grimaldo"],
-//         "interior-derecho": ["pedri", "merino", "dani-olmo"],
-//         "pivote": ["rodri", "zubimendi"],
-//         "interior-izquierdo": ["fabian", "gavi", "baena"],
-//         "extremo-derecho": ["yamal", "yeremy"],
-//         "delantero-centro": ["ferran", "oyarzabal", "iglesias"],
-//         "extremo-izquierdo": ["nico", "victor-munoz"]
-//       }
-//     },
-//     "4/2/3/1": {
-//       "description": "El esquema 4/2/3/1, muy utilizado por Luis de la Fuente desde su etapa como seleccionador sub-21, es una evolución del clásico 4/3/3. La presencia de Pedri en la medular, junto a un mediocentro al uso, permite introducir en el esquema el concepto de mediapunta, un jugador que ejerza de enganche entre la sala de máquinas y el delantero, con capacidad para el último pase. Ahí encajan futbolistas como Dani Olmo, Álex Baena, Merino o incluso Gavi.",
-//       "positions": {
-//         "portero": ["unai-simon", "raya", "joan-garcia"],
-//         "lateral-derecho": ["llorente", "porro"],
-//         "central-derecho": ["cubarsi", "pubill"],
-//         "central-izquierdo": ["laporte", "eric-garcia"],
-//         "lateral-izquierdo": ["cucurella", "grimaldo"],
-//         "centro-derecho": ["pedri", "merino", "gavi"],
-//         "centro-izquierdo": ["rodri", "zubimendi", "fabian"],
-//         "extremo-derecho": ["yamal", "yeremy"],
-//         "mediapunta": ["dani-olmo", "baena"],
-//         "extremo-izquierdo": ["nico", "victor-munoz"],
-//         "delantero-centro": ["ferran", "oyarzabal", "iglesias"]
-//       }
-//     },
-//     "4/4/2": {
-//       "description": "Aunque menos habitual, pues reduce el papel de los extremos, con Lamine Yamal y Nico Williams como estandartes de esta selección española, el dibujo táctico 4/4/2 puede ser una variante útil para determinados partidos o momentos de los mismos. Así, esta opción permite poblar el centro del campo para incrementar todavía más el dominio de los partidos desde el control del balón, un rasgo característico de España, así como introducir dos delanteros en la ecuación, cuando sea necesario redoblar la amenaza ofensiva frente a adversarios muy replegados.",
-//       "positions": {
-//         "portero": ["unai-simon", "raya", "joan-garcia"],
-//         "lateral-derecho": ["llorente", "porro"],
-//         "central-derecho": ["cubarsi", "pubill"],
-//         "central-izquierdo": ["laporte", "eric-garcia"],
-//         "lateral-izquierdo": ["cucurella", "grimaldo"],
-//         "extremo-derecho": ["yamal", "yeremy", "baena"],
-//         "centro-derecho": ["pedri", "merino", "gavi"],
-//         "centro-izquierdo": ["rodri", "zubimendi", "fabian"],
-//         "extremo-izquierdo": ["nico", "victor-munoz"],
-//         "delantero-derecho": ["ferran", "iglesias"],
-//         "delantero-izquierdo": ["oyarzabal", "dani-olmo"]
-//       }
-//     }
-//   },
-//   "players": {
-//     "baena": { "name": "Baena", "team": "Atlético", "age": "24 años", "caps": "17 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/baena.png", "injured": "false" },
-//     "cubarsi": { "name": "Cubarsí", "team": "Barcelona", "age": "19 años", "caps": "12 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/cubarsi.png", "injured": "false" },
-//     "cucurella": { "name": "Cucurella", "team": "Chelsea", "age": "27 años", "caps": "24 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/cucurella.png", "injured": "false" },
-//     "dani-olmo": { "name": "Dani Olmo", "team": "Barcelona", "age": "28 años", "caps": "50 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/olmo.png", "injured": "false" },
-//     "eric-garcia": { "name": "Eric García", "team": "Barcelona", "age": "25 años", "caps": "21 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/eric.png", "injured": "false" },
-//     "fabian": { "name": "Fabián", "team": "PSG", "age": "30 años", "caps": "42 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/fabian.png", "injured": "false" },
-//     "ferran": { "name": "Ferran", "team": "Barcelona", "age": "26 años", "caps": "57 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/torres.png", "injured": "false" },
-//     "gavi": { "name": "Gavi", "team": "Barcelona", "age": "21 años", "caps": "30 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/gavi.png", "injured": "false" },
-//     "grimaldo": { "name": "Grimaldo", "team": "Bayer Leverkusen", "age": "30 años", "caps": "14 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/grimaldo.png", "injured": "false" },
-//     "iglesias": { "name": "Iglesias", "team": "Celta", "age": "33 años", "caps": "8 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/iglesias.png", "injured": "false" },
-//     "joan-garcia": { "name": "Joan García", "team": "Barcelona", "age": "25 años", "caps": "2 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/garcia.png", "injured": "false" },
-//     "yamal": { "name": "Yamal", "team": "Barcelona", "age": "18 años", "caps": "25 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/yamal.png", "injured": "false" },
-//     "laporte": { "name": "Laporte", "team": "Athletic", "age": "32 años", "caps": "46 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/laporte.png", "injured": "false" },
-//     "llorente": { "name": "Llorente", "team": "Atlético", "age": "31 años", "caps": "24 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/llorente.png", "injured": "false" },
-//     "merino": { "name": "Merino", "team": "Arsenal", "age": "29 años", "caps": "43 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/merino.png", "injured": "false" },
-//     "nico": { "name": "Nico", "team": "Athletic", "age": "23 años", "caps": "30 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/williams.png", "injured": "false" },
-//     "oyarzabal": { "name": "Oyarzabal", "team": "Real Sociedad", "age": "29 años", "caps": "53 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/oyarzabal.png", "injured": "false" },
-//     "pedri": { "name": "Pedri", "team": "Barcelona", "age": "23 años", "caps": "41 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/pedri.png", "injured": "false" },
-//     "porro": { "name": "Porro", "team": "Tottenham", "age": "26 años", "caps": "18 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/porro.png", "injured": "false" },
-//     "pubill": { "name": "Pubill", "team": "Atlético", "age": "22 años", "caps": "2 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/pubill.png", "injured": "false" },
-//     "raya": { "name": "Raya", "team": "Arsenal", "age": "30 años", "caps": "13 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/raya.png", "injured": "false" },
-//     "rodri": { "name": "Rodri", "team": "Manchester City", "age": "29 años", "caps": "62 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/rodri.png", "injured": "false" },
-//     "unai-simon": { "name": "Unai Simón", "team": "Athletic", "age": "29 años", "caps": "58 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/unai.png", "injured": "true" },
-//     "victor-munoz": { "name": "Víctor Muñoz", "team": "Osasuna", "age": "22 años", "caps": "2 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/munoz.png", "injured": "false" },
-//     "yeremy": { "name": "Yéremy", "team": "Crystal Palace", "age": "23 años", "caps": "23 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/pino.png", "injured": "false" },
-//     "zubimendi": { "name": "Zubimendi", "team": "Arsenal", "age": "27 años", "caps": "26 internacionalidades", "image": "https://s1.ppllstatics.com/comun/img/2026/seleccion/zubimendi.png" }
-//   }
-// };
-
 let data = {
   formations: {},
   players: {}
@@ -216,119 +135,24 @@ export default async function initTuOnceIdeal() {
   
   const nextStepBlock = document.querySelector('.v-n-toi-next-step');
 
-  const SITE_LOGOS = {
-    'elcorreo.com': 'logo-elcorreo.png',
-    'larioja.com': 'logo-larioja.png',
-    'ideal.es': 'logo-ideal.png',
-    'elcomercio.es': 'logo-elcomercio.png',
-    'hoy.es': 'logo-hoy.png',
-    'diariosur.es': 'logo-diariosur.png',
-    'diariovasco.com': 'logo-diariovasco.png',
-    'eldiariomontanes.es': 'logo-eldiariomontanes.png',
-    'elnortedecastilla.es': 'logo-elnortedecastilla.png',
-    'lasprovincias.es': 'logo-lasprovincias.png',
-    'laverdad.es': 'logo-laverdad.png',
-    'abc.es': 'logo-abc.png',
-    'lavozdigital.es': 'logo-lavozdecadiz.png',
-    'leonoticias.com': 'logo-leonoticias.png',
-    'todoalicante.es': 'logo-todoalicante.png',
-    'salamancahoy.es': 'logo-salamancahoy.png',
-    'burgosconecta.es': 'logo-burgosconecta.png',
-    'canarias7.es': 'logo-canarias7.png',
-    'huelva24.com': 'logo-huelva24.png'
-  };
+  function initFooterSiteName() {
+    const domainSpan = document.querySelector(
+      '.v-n-toi-system-footer__domain'
+    );
 
-  function getCurrentSiteLogo() {
-    const hostname = window.location.hostname.replace(/^www\./, '').toLowerCase();
-    return SITE_LOGOS[hostname] || SITE_LOGOS['abc.es'];
+    if (!domainSpan) return;
+
+    domainSpan.textContent = window.location.hostname
+      .replace(/^www\./, '')
+      .toLowerCase();
   }
 
-  function initFooterLogo() {
-    const logo = document.querySelector('.v-n-toi-system-footer__site img');
-
-    if (!logo) return;
-
-    logo.src = `https://s1.abcstatics.com/comun/html/2026/tu-once-ideal/images/logomedios/${getCurrentSiteLogo()}`;
-  }
-
-  initFooterLogo();
+  initFooterSiteName();
 
   let activePlayerButton = null;
   let checkScrollSpeed = null;
 
   if (!selectorItems.length || !selectedBlock || !popup) return;
-
-  const testBtn = document.createElement('button');
-  testBtn.type = 'button';
-  testBtn.innerText = '⚡ Auto-llenar 11';
-  testBtn.style.position = 'fixed';
-  testBtn.style.bottom = '20px';
-  testBtn.style.left = '20px';
-  testBtn.style.zIndex = '99999';
-  testBtn.style.padding = '10px 14px';
-  testBtn.style.background = 'red';
-  testBtn.style.color = '#fff';
-  testBtn.style.border = 'none';
-  testBtn.style.borderRadius = '4px';
-  testBtn.style.cursor = 'pointer';
-  testBtn.style.fontWeight = 'bold';
-  testBtn.style.fontFamily = 'sans-serif';
-  testBtn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
-
-  document.body.appendChild(testBtn);
-
-  testBtn.addEventListener('click', () => {
-    const currentSystem = document
-      .querySelector('.v-n-toi-selector__item.is-active')
-      ?.getAttribute('data-system');
-
-    if (!currentSystem) {
-      alert('Primero selecciona un sistema táctico.');
-      return;
-    }
-
-    const playerButtons = document.querySelectorAll('.v-n-toi-player');
-
-    playerButtons.forEach((btn) => {
-      const positionKey = btn.getAttribute('data-player-position');
-
-      const playersIds =
-        data.formations[currentSystem]?.positions[positionKey] || [];
-
-      if (!playersIds.length) return;
-
-      // Jugador aleatorio para pruebas
-      const randomPlayerId =
-        playersIds[Math.floor(Math.random() * playersIds.length)];
-
-      const playerData = data.players[randomPlayerId];
-
-      if (!playerData) return;
-
-      // Imagen
-      const img = btn.querySelector('img');
-      if (img) {
-        img.src = playerData.image;
-        img.alt = `Foto de ${playerData.name}`;
-      }
-
-      // Nombre
-      const nameEl = btn.querySelector('.v-n-toi-player__name');
-      if (nameEl) {
-        nameEl.textContent = playerData.name;
-      }
-
-      // ID seleccionado
-      btn.setAttribute(
-        'data-selected-player-id',
-        randomPlayerId
-      );
-    });
-
-    closePopup();
-
-    console.log('⚡ Once rellenado automáticamente');
-  });
 
   selectorItems.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -564,18 +388,6 @@ export default async function initTuOnceIdeal() {
     const clonedFooter = clonedDocument.querySelector('.v-n-toi-system-footer');
     if (clonedFooter) {
       clonedFooter.style.display = 'block';
-    }
-
-    const clonedFooterLogo = clonedDocument.querySelector('.v-n-toi-system-footer__site img');
-
-    if (clonedFooterLogo) {
-      Object.assign(clonedFooterLogo.style, {
-        display: 'block',
-        width: 'auto',
-        height: '40px',
-        margin: '12px auto 0',
-        objectFit: 'contain'
-      });
     }
   }
 
