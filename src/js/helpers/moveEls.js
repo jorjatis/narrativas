@@ -4,6 +4,9 @@ export default function moveEls(el, target, position = "prepend") {
 
   if (!element || !targetEl) return;
 
+  if (position === "prepend" && targetEl.firstElementChild === element) return;
+  if (position === "append" && targetEl.lastElementChild === element) return;
+
   const actions = {
     prepend: () => targetEl.prepend(element),
     append: () => targetEl.append(element),

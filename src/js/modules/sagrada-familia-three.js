@@ -1,14 +1,8 @@
-// =======================================================
-// IMPORTACIONES NATIVAS (VÍA IMPORTMAP)
-// =======================================================
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
-// =======================================================
-// FUNCIÓN INICIALIZADORA 3D ULTRA-FLUIDA (60 FPS)
-// =======================================================
 export function initSagradaFamilia3D(containerSelector) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
@@ -44,7 +38,8 @@ export function initSagradaFamilia3D(containerSelector) {
 
   function startThreeJS() {
     const scene = new THREE.Scene();
-    scene.background = null;
+    
+    scene.background = new THREE.Color(0xffffff);
 
     const camera = new THREE.PerspectiveCamera(
       46,
@@ -54,14 +49,16 @@ export function initSagradaFamilia3D(containerSelector) {
     );
 
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true
+      antialias: false,
+      alpha: false,
+      powerPreference: "high-performance"
     });
 
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
+    
+    renderer.shadowMap.enabled = false;
     
     renderer.outputColorSpace = THREE.SRGBColorSpace; 
 
@@ -69,6 +66,7 @@ export function initSagradaFamilia3D(containerSelector) {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
+    controls.dampingFactor = 0.05; // Ajuste fino de la inercia
     controls.enableZoom = false; 
     controls.enablePan = false;  
     controls.maxPolarAngle = Math.PI / 2 - 0.05;
@@ -92,12 +90,12 @@ export function initSagradaFamilia3D(containerSelector) {
     const hotspots = [
       {
         blenderName: 'hotspot_0',
-        elementSelector: '#sf-scene-3D-hotspots .sf-btn--01',
+        elementSelector: '#sf-scene-3D-hotspots .sf-btn--02',
         referenceObject: null
       },
       {
         blenderName: 'hotspot_1',
-        elementSelector: '#sf-scene-3D-hotspots .sf-btn--02',
+        elementSelector: '#sf-scene-3D-hotspots .sf-btn--01',
         referenceObject: null
       }
     ];
@@ -121,7 +119,6 @@ export function initSagradaFamilia3D(containerSelector) {
       const box = new THREE.Box3().setFromObject(sagradaFamiliaModel);
       const center = box.getCenter(new THREE.Vector3());
 
-      // Centramos el modelo en el origen (0, y, 0)
       sagradaFamiliaModel.position.x = -center.x;
       sagradaFamiliaModel.position.z = -center.z;
       sagradaFamiliaModel.position.y = -box.min.y;
@@ -149,40 +146,31 @@ export function initSagradaFamilia3D(containerSelector) {
 
       camera.position.set(208.89, 161.04, -210.80);
       controls.target.set(8.51, 60.83, -3.48);
+      
       controls.update();
+      renderScene(); 
     });
 
-    // =======================================================
-    // NUEVA MATEMÁTICA VEGETAL RÁPIDA (0% LAG)
-    // =======================================================
     const worldPosition = new THREE.Vector3();
     const cameraDirection = new THREE.Vector3();
 
     function updateHotspots() {
       if (!sagradaFamiliaModel) return;
 
-      // Obtenemos la dirección hacia donde mira la cámara
       camera.getWorldDirection(cameraDirection);
 
       hotspots.forEach((hotspot) => {
         const el = document.querySelector(hotspot.elementSelector);
         if (!el || !hotspot.referenceObject) return;
 
-        // 1. Obtener posición global del hotspot
         hotspot.referenceObject.getWorldPosition(worldPosition);
 
-        // 2. Calcular si el hotspot está en el lado opuesto (detrás del centro del modelo)
-        // Usamos la posición local del objeto con respecto al centro para saber su orientación.
-        // Como el modelo está centrado en X=0 y Z=0, worldPosition.x y .z nos dan su vector desde el centro.
         const vH = new THREE.Vector3(worldPosition.x, 0, worldPosition.z).normalize();
         const vC = new THREE.Vector3(cameraDirection.x, 0, cameraDirection.z).normalize();
         
-        // Producto punto: si da mayor que 0, el hotspot y la cámara miran en direcciones similares
-        // (lo que significa que el hotspot está en la cara trasera apuntando lejos de la cámara)
         const dotProduct = vH.dot(vC);
-        const isBehind = dotProduct > 0.15; // Ajusta este número (0.0 a 0.3) para graduar cuándo empieza a desvanecerse
+        const isBehind = dotProduct > 0.15; 
 
-        // 3. Proyectar el punto 3D a la pantalla 2D
         worldPosition.project(camera);
 
         const x = (worldPosition.x * 0.5 + 0.5) * container.clientWidth;
@@ -191,30 +179,48 @@ export function initSagradaFamilia3D(containerSelector) {
         el.style.left = `${x}px`;
         el.style.top = `${y}px`;
 
-        // 4. Cambiar opacidad de forma instantánea pero matemática sin procesar mallas
         if (isBehind || worldPosition.z > 1) {
-          el.style.opacity = '0.15'; // Detrás del edificio
+          el.style.opacity = '0.15'; 
           el.style.pointerEvents = 'none';
         } else {
-          el.style.opacity = '1'; // Delante del edificio
+          el.style.opacity = '1'; 
           el.style.pointerEvents = 'auto';
         }
       });
     }
 
-    function animate() {
-      requestAnimationFrame(animate);
-      controls.update();
+    function renderScene() {
       updateHotspots();
       renderer.render(scene, camera);
     }
 
-    animate();
+    let isAnimating = false;
+
+    function animateDamping() {
+      const needsMoreFrames = controls.update();
+      
+      renderScene();
+
+      if (needsMoreFrames) {
+        requestAnimationFrame(animateDamping);
+      } else {
+        isAnimating = false;
+      }
+    }
+
+    controls.addEventListener('change', () => {
+      if (!isAnimating) {
+        isAnimating = true;
+        animateDamping();
+      }
+    });
 
     const resizeObserver = new ResizeObserver(() => {
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(container.clientWidth, container.clientHeight);
+      
+      renderScene();
     });
 
     resizeObserver.observe(container);

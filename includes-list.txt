@@ -16,3 +16,6 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/10/sagrada-familia/
 
 <!--#include virtual="/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-pre-header.html" -->
 <!--#include virtual="/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-sagrada-3D.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-cintillo-01.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-cintillo-02.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/06/10/sagrada-familia/includes/inc-cintillo-03.html" -->
