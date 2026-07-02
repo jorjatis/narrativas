@@ -2,6 +2,7 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camiseta
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/scripts.js
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/includes/inc-ranking-laroja.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/includes/inc-pre-header.html
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1982.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1994.webp
@@ -16,6 +17,7 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camiseta
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/pop_up_camisetas_1.gif
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/pop_up_camisetas_2.gif
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mensaje-gracias.gif
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camisetas-1920x1080.webp
 
 
-<!--#include virtual="/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/includes/inc-ranking-laroja.html" -->
+<!--#include virtual="/comun/html/2026/ranking-camisetas-laroja/includes/inc-ranking-laroja.html" -->
