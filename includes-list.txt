@@ -1,23 +1,8 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/table-wrapper/styles.css
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/table-wrapper/scripts.js
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/includes/inc-ranking-laroja.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/includes/inc-pre-header.html
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1982.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1994.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-1998.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2002.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2006.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2010.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2014.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2022.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-a.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camiseta-2026-b.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/pop_up_camisetas_1.gif
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/pop_up_camisetas_2.gif
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/mensaje-gracias.gif
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/06/25/ranking-camisetas-laroja/images/camisetas-1920x1080.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/table-wrapper/inc-table-wrapper.html
 
 
-<!--#include virtual="/comun/html/2026/ranking-camisetas-laroja/includes/inc-ranking-laroja.html" -->
+
+<!--#include virtual="/comun/narrativas/redaccion/2026/07/table-wrapper/inc-table-wrapper.html" -->
