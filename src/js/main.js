@@ -42,7 +42,6 @@ const initObservers = () => {
   const resizeObserver = new ResizeObserver(adjustVideoMargin);
   resizeObserver.observe(infoContainer);
   
-  // También ajustamos al cargar imágenes o fuentes
   window.addEventListener('load', adjustVideoMargin);
 };
 
@@ -53,6 +52,11 @@ export function initAll() {
 
   prepareSubtitles();
   moveEls('.v-a--d-s-1 > .v-a-inf-c', '.v-a--d-s-1 > .v-a-img-c', 'prepend');
+  moveEls(
+    ".v-a--d-s-1 .v-a-inf-c .v-a-s-t",
+    ".v-d--abc",
+    "prepend"
+  );
   
   initObservers();
   adjustVideoMargin();
