@@ -3,7 +3,7 @@ import fadeOnScroll from './helpers/fadeOnScroll';
 import moveEls from './helpers/moveEls';
 
 // Version sin google sheets
-import gameEvents, { DEFAULT_EVENTS } from './helpers/gameEvents';
+import gameEvents, { DEFAULT_EVENTS } from './modules/gameEvents';
 // Version con google sheets 
 // import gameEventsFromSheet from './helpers/gameEventsSheet'; // Aqui llama al anterior import
 
