@@ -1,0 +1,143 @@
+<section class="events-roll is-boot" data-component="events-roll" aria-label="Coloca los eventos en la línea temporal">
+
+  <div class="events-roll__menu">
+    <h2 class="events-roll__menu-title">Línea temporal</h2>
+    <p class="events-roll__menu-subtitle">Coloca cada evento en su año correcto</p>
+    <div class="events-roll__menu-actions" role="group" aria-label="Elige modo de juego">
+      <button type="button" class="events-roll__menu-btn" data-mode="instant">Al instante</button>
+      <button type="button" class="events-roll__menu-btn" data-mode="batch">Al final</button>
+    </div>
+
+    <dialog id="events-roll-info" class="events-roll__info-modal">
+      <button type="button" class="events-roll__info-dismiss" aria-label="Cerrar">×</button>
+      <h2 class="events-roll__info-title">Cómo jugar</h2>
+      <p class="events-roll__info-text">
+        Desliza la línea temporal hasta el año que creas correcto y pulsa «Colocar aquí».
+        Desliza el carrusel o usa las flechas para cambiar de evento.
+      </p>
+      <p class="events-roll__info-subtitle">Hay dos modos de juego:</p>
+      <p class="events-roll__info-text events-roll__info-text--instant">
+        <strong>Al instante:</strong> sabrás al momento si aciertas o fallas.
+      </p>
+      <p class="events-roll__info-text events-roll__info-text--batch">
+        <strong>Al final:</strong> coloca todos los eventos y pulsa «Corregir» para ver cuántos has acertado.
+      </p>
+      <button type="button" class="events-roll__info-close">Cerrar</button>
+    </dialog>
+  </div>
+
+  <div class="events-roll__game" hidden>
+
+    <div class="events-roll__header">
+      <div class="events-roll__stats" aria-live="polite">
+        <span class="events-roll__stats-item events-roll__stats-item--progress"></span>
+        <span class="events-roll__stats-item events-roll__stats-item--fails" hidden></span>
+      </div>
+    </div>
+
+    <div class="events-roll__carousel-wrap">
+      <button
+        type="button"
+        class="events-roll__carousel-btn events-roll__carousel-btn--prev"
+        aria-label="Evento anterior"
+        aria-controls="events-roll-carousel"
+      >
+        <span class="events-roll__carousel-btn-icon" aria-hidden="true"></span>
+      </button>
+
+      <div class="events-roll__carousel-shadow events-roll__carousel-shadow--left" aria-hidden="true"></div>
+
+      <div class="events-roll__carousel-stage">
+        <div
+          id="events-roll-carousel"
+          class="events-roll__carousel"
+          role="region"
+          aria-roledescription="carrusel de eventos"
+          aria-label="Eventos por colocar"
+        >
+          <article class="events-roll__event events-roll__event--prev" aria-hidden="true">
+            <div class="events-roll__event-body">
+              <p class="events-roll__event-text"></p>
+            </div>
+          </article>
+
+          <article class="events-roll__event events-roll__event--active" aria-current="true">
+            <div class="events-roll__event-body">
+              <p class="events-roll__event-text"></p>
+            </div>
+          </article>
+
+          <article class="events-roll__event events-roll__event--next" aria-hidden="true">
+            <div class="events-roll__event-body">
+              <p class="events-roll__event-text"></p>
+            </div>
+          </article>
+        </div>
+
+        <div class="events-roll__carousel-overlay" hidden>
+          <div class="events-roll__carousel-panel events-roll__carousel-panel--check">
+            <p class="events-roll__carousel-panel-text">Has colocado todos los eventos</p>
+            <button type="button" class="events-roll__check-btn">Corregir</button>
+          </div>
+
+          <div class="events-roll__carousel-panel events-roll__carousel-panel--results" hidden>
+            <p class="events-roll__results-text"></p>
+            <button type="button" class="events-roll__retry-btn">¿Corregir?</button>
+          </div>
+
+          <div class="events-roll__carousel-panel events-roll__carousel-panel--complete" hidden>
+            <p class="events-roll__complete-title">¡Felicidades!</p>
+            <p class="events-roll__complete-text">Has colocado todos los eventos correctamente.</p>
+            <button type="button" class="events-roll__restart-btn">Volver a empezar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="events-roll__carousel-shadow events-roll__carousel-shadow--right" aria-hidden="true"></div>
+
+      <button
+        type="button"
+        class="events-roll__carousel-btn events-roll__carousel-btn--next"
+        aria-label="Evento siguiente"
+        aria-controls="events-roll-carousel"
+      >
+        <span class="events-roll__carousel-btn-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="events-roll__controls">
+      <div
+        class="events-roll__timeline"
+        id="events-roll-timeline"
+        role="slider"
+        aria-label="Línea temporal"
+        tabindex="0"
+      >
+        <div class="events-roll__timeline-viewport">
+          <div class="events-roll__timeline-track" aria-hidden="true">
+            <div class="events-roll__timeline-inner">
+              <div class="events-roll__timeline-fade events-roll__timeline-fade--start" aria-hidden="true"></div>
+              <div class="events-roll__timeline-row">
+                <div class="events-roll__timeline-ticks"></div>
+              </div>
+              <div class="events-roll__timeline-fade events-roll__timeline-fade--end" aria-hidden="true"></div>
+              <div class="events-roll__markers" role="list" aria-label="Eventos colocados"></div>
+            </div>
+          </div>
+        </div>
+
+        <output class="events-roll__time" for="events-roll-timeline" aria-live="polite"></output>
+      </div>
+
+      <button
+        type="button"
+        class="events-roll__place-btn"
+        aria-describedby="events-roll-timeline"
+      >
+        Colocar aquí
+      </button>
+    </div>
+
+  </div>
+
+</section>
