@@ -2,12 +2,20 @@ import gameEvents, { DEFAULT_EVENTS } from './gameEvents';
 
 /**
  * Columnas esperadas en el Google Sheet (fila de cabecera):
- * | id | description | image | alt | correctTime |
+ * | id | description | image | alt | marker | markerAlt | correctTime |
  *
  * Ejemplo de URL pública (sheet publicado como "Cualquier persona con el enlace"):
  * https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit
  */
-export const SHEET_COLUMNS = ['id', 'description', 'image', 'alt', 'correctTime'];
+export const SHEET_COLUMNS = [
+  'id',
+  'description',
+  'image',
+  'alt',
+  'marker',
+  'markerAlt',
+  'correctTime',
+];
 
 /** ID de ejemplo — sustituir por el sheet real en producción. */
 export const MOCK_SPREADSHEET_ID = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms';
@@ -18,6 +26,8 @@ function flattenEvent(event) {
     description: event.description,
     image: event.image.src,
     alt: event.image.alt,
+    marker: event.marker?.src ?? event.image.src,
+    markerAlt: event.marker?.alt ?? event.image.alt,
     correctTime: event.correctTime,
   };
 }
@@ -41,12 +51,21 @@ function rowToEvent(row) {
     return '';
   };
 
+  const image = {
+    src: String(get('image')),
+    alt: String(get('alt')),
+  };
+
+  const markerSrc = String(get('marker', 'markerimage', 'markerImage'));
+  const markerAlt = String(get('markeralt', 'markerAlt'));
+
   return {
     id: String(get('id')),
     description: String(get('description')),
-    image: {
-      src: String(get('image')),
-      alt: String(get('alt')),
+    image,
+    marker: {
+      src: markerSrc || image.src,
+      alt: markerAlt || image.alt,
     },
     correctTime: Number(get('correcttime', 'correctTime')),
   };

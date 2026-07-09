@@ -5,7 +5,7 @@ import moveEls from './helpers/moveEls';
 // Version sin google sheets
 import gameEvents, { DEFAULT_EVENTS } from './modules/gameEvents';
 // Version con google sheets 
-// import gameEventsFromSheet from './helpers/gameEventsSheet'; // Aqui llama al anterior import
+// import gameEventsFromSheet from './modules/gameEventsSheet';
 
 // NOTE: Modules
 export async function initAll() {
@@ -19,10 +19,10 @@ export async function initAll() {
     typeGame: 'both',
     title: 'Línea temporal',
     timeline: {
-      min: 1900,
-      max: 2100,
-      step: 10,
-      startYear: 1950,
+      min: 1995,
+      max: 2015,
+      step: 1,
+      startYear: 2000,
     },
   });
   // Opción 2: eventos propios hardcodeados
@@ -33,6 +33,7 @@ export async function initAll() {
   //       id: '1',
   //       description: 'Mi evento...',
   //       image: { src: 'https://...', alt: 'Texto alt' },
+  //       marker: { src: 'https://...', alt: 'Texto alt para la linea temporal' },
   //       correctTime: 1980,
   //     },
   //   ],

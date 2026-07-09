@@ -1,73 +1,80 @@
 export const DEFAULT_EVENTS = [
   {
-    id: '1',
-    description:
-      'Corea del Sur celebra su primera elección libre tras la ocupación japonesa y el final de la Segunda Guerra Mundial.',
-    image: { src: 'https://picsum.photos/id/11/200/300', alt: 'Primera elección libre en Corea del Sur' },
-    correctTime: 1950,
-  },
-  {
-    id: '2',
-    description:
-      'El hombre pisa la Luna por primera vez: Neil Armstrong y Buzz Aldrin caminan sobre la superficie lunar durante la misión Apolo 11.',
-    image: { src: 'https://picsum.photos/id/29/800/600', alt: 'Primer alunizaje tripulado de la historia' },
-    correctTime: 1960,
-  },
-  {
-    id: '3',
-    description:
-      'IBM presenta el IBM PC, el ordenador personal que populariza el uso del PC en hogares y oficinas de todo el mundo.',
-    image: { src: 'https://picsum.photos/id/12/800/600', alt: 'Primer ordenador personal IBM PC' },
-    correctTime: 1980,
-  },
-  {
     id: '4',
-    description:
-      'Caen los primeros trozos del muro de Berlín mientras miles de personas celebran la reunificación simbólica de la ciudad.',
-    image: { src: 'https://picsum.photos/id/318/800/600', alt: 'Caída del muro de Berlín' },
-    correctTime: 1990,
-  },
-  {
-    id: '5',
-    description:
-      'Tim Berners-Lee presenta la World Wide Web al mundo, sentando las bases de la internet tal y como la conocemos hoy.',
-    image: { src: 'https://picsum.photos/id/48/800/600', alt: 'Nacimiento de la World Wide Web' },
-    correctTime: 2000,
-  },
-  {
-    id: '6',
-    description:
-      'Apple lanza el iPod, revolucionando la forma de escuchar música portátil con su diseño compacto y su rueda de control.',
-    image: { src: 'https://picsum.photos/id/26/800/600', alt: 'Presentación del iPod' },
-    correctTime: 2010,
-  },
-  {
-    id: '7',
-    description:
-      'El tsunami del océano Índico arrasa las costas de catorce países y se convierte en una de las mayores catástrofes naturales del siglo XXI.',
-    image: { src: 'https://picsum.photos/id/38/800/600', alt: 'Tsunami del océano Índico' },
-    correctTime: 2020,
+    description: 'Se estrena Aquí no hay quien viva.',
+    image: { src: '/assets/images/aquinohayquienviva.webp', alt: 'Aquí no hay quien viva' },
+    marker: { src: '/assets/images/icon-aqui.webp', alt: 'Aquí no hay quien viva' },
+    correctTime: 2003,
   },
   {
     id: '8',
-    description:
-      'España gana su primer Mundial de fútbol en Sudáfrica, con Andrés Iniesta marcando el gol de la victoria en la prórroga.',
-    image: { src: 'https://picsum.photos/id/13/800/600', alt: 'España gana su primer Mundial de fútbol' },
-    correctTime: 2050,
+    description: 'Llega el primer iPhone.',
+    image: { src: '/assets/images/primeriphone.jpg', alt: 'Primer iPhone' },
+    marker: { src: '/assets/images/icon-iphone.webp', alt: 'Primer iPhone' },
+    correctTime: 2007,
+  },
+  {
+    id: '2',
+    description: 'Primera edición de Operación Triunfo.',
+    image: { src: '/assets/images/operaciontriunfo.jpg', alt: 'Operación Triunfo' },
+    marker: { src: '/assets/images/icon-ot.webp', alt: 'Operación Triunfo' },
+    correctTime: 2001,
+  },
+  {
+    id: '11',
+    description: 'España gana el Mundial de fútbol.',
+    image: { src: '/assets/images/mundial2010.jpg', alt: 'España gana el Mundial de fútbol' },
+    marker: { src: '/assets/images/icon-mundial.webp', alt: 'España gana el Mundial de fútbol' },
+    correctTime: 2010,
+  },
+  {
+    id: '6',
+    description: 'Se lanza YouTube.',
+    image: { src: '/assets/images/youtube.jpg', alt: 'YouTube' },
+    marker: { src: '/assets/images/icon-yt.webp', alt: 'YouTube' },
+    correctTime: 2005,
+  },
+  {
+    id: '1',
+    description: 'Boom de Los Sims.',
+    image: { src: '/assets/images/lossims.jpg', alt: 'Los Sims' },
+    marker: { src: '/assets/images/icon-lossims.webp', alt: 'Los Sims' },
+    correctTime: 2000,
   },
   {
     id: '9',
-    description:
-      'Se firma el Acuerdo de París sobre cambio climático, el compromiso internacional más ambicioso para limitar el calentamiento global.',
-    image: { src: 'https://picsum.photos/id/15/800/600', alt: 'Acuerdo de París sobre clima' },
-    correctTime: 2060,
+    description: 'Se estrena Física o Química.',
+    image: { src: '/assets/images/fisicaoquimica.jpg', alt: 'Física o Química' },
+    marker: { src: '/assets/images/icon-foq.webp', alt: 'Física o Química' },
+    correctTime: 2008,
+  },
+  {
+    id: '5',
+    description: 'Nace Tuenti.',
+    image: { src: '/assets/images/tuenti2.jpg', alt: 'Tuenti' },
+    marker: { src: '/assets/images/icon-tuenti.webp', alt: 'Tuenti' },
+    correctTime: 2004,
   },
   {
     id: '10',
-    description:
-      'La OMS declara la pandemia de COVID-19, marcando el inicio de una crisis sanitaria global sin precedentes en décadas.',
-    image: { src: 'https://picsum.photos/id/20/800/600', alt: 'Declaración de pandemia de COVID-19' },
-    correctTime: 2070,
+    description: 'Boom de FarmVille en Facebook.',
+    image: { src: '/assets/images/farmville.jpg', alt: 'FarmVille en Facebook' },
+    marker: { src: '/assets/images/icon-fv.webp', alt: 'FarmVille en Facebook' },
+    correctTime: 2009,
+  },
+  {
+    id: '3',
+    description: 'Estreno de Gran Hermano 3',
+    image: { src: '/assets/images/granhermano.jpg', alt: 'Gran Hermano 3' },
+    marker: { src: '/assets/images/icon-gh.webp', alt: 'Gran Hermano 3' },
+    correctTime: 2002,
+  },
+  {
+    id: '7',
+    description: 'Sale la Nintendo Wii.',
+    image: { src: '/assets/images/wii.jpg', alt: 'Nintendo Wii' },
+    marker: { src: '/assets/images/icon-wii.webp', alt: 'Nintendo Wii' },
+    correctTime: 2006,
   },
 ];
 
@@ -77,6 +84,8 @@ const SLOT_ROLES = ['prev', 'active', 'next'];
 const FEEDBACK_MS = 1000;
 const CAROUSEL_SWIPE_THRESHOLD = 40;
 const CAROUSEL_ANIM_MS = 280;
+const TIMELINE_WHEEL_RESET_MS = 160;
+const TIMELINE_WHEEL_STEP_THRESHOLD = 30;
 
 function wrapIndex(index, length) {
   if (length === 0) return 0;
@@ -98,6 +107,11 @@ function clampYear(year, min, max, step) {
   const maxIndex = (max - min) / step;
 
   return min + Math.max(0, Math.min(maxIndex, index)) * step;
+}
+
+function getEventMarkerMedia(event) {
+  if (event.marker?.src) return event.marker;
+  return event.image;
 }
 
 function buildTimelineTicks(container, min, max, step) {
@@ -213,9 +227,10 @@ export default function gameEvents(selectorOrOptions = {}) {
     const tickStep = getTickStep(ticksContainer);
     if (!tickStep || !trackInner.clientWidth) return;
 
-    const padWidth = trackInner.clientWidth * 0.5;
+    const padWidth = viewport.clientWidth * 0.5;
     const count = Math.max(1, Math.ceil(padWidth / tickStep));
 
+    trackInner.style.setProperty('--events-roll-fade-width', `${padWidth}px`);
     buildTimelineFadeRoll(rollStart, count);
     buildTimelineFadeRoll(rollEnd, count);
   }
@@ -231,6 +246,8 @@ export default function gameEvents(selectorOrOptions = {}) {
   let timelineDragStartX = 0;
   let timelineDragStartTranslate = 0;
   let isTimelineDragging = false;
+  let timelineWheelTimer = null;
+  let timelineWheelRemainder = 0;
   let carouselDragStartX = 0;
   let isCarouselDragging = false;
   let isCarouselAnimating = false;
@@ -318,7 +335,7 @@ export default function gameEvents(selectorOrOptions = {}) {
 
     const index = yearToIndex(year);
     const tickStep = getTickStep(ticksContainer);
-    const paddingOffset = trackInner.clientWidth * 0.5;
+    const paddingOffset = rollStart.offsetWidth || viewport.clientWidth * 0.5;
     return paddingOffset + index * tickStep + 1;
   }
 
@@ -350,6 +367,7 @@ export default function gameEvents(selectorOrOptions = {}) {
   }
 
   function createMarkerElement(event, year, type) {
+    const markerMedia = getEventMarkerMedia(event);
     const marker = document.createElement('div');
     marker.className = `events-roll__marker is-${type}`;
     marker.role = 'listitem';
@@ -361,8 +379,8 @@ export default function gameEvents(selectorOrOptions = {}) {
     figure.hidden = type !== 'pending';
 
     const img = document.createElement('img');
-    img.src = event.image.src;
-    img.alt = event.image.alt;
+    img.src = markerMedia.src;
+    img.alt = markerMedia.alt;
     img.width = 200;
     img.height = 200;
     figure.appendChild(img);
@@ -408,10 +426,11 @@ export default function gameEvents(selectorOrOptions = {}) {
   }
 
   function showCorrectMarker(event, year, revealDelay = FEEDBACK_MS) {
+    const markerMedia = getEventMarkerMedia(event);
     removeMarker(event.id);
 
     const marker = createMarkerElement(event, year, 'correct');
-    marker.setAttribute('aria-label', `${event.image.alt}, colocado en ${year}`);
+    marker.setAttribute('aria-label', `${markerMedia.alt}, colocado en ${year}`);
     getTickElement(year)?.classList.add('is-correct');
     getTickElement(year)?.classList.remove('is-current');
     updateMarkerStates();
@@ -430,7 +449,7 @@ export default function gameEvents(selectorOrOptions = {}) {
     tick?.classList.add('is-wrong');
 
     const marker = document.createElement('div');
-    marker.className = 'events-roll__marker is-wrong';
+    marker.className = 'events-roll__marker is-wrong is-transient';
     marker.role = 'listitem';
     marker.dataset.placedTime = String(year);
     marker.setAttribute('aria-label', `Colocación incorrecta en ${year}`);
@@ -449,17 +468,19 @@ export default function gameEvents(selectorOrOptions = {}) {
   }
 
   function showPendingMarker(event, year) {
+    const markerMedia = getEventMarkerMedia(event);
     const marker = createMarkerElement(event, year, 'pending');
-    marker.setAttribute('aria-label', `${event.image.alt}, colocado provisionalmente en ${year}`);
+    marker.setAttribute('aria-label', `${markerMedia.alt}, colocado provisionalmente en ${year}`);
     updateMarkerStates();
   }
 
   function markBatchWrong(event, year) {
+    const markerMedia = getEventMarkerMedia(event);
     const marker = markerElements[event.id];
     if (!marker) return;
 
     marker.className = 'events-roll__marker is-wrong';
-    marker.setAttribute('aria-label', `${event.image.alt}, incorrecto en ${year}`);
+    marker.setAttribute('aria-label', `${markerMedia.alt}, incorrecto en ${year}`);
     marker.querySelector('.events-roll__marker-media').hidden = true;
     getTickElement(year)?.classList.add('is-wrong');
   }
@@ -932,6 +953,40 @@ export default function gameEvents(selectorOrOptions = {}) {
     updatePlaceButton();
   }
 
+  function normalizeWheelDelta(event) {
+    const rawDelta = Math.abs(event.deltaX) > Math.abs(event.deltaY)
+      ? event.deltaX
+      : event.deltaY;
+
+    if (event.deltaMode === WheelEvent.DOM_DELTA_LINE) return rawDelta * 16;
+    if (event.deltaMode === WheelEvent.DOM_DELTA_PAGE) return rawDelta * viewport.clientWidth;
+
+    return rawDelta;
+  }
+
+  function onTimelineWheel(event) {
+    event.preventDefault();
+
+    const delta = normalizeWheelDelta(event);
+    if (!delta) return;
+
+    timelineWheelRemainder += delta;
+
+    if (Math.abs(timelineWheelRemainder) >= TIMELINE_WHEEL_STEP_THRESHOLD) {
+      const direction = timelineWheelRemainder > 0 ? 1 : -1;
+
+      setYear(currentYear + direction * step, true);
+      updatePlaceButton();
+      timelineWheelRemainder = 0;
+    }
+
+    if (timelineWheelTimer) window.clearTimeout(timelineWheelTimer);
+    timelineWheelTimer = window.setTimeout(() => {
+      timelineWheelRemainder = 0;
+      timelineWheelTimer = null;
+    }, TIMELINE_WHEEL_RESET_MS);
+  }
+
   function onCarouselPointerDown(event) {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
     if (event.target.closest('button') || !carouselOverlay.hidden) return;
@@ -1001,6 +1056,7 @@ export default function gameEvents(selectorOrOptions = {}) {
   viewport.addEventListener('pointermove', onTimelinePointerMove);
   viewport.addEventListener('pointerup', onTimelinePointerUp);
   viewport.addEventListener('pointercancel', onTimelinePointerUp);
+  viewport.addEventListener('wheel', onTimelineWheel, { passive: false });
   carouselStage.addEventListener('pointerdown', onCarouselPointerDown);
   carouselStage.addEventListener('pointerup', onCarouselPointerUp);
   carouselStage.addEventListener('pointercancel', onCarouselPointerUp);
