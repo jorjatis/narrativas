@@ -1,6 +1,5 @@
 export default function tableWrapper() {
   const wrapper = document.querySelector('.v-n-table-wrapper');
-
   if (!wrapper) return;
 
   const urlCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTvDx2f3hMeLtuHEfXCQg6eY0nwt1E3dQTz3Fm7Dn475mR1e_FSkQ0lODB7BCmKn7KQEIlkLifKlAGG/pub?output=csv';
@@ -8,11 +7,11 @@ export default function tableWrapper() {
   const loading = wrapper.querySelector('#loadingMessage');
   const empty = wrapper.querySelector('#emptyResults');
   const searchInput = wrapper.querySelector('#communitySearch');
-  const sortButton = wrapper.querySelector('#sortCommunitiesBtn');
+  const container = wrapper.querySelector('#communitiesContainer');
+  const clearSearch = wrapper.querySelector('#clearSearch');
 
   let communities = [];
   let currentData = [];
-  let communitiesAsc = false;
 
   init();
 
@@ -20,34 +19,21 @@ export default function tableWrapper() {
     try {
       const response = await fetch(urlCSV);
 
-      if (!response.ok) {
-        throw new Error('Error cargando CSV');
-      }
+      if (!response.ok) throw new Error('Error cargando CSV');
 
       const csv = await response.text();
 
-      const rows = parseCSV(csv);
-
-      communities = groupByCommunity(rows);
-
-      currentData = communities.map(c => ({
-        ...c,
-        items: [...c.items]
-      }));
+      communities = groupByCommunity(parseCSV(csv));
+      currentData = cloneCommunities(communities);
 
       loading.hidden = true;
-
       searchInput.disabled = false;
-      sortButton.disabled = false;
 
       render(currentData);
-
       bindEvents();
 
     } catch (error) {
-
       console.error(error);
-
       loading.textContent = 'No se han podido cargar los datos.';
     }
   }
@@ -94,27 +80,18 @@ export default function tableWrapper() {
 
     const headers = rows.shift();
 
-    return rows.map(values => {
-      const obj = {};
-
-      headers.forEach((header, index) => {
-        obj[header] = values[index] || '';
-      });
-
-      return obj;
-    });
+    return rows.map(values => Object.fromEntries(
+      headers.map((header, index) => [header, values[index] || ''])
+    ));
   }
 
   function groupByCommunity(rows) {
     const grouped = {};
 
     rows.forEach(row => {
-
       const community = row['Comunidad Autónoma'];
 
-      if (!grouped[community]) {
-        grouped[community] = [];
-      }
+      if (!grouped[community]) grouped[community] = [];
 
       grouped[community].push(row);
     });
@@ -122,123 +99,148 @@ export default function tableWrapper() {
     return Object.entries(grouped)
       .map(([name, items]) => ({
         name,
-        items: items.sort((a, b) => {
-          const aValue = `${a.Provincia} ${a.Localidad}`;
-          const bValue = `${b.Provincia} ${b.Localidad}`;
-
-          return aValue.localeCompare(
-            bValue,
-            'es'
-          );
-        }),
         open: false,
-        asc: true
+        asc: true,
+        items: items.sort(sortLocations)
       }))
-      .sort((a, b) =>
-        a.name.localeCompare(b.name, 'es')
-      );
+      .sort((a, b) => a.name.localeCompare(b.name, 'es'));
+  }
+
+  function cloneCommunities(data) {
+    return data.map(c => ({
+      ...c,
+      items: [...c.items]
+    }));
+  }
+
+  function sortLocations(a, b) {
+    return `${a.Provincia} ${a.Localidad}`
+      .localeCompare(`${b.Provincia} ${b.Localidad}`, 'es');
+  }
+
+  function normalize(text) {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
   }
 
   function render(data) {
-    const container = wrapper.querySelector('#communitiesContainer');
-
     container.innerHTML = '';
 
     empty.hidden = !!data.length;
-
     if (!data.length) return;
 
     data.forEach((community, index) => {
-      container.insertAdjacentHTML(
-        'beforeend',
-        renderCommunity(community, index)
-      );
-    });
-  }
-
-  function renderCommunity(community, index) {
-    return `
+      container.insertAdjacentHTML('beforeend', `
       <div class="community">
+
         <div class="community__header" data-index="${index}">
-          <button type="button" class="community__toggle">
+          <button class="community__toggle" type="button">
             ${community.open ? '−' : '+'}
           </button>
-          <span class="community__name">
-            ${community.name}
-          </span>
+
+          <span>${community.name}</span>
         </div>
-        <div class="community__body" style="display:${community.open ? 'block' : 'none'}">
-          ${renderSubtable(community, index)}
+
+        <div class="community__body ${community.open ? 'is-open' : ''}">
+          ${renderTable(community, index)}
+        </div>
+
+      </div>
+    `);
+    });
+
+    updateScrollShadows();
+  }
+
+  function renderTable(community, index) {
+    let currentProvince = '';
+
+    const rows = community.items.map(item => {
+      let html = '';
+
+      if (item.Provincia !== currentProvince) {
+        currentProvince = item.Provincia;
+
+        html += `
+          <tr class="province-row">
+            <td colspan="4">${item.Provincia}</td>
+          </tr>
+        `;
+      }
+
+      html += `
+        <tr>
+          <td>${item.Localidad}</td>
+
+          <td>${item['Qué incluye la entrada']}</td>
+
+          <td>${item['Otras especificaciones']}</td>
+
+          <td>
+            ${item['Página web']
+          ? `<a href="${item['Página web']}" target="_blank" rel="noopener noreferrer">Ver web</a>`
+          : '-'
+        }
+          </td>
+        </tr>
+      `;
+
+      return html;
+    }).join('');
+
+    return `
+      <div class="community-table-shadow has-right-shadow">
+        <div class="community-table-wrapper">
+          <table class="community-table">
+
+            <colgroup>
+              <col style="width:18%">
+              <col style="width:35%">
+              <col style="width:35%">
+              <col style="width:12%">
+            </colgroup>
+
+            <thead>
+              <tr>
+                <th>Provincia / Localidad</th>
+                <th>Qué incluye la entrada</th>
+                <th>Otras especificaciones</th>
+                <th>Página web</th>
+              </tr>
+            </thead>
+
+            <tbody>${rows}</tbody>
+
+          </table>
         </div>
       </div>
     `;
   }
 
-  function renderSubtable(community, index) {
-    return `
-      <table class="community-table">
-        <thead>
-          <tr>
-            <th>
-              Provincia / Localidad
-              <button type="button" class="sort-subtable" data-index="${index}">
-                ⇅
-              </button>
-            </th>
-            <th>
-              Qué incluye la entrada
-            </th>
-            <th>
-              Otras especificaciones
-            </th>
-            <th>
-              Página web
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          ${community.items
-            .map(renderRow)
-            .join('')}
-        </tbody>
-      </table>
-    `;
-  }
+  function updateScrollShadows() {
+    const wrappers = container.querySelectorAll('.community-table-wrapper');
 
-  function renderRow(item) {
-    return `
-      <tr>
-        <td>
-          <strong>${item.Provincia}</strong>
-          <br>
-          ${item.Localidad}
-        </td>
-        <td>
-          ${item['Qué incluye la entrada']}
-        </td>
-        <td>
-          ${item['Otras especificaciones']}
-        </td>
-        <td>
-          ${item['Página web']
-            ? `
-              <a href="${item['Página web']}" target="_blank" rel="noopener noreferrer">
-                Ver web
-              </a>
-              `
-            : '-'
-          }
-        </td>
-      </tr>
-    `;
-  }
+    wrappers.forEach(wrapper => {
+      const shadow = wrapper.parentElement;
 
-  function normalizeText(text) {
-    return text
-      .toString()
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
+      const update = () => {
+        shadow.classList.toggle(
+          'has-left-shadow',
+          wrapper.scrollLeft > 0
+        );
+
+        shadow.classList.toggle(
+          'has-right-shadow',
+          wrapper.scrollLeft + wrapper.clientWidth < wrapper.scrollWidth - 1
+        );
+      };
+
+      update();
+
+      wrapper.addEventListener('scroll', update);
+    });
   }
 
   function bindEvents() {
@@ -247,99 +249,70 @@ export default function tableWrapper() {
 
       if (header) {
         const index = Number(header.dataset.index);
-
         currentData[index].open = !currentData[index].open;
-
         render(currentData);
       }
 
-      if ( event.target.id === 'sortCommunitiesBtn') {
-        communitiesAsc = !communitiesAsc;
+      if (event.target.classList.contains('sort-subtable')) {
+        const community = currentData[Number(event.target.dataset.index)];
 
-        currentData.sort((a, b) =>
-          communitiesAsc
-            ? b.name.localeCompare(a.name, 'es')
-            : a.name.localeCompare(b.name, 'es')
-        );
-
-        render(currentData);
-      }
-
-      if ( event.target.classList.contains('sort-subtable') ) {
-        const index = Number(event.target.dataset.index);
-
-        const community = currentData[index];
         community.asc = !community.asc;
-        community.items.sort((a, b) => {
-          const aValue = `${a.Provincia} ${a.Localidad}`;
-          const bValue = `${b.Provincia} ${b.Localidad}`;
 
-          return community.asc
-            ? bValue.localeCompare(aValue, 'es')
-            : aValue.localeCompare(bValue, 'es');
+        community.items.sort((a, b) => {
+          const result = sortLocations(a, b);
+          return community.asc ? result : -result;
         });
 
         render(currentData);
       }
     });
 
-    searchInput.addEventListener(
-      'input',
-      event => {
-        const value = normalizeText(
-          event.target.value.trim()
-        );
+    searchInput.addEventListener('input', event => {
+      clearSearch.hidden = event.target.value.length === 0;
 
-        if (value.length < 3) {
-          currentData = communities.map(c => ({
-            ...c,
-            open: false,
-            items: [...c.items]
-          }));
+      const value = normalize(event.target.value.trim());
 
-          render(currentData);
-
-          return;
-        }
-
-        currentData = communities
-          .map(community => {
-
-            if ( normalizeText(community.name).startsWith(value) ) {
-              return {
-                ...community,
-                open: false,
-                items: [...community.items]
-              };
-            }
-
-            const matches = community.items.filter(item => {
-              return (
-                normalizeText(item.Provincia).startsWith(value) ||
-                normalizeText(item.Localidad).startsWith(value)
-              );
-            });
-
-            if (!matches.length) {
-              return null;
-            }
-
-            const provinceSearch = matches.some(item =>
-              normalizeText(item.Provincia).startsWith(value)
-            );
-
-            return {
-              ...community,
-              open: true,
-              items: provinceSearch
-                ? [...community.items]
-                : matches
-            };
-          })
-          .filter(Boolean);
+      if (value.length < 3) {
+        currentData = cloneCommunities(communities)
+          .map(c => ({ ...c, open: false }));
 
         render(currentData);
+        return;
       }
-    );
+
+      currentData = communities
+        .map(community => {
+
+          if (normalize(community.name).startsWith(value)) {
+            return {
+              ...community,
+              open: false,
+              items: [...community.items]
+            };
+          }
+
+          const matches = community.items.filter(item =>
+            normalize(item.Provincia).startsWith(value) ||
+            normalize(item.Localidad).startsWith(value)
+          );
+
+          if (!matches.length) return null;
+
+          return {
+            ...community,
+            open: true,
+            items: matches
+          };
+        })
+        .filter(Boolean);
+
+      render(currentData);
+    });
+
+    clearSearch.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.dispatchEvent(new Event('input'));
+      searchInput.focus();
+    });
   }
 }

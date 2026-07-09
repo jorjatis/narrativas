@@ -1,15 +1,15 @@
 @use './base/variables' as *;
 @use './base/variables-custom' as *;
 
-@use './base/actions';
-@use './base/animations';
-@use './base/global';
+// @use './base/actions';
+// @use './base/animations';
+// @use './base/global';
 
-// Kraken componentes
-@use './kraken-components/ladillo';
+// // Kraken componentes
+// @use './kraken-components/ladillo';
 
-// Componentes
-@use './components/scroll-indicator';
-@use './components/pre-article-header';
+// // Componentes
+// @use './components/scroll-indicator';
+// @use './components/pre-article-header';
 
 @use './components/table-wrapper';
