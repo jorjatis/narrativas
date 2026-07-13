@@ -22,5 +22,15 @@
       "authorName": "Pepe Trashorras",
       "authorUrl": "https://www.abc.es/autor/pepe-trashorras-6230/"
     }
-  }
+  },
+  "items": [
+    {
+      "itemImageSrc": false,
+      "itemImageAuthor": "Pepito 1",
+      "itemText": "1 Lorem Ipsum Dolor Est",
+      "itemDateDay": "28",
+      "itemDateMonth": "Ago",
+      "itemAudioSrc": false
+    }
+  ]
 }

@@ -3,13 +3,27 @@
 
 // @use './base/actions';
 // @use './base/animations';
-// @use './base/global';
+@use './base/global';
 
 // // Kraken componentes
-// @use './kraken-components/ladillo';
 
 // // Componentes
-// @use './components/scroll-indicator';
-// @use './components/pre-article-header';
+@use './components/scroll-indicator';
+@use './components/pre-article-header';
+@use './components/scrolly';
 
-@use './components/table-wrapper';
+@use './components/scrolly-modal-episodes';
+
+body {
+  background: $cp15;
+
+  .v-h__c {
+    transition: background 0.2s ease;
+  }
+
+  .v-h:not(.is-fixed) .v-h__c,
+  .v-w-c--2,
+  .v-f__w--3:before {
+    background: $cp15;
+  }
+}
