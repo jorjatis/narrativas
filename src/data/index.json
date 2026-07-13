@@ -1,7 +1,11 @@
 {
   "metadata": {
-    "edition": { "sevilla": false },
-    "subedition": { "pasionensevilla": false },
+    "edition": {
+      "sevilla": false
+    },
+    "subedition": {
+      "pasionensevilla": false
+    },
     "coverUrl": "https://s1.abcstatics.com/abc/www/multimedia/espana/2026/03/08/ultras-1920x1080-blanco.jpg",
     "img": {
       "exists": true,
@@ -23,14 +27,436 @@
       "authorUrl": "https://www.abc.es/autor/pepe-trashorras-6230/"
     }
   },
-  "items": [
+  "episodes": [
     {
-      "itemImageSrc": false,
-      "itemImageAuthor": "Pepito 1",
-      "itemText": "1 Lorem Ipsum Dolor Est",
-      "itemDateDay": "28",
-      "itemDateMonth": "Ago",
-      "itemAudioSrc": false
+      "episodeTitle": "El nacimiento de la Guardia Civil",
+      "episodeButtonText": "Episodio 1",
+      "items": [
+        {
+          "itemImageSrc": "https://picsum.photos/id/100/800/600",
+          "itemImageAuthor": "Archivo Histórico 1",
+          "itemText": "Fundación del cuerpo en 1844 bajo el reinado de Isabel II.",
+          "itemDateDay": "02",
+          "itemDateMonth": "Ene",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/101/800/600",
+          "itemImageAuthor": "Archivo Histórico 2",
+          "itemText": "Primeras misiones de seguridad pública en las zonas rurales.",
+          "itemDateDay": "05",
+          "itemDateMonth": "Feb",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/102/800/600",
+          "itemImageAuthor": "Archivo Histórico 3",
+          "itemText": "Expansión territorial y organización de las comandancias.",
+          "itemDateDay": "08",
+          "itemDateMonth": "Mar",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/103/800/600",
+          "itemImageAuthor": "Archivo Histórico 4",
+          "itemText": "El uniforme verde y el tricornio como símbolos del cuerpo.",
+          "itemDateDay": "11",
+          "itemDateMonth": "Abr",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/104/800/600",
+          "itemImageAuthor": "Archivo Histórico 5",
+          "itemText": "Las primeras academias de formación de guardias civiles.",
+          "itemDateDay": "14",
+          "itemDateMonth": "May",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/110/800/600",
+          "itemImageAuthor": "Archivo Histórico 6",
+          "itemText": "Misión de protección de la propiedad y el orden en el campo.",
+          "itemDateDay": "17",
+          "itemDateMonth": "Jun",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/106/800/600",
+          "itemImageAuthor": "Archivo Histórico 7",
+          "itemText": "La figura del cabo y la estructura jerárquica inicial.",
+          "itemDateDay": "20",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/107/800/600",
+          "itemImageAuthor": "Archivo Histórico 8",
+          "itemText": "Conflictos con el bandolerismo en las carreteras del siglo XIX.",
+          "itemDateDay": "23",
+          "itemDateMonth": "Ago",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/108/800/600",
+          "itemImageAuthor": "Archivo Histórico 9",
+          "itemText": "Reconocimiento oficial del cuerpo por las instituciones del Estado.",
+          "itemDateDay": "26",
+          "itemDateMonth": "Sep",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/109/800/600",
+          "itemImageAuthor": "Archivo Histórico 10",
+          "itemText": "Los primeros informes sobre la eficacia de la Guardia Civil.",
+          "itemDateDay": "01",
+          "itemDateMonth": "Oct",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
+        }
+      ]
+    },
+    {
+      "episodeTitle": "La Guardia Civil en la Restauración",
+      "episodeButtonText": "Episodio 2",
+      "items": [
+        {
+          "itemImageSrc": "https://picsum.photos/id/200/800/600",
+          "itemImageAuthor": "Archivo Histórico 11",
+          "itemText": "Modernización del cuerpo durante el siglo XIX tardío.",
+          "itemDateDay": "03",
+          "itemDateMonth": "Mar",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/201/800/600",
+          "itemImageAuthor": "Archivo Histórico 12",
+          "itemText": "Nuevas competencias en la lucha contra el bandolerismo.",
+          "itemDateDay": "06",
+          "itemDateMonth": "Abr",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/202/800/600",
+          "itemImageAuthor": "Archivo Histórico 13",
+          "itemText": "Reconocimiento social y símbolos del cuerpo.",
+          "itemDateDay": "09",
+          "itemDateMonth": "May",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/203/800/600",
+          "itemImageAuthor": "Archivo Histórico 14",
+          "itemText": "Primeras unidades motorizadas y nuevas técnicas de vigilancia.",
+          "itemDateDay": "12",
+          "itemDateMonth": "Jun",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/204/800/600",
+          "itemImageAuthor": "Archivo Histórico 15",
+          "itemText": "La Guardia Civil en la protección de la realeza.",
+          "itemDateDay": "15",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/205/800/600",
+          "itemImageAuthor": "Archivo Histórico 16",
+          "itemText": "Expansión de cuarteles y presencia en las capitales de provincia.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Ago",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/210/800/600",
+          "itemImageAuthor": "Archivo Histórico 17",
+          "itemText": "Introducción de nuevas armas y procedimientos operativos.",
+          "itemDateDay": "21",
+          "itemDateMonth": "Sep",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/211/800/600",
+          "itemImageAuthor": "Archivo Histórico 18",
+          "itemText": "Colaboración con otras fuerzas de seguridad del Estado.",
+          "itemDateDay": "24",
+          "itemDateMonth": "Oct",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/208/800/600",
+          "itemImageAuthor": "Archivo Histórico 19",
+          "itemText": "Testimonios de guardias en la España de la Restauración.",
+          "itemDateDay": "27",
+          "itemDateMonth": "Nov",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/209/800/600",
+          "itemImageAuthor": "Archivo Histórico 20",
+          "itemText": "El cuerpo como referente de autoridad en las zonas rurales.",
+          "itemDateDay": "02",
+          "itemDateMonth": "Dic",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+        }
+      ]
+    },
+    {
+      "episodeTitle": "La Segunda República",
+      "episodeButtonText": "Episodio 3",
+      "items": [
+        {
+          "itemImageSrc": "https://picsum.photos/id/300/800/600",
+          "itemImageAuthor": "Archivo Histórico 21",
+          "itemText": "Reorganización institucional en un contexto político convulso.",
+          "itemDateDay": "04",
+          "itemDateMonth": "May",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/301/800/600",
+          "itemImageAuthor": "Archivo Histórico 22",
+          "itemText": "El cuerpo en el frente de la seguridad ciudadana.",
+          "itemDateDay": "07",
+          "itemDateMonth": "Jun",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/302/800/600",
+          "itemImageAuthor": "Archivo Histórico 23",
+          "itemText": "Testimonios de guardias civiles en las primeras décadas del siglo XX.",
+          "itemDateDay": "10",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/310/800/600",
+          "itemImageAuthor": "Archivo Histórico 24",
+          "itemText": "La Guardia Civil durante las elecciones y la vida pública.",
+          "itemDateDay": "13",
+          "itemDateMonth": "Ago",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/311/800/600",
+          "itemImageAuthor": "Archivo Histórico 25",
+          "itemText": "Tensiones políticas y el papel del cuerpo en la república.",
+          "itemDateDay": "16",
+          "itemDateMonth": "Sep",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/305/800/600",
+          "itemImageAuthor": "Archivo Histórico 26",
+          "itemText": "Reformas internas y debates sobre su dependencia ministerial.",
+          "itemDateDay": "19",
+          "itemDateMonth": "Oct",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/306/800/600",
+          "itemImageAuthor": "Archivo Histórico 27",
+          "itemText": "Protección de edificios públicos y eventos de masas.",
+          "itemDateDay": "22",
+          "itemDateMonth": "Nov",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/307/800/600",
+          "itemImageAuthor": "Archivo Histórico 28",
+          "itemText": "La Guardia Civil en la represión del bandolerismo urbano.",
+          "itemDateDay": "25",
+          "itemDateMonth": "Dic",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/308/800/600",
+          "itemImageAuthor": "Archivo Histórico 29",
+          "itemText": "Memorias de oficiales republicanos del cuerpo.",
+          "itemDateDay": "28",
+          "itemDateMonth": "Ene",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/309/800/600",
+          "itemImageAuthor": "Archivo Histórico 30",
+          "itemText": "El cuerpo en los albores de la Guerra Civil.",
+          "itemDateDay": "03",
+          "itemDateMonth": "Feb",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3"
+        }
+      ]
+    },
+    {
+      "episodeTitle": "La Guerra Civil y el franquismo",
+      "episodeButtonText": "Episodio 4",
+      "items": [
+        {
+          "itemImageSrc": "https://picsum.photos/id/400/800/600",
+          "itemImageAuthor": "Archivo Histórico 31",
+          "itemText": "El cuerpo en los frentes de la Guerra Civil española.",
+          "itemDateDay": "05",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/401/800/600",
+          "itemImageAuthor": "Archivo Histórico 32",
+          "itemText": "Reestructuración y expansión durante la posguerra.",
+          "itemDateDay": "08",
+          "itemDateMonth": "Ago",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/402/800/600",
+          "itemImageAuthor": "Archivo Histórico 33",
+          "itemText": "Nuevas funciones en la protección del orden público.",
+          "itemDateDay": "11",
+          "itemDateMonth": "Sep",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/403/800/600",
+          "itemImageAuthor": "Archivo Histórico 34",
+          "itemText": "La Guardia Civil en la transición hacia la democracia.",
+          "itemDateDay": "14",
+          "itemDateMonth": "Oct",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/404/800/600",
+          "itemImageAuthor": "Archivo Histórico 35",
+          "itemText": "Unidades especiales y operaciones de gran envergadura.",
+          "itemDateDay": "17",
+          "itemDateMonth": "Nov",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/405/800/600",
+          "itemImageAuthor": "Archivo Histórico 36",
+          "itemText": "El cuerpo en la lucha contra el terrorismo en los años 70.",
+          "itemDateDay": "20",
+          "itemDateMonth": "Dic",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/406/800/600",
+          "itemImageAuthor": "Archivo Histórico 37",
+          "itemText": "Modernización de equipamiento y comunicaciones.",
+          "itemDateDay": "23",
+          "itemDateMonth": "Ene",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/407/800/600",
+          "itemImageAuthor": "Archivo Histórico 38",
+          "itemText": "La Guardia Civil en la protección de fronteras.",
+          "itemDateDay": "26",
+          "itemDateMonth": "Feb",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/408/800/600",
+          "itemImageAuthor": "Archivo Histórico 39",
+          "itemText": "Reformas legales del estatuto del cuerpo.",
+          "itemDateDay": "01",
+          "itemDateMonth": "Mar",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/409/800/600",
+          "itemImageAuthor": "Archivo Histórico 40",
+          "itemText": "Reconocimiento internacional de sus misiones de paz.",
+          "itemDateDay": "04",
+          "itemDateMonth": "Abr",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+        }
+      ]
+    },
+    {
+      "episodeTitle": "La Guardia Civil hoy",
+      "episodeButtonText": "Episodio 5",
+      "items": [
+        {
+          "itemImageSrc": "https://picsum.photos/id/500/800/600",
+          "itemImageAuthor": "Archivo Histórico 41",
+          "itemText": "Tecnología y nuevas amenazas en el siglo XXI.",
+          "itemDateDay": "06",
+          "itemDateMonth": "Sep",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/501/800/600",
+          "itemImageAuthor": "Archivo Histórico 42",
+          "itemText": "Cooperación internacional y misiones en el exterior.",
+          "itemDateDay": "09",
+          "itemDateMonth": "Oct",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/502/800/600",
+          "itemImageAuthor": "Archivo Histórico 43",
+          "itemText": "El futuro del cuerpo en su 90 aniversario.",
+          "itemDateDay": "12",
+          "itemDateMonth": "Nov",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/503/800/600",
+          "itemImageAuthor": "Archivo Histórico 44",
+          "itemText": "Ciberdelincuencia y nuevas unidades de investigación.",
+          "itemDateDay": "15",
+          "itemDateMonth": "Dic",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/504/800/600",
+          "itemImageAuthor": "Archivo Histórico 45",
+          "itemText": "La Guardia Civil en emergencias y catástrofes naturales.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Ene",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/505/800/600",
+          "itemImageAuthor": "Archivo Histórico 46",
+          "itemText": "Igualdad y diversidad dentro del cuerpo.",
+          "itemDateDay": "21",
+          "itemDateMonth": "Feb",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/506/800/600",
+          "itemImageAuthor": "Archivo Histórico 47",
+          "itemText": "Protección del medio ambiente y delitos contra la naturaleza.",
+          "itemDateDay": "24",
+          "itemDateMonth": "Mar",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/507/800/600",
+          "itemImageAuthor": "Archivo Histórico 48",
+          "itemText": "Unidades de montaña y rescate en zonas de difícil acceso.",
+          "itemDateDay": "27",
+          "itemDateMonth": "Abr",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/508/800/600",
+          "itemImageAuthor": "Archivo Histórico 49",
+          "itemText": "Relación con la ciudadanía en la era digital.",
+          "itemDateDay": "02",
+          "itemDateMonth": "May",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        },
+        {
+          "itemImageSrc": "https://picsum.photos/id/509/800/600",
+          "itemImageAuthor": "Archivo Histórico 50",
+          "itemText": "Retos y perspectivas para las próximas décadas.",
+          "itemDateDay": "05",
+          "itemDateMonth": "Jun",
+          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+        }
+      ]
     }
   ]
 }

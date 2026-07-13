@@ -1,72 +1,173 @@
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { getScrollyInstance } from "./scrolly";
 
-export default function episodesModal() {
-  const modal = document.querySelector(".episodes-modal");
-
-  if (!modal) return;
-
-  const scroll = modal.querySelector(".episodes-modal__scroll");
-  const episodes = [...modal.querySelectorAll(".episode")];
+export default function episodesModal(scrollyInstances) {
+  const overlay = document.querySelector(".episodes-modal-overlay");
+  const modals = [...document.querySelectorAll(".episodes-modal")];
   const openButtons = [...document.querySelectorAll(".open-modal")];
-  const close = modal.querySelector(".modal-close");
-  const prev = modal.querySelector(".episode-prev");
-  const next = modal.querySelector(".episode-next");
 
-  let currentEpisode = 0;
+  if (!overlay || !modals.length) return;
 
-  function showEpisode(index) {
-    if (index < 0 || index >= episodes.length) return;
+  gsap.registerPlugin(ScrollTrigger);
 
-    episodes.forEach((ep) => ep.classList.remove("active"));
+  let currentEpisodeId = null;
+  let isSwitching = false;
 
-    episodes[index].classList.add("active");
+  function getModalById(id) {
+    return modals.find((modal) => modal.dataset.episode === String(id));
+  }
 
-    currentEpisode = index;
+  function resetModal(modal) {
+    const episodeId = modal.dataset.episode;
+    const scroll = modal.querySelector(".episodes-modal__scroll");
 
-    scroll.scrollTop = 0;
+    if (scroll) {
+      scroll.scrollTop = 0;
+    }
 
+    if (scrollyInstances) {
+      getScrollyInstance(scrollyInstances, episodeId)?.resetAudio();
+    }
+  }
+
+  function activateModal(modal, animate = true) {
+    modals.forEach((m) => {
+      m.classList.remove("is-active");
+      m.setAttribute("aria-hidden", "true");
+    });
+
+    modal.classList.add("is-active");
+    modal.setAttribute("aria-hidden", "false");
+
+    if (animate) {
+      gsap.fromTo(
+        modal,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: "power1.out" }
+      );
+    } else {
+      gsap.set(modal, { opacity: 1 });
+    }
+
+    currentEpisodeId = modal.dataset.episode;
     ScrollTrigger.refresh();
-
-    updateButtons();
   }
 
-  function updateButtons() {
-    prev.disabled = currentEpisode === 0;
+  function openEpisode(id) {
+    const modal = getModalById(id);
 
-    next.disabled = currentEpisode === episodes.length - 1;
-  }
+    if (!modal) return;
 
-  function open(index = 0) {
-    modal.classList.add("is-open");
+    modals.forEach((m) => resetModal(m));
 
+    overlay.classList.add("is-open");
+    overlay.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
 
-    showEpisode(index);
-
+    activateModal(modal, false);
     ScrollTrigger.refresh();
   }
 
-  function closeModal() {
-    modal.classList.remove("is-open");
+  function switchEpisode(id) {
+    if (isSwitching || String(id) === currentEpisodeId) return;
 
-    document.body.classList.remove("modal-open");
+    const nextModal = getModalById(id);
+    const currentModal = getModalById(currentEpisodeId);
+
+    if (!nextModal) return;
+
+    isSwitching = true;
+
+    const onComplete = () => {
+      if (currentModal) {
+        resetModal(currentModal);
+        currentModal.classList.remove("is-active");
+        currentModal.setAttribute("aria-hidden", "true");
+        gsap.set(currentModal, { opacity: 0 });
+      }
+
+      resetModal(nextModal);
+      activateModal(nextModal, true);
+      isSwitching = false;
+    };
+
+    if (currentModal) {
+      gsap.to(currentModal, {
+        opacity: 0,
+        duration: 0.3,
+        ease: "power1.in",
+        onComplete
+      });
+    } else {
+      onComplete();
+    }
   }
 
-  openButtons.forEach((button, index) => {
+  function closeAll() {
+    if (currentEpisodeId) {
+      const currentModal = getModalById(currentEpisodeId);
+
+      if (currentModal) {
+        resetModal(currentModal);
+      }
+    }
+
+    modals.forEach((modal) => {
+      modal.classList.remove("is-active");
+      modal.setAttribute("aria-hidden", "true");
+      gsap.set(modal, { opacity: 0 });
+    });
+
+    overlay.classList.remove("is-open");
+    overlay.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+
+    currentEpisodeId = null;
+    ScrollTrigger.refresh();
+  }
+
+  openButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      open(index);
+      const episodeId = button.dataset.episode;
+
+      if (episodeId) {
+        openEpisode(episodeId);
+      }
     });
   });
 
-  close.addEventListener("click", closeModal);
+  modals.forEach((modal) => {
+    const closeBtn = modal.querySelector(".modal-close");
+    const prevBtn = modal.querySelector(".episode-btn--prev");
+    const nextBtn = modal.querySelector(".episode-btn--next");
+    const content = modal.querySelector(".episodes-modal__c");
+    const episodeId = Number(modal.dataset.episode);
 
-  next.addEventListener("click", () => {
-    showEpisode(currentEpisode + 1);
+    closeBtn?.addEventListener("click", closeAll);
+
+    prevBtn?.addEventListener("click", () => {
+      if (!prevBtn.disabled) {
+        switchEpisode(episodeId - 1);
+      }
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      if (!nextBtn.disabled) {
+        switchEpisode(episodeId + 1);
+      }
+    });
+
+    content?.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
   });
 
-  prev.addEventListener("click", () => {
-    showEpisode(currentEpisode - 1);
-  });
+  overlay.addEventListener("click", closeAll);
 
-  updateButtons();
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && overlay.classList.contains("is-open")) {
+      closeAll();
+    }
+  });
 }

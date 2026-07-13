@@ -10,8 +10,8 @@ export function initAll() {
   fadeOnScroll('.scr-ind');
   moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
 
-  scrolly();
-  episodesModal();
+  const scrollyInstances = scrolly();
+  episodesModal(scrollyInstances);
 }
 
 // NOTE: Para prod el evento load de window se borra, dejamos solo:
