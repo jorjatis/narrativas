@@ -1,12 +1,15 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initAudioPlayer } from "./audio-player";
+import { motionDuration, scrollBehavior } from "../helpers/prefersReducedMotion";
 
 const audioProgressStore = new Map();
 
 function scrollToStep(step, scroller) {
+  const behavior = scrollBehavior();
+
   if (scroller === window) {
-    step.scrollIntoView({ behavior: "smooth", block: "center" });
+    step.scrollIntoView({ behavior, block: "center" });
     return;
   }
 
@@ -20,7 +23,7 @@ function scrollToStep(step, scroller) {
 
   scroller.scrollTo({
     top: scroller.scrollTop + offset,
-    behavior: "smooth"
+    behavior
   });
 }
 
@@ -117,7 +120,7 @@ function initScrollyContainer(container) {
 
       gsap.to(bg, {
         opacity: i === index ? 1 : 0,
-        duration: immediate ? 0 : 0.5,
+        duration: immediate ? 0 : motionDuration(0.5),
         overwrite: true
       });
     });
@@ -129,13 +132,19 @@ function initScrollyContainer(container) {
     steps.forEach((s) => s.classList.remove("is-active"));
     step.classList.add("is-active");
 
-    bullets.forEach((b) => b.classList.remove("is-active"));
-
     const index = Number(step.dataset.step);
 
-    if (bullets[index]) {
-      bullets[index].classList.add("is-active");
-    }
+    bullets.forEach((bullet, bulletIndex) => {
+      const isActive = bulletIndex === index;
+
+      bullet.classList.toggle("is-active", isActive);
+
+      if (isActive) {
+        bullet.setAttribute("aria-current", "true");
+      } else {
+        bullet.removeAttribute("aria-current");
+      }
+    });
 
     if (onStepChange) {
       onStepChange(step, index);

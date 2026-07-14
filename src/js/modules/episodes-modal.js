@@ -1,21 +1,98 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getScrollyInstance } from "./scrolly";
+import { motionDuration } from "../helpers/prefersReducedMotion";
+
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])'
+].join(", ");
 
 export default function episodesModal(scrollyInstances) {
   const overlay = document.querySelector(".episodes-modal-overlay");
   const modals = [...document.querySelectorAll(".episodes-modal")];
   const openButtons = [...document.querySelectorAll(".open-modal")];
+  const main = document.querySelector("main");
 
   if (!overlay || !modals.length) return;
+
+  function portalModalLayer() {
+    if (overlay.parentElement !== document.body) {
+      document.body.appendChild(overlay);
+    }
+
+    modals.forEach((modal) => {
+      if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+      }
+    });
+  }
+
+  portalModalLayer();
 
   gsap.registerPlugin(ScrollTrigger);
 
   let currentEpisodeId = null;
   let isSwitching = false;
+  let triggerElement = null;
+  let focusTrapHandler = null;
 
   function getModalById(id) {
     return modals.find((modal) => modal.dataset.episode === String(id));
+  }
+
+  function getFocusableElements(container) {
+    return [...container.querySelectorAll(FOCUSABLE_SELECTOR)].filter(
+      (element) => element.getClientRects().length > 0
+    );
+  }
+
+  function trapFocus(modal) {
+    releaseFocusTrap();
+
+    focusTrapHandler = (event) => {
+      if (event.key !== "Tab" || !overlay.classList.contains("is-open")) return;
+
+      const focusable = getFocusableElements(modal);
+
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", focusTrapHandler);
+  }
+
+  function releaseFocusTrap() {
+    if (focusTrapHandler) {
+      document.removeEventListener("keydown", focusTrapHandler);
+      focusTrapHandler = null;
+    }
+  }
+
+  function setBackgroundInert(inert) {
+    if (!main) return;
+
+    if (inert) {
+      main.setAttribute("inert", "");
+      main.setAttribute("aria-hidden", "true");
+    } else {
+      main.removeAttribute("inert");
+      main.removeAttribute("aria-hidden");
+    }
   }
 
   function resetModal(modal) {
@@ -40,11 +117,13 @@ export default function episodesModal(scrollyInstances) {
     modal.classList.add("is-active");
     modal.setAttribute("aria-hidden", "false");
 
-    if (animate) {
+    const duration = animate ? motionDuration(0.3) : 0;
+
+    if (animate && duration > 0) {
       gsap.fromTo(
         modal,
         { opacity: 0 },
-        { opacity: 1, duration: 0.3, ease: "power1.out" }
+        { opacity: 1, duration, ease: "power1.out" }
       );
     } else {
       gsap.set(modal, { opacity: 1 });
@@ -63,10 +142,15 @@ export default function episodesModal(scrollyInstances) {
 
     overlay.classList.add("is-open");
     overlay.setAttribute("aria-hidden", "false");
-    document.body.classList.add("modal-open");
+    document.body.classList.add("is-overflow");
+    setBackgroundInert(true);
 
     activateModal(modal, false);
     ScrollTrigger.refresh();
+
+    const closeBtn = modal.querySelector(".modal-close");
+    closeBtn?.focus();
+    trapFocus(modal);
   }
 
   function switchEpisode(id) {
@@ -89,19 +173,45 @@ export default function episodesModal(scrollyInstances) {
 
       resetModal(nextModal);
       activateModal(nextModal, true);
+      trapFocus(nextModal);
       isSwitching = false;
     };
 
-    if (currentModal) {
+    const duration = motionDuration(0.3);
+
+    if (currentModal && duration > 0) {
       gsap.to(currentModal, {
         opacity: 0,
-        duration: 0.3,
+        duration,
         ease: "power1.in",
         onComplete
       });
     } else {
+      if (currentModal) {
+        gsap.set(currentModal, { opacity: 0 });
+      }
       onComplete();
     }
+  }
+
+  function clearTriggerInteractionState() {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
+    if (!(triggerElement instanceof HTMLElement)) return;
+
+    triggerElement.blur();
+
+    const introImg = triggerElement.closest(".intro-img");
+
+    if (!(introImg instanceof HTMLElement)) return;
+
+    introImg.style.pointerEvents = "none";
+
+    requestAnimationFrame(() => {
+      introImg.style.pointerEvents = "";
+    });
   }
 
   function closeAll() {
@@ -121,8 +231,12 @@ export default function episodesModal(scrollyInstances) {
 
     overlay.classList.remove("is-open");
     overlay.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
+    document.body.classList.remove("is-overflow");
+    setBackgroundInert(false);
+    releaseFocusTrap();
+    clearTriggerInteractionState();
 
+    triggerElement = null;
     currentEpisodeId = null;
     ScrollTrigger.refresh();
   }
@@ -132,6 +246,7 @@ export default function episodesModal(scrollyInstances) {
       const episodeId = button.dataset.episode;
 
       if (episodeId) {
+        triggerElement = button;
         openEpisode(episodeId);
       }
     });
@@ -141,7 +256,6 @@ export default function episodesModal(scrollyInstances) {
     const closeBtn = modal.querySelector(".modal-close");
     const prevBtn = modal.querySelector(".episode-btn--prev");
     const nextBtn = modal.querySelector(".episode-btn--next");
-    const content = modal.querySelector(".episodes-modal__c");
     const episodeId = Number(modal.dataset.episode);
 
     closeBtn?.addEventListener("click", closeAll);
@@ -156,10 +270,6 @@ export default function episodesModal(scrollyInstances) {
       if (!nextBtn.disabled) {
         switchEpisode(episodeId + 1);
       }
-    });
-
-    content?.addEventListener("click", (event) => {
-      event.stopPropagation();
     });
   });
 

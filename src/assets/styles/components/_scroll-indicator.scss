@@ -77,3 +77,13 @@
     transform: translateX(-50%) translateY(5px);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .scr-ind {
+    transition: none;
+
+    &__w {
+      animation: none;
+    }
+  }
+}

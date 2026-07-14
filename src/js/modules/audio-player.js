@@ -7,6 +7,18 @@ function formatTime(seconds) {
   return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
 
+function updateSliderAria(progressWrap, progress, audio) {
+  if (!progressWrap || !progress) return;
+
+  const value = Number(progress.value) || 0;
+
+  progressWrap.setAttribute("aria-valuenow", String(Math.round(value)));
+  progressWrap.setAttribute(
+    "aria-valuetext",
+    audio?.duration ? formatTime(audio.currentTime) : "00:00"
+  );
+}
+
 export function initAudioPlayer(root) {
   const playBtn = root.querySelector(".v-ply__b--1");
   const muteBtn = root.querySelector(".v-ply__b--2");
@@ -29,12 +41,15 @@ export function initAudioPlayer(root) {
     if (currentEl) {
       currentEl.textContent = formatTime(audio.currentTime);
     }
+
+    updateSliderAria(progressWrap, progress, audio);
   }
 
   function updateDuration() {
     if (!durationEl || !audio.duration) return;
 
     durationEl.textContent = formatTime(audio.duration);
+    updateSliderAria(progressWrap, progress, audio);
   }
 
   function setPlaying(playing) {
@@ -104,6 +119,38 @@ export function initAudioPlayer(root) {
     progressWrap?.releasePointerCapture(event.pointerId);
   }
 
+  function onProgressKeyDown(event) {
+    if (!audio.duration) return;
+
+    const step = event.key === "PageUp" || event.key === "PageDown" ? 0.1 : 0.05;
+    let ratio = audio.currentTime / audio.duration;
+
+    switch (event.key) {
+      case "ArrowRight":
+      case "ArrowUp":
+        ratio += step;
+        event.preventDefault();
+        break;
+      case "ArrowLeft":
+      case "ArrowDown":
+        ratio -= step;
+        event.preventDefault();
+        break;
+      case "Home":
+        ratio = 0;
+        event.preventDefault();
+        break;
+      case "End":
+        ratio = 1;
+        event.preventDefault();
+        break;
+      default:
+        return;
+    }
+
+    seek(ratio);
+  }
+
   playBtn?.addEventListener("click", onPlayBtnClick);
   muteBtn?.addEventListener("click", toggleMute);
   audio.addEventListener("timeupdate", updateProgress);
@@ -114,11 +161,14 @@ export function initAudioPlayer(root) {
   progressWrap?.addEventListener("pointermove", onPointerMove);
   progressWrap?.addEventListener("pointerup", onPointerUp);
   progressWrap?.addEventListener("pointercancel", onPointerUp);
+  progressWrap?.addEventListener("keydown", onProgressKeyDown);
 
   if (muteBtn) {
     muteBtn.classList.add("is-active");
     muteBtn.setAttribute("aria-label", "Silenciar");
   }
+
+  updateSliderAria(progressWrap, progress, audio);
 
   return {
     audio,
@@ -143,6 +193,7 @@ export function initAudioPlayer(root) {
       progressWrap?.removeEventListener("pointermove", onPointerMove);
       progressWrap?.removeEventListener("pointerup", onPointerUp);
       progressWrap?.removeEventListener("pointercancel", onPointerUp);
+      progressWrap?.removeEventListener("keydown", onProgressKeyDown);
     }
   };
 }

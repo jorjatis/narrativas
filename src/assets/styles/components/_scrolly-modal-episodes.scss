@@ -32,10 +32,6 @@
   }
 }
 
-body.modal-open {
-  overflow: hidden;
-}
-
 .episodes-modal {
   position: fixed;
   top: 52px;
@@ -53,7 +49,7 @@ body.modal-open {
 
   &.is-active {
     visibility: visible;
-    pointer-events: all;
+    pointer-events: auto;
   }
 
   &__c {
@@ -62,11 +58,14 @@ body.modal-open {
     width: 100%;
     height: 100%;
     margin: 0 auto;
+    pointer-events: all;
   }
 
   &__scroll {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: calc(100dvh - 52px);
+    height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding: 0;
@@ -76,25 +75,25 @@ body.modal-open {
     &::-webkit-scrollbar {
       display: none;
     }
-
-    @media (min-width: $screen-xs) {
-      height: calc(100dvh - 60px);
-    }
   }
 
   .v-n-scrolly {
+    position: relative;
     left: unset;
     width: 100%;
     margin-left: 0;
+    min-height: 100%;
 
     &__sticky {
+      position: sticky;
       top: 0;
       height: calc(100dvh - 52px);
       max-width: 1240px;
       width: 100%;
       margin: 0 auto;
       padding: 0 20px;
-      overflow: visible;
+      overflow: hidden;
+      pointer-events: none;
 
       @media (min-width: $screen-xs) {
         height: calc(100dvh - 60px);
@@ -106,6 +105,7 @@ body.modal-open {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      pointer-events: none;
     }
 
     &__steps {
@@ -116,14 +116,17 @@ body.modal-open {
       pointer-events: none;
 
       .step {
+        min-height: calc(100dvh - 52px);
+        padding: calc((100dvh - 52px) * 0.5) 20px;
         justify-content: center;
+
+        @media (min-width: $screen-xs) {
+          min-height: calc(100dvh - 60px);
+          padding: calc((100dvh - 60px) * 0.5) 20px;
+        }
 
         @media (min-width: 821px) {
           justify-content: flex-end;
-        }
-
-        .step-content {
-          pointer-events: all;
         }
       }
     }
@@ -135,6 +138,7 @@ body.modal-open {
     left: 0;
     display: flex;
     gap: 6px;
+    pointer-events: auto;
 
     @media (min-width: 420px) {
       gap: 16px;
@@ -252,6 +256,7 @@ body.modal-open {
 
   .step {
     .step-content {
+      pointer-events: all;
       display: grid;
       grid-template-columns: 1fr auto;
       grid-template-rows: auto auto;
@@ -376,6 +381,20 @@ body.modal-open {
 
         &__v {
           cursor: pointer;
+
+          &:focus {
+            outline: 2px solid #DF9F31;
+            outline-offset: 2px;
+          }
+
+          &:focus:not(:focus-visible) {
+            outline: none;
+          }
+
+          &:focus-visible {
+            outline: 2px solid #DF9F31;
+            outline-offset: 2px;
+          }
         }
 
         &__g--3 {
@@ -446,6 +465,7 @@ body.modal-open {
     border: 1px solid $cb2;
     transition: opacity .2s ease;
     z-index: 1;
+    pointer-events: auto;
 
     &:hover {
       opacity: .7;
@@ -458,6 +478,7 @@ body.modal-open {
       justify-content: space-between;
       width: 100%;
       margin-top: 32px;
+      pointer-events: auto;
 
       @media (min-width: 821px) {
         position: absolute;
@@ -561,5 +582,16 @@ body.modal-open {
   .episodes-modal .episode-btn--prev svg, 
   .episodes-modal .episode-btn--next svg {
     width: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .episodes-modal-overlay,
+  .episodes-modal .pagination button,
+  .episodes-modal .modal-close,
+  .episodes-modal .episode-btn--prev,
+  .episodes-modal .episode-btn--next,
+  .episodes-modal .v-ply__b--2 {
+    transition: none;
   }
 }

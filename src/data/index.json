@@ -34,6 +34,7 @@
       "items": [
         {
           "itemImageSrc": "https://picsum.photos/id/100/800/600",
+          "itemImageAlt": "Fundación del cuerpo de la Guardia Civil en 1844",
           "itemImageAuthor": "Archivo Histórico 1",
           "itemText": "Fundación del cuerpo en 1844 bajo el reinado de Isabel II.",
           "itemDateDay": "02",

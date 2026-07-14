@@ -9,7 +9,8 @@
 <div class="episodes-modal-overlay" aria-hidden="true"></div>
 
 {{#each episodes}}
-<div class="episodes-modal" data-episode="{{inc @index}}" aria-hidden="true">
+<div class="episodes-modal" data-episode="{{inc @index}}" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="episode-title-{{inc @index}}">
+  <h2 id="episode-title-{{inc @index}}" class="sr-only">{{episodeTitle}}</h2>
   <div class="episodes-modal__c">
     <div class="episodes-modal__scroll v-n-scrolly-scroller">
       <div class="v-n-scrolly" data-scrolly-id="episode-{{inc @index}}">
@@ -19,7 +20,7 @@
               <div class="bg-item bg-item--{{inc @index}}" data-bg="{{@index}}">
                 <figure>
                   <div class="img-c">
-                    <img src="{{itemImageSrc}}" alt="">
+                    <img src="{{itemImageSrc}}" alt="{{default itemImageAlt itemText}}">
                   </div>
                   <figcaption>
                     <strong>© Fotografía: {{itemImageAuthor}}</strong>
@@ -29,29 +30,29 @@
               </div>
             {{/each}}
             <button class="modal-close" type="button" aria-label="Cerrar">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="#fff" d="m6 6 8 8M14 6l-8 8"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" aria-hidden="true"><path stroke="#fff" d="m6 6 8 8M14 6l-8 8"/></svg>
             </button>
             <div class="pagination">
               {{#each items}}
-                <button type="button" data-slide="{{@index}}"{{#if @first}} class="is-active"{{/if}}><span></span></button>
+                <button type="button" data-slide="{{@index}}" aria-label="Ir al paso {{inc @index}} de {{../items.length}}"{{#if @first}} class="is-active" aria-current="true"{{/if}}><span aria-hidden="true"></span></button>
               {{/each}}
             </div>
             <div class="episode-btn-c">
-              <button class="episode-btn episode-btn--prev" type="button" {{#if @first}}disabled{{/if}}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 31 15"><path fill="#f9f6ee" d="M.293 8.071a1 1 0 0 1 0-1.414L6.657.293A1 1 0 0 1 8.07 1.707L2.414 7.364l5.657 5.657a1 1 0 1 1-1.414 1.414zM31 7.364v1H1v-2h30z"/></svg>
+              <button class="episode-btn episode-btn--prev" type="button" {{#if @first}}disabled{{/if}}{{#unless @first}} aria-label="Episodio anterior: {{episodeNav ../episodes @index "prev" "episodeTitle"}}"{{/unless}}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 31 15" aria-hidden="true"><path fill="#f9f6ee" d="M.293 8.071a1 1 0 0 1 0-1.414L6.657.293A1 1 0 0 1 8.07 1.707L2.414 7.364l5.657 5.657a1 1 0 1 1-1.414 1.414zM31 7.364v1H1v-2h30z"/></svg>
                 <span class="episode-btn__title">
                   {{#unless @first}}
                     {{episodeNav ../episodes @index "prev" "episodeTitle"}}
                   {{/unless}}
                 </span>
               </button>
-              <button class="episode-btn episode-btn--next" type="button" {{#if @last}}disabled{{/if}}>
+              <button class="episode-btn episode-btn--next" type="button" {{#if @last}}disabled{{/if}}{{#unless @last}} aria-label="Episodio siguiente: {{episodeNav ../episodes @index "next" "episodeTitle"}}"{{/unless}}>
                 <span class="episode-btn__title">
                   {{#unless @last}}
                     {{episodeNav ../episodes @index "next" "episodeTitle"}}
                   {{/unless}}
                 </span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 31 15"><path fill="#f9f6ee" d="M30.707 8.071a1 1 0 0 0 0-1.414L24.343.293a1 1 0 1 0-1.414 1.414l5.657 5.657-5.657 5.657a1 1 0 0 0 1.414 1.414zM0 7.364v1h30v-2H0z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 31 15" aria-hidden="true"><path fill="#f9f6ee" d="M30.707 8.071a1 1 0 0 0 0-1.414L24.343.293a1 1 0 1 0-1.414 1.414l5.657 5.657-5.657 5.657a1 1 0 0 0 1.414 1.414zM0 7.364v1h30v-2H0z"/></svg>
               </button>
             </div>
           </div>
@@ -81,7 +82,7 @@
                         </div>
                         <div class="v-ply__w v-ply__w--2">
                           <div class="v-ply__g v-ply__g--2">
-                            <div class="v-ply__v">
+                            <div class="v-ply__v" tabindex="0" role="slider" aria-label="Posición del audio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="00:00">
                               <progress value="0" max="100"></progress>
                             </div>
                           </div>
@@ -94,7 +95,7 @@
                         </div>
                         <div class="v-ply__w v-ply__w--3">
                           <button class="v-ply__b v-ply__b--2" type="button" aria-label="Silenciar">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 18"><path stroke="#000" stroke-linejoin="round" stroke-width=".5" d="M4.818 4.818H.25v7.614h6.09L9.387 17V.25z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 18" aria-hidden="true"><path stroke="#000" stroke-linejoin="round" stroke-width=".5" d="M4.818 4.818H.25v7.614h6.09L9.387 17V.25z"/></svg>
                           </button>
                         </div>
                         <audio src="{{itemAudioSrc}}" preload="metadata"></audio>
