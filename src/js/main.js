@@ -7,6 +7,8 @@ import scrolly from './modules/scrolly';
 import episodesModal from './modules/episodes-modal';
 
 export function initAll() {
+  document.body.classList.add('is-loaded');
+
   fadeOnScroll('.scr-ind');
   moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
 

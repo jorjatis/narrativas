@@ -489,7 +489,7 @@ body.modal-open {
       transition: opacity .2s ease;
 
       &:disabled {
-        opacity: .3;
+        opacity: 0;
         pointer-events: none;
       }
 
@@ -543,10 +543,6 @@ body.modal-open {
 
   .episodes-modal .pagination {
     top: 8px;
-  }
-
-  .episodes-modal .v-n-scrolly__bg {
-    padding-top: 42px;
   }
 
   .episodes-modal .bg-item figure {

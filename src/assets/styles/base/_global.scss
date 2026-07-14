@@ -8,22 +8,6 @@ body {
   touch-action: pan-y;
 }
 
-body:has(.v-h-a) {
-  .v-w {
-    .v-a--d-s-1 {
-      margin-top: -118px;
-
-      @media (min-width: $screen-xs) {
-        margin-top: -147px;
-      }
-
-      @media (min-width: $screen-sm) {
-        margin-top: -98px;
-      }
-    }
-  }
-}
-
 .ai2html {
   display: flex;
   justify-content: center;
@@ -51,15 +35,7 @@ body:has(.v-h-a) {
 }
 
 .v-w {
-  .v-a--d-s-1 {
-    height: auto;
-    min-height: 100dvh;
-    margin-top: -70px;
-
-    @media (min-width: $screen-xs) {
-      margin-top: -98px;
-    }
-    
+  .v-a--d-s-1 { 
     .v-a-inf-c {
       grid-area: unset;
       justify-content: flex-start;
