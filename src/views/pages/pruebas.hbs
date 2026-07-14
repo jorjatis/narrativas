@@ -1,22 +1,261 @@
-{{> base/head }}
+<!DOCTYPE html>
+<html lang="es">
 
-{{!-- {{> base/header }} --}}
+<head>
 
-<div class="v-w">
-  <main class="v-w-c v-d-c">
-    <article class="v-d-w">
-      <div class="v-c">
-        <div class="v-d v-d--1 v-d--s v-d--abc">
-          <div class="paywall">
-            <div class="v-c-cmp">
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-  </main>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GSAP Scroll Intro</title>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#ece5d8;
+    overflow-x:hidden;
+}
+
+.section{
+    height:600vh;
+}
+
+.stage{
+
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:#ece5d8;
+
+}
+
+.text{
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:20;
+
+}
+
+.text h1{
+
+    font-size:7vw;
+    color:#555;
+    text-align:center;
+    line-height:.9;
+
+}
+
+.photo{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:257px;
+    height:144px;
+
+    margin-left:-128px;
+    margin-top:-72px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+
+    opacity:0;
+
+}
+
+@media(max-width:900px){
+
+    .text h1{
+        font-size:13vw;
+    }
+
+    .photo{
+        width:180px;
+        height:110px;
+        margin-left:-90px;
+        margin-top:-55px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section class="section">
+
+<div class="stage">
+
+    <div class="text text1">
+        <h1>18 JULIO<br>1936</h1>
+    </div>
+
+    <div class="text text2">
+        <h1>COMIENZA<br>LA GUERRA</h1>
+    </div>
+
+    <img src="https://picsum.photos/id/101/257/144" class="photo p1">
+    <img src="https://picsum.photos/id/102/257/144" class="photo p2">
+    <img src="https://picsum.photos/id/103/257/144" class="photo p3">
+    <img src="https://picsum.photos/id/104/257/144" class="photo p4">
+    <img src="https://picsum.photos/id/105/257/144" class="photo p5">
+
 </div>
 
-{{!-- {{> base/footer }} --}}
+</section>
 
-{{> base/foot }}
+<script>
+
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.set(".text2",{
+    opacity:0,
+    scale:0.3
+});
+
+gsap.set(".photo",{
+    opacity:0,
+    scale:0,
+    x:0,
+    y:0,
+    rotation:0
+});
+
+const tl = gsap.timeline({
+
+    scrollTrigger:{
+        trigger:".section",
+        start:"top top",
+        end:"+=5000",
+        scrub:1,
+        pin:".stage"
+    }
+
+});
+
+/* TEXTO 1 */
+
+tl.to(".text1",{
+
+    scale:8,
+    opacity:0,
+    ease:"none",
+    duration:1
+
+});
+
+/* TEXTO 2 */
+
+tl.to(".text2",{
+
+    scale:1,
+    opacity:1,
+    ease:"none",
+    duration:.6
+
+},"-=0.1");
+
+tl.to(".text2",{
+
+    scale:8,
+    opacity:0,
+    ease:"none",
+    duration:1
+
+});
+
+/* IMÁGENES */
+
+const images=[
+
+{
+cls:".p1",
+x:-430,
+y:-220,
+rot:-8
+},
+
+{
+cls:".p2",
+x:390,
+y:-180,
+rot:8
+},
+
+{
+cls:".p3",
+x:-340,
+y:220,
+rot:-6
+},
+
+{
+cls:".p4",
+x:360,
+y:200,
+rot:7
+},
+
+{
+cls:".p5",
+x:0,
+y:0,
+rot:0
+}
+
+];
+
+images.forEach((img)=>{
+
+    tl.to(img.cls,{
+
+        opacity:1,
+        scale:1,
+        x:img.x,
+        y:img.y,
+        rotation:img.rot,
+        ease:"power3.out",
+        duration:.5
+
+    },"<0.15");
+
+});
+
+/* PEQUEÑO ZOOM FINAL */
+
+tl.to(".photo",{
+
+    scale:1.08,
+    stagger:.08,
+    duration:1
+
+});
+
+</script>
+
+</body>
+
+</html>
