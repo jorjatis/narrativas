@@ -229,26 +229,35 @@ body:has(.v-h-a) {
   }
 
   .intro-img-c {
-    position: absolute;
-    inset: 0;
+    display: flex;
+    flex-direction: column;
     max-width: 980px;
     width: 100%;
     height: auto;
     margin: 0 auto;
     padding: 0 20px;
     z-index: 1;
+
+    @media (min-width: $screen-xs) {
+      display: block;
+      position: absolute;
+      inset: 0;
+    }
   }
 
-  .intro-img-info {
-    position: absolute;
-    top: 10%;
-    right: 62%;
+  .intro-img-info {    
     display: inline-flex;
     align-items: center;
     gap: 10px;
     z-index: 1;
     opacity: 0;
-    transform: translateX(-50%);
+
+    @media (min-width: $screen-xs) {
+      position: absolute;
+      top: 10%;
+      left: 62%;
+      transform: translateX(-50%);
+    }
 
     svg {
       width: 30px;
@@ -328,9 +337,11 @@ body:has(.v-h-a) {
     }
 
     &--1 {
-      top: 12%;
-      left: 16%;
-      width: 30%;
+      @media (min-width: $screen-xs) {
+        top: 12%;
+        left: 16%;
+        width: 30%;
+      }
 
       .intro-img__enter {
         animation-name: preh-float-a;
@@ -346,9 +357,11 @@ body:has(.v-h-a) {
     }
 
     &--2 {
-      top: 18%;
-      right: 14%;
-      width: 26%;
+      @media (min-width: $screen-xs) {
+        top: 18%;
+        right: 14%;
+        width: 26%;
+      }
 
       .intro-img__enter {
         animation-name: preh-float-c;
@@ -366,9 +379,11 @@ body:has(.v-h-a) {
     }
 
     &--3 {
-      top: 42%;
-      left: 0%;
-      width: 32%;
+      @media (min-width: $screen-xs) {
+        top: 42%;
+        left: 0%;
+        width: 32%;
+      }
 
       .intro-img__enter {
         animation-name: preh-float-b;
@@ -386,9 +401,11 @@ body:has(.v-h-a) {
     }
 
     &--4 {
-      top: 36%;
-      right: 10%;
-      width: 48%;
+      @media (min-width: $screen-xs) {
+        top: 36%;
+        right: 10%;
+        width: 48%;
+      }
 
       .intro-img__enter {
         animation-name: preh-float-d;
@@ -406,9 +423,11 @@ body:has(.v-h-a) {
     }
 
     &--5 {
-      top: 70%;
-      left: 35%;
-      width: 40%;
+      @media (min-width: $screen-xs) {
+        top: 70%;
+        left: 35%;
+        width: 40%;
+      }
 
       .intro-img__enter {
         animation-name: preh-float-e;

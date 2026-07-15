@@ -1,11 +1,3 @@
-<div class="episodes-modal-buttons">
-  {{#each episodes}}
-    <button class="open-modal v-btn v-btn-g v-btn--l" data-episode="{{inc @index}}">
-      {{episodeButtonText}}
-    </button>
-  {{/each}}
-</div>
-
 <div class="episodes-modal-overlay" aria-hidden="true"></div>
 
 {{#each episodes}}
@@ -20,7 +12,7 @@
               <div class="bg-item bg-item--{{inc @index}}" data-bg="{{@index}}">
                 <figure>
                   <div class="img-c">
-                    <img src="{{itemImageSrc}}" alt="{{default itemImageAlt itemText}}">
+                    <img src="{{itemImageSrc}}" alt="{{default itemText}}">
                   </div>
                   <figcaption>
                     <strong>© Fotografía: {{itemImageAuthor}}</strong>

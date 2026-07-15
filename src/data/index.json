@@ -29,16 +29,14 @@
   },
   "episodes": [
     {
-      "episodeTitle": "El nacimiento de la Guardia Civil",
-      "episodeButtonText": "Episodio 1",
+      "episodeTitle": "El estallido",
       "items": [
         {
           "itemImageSrc": "https://picsum.photos/id/100/800/600",
-          "itemImageAlt": "Fundación del cuerpo de la Guardia Civil en 1844",
           "itemImageAuthor": "Archivo Histórico 1",
-          "itemText": "Fundación del cuerpo en 1844 bajo el reinado de Isabel II.",
-          "itemDateDay": "02",
-          "itemDateMonth": "Ene",
+          "itemText": "Página de ABC detallando el accidente ferroviario de Añorga y los destrozos.",
+          "itemDateDay": "13",
+          "itemDateMonth": "Jul",
           "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
         },
         {
@@ -116,8 +114,7 @@
       ]
     },
     {
-      "episodeTitle": "La Guardia Civil en la Restauración",
-      "episodeButtonText": "Episodio 2",
+      "episodeTitle": "La batalla por las ciudades",
       "items": [
         {
           "itemImageSrc": "https://picsum.photos/id/200/800/600",
@@ -202,8 +199,7 @@
       ]
     },
     {
-      "episodeTitle": "La Segunda República",
-      "episodeButtonText": "Episodio 3",
+      "episodeTitle": "Radio 1 Politica",
       "items": [
         {
           "itemImageSrc": "https://picsum.photos/id/300/800/600",
@@ -288,8 +284,7 @@
       ]
     },
     {
-      "episodeTitle": "La Guerra Civil y el franquismo",
-      "episodeButtonText": "Episodio 4",
+      "episodeTitle": "Radio 2 Cultura",
       "items": [
         {
           "itemImageSrc": "https://picsum.photos/id/400/800/600",
@@ -374,8 +369,7 @@
       ]
     },
     {
-      "episodeTitle": "La Guardia Civil hoy",
-      "episodeButtonText": "Episodio 5",
+      "episodeTitle": "Radio 3 Sociedad",
       "items": [
         {
           "itemImageSrc": "https://picsum.photos/id/500/800/600",
