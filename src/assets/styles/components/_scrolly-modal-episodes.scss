@@ -173,10 +173,11 @@
 
         @media (max-width: $screen-xs) {
           &:not(.step--end) {
+            min-height: calc(100dvh - 52px + 28vh);
             align-items: flex-end;
             justify-content: center;
-            padding-top: calc((100dvh - 52px) * 0.35);
-            padding-bottom: 20vh;
+            padding-top: calc(100dvh - 52px + 10vh);
+            padding-bottom: 18vh;
           }
         }
 
@@ -422,6 +423,10 @@
       background: #F9F6EE;
       border-radius: 6px;
       box-shadow: 0 4px 25px 15px rgba($cb1, .2);
+
+      @media (max-width: $screen-xs) {
+        transform: translateY(-25vh);
+      }
     }
 
     .step-date {
@@ -674,6 +679,7 @@
 
     &--prev,
     &--next {
+      flex: 1 0 0;
       display: flex; 
       gap: 12px; 
       align-items: center;
