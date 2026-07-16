@@ -8,6 +8,16 @@
   }
 }
 
+@keyframes preh-scaleY {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
 @keyframes preh-fade-up {
   from {
     opacity: 0;

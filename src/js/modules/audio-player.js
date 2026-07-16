@@ -19,7 +19,7 @@ function updateSliderAria(progressWrap, progress, audio) {
   );
 }
 
-export function initAudioPlayer(root) {
+export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
   const playBtn = root.querySelector(".v-ply__b--1");
   const muteBtn = root.querySelector(".v-ply__b--2");
   const progress = root.querySelector("progress");
@@ -94,8 +94,10 @@ export function initAudioPlayer(root) {
 
   function onPlayBtnClick() {
     if (audio.paused) {
+      onUserPlay?.();
       play();
     } else {
+      onUserPause?.();
       pause();
     }
   }

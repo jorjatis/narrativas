@@ -32,424 +32,481 @@
       "episodeTitle": "El estallido",
       "items": [
         {
-          "itemImageSrc": "https://picsum.photos/id/100/800/600",
-          "itemImageAuthor": "Archivo Histórico 1",
-          "itemText": "Página de ABC detallando el accidente ferroviario de Añorga y los destrozos.",
-          "itemDateDay": "13",
-          "itemDateMonth": "Jul",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/101/800/600",
-          "itemImageAuthor": "Archivo Histórico 2",
-          "itemText": "Primeras misiones de seguridad pública en las zonas rurales.",
-          "itemDateDay": "05",
-          "itemDateMonth": "Feb",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/102/800/600",
-          "itemImageAuthor": "Archivo Histórico 3",
-          "itemText": "Expansión territorial y organización de las comandancias.",
-          "itemDateDay": "08",
-          "itemDateMonth": "Mar",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/103/800/600",
-          "itemImageAuthor": "Archivo Histórico 4",
-          "itemText": "El uniforme verde y el tricornio como símbolos del cuerpo.",
-          "itemDateDay": "11",
-          "itemDateMonth": "Abr",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/104/800/600",
-          "itemImageAuthor": "Archivo Histórico 5",
-          "itemText": "Las primeras academias de formación de guardias civiles.",
-          "itemDateDay": "14",
-          "itemDateMonth": "May",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/110/800/600",
-          "itemImageAuthor": "Archivo Histórico 6",
-          "itemText": "Misión de protección de la propiedad y el orden en el campo.",
-          "itemDateDay": "17",
-          "itemDateMonth": "Jun",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/106/800/600",
-          "itemImageAuthor": "Archivo Histórico 7",
-          "itemText": "La figura del cabo y la estructura jerárquica inicial.",
-          "itemDateDay": "20",
-          "itemDateMonth": "Jul",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/107/800/600",
-          "itemImageAuthor": "Archivo Histórico 8",
-          "itemText": "Conflictos con el bandolerismo en las carreteras del siglo XIX.",
-          "itemDateDay": "23",
-          "itemDateMonth": "Ago",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/108/800/600",
-          "itemImageAuthor": "Archivo Histórico 9",
-          "itemText": "Reconocimiento oficial del cuerpo por las instituciones del Estado.",
-          "itemDateDay": "26",
-          "itemDateMonth": "Sep",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/109/800/600",
-          "itemImageAuthor": "Archivo Histórico 10",
-          "itemText": "Los primeros informes sobre la eficacia de la Guardia Civil.",
-          "itemDateDay": "01",
-          "itemDateMonth": "Oct",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
-        }
-      ]
-    },
-    {
-      "episodeTitle": "La batalla por las ciudades",
-      "items": [
-        {
-          "itemImageSrc": "https://picsum.photos/id/200/800/600",
-          "itemImageAuthor": "Archivo Histórico 11",
-          "itemText": "Modernización del cuerpo durante el siglo XIX tardío.",
-          "itemDateDay": "03",
-          "itemDateMonth": "Mar",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/201/800/600",
-          "itemImageAuthor": "Archivo Histórico 12",
-          "itemText": "Nuevas competencias en la lucha contra el bandolerismo.",
-          "itemDateDay": "06",
-          "itemDateMonth": "Abr",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/202/800/600",
-          "itemImageAuthor": "Archivo Histórico 13",
-          "itemText": "Reconocimiento social y símbolos del cuerpo.",
-          "itemDateDay": "09",
-          "itemDateMonth": "May",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/203/800/600",
-          "itemImageAuthor": "Archivo Histórico 14",
-          "itemText": "Primeras unidades motorizadas y nuevas técnicas de vigilancia.",
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/1-4344806.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "El sargento Puente junto a cinco guardias de salto que repelieron a las tropas nacionales durante dos horas de tiroteo. En la foto carné, retrato del teniente José del Castillo.",
+          "itemTextStep": "Asesinato del teniente José del Castillo.",
           "itemDateDay": "12",
-          "itemDateMonth": "Jun",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/204/800/600",
-          "itemImageAuthor": "Archivo Histórico 15",
-          "itemText": "La Guardia Civil en la protección de la realeza.",
-          "itemDateDay": "15",
           "itemDateMonth": "Jul",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-1"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/205/800/600",
-          "itemImageAuthor": "Archivo Histórico 16",
-          "itemText": "Expansión de cuarteles y presencia en las capitales de provincia.",
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/2-7626788.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "El cadáver de José Calvo Sotelo en la puerta del depósito del cementerio de La Almudena, donde fue arrojado tras su asesinato. La fotografía está positivada al revés para ubicarla en la posición correcta, con la cabeza en el lado izquierdo.",
+          "itemTextStep": "Asesinato del líder derechista José Calvo Sotelo.",
+          "itemDateDay": "13",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-2"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/3-8054255.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Dragon Rapide, uno de los aviones de pasajeros de corto alcance más populares de los años 30, fue uno de los primeros aviones de Iberia.",
+          "itemTextStep": "El 'Dragón Rapide' y la muerte del general Balmes.",
+          "itemDateDay": "15-16",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-3"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/4-Base_de_Hidroaviones_del_Atalayon.webp",
+          "itemImageAuthor": "Wikimedia",
+          "itemImageFigcaption": "Base de hidroaviones del Atalayón, en la Mar Chica, en el protectorado español de Marruecos.",
+          "itemTextStep": "El chivatazo y alzamiento prematuro en Melilla.",
+          "itemDateDay": "17",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-4"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/5-1514498372.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "El general Francisco Franco llega a Ceuta procedente de Canarias, para asumir el mando del ejército",
+          "itemTextStep": "Arranca el golpe en el Protectorado de Marruecos.",
+          "itemDateDay": "17",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-5"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/6-4407234.webp",
+          "itemImageAuthor": "Archivo ABC // Hermanos Izquierdo",
+          "itemImageFigcaption": "El torpedero Nº 14, con base en Cartagena, cuyos tripulantes evitaron ser capturados por parte de los sublevados, en septiembre de 1936.",
+          "itemTextStep": "Tensión y motines a bordo de la Marina.",
+          "itemDateDay": "17",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-6"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/7-Ricardo_de_la_Puente_Bahamonde.webp",
+          "itemImageAuthor": "Wikimedia",
+          "itemImageFigcaption": "El comandante Ricardo de la Puente Bahamonde, condenado en consejo de guerra el 2 de agosto de 1936 y ejecutado dos días más tarde.",
+          "itemTextStep": "Drama familiar en el aeródromo de Tetuán.",
           "itemDateDay": "18",
-          "itemDateMonth": "Ago",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-7"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/210/800/600",
-          "itemImageAuthor": "Archivo Histórico 17",
-          "itemText": "Introducción de nuevas armas y procedimientos operativos.",
-          "itemDateDay": "21",
-          "itemDateMonth": "Sep",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+          "itemImageSrcHasBg": true,
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/8-1514531173.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Primer manifiesto del general Francisco Franco, redactado cuando era comandante general de Canarias",
+          "itemTextStep": "Franco declara el Estado de Guerra y vuela a Marruecos.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-8"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/211/800/600",
-          "itemImageAuthor": "Archivo Histórico 18",
-          "itemText": "Colaboración con otras fuerzas de seguridad del Estado.",
-          "itemDateDay": "24",
-          "itemDateMonth": "Oct",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/9-4279369.webp",
+          "itemImageAuthor": "Archivo ABC // SERRANO",
+          "itemImageFigcaption": "Momento en el que se alza la bandera bicolor en Sevilla, con el General Queipo de Llano presente en el balcón",
+          "itemTextStep": "Queipo de Llano toma Sevilla y Varela alza Cádiz.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-9"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/208/800/600",
-          "itemImageAuthor": "Archivo Histórico 19",
-          "itemText": "Testimonios de guardias en la España de la Restauración.",
-          "itemDateDay": "27",
-          "itemDateMonth": "Nov",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/209/800/600",
-          "itemImageAuthor": "Archivo Histórico 20",
-          "itemText": "El cuerpo como referente de autoridad en las zonas rurales.",
-          "itemDateDay": "02",
-          "itemDateMonth": "Dic",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_1/10-4375345.webp",
+          "itemImageAuthor": "Archivo ABC // Miguel Marín Chivite",
+          "itemImageFigcaption": "Declaración del Estado de Guerra en Zaragoza",
+          "itemTextStep": "Sublevación en el Norte: Valladolid y Zaragoza.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-10"
         }
       ]
     },
     {
-      "episodeTitle": "Radio 1 Politica",
+      "episodeTitle": "Las luchas por el territorio",
       "items": [
         {
-          "itemImageSrc": "https://picsum.photos/id/300/800/600",
-          "itemImageAuthor": "Archivo Histórico 21",
-          "itemText": "Reorganización institucional en un contexto político convulso.",
-          "itemDateDay": "04",
-          "itemDateMonth": "May",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/301/800/600",
-          "itemImageAuthor": "Archivo Histórico 22",
-          "itemText": "El cuerpo en el frente de la seguridad ciudadana.",
-          "itemDateDay": "07",
-          "itemDateMonth": "Jun",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/302/800/600",
-          "itemImageAuthor": "Archivo Histórico 23",
-          "itemText": "Testimonios de guardias civiles en las primeras décadas del siglo XX.",
-          "itemDateDay": "10",
-          "itemDateMonth": "Jul",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/310/800/600",
-          "itemImageAuthor": "Archivo Histórico 24",
-          "itemText": "La Guardia Civil durante las elecciones y la vida pública.",
-          "itemDateDay": "13",
-          "itemDateMonth": "Ago",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/311/800/600",
-          "itemImageAuthor": "Archivo Histórico 25",
-          "itemText": "Tensiones políticas y el papel del cuerpo en la república.",
-          "itemDateDay": "16",
-          "itemDateMonth": "Sep",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/305/800/600",
-          "itemImageAuthor": "Archivo Histórico 26",
-          "itemText": "Reformas internas y debates sobre su dependencia ministerial.",
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/1-4393807.webp",
+          "itemImageAuthor": "Archivo ABC // Alfonso Sánchez García",
+          "itemImageFigcaption": "Milicianos de los distritos del Hospital y de La Inclusa, momentos antes de salir de Madrid para incorporarse a las tropas y milicias de Somosierra",
+          "itemTextStep": "Crisis institucional y entrega de armas al pueblo.",
           "itemDateDay": "19",
-          "itemDateMonth": "Oct",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/306/800/600",
-          "itemImageAuthor": "Archivo Histórico 27",
-          "itemText": "Protección de edificios públicos y eventos de masas.",
-          "itemDateDay": "22",
-          "itemDateMonth": "Nov",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/307/800/600",
-          "itemImageAuthor": "Archivo Histórico 28",
-          "itemText": "La Guardia Civil en la represión del bandolerismo urbano.",
-          "itemDateDay": "25",
-          "itemDateMonth": "Dic",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/308/800/600",
-          "itemImageAuthor": "Archivo Histórico 29",
-          "itemText": "Memorias de oficiales republicanos del cuerpo.",
-          "itemDateDay": "28",
-          "itemDateMonth": "Ene",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/309/800/600",
-          "itemImageAuthor": "Archivo Histórico 30",
-          "itemText": "El cuerpo en los albores de la Guerra Civil.",
-          "itemDateDay": "03",
-          "itemDateMonth": "Feb",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3"
-        }
-      ]
-    },
-    {
-      "episodeTitle": "Radio 2 Cultura",
-      "items": [
-        {
-          "itemImageSrc": "https://picsum.photos/id/400/800/600",
-          "itemImageAuthor": "Archivo Histórico 31",
-          "itemText": "El cuerpo en los frentes de la Guerra Civil española.",
-          "itemDateDay": "05",
           "itemDateMonth": "Jul",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-1"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/401/800/600",
-          "itemImageAuthor": "Archivo Histórico 32",
-          "itemText": "Reestructuración y expansión durante la posguerra.",
-          "itemDateDay": "08",
-          "itemDateMonth": "Ago",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/2-56239437.webp",
+          "itemImageAuthor": "Archivo ABC // Serrano",
+          "itemImageFigcaption": "El General Francisco Franco llega a Sevilla procedente de Marruecos, en un Douglas DC-2, para ponerse al frente del Movimiento Nacional",
+          "itemTextStep": "Franco toma el mando del Ejército de África.",
+          "itemDateDay": "19",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-2"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/402/800/600",
-          "itemImageAuthor": "Archivo Histórico 33",
-          "itemText": "Nuevas funciones en la protección del orden público.",
-          "itemDateDay": "11",
-          "itemDateMonth": "Sep",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/3-4527842.webp",
+          "itemImageAuthor": "Archivo ABC // José Díaz Casariego",
+          "itemImageFigcaption": "Barricada en las calles de Barceona durante la guerra",
+          "itemTextStep": "Ofensiva y derrota sublevada en Barcelona.",
+          "itemDateDay": "19",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-3"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/403/800/600",
-          "itemImageAuthor": "Archivo Histórico 34",
-          "itemText": "La Guardia Civil en la transición hacia la democracia.",
-          "itemDateDay": "14",
-          "itemDateMonth": "Oct",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/4-1514531264.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Dolores Ibarruri Gómez, \"Pasionaria\", presidenta del Partido Comunista de España y diputada por el Frente Popular al estallar la guerra civil",
+          "itemTextStep": "Fanjul se encierra y \"La Pasionaria\" arenga a Madrid.",
+          "itemDateDay": "19",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-4"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/404/800/600",
-          "itemImageAuthor": "Archivo Histórico 35",
-          "itemText": "Unidades especiales y operaciones de gran envergadura.",
-          "itemDateDay": "17",
-          "itemDateMonth": "Nov",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/5-4335646.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Salida de los primeros requetés (milicias carlistas) en Navarra, coordinados con el general Mola, el 18 de julio.",
+          "itemTextStep": "Mola incendia el norte y Aranda toma Oviedo.",
+          "itemDateDay": "19",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-5"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/405/800/600",
-          "itemImageAuthor": "Archivo Histórico 36",
-          "itemText": "El cuerpo en la lucha contra el terrorismo en los años 70.",
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/6-101380455.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": false,
+          "itemTextStep": "Resistencia en Málaga y caída del río Guadalquivir.",
+          "itemDateDay": "19",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-6"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/7-7625960.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "A la izquierda, José Sanjurjo (tercero por la derecha), el que iba a ser el comandante en jefe del bando sublevado. A la derecha, restos del avión siniestrado en Portugal, donde estaba exiliado.",
+          "itemTextStep": "Muerte del comandante en jefe José Sanjurjo.",
           "itemDateDay": "20",
-          "itemDateMonth": "Dic",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-7"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/406/800/600",
-          "itemImageAuthor": "Archivo Histórico 37",
-          "itemText": "Modernización de equipamiento y comunicaciones.",
-          "itemDateDay": "23",
-          "itemDateMonth": "Ene",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/8-4450204.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Aspecto del patio del cuartel de la Montaña, con los cadáveres de oficiales y soldados asesinados después del asalto de las fuerzas republicanas, el 20 de julio.",
+          "itemTextStep": "Sangriento asalto al Cuartel de la Montaña.",
+          "itemDateDay": "20",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-8"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/407/800/600",
-          "itemImageAuthor": "Archivo Histórico 38",
-          "itemText": "La Guardia Civil en la protección de fronteras.",
-          "itemDateDay": "26",
-          "itemDateMonth": "Feb",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/9-4412078.webp",
+          "itemImageAuthor": "Archivo ABC // Novoa",
+          "itemImageFigcaption": "Ruinas de una parte dela Plaza de Zocodover y toda la fortaleza del Alcázar de Toledo, el 29 de octubre de 1936.",
+          "itemTextStep": "Alzamiento en Toledo y asedio del Alcázar.",
+          "itemDateDay": "21",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-9"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/408/800/600",
-          "itemImageAuthor": "Archivo Histórico 39",
-          "itemText": "Reformas legales del estatuto del cuerpo.",
-          "itemDateDay": "01",
-          "itemDateMonth": "Mar",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
-        },
-        {
-          "itemImageSrc": "https://picsum.photos/id/409/800/600",
-          "itemImageAuthor": "Archivo Histórico 40",
-          "itemText": "Reconocimiento internacional de sus misiones de paz.",
-          "itemDateDay": "04",
-          "itemDateMonth": "Abr",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/militar_2/10-4491776.webp",
+          "itemImageAuthor": "Archivo ABC // Josep Brangulí",
+          "itemImageFigcaption": "Fuerzas del Gobierno republicano, en Mahón, embarcado artillería hacia Mallorca.",
+          "itemTextStep": "Fracaso del desembarco republicano en Mallorca.",
+          "itemDateDay": "22",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-10"
         }
       ]
     },
     {
-      "episodeTitle": "Radio 3 Sociedad",
+      "episodeTitle": "Huelgas y armas para el pueblo",
       "items": [
         {
-          "itemImageSrc": "https://picsum.photos/id/500/800/600",
-          "itemImageAuthor": "Archivo Histórico 41",
-          "itemText": "Tecnología y nuevas amenazas en el siglo XXI.",
-          "itemDateDay": "06",
-          "itemDateMonth": "Sep",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/1-4337482.webp",
+          "itemImageAuthor": "Archivo ABC // Hermanos Izquierdo",
+          "itemImageFigcaption": "Juventudes de la UGT, de la CNT y comunistas, recorriendo y vigilando las calles, con motivo de las algaradas de los primeros días de la guerra civil, en Madrid",
+          "itemTextStep": "Fin de la huelga de la construcción.",
+          "itemDateDay": "13",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-1"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/501/800/600",
-          "itemImageAuthor": "Archivo Histórico 42",
-          "itemText": "Cooperación internacional y misiones en el exterior.",
-          "itemDateDay": "09",
-          "itemDateMonth": "Oct",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/2-7590849.webp",
+          "itemImageAuthor": "Archivo ABC // Albero y Segovia",
+          "itemImageFigcaption": "Fernando Suárez de Tangil, conde de Vallellano; José Mª Gil Robles, Juan Ventosa Calvell y José Mª Cid, en los sillones del Congreso, líderes de las minorías de derechas que responsabilizaron al Gobierno del asesinato de José Calvo Sotelo",
+          "itemTextStep": "El Congreso de los Diputados es blindado.",
+          "itemDateDay": "14",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-2"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/502/800/600",
-          "itemImageAuthor": "Archivo Histórico 43",
-          "itemText": "El futuro del cuerpo en su 90 aniversario.",
-          "itemDateDay": "12",
-          "itemDateMonth": "Nov",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3"
+          "itemImageSrcHasBg": true,
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/3-7627583.webp",
+          "itemImageAuthor": "Archivo ABC // José Díaz Casariego",
+          "itemImageFigcaption": "El féretro con el cadáver de Calvo Sotelo llevado a hombros por los José Mª Albiña, Andrés Amado,  Santiago FuentesFuentes Pila, Vicente de la Hoz y Joaquín Bau, así como otros diputados y amigos, hasta el panteón familiar.",
+          "itemTextStep": "Entierro de José Calvo Sotelo y disturbios.",
+          "itemDateDay": "14",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-3"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/503/800/600",
-          "itemImageAuthor": "Archivo Histórico 44",
-          "itemText": "Ciberdelincuencia y nuevas unidades de investigación.",
-          "itemDateDay": "15",
-          "itemDateMonth": "Dic",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3"
+          "itemImageSrcHasBg": true,
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/4.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Portada de ABC con George McMahon, el hombre que intentó atentar contra Eduardo VIII, detenido por la policía londinense en Hyde Park.",
+          "itemTextStep": "Atentado frustrado al Rey Eduardo VIII.",
+          "itemDateDay": "16",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-4"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/504/800/600",
-          "itemImageAuthor": "Archivo Histórico 45",
-          "itemText": "La Guardia Civil en emergencias y catástrofes naturales.",
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/5-ABC_portada.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Portada de ABC que recoge la primera reacción oficial del Gobierno, a través del ministro de la Gobernación, Casares Quiroga, tras el comienzo del golpe de Estado.",
+          "itemTextStep": "Primer comunicado oficial por radio de la República.",
           "itemDateDay": "18",
-          "itemDateMonth": "Ene",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-5"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/505/800/600",
-          "itemImageAuthor": "Archivo Histórico 46",
-          "itemText": "Igualdad y diversidad dentro del cuerpo.",
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/6-4618725.webp",
+          "itemImageAuthor": "Archivo ABC // Uguina",
+          "itemImageFigcaption": "Manifestación de la UGT, con unos 20.000 asistentes, en las calles de Madrid.",
+          "itemTextStep": "UGT y CNT declaran la huelga general.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-6"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/7-ABC_pagina.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "El general Francisco Franco, en Burgos, acompañado del general Miguel Cabanellas y del general jefe del Ejército del Sur, Gonzalo Queipo de Llano",
+          "itemTextStep": "Decreto de destitución de los generales golpistas.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-7"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/8-4255326.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": false,
+          "itemTextStep": "José Giral decreta armar al pueblo.",
+          "itemDateDay": "19",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-8"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/9-4401179.webp",
+          "itemImageAuthor": "Archivo ABC // Josep Brangulí",
+          "itemImageFigcaption": "Milicianos que se dirigen al frente desfilan por las calles de Barcelona.",
+          "itemTextStep": "Creación del Comité de Milicias y Junta de Levante.",
           "itemDateDay": "21",
-          "itemDateMonth": "Feb",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3"
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-9"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/506/800/600",
-          "itemImageAuthor": "Archivo Histórico 47",
-          "itemText": "Protección del medio ambiente y delitos contra la naturaleza.",
-          "itemDateDay": "24",
-          "itemDateMonth": "Mar",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/politica/10-7674058.webp",
+          "itemImageAuthor": "Archivo ABC // José Díaz Casariego",
+          "itemImageFigcaption": "El diputado del PSOE por Vizcaya Indalecio Prieto a su salida del Palacio de las Cortes tras declinar forman Gobierno.",
+          "itemTextStep": "Discurso radiofónico de Indalecio Prieto.",
+          "itemDateDay": "23",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-10"
+        }
+      ]
+    },
+    {
+      "episodeTitle": "Intelectuales en el disparadero",
+      "items": [
+        {
+          "itemImageSrcHasBg": true,
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/1-8725480.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Manuscrito de \"Poeta en Nueva York\", de García Lorca, subastado en Christie's (Londres).",
+          "itemTextStep": "Lorca entrega el manuscrito de Poeta en Nueva York.",
+          "itemDateDay": "13",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-1"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/507/800/600",
-          "itemImageAuthor": "Archivo Histórico 48",
-          "itemText": "Unidades de montaña y rescate en zonas de difícil acceso.",
-          "itemDateDay": "27",
-          "itemDateMonth": "Abr",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/2-8546889.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Rodaje de la Verbena de la Paloma en los estudios CIFESA de Madrid",
+          "itemTextStep": "Pleno éxito en las carteleras de cine y teatro.",
+          "itemDateDay": "13",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-2"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/508/800/600",
-          "itemImageAuthor": "Archivo Histórico 49",
-          "itemText": "Relación con la ciudadanía en la era digital.",
-          "itemDateDay": "02",
-          "itemDateMonth": "May",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/3-7888545.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "García Lorca con su hermana Isabel, en la residencia de verano familiar de San Vicente de la Huerta, en Granada, en 1918",
+          "itemTextStep": "Lorca llega a la Huerta de San Vicente.",
+          "itemDateDay": "14",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-3"
         },
         {
-          "itemImageSrc": "https://picsum.photos/id/509/800/600",
-          "itemImageAuthor": "Archivo Histórico 50",
-          "itemText": "Retos y perspectivas para las próximas décadas.",
-          "itemDateDay": "05",
-          "itemDateMonth": "Jun",
-          "itemAudioSrc": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/4-5565497.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Gregorio Marañón en su despacho, en 1930.",
+          "itemTextStep": "Carta de indignación del doctor Gregorio Marañón.",
+          "itemDateDay": "16",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-4"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/5-5567326.webp",
+          "itemImageAuthor": "Archivo ABC // Alfonso Sánchez García",
+          "itemImageFigcaption": "Manuel Machado y su mujer, Eulalia Cáceres.",
+          "itemTextStep": "Manuel Machado queda atrapado en Burgos.",
+          "itemDateDay": "17",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-5"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/6-4468838.webp",
+          "itemImageAuthor": "Archivo ABC // Luis Vidal",
+          "itemImageFigcaption": "Homenaje de Valencia a Rusia y México, organizado por la Alianza de Intelecturales Antifascistas, en el Teatro Principal de Valencia.",
+          "itemTextStep": "Manifiesto de la Alianza de Intelectuales.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-6"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/7-22714901.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "El cuerpo de Antonio Machado en una cama del hotel Quintana, cubierto por la bandera tricolor, en la localida francesa de Colliure donde murió exiliado.",
+          "itemTextStep": "Antonio Machado decide resistir en Madrid.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-7"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/8-7685944.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "En la imagen, Sáenz de Heredia, director de la película \"Raza\" (guionizada por Franco), junto al dictador en el rodaje del largometraje \"Franco ese Hombre\", en 1964.",
+          "itemTextStep": "Detención de Sáenz de Heredia.",
+          "itemDateDay": "18",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-8"
+        },
+        {
+          "itemImageSrcHasBg": true,
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/9-portadas-abc.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Portadas de ABC del 20 de julio de las ediciones de Madrid y Sevilla.",
+          "itemTextStep": "El cisma de la prensa: los dos ABC.",
+          "itemDateDay": "20",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-9"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/cultura/10-4902846.webp",
+          "itemImageAuthor": "Archivo ABC // Miguel Ortega Spottorno",
+          "itemImageFigcaption": "Teófilo Hernando, José Ortega y Gasset y el doctor Marañón posan para Miguel Ortega, hijo del filósofo, en el \"Cigarral de Menores\", en Toledo, en una imagen realizada y cedida a ABC para su publicación, en 1947",
+          "itemTextStep": "Presión miliciana a Ortega y Gasset.",
+          "itemDateDay": "21",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-10"
+        }
+      ]
+    },
+    {
+      "episodeTitle": "Censura y fusilamientos",
+      "items": [
+        {
+          "itemImageSrcHasBg": true,
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/2-1514495093.webp",
+          "itemImageAuthor": "Archivo ABC // Juan Guzmán",
+          "itemImageFigcaption": "Poste con anuncios sobre la Olimpiada Popular, en una calle de Barcelona, que comenzaría el 19 de julio como alternativa antifascista a la Olimpiada de Berlín.",
+          "itemTextStep": "Delegaciones extranjeras para la Olimpiada Popular.",
+          "itemDateDay": "13",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-1"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/1-ABC_pagina.webp",
+          "itemImageAuthor": "Archivo ABC // Marín",
+          "itemImageFigcaption": "Imagen del descarrilamiento publicada en las páginas de ABC",
+          "itemTextStep": "Trágico accidente ferroviario en el norte.",
+          "itemDateDay": "13",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-2"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/3-Blanco y Negro.webp",
+          "itemImageAuthor": "Archivo ABC // Díaz Casariego",
+          "itemImageFigcaption": "Página de la revista Blanco y Negro, editada por Prensa Española, con espectadores esperando el aterrizaje de los aviadores en Madrid",
+          "itemTextStep": "Aviadores filipinos atrapados en Madrid.",
+          "itemDateDay": "13",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-3"
+        },
+        {
+          
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/4-ABC-pagina.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Nota en ABC de la \"suspensión indefinida\" de los diarios La Época y Ya, por la publicación de \"varias noticias destacadas, falsas a todas luces\"...",
+          "itemTextStep": "Censura de prensa gubernamental.",
+          "itemDateDay": "14",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-4"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/5-7578087.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Retrato de José Calvo Sotelo, en 1930.",
+          "itemTextStep": "Entrevista póstuma a Calvo Sotelo.",
+          "itemDateDay": "15",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-5"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/6-1514496593.webp",
+          "itemImageAuthor": "Archivo ABC //Juan Guzmán",
+          "itemImageFigcaption": "Varios deportistas entrenan en el estadio de Montjuich para la Olimpiada Popular de Barcelona",
+          "itemTextStep": "Suspensión de la Olimpiada Popular.",
+          "itemDateDay": "19",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-6"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/7-50861120.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "Uzudun en una fotografía dedicada a ABC, en 1930.",
+          "itemTextStep": "El boxeador Paulino Uzkudun se esconde.",
+          "itemDateDay": "19",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-7"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/8-7397062.webp",
+          "itemImageAuthor": "Archivo ABC // Serrano",
+          "itemImageFigcaption": "La plantilla y directiva del Betis posa con el trofeo de campeón de Liga de 1ª División, el 30 de abril de 1935.",
+          "itemTextStep": "El fútbol sufre las primeras ejecuciones.",
+          "itemDateDay": "20",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-8"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/9-1514497190.webp",
+          "itemImageAuthor": "Archivo ABC",
+          "itemImageFigcaption": "El exfutbolista y secretario de la Junta directiva del Madrid, Santiago Bernabéu (a la derecha), recibe la medalla al Mérito Futbolístico, en los salones de la Federación Castellana de Fútbol",
+          "itemTextStep": "Santiago Bernabéu busca asilo diplomático.",
+          "itemDateDay": "20",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-9"
+        },
+        {
+          "itemImageSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/sociedad/10-1514495128.webp",
+          "itemImageAuthor": "Archivo ABC // Juan Guzmán",
+          "itemImageFigcaption": "Ciudadanos armados montan guardia junto a una de las primeras barricadas levantadas en las calles de Barcelona, cuyas paredes están todavía adornadas con carteles de la recién cancelada Olimpiada Popular",
+          "itemTextStep": "Evacuación de atletas y nacimiento de brigadas.",
+          "itemDateDay": "22",
+          "itemDateMonth": "Jul",
+          "itemAudioSrc": "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-10"
         }
       ]
     }

@@ -1,0 +1,51 @@
+src\views\pages\index.hbs:7:  <main class="v-w-c {{#if hasPaywall}}v-w-c--1{{/if}} v-d-c">
+src\assets\styles\components\_pre-article-header.scss:336:  .intro-img-c {
+src\assets\styles\components\_pre-article-header.scss:363:  .intro-img-info {    
+src\assets\styles\components\_pre-article-header.scss:411:  .intro-img {
+src\assets\styles\components\_pre-article-header.scss:530:      .intro-img__enter {
+src\assets\styles\components\_pre-article-header.scss:535:      .intro-img__txt {
+src\assets\styles\components\_pre-article-header.scss:550:      .intro-img__enter {
+src\assets\styles\components\_pre-article-header.scss:556:      .intro-img__txt {
+src\assets\styles\components\_pre-article-header.scss:572:      .intro-img__enter {
+src\assets\styles\components\_pre-article-header.scss:578:      .intro-img__txt {
+src\assets\styles\components\_pre-article-header.scss:594:      .intro-img__enter {
+src\assets\styles\components\_pre-article-header.scss:600:      .intro-img__txt {
+src\assets\styles\components\_pre-article-header.scss:616:      .intro-img__enter {
+src\assets\styles\components\_pre-article-header.scss:622:      .intro-img__txt {
+src\assets\styles\components\_pre-article-header.scss:641:    .intro-img-c {
+src\assets\styles\components\_pre-article-header.scss:645:      &:has(.intro-img:hover, .intro-img:focus-within) .intro-img:not(:hover):not(:focus-within) .intro-img__enter {
+src\assets\styles\components\_pre-article-header.scss:650:    .intro-img {
+src\assets\styles\components\_pre-article-header.scss:709:    .intro-img {
+src\assets\styles\components\_pre-article-header.scss:750:      .intro-img-info {
+src\assets\styles\components\_pre-article-header.scss:762:      .intro-img {
+src\js\modules\episodes-modal.js:331:    const introImg = triggerElement.closest(".intro-img");
+src\js\modules\pre-article-header-scroll.js:260:  const infos = [...root.querySelectorAll(".intro-img-info")];
+src\js\modules\pre-article-header-scroll.js:263:    const figure = info.closest(".intro-img");
+src\js\modules\pre-article-header-scroll.js:290:  const imgContainer = root.querySelector(".intro-img-c");
+src\js\modules\pre-article-header-scroll.js:291:  const figures = [...root.querySelectorAll(".intro-img")];
+src\js\modules\pre-article-header-scroll.js:293:  const infos = [...root.querySelectorAll(".intro-img-info")];
+src\views\partials\includes\pre-article-header.hbs:33:    <div class="intro-img-c">
+src\views\partials\includes\pre-article-header.hbs:34:      <figure class="intro-img intro-img--1">
+src\views\partials\includes\pre-article-header.hbs:35:        <div class="intro-img__enter">
+src\views\partials\includes\pre-article-header.hbs:36:          <div class="intro-img__c">
+src\views\partials\includes\pre-article-header.hbs:39:              <span class="intro-img__txt">Los inicios de la guerra 01</span>
+src\views\partials\includes\pre-article-header.hbs:44:      <figure class="intro-img intro-img--2">
+src\views\partials\includes\pre-article-header.hbs:45:        <div class="intro-img__enter">
+src\views\partials\includes\pre-article-header.hbs:46:          <div class="intro-img__c">
+src\views\partials\includes\pre-article-header.hbs:49:              <span class="intro-img__txt">Los inicios de la guerra 02</span>
+src\views\partials\includes\pre-article-header.hbs:54:      <figure class="intro-img intro-img--3">
+src\views\partials\includes\pre-article-header.hbs:55:        <div class="intro-img__enter">
+src\views\partials\includes\pre-article-header.hbs:56:          <div class="intro-img__c">
+src\views\partials\includes\pre-article-header.hbs:59:              <span class="intro-img__txt">Los inicios de la guerra 03</span>
+src\views\partials\includes\pre-article-header.hbs:64:      <figure class="intro-img intro-img--4">
+src\views\partials\includes\pre-article-header.hbs:65:        <div class="intro-img__enter">
+src\views\partials\includes\pre-article-header.hbs:66:          <div class="intro-img__c">
+src\views\partials\includes\pre-article-header.hbs:69:              <span class="intro-img__txt">Los inicios de la guerra 04</span>
+src\views\partials\includes\pre-article-header.hbs:74:      <figure class="intro-img intro-img--5">
+src\views\partials\includes\pre-article-header.hbs:75:        <div class="intro-img__enter">
+src\views\partials\includes\pre-article-header.hbs:76:          <div class="intro-img__c">
+src\views\partials\includes\pre-article-header.hbs:79:              <span class="intro-img__txt">Los inicios de la guerra 05</span>
+src\views\partials\includes\pre-article-header.hbs:84:      <div class="intro-img-info">
+src\views\partials\layout\article-bar.hbs:35:          <ev-engagement group-name="articleShare-abc" article-sharing="true"></ev-engagement>
+src\views\partials\base\header.hbs:1:<style>.v-h ev-engagement{visibility:hidden}</style>
+src\views\partials\base\header.hbs:36:          <ev-engagement class="v-btn v-btn--1 v-btn-g v-btn--s" group-name="pastilla-abc" redirect="false" data-mrf-recirculation="Comienzo suscripción cabecera A"></ev-engagement>

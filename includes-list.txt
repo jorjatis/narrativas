@@ -1,8 +1,9 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/table-wrapper/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/table-wrapper/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/styles.css
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/scripts.js
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/table-wrapper/inc-table-wrapper.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/include-pre-header.html
+
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/images/
 
 
-
-<!--#include virtual="/comun/narrativas/redaccion/2026/07/table-wrapper/inc-table-wrapper.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/07/17/90aniversariogc/include-pre-header.html" -->

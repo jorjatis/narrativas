@@ -1,46 +1,47 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { hasArticlePaywall, onArticlePaywallChange } from "../helpers/hasArticlePaywall";
 import { prefersReducedMotion } from "../helpers/prefersReducedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CONFIG = {
   scroll: {
-    // Altura de scroll (en múltiplos de viewport) por segundo de timeline.
-    // Ajusta el "largo" del pin: más alto = hay que scrollear más (más lento).
-    speed: 0.28,
+    speed: 0.33,
     scrub: 0.5
   },
   text: {
     enterScale: 0.15,
-    exitScale: 10
+    exitScale: 50,
+    exitXPercent: 0,
+    transformOrigin: "50% 50%"
   },
   timing: {
-    text1Hold: 1.4,      // tiempo visible el texto 1 antes de irse
-    textEnter: 1.8,      // entrada de los textos secundarios (pequeño -> 1)
-    textHold: 1,         // tiempo visible antes de salir
-    textExit: 3,         // zoom de salida hacia cámara
-    textFade: 1.4,       // fundido de salida
-    textFadeOffset: 1.6  // cuándo empieza el fundido dentro de la salida
+    text1Hold: 1.4,
+    textEnter: 1.8,
+    textHold: 1,
+    textExit: 3
   },
   images: {
     fromScale: 0,
     duration: 2.4,
-    stagger: 0.35
+    stagger: 0.5,
+    mobileDuration: 0.7,
+    mobileOffsetY: 20,
+    infoStartFactor: 0.35
   },
   infoDuration: 0.6,
-  endHold: 2.5           // pin extra al final (scroll con la pantalla fija)
+  endHold: 2.5,
+  paywallEndHold: 0
 };
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
+const MOBILE_MAX_WIDTH = 699;
+const { transformOrigin } = CONFIG.text;
 
-/**
- * Desplazamiento en px para que el centro del figure coincida
- * con el centro de .intro-img-c (posición final en CSS %).
- * Lecturas en batch para evitar forced reflow.
- */
+function isMobileLayout() {
+  return window.innerWidth <= MOBILE_MAX_WIDTH;
+}
+
 function measureCenterOffsets(figures, container) {
   const containerRect = container.getBoundingClientRect();
   const containerCenterX = containerRect.left + containerRect.width / 2;
@@ -72,10 +73,6 @@ function waitForImages(figures) {
   );
 }
 
-/**
- * Devuelve texto 1 (entrada por CSS) y el resto de paneles de texto,
- * que comparten el mismo efecto (entrar pequeño -> crecer -> zoom de salida).
- */
 function collectTextPanels(root) {
   const panels = [...root.querySelectorAll(".intro-text")];
   const text1El = panels.find((el) => el.classList.contains("intro-text--1"));
@@ -91,53 +88,73 @@ function collectTextPanels(root) {
   };
 }
 
-// ---------------------------------------------------------------------------
-// Fases
-// ---------------------------------------------------------------------------
-
-function addTextExit(timeline, zoomEl, exitStart) {
-  const { exitScale } = CONFIG.text;
-  const { textExit, textFade, textFadeOffset } = CONFIG.timing;
-
-  timeline
-    .to(zoomEl, {
-      scale: exitScale,
-      duration: textExit,
-      ease: "power1.in"
-    }, exitStart)
-    .to(zoomEl, {
-      autoAlpha: 0,
-      duration: textFade,
-      ease: "power1.in"
-    }, exitStart + textFadeOffset);
-}
-
-/**
- * Restaura la nitidez del texto al volver arriba del todo:
- * elimina el transform/filter inline para que el navegador
- * rasterice el texto a resolución nativa (sin dientes de sierra).
- */
-function restoreTextSharpness(text1Zoom, secondaryZooms) {
-  gsap.set(text1Zoom, { clearProps: "transform,filter,opacity,visibility" });
-  secondaryZooms.forEach((zoom) => {
-    gsap.set(zoom, { autoAlpha: 0, clearProps: "transform,filter" });
+function setEpisodeButtonsFocusable(buttons, focusable) {
+  buttons.forEach((button) => {
+    if (focusable) {
+      button.removeAttribute("tabindex");
+    } else {
+      button.setAttribute("tabindex", "-1");
+    }
   });
 }
 
-// ---------------------------------------------------------------------------
-// Timeline principal
-// ---------------------------------------------------------------------------
+function addTextExit(timeline, zoomEl, exitStart) {
+  const { exitScale, exitXPercent } = CONFIG.text;
+  const { textExit } = CONFIG.timing;
 
-function buildTimeline(elements, getOffsets) {
-  const { root, stage, text1El, text1Zoom, secondary, imgContainer, figures } = elements;
+  timeline.to(
+    zoomEl,
+    {
+      scale: exitScale,
+      xPercent: exitXPercent,
+      autoAlpha: 0,
+      duration: textExit,
+      ease: "power1.in",
+      transformOrigin
+    },
+    exitStart
+  );
+}
+
+function addTextEnter(timeline, zoomEl, start) {
   const { enterScale } = CONFIG.text;
+  const { textEnter } = CONFIG.timing;
+
+  timeline.fromTo(
+    zoomEl,
+    {
+      scale: enterScale,
+      autoAlpha: 0,
+      immediateRender: false,
+      transformOrigin
+    },
+    {
+      scale: 1,
+      autoAlpha: 1,
+      duration: textEnter,
+      ease: "power2.out",
+      transformOrigin
+    },
+    start
+  );
+}
+
+function hidePaywalledContent(root, imgContainer) {
+  root.classList.add("v-a-preh--paywall");
+  imgContainer?.setAttribute("hidden", "");
+}
+
+function isPaywallText3(el, skipImages) {
+  return skipImages && el.classList.contains("intro-text--3");
+}
+
+function buildTimeline(elements, getOffsets, { skipImages = false } = {}) {
+  const { root, stage, text1El, text1Zoom, secondary, imgContainer, figures, episodeButtons } = elements;
   const { text1Hold, textEnter, textHold, textExit } = CONFIG.timing;
   const { fromScale, duration: imgDuration, stagger } = CONFIG.images;
 
   const secondaryZooms = secondary.map((panel) => panel.zoom);
   let imagesStartTime = 0;
-  let imagesActive = false;
-  let atTop = true;
 
   gsap.set(secondary.map((panel) => panel.el), { autoAlpha: 0, zIndex: 1 });
   gsap.set(imgContainer, { zIndex: 1, pointerEvents: "none" });
@@ -147,54 +164,33 @@ function buildTimeline(elements, getOffsets) {
     scrollTrigger: {
       trigger: root,
       start: "top top",
-      // El largo del pin se calcula según la duración total del timeline,
-      // así al añadir textos o el endHold se amplía solo.
       end: () => "+=" + Math.round(window.innerHeight * timeline.duration() * CONFIG.scroll.speed),
       pin: stage,
       scrub: CONFIG.scroll.scrub,
       anticipatePin: 1,
       fastScrollEnd: true,
       invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const currentTime = self.progress * timeline.duration();
-
-        const shouldImages = currentTime >= imagesStartTime;
-        if (shouldImages !== imagesActive) {
-          imagesActive = shouldImages;
-          root.classList.toggle("intro-images-active", shouldImages);
-        }
-
-        if (self.progress < 0.003) {
-          if (!atTop) {
-            atTop = true;
-            root.classList.remove("intro-scroll-active");
-            restoreTextSharpness(text1Zoom, secondaryZooms);
-          }
-        } else if (atTop) {
-          atTop = false;
-          root.classList.add("intro-scroll-active");
-        }
+      onUpdate(self) {
+        const shouldImages = !skipImages && self.progress * timeline.duration() >= imagesStartTime;
+        root.classList.toggle("intro-images-active", shouldImages);
+        setEpisodeButtonsFocusable(episodeButtons, shouldImages);
       },
-      onLeave: () => {
+      onLeave() {
         root.classList.add("intro-scroll-complete");
-        root.classList.remove("intro-scroll-active");
         gsap.set(figures, { clearProps: "transform,willChange", autoAlpha: 1 });
         gsap.set([text1Zoom, ...secondaryZooms], { clearProps: "transform,filter" });
       },
-      onEnterBack: () => {
+      onEnterBack() {
         root.classList.remove("intro-scroll-complete");
-        atTop = false;
-        root.classList.add("intro-scroll-active");
       }
     }
   });
 
   let t = 0;
 
-  // --- Texto 1 (la entrada la hace el CSS con .is-loaded) ---
   timeline
     .set(text1El, { zIndex: 3 }, 0)
-    .set(text1Zoom, { scale: 1, autoAlpha: 1, transformOrigin: "center center" }, 0);
+    .set(text1Zoom, { scale: 1, autoAlpha: 1, transformOrigin }, 0);
 
   t += text1Hold;
   addTextExit(timeline, text1Zoom, t);
@@ -202,16 +198,16 @@ function buildTimeline(elements, getOffsets) {
   timeline.set(text1El, { zIndex: 1 }, text1Gone);
   t = text1Gone;
 
-  // --- Textos secundarios (2, 3, ...): mismo efecto en secuencia ---
   secondary.forEach(({ el, zoom }) => {
-    timeline
-      .set(el, { autoAlpha: 1, zIndex: 3 }, t)
-      .fromTo(
-        zoom,
-        { scale: enterScale, autoAlpha: 0, transformOrigin: "center center", immediateRender: false },
-        { scale: 1, autoAlpha: 1, duration: textEnter, ease: "power2.out" },
-        t
-      );
+    const paywallText3 = isPaywallText3(el, skipImages);
+
+    timeline.set(el, { autoAlpha: 1, zIndex: 3 }, t);
+    addTextEnter(timeline, zoom, t);
+
+    if (paywallText3) {
+      t += textEnter;
+      return;
+    }
 
     const exitStart = t + textEnter + textHold;
     addTextExit(timeline, zoom, exitStart);
@@ -220,45 +216,81 @@ function buildTimeline(elements, getOffsets) {
     t = gone;
   });
 
-  // --- Imágenes: salen del centro y escalan a su sitio con stagger ---
   imagesStartTime = t;
 
-  timeline
-    .set(
-      figures,
-      {
-        x: (index) => getOffsets()[index]?.x ?? 0,
-        y: (index) => getOffsets()[index]?.y ?? 0,
-        scale: fromScale,
-        autoAlpha: 0,
-        transformOrigin: "center center",
-        force3D: true,
-        willChange: "transform"
-      },
-      0
-    )
-    .set(imgContainer, { zIndex: 4, pointerEvents: "auto" }, imagesStartTime)
-    .to(
-      figures,
-      {
-        x: 0,
-        y: 0,
-        scale: 1,
-        autoAlpha: 1,
-        duration: imgDuration,
-        stagger,
-        ease: "power1.out",
-        force3D: true
-      },
-      imagesStartTime
-    );
+  if (skipImages) {
+    if (CONFIG.paywallEndHold > 0) {
+      timeline.to({}, { duration: CONFIG.paywallEndHold }, t);
+    }
 
-  // --- .intro-img-info: fundido 0 -> 1 al empezar su bloque, sin esperar ---
+    return timeline;
+  }
+
+  timeline.set(imgContainer, { zIndex: 4, pointerEvents: "auto" }, imagesStartTime);
+
+  if (isMobileLayout()) {
+    const { mobileDuration, mobileOffsetY, stagger: mobileStagger } = CONFIG.images;
+
+    timeline
+      .set(
+        figures,
+        {
+          autoAlpha: 0,
+          y: mobileOffsetY,
+          clearProps: "x,scale"
+        },
+        0
+      )
+      .to(
+        figures,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: mobileDuration,
+          stagger: mobileStagger,
+          ease: "power2.out"
+        },
+        imagesStartTime
+      );
+  } else {
+    timeline
+      .set(
+        figures,
+        {
+          x: (index) => getOffsets()[index]?.x ?? 0,
+          y: (index) => getOffsets()[index]?.y ?? 0,
+          scale: fromScale,
+          autoAlpha: 0,
+          transformOrigin: "center center",
+          force3D: true
+        },
+        0
+      )
+      .to(
+        figures,
+        {
+          x: 0,
+          y: 0,
+          scale: 1,
+          autoAlpha: 1,
+          duration: imgDuration,
+          stagger,
+          ease: "power1.out",
+          force3D: true
+        },
+        imagesStartTime
+      );
+  }
+
+  const activeImgDuration = isMobileLayout() ? CONFIG.images.mobileDuration : imgDuration;
   const infos = [...root.querySelectorAll(".intro-img-info")];
+
   infos.forEach((info) => {
     const figure = info.closest(".intro-img");
     const index = figure ? figures.indexOf(figure) : -1;
-    const at = index >= 0 ? imagesStartTime + index * stagger : imagesStartTime;
+    const at = index >= 0
+      ? imagesStartTime + index * stagger
+      : imagesStartTime + activeImgDuration * CONFIG.images.infoStartFactor;
 
     timeline.fromTo(
       info,
@@ -268,18 +300,13 @@ function buildTimeline(elements, getOffsets) {
     );
   });
 
-  const imagesEnd = imagesStartTime + imgDuration + stagger * Math.max(0, figures.length - 1);
+  const imagesEnd = imagesStartTime + activeImgDuration + stagger * Math.max(0, figures.length - 1);
   t = imagesEnd;
 
-  // --- Pin extra al final (scroll con la pantalla fija) ---
   timeline.to({}, { duration: CONFIG.endHold }, t);
 
   return timeline;
 }
-
-// ---------------------------------------------------------------------------
-// Init
-// ---------------------------------------------------------------------------
 
 export default function preArticleHeaderScroll() {
   const root = document.querySelector(".v-a-preh");
@@ -288,41 +315,77 @@ export default function preArticleHeaderScroll() {
   const stage = root.querySelector(".intro-stage");
   const imgContainer = root.querySelector(".intro-img-c");
   const figures = [...root.querySelectorAll(".intro-img")];
+  const episodeButtons = [...root.querySelectorAll(".open-modal")];
+  const infos = [...root.querySelectorAll(".intro-img-info")];
   const { text1El, text1Zoom, secondary } = collectTextPanels(root);
+  let skipImages = hasArticlePaywall();
 
   if (!stage || !text1El || !text1Zoom || !imgContainer || !figures.length) {
     return null;
   }
 
+  if (skipImages) {
+    hidePaywalledContent(root, imgContainer);
+  }
+
   if (prefersReducedMotion()) {
     root.classList.add("intro-scroll-complete");
-    gsap.set(figures, { autoAlpha: 1, clearProps: "transform" });
+
+    if (!skipImages) {
+      root.classList.add("intro-images-active");
+      gsap.set(figures, { autoAlpha: 1, clearProps: "transform" });
+      gsap.set(infos, { autoAlpha: 1 });
+      setEpisodeButtonsFocusable(episodeButtons, true);
+    } else {
+      const text3 = root.querySelector(".intro-text--3");
+      const text3Zoom = text3?.querySelector(".intro-text__zoom");
+
+      if (text3 && text3Zoom) {
+        gsap.set(text3, { autoAlpha: 1, zIndex: 3 });
+        gsap.set(text3Zoom, { scale: 1, autoAlpha: 1, transformOrigin });
+      }
+    }
+
     return null;
   }
 
-  const infos = [...root.querySelectorAll(".intro-img-info")];
-  gsap.set(figures, { autoAlpha: 0, scale: 0 });
+  setEpisodeButtonsFocusable(episodeButtons, false);
+
+  if (isMobileLayout()) {
+    gsap.set(figures, { autoAlpha: 0, y: CONFIG.images.mobileOffsetY });
+  } else {
+    gsap.set(figures, { autoAlpha: 0, scale: 0 });
+  }
   gsap.set(infos, { autoAlpha: 0 });
 
-  const elements = { root, stage, text1El, text1Zoom, secondary, imgContainer, figures };
+  const elements = { root, stage, text1El, text1Zoom, secondary, imgContainer, figures, episodeButtons };
   let timeline = null;
   let resizeTimer = null;
 
   const createTimeline = () => {
-    gsap.set(figures, { clearProps: "transform" });
-    const imageOffsets = measureCenterOffsets(figures, imgContainer);
-    const getOffsets = () => imageOffsets;
+    if (!skipImages) {
+      gsap.set(figures, { clearProps: "transform" });
+    }
+
+    const getOffsets = isMobileLayout()
+      ? () => []
+      : () => measureCenterOffsets(figures, imgContainer);
 
     timeline?.scrollTrigger?.kill();
     timeline?.kill();
-    timeline = buildTimeline(elements, getOffsets);
-    root.classList.add("intro-scroll-ready");
+    timeline = buildTimeline(elements, getOffsets, { skipImages });
     ScrollTrigger.refresh();
   };
 
-  waitForImages(figures).then(() => {
+  const startTimeline = () => {
     requestAnimationFrame(createTimeline);
-  });
+  };
+
+  if (skipImages) {
+    startTimeline();
+  } else {
+    waitForImages(figures).then(startTimeline);
+  }
 
   const onResize = () => {
     clearTimeout(resizeTimer);
@@ -331,8 +394,17 @@ export default function preArticleHeaderScroll() {
 
   window.addEventListener("resize", onResize, { passive: true });
 
+  const stopPaywallWatch = onArticlePaywallChange(() => {
+    if (skipImages) return;
+
+    skipImages = true;
+    hidePaywalledContent(root, imgContainer);
+    createTimeline();
+  });
+
   return {
     kill() {
+      stopPaywallWatch();
       window.removeEventListener("resize", onResize);
       clearTimeout(resizeTimer);
       timeline?.scrollTrigger?.kill();

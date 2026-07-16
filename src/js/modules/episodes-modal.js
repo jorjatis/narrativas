@@ -17,6 +17,9 @@ export default function episodesModal(scrollyInstances) {
   const modals = [...document.querySelectorAll(".episodes-modal")];
   const openButtons = [...document.querySelectorAll(".open-modal")];
   const main = document.querySelector("main");
+  const pageScrInd =
+    document.querySelector(".v-a-img-c > .scr-ind") ||
+    document.querySelector(".v-a-preh + .scr-ind");
 
   if (!overlay || !modals.length) return;
 
@@ -40,6 +43,131 @@ export default function episodesModal(scrollyInstances) {
   let isSwitching = false;
   let triggerElement = null;
   let focusTrapHandler = null;
+  let audioAutoplayEnabled = false;
+  let audioAutoplayPaused = false;
+  let scrollIndicatorHandler = null;
+  let scrollIndicatorScroller = null;
+  let scrollIndicatorEl = null;
+  let scrollIndicatorOrigin = 0;
+
+  const SCROLL_IND_THRESHOLD = 50;
+
+  function enableAutoplayOnAllInstances() {
+    audioAutoplayEnabled = true;
+    audioAutoplayPaused = false;
+
+    if (scrollyInstances) {
+      scrollyInstances.forEach((instance) => {
+        instance.enableAutoplay();
+        instance.resumeAutoplay();
+      });
+    }
+  }
+
+  function disableAutoplayOnAllInstances() {
+    audioAutoplayEnabled = false;
+    audioAutoplayPaused = false;
+
+    if (scrollyInstances) {
+      scrollyInstances.forEach((instance) => instance.disableAutoplay());
+    }
+  }
+
+  function deactivateAllScrollTriggers() {
+    if (scrollyInstances) {
+      scrollyInstances.forEach((instance) => instance.deactivateScrollTriggers());
+    }
+  }
+
+  function pauseAutoplayOnAllInstances() {
+    audioAutoplayPaused = true;
+
+    if (scrollyInstances) {
+      scrollyInstances.forEach((instance) => instance.pauseAutoplay());
+    }
+  }
+
+  function updateScrollIndicatorVisibility() {
+    if (!scrollIndicatorEl || !scrollIndicatorScroller) return;
+
+    const hasScrolled =
+      scrollIndicatorScroller.scrollTop >
+      scrollIndicatorOrigin + SCROLL_IND_THRESHOLD;
+
+    scrollIndicatorEl.classList.toggle("is-visible", !hasScrolled);
+    scrollIndicatorEl.setAttribute("aria-hidden", String(hasScrolled));
+  }
+
+  function bindScrollIndicator(modal) {
+    releaseScrollIndicator();
+
+    scrollIndicatorScroller = modal.querySelector(".episodes-modal__scroll");
+    scrollIndicatorEl = modal.querySelector(".scr-ind");
+
+    if (!scrollIndicatorEl || !scrollIndicatorScroller) return;
+
+    const instance = getScrollyInstance(
+      scrollyInstances,
+      modal.dataset.episode
+    );
+
+    scrollIndicatorOrigin =
+      instance?.getMinScrollTop() ?? scrollIndicatorScroller.scrollTop;
+
+    scrollIndicatorHandler = () => updateScrollIndicatorVisibility();
+    scrollIndicatorScroller.addEventListener("scroll", scrollIndicatorHandler, {
+      passive: true
+    });
+
+    updateScrollIndicatorVisibility();
+  }
+
+  function releaseScrollIndicator() {
+    if (scrollIndicatorScroller && scrollIndicatorHandler) {
+      scrollIndicatorScroller.removeEventListener("scroll", scrollIndicatorHandler);
+    }
+
+    if (scrollIndicatorEl) {
+      scrollIndicatorEl.classList.remove("is-visible");
+      scrollIndicatorEl.setAttribute("aria-hidden", "true");
+    }
+
+    scrollIndicatorScroller = null;
+    scrollIndicatorHandler = null;
+    scrollIndicatorEl = null;
+    scrollIndicatorOrigin = 0;
+
+    if (pageScrInd) {
+      pageScrInd.classList.toggle("is-visible", window.scrollY < SCROLL_IND_THRESHOLD);
+    }
+  }
+
+  function prepareModalView(modal) {
+    const instance = getScrollyInstance(scrollyInstances, modal.dataset.episode);
+
+    pageScrInd?.classList.remove("is-visible");
+    deactivateAllScrollTriggers();
+
+    requestAnimationFrame(() => {
+      instance?.activateScrollTriggers();
+      ScrollTrigger.refresh(true);
+      instance?.goToStep(0, { behavior: "auto" });
+
+      if (audioAutoplayEnabled) {
+        instance?.enableAutoplay();
+
+        if (audioAutoplayPaused) {
+          instance?.pauseAutoplay();
+        }
+      }
+
+      requestAnimationFrame(() => {
+        instance?.syncMinScrollTop();
+        ScrollTrigger.refresh(true);
+        bindScrollIndicator(modal);
+      });
+    });
+  }
 
   function getModalById(id) {
     return modals.find((modal) => modal.dataset.episode === String(id));
@@ -97,14 +225,11 @@ export default function episodesModal(scrollyInstances) {
 
   function resetModal(modal) {
     const episodeId = modal.dataset.episode;
-    const scroll = modal.querySelector(".episodes-modal__scroll");
-
-    if (scroll) {
-      scroll.scrollTop = 0;
-    }
 
     if (scrollyInstances) {
-      getScrollyInstance(scrollyInstances, episodeId)?.resetAudio();
+      const instance = getScrollyInstance(scrollyInstances, episodeId);
+      instance?.resetScrollState();
+      instance?.resetAudio();
     }
   }
 
@@ -147,6 +272,7 @@ export default function episodesModal(scrollyInstances) {
 
     activateModal(modal, false);
     ScrollTrigger.refresh();
+    prepareModalView(modal);
 
     const closeBtn = modal.querySelector(".modal-close");
     closeBtn?.focus();
@@ -173,6 +299,7 @@ export default function episodesModal(scrollyInstances) {
 
       resetModal(nextModal);
       activateModal(nextModal, true);
+      prepareModalView(nextModal);
       trapFocus(nextModal);
       isSwitching = false;
     };
@@ -234,8 +361,12 @@ export default function episodesModal(scrollyInstances) {
     document.body.classList.remove("is-overflow");
     setBackgroundInert(false);
     releaseFocusTrap();
+    releaseScrollIndicator();
+    disableAutoplayOnAllInstances();
+    deactivateAllScrollTriggers();
     clearTriggerInteractionState();
 
+    triggerElement?.focus();
     triggerElement = null;
     currentEpisodeId = null;
     ScrollTrigger.refresh();
@@ -280,4 +411,7 @@ export default function episodesModal(scrollyInstances) {
       closeAll();
     }
   });
+
+  document.addEventListener("scrolly:audio-enabled", enableAutoplayOnAllInstances);
+  document.addEventListener("scrolly:audio-paused", pauseAutoplayOnAllInstances);
 }

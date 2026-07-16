@@ -1,0 +1,6 @@
+.\src\views\partials\layout\article-bar.hbs
+.\src\views\partials\base\header.hbs
+.\src\assets\styles\components\_pre-article-header.scss
+.\src\js\modules\pre-article-header-scroll.js
+.\src\views\partials\includes\pre-article-header.hbs
+.\src\js\modules\episodes-modal.js

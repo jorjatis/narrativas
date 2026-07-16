@@ -10,7 +10,7 @@ import episodesModal from './modules/episodes-modal';
 export function initAll() {
   document.body.classList.add('is-loaded');
 
-  fadeOnScroll('.scr-ind');
+  fadeOnScroll(".v-a-img-c > .scr-ind, .v-a-preh + .scr-ind");
   moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
 
   preArticleHeaderScroll();
