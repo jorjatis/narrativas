@@ -105,116 +105,170 @@ body:has(.v-h-a) {
       }
 
       .intro-text__l {
+        position: relative;
         display: flex;
         flex-direction: column;
         margin-top: 20px;
+        margin-right: 8px;
+        padding-right: 16px;
 
-        @media (min-width: 389px) {
+        @media (min-width: 450px) {
           margin-top: 12px;
+          margin-right: 16px;
         }
 
-        @media (min-width: $screen-xs) {
+        @media (min-width: 820px) {
           margin-top: 0;
+          margin-right: 30px;
+          padding-right: 30px;
+        }        
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: -7%;
+          right: 0;
+          width: 1px;
+          height: 110%;
+          background: $cb9;
+          transform: scaleY(0);
+          transform-origin: top center;
+
+          @media (min-width: 820px) {
+            top: 0;
+            height: 100%;
+          }
         }
 
         .intro-text__t {
           opacity: 0;
-          transform: translateY(-14px);
+          transform: translateY(-28px);
 
           &--1 {
             margin-bottom: 40px;
-            font-family: $axs;
             font-size: 190px;
             line-height: 75px;
             letter-spacing: -8px;
             color: #DF9F31;
+            text-align: right;
 
-            @media (min-width: 389px) {
+            @media (min-width: 450px) {
               font-size: 230px;
               line-height: 115px;
+              text-align: left;
             }
 
-            @media (min-width: $screen-xs) {              
+            @media (min-width: 820px) {              
               font-size: 400px;
               line-height: 235px;
             }
           }
 
           &--2 {
-            font-family: $axs;
-            font-size: 31px;
-            line-height: 1;
+            font-size: 32px;
+            line-height: 33px;
             letter-spacing: -1.309px;
 
-            @media (min-width: 389px) {
-              font-size: 39px;
+            @media (min-width: 450px) {
+              font-size: 40px;
+              line-height: 32px;
             }
 
-            @media (min-width: $screen-xs) {              
+            @media (min-width: 820px) {              
               font-size: 65px;
+              line-height: 1;
+            }
+          }
+
+          &--3 {
+            display: flex;
+            gap: 2px;
+            font-size: 27px;
+            line-height: 1;
+            letter-spacing: -1.14px;
+            opacity: 1;
+            transform: none;
+
+            @media (min-width: 450px) {
+              gap: 6px;
+              font-size: 34px;
+              line-height: 36px;
+            }
+
+            @media (min-width: 820px) {              
+              font-size: 57px;
+            }
+
+            .intro-text__c {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+
+            .intro-text__word {
+              display: inline-block;
+              opacity: 0;
+              transform: translateY(-28px);
+            }
+          }
+
+          &--4 {
+            font-size: 16px;
+            line-height: 13px;
+            letter-spacing: 0;
+
+            @media (min-width: 450px) {
+              font-size: 18px;
+            }
+
+            @media (min-width: 820px) {              
+              font-size: 25px;
+              line-height: 20px;
+              letter-spacing: -1.14px;
             }
           }
         }
       }
 
       .intro-text__r {
-        position: relative;
         display: flex;
         flex-direction: column;
-        margin-left: 16px;
-        padding-left: 16px;
-
-        @media (min-width: $screen-xs) {              
-          margin-left: 30px;
-          padding-left: 30px;
-        }
-
-        &:before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 1px;
-          height: 100%;
-          background: $cb9;
-          transform: scaleY(0);
-          transform-origin: top;
-          transition: transform 0.5s ease;
-          transition-delay: 0.25s;
-        }
 
         .intro-text__t {
           opacity: 0;
-          transform: translateY(-14px);
+          transform: translateY(-28px);
 
           &--1 {            
-            font-size: 26px;
-            line-height: 14px;
+            padding-left: 17%;
+            font-size: 24px;
+            line-height: 20px;
             letter-spacing: -0.8px;
 
-            @media (min-width: 389px) {
+            @media (min-width: 450px) {
+              padding-left: 19%;
               font-size: 30px;
               line-height: 26px;
             }
 
-            @media (min-width: $screen-xs) {
+            @media (min-width: 820px) {
+              padding-left: 21%;
               font-size: 40px;
-              line-height: 35px;
+              line-height: 24px;
             }
           }
 
           &--2 {
-            font-size: 50px;
-            line-height: 54px;
+            font-size: 40px;
+            line-height: 34px;
             letter-spacing: -2.4px;
 
-            @media (min-width: 389px) {
+            @media (min-width: 450px) {
               font-size: 65px;
-              line-height: 57px;
+              line-height: 48px;
             }
 
-            @media (min-width: $screen-xs) {              
-              font-size: 120px;
+            @media (min-width: 820px) {              
+              font-size: 110px;
               line-height: 100px;
             }
 
@@ -223,12 +277,12 @@ body:has(.v-h-a) {
               line-height: 30px;
               letter-spacing: -0.8px;
 
-              @media (min-width: 389px) {
+              @media (min-width: 450px) {
                 font-size: 30px;
                 line-height: 30px;
               }
 
-              @media (min-width: $screen-xs) {
+              @media (min-width: 820px) {
                 font-size: 40px;
                 line-height: 35px;
               }
@@ -236,35 +290,64 @@ body:has(.v-h-a) {
           }
 
           &--3 {
-            font-size: 57px;
-            line-height: 36px;
+            display: flex;
+            gap: 0;
+            font-size: 40px;
+            line-height: 34px;
             letter-spacing: -2.4px;
+            opacity: 1;
+            transform: none;
 
-            @media (min-width: 389px) {
-              font-size: 71px;
-              line-height: 59px;
+            @media (min-width: 450px) {
+              gap: 2px;
+              font-size: 65px;
+              line-height: 57px;
             }
 
-            @media (min-width: $screen-xs) {
+            @media (min-width: 820px) {
+              gap: 8px;
               font-size: 120px;
-              line-height: 100px;              
+              line-height: 85px;              
+            }
+
+            .intro-text__word {
+              display: inline-block;
+              opacity: 0;
+              transform: translateY(-28px);
             }
           }
 
           &--4 {            
-            font-size: 57px;
-            line-height: 60px;
-            letter-spacing: -2.4px;
+            font-size: 17px;
+            line-height: 36px;
             text-align: right;
+            letter-spacing: 0;
 
-            @media (min-width: 389px) {
-              font-size: 71px;
-              line-height: 63px;
+            @media (min-width: 450px) {
+              font-size: 20px;
+              line-height: 57px;
             }
 
-            @media (min-width: $screen-xs) {
+            @media (min-width: 820px) {
+              font-size: 36px;
+              line-height: 85px;
+              letter-spacing: -2.4px;
+            }
+          }
+
+          &--5 {            
+            font-size: 40px;
+            line-height: 30px;
+            letter-spacing: -2.4px;
+
+            @media (min-width: 450px) {
+              font-size: 65px;
+              line-height: 48px;
+            }
+
+            @media (min-width: 820px) {
               font-size: 120px;
-              line-height: 100px;
+              line-height: 110px;
             }
           }
         }
@@ -680,15 +763,39 @@ body.is-loaded {
         opacity: 1;
 
         .intro-text__l {
+          &:after {
+            animation: preh-scaleY .55s ease forwards;
+            animation-delay: .32s;
+          }
+
           .intro-text__t {
-            animation: preh-fade-up .55s ease forwards;
+            animation: preh-fade-down .55s ease forwards;
 
             &--1 {
-              animation-delay: .15s;
+              animation-delay: .12s;
             }
 
             &--2 {
-              animation-delay: .25s;
+              animation-delay: .28s;
+            }
+
+            &--3 {
+              animation: none;
+              opacity: 1;
+              transform: none;
+
+              .intro-text__word {
+                animation: preh-fade-down .55s ease forwards;
+                animation-delay: .52s;
+              }
+            }
+
+            &--4 {
+              animation-delay: .4s;
+
+              & + .intro-text__t--4 {
+                animation-delay: .46s;
+              }
             }
           }
         }
@@ -699,22 +806,37 @@ body.is-loaded {
           }
 
           .intro-text__t {
-            animation: preh-fade-up .55s ease forwards;
+            animation: preh-fade-down .55s ease forwards;
 
             &--1 {
-              animation-delay: .35s;
+              animation-delay: .38s;
             }
 
             &--2 {
-              animation-delay: .45s;
+              animation-delay: .5s;
             }
 
             &--3 {
-              animation-delay: .55s;
+              animation: none;
+              opacity: 1;
+              transform: none;
+
+              .intro-text__word {
+                animation: preh-fade-down .55s ease forwards;
+                animation-delay: .74s;
+              }
             }
 
             &--4 {
-              animation-delay: .65s;
+              animation-delay: .62s;
+
+              & + .intro-text__t--4 {
+                animation-delay: .68s;
+              }
+            }
+
+            &--5 {
+              animation-delay: .86s;
             }
           }
         }
@@ -739,18 +861,33 @@ body.is-loaded {
       &--1 {
         transition: none;
 
+        .intro-text__l {
+          &:after {
+            transform: scaleY(1);
+            animation: none;
+          }
+        }
+
         .intro-text__l,
         .intro-text__r {
           .intro-text__t {
             opacity: 1;
             transform: none;
             animation: none;
+
+            &--3 {
+              .intro-text__word {
+                opacity: 1;
+                transform: none;
+                animation: none;
+              }
+            }
           }
         }
 
         .intro-text__r {
           &:before {
-            transition: none;
+            animation: none;
           }
         }
       }
