@@ -4,6 +4,13 @@
       "title": "Julio 2026",
       "cards": [
         {
+          "title": "90 Aniversario de la Guerra civil: El origen de la tragedia española",
+          "articleUrl": "https://www.abc.es/historia/julio-1936-comenzo-guerra-civil-20260718015745-nt.html",
+          "titleMedia": "18-90-aniversario-gc",
+          "gif": true,
+          "netlifyUrl": "https://narrativas-90aniversariogc.netlify.app/"
+        },
+        {
           "title": "Ranking camisetas España",
           "articleUrl": "https://www.abc.es/deportes/futbol/mundial/mejor-camiseta-espana-mundial-elige-tus-favoritas-20260627000243-nt.html",
           "titleMedia": "17-ranking-camisetas",
@@ -127,19 +134,19 @@
           "titleMedia": "03-ultras",
           "gif": false,
           "netlifyUrl": "https://narrativa-gruposultra.netlify.app/"
-        },
-        {
-          "title": "Más allá del reloj: un médico en 24 horas de guardia",
-          "articleUrl": "https://www.abc.es/sociedad/anatomia-guardia-medica-horas-20260301124231-nt.html",
-          "titleMedia": "02-urgencias",
-          "gif": true,
-          "netlifyUrl": "https://narrativa-24horasurgencias.netlify.app/"
         }
       ]
     },
     {
       "title": "Febrero 2026",
       "cards": [
+        {
+          "title": "Más allá del reloj: un médico en 24 horas de guardia",
+          "articleUrl": "https://www.abc.es/sociedad/anatomia-guardia-medica-horas-20260301124231-nt.html",
+          "titleMedia": "02-urgencias",
+          "gif": true,
+          "netlifyUrl": "https://narrativa-24horasurgencias.netlify.app/"
+        },
         {
           "title": "Viaje a la Dinamarca sin inmigrantes que imita Europa",
           "articleUrl": "https://www.abc.es/internacional/dinamarca-quiere-sade-imita-europa-20260218194319-nt.html",
