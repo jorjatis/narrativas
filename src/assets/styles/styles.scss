@@ -1,8 +1,8 @@
 @use './base/variables' as *;
 @use './base/variables-custom' as *;
 
-// @use './base/actions';
-// @use './base/animations';
+@use './base/actions';
+@use './base/animations';
 @use './base/global';
 
 // // Kraken componentes
@@ -12,18 +12,5 @@
 @use './components/pre-article-header';
 @use './components/scrolly';
 
-@use './components/scrolly-modal-episodes';
-
-body {
-  background: $cp15;
-
-  .v-h__c {
-    transition: background 0.2s ease;
-  }
-
-  .v-h:not(.is-fixed) .v-h__c,
-  .v-w-c--2,
-  .v-f__w--3:before {
-    background: $cp15;
-  }
-}
+@use './components/perspective-map';
+@use './components/scrolls-stories';

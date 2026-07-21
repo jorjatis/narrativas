@@ -1,43 +1,16 @@
-function getScrollY() {
-  return (
-    window.scrollY ||
-    document.documentElement.scrollTop ||
-    document.body.scrollTop ||
-    0
-  );
-}
+export default function fadeOnScroll(selector, threshold = 50) {
+  const indicators = document.querySelectorAll(selector);
+  if (!indicators.length) return;
 
-function getPageScrollIndicators(selector) {
-  return [...document.querySelectorAll(selector)].filter(
-    (el) => !el.closest(".episodes-modal")
-  );
-}
+  const update = () => {
+    const visible = window.scrollY < threshold;
 
-export default function fadeOnScroll(selector, distance = 50) {
-  let ticking = false;
-
-  const sync = () => {
-    const shouldBeVisible = getScrollY() < distance;
-
-    getPageScrollIndicators(selector).forEach((el) => {
-      el.classList.toggle("is-visible", shouldBeVisible);
-      el.setAttribute("aria-hidden", String(!shouldBeVisible));
+    indicators.forEach((el) => {
+      el.classList.toggle("is-visible", visible);
+      el.setAttribute("aria-hidden", String(!visible));
     });
   };
 
-  sync();
-
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (ticking) return;
-
-      ticking = true;
-      requestAnimationFrame(() => {
-        sync();
-        ticking = false;
-      });
-    },
-    { passive: true }
-  );
+  update();
+  window.addEventListener("scroll", update, { passive: true });
 }

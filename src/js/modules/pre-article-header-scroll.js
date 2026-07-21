@@ -5,6 +5,9 @@ import { prefersReducedMotion } from "../helpers/prefersReducedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// iOS/Android: show/hide URL bar fires resize and would rebuild the scrub timeline.
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 const CONFIG = {
   scroll: {
     speed: 0.33,
@@ -329,7 +332,7 @@ export default function preArticleHeaderScroll() {
   }
 
   if (prefersReducedMotion()) {
-    root.classList.add("intro-scroll-complete");
+    root.classList.add("intro-scroll-complete", "intro-entrance-done");
 
     if (!skipImages) {
       root.classList.add("intro-images-active");
@@ -360,7 +363,7 @@ export default function preArticleHeaderScroll() {
 
   const elements = { root, stage, text1El, text1Zoom, secondary, imgContainer, figures, episodeButtons };
   let timeline = null;
-  let resizeTimer = null;
+  let entranceLockTimer = null;
 
   const createTimeline = () => {
     if (!skipImages) {
@@ -387,12 +390,14 @@ export default function preArticleHeaderScroll() {
     waitForImages(figures).then(startTimeline);
   }
 
-  const onResize = () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(createTimeline, 250);
-  };
+  // Freeze CSS entrance after it finishes so it can never re-fire
+  // (is-loaded is only set once; recreating GSAP/DOM can still restart CSS animations).
+  entranceLockTimer = window.setTimeout(() => {
+    root.classList.add("intro-entrance-done");
+  }, 1600);
 
-  window.addEventListener("resize", onResize, { passive: true });
+  // No resize rebuild: mobile browser chrome (iOS/Android) fires resize on scroll
+  // and would kill/recreate the scrub timeline, making the intro look like it reloads.
 
   const stopPaywallWatch = onArticlePaywallChange(() => {
     if (skipImages) return;
@@ -405,8 +410,7 @@ export default function preArticleHeaderScroll() {
   return {
     kill() {
       stopPaywallWatch();
-      window.removeEventListener("resize", onResize);
-      clearTimeout(resizeTimer);
+      clearTimeout(entranceLockTimer);
       timeline?.scrollTrigger?.kill();
       timeline?.kill();
     }
