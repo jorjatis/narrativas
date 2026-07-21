@@ -1,21 +1,26 @@
 @use '../base/variables' as *;
 
 .v-n-ss {
-  margin: 72px 0 94px;
+  margin-top: 72px;
+  margin-bottom: 94px;
 }
 
 .v-n-ss-h {
   position: relative;
   display: flex;
   align-items: flex-end;
-  gap: 16px;
+  gap: 8px;
   max-width: 372px;
   margin-bottom: 32px;
   padding-bottom: 12px;
 
+  @media (min-width: 420px) {
+    gap: 16px;
+  }
+
   @media (min-width: $screen-xs) {
     gap: 36px;
-    max-width: 542px;
+    max-width: 600px;
   }
 
   @media (min-width: 840px) {
@@ -23,9 +28,9 @@
     margin-left: calc(-800px / 2 + 50%);
   }
 
-  @media (min-width: 1220px) {
-    width: 1180px;
-    margin-left: calc(-1180px / 2 + 50%);
+  @media (min-width: 1290px) {
+    width: 1250px;
+    margin-left: calc(-1250px / 2 + 50%);
   }
 
   &:before {
@@ -33,9 +38,12 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 150vw;
+    width: 100vw;
     height: 1px;
     background: $cp3;
+    transform: scaleX(1);
+    transform-origin: left center;
+    transition: transform 0.9s ease-in-out 0.2s;
   }
 
   &:after {
@@ -46,16 +54,19 @@
     width: 4px;
     height: 4px;
     background: $cp3;
+    opacity: 1;
     transform: rotate(45deg);
+    transition: opacity 0.25s ease 1.1s;
   }
 
   &__d {
     font-family: $axs;
-    font-size: 90px;
-    line-height: 72px;
+    font-size: 82px;
+    line-height: 68px;
     color: $cp1;
+    font-variant-numeric: tabular-nums;
 
-    @media (min-width: 380px) {
+    @media (min-width: 420px) {
       font-size: 120px;
       line-height: 96px;
     }
@@ -74,8 +85,11 @@
     font-family: $adl;
     font-size: 20px;
     line-height: 22px;
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
 
-    @media (min-width: 380px) {
+    @media (min-width: 420px) {
       font-size: 24px;
       line-height: 28px;
     }
@@ -93,6 +107,9 @@
       width: 100%;
       height: 1px;
       background: $cp3;
+      transform: scaleX(1);
+      transform-origin: left center;
+      transition: transform 0.9s ease-in-out 0.2s;
     }
 
     &:after {
@@ -103,7 +120,61 @@
       width: 4px;
       height: 4px;
       background: $cp3;
+      opacity: 1;
       transform: rotate(45deg);
+      transition: opacity 0.25s ease 1.1s;
+    }
+  }
+
+  &.has-animation {
+    &:before {
+      transform: scaleX(0);
+    }
+
+    &:after {
+      opacity: 0;
+    }
+
+    .v-n-ss-h__t {
+      opacity: 0;
+      transform: translateY(-16px);
+
+      &:before {
+        transform: scaleX(0);
+      }
+
+      &:after {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-n-ss-h {
+    &:before,
+    &:after,
+    .v-n-ss-h__t,
+    .v-n-ss-h__t:before,
+    .v-n-ss-h__t:after {
+      transition: none;
+    }
+
+    &.has-animation {
+      &:before,
+      .v-n-ss-h__t:before {
+        transform: scaleX(1);
+      }
+
+      &:after,
+      .v-n-ss-h__t:after {
+        opacity: 1;
+      }
+
+      .v-n-ss-h__t {
+        opacity: 1;
+        transform: none;
+      }
     }
   }
 }
