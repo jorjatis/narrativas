@@ -53,6 +53,7 @@ body {
 
     .v-w {
       .v-a--d-s-1 {
+        min-height: 100svh;
         margin-top: -118px;
 
         @media (min-width: $screen-xs) {

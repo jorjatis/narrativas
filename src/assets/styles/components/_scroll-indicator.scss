@@ -26,6 +26,10 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
+
+    @media (min-width: $screen-xs) {
+      padding-bottom: 24px;
+    }
   }
 
   &__m {
