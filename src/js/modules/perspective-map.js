@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const DOT_IDS = ['dot_1', 'dot_2', 'dot_3'];
+const DESKTOP_MQ = '(min-width: 699px)';
 const DIAMOND_SIZE = 6;
 
 const MAP_START_WIDTH = 720;
@@ -20,6 +21,9 @@ const MAP_SCALE_REF_H = 820;
 const MAP_SCALE_SHORT_H = 560;
 const STAGE_PAD = 8;
 const NARROW_SHIFT_REF = 960;
+// Encuadre mobile del SVG alrededor de los 3 dots (Paseo del Prado)
+const MOBILE_VIEWBOX = '1250 1000 1500 2100';
+const DESKTOP_VIEWBOX = '0 0 4000 4000';
 
 function lerp(a, b, t) {
   return a + (b - a) * t;
@@ -93,6 +97,7 @@ function initPerspectiveMap(root) {
   const mapEl = root.querySelector('.v-n-pm-map');
   const mapTilt = root.querySelector('.v-n-pm-map__tilt');
   const mapImg = root.querySelector('.v-n-pm-map__img');
+  const desktopMq = window.matchMedia(DESKTOP_MQ);
 
   let resizeObserver = null;
   let lineElements = [];
@@ -100,6 +105,17 @@ function initPerspectiveMap(root) {
   let rafId = 0;
   let scrollTween = null;
   let progress = 0;
+  let mobileBound = false;
+
+  function setMapViewBox(viewBox, slice = false) {
+    if (!mapImg) return;
+    mapImg.setAttribute('viewBox', viewBox);
+    if (slice) {
+      mapImg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+    } else {
+      mapImg.removeAttribute('preserveAspectRatio');
+    }
+  }
 
   function getMapStartWidth() {
     const stageWidth = stage.clientWidth || window.innerWidth;
@@ -200,14 +216,11 @@ function initPerspectiveMap(root) {
     ensureLines();
     applyMapFraming();
 
-    // Animación completa en ANIM_PORTION; el resto del scroll mantiene el estado final
     const p = getAnimProgress();
     const stageRect = stage.getBoundingClientRect();
     const statuesRect = statuesEl.getBoundingClientRect();
 
-    // Línea + rombo: fade out completo al final
     const lineOpacity = Math.max(0, 1 - p);
-    // Sombra: aparece a partir del 65% (detrás de la estatua) → perspectiva final
     const shadowT = p < 0.65 ? 0 : Math.min(1, (p - 0.65) / 0.35);
     const shadowOpacity = lerp(0, 0.2, shadowT);
     const shadowRotateX = lerp(0, -50, shadowT);
@@ -248,7 +261,6 @@ function initPerspectiveMap(root) {
         ].join(' ');
       }
 
-      // Posición inicial: left 0. Final: centrada sobre el dot, clamp al stage
       const endLeftRaw = anchor.centerX - statuesRect.left - item.offsetWidth / 2;
       const minLeft = stageRect.left + STAGE_PAD - statuesRect.left;
       const maxLeft = stageRect.right - STAGE_PAD - item.offsetWidth - statuesRect.left;
@@ -260,7 +272,6 @@ function initPerspectiveMap(root) {
       item.style.left = `${currentLeft}px`;
       item.style.top = `${top}px`;
 
-      // Línea desde el borde izquierdo de la estatua hasta el dot (se achata y desaparece)
       const fromClientX = statuesRect.left + currentLeft;
       const from = getRelativePoint(fromClientX, anchor.y, stage);
       const to = getRelativePoint(anchor.leftX, anchor.y, stage);
@@ -279,6 +290,64 @@ function initPerspectiveMap(root) {
   function update() {
     cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(updatePositions);
+  }
+
+  function updateMobilePositions() {
+    if (!statuesEl || !linesSvg) return;
+
+    ensureLines();
+
+    const stageRect = stage.getBoundingClientRect();
+    linesSvg.setAttribute('viewBox', `0 0 ${stageRect.width} ${stageRect.height}`);
+
+    statueItems.forEach((item) => {
+      item.style.top = '';
+      item.style.left = '';
+
+      const title = item.querySelector('.v-n-pm-statues-i__t');
+      if (title) title.style.opacity = '1';
+
+      const shadow = item.querySelector('.v-n-pm-statues-i__shadow');
+      if (shadow) {
+        shadow.style.opacity = '';
+        shadow.style.transform = '';
+        shadow.style.filter = '';
+      }
+    });
+
+    DOT_IDS.forEach((dotId, index) => {
+      const dot = root.querySelector(`#${dotId}`);
+      const line = lineElements[index];
+      const diamond = diamondElements[index];
+      const item = statueItems[index];
+
+      if (!dot || !line || !diamond || !item) return;
+
+      const anchor = getDotAnchor(dot);
+      const img = item.querySelector('.v-n-pm-statues-i__img');
+      if (!anchor || !img) return;
+
+      const imgRect = img.getBoundingClientRect();
+      // Cibeles (arriba): línea desde la base. Apolo/Neptuno (abajo): desde la cima
+      const fromClientX = imgRect.left + imgRect.width / 2;
+      const fromClientY = index === 0 ? imgRect.bottom : imgRect.top;
+      const from = getRelativePoint(fromClientX, fromClientY, stage);
+      const to = getRelativePoint(anchor.centerX, anchor.y, stage);
+
+      line.setAttribute('x1', from.x);
+      line.setAttribute('y1', from.y);
+      line.setAttribute('x2', to.x);
+      line.setAttribute('y2', to.y);
+      line.style.opacity = '1';
+
+      diamond.setAttribute('points', diamondPoints(from.x, from.y, DIAMOND_SIZE));
+      diamond.style.opacity = '1';
+    });
+  }
+
+  function updateMobile() {
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(updateMobilePositions);
   }
 
   function killScroll() {
@@ -310,7 +379,7 @@ function initPerspectiveMap(root) {
     });
 
     gsap.set(mapTilt, {
-      transformOrigin: '43% 48%',
+      transformOrigin: '50% 48%',
       rotateX: 0,
       scale: getMapScale(),
       x: getMapX(),
@@ -333,7 +402,6 @@ function initPerspectiveMap(root) {
         },
         onRefresh: (self) => {
           progress = self.progress;
-          // Recalcular ancho inicial en resize / orientación
           if (self.progress === 0) {
             gsap.set(mapEl, { width: getMapStartWidth() });
           }
@@ -381,6 +449,7 @@ function initPerspectiveMap(root) {
     });
 
     window.addEventListener('resize', update);
+    setMapViewBox(DESKTOP_VIEWBOX, false);
     setupScroll();
   }
 
@@ -406,11 +475,84 @@ function initPerspectiveMap(root) {
     });
   }
 
-  bind();
+  function bindMobile() {
+    if (mobileBound) {
+      updateMobile();
+      return;
+    }
+
+    mobileBound = true;
+    setMapViewBox(MOBILE_VIEWBOX, true);
+
+    resizeObserver = new ResizeObserver(updateMobile);
+    resizeObserver.observe(root);
+    resizeObserver.observe(stage);
+
+    if (mapEl) resizeObserver.observe(mapEl);
+    if (mapImg) resizeObserver.observe(mapImg);
+
+    statueItems.forEach((item) => {
+      resizeObserver.observe(item);
+      const img = item.querySelector('.v-n-pm-statues-i__img');
+      if (img && !img.complete) {
+        img.addEventListener('load', updateMobile, { once: true });
+      }
+    });
+
+    window.addEventListener('resize', updateMobile);
+    updateMobile();
+  }
+
+  function unbindMobile() {
+    if (!mobileBound) return;
+
+    mobileBound = false;
+    cancelAnimationFrame(rafId);
+    resizeObserver?.disconnect();
+    resizeObserver = null;
+    window.removeEventListener('resize', updateMobile);
+
+    lineElements.forEach((line) => {
+      line.removeAttribute('x1');
+      line.removeAttribute('y1');
+      line.removeAttribute('x2');
+      line.removeAttribute('y2');
+      line.style.opacity = '';
+    });
+
+    diamondElements.forEach((diamond) => {
+      diamond.removeAttribute('points');
+      diamond.style.opacity = '';
+    });
+  }
+
+  function onBreakpointChange() {
+    if (desktopMq.matches) {
+      unbindMobile();
+      bind();
+      return;
+    }
+
+    unbind();
+    bindMobile();
+  }
+
+  desktopMq.addEventListener('change', onBreakpointChange);
+
+  if (desktopMq.matches) {
+    bind();
+  } else {
+    bindMobile();
+  }
 
   window.addEventListener('load', () => {
-    update();
-    ScrollTrigger.refresh();
+    if (desktopMq.matches) {
+      update();
+      ScrollTrigger.refresh();
+      return;
+    }
+
+    updateMobile();
   });
 }
 

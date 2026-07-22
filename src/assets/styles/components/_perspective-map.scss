@@ -1,190 +1,358 @@
 @use '../base/variables' as *;
 
-.v-n-pm {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  left: 50%;
-  width: 100vw;
-  max-width: 1440px;
-  margin-left: max(-50vw, -720px);
-  height: 100vh;
-  margin-top: 80px;
-  margin-bottom: 80px;
-
-  &__stage {
+// Desktop / tablet (≥699px). Mobile se implementará aparte.
+@media (min-width: $screen-xs) {
+  .v-n-pm {
+    display: flex;
+    justify-content: center;
     position: relative;
-    width: 100%;
-    height: calc(100vh);
-    display: grid;
+    left: 50%;
+    width: 100vw;
+    max-width: 1440px;
+    margin-left: max(-50vw, -720px);
+    height: 100vh;
+    margin-top: 80px;
+    margin-bottom: 80px;
 
-    @media (min-width: $screen-xs) {
+    &__stage {
+      position: relative;
+      width: 100%;
       height: calc(100vh - 60px);
       margin-top: 60px;
+      display: grid;
+
+      > * {
+        grid-area: 1/1;
+      }
     }
-
-    > * {
-      grid-area: 1/1;
-    }
-  }
-}
-
-.v-n-pm-lines {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: visible;
-
-  &__segment {
-    stroke: #ff6441;
-    stroke-width: 1;
   }
 
-  &__diamond {
-    fill: #ff6441;
-  }
-}
-
-.v-n-pm-map {
-  position: relative;
-  width: min(720px, 55vw);
-  height: 100%;
-  margin-left: 50%;
-  margin-right: auto;
-  overflow: hidden;
-  perspective: 1100px;
-  perspective-origin: 35% 80%;
-  transform-style: preserve-3d;
-
-  &__tilt {
+  .v-n-pm-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
     width: 100%;
     height: 100%;
-    transform-origin: 43% 48%;
-    transform: rotateX(0deg) scale(2.48) translate(-26px, 12px);
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    will-change: transform;
-    // Ayuda al antialiasing en capas 3D
-    outline: 1px solid transparent;
-  }
-
-  &__img {
-    display: block;
-    // 2× el contenedor + scale(0.5) = misma medida visual, el doble de resolución al rasterizar
-    width: 170%;
-    height: 200%;
-    max-height: none;
-    transform: scale(0.5);
-    transform-origin: 0 0;
-    shape-rendering: geometricPrecision;
-    backface-visibility: hidden;
-  }
-
-  &__dot {
-    position: absolute;
-    width: 24px;
-    border: 2px solid white;
-    border-radius: 100%;
-
-    &--01 {
-      top: 28.5%;
-      left: 30.5%;
-    }
-
-    &--02 {
-      top: 60%;
-      left: 18%;
-    }
-
-    &--03 {
-      top: 91.3%;
-      left: 16.3%;
-    }
-  }
-}
-
-.v-n-pm-statues {
-  position: relative;
-  z-index: 3;
-  width: 50%;
-  margin-left: 20%;
-  height: 100%;
-  min-height: 0;
-}
-
-.v-n-pm-statues-i {
-  position: absolute;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding-left: 10px;
-  perspective: 420px;
-  transform-style: preserve-3d;
-  will-change: left, top;
-
-  &__shadow {
-    position: absolute;
-    left: 30%;
-    bottom: -10px;
-    z-index: 0;
-    max-width: 214px;
-    max-height: 140px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    filter: brightness(0) blur(0px);
-    opacity: 0;
     pointer-events: none;
-    transform-origin: center bottom;
-    transform: translateX(0%) rotateX(0deg) scaleY(1) scaleX(1) translateZ(-40px);
-    will-change: opacity, transform, filter;
+    overflow: visible;
+
+    &__segment {
+      stroke: #ff6441;
+      stroke-width: 1;
+    }
+
+    &__diamond {
+      fill: #ff6441;
+    }
   }
 
-  &__img {
+  .v-n-pm-map {
     position: relative;
-    z-index: 2;
-    flex: 0 0 auto;
-    max-width: 194px;
-    max-height: 140px;
-    object-fit: contain;
-    transform: translateZ(0);
+    width: min(720px, 55vw);
+    height: 100%;
+    margin-left: 50%;
+    margin-right: auto;
+    overflow: hidden;
+    perspective: 1100px;
+    perspective-origin: 35% 80%;
+    transform-style: preserve-3d;
+
+    // Difumina los bordes para ocultar el recorte del SVG escalado
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      box-shadow:
+        inset 0 40px 40px -20px #fff,
+        inset 0 -40px 40px -20px #fff,
+        inset 40px 0 40px -20px #fff,
+        inset -40px 0 40px -20px #fff;
+    }
+
+    &__tilt {
+      width: 100%;
+      height: 100%;
+      transform-origin: 43% 48%;
+      transform: rotateX(0deg) scale(2.48) translate(-26px, 12px);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      will-change: transform;
+      outline: 1px solid transparent;
+    }
+
+    &__img {
+      display: block;
+      // 2× el contenedor + scale(0.5) = misma medida visual, el doble de resolución al rasterizar
+      width: 170%;
+      height: 200%;
+      max-height: none;
+      transform: scale(0.5);
+      transform-origin: 0 0;
+      shape-rendering: geometricPrecision;
+      backface-visibility: hidden;
+    }
+
+    &__dot {
+      position: absolute;
+      width: 24px;
+      border: 2px solid white;
+      border-radius: 100%;
+
+      &--01 {
+        top: 28.5%;
+        left: 30.5%;
+      }
+
+      &--02 {
+        top: 60%;
+        left: 18%;
+      }
+
+      &--03 {
+        top: 91.3%;
+        left: 16.3%;
+      }
+    }
   }
 
-  &__t {
+  .v-n-pm-statues {
     position: relative;
-    z-index: 2;
-    font-family: $mcs;
-    font-size: 18px;
-    line-height: 24px;
-    color: $cp1;
-    text-transform: uppercase;
-    transform: translateZ(20px);
-    will-change: opacity;
+    z-index: 3;
+    width: 50%;
+    margin-left: 20%;
+    height: 100%;
+    min-height: 0;
   }
 
-  @media (max-width: 960px) {
-    &__img,
+  .v-n-pm-statues-i {
+    position: absolute;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+    perspective: 420px;
+    transform-style: preserve-3d;
+    will-change: left, top;
+
     &__shadow {
-      max-width: 150px;
-      max-height: 110px;
+      position: absolute;
+      left: 30%;
+      bottom: -10px;
+      z-index: 0;
+      max-width: 214px;
+      max-height: 140px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: brightness(0) blur(0px);
+      opacity: 0;
+      pointer-events: none;
+      transform-origin: center bottom;
+      transform: translateX(0%) rotateX(0deg) scaleY(1) scaleX(1) translateZ(-40px);
+      will-change: opacity, transform, filter;
+    }
+
+    &__img {
+      position: relative;
+      z-index: 2;
+      flex: 0 0 auto;
+      max-width: 194px;
+      max-height: 140px;
+      object-fit: contain;
+      transform: translateZ(0);
     }
 
     &__t {
-      font-size: 15px;
-      line-height: 20px;
+      position: relative;
+      z-index: 2;
+      font-family: $mcs;
+      font-size: 18px;
+      line-height: 24px;
+      color: $cp1;
+      text-transform: uppercase;
+      transform: translateZ(20px);
+      will-change: opacity;
+    }
+
+    @media (max-width: 960px) {
+      &__img,
+      &__shadow {
+        max-width: 150px;
+        max-height: 110px;
+      }
+
+      &__t {
+        font-size: 15px;
+        line-height: 20px;
+      }
+    }
+  }
+}
+
+// Mobile (<699px): layout estático según mockup
+@media (max-width: ($screen-xs - 1)) {
+  .v-n-pm {
+    display: block;
+    position: relative;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin: 40px 0;
+    margin-left: 0;
+  }
+
+  .v-n-pm__stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'cibeles cibeles'
+      'map map'
+      'neptuno apolo';
+    gap: 0 16px;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  .v-n-pm-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+
+    &__segment {
+      stroke: #ff6441;
+      stroke-width: 1;
+    }
+
+    &__diamond {
+      fill: #ff6441;
     }
   }
 
-  @media (max-width: 700px) {
-    &__img,
+  .v-n-pm-map {
+    grid-area: map;
+    position: relative;
+    max-width: 320px;
+    height: 458px;
+    margin: 24px auto;
+    overflow: hidden;
+    perspective: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      box-shadow:
+        inset 0 28px 28px -14px #fff,
+        inset 0 -28px 28px -14px #fff,
+        inset 28px 0 28px -14px #fff,
+        inset -28px 0 28px -14px #fff;
+    }
+
+    &__tilt {
+      width: 100%;
+      height: 100%;
+      transform: none !important;
+      transform-origin: center center;
+    }
+
+    &__img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      transform: none;
+    }
+  }
+
+  .v-n-pm-statues {
+    display: contents;
+  }
+
+  .v-n-pm-statues-i {
+    position: relative;
+    left: auto;
+    top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    perspective: none;
+    transform-style: flat;
+    will-change: auto;
+
     &__shadow {
-      max-width: 120px;
-      max-height: 90px;
+      display: none;
+    }
+
+    &__img {
+      position: relative;
+      z-index: 1;
+      max-width: 160px;
+      max-height: 140px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    &__t {
+      position: relative;
+      z-index: 1;
+      font-family: $mcs;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 700;
+      color: $cp1;
+      text-align: center;
+      text-transform: uppercase;
+      transform: none;
+    }
+
+    &--01 {
+      grid-area: cibeles;
+      margin-bottom: 8px;
+
+      .v-n-pm-statues-i__img {
+        max-width: 200px;
+        max-height: 160px;
+        padding-bottom: 10px;
+      }
+    }
+
+    // Abajo: imagen arriba, título debajo (como el mockup)
+    &--02,
+    &--03 {
+      flex-direction: column-reverse;
+      gap: 8px;
+      margin-top: 8px;
+
+      .v-n-pm-statues-i__img {
+        padding-top: 10px;
+      }
+    }
+
+    &--02 {
+      grid-area: apolo;
+    }
+
+    &--03 {
+      grid-area: neptuno;
     }
   }
 }
