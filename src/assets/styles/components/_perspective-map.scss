@@ -1,19 +1,31 @@
 @use '../base/variables' as *;
 
 .v-n-pm {
-  display: grid;
-  margin-top: 82px;
-  margin-bottom: 82px;
+  display: flex;
+  justify-content: center;
   position: relative;
   left: 50%;
   width: 100vw;
   max-width: 1440px;
   margin-left: max(-50vw, -720px);
-  height: 75vh;
-  max-height: 820px;
+  height: 100vh;
+  margin-top: 80px;
+  margin-bottom: 80px;
 
-  > * {
-    grid-area: 1/1;
+  &__stage {
+    position: relative;
+    width: 100%;
+    height: calc(100vh);
+    display: grid;
+
+    @media (min-width: $screen-xs) {
+      height: calc(100vh - 60px);
+      margin-top: 60px;
+    }
+
+    > * {
+      grid-area: 1/1;
+    }
   }
 }
 
@@ -36,37 +48,39 @@
   }
 }
 
-@media (max-width: $screen-xs) {
-  .v-n-pm-lines {
-    display: none;
-  }
-
-  .v-n-pm-statues {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    min-height: 0;
-  }
-
-  .v-n-pm-statues-i {
-    position: relative;
-    top: auto !important;
-    align-items: center;
-  }
-}
-
 .v-n-pm-map {
   position: relative;
-  width: 720px;
+  width: min(720px, 55vw);
+  height: 100%;
   margin-left: 50%;
   margin-right: auto;
   overflow: hidden;
+  perspective: 1100px;
+  perspective-origin: 35% 80%;
+  transform-style: preserve-3d;
 
-  &__img {    
-    max-height: 820px;    
-    object-fit: cover;
-    scale: 2.1;
-    transform: translate(-60px, 10px);
+  &__tilt {
+    width: 100%;
+    height: 100%;
+    transform-origin: 43% 48%;
+    transform: rotateX(0deg) scale(2.48) translate(-26px, 12px);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+    // Ayuda al antialiasing en capas 3D
+    outline: 1px solid transparent;
+  }
+
+  &__img {
+    display: block;
+    // 2× el contenedor + scale(0.5) = misma medida visual, el doble de resolución al rasterizar
+    width: 170%;
+    height: 200%;
+    max-height: none;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    shape-rendering: geometricPrecision;
+    backface-visibility: hidden;
   }
 
   &__dot {
@@ -96,88 +110,81 @@
   position: relative;
   z-index: 3;
   width: 50%;
-  margin-left: 10%;
+  margin-left: 20%;
   height: 100%;
-  min-height: 75vh;
+  min-height: 0;
 }
 
 .v-n-pm-statues-i {
   position: absolute;
   left: 0;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   padding-left: 10px;
+  perspective: 420px;
+  transform-style: preserve-3d;
+  will-change: left, top;
 
-  &--01 {
-    .v-n-pm-statues-i {
-      &__line {
-        bottom: -28%;
-      }
-    }
-  }
-
-  &--02 {
-    .v-n-pm-statues-i {
-      &__line {
-        bottom: -28%;
-      }
-    }
-  }
-
-  &--03 {
-    .v-n-pm-statues-i {
-      &__line {
-        bottom: -28%;
-      }
-    }
+  &__shadow {
+    position: absolute;
+    left: 30%;
+    bottom: -10px;
+    z-index: 0;
+    max-width: 214px;
+    max-height: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0) blur(0px);
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: center bottom;
+    transform: translateX(0%) rotateX(0deg) scaleY(1) scaleX(1) translateZ(-40px);
+    will-change: opacity, transform, filter;
   }
 
   &__img {
+    position: relative;
+    z-index: 2;
     flex: 0 0 auto;
     max-width: 194px;
-    max-height: 175px;
+    max-height: 140px;
     object-fit: contain;
-  }
-
-  &__inf {
-    flex: 1 0 auto;
-    margin-right: 12px;
-    max-width: 190px;
-    width: 100%;
-    margin-bottom: 8px;
+    transform: translateZ(0);
   }
 
   &__t {
+    position: relative;
+    z-index: 2;
     font-family: $mcs;
     font-size: 18px;
     line-height: 24px;
     color: $cp1;
     text-transform: uppercase;
+    transform: translateZ(20px);
+    will-change: opacity;
   }
 
-  &__p {
-    font-family: $mcr;
-    font-size: 16px;
-    line-height: 22px;
-  }
-
-  &__line {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    
-    &-length {
-      display: block;
-      width: 100%;
-      height: 1px;
-      background: #FF6441;
+  @media (max-width: 960px) {
+    &__img,
+    &__shadow {
+      max-width: 150px;
+      max-height: 110px;
     }
 
-    &-end {
-      flex: 1 0 auto;
-      display: block;
-      width: 24px;
+    &__t {
+      font-size: 15px;
+      line-height: 20px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    &__img,
+    &__shadow {
+      max-width: 120px;
+      max-height: 90px;
     }
   }
 }
