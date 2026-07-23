@@ -302,38 +302,62 @@ function initScrollStory(root) {
     pauseAll();
   }
 
-  // Detecta el pin real del position:sticky (no solo el start del trigger)
-  ScrollTrigger.create({
-    trigger: root,
-    start: 'top bottom',
-    end: 'bottom top',
-    invalidateOnRefresh: true,
-    onUpdate: () => {
-      setPinnedState(isStickyPinned());
-    },
-    onLeave: () => setPinnedState(false),
-    onLeaveBack: () => setPinnedState(false),
-  });
-
-  // Desbloqueo de autoplay tras primer gesto (excepto el botón mute, que se gestiona solo)
-  const unlockEvents = ['pointerdown', 'touchstart', 'keydown'];
-  function removeUnlockListeners() {
-    unlockEvents.forEach((evt) => window.removeEventListener(evt, onFirstGesture));
+  // Detección de pin robusta: escuchamos el scroll directamente (con rAF) y
+  // usamos las posiciones REALES del sticky. Así funciona aunque el contenedor
+  // crezca después de inicializar (imágenes/contenido que cargan tarde y
+  // desfasan las posiciones que cachea ScrollTrigger), evitando que el audio
+  // se pare antes de tiempo cerca del final del bloque.
+  let pinTicking = false;
+  function syncPinnedState() {
+    setPinnedState(isStickyPinned());
   }
-  function onFirstGesture(event) {
+  function onPinScroll() {
+    if (pinTicking) return;
+    pinTicking = true;
+    requestAnimationFrame(() => {
+      pinTicking = false;
+      syncPinnedState();
+    });
+  }
+  window.addEventListener('scroll', onPinScroll, { passive: true });
+  ScrollTrigger.addEventListener('refresh', syncPinnedState);
+
+  // Desbloqueo de autoplay: CUALQUIER interacción del usuario en cualquier
+  // parte de la página (no solo el botón de sonido) desbloquea el audio.
+  // Mantenemos los listeners hasta que el audio suene de verdad, de forma que
+  // al llegar a is-pinned empiece a sonar solo sin tener que pulsar el botón.
+  // Nota: en móvil, el propio gesto de scroll (touchstart) ya desbloquea.
+  const unlockEvents = ['pointerdown', 'mousedown', 'touchstart', 'keydown', 'click'];
+
+  function audioIsAudible() {
+    return !!activeAudio && !activeAudio.paused && !activeAudio.muted;
+  }
+  function removeUnlockListeners() {
+    unlockEvents.forEach((evt) => window.removeEventListener(evt, onUserGesture));
+  }
+  function onUserGesture(event) {
+    // El botón de sonido tiene su propia gestión
     if (muteBtn && event.target instanceof Node && muteBtn.contains(event.target)) {
       return;
     }
 
-    unlockAndPlay();
-    removeUnlockListeners();
-  }
-  unlockEvents.forEach((evt) => window.addEventListener(evt, onFirstGesture, { passive: true }));
+    if (audioIsAudible()) {
+      removeUnlockListeners();
+      return;
+    }
 
-  muteBtn?.addEventListener('click', (event) => {
-    onMuteClick(event);
-    removeUnlockListeners();
-  });
+    if (!unlocked) {
+      unlockAndPlay();
+    } else if (shouldPlay && !userMuted) {
+      ensureActiveAudio();
+      tryPlay(activeAudio);
+    }
+
+    if (audioIsAudible()) removeUnlockListeners();
+  }
+  unlockEvents.forEach((evt) => window.addEventListener(evt, onUserGesture, { passive: true }));
+
+  muteBtn?.addEventListener('click', onMuteClick);
   root.addEventListener('scrolly:step', onStep);
   setMuteUI(false);
 

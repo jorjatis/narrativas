@@ -167,6 +167,15 @@
   }
 }
 
+.v-n-ss--02 {
+  .step[data-step="0"] {
+    .step__c {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
 .v-n-ss-h {
   position: relative;
   display: flex;

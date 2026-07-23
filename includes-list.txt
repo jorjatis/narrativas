@@ -5,13 +5,22 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelac
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-preheader.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-cibeles3D.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-panoramicaprado.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-scrolly1.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-scrolly2.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-scrolly3.html
+
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/audios/1-fuente-el-planteamiento-original.opus
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/audios/2-la-fuente-se-mueve-carruajes.opus
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/cibeleslimpia-v1.glb
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/cibeles3D.glb
 
 
 <!--#include virtual="/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-preheader.html" -->
 <!--#include virtual="/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-cibeles3D.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-panoramicaprado.html -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-scrolly1.html -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-scrolly2.html -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-scrolly3.html -->
 

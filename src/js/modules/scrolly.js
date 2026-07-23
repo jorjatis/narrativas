@@ -159,6 +159,18 @@ export default function scrolly() {
       activateStep(step, { immediate });
     }
 
+    // Activación en modo overlay calculada con las posiciones REALES de las
+    // cartelas en cada scroll (no con posiciones cacheadas por ScrollTrigger,
+    // que se desfasan cuando el contenedor crece por imágenes/contenido que
+    // cargan tarde). Se invoca desde un listener de scroll propio, así siempre
+    // se dispara aunque el layout cambie después de inicializar.
+    function syncOverlayActive() {
+      if (!overlaySteps) return;
+      if (!isStickyStuck()) return;
+      const step = getActiveOverlayStep();
+      if (step) activateStep(step);
+    }
+
     function killStepTriggers() {
       stepTriggers.forEach((st) => st.kill());
       stepTriggers = [];
@@ -184,30 +196,10 @@ export default function scrolly() {
         return;
       }
 
-      // Modelo unificado (mobile y desktop): la 1ª cartela está activa hasta
-      // que aparece la 2ª; a partir de ahí cada step se activa cuando su
-      // cartela aparece por abajo (cambian fecha, título, imagen y audio).
-      //
-      // La activación se calcula con las posiciones REALES de las cartelas en
-      // cada frame (getActiveOverlayStep), no con posiciones cacheadas por
-      // ScrollTrigger, que se desfasan por el margin negativo y la carga de
-      // imágenes. Así el cambio de contenido ocurre justo cuando la cartela
-      // anterior ha salido y aparece la siguiente.
-      const syncActiveStep = () => {
-        if (!isStickyStuck()) return;
-        const step = getActiveOverlayStep();
-        if (step) activateStep(step);
-      };
-
-      stepTriggers.push(
-        ScrollTrigger.create({
-          trigger: container,
-          start: "top bottom",
-          end: "bottom top",
-          onUpdate: syncActiveStep,
-          onRefresh: syncActiveStep,
-        })
-      );
+      // Modo overlay: la activación NO usa triggers por-step de ScrollTrigger
+      // (sus posiciones se desfasan). Se gestiona con un listener de scroll
+      // propio (ver más abajo) que llama a syncOverlayActive con las posiciones
+      // reales de las cartelas. Aquí no hay que crear nada.
     }
 
     let initialized = false;
@@ -240,6 +232,24 @@ export default function scrolly() {
     }
 
     updateInitialState();
+
+    // Overlay: listener de scroll propio (throttle con rAF) para activar el
+    // step correcto en cada momento. Es robusto ante cambios de layout
+    // posteriores (imágenes/contenido que cargan tarde y agrandan el bloque),
+    // a diferencia de un onUpdate de ScrollTrigger con rango cacheado.
+    if (overlaySteps) {
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          syncOverlayActive();
+        });
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      ScrollTrigger.addEventListener("refresh", syncOverlayActive);
+    }
 
     ScrollTrigger.create({
       trigger: container,

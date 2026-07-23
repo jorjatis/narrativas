@@ -7,8 +7,7 @@ import scrolly from './modules/scrolly';
 import scrollStoryHeader from './modules/scroll-story-header';
 import scrollStory from './modules/scroll-story';
 import perspectiveMap from './modules/perspective-map';
-import pruebasPerspective from './modules/pruebas-perspective';
-import cibeles3D from './cibeles-3D';
+import cibeles3D from './modules/cibeles-3D';
 
 export function initAll() {
   // document.body.classList.add('is-loaded');
@@ -19,7 +18,6 @@ export function initAll() {
   scrolly();
   scrollStoryHeader();
   perspectiveMap();
-  pruebasPerspective();
   cibeles3D();
 }
 
