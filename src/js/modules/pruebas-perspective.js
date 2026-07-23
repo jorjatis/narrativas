@@ -72,6 +72,7 @@ function setupPerspectiveScene(root) {
 
   const stage = root.querySelector('.p3d__stage');
   const plane = root.querySelector('.p3d__plane');
+  const mapContent = root.querySelector('.p3d__content');
   const index = root.querySelector('.p3d__index');
   const indexItems = gsap.utils.toArray('.p3d__index-item', root);
   const indexImages = gsap.utils.toArray('.p3d__index-item img', root);
@@ -82,9 +83,16 @@ function setupPerspectiveScene(root) {
   const anchors = gsap.utils.toArray('.p3d__dot-anchor', root);
   const connectors = gsap.utils.toArray('[data-p3d-connector]', root);
   const caption = root.querySelector('.p3d__caption');
-  const labels = createMapLabels(mapObject, plane);
+  const labels = createMapLabels(mapObject, mapContent);
 
-  if (!stage || !plane || !index || !billboards.length || anchors.length !== 3) return;
+  if (
+    !stage
+    || !plane
+    || !mapContent
+    || !index
+    || !billboards.length
+    || anchors.length !== 3
+  ) return;
 
   function fitIndexInsideSafeArea() {
     root.style.removeProperty('--p3d-statue-max-height');
@@ -113,10 +121,14 @@ function setupPerspectiveScene(root) {
   }
 
   function setBillboardArrivalScales() {
+    const contentScale = mapContent.getBoundingClientRect().width / mapContent.offsetWidth;
     const arrivalScales = billboards.map((billboard, itemIndex) => {
       const billboardImage = billboard.querySelector('img');
       const arrivingHeight = indexImages[itemIndex].offsetHeight * 0.72;
-      return Math.max(0.3, Math.min(0.75, arrivingHeight / billboardImage.offsetHeight));
+      return Math.max(
+        0.2,
+        Math.min(0.75, arrivingHeight / (billboardImage.offsetHeight * contentScale)),
+      );
     });
 
     gsap.set(billboards, {

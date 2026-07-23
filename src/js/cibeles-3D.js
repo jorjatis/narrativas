@@ -6,25 +6,21 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 const MODEL_URL = '/assets/images/cibeleslimpia-v1.glb';
 const DRACO_DECODER_PATH = '/js/vendors/three/draco/';
 
-const ENABLE_DEBUG_GUI = false;
+const ENABLE_DEBUG_GUI = true;
 const SCENE_SETTINGS = {
-  initialMargin: 0.66,
-  mobileInitialScale: 0.35,
-  maxZoomFactor: 0.1,
+  initialMargin: 0.16,
   modelRotation: 157,
-  targetHeight: -0.15,
+  targetHeight: 0.49,
   cameraX: 1.35,
   cameraY: 0.72,
   cameraZ: 2.15,
-  exposure: 1.15,
-  ambientIntensity: 1.35,
-  lightIntensity: 5.2,
-  lightX: -7,
-  lightY: 4,
-  lightZ: 3,
+  exposure: 0.8,
+  ambientIntensity: 3.5,
+  lightIntensity: 6.5,
+  lightX: -3,
+  lightY: 2.9,
+  lightZ: 1.6,
 };
-const PAN_LIMIT_HORIZONTAL_FACTOR = 0.40;
-const PAN_LIMIT_VERTICAL_FACTOR = 1;
 
 function getCameraDirection() {
   return new THREE.Vector3(
@@ -116,24 +112,15 @@ function createCibelesScene(container) {
   renderer.domElement.setAttribute('aria-label', 'Modelo 3D de la fuente de Cibeles');
   container.append(renderer.domElement);
 
-  function requireControlForWheel(event) {
-    if (!event.ctrlKey) event.stopImmediatePropagation();
-  }
-
-  renderer.domElement.addEventListener('wheel', requireControlForWheel, {
-    capture: true,
-    passive: true,
-  });
-
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.07;
-  controls.enablePan = true;
-  controls.minPolarAngle = THREE.MathUtils.degToRad(8);
-  controls.maxPolarAngle = THREE.MathUtils.degToRad(88);
+  controls.enablePan = false;
+  controls.enableZoom = false;
+  controls.mouseButtons.RIGHT = null;
   controls.mouseButtons.MIDDLE = null;
   controls.touches.ONE = THREE.TOUCH.ROTATE;
-  controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
+  controls.touches.TWO = null;
 
   const ambientLight = new THREE.HemisphereLight(
     0xddeaff,
@@ -156,42 +143,8 @@ function createCibelesScene(container) {
   let modelBox = null;
   let frameId = null;
   let isVisible = true;
-  let initialDistance = 1;
-  let panLimits = null;
-  let isConstrainingPan = false;
   let debugGui = null;
   let isDisposed = false;
-
-  function constrainPan() {
-    if (!panLimits || isConstrainingPan) return;
-
-    const previousTarget = controls.target.clone();
-    controls.target.set(
-      THREE.MathUtils.clamp(
-        controls.target.x,
-        panLimits.center.x - panLimits.x,
-        panLimits.center.x + panLimits.x,
-      ),
-      THREE.MathUtils.clamp(
-        controls.target.y,
-        panLimits.center.y - panLimits.y,
-        panLimits.center.y + panLimits.y,
-      ),
-      THREE.MathUtils.clamp(
-        controls.target.z,
-        panLimits.center.z - panLimits.z,
-        panLimits.center.z + panLimits.z,
-      ),
-    );
-
-    const correction = controls.target.clone().sub(previousTarget);
-    if (correction.lengthSq() === 0) return;
-
-    camera.position.add(correction);
-    isConstrainingPan = true;
-    controls.update();
-    isConstrainingPan = false;
-  }
 
   function updateCameraFraming() {
     if (!modelBox) {
@@ -200,13 +153,12 @@ function createCibelesScene(container) {
     }
 
     const cameraDirection = getCameraDirection();
-    const isMobile = window.matchMedia('(max-width: 699px)').matches;
-    const fitDistance = getFitDistance(camera, modelBox, controls.target);
-    const responsiveScale = isMobile ? SCENE_SETTINGS.mobileInitialScale : 1;
-
-    initialDistance = fitDistance * responsiveScale;
-    controls.minDistance = initialDistance * SCENE_SETTINGS.maxZoomFactor;
-    controls.maxDistance = isMobile ? fitDistance : initialDistance;
+    const initialDistance = getFitDistance(camera, modelBox, controls.target);
+    const polarAngle = Math.acos(
+      THREE.MathUtils.clamp(cameraDirection.y, -1, 1),
+    );
+    controls.minPolarAngle = polarAngle;
+    controls.maxPolarAngle = polarAngle;
     camera.position.copy(controls.target).addScaledVector(
       cameraDirection,
       initialDistance,
@@ -226,12 +178,6 @@ function createCibelesScene(container) {
 
     const size = modelBox.getSize(new THREE.Vector3());
     controls.target.set(0, size.y * SCENE_SETTINGS.targetHeight, 0);
-    panLimits = {
-      center: controls.target.clone(),
-      x: size.x * PAN_LIMIT_HORIZONTAL_FACTOR,
-      y: size.y * PAN_LIMIT_VERTICAL_FACTOR,
-      z: size.z * PAN_LIMIT_HORIZONTAL_FACTOR,
-    };
     updateCameraFraming();
   }
 
@@ -257,7 +203,6 @@ function createCibelesScene(container) {
     if (frameId === null && isVisible) frameId = requestAnimationFrame(render);
   }
 
-  controls.addEventListener('change', constrainPan);
   controls.addEventListener('change', requestRender);
 
   const resizeObserver = new ResizeObserver(resize);
@@ -289,20 +234,12 @@ function createCibelesScene(container) {
         .name('Giro Y')
         .onChange(updateModelFraming);
       modelFolder
-        .add(SCENE_SETTINGS, 'targetHeight', -0.3, 0.3, 0.01)
+        .add(SCENE_SETTINGS, 'targetHeight', -0.5, 0.5, 0.01)
         .name('Altura')
         .onChange(updateModelFraming);
       modelFolder
-        .add(SCENE_SETTINGS, 'initialMargin', 0.5, 1.3, 0.01)
+        .add(SCENE_SETTINGS, 'initialMargin', 0.15, 1.3, 0.01)
         .name('Encuadre')
-        .onChange(updateCameraFraming);
-      modelFolder
-        .add(SCENE_SETTINGS, 'mobileInitialScale', 0.15, 1, 0.01)
-        .name('Encuadre móvil')
-        .onChange(updateCameraFraming);
-      modelFolder
-        .add(SCENE_SETTINGS, 'maxZoomFactor', 0.1, 0.8, 0.01)
-        .name('Zoom máximo')
         .onChange(updateCameraFraming);
       ['cameraX', 'cameraY', 'cameraZ'].forEach((property) => {
         modelFolder
@@ -402,12 +339,8 @@ function createCibelesScene(container) {
     resizeObserver.disconnect();
     visibilityObserver.disconnect();
     if (frameId !== null) cancelAnimationFrame(frameId);
-    controls.removeEventListener('change', constrainPan);
     controls.removeEventListener('change', requestRender);
     controls.dispose();
-    renderer.domElement.removeEventListener('wheel', requireControlForWheel, {
-      capture: true,
-    });
     dracoLoader.dispose();
     debugGui?.destroy();
     if (model) disposeModel(model);

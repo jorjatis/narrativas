@@ -131,6 +131,13 @@
     will-change: transform;
   }
 
+  &__content {
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 50%;
+    transform-style: preserve-3d;
+  }
+
   &__map {
     position: relative;
     z-index: 1;
@@ -372,6 +379,10 @@
       right: auto;
       left: 50%;
       width: var(--p3d-plane-size);
+    }
+
+    &__content {
+      transform: scale(1.5);
     }
 
     &__monument {

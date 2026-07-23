@@ -41,8 +41,12 @@
   &__scene {
     position: relative;
     width: 100vw;
-    height: 70vh;
+    height: 60vh;
     overflow: hidden;
+
+    @media (min-width: $screen-xs) {
+      height: 70vh;
+    }
 
     canvas {
       display: block;

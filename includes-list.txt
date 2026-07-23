@@ -3,7 +3,8 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelac
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/scripts-preheader.js
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/scripts-cibeles3D.js
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-pre-header.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-preheader.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-cibeles3D.html
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/audios/1-fuente-el-planteamiento-original.opus
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/audios/2-la-fuente-se-mueve-carruajes.opus
