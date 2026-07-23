@@ -3,6 +3,168 @@
 .v-n-ss {
   margin-top: 72px;
   margin-bottom: 94px;
+
+  .v-n-scrolly__sticky {
+    flex-direction: column;
+    align-items: flex-start;
+    // Mobile: cabecera + fondo arriba, para que la cartela (abajo) no los tape
+    justify-content: flex-start;
+    padding-top: 4vh;
+
+    // Desktop (≥699): centrado vertical, como en la foto
+    @media (min-width: $screen-xs) {
+      justify-content: center;
+      padding-top: 0;
+    }
+  }
+
+  .v-n-scrolly__bg {
+    width: 100%;
+  }
+
+  .bg-item {
+    left: 0;
+
+    &__img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      // Mobile: fondo algo más contenido para dejar sitio a la cartela abajo
+      max-height: 42vh;
+      margin: 0 auto;
+      object-fit: contain;
+      object-position: center;
+
+      @media (min-width: $screen-xs) {
+        max-height: 60vh;
+      }
+    }
+  }
+
+  // Los steps se solapan con el sticky: la 1ª cartela aparece ya al pinear
+  // (junto al fondo y la cabecera, como en el diseño), y las cartelas
+  // entran desde abajo / salen por arriba a medida que se hace scroll.
+  .v-n-scrolly__steps {
+    position: relative;
+    z-index: 2;
+    // Subimos los steps una pantalla para que el 1º coincida con la
+    // primera pantalla pineada (no hay que hacer scroll para verlo).
+    margin-top: calc(-100vh + 52px);
+    // Espacio final (padding, no margin: así NO colapsa fuera del contenedor)
+    // para que la última cartela salga por arriba antes de despinear.
+    padding-bottom: calc(100vh - 52px);
+    pointer-events: none;
+
+    @media (min-width: $screen-xs) {
+      margin-top: calc(-100vh + 60px);
+      padding-bottom: calc(100vh - 60px);
+    }
+
+    // Especificidad >= que .v-n-scrolly__steps .step del scrolly general
+    .step {
+      // Mobile: cartela abajo centrada (no tapa el fondo)
+      justify-content: center;
+      align-items: flex-end;
+      height: calc(100vh - 52px);
+      min-height: calc(100vh - 52px);
+      max-height: calc(100vh - 52px);
+      padding: 0 20px 8vh;
+      // Hueco entre steps para que no se vea la tarjeta anterior/siguiente
+      margin-bottom: 45vh;
+      box-sizing: border-box;
+
+      // ≥699px (desktop): cartela abajo a la derecha, como en la foto
+      @media (min-width: $screen-xs) {
+        justify-content: flex-end;
+        align-items: flex-end;
+        height: calc(100vh - 60px);
+        min-height: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
+        margin-right: 10%;
+        padding-bottom: 10vh;
+      }
+
+      // El espacio final lo aporta el padding-bottom del contenedor de steps
+      // (no colapsa), así que el último step no necesita margen inferior.
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &__c {
+        pointer-events: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 300px;
+        padding: 29px 20px 36px;
+        border-radius: 6px;
+        background: $cp6;
+        box-shadow: 0 4px 25px 15px rgba($cb1, .2);
+
+        p {
+          max-width: unset;
+          padding: 0;
+          font-family: $atl;
+          font-size: 16px;
+          line-height: 22px;
+          letter-spacing: -.32px;
+          border: 0;
+          border-radius: 0;
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  &__mute {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: $cp1;
+    color: #fff;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+
+    @media (min-width: $screen-xs) {
+      right: 24px;
+      bottom: 24px;
+    }
+
+    &.is-muted {
+      .v-n-ss__mute-icon--on {
+        display: none;
+      }
+
+      .v-n-ss__mute-icon--off {
+        display: block;
+      }
+    }
+  }
+
+  &__mute-icon {
+    display: block;
+    width: 22px;
+    height: 22px;
+
+    &--off {
+      display: none;
+    }
+  }
+
+  &__audio {
+    display: none;
+  }
 }
 
 .v-n-ss-h {
@@ -13,6 +175,7 @@
   max-width: 372px;
   margin-bottom: 32px;
   padding-bottom: 12px;
+  padding-left: 20px;
 
   @media (min-width: 420px) {
     gap: 16px;

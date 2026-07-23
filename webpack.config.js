@@ -128,6 +128,7 @@ module.exports = (env, argv) => {
           { from: 'public', to: '', noErrorOnMissing: true },
           { from: 'src/assets/images', to: 'assets/images', noErrorOnMissing: true },
           { from: 'src/assets/videos', to: 'assets/videos', noErrorOnMissing: true },
+          { from: 'src/assets/audio', to: 'assets/audio', noErrorOnMissing: true },
           { from: 'src/favicon.ico', to: '', noErrorOnMissing: true },
           { from: 'src/js/vendors', to: 'js/vendors', noErrorOnMissing: true }
         ]

@@ -1,62 +1,16 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/styles.css
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/include-pre-header.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/scripts-preheader.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/scripts-cibeles3D.js
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-1.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-2.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-3.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-4.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-5.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-6.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-7.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-8.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-9.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_1/audio-10.mp3
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-pre-header.html
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-1.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-2.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-3.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-4.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-5.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-6.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-7.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-8.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-9.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/militar_2/audio-10.mp3
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/audios/1-fuente-el-planteamiento-original.opus
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/audios/2-la-fuente-se-mueve-carruajes.opus
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-1.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-2.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-3.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-4.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-5.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-6.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-7.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-8.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-9.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/cultura/audio-10.mp3
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-1.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-2.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-3.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-4.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-5.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-6.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-7.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-8.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-9.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/sociedad/audio-10.mp3
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-1.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-2.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-3.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-4.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-5.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-6.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-7.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-8.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-9.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/17/90aniversariogc/audios/politica/audio-10.mp3
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/cibeleslimpia-v1.glb
 
 
-<!--#include virtual="/comun/narrativas/redaccion/2026/07/17/90aniversariogc/include-pre-header.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-preheader.html" -->
+<!--#include virtual="/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/include-cibeles3D.html" -->
+

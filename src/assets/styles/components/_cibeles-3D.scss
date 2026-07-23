@@ -1,0 +1,142 @@
+@use '../base/variables' as *;
+
+.v-n-c3d {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  margin: 80px 0;
+
+  &__inf {
+    display: flex;
+    gap: 48px;
+
+    &-i {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      max-width: 190px;
+
+      svg {
+        max-height: 40px;
+      }
+
+      .v-n-c3d__inf-label {
+        display: block;
+        font-family: $mcr;
+        font-size: 14px;
+        line-height: 16px;
+        text-transform: uppercase;
+        text-align: center;
+        color: $cp1;
+      }
+    }
+
+    &-i &-label--touch {
+      display: none;
+    }
+  }
+
+  &__scene {
+    position: relative;
+    width: 100vw;
+    height: 70vh;
+    overflow: hidden;
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+  }
+
+  &__loader {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: #eeeeee;
+    color: $cp1;
+    transition: opacity 300ms ease, visibility 300ms ease;
+
+    &.is-hidden {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &-text {
+      font-family: $mcr;
+      font-size: 14px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    &-dot {
+      display: inline-block;
+      animation: cibeles-loader-dot 1.2s infinite both;
+
+      &:nth-child(2) {
+        animation-delay: 150ms;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 300ms;
+      }
+    }
+
+    &-spinner {
+      width: 34px;
+      height: 34px;
+      border: 3px solid rgba($cp1, 0.2);
+      border-top-color: $cp1;
+      border-radius: 50%;
+      animation: cibeles-loader-spin 800ms linear infinite;
+    }
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .v-n-c3d__inf-i .v-n-c3d__inf-label--desktop {
+    display: none;
+  }
+
+  .v-n-c3d__inf-i .v-n-c3d__inf-label--touch {
+    display: block;
+  }
+}
+
+@keyframes cibeles-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cibeles-loader-dot {
+  0%,
+  20% {
+    opacity: 0.15;
+    transform: translateY(0);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  70%,
+  100% {
+    opacity: 0.15;
+    transform: translateY(0);
+  }
+}
