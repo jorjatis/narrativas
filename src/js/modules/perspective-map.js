@@ -47,12 +47,17 @@ function createMapLabels(mapObject, mapContent) {
     const localMatrix = textElement.transform.baseVal.consolidate()?.matrix;
     const position = localMatrix ? point.matrixTransform(localMatrix) : point;
     const label = document.createElement('span');
+    const lines = getTextLines(textElement);
+    const labelText = lines.join(' ');
 
     label.className = 'v-n-pm__map-label';
+    if (/calle\s*de\s*alcal/i.test(labelText)) {
+      label.classList.add('v-n-pm__map-label--alcala');
+    }
     label.style.left = `${((position.x - viewBox.x) / viewBox.width) * 100}%`;
     label.style.top = `${((position.y - viewBox.y) / viewBox.height) * 100}%`;
 
-    getTextLines(textElement).forEach((line, index, textLines) => {
+    lines.forEach((line, index, textLines) => {
       label.append(document.createTextNode(line));
       if (index < textLines.length - 1) label.append(document.createElement('br'));
     });
@@ -185,11 +190,25 @@ function setupPerspectiveMap(root) {
       const imageRect = image.getBoundingClientRect();
       const anchorRect = anchor.getBoundingClientRect();
       // Desktop: rombos alineados al eje de Cibeles.
-      // Mobile: cada línea sale de su propia estatua (si no, se cruzan raras).
-      const lineStartX = isDesktop
-        ? sharedStartX
-        : imageRect.left - stageRect.left + Math.min(8, imageRect.width * 0.08);
-      const lineStartY = imageRect.bottom - stageRect.top;
+      // Mobile: Cibeles (arriba del mapa) conecta por la base;
+      // Apolo/Neptuno (abajo del mapa) conectan por la parte superior.
+      let lineStartX;
+      let lineStartY;
+      if (isDesktop) {
+        lineStartX = sharedStartX;
+        lineStartY = imageRect.bottom - stageRect.top;
+      } else {
+        const verticalGap = Math.min(16, Math.max(10, imageRect.height * 0.14));
+        if (connectorIndex === 0) {
+          // Cibeles (arriba): sale por el centro de la base, separada hacia abajo.
+          lineStartX = imageRect.left + imageRect.width / 2 - stageRect.left;
+          lineStartY = imageRect.bottom - stageRect.top + verticalGap;
+        } else {
+          // Apolo / Neptuno (abajo): salen por el centro superior, separadas hacia arriba.
+          lineStartX = imageRect.left + imageRect.width / 2 - stageRect.left;
+          lineStartY = imageRect.top - stageRect.top - verticalGap;
+        }
+      }
       const lineEndX = anchorRect.left + anchorRect.width / 2 - stageRect.left;
       const lineEndY = anchorRect.top + anchorRect.height / 2 - stageRect.top;
       const diamondHalfSize = 3;
@@ -236,7 +255,8 @@ function setupPerspectiveMap(root) {
 
       gsap.set(plane, {
         rotationX: 0,
-        xPercent: desktop ? 0 : -50,
+        // Desktop: un poco a la derecha al inicio (hueco del índice), centrado al final.
+        xPercent: desktop ? -38 : -50,
         yPercent: -50,
         scale: 1,
         force3D: true,
@@ -284,10 +304,27 @@ function setupPerspectiveMap(root) {
       if (desktop) {
         fitIndexInsideSafeArea();
         alignIndexToAnchors();
+        labels.forEach((label) => {
+          if (!label.classList.contains('v-n-pm__map-label--alcala')) return;
+          if (label.dataset.pmLeft) {
+            label.style.left = label.dataset.pmLeft;
+            label.style.top = label.dataset.pmTop;
+          }
+        });
       } else {
         root.style.removeProperty('--pm-statue-max-height');
         indexItems.forEach((item) => {
           item.style.top = '';
+        });
+        // Aparta "Calle de Alcalá" de Cibeles en el estado final.
+        labels.forEach((label) => {
+          if (!label.classList.contains('v-n-pm__map-label--alcala')) return;
+          if (!label.dataset.pmLeft) {
+            label.dataset.pmLeft = label.style.left;
+            label.dataset.pmTop = label.style.top;
+          }
+          label.style.left = `${parseFloat(label.dataset.pmLeft) + 8}%`;
+          label.style.top = `${parseFloat(label.dataset.pmTop) - 3.5}%`;
         });
       }
 
@@ -370,7 +407,7 @@ function setupPerspectiveMap(root) {
         .set(connectorGraphics, { autoAlpha: 1 }, 0)
         .set(plane, {
           rotationX: 0,
-          xPercent: desktop ? 0 : -50,
+          xPercent: desktop ? -38 : -50,
           yPercent: -50,
           scale: 1,
         }, 0)
@@ -399,8 +436,9 @@ function setupPerspectiveMap(root) {
           plane,
           {
             rotationX: tilt,
-            xPercent: desktop ? -20 : -50,
-            yPercent: desktop ? -72 : -50,
+            // Un poco a la izquierda: el Retiro pesa a la derecha y desequilibra el centro visual.
+            xPercent: desktop ? -54 : -50,
+            yPercent: desktop ? -68 : -50,
             scale: desktop ? 1.08 : 1.06,
             duration: 0.58,
           },
@@ -409,8 +447,9 @@ function setupPerspectiveMap(root) {
         .to(
           billboards,
           {
-            // Compensa el tilt del plano para que sigan de pie, sin perspectiva extra.
+            // Compensa el tilt del plano para que sigan de pie, sin elevarse en Z.
             rotationX: -tilt,
+            z: 0,
             scale: (itemIndex) => grownScales[itemIndex],
             stagger: 0.04,
             duration: 0.4,
@@ -421,7 +460,7 @@ function setupPerspectiveMap(root) {
           labels,
           {
             rotationX: -tilt,
-            z: desktop ? 18 : 12,
+            z: desktop ? 8 : 4,
             stagger: 0.012,
             duration: 0.28,
           },
@@ -430,11 +469,11 @@ function setupPerspectiveMap(root) {
         .to(
           shadows,
           {
-            autoAlpha: 0.9,
-            x: desktop ? 22 : 12,
-            skewX: desktop ? -28 : -22,
-            scaleX: (itemIndex) => grownScales[itemIndex] * 1.05,
-            scaleY: (itemIndex) => grownScales[itemIndex] * (desktop ? 0.32 : 0.28),
+            autoAlpha: 0.55,
+            x: desktop ? 14 : 8,
+            skewX: desktop ? -18 : -14,
+            scaleX: (itemIndex) => grownScales[itemIndex] * 1.02,
+            scaleY: (itemIndex) => grownScales[itemIndex] * (desktop ? 0.2 : 0.16),
             stagger: 0.04,
             duration: 0.3,
           },

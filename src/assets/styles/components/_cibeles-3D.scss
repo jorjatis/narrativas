@@ -1,4 +1,4 @@
-@use '../base/variables' as *;
+@use '../base/variables'as *;
 
 .v-n-c3d {
   display: flex;
@@ -41,14 +41,21 @@
   &__scene {
     position: relative;
     width: 100vw;
-    height: 60vh;
+    height: 50vh;
     overflow: hidden;
+
+    @media (min-width: 420px) {
+      height: 60vh;
+    }
 
     @media (min-width: $screen-xs) {
       height: 70vh;
     }
 
     canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
       display: block;
       width: 100%;
       height: 100%;
@@ -62,16 +69,18 @@
 
   &__hotspots {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     inset: 0;
     pointer-events: none;
-    contain: layout style;
   }
 
   &__hotspot {
+    --hx: -9999px;
+    --hy: -9999px;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,16 +92,15 @@
     cursor: pointer;
     pointer-events: auto;
     transform-origin: center center;
-    transition: opacity .2s ease;
-    transform: translate3d(-9999px, -9999px, 0) translate(-50%, -50%);
-    contain: layout style;
+    transition: opacity .2s ease, transform .2s ease;
+    transform: translate3d(var(--hx), var(--hy), 0) translate(-50%, -50%);
 
     &:hover,
     &:focus-visible {
-      scale: 1.25;
+      transform: translate3d(var(--hx), var(--hy), 0) translate(-50%, -50%) scale(1.25);
     }
 
-    &:before, 
+    &:before,
     &:after {
       content: "";
       position: absolute;
@@ -108,6 +116,7 @@
     }
 
     &--behind {
+      z-index: 0;
       opacity: 0.15;
       pointer-events: none;
     }
@@ -121,7 +130,10 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: rgba(#111, 0.58);
+
+    @media (max-width: $screen-xs) {
+      padding: 0;
+    }
 
     &[hidden] {
       display: none;
@@ -134,30 +146,118 @@
       overflow: auto;
       background: #fff;
       box-shadow: 0 16px 50px rgba(#000, 0.35);
+      max-width: 360px;
+      min-height: 220px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 16px;
+      padding: 16px;
+      border-radius: 2px;
+      background: #f5f7f9;
+
+      @media (max-width: $screen-xs) {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        max-height: 100%;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      &:has(.v-n-c3d__popup-image.is-vertical) {
+        @media (min-width: $screen-xs) {
+          max-width: 360px;
+          min-height: 220px;
+        }
+      }
+
+      &:has(.v-n-c3d__popup-image.is-horizontal) {
+        @media (min-width: $screen-xs) {
+          max-width: 507px;
+          min-height: 220px;
+        }
+      }
     }
 
     &-close {
       position: absolute;
       z-index: 1;
-      top: 10px;
-      right: 10px;
-      width: 36px;
-      height: 36px;
-      padding: 0;
-      border: 0;
-      border-radius: 50%;
+      top: 8px;
+      right: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 2px;
       background: $cp1;
-      font-size: 26px;
-      line-height: 32px;
-      color: #fff;
       cursor: pointer;
+      transition: opacity .2s ease;
+
+      &:hover {
+        opacity: .7;
+      }
+
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 18px;
+        background: $cb2;
+      }
+
+      &:before {
+        transform: rotate(-45deg);
+      }
+
+      &:after {
+        transform: rotate(45deg);
+      }
     }
 
     &-image {
-      display: block;
-      width: 100%;
-      max-height: 300px;
-      object-fit: cover;
+      max-height: 159px;
+
+      @media (max-width: $screen-xs) {
+        max-height: 100%;
+        margin-bottom: 12px;
+      }
+
+      @media (min-width: $screen-xs) {
+        grid-row: 2;
+        grid-column: 1;
+        max-height: 219px;
+      }
+
+      &.is-vertical {
+        @media (min-width: $screen-xs) {
+          width: 145px;
+          height: 217px;
+        }
+
+        @media (max-width: $screen-xs) {
+          max-width: 130px;
+        }
+      }
+
+      &.is-horizontal {
+        @media (min-width: $screen-xs) {
+          width: 217px;
+          height: 145px;
+        }
+
+        @media (max-width: $screen-xs) {
+          max-width: 260px;
+        }
+      }
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
     }
 
     &-content {
@@ -165,17 +265,28 @@
     }
 
     &-title {
-      margin: 0 0 10px;
-      font-family: $mcr;
-      font-size: 22px;
-      line-height: 1.15;
+      grid-row: 1;
+      grid-column: 1 / span 2;
+      margin-bottom: 12px;
+      position: relative;
+      font: 16px / 18px $mcs;
       color: $cp1;
+
+      &:after {
+        content: "";
+        display: block;
+        width: 25px;
+        height: 1px;
+        margin-top: 8px;
+        background: $cp1;
+      }
     }
 
     &-text {
-      margin: 0;
-      font-size: 16px;
-      line-height: 1.45;
+      grid-row: 2;
+      grid-column: 2;
+      font: 16px / 18px $mcr;
+      color: $cb9;
     }
   }
 
@@ -229,7 +340,8 @@
   }
 }
 
-@media (hover: none), (pointer: coarse) {
+@media (hover: none),
+(pointer: coarse) {
   .v-n-c3d__inf-i .v-n-c3d__inf-label--desktop {
     display: none;
   }
@@ -246,6 +358,7 @@
 }
 
 @keyframes cibeles-loader-dot {
+
   0%,
   20% {
     opacity: 0.15;

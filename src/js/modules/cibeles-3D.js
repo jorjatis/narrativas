@@ -6,23 +6,64 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 const MODEL_URL = '/assets/images/cibeles3D.glb';
 const DRACO_DECODER_PATH = '/js/vendors/three/draco/';
 
-// Sustituye estos textos e imágenes por el contenido definitivo.
 const HOTSPOT_CONTENT = {
-  h_losa: { title: 'La losa' },
-  h__losa: { title: 'La losa' },
-  h_boca: { title: 'La boca' },
-  h_dragon: { title: 'El dragón' },
-  h_hocico_leon: { title: 'El hocico del león' },
-  h_llave: { title: 'La llave' },
-  h_mano_llave: { title: 'La mano con llave' },
-  h_mano_sin_llave: { title: 'La mano sin llave' },
-  h_mano_sin_llave001: { title: 'La otra mano' },
-  h_oso: { title: 'El oso' },
-  h_pata_apoyo: { title: 'La pata de apoyo' },
-  h_pata_apoyo_leon: { title: 'La pata del león' },
-  h_soporte: { title: 'El soporte' },
+  h__losa: {
+    title: 'La losa',
+    image: '/assets/images/hotspot-losa.webp',
+    orientation: 'horizontal',
+    text: 'Texto provisional de la losa. Sustituye esta descripción e imagen.',
+  },
+  h_dragon: {
+    title: 'El dragón',
+    image: '/assets/images/hotspot-dragon.webp',
+    orientation: 'horizontal',
+    text: 'No constaba en el proyecto original. Una vez cerrada la fuente al uso público, fue retirado de la fuente en 1862, junto con el oso.',
+  },
+  h_hocico_leon: {
+    title: 'El hocico del león',
+    image: '/assets/images/hotspot-hocico_leon.webp',
+    orientation: 'vertical',
+    text: 'Dañado al inicio de la Guerra Civil, por efecto de la metralla. Fue reparado al final de la contienda.',
+  },
+  h_llave: {
+    title: 'La llave',
+    image: '/assets/images/hotspot-llave.webp',
+    orientation: 'horizontal',
+    text: 'Además de la mano derecha, el 14 de abril de 1931, desaparecieron las llaves que sujeta en la mano izquierda. Se reparó antes de la Guerra Civil.',
+  },
+  h_mano_llave: {
+    title: 'La mano con llave',
+    image: '/assets/images/hotspot-mano_llave.webp',
+    orientation: 'vertical',
+    text: 'Dañada en dos ocasiones. Además de en la celebración de la victoria de España ante Suiza en 1994, en 2002, desaparece como resultado de un acto vandálico. Se sustituyó por una copia hecha en mármol de la misma cantera que la fuente original.',
+  },
+  h_mano_sin_llave: {
+    title: 'La mano sin llave',
+    image: '/assets/images/hotspot-mano_sin_llave.webp',
+    orientation: 'horizontal',
+    text: 'El día de la proclamación de la II República la escultura de la diosa perdió su mano derecha. Se reparó antes de la Guerra Civil.',
+  },
+  h_oso: {
+    title: 'El oso',
+    image: '/assets/images/hotspot-oso.webp',
+    orientation: 'horizontal',
+    text: 'No estaba incluido en el proyecto original de Ventura Rodríguez. Años después de ser dañado por un robo, fue retirado definitivamente.',
+  },
+  h_pata_apoyo_leon: {
+    title: 'La pata del león',
+    image: '/assets/images/hotspot-pata_apoyo_leon.webp',
+    orientation: 'vertical',
+    text: 'Las esquirlas de los bombardeos de la aviación en la Guerra Civil también dañaron la pata de apoyo del león izquierdo.',
+  },
+  h_soporte: {
+    title: 'El soporte',
+    image: '/assets/images/hotspot-soporte.webp',
+    orientation: 'horizontal',
+    text: 'La restauración de 1980 se aprovechó para hacer el vaciado de la fuente para una réplica en bronce. Inaugurada por Tierno Galván, se envió a Ciudad de México en reconocimiento de la comunidad española emigrada al país.',
+  },
 };
-const DEFAULT_HOTSPOT_IMAGE = '/assets/images/statue-01.webp';
+
+const DEFAULT_HOTSPOT_IMAGE = '/assets/images/hotspot-losa.webp';
 const DEFAULT_HOTSPOT_TEXT = 'Aquí irá el texto explicativo y la imagen real de esta parte de la estatua de la Cibeles.';
 
 const ENABLE_DEBUG_GUI = false;
@@ -41,46 +82,51 @@ const SCENE_SETTINGS = {
   lightZ: 1.6,
 };
 
+const cameraDirection = new THREE.Vector3();
+
+const fitCameraRight = new THREE.Vector3();
+const fitCameraUp = new THREE.Vector3();
+const fitOffset = new THREE.Vector3();
+const fitCorner = new THREE.Vector3();
+
 function getCameraDirection() {
-  return new THREE.Vector3(
-    SCENE_SETTINGS.cameraX,
-    SCENE_SETTINGS.cameraY,
-    SCENE_SETTINGS.cameraZ,
-  ).normalize();
+  return cameraDirection
+    .set(
+      SCENE_SETTINGS.cameraX,
+      SCENE_SETTINGS.cameraY,
+      SCENE_SETTINGS.cameraZ,
+    )
+    .normalize();
 }
 
 function getFitDistance(camera, box, target) {
   const cameraDirection = getCameraDirection();
   const verticalTan = Math.tan(THREE.MathUtils.degToRad(camera.fov * 0.5));
   const horizontalTan = verticalTan * camera.aspect;
-  const cameraRight = new THREE.Vector3();
-  const cameraUp = new THREE.Vector3();
-  const offset = new THREE.Vector3();
-  const corner = new THREE.Vector3();
 
   camera.position.copy(target).add(cameraDirection);
   camera.lookAt(target);
   camera.updateMatrixWorld();
-  cameraRight.setFromMatrixColumn(camera.matrixWorld, 0);
-  cameraUp.setFromMatrixColumn(camera.matrixWorld, 1);
+  fitCameraRight.setFromMatrixColumn(camera.matrixWorld, 0);
+  fitCameraUp.setFromMatrixColumn(camera.matrixWorld, 1);
 
   let distance = 0;
 
   for (let x = 0; x <= 1; x += 1) {
     for (let y = 0; y <= 1; y += 1) {
       for (let z = 0; z <= 1; z += 1) {
-        corner.set(
+        fitCorner.set(
           x ? box.max.x : box.min.x,
           y ? box.max.y : box.min.y,
           z ? box.max.z : box.min.z,
         );
-        offset.copy(corner).sub(target);
+        fitOffset.copy(fitCorner).sub(target);
 
-        const depthOffset = offset.dot(cameraDirection);
+        const depthOffset = fitOffset.dot(cameraDirection);
         const horizontalDistance = depthOffset
-          + Math.abs(offset.dot(cameraRight)) / horizontalTan;
+          + Math.abs(fitOffset.dot(fitCameraRight)) / horizontalTan;
         const verticalDistance = depthOffset
-          + Math.abs(offset.dot(cameraUp)) / verticalTan;
+          + Math.abs(fitOffset.dot(fitCameraUp)) / verticalTan;
 
         distance = Math.max(distance, horizontalDistance, verticalDistance);
       }
@@ -90,22 +136,31 @@ function getFitDistance(camera, box, target) {
   return distance * SCENE_SETTINGS.initialMargin;
 }
 
+function disposeMaterial(material) {
+  if (!material) return;
+
+  for (const key in material) {
+    const value = material[key];
+
+    if (value && value.isTexture) {
+      value.dispose();
+    }
+  }
+
+  material.dispose();
+}
+
 function disposeModel(model) {
   model.traverse((object) => {
     if (!object.isMesh) return;
 
     object.geometry?.dispose();
-    const materials = Array.isArray(object.material)
-      ? object.material
-      : [object.material];
 
-    materials.forEach((material) => {
-      if (!material) return;
-      Object.values(material).forEach((value) => {
-        if (value?.isTexture) value.dispose();
-      });
-      material.dispose();
-    });
+    if (Array.isArray(object.material)) {
+      object.material.forEach(disposeMaterial);
+    } else {
+      disposeMaterial(object.material);
+    }
   });
 }
 
@@ -122,6 +177,7 @@ function createCibelesScene(container) {
   const popupTitle = popup?.querySelector('.v-n-c3d__popup-title');
   const popupText = popup?.querySelector('.v-n-c3d__popup-text');
   const popupImage = popup?.querySelector('.v-n-c3d__popup-image');
+  const popupImageElement = popupImage?.querySelector('img');
   const camera = new THREE.PerspectiveCamera(52, 1, 0.01, 10000);
   const renderer = new THREE.WebGLRenderer({
     alpha: true,
@@ -135,7 +191,8 @@ function createCibelesScene(container) {
   renderer.toneMappingExposure = SCENE_SETTINGS.exposure;
   renderer.setClearColor(0x000000, 0);
   renderer.domElement.setAttribute('aria-label', 'Modelo 3D de la fuente de Cibeles');
-  container.append(renderer.domElement);
+  // El canvas debe quedar debajo de hotspots/popup; si va al final, captura todos los clics.
+  container.insertBefore(renderer.domElement, container.firstChild);
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
@@ -175,23 +232,43 @@ function createCibelesScene(container) {
   let containerWidth = 1;
   let containerHeight = 1;
   let resizeFrameId = null;
-  // #region agent log
-  let dbgLastReport = 0;
-  let dbgDomWrites = 0;
-  let dbgFrames = 0;
-  // #endregion
   const hotspots = [];
-  const hotspotScreenPosition = new THREE.Vector3();
   const cameraLookDirection = new THREE.Vector3();
   const cameraHorizontal = new THREE.Vector3();
+
+  const projectedPosition = new THREE.Vector3();
+
   const BEHIND_DOT_THRESHOLD = 0.15;
 
   function getHotspotLabel(name) {
     return name
-      .replace(/^h_/, '')
+      .replace(/^h_[\s_]*/, '')
       .replace(/\.\d+$/, '')
       .replace(/_/g, ' ')
+      .trim()
       .replace(/\b\w/g, (letter) => letter.toUpperCase());
+  }
+
+  function normalizeHotspotKey(name) {
+    return name
+      .trim()
+      .replace(/\s+/g, '_')
+      .replace(/\.(\d+)$/, '$1');
+  }
+
+  function getHotspotContent(name) {
+    const normalized =
+      normalizeHotspotKey(name);
+
+    const fallback =
+      normalized.replace(/^h__+/, 'h_');
+
+    return (
+      HOTSPOT_CONTENT[name]
+      || HOTSPOT_CONTENT[normalized]
+      || HOTSPOT_CONTENT[fallback]
+      || {}
+    );
   }
 
   function closePopup() {
@@ -206,14 +283,18 @@ function createCibelesScene(container) {
   function openPopup(name, button) {
     if (!popup) return;
 
-    const content = HOTSPOT_CONTENT[name] || {};
+    const content = getHotspotContent(name);
     const title = content.title || getHotspotLabel(name);
 
     if (popupTitle) popupTitle.textContent = title;
     if (popupText) popupText.textContent = content.text || DEFAULT_HOTSPOT_TEXT;
     if (popupImage) {
-      popupImage.src = content.image || DEFAULT_HOTSPOT_IMAGE;
-      popupImage.alt = `Imagen de ${title.toLowerCase()}`;
+      const orientation = content.orientation === 'vertical' ? 'vertical' : 'horizontal';
+
+      popupImageElement.src = content.image || DEFAULT_HOTSPOT_IMAGE;
+      popupImageElement.alt = `Imagen de ${title.toLowerCase()}`;
+      popupImage.classList.toggle('is-vertical', orientation === 'vertical');
+      popupImage.classList.toggle('is-horizontal', orientation === 'horizontal');
     }
 
     activeHotspotButton = button;
@@ -253,7 +334,15 @@ function createCibelesScene(container) {
       button.dataset.hotspot = object.name;
       button.setAttribute('aria-label', `Ver detalle: ${label}`);
       button.title = label;
-      button.addEventListener('click', () => openPopup(object.name, button));
+      // Evita que OrbitControls interprete el gesto sobre el botón.
+      button.addEventListener('pointerdown', (event) => {
+        event.stopPropagation();
+      });
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        openPopup(object.name, button);
+      });
 
       hotspotLayer.append(button);
       hotspots.push({
@@ -261,7 +350,6 @@ function createCibelesScene(container) {
         button,
         worldPosition,
         horizontalOffset,
-        localPosition: worldPosition.clone(),
         isBehind: null,
         lastX: Number.NaN,
         lastY: Number.NaN,
@@ -273,15 +361,11 @@ function createCibelesScene(container) {
   function cacheHotspotWorldPositions() {
     if (!hotspots.length || !modelPivot) return;
 
-    modelPivot.updateMatrixWorld(true);
-
     hotspots.forEach((hotspot) => {
-      if (hotspot.object.isMesh && hotspot.localPosition) {
-        hotspot.worldPosition.copy(hotspot.localPosition);
-        hotspot.object.localToWorld(hotspot.worldPosition);
-      } else {
-        hotspot.object.getWorldPosition(hotspot.worldPosition);
-      }
+
+      hotspot.object.getWorldPosition(
+        hotspot.worldPosition
+      );
 
       hotspot.horizontalOffset.set(
         hotspot.worldPosition.x - controls.target.x,
@@ -289,7 +373,9 @@ function createCibelesScene(container) {
         hotspot.worldPosition.z - controls.target.z,
       );
 
-      if (hotspot.horizontalOffset.lengthSq() > 1e-8) {
+      if (
+        hotspot.horizontalOffset.lengthSq() > 1e-8
+      ) {
         hotspot.horizontalOffset.normalize();
       } else {
         hotspot.horizontalOffset.set(0, 0, 0);
@@ -301,41 +387,106 @@ function createCibelesScene(container) {
     if (!hotspots.length) return;
 
     camera.getWorldDirection(cameraLookDirection);
-    cameraHorizontal.set(cameraLookDirection.x, 0, cameraLookDirection.z);
 
-    if (cameraHorizontal.lengthSq() > 0) cameraHorizontal.normalize();
+    cameraHorizontal.set(
+      cameraLookDirection.x,
+      0,
+      cameraLookDirection.z,
+    );
+
+    if (cameraHorizontal.lengthSq() > 0) {
+      cameraHorizontal.normalize();
+    }
 
     const halfWidth = containerWidth * 0.5;
     const halfHeight = containerHeight * 0.5;
 
-    for (let index = 0; index < hotspots.length; index += 1) {
-      const hotspot = hotspots[index];
-      const { button, worldPosition, horizontalOffset } = hotspot;
+    for (let i = 0; i < hotspots.length; i += 1) {
+      const hotspot = hotspots[i];
 
-      const isBehind = horizontalOffset.dot(cameraHorizontal) > BEHIND_DOT_THRESHOLD;
+      const {
+        button,
+        worldPosition,
+        horizontalOffset,
+      } = hotspot;
 
-      hotspotScreenPosition.copy(worldPosition).project(camera);
+      const isBehind =
+        horizontalOffset.dot(cameraHorizontal)
+        > BEHIND_DOT_THRESHOLD;
 
-      const x = (hotspotScreenPosition.x + 1) * halfWidth;
-      const y = (1 - hotspotScreenPosition.y) * halfHeight;
-      const roundedX = (x + 0.5) | 0;
-      const roundedY = (y + 0.5) | 0;
+      projectedPosition
+        .copy(worldPosition)
+        .project(camera);
 
-      if (hotspot.lastX !== roundedX || hotspot.lastY !== roundedY) {
+      // PERF: no calcular hotspots fuera del frustum
+      if (
+        projectedPosition.z < -1 ||
+        projectedPosition.z > 1
+      ) {
+        if (!hotspot.isBehind) {
+          hotspot.isBehind = true;
+          button.classList.add(
+            'v-n-c3d__hotspot--behind',
+          );
+          button.tabIndex = -1;
+          button.setAttribute(
+            'aria-hidden',
+            'true',
+          );
+        }
+
+        continue;
+      }
+
+      const roundedX =
+        (((projectedPosition.x + 1) * halfWidth) + 0.5) | 0;
+
+      const roundedY =
+        (((1 - projectedPosition.y) * halfHeight) + 0.5) | 0;
+
+      if (
+        hotspot.lastX !== roundedX ||
+        hotspot.lastY !== roundedY
+      ) {
         hotspot.lastX = roundedX;
         hotspot.lastY = roundedY;
-        // transform directo evita invalidar cascada de custom properties
-        button.style.transform = `translate3d(${roundedX}px, ${roundedY}px, 0) translate(-50%, -50%)`;
-        // #region agent log
-        dbgDomWrites += 1;
-        // #endregion
+
+        button.style.setProperty(
+          '--hx',
+          `${roundedX}px`,
+        );
+
+        button.style.setProperty(
+          '--hy',
+          `${roundedY}px`,
+        );
       }
 
       if (hotspot.isBehind !== isBehind) {
         hotspot.isBehind = isBehind;
-        button.classList.toggle('v-n-c3d__hotspot--behind', isBehind);
-        button.tabIndex = isBehind ? -1 : 0;
-        button.setAttribute('aria-hidden', isBehind ? 'true' : 'false');
+
+        button.classList.toggle(
+          'v-n-c3d__hotspot--behind',
+          isBehind,
+        );
+
+        const newTabIndex = isBehind ? -1 : 0;
+
+        if (button.tabIndex !== newTabIndex) {
+          button.tabIndex = newTabIndex;
+        }
+
+        const ariaHidden = String(isBehind);
+
+        if (
+          button.getAttribute('aria-hidden')
+          !== ariaHidden
+        ) {
+          button.setAttribute(
+            'aria-hidden',
+            ariaHidden,
+          );
+        }
       }
     }
   }
@@ -381,45 +532,22 @@ function createCibelesScene(container) {
   }
 
   function resize() {
-    // #region agent log
-    const resizeStart = performance.now();
-    // #endregion
     const width = Math.max(container.clientWidth, 1);
     const height = Math.max(container.clientHeight, 1);
 
-    // Evita trabajo y reflow si el tamaño no cambió realmente.
-    if (width === containerWidth && height === containerHeight) {
-      // #region agent log
-      fetch('http://127.0.0.1:7310/ingest/6b5ec826-93b4-42a5-9673-2b6c14ff0bd6',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a4b4c2'},body:JSON.stringify({sessionId:'a4b4c2',runId:'post-fix',hypothesisId:'C',location:'cibeles-3D.js:resize',message:'resize skipped',data:{ms:+(performance.now()-resizeStart).toFixed(2),w:width,h:height},timestamp:Date.now()})}).catch(()=>{});
-      // #endregion
-      return;
-    }
+    if (width === containerWidth && height === containerHeight) return;
 
     containerWidth = width;
     containerHeight = height;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height, false);
-    // No resetear el encuadre/cámara aquí: solo adaptar el viewport.
     requestRender();
-    // #region agent log
-    fetch('http://127.0.0.1:7310/ingest/6b5ec826-93b4-42a5-9673-2b6c14ff0bd6',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a4b4c2'},body:JSON.stringify({sessionId:'a4b4c2',runId:'post-fix',hypothesisId:'C',location:'cibeles-3D.js:resize',message:'resize applied',data:{ms:+(performance.now()-resizeStart).toFixed(2),w:width,h:height},timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
   }
 
   function render() {
     updateHotspotPositions();
     renderer.render(scene, camera);
-    // #region agent log
-    dbgFrames += 1;
-    const now = performance.now();
-    if (now - dbgLastReport > 500) {
-      fetch('http://127.0.0.1:7310/ingest/6b5ec826-93b4-42a5-9673-2b6c14ff0bd6',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a4b4c2'},body:JSON.stringify({sessionId:'a4b4c2',runId:'post-fix',hypothesisId:'A',location:'cibeles-3D.js:render',message:'render batch',data:{frames:dbgFrames,domWrites:dbgDomWrites},timestamp:Date.now()})}).catch(()=>{});
-      dbgFrames = 0;
-      dbgDomWrites = 0;
-      dbgLastReport = now;
-    }
-    // #endregion
   }
 
   function animate() {
@@ -430,6 +558,7 @@ function createCibelesScene(container) {
     }
 
     const needsMoreFrames = controls.update();
+
     render();
 
     if (needsMoreFrames) {
@@ -553,8 +682,14 @@ function createCibelesScene(container) {
       model.position.y -= modelBox.min.y;
       model.position.z -= center.z;
 
+      model.updateMatrixWorld(true);
       model.traverse((object) => {
+
+        object.matrixAutoUpdate = false;
+        object.updateMatrix();
+
         if (!object.isMesh) return;
+
         object.castShadow = false;
         object.receiveShadow = false;
       });
@@ -562,7 +697,9 @@ function createCibelesScene(container) {
       createHotspotButtons(model);
 
       modelPivot = new THREE.Group();
+
       modelPivot.add(model);
+
       scene.add(modelPivot);
       updateModelFraming();
       resize();
