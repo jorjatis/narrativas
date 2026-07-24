@@ -16,7 +16,7 @@
     },
     "infoContainer": {
       "exists": true,
-      "pretitle": "Historia",
+      "pretitle": false,
       "title": "Las mil vidas de la Cibeles",
       "description": "Descripción de la narrativa",
       "chevronDown": true

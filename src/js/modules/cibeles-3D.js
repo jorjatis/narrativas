@@ -3,67 +3,67 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
-const MODEL_URL = '/assets/images/cibeles3D.glb';
+const MODEL_URL = 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/cibeles3D.glb';
 const DRACO_DECODER_PATH = '/js/vendors/three/draco/';
 
 const HOTSPOT_CONTENT = {
   h__losa: {
     title: 'La losa',
-    image: '/assets/images/hotspot-losa.webp',
+    image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-losa.webp',
     orientation: 'horizontal',
-    text: 'Texto provisional de la losa. Sustituye esta descripción e imagen.',
+    text: 'Dentro del proceso de restauración integral de la piedra de este 2026,se procederá a corregir la desviación de la fuente y el refuerzo del soporte sobre el que se asienta.',
   },
   h_dragon: {
     title: 'El dragón',
-    image: '/assets/images/hotspot-dragon.webp',
+    image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-dragon.webp',
     orientation: 'horizontal',
     text: 'No constaba en el proyecto original. Una vez cerrada la fuente al uso público, fue retirado de la fuente en 1862, junto con el oso.',
   },
   h_hocico_leon: {
     title: 'El hocico del león',
-    image: '/assets/images/hotspot-hocico_leon.webp',
+    image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-hocico_leon.webp',
     orientation: 'vertical',
     text: 'Dañado al inicio de la Guerra Civil, por efecto de la metralla. Fue reparado al final de la contienda.',
   },
   h_llave: {
     title: 'La llave',
-    image: '/assets/images/hotspot-llave.webp',
+    image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-llave.webp',
     orientation: 'horizontal',
     text: 'Además de la mano derecha, el 14 de abril de 1931, desaparecieron las llaves que sujeta en la mano izquierda. Se reparó antes de la Guerra Civil.',
   },
   h_mano_llave: {
     title: 'La mano con llave',
-    image: '/assets/images/hotspot-mano_llave.webp',
+    image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-mano_llave.webp',
     orientation: 'vertical',
     text: 'Dañada en dos ocasiones. Además de en la celebración de la victoria de España ante Suiza en 1994, en 2002, desaparece como resultado de un acto vandálico. Se sustituyó por una copia hecha en mármol de la misma cantera que la fuente original.',
   },
   h_mano_sin_llave: {
     title: 'La mano sin llave',
-    image: '/assets/images/hotspot-mano_sin_llave.webp',
+    image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-mano_llave.webp',
     orientation: 'horizontal',
     text: 'El día de la proclamación de la II República la escultura de la diosa perdió su mano derecha. Se reparó antes de la Guerra Civil.',
   },
   h_oso: {
     title: 'El oso',
-    image: '/assets/images/hotspot-oso.webp',
+    image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-oso.webp',
     orientation: 'horizontal',
     text: 'No estaba incluido en el proyecto original de Ventura Rodríguez. Años después de ser dañado por un robo, fue retirado definitivamente.',
   },
   h_pata_apoyo_leon: {
     title: 'La pata del león',
-    image: '/assets/images/hotspot-pata_apoyo_leon.webp',
+    image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-pata_apoyo_leon.webp',
     orientation: 'vertical',
     text: 'Las esquirlas de los bombardeos de la aviación en la Guerra Civil también dañaron la pata de apoyo del león izquierdo.',
   },
   h_soporte: {
     title: 'El soporte',
-    image: '/assets/images/hotspot-soporte.webp',
+    image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-soporte.webp',
     orientation: 'horizontal',
     text: 'La restauración de 1980 se aprovechó para hacer el vaciado de la fuente para una réplica en bronce. Inaugurada por Tierno Galván, se envió a Ciudad de México en reconocimiento de la comunidad española emigrada al país.',
   },
 };
 
-const DEFAULT_HOTSPOT_IMAGE = '/assets/images/hotspot-losa.webp';
+const DEFAULT_HOTSPOT_IMAGE = 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-losa.webp';
 const DEFAULT_HOTSPOT_TEXT = 'Aquí irá el texto explicativo y la imagen real de esta parte de la estatua de la Cibeles.';
 
 const ENABLE_DEBUG_GUI = false;
@@ -233,12 +233,14 @@ function createCibelesScene(container) {
   let containerHeight = 1;
   let resizeFrameId = null;
   const hotspots = [];
-  const cameraLookDirection = new THREE.Vector3();
-  const cameraHorizontal = new THREE.Vector3();
-
   const projectedPosition = new THREE.Vector3();
+  const raycaster = new THREE.Raycaster();
+  const rayDirection = new THREE.Vector3();
+  const OCCLUSION_EPSILON = 0.02;
 
-  const BEHIND_DOT_THRESHOLD = 0.15;
+  // #region agent log
+  let dbgBehindLogAt = 0;
+  // #endregion
 
   function getHotspotLabel(name) {
     return name
@@ -320,14 +322,6 @@ function createCibelesScene(container) {
       const button = document.createElement('button');
       const label = getHotspotLabel(object.name);
       const worldPosition = new THREE.Vector3();
-      const horizontalOffset = new THREE.Vector3();
-
-      if (object.isMesh && object.geometry) {
-        object.geometry.computeBoundingBox();
-        if (object.geometry.boundingBox) {
-          object.geometry.boundingBox.getCenter(worldPosition);
-        }
-      }
 
       button.type = 'button';
       button.className = 'v-n-c3d__hotspot';
@@ -349,7 +343,6 @@ function createCibelesScene(container) {
         object,
         button,
         worldPosition,
-        horizontalOffset,
         isBehind: null,
         lastX: Number.NaN,
         lastY: Number.NaN,
@@ -362,44 +355,45 @@ function createCibelesScene(container) {
     if (!hotspots.length || !modelPivot) return;
 
     hotspots.forEach((hotspot) => {
-
-      hotspot.object.getWorldPosition(
-        hotspot.worldPosition
-      );
-
-      hotspot.horizontalOffset.set(
-        hotspot.worldPosition.x - controls.target.x,
-        0,
-        hotspot.worldPosition.z - controls.target.z,
-      );
-
-      if (
-        hotspot.horizontalOffset.lengthSq() > 1e-8
-      ) {
-        hotspot.horizontalOffset.normalize();
-      } else {
-        hotspot.horizontalOffset.set(0, 0, 0);
-      }
+      hotspot.object.getWorldPosition(hotspot.worldPosition);
     });
+
+    // #region agent log
+    fetch('http://127.0.0.1:7310/ingest/6b5ec826-93b4-42a5-9673-2b6c14ff0bd6',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a4b4c2'},body:JSON.stringify({sessionId:'a4b4c2',runId:'post-fix',hypothesisId:'B-E',location:'cibeles-3D.js:cacheHotspotWorldPositions',message:'cached hotspot world positions',data:{target:{x:+controls.target.x.toFixed(3),y:+controls.target.y.toFixed(3),z:+controls.target.z.toFixed(3)},hotspots:hotspots.map((h)=>({name:h.object.name,type:h.object.type,isMesh:!!h.object.isMesh,world:{x:+h.worldPosition.x.toFixed(3),y:+h.worldPosition.y.toFixed(3),z:+h.worldPosition.z.toFixed(3)}}))},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
+  }
+
+  function isHotspotOccluded(worldPosition) {
+    if (!modelPivot) return false;
+
+    rayDirection.copy(worldPosition).sub(camera.position);
+    const distanceToHotspot = rayDirection.length();
+    if (distanceToHotspot < 1e-6) return false;
+
+    rayDirection.multiplyScalar(1 / distanceToHotspot);
+    raycaster.set(camera.position, rayDirection);
+
+    const hits = raycaster.intersectObject(modelPivot, true);
+    for (let i = 0; i < hits.length; i += 1) {
+      if (hits[i].distance < distanceToHotspot - OCCLUSION_EPSILON) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   function updateHotspotPositions() {
     if (!hotspots.length) return;
 
-    camera.getWorldDirection(cameraLookDirection);
-
-    cameraHorizontal.set(
-      cameraLookDirection.x,
-      0,
-      cameraLookDirection.z,
-    );
-
-    if (cameraHorizontal.lengthSq() > 0) {
-      cameraHorizontal.normalize();
-    }
-
     const halfWidth = containerWidth * 0.5;
     const halfHeight = containerHeight * 0.5;
+    // #region agent log
+    const dbgNow = performance.now();
+    const dbgShouldSample = dbgNow - dbgBehindLogAt > 800;
+    const dbgSamples = dbgShouldSample ? [] : null;
+    if (dbgShouldSample) dbgBehindLogAt = dbgNow;
+    // #endregion
 
     for (let i = 0; i < hotspots.length; i += 1) {
       const hotspot = hotspots[i];
@@ -407,16 +401,37 @@ function createCibelesScene(container) {
       const {
         button,
         worldPosition,
-        horizontalOffset,
       } = hotspot;
 
-      const isBehind =
-        horizontalOffset.dot(cameraHorizontal)
-        > BEHIND_DOT_THRESHOLD;
+      // Oclusión real cámara→punto (no hemisferio angular).
+      const isBehind = isHotspotOccluded(worldPosition);
 
       projectedPosition
         .copy(worldPosition)
         .project(camera);
+
+      // #region agent log
+      if (dbgSamples) {
+        const name = hotspot.object.name;
+        if (/losa|soporte|dragon|oso/i.test(name)) {
+          rayDirection.copy(worldPosition).sub(camera.position);
+          const dist = rayDirection.length();
+          dbgSamples.push({
+            name,
+            raycastBehind: isBehind,
+            hotspotDist: +dist.toFixed(3),
+            projZ: +projectedPosition.z.toFixed(3),
+            frustumBehind: projectedPosition.z < -1 || projectedPosition.z > 1,
+            world: {
+              x: +worldPosition.x.toFixed(3),
+              y: +worldPosition.y.toFixed(3),
+              z: +worldPosition.z.toFixed(3),
+            },
+            classBehind: button.classList.contains('v-n-c3d__hotspot--behind'),
+          });
+        }
+      }
+      // #endregion
 
       // PERF: no calcular hotspots fuera del frustum
       if (
@@ -489,6 +504,12 @@ function createCibelesScene(container) {
         }
       }
     }
+
+    // #region agent log
+    if (dbgSamples?.length) {
+      fetch('http://127.0.0.1:7310/ingest/6b5ec826-93b4-42a5-9673-2b6c14ff0bd6',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a4b4c2'},body:JSON.stringify({sessionId:'a4b4c2',runId:'post-fix',hypothesisId:'A-D',location:'cibeles-3D.js:updateHotspotPositions',message:'hotspot behind sample',data:{samples:dbgSamples},timestamp:Date.now()})}).catch(()=>{});
+    }
+    // #endregion
   }
 
   popupClose?.addEventListener('click', closePopup);
