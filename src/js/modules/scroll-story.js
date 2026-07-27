@@ -277,6 +277,57 @@ function initScrollStory(root) {
     return rect.top <= offset + 1 && rect.bottom > offset + 1;
   }
 
+  function getActiveStep() {
+    return root.querySelector('.step.is-active') || root.querySelector('.step');
+  }
+
+  function getStepCard(step) {
+    return step?.querySelector('.step__c') || step || null;
+  }
+
+  function isCardVisible(card) {
+    if (!card) return false;
+    const rect = card.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+  }
+
+  function isAnySameAudioCardVisible(audioId) {
+    return [...root.querySelectorAll('.step')]
+      .filter((step) => step.dataset.audio === String(audioId))
+      .some((step) => isCardVisible(getStepCard(step)));
+  }
+
+  // Hueco entre dos cartelas consecutivas del mismo audio.
+  // Vale igual al scrollear hacia abajo (A sale por arriba, B aún abajo)
+  // y hacia arriba (B sale por abajo, A aún arriba): A.bottom <= 0 && B.top >= vh.
+  function isInSameAudioContiguousGap(audioId) {
+    const steps = [...root.querySelectorAll('.step')];
+    const vh = window.innerHeight;
+
+    for (let i = 0; i < steps.length - 1; i += 1) {
+      if (steps[i].dataset.audio !== String(audioId)) continue;
+      if (steps[i + 1].dataset.audio !== String(audioId)) continue;
+
+      const a = getStepCard(steps[i]).getBoundingClientRect();
+      const b = getStepCard(steps[i + 1]).getBoundingClientRect();
+      if (a.bottom <= 0 && b.top >= vh) return true;
+    }
+
+    return false;
+  }
+
+  function shouldAudioPlayNow() {
+    if (!isStickyPinned()) return false;
+
+    const activeStep = getActiveStep();
+    const audioId = activeStep?.dataset.audio ?? currentAudioId;
+    if (audioId == null) return false;
+
+    if (isAnySameAudioCardVisible(audioId)) return true;
+
+    return isInSameAudioContiguousGap(audioId);
+  }
+
   function playPinnedAudio() {
     ensureActiveAudio();
     if (activeAudio && !userMuted) tryPlay(activeAudio);
@@ -309,7 +360,7 @@ function initScrollStory(root) {
   // se pare antes de tiempo cerca del final del bloque.
   let pinTicking = false;
   function syncPinnedState() {
-    setPinnedState(isStickyPinned());
+    setPinnedState(shouldAudioPlayNow());
   }
   function onPinScroll() {
     if (pinTicking) return;
@@ -358,7 +409,10 @@ function initScrollStory(root) {
   unlockEvents.forEach((evt) => window.addEventListener(evt, onUserGesture, { passive: true }));
 
   muteBtn?.addEventListener('click', onMuteClick);
-  root.addEventListener('scrolly:step', onStep);
+  root.addEventListener('scrolly:step', (event) => {
+    onStep(event);
+    syncPinnedState();
+  });
   setMuteUI(false);
 
   // Solo estado inicial si ya hay un step activo (el scrolly decide cuándo)
@@ -366,7 +420,7 @@ function initScrollStory(root) {
   if (activeStep) applyStep(activeStep, { immediate: true });
 
   // Sincroniza por si el bloque ya está pineado al cargar
-  setPinnedState(isStickyPinned());
+  setPinnedState(shouldAudioPlayNow());
 }
 
 export default function scrollStory() {

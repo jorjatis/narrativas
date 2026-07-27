@@ -13,8 +13,9 @@ import cibeles3D from './modules/cibeles-3D';
 export function initAll() {
   document.body.classList.add('is-loaded');
 
-  fadeOnScroll(".v-a-img-c > .scr-ind");
   moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
+  moveEls(".v-d--abc .scr-ind", ".v-a--d-s-1 .v-a-img-c", "prepend");
+  fadeOnScroll(".v-a--d-s-1 .v-a-img-c > .scr-ind");
   articleTitle();
   scrollStory();
   scrolly();

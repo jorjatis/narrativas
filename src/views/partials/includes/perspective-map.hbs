@@ -30,16 +30,9 @@
           <div class="v-n-pm__content">
             <img
               class="v-n-pm__map"
-              src="assets/images/mapa-madrid.svg"
+              src="assets/images/mapa-madrid.webp"
               alt="Mapa del eje del Paseo del Prado y el Paseo de Recoletos"
             >
-            <object
-              class="v-n-pm__map-data"
-              data="assets/images/mapa-madrid.svg"
-              type="image/svg+xml"
-              aria-hidden="true"
-              tabindex="-1"
-            ></object>
 
             <span class="v-n-pm__dot v-n-pm__dot--cibeles" aria-hidden="true"></span>
             <span class="v-n-pm__dot v-n-pm__dot--apolo" aria-hidden="true"></span>
@@ -74,6 +67,15 @@
           </div>
         </div>
       </div>
+
+      <!-- Fuera del plano 3D: solo para leer labels en localhost (same-origin). -->
+      <object
+        class="v-n-pm__map-data"
+        data="assets/images/mapa-madrid.svg"
+        type="image/svg+xml"
+        aria-hidden="true"
+        tabindex="-1"
+      ></object>
     </div>
   </div>
 </div>

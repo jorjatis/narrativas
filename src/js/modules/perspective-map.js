@@ -3,6 +3,19 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Fallback prod: el <object> cross-origin deja contentDocument en null.
+// Coordenadas = centro del rect de cada label en el SVG (viewBox 4000²).
+const FALLBACK_MAP_LABELS = [
+  { lines: ['PALACIO DE', 'BUENAVISTA'], left: 42.367, top: 20.728 },
+  { lines: ['CALLE DE', 'ALCALÁ'], left: 62.575, top: 29.829, alcala: true },
+  { lines: ['PUERTA DE', 'ALCALÁ'], left: 82.118, top: 26.028 },
+  { lines: ['PARQUE DE', 'EL RETIRO'], left: 88.625, top: 60.558 },
+  { lines: ['PASEO DEL', 'PRADO'], left: 48.337, top: 43.2 },
+  { lines: ['PLAZA DE', 'LA LEALTAD'], left: 53.782, top: 58.372 },
+  { lines: ['MUSEO', 'THYSSEN-', 'BORNEMISZA'], left: 37.272, top: 61.187 },
+  { lines: ['MUSEO', 'DEL PRADO'], left: 57.581, top: 76.45 },
+];
+
 function getTextLines(textElement) {
   const tspans = [...textElement.querySelectorAll('tspan')];
   if (!tspans.length) return [textElement.textContent.trim()];
@@ -18,21 +31,67 @@ function getTextLines(textElement) {
     .filter(Boolean);
 }
 
-function createMapLabels(mapObject, mapContent) {
+function appendLabel(labelsLayer, { lines, left, top, alcala = false }) {
+  const label = document.createElement('span');
+  const labelText = lines.join(' ');
+
+  label.className = 'v-n-pm__map-label';
+  if (alcala || /calle\s*de\s*alcal/i.test(labelText)) {
+    label.classList.add('v-n-pm__map-label--alcala');
+  }
+  label.style.left = typeof left === 'number' ? `${left}%` : left;
+  label.style.top = typeof top === 'number' ? `${top}%` : top;
+
+  lines.forEach((line, index, textLines) => {
+    label.append(document.createTextNode(line));
+    if (index < textLines.length - 1) label.append(document.createElement('br'));
+  });
+
+  labelsLayer.append(label);
+  return label;
+}
+
+function ensureWebpMapImage(mapContent) {
+  const visibleMap = mapContent.querySelector('img.v-n-pm__map');
+  if (!visibleMap?.src) return;
+
+  // Si Methode aún sirve el .svg, los textos rojos del SVG se ven debajo de los labels HTML.
+  if (/\.svg(\?|#|$)/i.test(visibleMap.src)) {
+    visibleMap.src = visibleMap.src.replace(/\.svg(?=(\?|#|$))/i, '.webp');
+  }
+}
+
+function createFallbackMapLabels(mapContent) {
+  ensureWebpMapImage(mapContent);
+
+  const labelsLayer = document.createElement('div');
+  labelsLayer.className = 'v-n-pm__map-labels';
+  labelsLayer.setAttribute('aria-hidden', 'true');
+
+  const labels = FALLBACK_MAP_LABELS.map((item) => appendLabel(labelsLayer, item));
+  mapContent.append(labelsLayer);
+  return labels;
+}
+
+function createMapLabelsFromSvg(mapObject, mapContent) {
   const svgDocument = mapObject.contentDocument;
   const svg = svgDocument?.documentElement;
   const textGroup = svgDocument?.querySelector('#texto');
   const textElements = [...(textGroup?.querySelectorAll('text') || [])];
-  const embeddedMap = svgDocument?.querySelector('#mapa image');
   const visibleMap = mapContent.querySelector('img.v-n-pm__map');
 
   if (!svg || !textGroup || !textElements.length) return [];
 
-  const embeddedMapSource = embeddedMap?.getAttributeNS(
-    'http://www.w3.org/1999/xlink',
-    'href',
-  ) || embeddedMap?.getAttribute('href');
-  if (embeddedMapSource && visibleMap) visibleMap.src = embeddedMapSource;
+  // Preferir webp (sin textos). El base64 del SVG también vale, pero el .webp pesa menos en caché.
+  ensureWebpMapImage(mapContent);
+  if (visibleMap && !/\.webp(\?|#|$)/i.test(visibleMap.src)) {
+    const embeddedMap = svgDocument?.querySelector('#mapa image');
+    const embeddedMapSource = embeddedMap?.getAttributeNS(
+      'http://www.w3.org/1999/xlink',
+      'href',
+    ) || embeddedMap?.getAttribute('href');
+    if (embeddedMapSource) visibleMap.src = embeddedMapSource;
+  }
 
   const labelsLayer = document.createElement('div');
   labelsLayer.className = 'v-n-pm__map-labels';
@@ -46,29 +105,29 @@ function createMapLabels(mapObject, mapContent) {
     point.y = box.y + box.height / 2;
     const localMatrix = textElement.transform.baseVal.consolidate()?.matrix;
     const position = localMatrix ? point.matrixTransform(localMatrix) : point;
-    const label = document.createElement('span');
     const lines = getTextLines(textElement);
-    const labelText = lines.join(' ');
 
-    label.className = 'v-n-pm__map-label';
-    if (/calle\s*de\s*alcal/i.test(labelText)) {
-      label.classList.add('v-n-pm__map-label--alcala');
-    }
-    label.style.left = `${((position.x - viewBox.x) / viewBox.width) * 100}%`;
-    label.style.top = `${((position.y - viewBox.y) / viewBox.height) * 100}%`;
-
-    lines.forEach((line, index, textLines) => {
-      label.append(document.createTextNode(line));
-      if (index < textLines.length - 1) label.append(document.createElement('br'));
+    return appendLabel(labelsLayer, {
+      lines,
+      left: ((position.x - viewBox.x) / viewBox.width) * 100,
+      top: ((position.y - viewBox.y) / viewBox.height) * 100,
     });
-
-    labelsLayer.append(label);
-    return label;
   });
 
   textGroup.style.opacity = '0';
   mapContent.append(labelsLayer);
   return labels;
+}
+
+function createMapLabels(mapObject, mapContent) {
+  mapContent.querySelector('.v-n-pm__map-labels')?.remove();
+
+  if (mapObject?.contentDocument?.documentElement) {
+    const fromSvg = createMapLabelsFromSvg(mapObject, mapContent);
+    if (fromSvg.length) return fromSvg;
+  }
+
+  return createFallbackMapLabels(mapContent);
 }
 
 function setupPerspectiveMap(root) {
@@ -295,8 +354,11 @@ function setupPerspectiveMap(root) {
         force3D: true,
       });
       gsap.set(labels, {
+        xPercent: -50,
+        yPercent: -50,
         rotationX: 0,
         z: 0,
+        transformOrigin: '50% 50%',
         force3D: true,
       });
       gsap.set(connectorGraphics, { autoAlpha: 1 });
@@ -304,27 +366,10 @@ function setupPerspectiveMap(root) {
       if (desktop) {
         fitIndexInsideSafeArea();
         alignIndexToAnchors();
-        labels.forEach((label) => {
-          if (!label.classList.contains('v-n-pm__map-label--alcala')) return;
-          if (label.dataset.pmLeft) {
-            label.style.left = label.dataset.pmLeft;
-            label.style.top = label.dataset.pmTop;
-          }
-        });
       } else {
         root.style.removeProperty('--pm-statue-max-height');
         indexItems.forEach((item) => {
           item.style.top = '';
-        });
-        // Aparta "Calle de Alcalá" de Cibeles en el estado final.
-        labels.forEach((label) => {
-          if (!label.classList.contains('v-n-pm__map-label--alcala')) return;
-          if (!label.dataset.pmLeft) {
-            label.dataset.pmLeft = label.style.left;
-            label.dataset.pmTop = label.style.top;
-          }
-          label.style.left = `${parseFloat(label.dataset.pmLeft) + 8}%`;
-          label.style.top = `${parseFloat(label.dataset.pmTop) - 3.5}%`;
         });
       }
 
@@ -447,7 +492,7 @@ function setupPerspectiveMap(root) {
         .to(
           billboards,
           {
-            // Compensa el tilt del plano para que sigan de pie, sin elevarse en Z.
+            // Compensa el tilt: de pie hacia la cámara, sin elevar (pegadas a la sombra).
             rotationX: -tilt,
             z: 0,
             scale: (itemIndex) => grownScales[itemIndex],
@@ -460,7 +505,7 @@ function setupPerspectiveMap(root) {
           labels,
           {
             rotationX: -tilt,
-            z: desktop ? 8 : 4,
+            z: desktop ? 12 : 8,
             stagger: 0.012,
             duration: 0.28,
           },
@@ -469,11 +514,11 @@ function setupPerspectiveMap(root) {
         .to(
           shadows,
           {
-            autoAlpha: 0.55,
-            x: desktop ? 14 : 8,
-            skewX: desktop ? -18 : -14,
-            scaleX: (itemIndex) => grownScales[itemIndex] * 1.02,
-            scaleY: (itemIndex) => grownScales[itemIndex] * (desktop ? 0.2 : 0.16),
+            autoAlpha: 0.9,
+            x: desktop ? 22 : 12,
+            skewX: desktop ? -28 : -22,
+            scaleX: (itemIndex) => grownScales[itemIndex] * 1.05,
+            scaleY: (itemIndex) => grownScales[itemIndex] * (desktop ? 0.32 : 0.28),
             stagger: 0.04,
             duration: 0.3,
           },
@@ -519,7 +564,6 @@ function whenImagesReady(images) {
 
 function initPerspectiveMap(root) {
   const mapObject = root.querySelector('.v-n-pm__map-data');
-  if (!mapObject) return;
 
   const boot = () => {
     setupPerspectiveMap(root);
@@ -527,18 +571,29 @@ function initPerspectiveMap(root) {
     whenImagesReady(images).then(() => ScrollTrigger.refresh());
   };
 
-  if (mapObject.contentDocument?.documentElement) {
+  // Localhost / same-origin: esperar al <object> para labels precisos del SVG.
+  // Prod cross-origin (contentDocument null): fallback estático + img webp.
+  if (mapObject?.contentDocument?.documentElement) {
     boot();
     return;
   }
 
-  mapObject.addEventListener('load', boot, { once: true });
+  if (mapObject) {
+    const onObjectReady = () => {
+      if (root.dataset.pmReady === 'true') return;
+      boot();
+    };
 
-  // Fallback por si el <object> no dispara load (p. ej. algunos móviles).
-  window.setTimeout(() => {
-    if (root.dataset.pmReady === 'true') return;
-    boot();
-  }, 1200);
+    mapObject.addEventListener('load', onObjectReady, { once: true });
+
+    window.setTimeout(() => {
+      if (root.dataset.pmReady === 'true') return;
+      boot();
+    }, 400);
+    return;
+  }
+
+  boot();
 }
 
 export default function perspectiveMap() {

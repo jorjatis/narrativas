@@ -11,7 +11,7 @@ const HOTSPOT_CONTENT = {
     title: 'La losa',
     image: 'https://s1.abcstatics.com/comun/narrativas/redaccion/2026/07/25/lasmilvidasdelacibeles/images/hotspot-losa.webp',
     orientation: 'horizontal',
-    text: 'Dentro del proceso de restauración integral de la piedra de este 2026,se procederá a corregir la desviación de la fuente y el refuerzo del soporte sobre el que se asienta.',
+    text: 'Dentro del proceso de restauración integral de este 2026, se procederá a corregir la desviación de la fuente y el refuerzo del soporte sobre el que se asienta.',
   },
   h_dragon: {
     title: 'El dragón',
@@ -81,73 +81,69 @@ const SCENE_SETTINGS = {
   lightY: 2.9,
   lightZ: 1.6,
 };
+// Solo las 3 primeras: Giro Y, Altura, Encuadre.
+const SCENE_SETTINGS_MOBILE_SMALL = {
+  modelRotation: 153,
+  targetHeight: 0.25,
+  initialMargin: 0.34,
+};
+const MOBILE_SMALL_MQ = '(max-width: 420px)';
 
-const cameraDirection = new THREE.Vector3();
+function getSceneSettings() {
+  if (window.matchMedia(MOBILE_SMALL_MQ).matches) {
+    return { ...SCENE_SETTINGS, ...SCENE_SETTINGS_MOBILE_SMALL };
+  }
 
-const fitCameraRight = new THREE.Vector3();
-const fitCameraUp = new THREE.Vector3();
-const fitOffset = new THREE.Vector3();
-const fitCorner = new THREE.Vector3();
-
-function getCameraDirection() {
-  return cameraDirection
-    .set(
-      SCENE_SETTINGS.cameraX,
-      SCENE_SETTINGS.cameraY,
-      SCENE_SETTINGS.cameraZ,
-    )
-    .normalize();
+  return SCENE_SETTINGS;
 }
 
-function getFitDistance(camera, box, target) {
-  const cameraDirection = getCameraDirection();
+function getCameraDirection(settings = getSceneSettings()) {
+  return new THREE.Vector3(
+    settings.cameraX,
+    settings.cameraY,
+    settings.cameraZ,
+  ).normalize();
+}
+
+function getFitDistance(camera, box, target, settings = getSceneSettings()) {
+  const cameraDirection = getCameraDirection(settings);
   const verticalTan = Math.tan(THREE.MathUtils.degToRad(camera.fov * 0.5));
   const horizontalTan = verticalTan * camera.aspect;
+  const cameraRight = new THREE.Vector3();
+  const cameraUp = new THREE.Vector3();
+  const offset = new THREE.Vector3();
+  const corner = new THREE.Vector3();
 
   camera.position.copy(target).add(cameraDirection);
   camera.lookAt(target);
   camera.updateMatrixWorld();
-  fitCameraRight.setFromMatrixColumn(camera.matrixWorld, 0);
-  fitCameraUp.setFromMatrixColumn(camera.matrixWorld, 1);
+  cameraRight.setFromMatrixColumn(camera.matrixWorld, 0);
+  cameraUp.setFromMatrixColumn(camera.matrixWorld, 1);
 
   let distance = 0;
 
   for (let x = 0; x <= 1; x += 1) {
     for (let y = 0; y <= 1; y += 1) {
       for (let z = 0; z <= 1; z += 1) {
-        fitCorner.set(
+        corner.set(
           x ? box.max.x : box.min.x,
           y ? box.max.y : box.min.y,
           z ? box.max.z : box.min.z,
         );
-        fitOffset.copy(fitCorner).sub(target);
+        offset.copy(corner).sub(target);
 
-        const depthOffset = fitOffset.dot(cameraDirection);
+        const depthOffset = offset.dot(cameraDirection);
         const horizontalDistance = depthOffset
-          + Math.abs(fitOffset.dot(fitCameraRight)) / horizontalTan;
+          + Math.abs(offset.dot(cameraRight)) / horizontalTan;
         const verticalDistance = depthOffset
-          + Math.abs(fitOffset.dot(fitCameraUp)) / verticalTan;
+          + Math.abs(offset.dot(cameraUp)) / verticalTan;
 
         distance = Math.max(distance, horizontalDistance, verticalDistance);
       }
     }
   }
 
-  return distance * SCENE_SETTINGS.initialMargin;
-}
-
-function disposeMaterial(material) {
-  if (!material) return;
-
-  for (const key in material) {
-    const value = material[key];
-
-    if (value && value.isTexture) {
-      value.dispose();
-    }
-  }
-
-  material.dispose();
+  return distance * settings.initialMargin;
 }
 
 function disposeModel(model) {
@@ -155,12 +151,17 @@ function disposeModel(model) {
     if (!object.isMesh) return;
 
     object.geometry?.dispose();
+    const materials = Array.isArray(object.material)
+      ? object.material
+      : [object.material];
 
-    if (Array.isArray(object.material)) {
-      object.material.forEach(disposeMaterial);
-    } else {
-      disposeMaterial(object.material);
-    }
+    materials.forEach((material) => {
+      if (!material) return;
+      Object.values(material).forEach((value) => {
+        if (value?.isTexture) value.dispose();
+      });
+      material.dispose();
+    });
   });
 }
 
@@ -177,7 +178,6 @@ function createCibelesScene(container) {
   const popupTitle = popup?.querySelector('.v-n-c3d__popup-title');
   const popupText = popup?.querySelector('.v-n-c3d__popup-text');
   const popupImage = popup?.querySelector('.v-n-c3d__popup-image');
-  const popupImageElement = popupImage?.querySelector('img');
   const camera = new THREE.PerspectiveCamera(52, 1, 0.01, 10000);
   const renderer = new THREE.WebGLRenderer({
     alpha: true,
@@ -233,14 +233,10 @@ function createCibelesScene(container) {
   let containerHeight = 1;
   let resizeFrameId = null;
   const hotspots = [];
-  const projectedPosition = new THREE.Vector3();
-  const raycaster = new THREE.Raycaster();
-  const rayDirection = new THREE.Vector3();
-  const OCCLUSION_EPSILON = 0.02;
-
-  // #region agent log
-  let dbgBehindLogAt = 0;
-  // #endregion
+  const hotspotScreenPosition = new THREE.Vector3();
+  const cameraLookDirection = new THREE.Vector3();
+  const cameraHorizontal = new THREE.Vector3();
+  const BEHIND_DOT_THRESHOLD = 0.15;
 
   function getHotspotLabel(name) {
     return name
@@ -259,18 +255,11 @@ function createCibelesScene(container) {
   }
 
   function getHotspotContent(name) {
-    const normalized =
-      normalizeHotspotKey(name);
-
-    const fallback =
-      normalized.replace(/^h__+/, 'h_');
-
-    return (
-      HOTSPOT_CONTENT[name]
-      || HOTSPOT_CONTENT[normalized]
-      || HOTSPOT_CONTENT[fallback]
-      || {}
-    );
+    const key = normalizeHotspotKey(name);
+    return HOTSPOT_CONTENT[name]
+      || HOTSPOT_CONTENT[key]
+      || HOTSPOT_CONTENT[key.replace(/^h__+/, 'h_')]
+      || {};
   }
 
   function closePopup() {
@@ -293,8 +282,8 @@ function createCibelesScene(container) {
     if (popupImage) {
       const orientation = content.orientation === 'vertical' ? 'vertical' : 'horizontal';
 
-      popupImageElement.src = content.image || DEFAULT_HOTSPOT_IMAGE;
-      popupImageElement.alt = `Imagen de ${title.toLowerCase()}`;
+      popupImage.querySelector('img').src = content.image || DEFAULT_HOTSPOT_IMAGE;
+      popupImage.querySelector('img').alt = `Imagen de ${title.toLowerCase()}`;
       popupImage.classList.toggle('is-vertical', orientation === 'vertical');
       popupImage.classList.toggle('is-horizontal', orientation === 'horizontal');
     }
@@ -322,6 +311,14 @@ function createCibelesScene(container) {
       const button = document.createElement('button');
       const label = getHotspotLabel(object.name);
       const worldPosition = new THREE.Vector3();
+      const horizontalOffset = new THREE.Vector3();
+
+      if (object.isMesh && object.geometry) {
+        object.geometry.computeBoundingBox();
+        if (object.geometry.boundingBox) {
+          object.geometry.boundingBox.getCenter(worldPosition);
+        }
+      }
 
       button.type = 'button';
       button.className = 'v-n-c3d__hotspot';
@@ -343,6 +340,8 @@ function createCibelesScene(container) {
         object,
         button,
         worldPosition,
+        horizontalOffset,
+        localPosition: worldPosition.clone(),
         isBehind: null,
         lastX: Number.NaN,
         lastY: Number.NaN,
@@ -354,162 +353,69 @@ function createCibelesScene(container) {
   function cacheHotspotWorldPositions() {
     if (!hotspots.length || !modelPivot) return;
 
+    modelPivot.updateMatrixWorld(true);
+
     hotspots.forEach((hotspot) => {
-      hotspot.object.getWorldPosition(hotspot.worldPosition);
-    });
-
-    // #region agent log
-    fetch('http://127.0.0.1:7310/ingest/6b5ec826-93b4-42a5-9673-2b6c14ff0bd6',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a4b4c2'},body:JSON.stringify({sessionId:'a4b4c2',runId:'post-fix',hypothesisId:'B-E',location:'cibeles-3D.js:cacheHotspotWorldPositions',message:'cached hotspot world positions',data:{target:{x:+controls.target.x.toFixed(3),y:+controls.target.y.toFixed(3),z:+controls.target.z.toFixed(3)},hotspots:hotspots.map((h)=>({name:h.object.name,type:h.object.type,isMesh:!!h.object.isMesh,world:{x:+h.worldPosition.x.toFixed(3),y:+h.worldPosition.y.toFixed(3),z:+h.worldPosition.z.toFixed(3)}}))},timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
-  }
-
-  function isHotspotOccluded(worldPosition) {
-    if (!modelPivot) return false;
-
-    rayDirection.copy(worldPosition).sub(camera.position);
-    const distanceToHotspot = rayDirection.length();
-    if (distanceToHotspot < 1e-6) return false;
-
-    rayDirection.multiplyScalar(1 / distanceToHotspot);
-    raycaster.set(camera.position, rayDirection);
-
-    const hits = raycaster.intersectObject(modelPivot, true);
-    for (let i = 0; i < hits.length; i += 1) {
-      if (hits[i].distance < distanceToHotspot - OCCLUSION_EPSILON) {
-        return true;
+      if (hotspot.object.isMesh && hotspot.localPosition) {
+        hotspot.worldPosition.copy(hotspot.localPosition);
+        hotspot.object.localToWorld(hotspot.worldPosition);
+      } else {
+        hotspot.object.getWorldPosition(hotspot.worldPosition);
       }
-    }
 
-    return false;
+      hotspot.horizontalOffset.set(
+        hotspot.worldPosition.x - controls.target.x,
+        0,
+        hotspot.worldPosition.z - controls.target.z,
+      );
+
+      if (hotspot.horizontalOffset.lengthSq() > 1e-8) {
+        hotspot.horizontalOffset.normalize();
+      } else {
+        hotspot.horizontalOffset.set(0, 0, 0);
+      }
+    });
   }
 
   function updateHotspotPositions() {
     if (!hotspots.length) return;
 
+    camera.getWorldDirection(cameraLookDirection);
+    cameraHorizontal.set(cameraLookDirection.x, 0, cameraLookDirection.z);
+
+    if (cameraHorizontal.lengthSq() > 0) cameraHorizontal.normalize();
+
     const halfWidth = containerWidth * 0.5;
     const halfHeight = containerHeight * 0.5;
-    // #region agent log
-    const dbgNow = performance.now();
-    const dbgShouldSample = dbgNow - dbgBehindLogAt > 800;
-    const dbgSamples = dbgShouldSample ? [] : null;
-    if (dbgShouldSample) dbgBehindLogAt = dbgNow;
-    // #endregion
 
-    for (let i = 0; i < hotspots.length; i += 1) {
-      const hotspot = hotspots[i];
+    for (let index = 0; index < hotspots.length; index += 1) {
+      const hotspot = hotspots[index];
+      const { button, worldPosition, horizontalOffset } = hotspot;
 
-      const {
-        button,
-        worldPosition,
-      } = hotspot;
+      const isBehind = horizontalOffset.dot(cameraHorizontal) > BEHIND_DOT_THRESHOLD;
 
-      // Oclusión real cámara→punto (no hemisferio angular).
-      const isBehind = isHotspotOccluded(worldPosition);
+      hotspotScreenPosition.copy(worldPosition).project(camera);
 
-      projectedPosition
-        .copy(worldPosition)
-        .project(camera);
+      const x = (hotspotScreenPosition.x + 1) * halfWidth;
+      const y = (1 - hotspotScreenPosition.y) * halfHeight;
+      const roundedX = (x + 0.5) | 0;
+      const roundedY = (y + 0.5) | 0;
 
-      // #region agent log
-      if (dbgSamples) {
-        const name = hotspot.object.name;
-        if (/losa|soporte|dragon|oso/i.test(name)) {
-          rayDirection.copy(worldPosition).sub(camera.position);
-          const dist = rayDirection.length();
-          dbgSamples.push({
-            name,
-            raycastBehind: isBehind,
-            hotspotDist: +dist.toFixed(3),
-            projZ: +projectedPosition.z.toFixed(3),
-            frustumBehind: projectedPosition.z < -1 || projectedPosition.z > 1,
-            world: {
-              x: +worldPosition.x.toFixed(3),
-              y: +worldPosition.y.toFixed(3),
-              z: +worldPosition.z.toFixed(3),
-            },
-            classBehind: button.classList.contains('v-n-c3d__hotspot--behind'),
-          });
-        }
-      }
-      // #endregion
-
-      // PERF: no calcular hotspots fuera del frustum
-      if (
-        projectedPosition.z < -1 ||
-        projectedPosition.z > 1
-      ) {
-        if (!hotspot.isBehind) {
-          hotspot.isBehind = true;
-          button.classList.add(
-            'v-n-c3d__hotspot--behind',
-          );
-          button.tabIndex = -1;
-          button.setAttribute(
-            'aria-hidden',
-            'true',
-          );
-        }
-
-        continue;
-      }
-
-      const roundedX =
-        (((projectedPosition.x + 1) * halfWidth) + 0.5) | 0;
-
-      const roundedY =
-        (((1 - projectedPosition.y) * halfHeight) + 0.5) | 0;
-
-      if (
-        hotspot.lastX !== roundedX ||
-        hotspot.lastY !== roundedY
-      ) {
+      if (hotspot.lastX !== roundedX || hotspot.lastY !== roundedY) {
         hotspot.lastX = roundedX;
         hotspot.lastY = roundedY;
-
-        button.style.setProperty(
-          '--hx',
-          `${roundedX}px`,
-        );
-
-        button.style.setProperty(
-          '--hy',
-          `${roundedY}px`,
-        );
+        // Posición vía CSS vars para no pelear con el scale del hover.
+        button.style.setProperty('--hx', `${roundedX}px`);
+        button.style.setProperty('--hy', `${roundedY}px`);
       }
 
       if (hotspot.isBehind !== isBehind) {
         hotspot.isBehind = isBehind;
-
-        button.classList.toggle(
-          'v-n-c3d__hotspot--behind',
-          isBehind,
-        );
-
-        const newTabIndex = isBehind ? -1 : 0;
-
-        if (button.tabIndex !== newTabIndex) {
-          button.tabIndex = newTabIndex;
-        }
-
-        const ariaHidden = String(isBehind);
-
-        if (
-          button.getAttribute('aria-hidden')
-          !== ariaHidden
-        ) {
-          button.setAttribute(
-            'aria-hidden',
-            ariaHidden,
-          );
-        }
+        button.classList.toggle('v-n-c3d__hotspot--behind', isBehind);
+        button.tabIndex = isBehind ? -1 : 0;
+        button.setAttribute('aria-hidden', isBehind ? 'true' : 'false');
       }
     }
-
-    // #region agent log
-    if (dbgSamples?.length) {
-      fetch('http://127.0.0.1:7310/ingest/6b5ec826-93b4-42a5-9673-2b6c14ff0bd6',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a4b4c2'},body:JSON.stringify({sessionId:'a4b4c2',runId:'post-fix',hypothesisId:'A-D',location:'cibeles-3D.js:updateHotspotPositions',message:'hotspot behind sample',data:{samples:dbgSamples},timestamp:Date.now()})}).catch(()=>{});
-    }
-    // #endregion
   }
 
   popupClose?.addEventListener('click', closePopup);
@@ -522,8 +428,14 @@ function createCibelesScene(container) {
       return;
     }
 
-    const cameraDirection = getCameraDirection();
-    const initialDistance = getFitDistance(camera, modelBox, controls.target);
+    const settings = getSceneSettings();
+    const cameraDirection = getCameraDirection(settings);
+    const initialDistance = getFitDistance(
+      camera,
+      modelBox,
+      controls.target,
+      settings,
+    );
     const polarAngle = Math.acos(
       THREE.MathUtils.clamp(cameraDirection.y, -1, 1),
     );
@@ -540,14 +452,15 @@ function createCibelesScene(container) {
   function updateModelFraming() {
     if (!modelPivot) return;
 
+    const settings = getSceneSettings();
     modelPivot.rotation.y = THREE.MathUtils.degToRad(
-      SCENE_SETTINGS.modelRotation,
+      settings.modelRotation,
     );
     modelPivot.updateMatrixWorld(true);
     modelBox = new THREE.Box3().setFromObject(modelPivot);
 
     const size = modelBox.getSize(new THREE.Vector3());
-    controls.target.set(0, size.y * SCENE_SETTINGS.targetHeight, 0);
+    controls.target.set(0, size.y * settings.targetHeight, 0);
     updateCameraFraming();
     cacheHotspotWorldPositions();
   }
@@ -579,7 +492,6 @@ function createCibelesScene(container) {
     }
 
     const needsMoreFrames = controls.update();
-
     render();
 
     if (needsMoreFrames) {
@@ -618,6 +530,12 @@ function createCibelesScene(container) {
     }
   });
   visibilityObserver.observe(container);
+
+  const mobileSmallMedia = window.matchMedia(MOBILE_SMALL_MQ);
+  const handleMobileSmallChange = () => {
+    updateModelFraming();
+  };
+  mobileSmallMedia.addEventListener('change', handleMobileSmallChange);
 
   function setupDebugGui() {
     if (!ENABLE_DEBUG_GUI) return;
@@ -703,14 +621,8 @@ function createCibelesScene(container) {
       model.position.y -= modelBox.min.y;
       model.position.z -= center.z;
 
-      model.updateMatrixWorld(true);
       model.traverse((object) => {
-
-        object.matrixAutoUpdate = false;
-        object.updateMatrix();
-
         if (!object.isMesh) return;
-
         object.castShadow = false;
         object.receiveShadow = false;
       });
@@ -718,9 +630,7 @@ function createCibelesScene(container) {
       createHotspotButtons(model);
 
       modelPivot = new THREE.Group();
-
       modelPivot.add(model);
-
       scene.add(modelPivot);
       updateModelFraming();
       resize();
@@ -748,6 +658,7 @@ function createCibelesScene(container) {
     isDisposed = true;
     resizeObserver.disconnect();
     visibilityObserver.disconnect();
+    mobileSmallMedia.removeEventListener('change', handleMobileSmallChange);
     if (frameId !== null) cancelAnimationFrame(frameId);
     if (resizeFrameId !== null) cancelAnimationFrame(resizeFrameId);
     controls.removeEventListener('change', requestRender);

@@ -170,6 +170,23 @@
           max-width: 360px;
           min-height: 220px;
         }
+
+        @media (max-width: $screen-xs) {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .v-n-c3d__popup-title {
+          @media (max-width: $screen-xs) {
+            flex: 1 0 100%;
+          }
+        }
+
+        .v-n-c3d__popup-text {
+          @media (max-width: $screen-xs) {
+            flex: 1 0 0;
+          }
+        }
       }
 
       &:has(.v-n-c3d__popup-image.is-horizontal) {

@@ -7,19 +7,20 @@
   .v-n-scrolly__sticky {
     flex-direction: column;
     align-items: flex-start;
-    // Mobile: cabecera + fondo arriba, para que la cartela (abajo) no los tape
-    justify-content: flex-start;
-    padding-top: 4vh;
-
-    // Desktop (≥699): centrado vertical, como en la foto
-    @media (min-width: $screen-xs) {
-      justify-content: center;
-      padding-top: 0;
-    }
+    justify-content: center;
   }
 
   .v-n-scrolly__bg {
-    width: 100%;
+    align-self: center;
+    width: 500px;
+
+    @media (min-width: 420px) {
+      width: 600px;
+    }
+
+    @media (min-width: $screen-xs) {
+      width: 100%;
+    }
   }
 
   .bg-item {
@@ -29,7 +30,6 @@
       display: block;
       width: auto;
       max-width: 100%;
-      // Mobile: fondo algo más contenido para dejar sitio a la cartela abajo
       max-height: 42vh;
       margin: 0 auto;
       object-fit: contain;
@@ -70,7 +70,7 @@
       max-height: calc(100vh - 52px);
       padding: 0 20px 8vh;
       // Hueco entre steps para que no se vea la tarjeta anterior/siguiente
-      margin-bottom: 45vh;
+      margin-bottom: 85vh;
       box-sizing: border-box;
 
       // ≥699px (desktop): cartela abajo a la derecha, como en la foto
@@ -82,6 +82,7 @@
         max-height: calc(100vh - 60px);
         margin-right: 10%;
         padding-bottom: 10vh;
+        margin-bottom: 45vh;
       }
 
       // El espacio final lo aporta el padding-bottom del contenedor de steps
@@ -105,9 +106,9 @@
         p {
           max-width: unset;
           padding: 0;
-          font-family: $atl;
+          font-family: $mcr;
           font-size: 16px;
-          line-height: 22px;
+          line-height: 20px;
           letter-spacing: -.32px;
           border: 0;
           border-radius: 0;
