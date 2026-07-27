@@ -27,6 +27,7 @@ export default function scrolly() {
     let currentBg = -1;
     let currentStepIndex = -1;
     let stepTriggers = [];
+    let morphing = false;
 
     const config = {
       fadeIn: 0.8,
@@ -89,8 +90,11 @@ export default function scrolly() {
     }
 
     function setBackground(index, immediate = false) {
-      if (index === currentBg || index < 0) return;
+      if (index < 0) return;
+      // Tras un morph, hay que asentar opacidades aunque el índice coincida
+      if (!morphing && index === currentBg) return;
 
+      morphing = false;
       const nextBg = backgrounds[index];
       const otherBgs = Array.from(backgrounds).filter((_, i) => i !== index);
 
@@ -125,6 +129,72 @@ export default function scrolly() {
       currentBg = index;
     }
 
+    // Progreso 0→1 mientras la cartela cruza el viewport
+    // (0 = entra por abajo, 1 = sale por arriba).
+    function getMorphProgress(step) {
+      const card = getStepTrigger(step);
+      const rect = card.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const travel = vh + rect.height;
+      if (travel <= 0) return 0;
+      return gsap.utils.clamp(0, 1, 1 - rect.bottom / travel);
+    }
+
+    function applyMorphBackground(fromIndex, toIndex, progress) {
+      if (fromIndex < 0 || toIndex < 0) return;
+
+      const fromBg = backgrounds[fromIndex];
+      const toBg = backgrounds[toIndex];
+      if (!fromBg || !toBg) return;
+
+      morphing = true;
+
+      backgrounds.forEach((bg, i) => {
+        const isPair = i === fromIndex || i === toIndex;
+        bg.classList.toggle("is-active", isPair);
+
+        if (!isPair) {
+          const video = bg.querySelector("video");
+          if (video) video.pause();
+          gsap.set(bg, { opacity: 0, overwrite: true });
+        }
+      });
+
+      // Fundido cruzado scrubbed al scroll (sin duración)
+      gsap.set(fromBg, { opacity: 1 - progress, overwrite: true });
+      gsap.set(toBg, { opacity: progress, overwrite: true });
+
+      const fromVideo = fromBg.querySelector("video");
+      const toVideo = toBg.querySelector("video");
+      if (progress < 0.5) {
+        if (toVideo) toVideo.pause();
+        if (fromVideo) fromVideo.play().catch(() => {});
+      } else {
+        if (fromVideo) fromVideo.pause();
+        if (toVideo) toVideo.play().catch(() => {});
+      }
+
+      currentBg = progress >= 1 ? toIndex : fromIndex;
+    }
+
+    // Aplica el fondo del step activo: si tiene data-bg-morph, funde
+    // data-bg → data-bg-morph según el progreso de la cartela.
+    function updateBackgrounds({ immediate = false } = {}) {
+      const step = steps[currentStepIndex] || getActiveStepFromTriggers();
+      if (!step) return;
+
+      const fromIndex = parseInt(step.dataset.bg, 10);
+      const morphRaw = step.dataset.bgMorph;
+      const toIndex = morphRaw != null ? parseInt(morphRaw, 10) : NaN;
+
+      if (!Number.isFinite(toIndex) || toIndex === fromIndex) {
+        setBackground(fromIndex, immediate || morphing);
+        return;
+      }
+
+      applyMorphBackground(fromIndex, toIndex, getMorphProgress(step));
+    }
+
     function setActiveStep(activeStep, { immediate = false } = {}) {
       const index = steps.indexOf(activeStep);
       if (index === currentStepIndex && activeStep.classList.contains("is-active")) {
@@ -142,6 +212,9 @@ export default function scrolly() {
             step: activeStep,
             index,
             bg: parseInt(activeStep.dataset.bg, 10),
+            bgMorph: activeStep.dataset.bgMorph != null
+              ? parseInt(activeStep.dataset.bgMorph, 10)
+              : null,
             immediate,
           },
         })
@@ -151,7 +224,7 @@ export default function scrolly() {
     function activateStep(step, { immediate = false } = {}) {
       if (!step) return;
       setActiveStep(step, { immediate });
-      setBackground(parseInt(step.dataset.bg, 10), immediate);
+      updateBackgrounds({ immediate });
     }
 
     function activateCurrentStep({ immediate = false } = {}) {
@@ -168,7 +241,10 @@ export default function scrolly() {
       if (!overlaySteps) return;
       if (!isStickyStuck()) return;
       const step = getActiveOverlayStep();
-      if (step) activateStep(step);
+      if (!step) return;
+      setActiveStep(step);
+      // Siempre actualizar fondos: el morph necesita el progreso en cada frame
+      updateBackgrounds();
     }
 
     function killStepTriggers() {
