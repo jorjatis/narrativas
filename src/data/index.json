@@ -4,6 +4,13 @@
       "title": "Julio 2026",
       "cards": [
         {
+          "title": "Las mil vidas de la Cibeles",
+          "articleUrl": "https://www.abc.es/espana/madrid/cibeles-testigo-heridas-paso-tiempo-20260725205323-nt.html",
+          "titleMedia": "19-las-mil-vidas-de-la-cibeles",
+          "gif": true,
+          "netlifyUrl": "https://narrativa-lasmilvidasdelacibeles.netlify.app/"
+        },
+        {
           "title": "90 Aniversario de la Guerra civil: El origen de la tragedia española",
           "articleUrl": "https://www.abc.es/historia/julio-1936-comenzo-guerra-civil-20260718015745-nt.html",
           "titleMedia": "18-90-aniversario-gc",
