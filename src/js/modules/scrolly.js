@@ -302,6 +302,21 @@ export default function scrolly() {
       );
     }
 
+    function dispatchStepEvent(activeStep, index, { immediate = false } = {}) {
+      container.dispatchEvent(
+        new CustomEvent("scrolly:step", {
+          bubbles: true,
+          detail: {
+            step: activeStep,
+            index,
+            bg: activeStep ? parseInt(activeStep.dataset.bg, 10) : null,
+            bgMorph: activeStep?.dataset.bgMorph ?? null,
+            immediate,
+          },
+        })
+      );
+    }
+
     function setActiveStep(activeStep, { immediate = false } = {}) {
       const index = steps.indexOf(activeStep);
       if (index === currentStepIndex && activeStep.classList.contains("is-active")) {
@@ -312,18 +327,40 @@ export default function scrolly() {
       activeStep.classList.add("is-active");
       currentStepIndex = index;
 
-      container.dispatchEvent(
-        new CustomEvent("scrolly:step", {
-          bubbles: true,
-          detail: {
-            step: activeStep,
-            index,
-            bg: parseInt(activeStep.dataset.bg, 10),
-            bgMorph: activeStep.dataset.bgMorph ?? null,
-            immediate,
-          },
-        })
-      );
+      dispatchStepEvent(activeStep, index, { immediate });
+    }
+
+    // Última cartela (u otra) salió por arriba: no hay step activo, pero el
+    // sticky sigue pineado por el padding final. Avisamos para pausar audio
+    // sin resetear currentStepIndex (el fondo debe quedarse en el último).
+    function clearCartelaActive({ immediate = false } = {}) {
+      const hadActive = steps.some((step) => step.classList.contains("is-active"));
+      if (!hadActive) return;
+
+      steps.forEach((step) => step.classList.remove("is-active"));
+      dispatchStepEvent(null, -1, { immediate });
+    }
+
+    function isPastLastCartela() {
+      if (!steps.length) return true;
+      const last = getStepTrigger(steps[steps.length - 1]);
+      return last.getBoundingClientRect().bottom <= 0;
+    }
+
+    // En el hueco entre cartelas: el audio solo debe seguir si la siguiente
+    // comparte el mismo data-audio. Si no hay siguiente, o no tiene audio,
+    // o es otra pista → no mantener.
+    function shouldKeepAudioThroughGap() {
+      if (currentStepIndex < 0) return false;
+      const current = steps[currentStepIndex];
+      const next = steps[currentStepIndex + 1];
+      if (!next) return false;
+
+      const curAudio = current?.dataset.audio;
+      const nextAudio = next?.dataset.audio;
+      if (curAudio == null || curAudio === "") return false;
+      if (nextAudio == null || nextAudio === "") return false;
+      return String(curAudio) === String(nextAudio);
     }
 
     function activateStep(step, { immediate = false } = {}) {
@@ -346,7 +383,11 @@ export default function scrolly() {
       if (!overlaySteps) return;
       if (!isStickyStuck()) return;
       const step = getActiveOverlayStep();
-      if (step) setActiveStep(step);
+      if (step) {
+        setActiveStep(step);
+      } else if (isPastLastCartela() || !shouldKeepAudioThroughGap()) {
+        clearCartelaActive();
+      }
 
       // Actualizar fondos aunque no haya cartela activa (huecos entre steps):
       // el morph debe seguir progresando y no quedarse congelado.

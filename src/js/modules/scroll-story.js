@@ -25,6 +25,8 @@ function initScrollStory(root) {
   let shouldPlay = false;
   let userMuted = false;
   let activeAudio = null;
+  // true tras salir de cartela / step sin audio: no resucitar pista al re-sync del pin
+  let audioSuppressed = false;
 
   const dateProxy = { value: currentDate };
 
@@ -53,31 +55,56 @@ function initScrollStory(root) {
     });
   }
 
+  function unmuteIfAllowed(audio) {
+    if (!audio || userMuted) return false;
+    audio.muted = false;
+    unlocked = true;
+    return true;
+  }
+
+  // Muted play → unmute: más fiable que play() con sonido desde pausa (autoplay).
   function tryPlay(audio) {
-    if (!audio || !shouldPlay || userMuted) return Promise.resolve(false);
+    if (!audio || !shouldPlay || userMuted || audioSuppressed) {
+      return Promise.resolve(false);
+    }
     if (!root.classList.contains('is-pinned')) return Promise.resolve(false);
 
-    audio.muted = false;
+    if (!audio.paused) {
+      unmuteIfAllowed(audio);
+      return Promise.resolve(true);
+    }
+
+    audio.muted = true;
     const playPromise = audio.play();
     if (!playPromise || typeof playPromise.then !== 'function') {
-      unlocked = true;
+      unmuteIfAllowed(audio);
       return Promise.resolve(true);
     }
 
     return playPromise
-      .then(() => {
-        unlocked = true;
-        return true;
-      })
+      .then(() => unmuteIfAllowed(audio))
       .catch(() => false);
+  }
+
+  function clearAudio() {
+    pauseAll();
+    currentAudioId = null;
+    activeAudio = null;
+    audioSuppressed = true;
   }
 
   function setAudio(id, { force = false } = {}) {
     if (!audios.length) return;
-    if (!force && String(id) === String(currentAudioId)) return;
+    // Misma pista que el step anterior → sigue sonando sin reiniciar
+    if (!force && !audioSuppressed && String(id) === String(currentAudioId)) return;
 
     const next = getAudioById(id);
-    if (!next) return;
+    if (!next) {
+      clearAudio();
+      return;
+    }
+
+    audioSuppressed = false;
 
     const prev = activeAudio;
     currentAudioId = String(id);
@@ -165,7 +192,13 @@ function initScrollStory(root) {
   }
 
   function applyStep(step, { immediate = false } = {}) {
-    if (!step) return;
+    // Sin cartela activa (salió por arriba) o step sin data-audio → parar.
+    // Solo continúa si el step actual y el anterior comparten el mismo id
+    // (setAudio hace early-return cuando el id no cambia).
+    if (!step) {
+      clearAudio();
+      return;
+    }
 
     if (step.dataset.date != null) {
       animateDate(parseDate(step.dataset.date), immediate);
@@ -175,8 +208,10 @@ function initScrollStory(root) {
       animateTitle(step.dataset.title, immediate);
     }
 
-    if (step.dataset.audio != null) {
+    if (step.dataset.audio != null && step.dataset.audio !== '') {
       setAudio(step.dataset.audio, { force: immediate });
+    } else {
+      clearAudio();
     }
   }
 
@@ -185,10 +220,17 @@ function initScrollStory(root) {
   }
 
   function ensureActiveAudio() {
+    if (audioSuppressed) return null;
     if (activeAudio) return activeAudio;
 
-    const activeStep = root.querySelector('.step.is-active') || root.querySelector('.step');
-    const id = activeStep?.dataset.audio ?? currentAudioId ?? '0';
+    const activeStep = root.querySelector('.step.is-active');
+    if (activeStep && (activeStep.dataset.audio == null || activeStep.dataset.audio === '')) {
+      return null;
+    }
+
+    const fallbackStep = root.querySelector('.step[data-audio]');
+    const id =
+      activeStep?.dataset.audio ?? currentAudioId ?? fallbackStep?.dataset.audio ?? '0';
     const next = getAudioById(id) || audios[0];
     if (!next) return null;
 
@@ -243,10 +285,23 @@ function initScrollStory(root) {
   function onMuteClick(event) {
     event?.stopPropagation();
     unlocked = true;
+
+    const activeStep = root.querySelector('.step.is-active');
+    if (activeStep?.dataset.audio != null && activeStep.dataset.audio !== '') {
+      audioSuppressed = false;
+      if (!activeAudio || String(activeAudio.dataset.audio) !== String(activeStep.dataset.audio)) {
+        setAudio(activeStep.dataset.audio);
+      }
+    }
+
     ensureActiveAudio();
 
-    // Autoplay bloqueado: el icono dice "unmuted" pero no suena → este click solo activa sonido
-    const autoplayBlocked = shouldPlay && !userMuted && activeAudio?.paused;
+    // Autoplay bloqueado: icono "unmuted" pero no se oye (pausado o aún muted)
+    const autoplayBlocked =
+      shouldPlay &&
+      !userMuted &&
+      !!activeAudio &&
+      (activeAudio.paused || activeAudio.muted);
     if (autoplayBlocked) {
       setMuteUI(false);
       tryPlay(activeAudio);
@@ -282,8 +337,9 @@ function initScrollStory(root) {
   }
 
   function playPinnedAudio() {
+    if (audioSuppressed || userMuted) return;
     ensureActiveAudio();
-    if (activeAudio && !userMuted) tryPlay(activeAudio);
+    if (activeAudio) tryPlay(activeAudio);
   }
 
   function setPinnedState(pinned) {
@@ -358,8 +414,11 @@ function initScrollStory(root) {
   muteBtn?.addEventListener('click', onMuteClick);
   root.addEventListener('scrolly:step', (event) => {
     onStep(event);
-    // Tras cambiar de step, si seguimos pineados, asegurar que suena
-    if (isStickyPinned()) playPinnedAudio();
+    // Tras cambiar de step, si seguimos pineados y hay audio, asegurar que suena
+    const step = event.detail?.step;
+    if (isStickyPinned() && step?.dataset?.audio != null && step.dataset.audio !== '') {
+      playPinnedAudio();
+    }
   });
   setMuteUI(false);
 
