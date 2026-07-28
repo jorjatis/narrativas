@@ -281,63 +281,13 @@ function initScrollStory(root) {
     return root.querySelector('.step.is-active') || root.querySelector('.step');
   }
 
-  function getStepCard(step) {
-    return step?.querySelector('.step__c') || step || null;
-  }
-
-  function isCardVisible(card) {
-    if (!card) return false;
-    const rect = card.getBoundingClientRect();
-    return rect.top < window.innerHeight && rect.bottom > 0;
-  }
-
-  function isAnySameAudioCardVisible(audioId) {
-    return [...root.querySelectorAll('.step')]
-      .filter((step) => step.dataset.audio === String(audioId))
-      .some((step) => isCardVisible(getStepCard(step)));
-  }
-
-  // Hueco entre dos cartelas consecutivas del mismo audio.
-  // Vale igual al scrollear hacia abajo (A sale por arriba, B aún abajo)
-  // y hacia arriba (B sale por abajo, A aún arriba): A.bottom <= 0 && B.top >= vh.
-  function isInSameAudioContiguousGap(audioId) {
-    const steps = [...root.querySelectorAll('.step')];
-    const vh = window.innerHeight;
-
-    for (let i = 0; i < steps.length - 1; i += 1) {
-      if (steps[i].dataset.audio !== String(audioId)) continue;
-      if (steps[i + 1].dataset.audio !== String(audioId)) continue;
-
-      const a = getStepCard(steps[i]).getBoundingClientRect();
-      const b = getStepCard(steps[i + 1]).getBoundingClientRect();
-      if (a.bottom <= 0 && b.top >= vh) return true;
-    }
-
-    return false;
-  }
-
-  function shouldAudioPlayNow() {
-    if (!isStickyPinned()) return false;
-
-    const activeStep = getActiveStep();
-    const audioId = activeStep?.dataset.audio ?? currentAudioId;
-    if (audioId == null) return false;
-
-    if (isAnySameAudioCardVisible(audioId)) return true;
-
-    return isInSameAudioContiguousGap(audioId);
-  }
-
   function playPinnedAudio() {
     ensureActiveAudio();
     if (activeAudio && !userMuted) tryPlay(activeAudio);
   }
 
   function setPinnedState(pinned) {
-    if (pinned === shouldPlay
-      && root.classList.contains('is-pinned') === pinned) {
-      return;
-    }
+    const wasPinned = root.classList.contains('is-pinned');
 
     shouldPlay = pinned;
     root.classList.toggle('is-pinned', pinned);
@@ -346,21 +296,22 @@ function initScrollStory(root) {
     sticky.classList.toggle('is-unpinned', !pinned);
 
     if (pinned) {
+      // Reintenta en cada sync: si el autoplay falló antes, un gesto
+      // posterior o el propio pin deben poder arrancar el audio.
       playPinnedAudio();
       return;
     }
 
-    pauseAll();
+    if (wasPinned || !activeAudio?.paused) {
+      pauseAll();
+    }
   }
 
   // Detección de pin robusta: escuchamos el scroll directamente (con rAF) y
-  // usamos las posiciones REALES del sticky. Así funciona aunque el contenedor
-  // crezca después de inicializar (imágenes/contenido que cargan tarde y
-  // desfasan las posiciones que cachea ScrollTrigger), evitando que el audio
-  // se pare antes de tiempo cerca del final del bloque.
+  // usamos las posiciones REALES del sticky.
   let pinTicking = false;
   function syncPinnedState() {
-    setPinnedState(shouldAudioPlayNow());
+    setPinnedState(isStickyPinned());
   }
   function onPinScroll() {
     if (pinTicking) return;
@@ -373,11 +324,8 @@ function initScrollStory(root) {
   window.addEventListener('scroll', onPinScroll, { passive: true });
   ScrollTrigger.addEventListener('refresh', syncPinnedState);
 
-  // Desbloqueo de autoplay: CUALQUIER interacción del usuario en cualquier
-  // parte de la página (no solo el botón de sonido) desbloquea el audio.
-  // Mantenemos los listeners hasta que el audio suene de verdad, de forma que
-  // al llegar a is-pinned empiece a sonar solo sin tener que pulsar el botón.
-  // Nota: en móvil, el propio gesto de scroll (touchstart) ya desbloquea.
+  // Desbloqueo de autoplay: cualquier interacción en la página desbloquea.
+  // En móvil el propio touch del scroll ya cuenta. El botón mute solo mutea.
   const unlockEvents = ['pointerdown', 'mousedown', 'touchstart', 'keydown', 'click'];
 
   function audioIsAudible() {
@@ -387,7 +335,6 @@ function initScrollStory(root) {
     unlockEvents.forEach((evt) => window.removeEventListener(evt, onUserGesture));
   }
   function onUserGesture(event) {
-    // El botón de sonido tiene su propia gestión
     if (muteBtn && event.target instanceof Node && muteBtn.contains(event.target)) {
       return;
     }
@@ -411,7 +358,8 @@ function initScrollStory(root) {
   muteBtn?.addEventListener('click', onMuteClick);
   root.addEventListener('scrolly:step', (event) => {
     onStep(event);
-    syncPinnedState();
+    // Tras cambiar de step, si seguimos pineados, asegurar que suena
+    if (isStickyPinned()) playPinnedAudio();
   });
   setMuteUI(false);
 
@@ -420,7 +368,7 @@ function initScrollStory(root) {
   if (activeStep) applyStep(activeStep, { immediate: true });
 
   // Sincroniza por si el bloque ya está pineado al cargar
-  setPinnedState(shouldAudioPlayNow());
+  setPinnedState(isStickyPinned());
 }
 
 export default function scrollStory() {

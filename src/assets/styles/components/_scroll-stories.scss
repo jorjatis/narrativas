@@ -169,7 +169,8 @@
 }
 
 .v-n-ss--02 {
-  .step[data-step="0"] {
+  // Cartelas vacías (spacers del morph): ocupan scroll pero no se ven
+  .step:not(:has(.step__c p)) {
     .step__c {
       opacity: 0;
       visibility: hidden;

@@ -28,6 +28,9 @@ export default function scrolly() {
     let currentStepIndex = -1;
     let stepTriggers = [];
     let morphing = false;
+    let morphPairKey = null;
+    let lastMorphProgress = -1;
+    let lastMorphVideoSide = -1;
 
     const config = {
       fadeIn: 0.8,
@@ -95,10 +98,16 @@ export default function scrolly() {
       if (!morphing && index === currentBg) return;
 
       morphing = false;
+      morphPairKey = null;
+      lastMorphProgress = -1;
+      lastMorphVideoSide = -1;
+
       const nextBg = backgrounds[index];
       const otherBgs = Array.from(backgrounds).filter((_, i) => i !== index);
 
       backgrounds.forEach((bg, i) => {
+        // Limpia opacidades inline del morph scrubbed
+        bg.style.opacity = "";
         if (i !== index) {
           bg.classList.remove("is-active");
           const video = bg.querySelector("video");
@@ -129,15 +138,87 @@ export default function scrolly() {
       currentBg = index;
     }
 
-    // Progreso 0→1 mientras la cartela cruza el viewport
-    // (0 = entra por abajo, 1 = sale por arriba).
-    function getMorphProgress(step) {
-      const card = getStepTrigger(step);
-      const rect = card.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const travel = vh + rect.height;
-      if (travel <= 0) return 0;
-      return gsap.utils.clamp(0, 1, 1 - rect.bottom / travel);
+    // data-bg-morph="true" (o vacío): inicia un morph multi-step.
+    // data-bg-morph="1": destino explícito (también puede abarcar varios
+    // steps con el mismo data-bg hasta llegar al destino).
+    function hasMorphAttr(step) {
+      return step.dataset.bgMorph != null && step.dataset.bgMorph !== "false";
+    }
+
+    function resolveMorph(activeStep) {
+      const idx = steps.indexOf(activeStep);
+      if (idx < 0) return null;
+
+      for (let s = 0; s < steps.length; s += 1) {
+        if (!hasMorphAttr(steps[s])) continue;
+
+        const fromBg = parseInt(steps[s].dataset.bg, 10);
+        if (!Number.isFinite(fromBg)) continue;
+
+        // Tramo con el mismo data-bg a partir del step que inicia el morph
+        let end = s;
+        while (
+          end + 1 < steps.length
+          && parseInt(steps[end + 1].dataset.bg, 10) === fromBg
+        ) {
+          end += 1;
+        }
+
+        let toBg = parseInt(steps[s].dataset.bgMorph, 10);
+        if (!Number.isFinite(toBg)) {
+          if (end + 1 >= steps.length) continue;
+          toBg = parseInt(steps[end + 1].dataset.bg, 10);
+        }
+
+        if (!Number.isFinite(toBg) || toBg === fromBg) continue;
+
+        // Dentro del tramo de origen → fundido scrubbed
+        if (idx >= s && idx <= end) {
+          return { fromBg, toBg, startIdx: s, endIdx: end, phase: "scrub" };
+        }
+
+        // Ya en el fondo destino (o steps posteriores con ese bg)
+        if (idx > end && parseInt(activeStep.dataset.bg, 10) === toBg) {
+          return { fromBg, toBg, startIdx: s, endIdx: end, phase: "done" };
+        }
+      }
+
+      return null;
+    }
+
+    // Métricas estables del morph (se invalidan en refresh/resize).
+    // Empieza al pinear (progress 0 → opacities 1/0) y termina cuando
+    // sale la última cartela del tramo con el mismo data-bg.
+    const morphMetrics = new Map();
+
+    function invalidateMorphMetrics() {
+      morphMetrics.clear();
+    }
+
+    function getMorphMetrics(startIdx, endIdx) {
+      const key = `${startIdx}:${endIdx}`;
+      let metrics = morphMetrics.get(key);
+      if (metrics) return metrics;
+
+      const last = getStepTrigger(steps[endIdx]);
+      const lastRect = last.getBoundingClientRect();
+      const lastBottom = lastRect.top + window.scrollY + lastRect.height;
+
+      // Inicio = momento en que el sticky se fija (no cuando la cartela
+      // entra por abajo: con margin negativo ya estaría a medias).
+      const containerTop = container.getBoundingClientRect().top + window.scrollY;
+      const startScroll = containerTop - stickyOffset;
+      const endScroll = lastBottom;
+      const span = Math.max(1, endScroll - startScroll);
+
+      metrics = { startScroll, endScroll, span };
+      morphMetrics.set(key, metrics);
+      return metrics;
+    }
+
+    function getMorphProgressForRange(startIdx, endIdx) {
+      const { startScroll, span } = getMorphMetrics(startIdx, endIdx);
+      return gsap.utils.clamp(0, 1, (window.scrollY - startScroll) / span);
     }
 
     function applyMorphBackground(fromIndex, toIndex, progress) {
@@ -147,52 +228,78 @@ export default function scrolly() {
       const toBg = backgrounds[toIndex];
       if (!fromBg || !toBg) return;
 
+      // Evita writes inútiles (menos jank al scrollear)
+      const rounded = Math.round(progress * 1000) / 1000;
+      const pairKey = `${fromIndex}:${toIndex}`;
+      if (pairKey === morphPairKey && rounded === lastMorphProgress) return;
+
       morphing = true;
 
-      backgrounds.forEach((bg, i) => {
-        const isPair = i === fromIndex || i === toIndex;
-        bg.classList.toggle("is-active", isPair);
+      if (pairKey !== morphPairKey) {
+        morphPairKey = pairKey;
+        lastMorphVideoSide = -1;
+        gsap.killTweensOf(backgrounds);
 
-        if (!isPair) {
-          const video = bg.querySelector("video");
-          if (video) video.pause();
-          gsap.set(bg, { opacity: 0, overwrite: true });
-        }
-      });
-
-      // Fundido cruzado scrubbed al scroll (sin duración)
-      gsap.set(fromBg, { opacity: 1 - progress, overwrite: true });
-      gsap.set(toBg, { opacity: progress, overwrite: true });
-
-      const fromVideo = fromBg.querySelector("video");
-      const toVideo = toBg.querySelector("video");
-      if (progress < 0.5) {
-        if (toVideo) toVideo.pause();
-        if (fromVideo) fromVideo.play().catch(() => {});
-      } else {
-        if (fromVideo) fromVideo.pause();
-        if (toVideo) toVideo.play().catch(() => {});
+        backgrounds.forEach((bg, i) => {
+          const isPair = i === fromIndex || i === toIndex;
+          bg.classList.toggle("is-active", isPair);
+          if (!isPair) {
+            const video = bg.querySelector("video");
+            if (video) video.pause();
+            bg.style.opacity = "0";
+          }
+        });
       }
 
-      currentBg = progress >= 1 ? toIndex : fromIndex;
+      // Escritura directa: más barata que gsap.set en cada frame
+      fromBg.style.opacity = String(1 - rounded);
+      toBg.style.opacity = String(rounded);
+      lastMorphProgress = rounded;
+
+      const videoSide = rounded < 0.5 ? 0 : 1;
+      if (videoSide !== lastMorphVideoSide) {
+        lastMorphVideoSide = videoSide;
+        const fromVideo = fromBg.querySelector("video");
+        const toVideo = toBg.querySelector("video");
+        if (videoSide === 0) {
+          if (toVideo) toVideo.pause();
+          if (fromVideo) fromVideo.play().catch(() => {});
+        } else {
+          if (fromVideo) fromVideo.pause();
+          if (toVideo) toVideo.play().catch(() => {});
+        }
+      }
+
+      currentBg = rounded >= 1 ? toIndex : fromIndex;
     }
 
-    // Aplica el fondo del step activo: si tiene data-bg-morph, funde
-    // data-bg → data-bg-morph según el progreso de la cartela.
+    // Aplica el fondo del step activo. Si forma parte de un morph
+    // (data-bg-morph), funde poco a poco a lo largo de varios steps.
     function updateBackgrounds({ immediate = false } = {}) {
       const step = steps[currentStepIndex] || getActiveStepFromTriggers();
       if (!step) return;
 
-      const fromIndex = parseInt(step.dataset.bg, 10);
-      const morphRaw = step.dataset.bgMorph;
-      const toIndex = morphRaw != null ? parseInt(morphRaw, 10) : NaN;
+      const morph = resolveMorph(step);
 
-      if (!Number.isFinite(toIndex) || toIndex === fromIndex) {
-        setBackground(fromIndex, immediate || morphing);
+      if (!morph) {
+        morphPairKey = null;
+        lastMorphProgress = -1;
+        setBackground(parseInt(step.dataset.bg, 10), immediate || morphing);
         return;
       }
 
-      applyMorphBackground(fromIndex, toIndex, getMorphProgress(step));
+      if (morph.phase === "done") {
+        morphPairKey = null;
+        lastMorphProgress = -1;
+        setBackground(morph.toBg, immediate || morphing);
+        return;
+      }
+
+      applyMorphBackground(
+        morph.fromBg,
+        morph.toBg,
+        getMorphProgressForRange(morph.startIdx, morph.endIdx)
+      );
     }
 
     function setActiveStep(activeStep, { immediate = false } = {}) {
@@ -212,9 +319,7 @@ export default function scrolly() {
             step: activeStep,
             index,
             bg: parseInt(activeStep.dataset.bg, 10),
-            bgMorph: activeStep.dataset.bgMorph != null
-              ? parseInt(activeStep.dataset.bgMorph, 10)
-              : null,
+            bgMorph: activeStep.dataset.bgMorph ?? null,
             immediate,
           },
         })
@@ -241,10 +346,13 @@ export default function scrolly() {
       if (!overlaySteps) return;
       if (!isStickyStuck()) return;
       const step = getActiveOverlayStep();
-      if (!step) return;
-      setActiveStep(step);
-      // Siempre actualizar fondos: el morph necesita el progreso en cada frame
-      updateBackgrounds();
+      if (step) setActiveStep(step);
+
+      // Actualizar fondos aunque no haya cartela activa (huecos entre steps):
+      // el morph debe seguir progresando y no quedarse congelado.
+      if (step || currentStepIndex >= 0) {
+        updateBackgrounds();
+      }
     }
 
     function killStepTriggers() {
@@ -324,16 +432,23 @@ export default function scrolly() {
         });
       };
       window.addEventListener("scroll", onScroll, { passive: true });
-      ScrollTrigger.addEventListener("refresh", syncOverlayActive);
+      ScrollTrigger.addEventListener("refresh", () => {
+        invalidateMorphMetrics();
+        syncOverlayActive();
+      });
     }
 
     ScrollTrigger.create({
       trigger: container,
       start: "top bottom",
-      onRefresh: () => updateInitialState()
+      onRefresh: () => {
+        invalidateMorphMetrics();
+        updateInitialState();
+      }
     });
 
     const onBreakpointChange = () => {
+      invalidateMorphMetrics();
       createStepTriggers();
       ScrollTrigger.refresh();
       if (isStickyStuck()) activateCurrentStep({ immediate: true });
