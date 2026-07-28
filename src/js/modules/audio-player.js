@@ -7,6 +7,10 @@ function formatTime(seconds) {
   return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
 
+function hasDuration(audio) {
+  return Number.isFinite(audio?.duration) && audio.duration > 0;
+}
+
 function updateSliderAria(progressWrap, progress, audio) {
   if (!progressWrap || !progress) return;
 
@@ -15,7 +19,7 @@ function updateSliderAria(progressWrap, progress, audio) {
   progressWrap.setAttribute("aria-valuenow", String(Math.round(value)));
   progressWrap.setAttribute(
     "aria-valuetext",
-    audio?.duration ? formatTime(audio.currentTime) : "00:00"
+    hasDuration(audio) ? formatTime(audio.currentTime) : "00:00"
   );
 }
 
@@ -31,9 +35,10 @@ export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
   if (!audio) return null;
 
   let isDragging = false;
+  let pendingSeek = null;
 
   function updateProgress() {
-    if (!progress || !audio.duration) return;
+    if (!progress || !hasDuration(audio)) return;
 
     progress.value = (audio.currentTime / audio.duration) * 100;
     progress.max = 100;
@@ -46,10 +51,17 @@ export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
   }
 
   function updateDuration() {
-    if (!durationEl || !audio.duration) return;
+    if (!durationEl || !hasDuration(audio)) return;
 
     durationEl.textContent = formatTime(audio.duration);
     updateSliderAria(progressWrap, progress, audio);
+
+    if (pendingSeek != null && hasDuration(audio)) {
+      const time = pendingSeek;
+      pendingSeek = null;
+      audio.currentTime = time;
+      updateProgress();
+    }
   }
 
   function setPlaying(playing) {
@@ -60,8 +72,24 @@ export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
     }
   }
 
+  function ensureLoaded() {
+    // iOS/WebKit often needs an explicit load() before the first play,
+    // especially with preload="none" and audio inside hidden modals.
+    if (audio.readyState === 0) {
+      audio.load();
+    }
+  }
+
   function play() {
-    audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+    ensureLoaded();
+
+    return audio
+      .play()
+      .then(() => {
+        updateDuration();
+        setPlaying(true);
+      })
+      .catch(() => setPlaying(false));
   }
 
   function pause() {
@@ -70,7 +98,7 @@ export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
   }
 
   function seek(ratio) {
-    if (!audio.duration) return;
+    if (!hasDuration(audio)) return;
 
     const clamped = Math.max(0, Math.min(1, ratio));
     audio.currentTime = clamped * audio.duration;
@@ -78,7 +106,7 @@ export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
   }
 
   function seekFromEvent(event) {
-    if (!progressWrap || !audio.duration) return;
+    if (!progressWrap || !hasDuration(audio)) return;
 
     const rect = progressWrap.getBoundingClientRect();
     const ratio = (event.clientX - rect.left) / rect.width;
@@ -122,7 +150,7 @@ export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
   }
 
   function onProgressKeyDown(event) {
-    if (!audio.duration) return;
+    if (!hasDuration(audio)) return;
 
     const step = event.key === "PageUp" || event.key === "PageDown" ? 0.1 : 0.05;
     let ratio = audio.currentTime / audio.duration;
@@ -153,11 +181,17 @@ export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
     seek(ratio);
   }
 
+  function onEnded() {
+    setPlaying(false);
+  }
+
+  const durationEvents = ["loadedmetadata", "durationchange", "loadeddata", "canplay"];
+
   playBtn?.addEventListener("click", onPlayBtnClick);
   muteBtn?.addEventListener("click", toggleMute);
   audio.addEventListener("timeupdate", updateProgress);
-  audio.addEventListener("loadedmetadata", updateDuration);
-  audio.addEventListener("ended", () => setPlaying(false));
+  durationEvents.forEach((evt) => audio.addEventListener(evt, updateDuration));
+  audio.addEventListener("ended", onEnded);
 
   progressWrap?.addEventListener("pointerdown", onPointerDown);
   progressWrap?.addEventListener("pointermove", onPointerMove);
@@ -180,6 +214,11 @@ export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
     toggleMute,
     getCurrentTime: () => audio.currentTime,
     setCurrentTime: (time) => {
+      if (!hasDuration(audio)) {
+        pendingSeek = time;
+        return;
+      }
+
       audio.currentTime = time;
       updateProgress();
     },
@@ -189,8 +228,8 @@ export function initAudioPlayer(root, { onUserPlay, onUserPause } = {}) {
       playBtn?.removeEventListener("click", onPlayBtnClick);
       muteBtn?.removeEventListener("click", toggleMute);
       audio.removeEventListener("timeupdate", updateProgress);
-      audio.removeEventListener("loadedmetadata", updateDuration);
-      audio.removeEventListener("ended", () => setPlaying(false));
+      durationEvents.forEach((evt) => audio.removeEventListener(evt, updateDuration));
+      audio.removeEventListener("ended", onEnded);
       progressWrap?.removeEventListener("pointerdown", onPointerDown);
       progressWrap?.removeEventListener("pointermove", onPointerMove);
       progressWrap?.removeEventListener("pointerup", onPointerUp);

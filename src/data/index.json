@@ -6,7 +6,7 @@
     "subedition": {
       "pasionensevilla": false
     },
-    "coverUrl": "https://s1.abcstatics.com/abc/www/multimedia/espana/2026/03/08/ultras-1920x1080-blanco.jpg",
+    "coverUrl": "https://s1.abcstatics.com/abc/www/multimedia/historia/2026/07/18/gc-home-1920x1080.jpg",
     "img": {
       "exists": true,
       "preArticleHeader": true,
@@ -16,9 +16,9 @@
     },
     "infoContainer": {
       "exists": true,
-      "pretitle": "Fútbol",
-      "title": "¿Cuál ha sido la mejor camiseta de españa en un mundial? Elige tu favorita",
-      "description": "Desde la Copa Mundial de 1982 hasta la cita de 2026, clasifica las elásticas más icónicas vestidas por la selección española de fútbol y compara tu votación con la del resto de lectores",
+      "pretitle": "Historia",
+      "title": "La Guerra Civil: el origen de la gran tragedia española",
+      "description": "Un recorrido visual y sonoro por los protagonistas y escenarios que marcaron el devenir del país",
       "chevronDown": true
     },
     "firma": {

@@ -79,7 +79,8 @@ body:has(.v-h-a) {
 
     &--1,
     &--2,
-    &--3 {
+    &--3,
+    &--4 {
       position: absolute;
       inset: 0;
       display: flex;
@@ -354,7 +355,8 @@ body:has(.v-h-a) {
       }
     }
 
-    &--3 {
+    &--3,
+    &--4 {
       opacity:0;
       visibility:hidden;
       pointer-events: none;
@@ -757,7 +759,7 @@ body:has(.v-h-a) {
 }
 
 body.is-loaded {
-  .v-a-preh {
+  .v-a-preh:not(.intro-entrance-done) {
     .intro-text {
       &--1 {
         opacity: 1;
@@ -853,6 +855,56 @@ body.is-loaded {
       }
     }
   }
+
+  // After the entrance has played once, keep the final state without animations.
+  .v-a-preh.intro-entrance-done {
+    .intro-text {
+      &--1 {
+        opacity: 1;
+
+        .intro-text__l {
+          &:after {
+            transform: scaleY(1);
+            animation: none;
+          }
+        }
+
+        .intro-text__l,
+        .intro-text__r {
+          .intro-text__t {
+            opacity: 1;
+            transform: none;
+            animation: none;
+
+            &--3 {
+              .intro-text__word {
+                opacity: 1;
+                transform: none;
+                animation: none;
+              }
+            }
+          }
+        }
+
+        .intro-text__r {
+          &:before {
+            transform: scaleY(1);
+            animation: none;
+          }
+        }
+      }
+    }
+
+    .intro-img {
+      &__enter {
+        animation-play-state: running;
+      }
+
+      &__txt {
+        animation-play-state: running;
+      }
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -892,7 +944,9 @@ body.is-loaded {
         }
       }
 
-      &--2 {
+      &--2,
+      &--3,
+      &--4 {
         opacity: 0;
       }
     }

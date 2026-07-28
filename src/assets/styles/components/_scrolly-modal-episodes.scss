@@ -474,9 +474,25 @@
       padding-top: 24px;
       border-top: 1px solid $cb6;
 
+      // Keep the media element in the accessibility tree / media pipeline on iOS.
+      // display:none can prevent WebKit from loading/playing audio.
+      audio {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        pointer-events: none;
+      }
+
       .v-ply {
         &__c {
           display: flex;
+          position: relative;
         }
 
         &__w--2 {
@@ -677,6 +693,24 @@
       }
     }
 
+    &__prev-ep,
+    &__next-ep {
+      display: block;
+      font-family: $mcr;
+
+      > span:first-child {
+        @media (max-width: 420px) {
+          display: none;
+        }
+      }
+
+      > span:last-child {
+        @media (min-width: 420px) {
+          display: none;
+        }
+      }
+    }
+
     &--prev,
     &--next {
       flex: 1 0 0;
@@ -711,6 +745,7 @@
     
     &--next {
       text-align: right;
+      justify-content: flex-end;
     }
   }
 }

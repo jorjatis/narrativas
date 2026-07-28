@@ -26,4 +26,31 @@ body {
   .v-f__w--3:before {
     background: $cp15;
   }
+
+  &:has(ev-engagement[group-name="paywall-abc"][redirect="false"]) {
+    .v-w>* {
+      margin-bottom: 0;
+      padding-bottom: 40px;
+
+      @media (min-width: $screen-xs) {
+        margin-bottom: 0;
+        padding-bottom: 70px;
+      }
+    }
+
+    .v-w-c--2 {
+      position: relative;
+      background: $cb2;
+    }
+
+    .v-f {
+      background: $cb2;
+
+      &__w--3 {
+        &:before {
+          background: $cb2;
+        }
+      }
+    }
+  }
 }
