@@ -54,7 +54,12 @@ body {
 }
 
 .v-w {
-  .v-a--d-s-1 { 
+  .v-a--d-s-1 {
+    @media (min-width: $screen-sm) {
+      height: auto;
+      min-height: calc(100svh - 58px);
+    } 
+
     .v-a-lnk {
       > div {
         height: 100%;
@@ -79,82 +84,9 @@ body {
       }
       
       .v-a-p-t,
-      .v-a-t {
-        color: $cb1;
-      }
-
-      .v-a-t {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        font-family: $axs;
-        text-transform: uppercase;
-        text-align: left;
-        opacity: 0;
-        transition: opacity .3s ease;
-
-        @media (max-width: 500px) {
-          margin-left: -5%;
-        }
-
-        &__las {
-          font-size: 54px;
-          line-height: 64px;
-          margin-left: 12%;
-
-          @media (max-width: 500px) {
-            font-size: 26px;
-            line-height: 34px;
-          }
-        }
-
-        &__mil {
-          font-size: 118px;
-          line-height: 80px;
-
-          @media (max-width: 500px) {
-            font-size: 68px;
-            line-height: 42px;
-          }
-        }
-
-        &__bottom {
-          display: flex;
-          align-items: stretch;
-          gap: 8px;
-          margin-left: 12%;
-        }
-
-        &__stack {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          font-size: 54px;
-          line-height: 64px;
-
-          @media (max-width: 500px) {
-            font-size: 26px;
-            line-height: 42px;
-          }
-        }
-
-        &__cibeles {
-          font-size: 118px;
-          line-height: 111px;
-
-          @media (max-width: 500px) {
-            font-size: 68px;
-            line-height: 64px;
-          }
-        }
-
-        &__la {
-          margin-top: -18px;
-        }
-      }
-      
+      .v-a-t,
       .v-a-s-t {
-        display: none;
+        color: $cb1;
       }
 
       .v-i {
@@ -172,7 +104,7 @@ body {
 
     .v-a-img-c {     
       &:after {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, white 100%);
+        content: none;
       }
     }
   }
@@ -214,3 +146,5 @@ body.is-loaded {
     opacity: 1;
   }
 }
+
+.v-crt--t2 .v-crt__c { z-index: 20; }

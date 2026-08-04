@@ -3,3 +3,52 @@
 @use '../base/actions' as *;
 @use '../base/animations' as *;
 
+.v-n-preh {
+  margin-bottom: 220px;
+  
+  &-scene {
+    display: flex;
+    height: 100dvh;
+
+    &:not(:first-child) {
+      height: calc(100dvh - 58px);
+    }
+
+    &--01 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -58px;
+      padding: 0 20px;
+    }
+  }
+}
+
+.v-w {
+  .v-a--d-s-1 { 
+    > .v-a-inf-c {
+      display: none;
+    }
+
+    .v-a-inf-c {
+      justify-content: center;
+      padding: 0;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-in-out forwards 0.2s;
+
+      .v-a-t {
+        max-width: 500px;
+        font-family: $axs;
+        font-size: 90px;
+        line-height: 80px;
+        letter-spacing: -1.8px;
+        text-transform: uppercase;
+        color: $cb9;
+      }
+
+      .v-a-s-t {
+        max-width: 320px;
+      }
+    }
+  }
+}
