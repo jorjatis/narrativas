@@ -1,18 +1,13 @@
 @use './base/variables' as *;
-@use './base/variables-custom' as *;
+// @use './base/variables-custom' as *;
 
-@use './base/actions';
-@use './base/animations';
-@use './base/global';
+// @use './base/actions';
+// @use './base/animations';
+// @use './base/global';
 
 // // Kraken componentes
 
 // // Componentes
-@use './components/scroll-indicator';
-@use './components/pre-article-header';
-@use './components/scrolly';
-
-@use './components/perspective-map';
-@use './components/scroll-stories';
-@use './components/ladillo-title';
-@use './components/cibeles-3D';
+// @use './components/scroll-indicator';
+// @use './components/pre-article-header';
+@use './components/eclipse-scroll';
