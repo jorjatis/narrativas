@@ -12,12 +12,13 @@ function createVideoSubtitles(scene) {
   const video = player?.querySelector('video');
   const playButton = player?.querySelector('.v-ply__b');
   const subsBox = scene.querySelector('.vid-subs__subs');
-  const paragraph = subsBox?.querySelector('p');
+  const subsScroll = subsBox?.querySelector('.vid-subs__subs-scroll');
+  const paragraph = subsScroll?.querySelector('p');
   const scrub = scene.querySelector('.vid-subs__scrub');
   const scrubTrack = scene.querySelector('.vid-subs__scrub-track');
   const scrubFill = scene.querySelector('.vid-subs__scrub-fill');
 
-  if (!player || !video || !subsBox || !paragraph || !playButton) return;
+  if (!player || !video || !subsBox || !subsScroll || !paragraph || !playButton) return;
 
   const transcriptUrl =
     scene.dataset.transcript ||
@@ -32,27 +33,105 @@ function createVideoSubtitles(scene) {
   let words = [];
   let wordEls = [];
   let lastActiveIndex = -1;
+  let lastScrubProgress = -1;
   let rafId = 0;
   let videoReady = false;
   let transcriptReady = false;
   let dragging = false;
+  let scrubTrackWidth = 0;
 
   const setPlaying = (playing) => {
     if (!player.classList.contains('is-active')) return;
     player.classList.toggle('is-play', playing);
     player.classList.toggle('is-pause', !playing);
+    // Solo se puede hacer scroll manual con el vídeo en pausa.
+    subsScroll.classList.toggle('is-locked', playing);
   };
 
   const updateScrub = (time = video.currentTime) => {
     if (!scrubFill || !video.duration) return;
     const progress = Math.min(1, Math.max(0, time / video.duration));
-    scrubFill.style.width = `${progress * 100}%`;
+    if (Math.abs(progress - lastScrubProgress) < 0.0005) return;
+    lastScrubProgress = progress;
+    scrubFill.style.transform = `scaleX(${progress})`;
   };
 
   const updateSubsFade = () => {
-    const maxScroll = subsBox.scrollHeight - subsBox.clientHeight;
-    const atEnd = maxScroll <= 1 || subsBox.scrollTop >= maxScroll - 2;
+    const maxScroll = subsScroll.scrollHeight - subsScroll.clientHeight;
+    const atEnd = maxScroll <= 1 || subsScroll.scrollTop >= maxScroll - 2;
     subsBox.classList.toggle('is-end', atEnd);
+  };
+
+  const findActiveIndex = (time) => {
+    let low = 0;
+    let high = words.length - 1;
+    let activeIndex = -1;
+
+    while (low <= high) {
+      const mid = (low + high) >> 1;
+      if (words[mid].start <= time) {
+        activeIndex = mid;
+        low = mid + 1;
+      } else {
+        high = mid - 1;
+      }
+    }
+
+    return activeIndex;
+  };
+
+  const applyWordRange = (fromIndex, toIndex) => {
+    if (fromIndex >= 0 && wordEls[fromIndex]) {
+      wordEls[fromIndex].classList.remove('is-active');
+    }
+
+    if (toIndex > fromIndex) {
+      for (let i = Math.max(0, fromIndex + 1); i <= toIndex; i += 1) {
+        wordEls[i]?.classList.add('vid-subs__word--over');
+      }
+    } else if (toIndex < fromIndex) {
+      for (let i = toIndex + 1; i <= fromIndex; i += 1) {
+        wordEls[i]?.classList.remove('vid-subs__word--over', 'is-active');
+      }
+    }
+
+    if (toIndex >= 0) {
+      const activeEl = wordEls[toIndex];
+      activeEl?.classList.add('vid-subs__word--over', 'is-active');
+      scrollWordIntoView(subsScroll, activeEl);
+    }
+
+    lastActiveIndex = toIndex;
+    updateSubsFade();
+  };
+
+  const syncWords = (time, { force = false } = {}) => {
+    if (!wordEls.length) return;
+
+    const activeIndex = findActiveIndex(time);
+    if (!force && activeIndex === lastActiveIndex) return;
+
+    if (force || lastActiveIndex < 0 || Math.abs(activeIndex - lastActiveIndex) > 8) {
+      // Seek grande o primer sync: repinta el rango completo de forma barata.
+      wordEls.forEach((el, index) => {
+        el.classList.toggle('vid-subs__word--over', index <= activeIndex);
+        el.classList.toggle('is-active', index === activeIndex);
+      });
+      if (activeIndex >= 0) scrollWordIntoView(subsScroll, wordEls[activeIndex]);
+      lastActiveIndex = activeIndex;
+      updateSubsFade();
+      return;
+    }
+
+    applyWordRange(lastActiveIndex, activeIndex);
+  };
+
+  const tick = () => {
+    syncWords(video.currentTime);
+    updateScrub();
+    if (!video.paused && !video.ended) {
+      rafId = requestAnimationFrame(tick);
+    }
   };
 
   const maybeReady = () => {
@@ -64,13 +143,14 @@ function createVideoSubtitles(scene) {
     player.classList.remove('is-play');
     playButton.disabled = false;
 
-    syncWords(video.currentTime);
+    syncWords(video.currentTime, { force: true });
     updateScrub();
     updateSubsFade();
+    if (scrubTrack) scrubTrackWidth = scrubTrack.getBoundingClientRect().width;
   };
 
   const renderWords = (items) => {
-    paragraph.replaceChildren();
+    const fragment = document.createDocumentFragment();
     wordEls = items.map((item, index) => {
       const span = document.createElement('span');
       span.className = 'vid-subs__word';
@@ -80,41 +160,11 @@ function createVideoSubtitles(scene) {
       span.textContent = item.word;
       span.tabIndex = 0;
       span.setAttribute('role', 'button');
-      span.setAttribute('aria-label', `Ir a ${item.word}`);
-      paragraph.append(span, document.createTextNode(' '));
+      fragment.append(span, document.createTextNode(' '));
       return span;
     });
-  };
-
-  const syncWords = (time) => {
-    if (!wordEls.length) return;
-
-    let activeIndex = -1;
-    for (let i = 0; i < words.length; i += 1) {
-      if (time >= words[i].start) activeIndex = i;
-      else break;
-    }
-
-    wordEls.forEach((el, index) => {
-      const isOver = index <= activeIndex;
-      const isActive = index === activeIndex;
-      el.classList.toggle('vid-subs__word--over', isOver);
-      el.classList.toggle('is-active', isActive);
-    });
-
-    if (activeIndex >= 0 && activeIndex !== lastActiveIndex) {
-      scrollToWord(subsBox, wordEls[activeIndex]);
-      lastActiveIndex = activeIndex;
-      updateSubsFade();
-    }
-  };
-
-  const tick = () => {
-    syncWords(video.currentTime);
-    updateScrub();
-    if (!video.paused && !video.ended) {
-      rafId = requestAnimationFrame(tick);
-    }
+    paragraph.replaceChildren(fragment);
+    lastActiveIndex = -1;
   };
 
   const pause = () => {
@@ -148,16 +198,18 @@ function createVideoSubtitles(scene) {
     if (!Number.isFinite(time) || !video.duration) return;
     const next = Math.min(Math.max(0, time), video.duration);
     video.currentTime = next;
-    lastActiveIndex = -1;
-    syncWords(next);
+    syncWords(next, { force: true });
     updateScrub(next);
   };
 
   const seekFromPointer = (clientX) => {
     if (!scrubTrack || !video.duration) return;
-    const rect = scrubTrack.getBoundingClientRect();
-    if (!rect.width) return;
-    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    if (!scrubTrackWidth) {
+      scrubTrackWidth = scrubTrack.getBoundingClientRect().width;
+    }
+    if (!scrubTrackWidth) return;
+    const rectLeft = scrubTrack.getBoundingClientRect().left;
+    const ratio = Math.min(1, Math.max(0, (clientX - rectLeft) / scrubTrackWidth));
     seekTo(ratio * video.duration);
   };
 
@@ -168,7 +220,15 @@ function createVideoSubtitles(scene) {
     if (video.paused) play();
   };
 
-  subsBox.addEventListener('scroll', updateSubsFade, { passive: true });
+  subsScroll.addEventListener('scroll', updateSubsFade, { passive: true });
+
+  const blockManualScroll = (event) => {
+    if (!subsScroll.classList.contains('is-locked')) return;
+    event.preventDefault();
+  };
+
+  subsScroll.addEventListener('wheel', blockManualScroll, { passive: false });
+  subsScroll.addEventListener('touchmove', blockManualScroll, { passive: false });
 
   player.addEventListener('click', (event) => {
     if (event.target.closest('.vid-subs__scrub')) return;
@@ -203,6 +263,7 @@ function createVideoSubtitles(scene) {
       event.stopPropagation();
       dragging = true;
       scrub.classList.add('is-drag');
+      scrubTrackWidth = scrubTrack.getBoundingClientRect().width;
       scrub.setPointerCapture?.(event.pointerId);
       seekFromPointer(event.clientX);
     });
@@ -228,15 +289,17 @@ function createVideoSubtitles(scene) {
   video.addEventListener('ended', () => {
     cancelAnimationFrame(rafId);
     setPlaying(false);
-    syncWords(video.duration || video.currentTime);
+    syncWords(video.duration || video.currentTime, { force: true });
     updateScrub(video.duration || video.currentTime);
   });
   video.addEventListener('pause', () => {
     if (!video.ended) setPlaying(false);
   });
   video.addEventListener('play', () => setPlaying(true));
+  // Solo rAF actualiza scrub durante play; timeupdate cubre pause/seek externo.
   video.addEventListener('timeupdate', () => {
-    if (!dragging) updateScrub();
+    if (dragging || (!video.paused && rafId)) return;
+    updateScrub();
   });
   video.addEventListener('loadedmetadata', () => updateScrub());
 
@@ -296,11 +359,17 @@ function normalizeWords(data) {
     .filter((item) => item.word && Number.isFinite(item.start) && Number.isFinite(item.end));
 }
 
-function scrollToWord(container, wordEl) {
+function scrollWordIntoView(container, wordEl) {
   if (!container || !wordEl) return;
 
   const containerRect = container.getBoundingClientRect();
   const wordRect = wordEl.getBoundingClientRect();
+  const padding = 8;
+
+  const above = wordRect.top < containerRect.top + padding;
+  const below = wordRect.bottom > containerRect.bottom - padding;
+  if (!above && !below) return;
+
   const offset =
     wordRect.top -
     containerRect.top -
@@ -309,8 +378,6 @@ function scrollToWord(container, wordEl) {
 
   container.scrollTo({
     top: container.scrollTop + offset,
-    behavior: 'smooth',
+    behavior: 'auto',
   });
-
-  container.dispatchEvent(new Event('scroll'));
 }
