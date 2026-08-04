@@ -10,6 +10,9 @@ dist/
 # Configuración del entorno
 .env
 
+# WhisperX / Python venv local
+scripts/transcribe/.venv/
+
 # Windows temp
 %LOCALAPPDATA%/
 AppData/

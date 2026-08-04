@@ -1,0 +1,607 @@
+[
+  {
+    "word": "En",
+    "start": 0.31,
+    "end": 0.37
+  },
+  {
+    "word": "un",
+    "start": 0.39,
+    "end": 0.43
+  },
+  {
+    "word": "minuto",
+    "start": 0.45,
+    "end": 0.79
+  },
+  {
+    "word": "Wiki,",
+    "start": 0.83,
+    "end": 1.15
+  },
+  {
+    "word": "mucho",
+    "start": 1.19,
+    "end": 1.35
+  },
+  {
+    "word": "puedo",
+    "start": 1.41,
+    "end": 1.57
+  },
+  {
+    "word": "correr,",
+    "start": 1.65,
+    "end": 1.93
+  },
+  {
+    "word": "como",
+    "start": 2.23,
+    "end": 2.37
+  },
+  {
+    "word": "los",
+    "start": 2.43,
+    "end": 2.81
+  },
+  {
+    "word": "60",
+    "start": 2.83,
+    "end": 2.87
+  },
+  {
+    "word": "segundos",
+    "start": 2.91,
+    "end": 3.25
+  },
+  {
+    "word": "de",
+    "start": 3.27,
+    "end": 3.31
+  },
+  {
+    "word": "todo",
+    "start": 3.39,
+    "end": 3.57
+  },
+  {
+    "word": "lo",
+    "start": 3.61,
+    "end": 3.67
+  },
+  {
+    "word": "que",
+    "start": 3.69,
+    "end": 3.79
+  },
+  {
+    "word": "pasa",
+    "start": 3.85,
+    "end": 4.01
+  },
+  {
+    "word": "en",
+    "start": 4.03,
+    "end": 4.07
+  },
+  {
+    "word": "los",
+    "start": 4.09,
+    "end": 4.19
+  },
+  {
+    "word": "proyectos",
+    "start": 4.23,
+    "end": 4.61
+  },
+  {
+    "word": "de",
+    "start": 4.63,
+    "end": 4.71
+  },
+  {
+    "word": "Wikimere.",
+    "start": 4.75,
+    "end": 5.13
+  },
+  {
+    "word": "Incluso",
+    "start": 5.63,
+    "end": 5.83
+  },
+  {
+    "word": "en",
+    "start": 5.89,
+    "end": 5.99
+  },
+  {
+    "word": "el",
+    "start": 6.01,
+    "end": 6.07
+  },
+  {
+    "word": "tiempo",
+    "start": 6.09,
+    "end": 6.27
+  },
+  {
+    "word": "que",
+    "start": 6.33,
+    "end": 6.43
+  },
+  {
+    "word": "necesitas",
+    "start": 6.49,
+    "end": 6.93
+  },
+  {
+    "word": "para",
+    "start": 6.97,
+    "end": 7.13
+  },
+  {
+    "word": "responder",
+    "start": 7.23,
+    "end": 7.69
+  },
+  {
+    "word": "a",
+    "start": 7.73,
+    "end": 7.85
+  },
+  {
+    "word": "el",
+    "start": 8.05,
+    "end": 8.13
+  },
+  {
+    "word": "contenido",
+    "start": 8.19,
+    "end": 8.69
+  },
+  {
+    "word": "de",
+    "start": 8.73,
+    "end": 8.81
+  },
+  {
+    "word": "Wikipedia",
+    "start": 8.87,
+    "end": 9.39
+  },
+  {
+    "word": "refleja",
+    "start": 9.45,
+    "end": 9.79
+  },
+  {
+    "word": "la",
+    "start": 9.83,
+    "end": 9.87
+  },
+  {
+    "word": "diversidad",
+    "start": 9.93,
+    "end": 10.39
+  },
+  {
+    "word": "del",
+    "start": 10.43,
+    "end": 10.55
+  },
+  {
+    "word": "mundo,",
+    "start": 10.61,
+    "end": 10.83
+  },
+  {
+    "word": "Wikipedia",
+    "start": 11.23,
+    "end": 11.57
+  },
+  {
+    "word": "de",
+    "start": 11.59,
+    "end": 11.63
+  },
+  {
+    "word": "la",
+    "start": 11.65,
+    "end": 11.69
+  },
+  {
+    "word": "encyclopedia",
+    "start": 11.71,
+    "end": 12.19
+  },
+  {
+    "word": "libre",
+    "start": 12.25,
+    "end": 12.43
+  },
+  {
+    "word": "que",
+    "start": 12.47,
+    "end": 12.57
+  },
+  {
+    "word": "cualquiera",
+    "start": 12.63,
+    "end": 12.99
+  },
+  {
+    "word": "puede",
+    "start": 13.05,
+    "end": 13.23
+  },
+  {
+    "word": "veritar.",
+    "start": 13.25,
+    "end": 13.63
+  },
+  {
+    "word": "Y",
+    "start": 14.03,
+    "end": 14.09
+  },
+  {
+    "word": "casi",
+    "start": 14.13,
+    "end": 14.33
+  },
+  {
+    "word": "300",
+    "start": 14.35,
+    "end": 14.79
+  },
+  {
+    "word": "mil",
+    "start": 14.87,
+    "end": 14.99
+  },
+  {
+    "word": "personas",
+    "start": 15.05,
+    "end": 15.38
+  },
+  {
+    "word": "voluntarias",
+    "start": 15.41,
+    "end": 15.91
+  },
+  {
+    "word": "hacen",
+    "start": 16.05,
+    "end": 16.25
+  },
+  {
+    "word": "precisamente",
+    "start": 16.32,
+    "end": 16.93
+  },
+  {
+    "word": "eso",
+    "start": 16.95,
+    "end": 17.02
+  },
+  {
+    "word": "cada",
+    "start": 17.27,
+    "end": 17.45
+  },
+  {
+    "word": "mes.",
+    "start": 17.52,
+    "end": 17.68
+  },
+  {
+    "word": "Precisamente",
+    "start": 17.98,
+    "end": 18.54
+  },
+  {
+    "word": "porque",
+    "start": 18.59,
+    "end": 18.75
+  },
+  {
+    "word": "un",
+    "start": 18.86,
+    "end": 18.91
+  },
+  {
+    "word": "Wikipedia",
+    "start": 18.93,
+    "end": 19.23
+  },
+  {
+    "word": "salimentada",
+    "start": 19.32,
+    "end": 19.84
+  },
+  {
+    "word": "por",
+    "start": 19.88,
+    "end": 20.0
+  },
+  {
+    "word": "personas",
+    "start": 20.08,
+    "end": 20.42
+  },
+  {
+    "word": "puede",
+    "start": 20.7,
+    "end": 20.88
+  },
+  {
+    "word": "ser",
+    "start": 20.94,
+    "end": 21.06
+  },
+  {
+    "word": "vulnerables",
+    "start": 21.1,
+    "end": 21.58
+  },
+  {
+    "word": "de",
+    "start": 21.62,
+    "end": 21.68
+  },
+  {
+    "word": "sus",
+    "start": 21.72,
+    "end": 21.92
+  },
+  {
+    "word": "históricos",
+    "start": 21.96,
+    "end": 22.42
+  },
+  {
+    "word": "y",
+    "start": 22.44,
+    "end": 22.46
+  },
+  {
+    "word": "también",
+    "start": 22.68,
+    "end": 22.88
+  },
+  {
+    "word": "es",
+    "start": 22.9,
+    "end": 23.06
+  },
+  {
+    "word": "el",
+    "start": 23.08,
+    "end": 23.14
+  },
+  {
+    "word": "resultado",
+    "start": 23.2,
+    "end": 23.64
+  },
+  {
+    "word": "que",
+    "start": 23.66,
+    "end": 23.8
+  },
+  {
+    "word": "entraba",
+    "start": 23.84,
+    "end": 24.14
+  },
+  {
+    "word": "con",
+    "start": 24.18,
+    "end": 24.3
+  },
+  {
+    "word": "participativo.",
+    "start": 24.34,
+    "end": 25.0
+  },
+  {
+    "word": "Esas",
+    "start": 25.26,
+    "end": 25.46
+  },
+  {
+    "word": "uno",
+    "start": 25.56,
+    "end": 25.68
+  },
+  {
+    "word": "de",
+    "start": 25.7,
+    "end": 25.78
+  },
+  {
+    "word": "las",
+    "start": 25.82,
+    "end": 25.9
+  },
+  {
+    "word": "razones",
+    "start": 25.94,
+    "end": 26.26
+  },
+  {
+    "word": "por",
+    "start": 26.3,
+    "end": 26.38
+  },
+  {
+    "word": "las",
+    "start": 26.42,
+    "end": 26.5
+  },
+  {
+    "word": "que",
+    "start": 26.54,
+    "end": 26.6
+  },
+  {
+    "word": "nos",
+    "start": 26.64,
+    "end": 26.74
+  },
+  {
+    "word": "está",
+    "start": 26.82,
+    "end": 26.98
+  },
+  {
+    "word": "faltando",
+    "start": 27.02,
+    "end": 27.38
+  },
+  {
+    "word": "conocimiento",
+    "start": 27.46,
+    "end": 27.98
+  },
+  {
+    "word": "que",
+    "start": 28.02,
+    "end": 28.12
+  },
+  {
+    "word": "representa",
+    "start": 28.18,
+    "end": 28.66
+  },
+  {
+    "word": "más",
+    "start": 28.76,
+    "end": 28.98
+  },
+  {
+    "word": "de",
+    "start": 29.0,
+    "end": 29.04
+  },
+  {
+    "word": "la",
+    "start": 29.08,
+    "end": 29.14
+  },
+  {
+    "word": "población",
+    "start": 29.18,
+    "end": 29.54
+  },
+  {
+    "word": "del",
+    "start": 29.58,
+    "end": 29.68
+  },
+  {
+    "word": "mundo.",
+    "start": 29.72,
+    "end": 29.96
+  },
+  {
+    "word": "Por",
+    "start": 30.28,
+    "end": 30.38
+  },
+  {
+    "word": "ejemplo,",
+    "start": 30.42,
+    "end": 30.7
+  },
+  {
+    "word": "en",
+    "start": 30.72,
+    "end": 30.76
+  },
+  {
+    "word": "los",
+    "start": 30.82,
+    "end": 30.94
+  },
+  {
+    "word": "22,",
+    "start": 30.96,
+    "end": 31.1
+  },
+  {
+    "word": "menos",
+    "start": 31.14,
+    "end": 31.52
+  },
+  {
+    "word": "del",
+    "start": 31.54,
+    "end": 31.87
+  },
+  {
+    "word": "20",
+    "start": 31.91,
+    "end": 31.99
+  },
+  {
+    "word": "por",
+    "start": 32.01,
+    "end": 32.13
+  },
+  {
+    "word": "cento",
+    "start": 32.19,
+    "end": 32.83
+  },
+  {
+    "word": "de",
+    "start": 32.85,
+    "end": 32.91
+  },
+  {
+    "word": "dólares",
+    "start": 32.97,
+    "end": 33.19
+  },
+  {
+    "word": "de",
+    "start": 33.25,
+    "end": 33.29
+  },
+  {
+    "word": "ocasión",
+    "start": 33.31,
+    "end": 33.75
+  },
+  {
+    "word": "muy",
+    "start": 33.77,
+    "end": 33.83
+  },
+  {
+    "word": "que",
+    "start": 33.94,
+    "end": 34.03
+  },
+  {
+    "word": "pede",
+    "start": 34.08,
+    "end": 34.28
+  },
+  {
+    "word": "en",
+    "start": 34.3,
+    "end": 34.38
+  },
+  {
+    "word": "inglés",
+    "start": 34.42,
+    "end": 34.7
+  },
+  {
+    "word": "era",
+    "start": 34.72,
+    "end": 34.84
+  }
+]

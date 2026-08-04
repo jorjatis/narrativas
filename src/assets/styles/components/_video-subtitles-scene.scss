@@ -1,5 +1,15 @@
 @use '../base/variables' as *;
 
+@keyframes vid-subs-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 .vid-subs-scene {
   width: 100%;
   padding: 0 20px;
@@ -13,30 +23,227 @@
   gap: 56px;
 
   &__video {
+    position: relative;
     width: 100%;
     max-width: 539px;
     background: $cb8;
     aspect-ratio: 16/9;
+    cursor: pointer;
+    overflow: hidden;
+    transform: none;
+
+    video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .v-ply__b {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      margin: auto;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+  }
+
+  &__video-ph {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      100deg,
+      $cb8 20%,
+      $cb7 40%,
+      $cb8 60%
+    );
+    background-size: 200% 100%;
+    animation: vid-subs-shimmer 1.4s ease-in-out infinite;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  &__scrub {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    height: 0;
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
+    background: transparent;
+    transition: height 0.2s ease;
+    overflow: hidden;
+  }
+
+  &__scrub-track {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background: rgba($cb2, 0.35);
+    cursor: pointer;
+    transition: height 0.2s ease;
+  }
+
+  &__scrub-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: $cp7;
+    pointer-events: none;
   }
 
   &__subs {
+    position: relative;
     max-width: 679px;
     width: 100%;
     height: 170px;
     overflow: hidden;
-    
-    &-over {
-      p {
-        color: $cp1;
-      }
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
     }
 
     p {
+      margin: 0;
       font-family: $atl;
       font-size: 36px;
       line-height: 42px;
-      letter-spacing: -.72px;
+      letter-spacing: -0.72px;
       color: $cp4;
-    }    
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &.is-end .vid-subs__subs-fade {
+      opacity: 0;
+    }
+  }
+
+  &__subs-fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 56px;
+    background: linear-gradient(to top, rgba($cb2, 1) 0%, rgba($cb2, 0) 100%);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+    z-index: 2;
+  }
+
+  &__subs-ph {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    span {
+      display: block;
+      height: 28px;
+      border-radius: 4px;
+      background: linear-gradient(
+        100deg,
+        $cp5 20%,
+        $cp4 40%,
+        $cp5 60%
+      );
+      background-size: 200% 100%;
+      animation: vid-subs-shimmer 1.4s ease-in-out infinite;
+
+      &:nth-child(1) {
+        width: 92%;
+      }
+
+      &:nth-child(2) {
+        width: 78%;
+        animation-delay: 0.08s;
+      }
+
+      &:nth-child(3) {
+        width: 88%;
+        animation-delay: 0.16s;
+      }
+
+      &:nth-child(4) {
+        width: 64%;
+        animation-delay: 0.24s;
+      }
+    }
+  }
+
+  &__word {
+    color: $cp4;
+    cursor: pointer;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $cp2;
+    }
+
+    &--over {
+      color: $cp1;
+    }
+
+    &.is-active {
+      color: $cp1;
+    }
+  }
+
+  // --- Estados (placeholders en .vid-subs, play en .v-ply) ---
+
+  &.is-load {
+    .vid-subs__video video,
+    .vid-subs__subs p {
+      opacity: 0;
+    }
+  }
+
+  &:not(.is-load) {
+    .vid-subs__video video,
+    .vid-subs__subs p {
+      opacity: 1;
+    }
+
+    .vid-subs__video-ph,
+    .vid-subs__subs-ph {
+      opacity: 0;
+    }
+  }
+
+  .vid-subs__video.is-play .v-ply__b {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+  }
+
+  .vid-subs__video.is-pause.is-active .v-ply__b {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .vid-subs__video.is-active:hover .vid-subs__scrub,
+  .vid-subs__video.is-active .vid-subs__scrub.is-drag {
+    height: 20px;
+    pointer-events: auto;
+  }
+
+  .vid-subs__video.is-active .vid-subs__scrub:hover .vid-subs__scrub-track,
+  .vid-subs__video.is-active .vid-subs__scrub.is-drag .vid-subs__scrub-track {
+    height: 6px;
   }
 }
