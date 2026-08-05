@@ -1,0 +1,100 @@
+@use '../base/variables' as *;
+
+.v-n-route-medias {
+  width: 100vw;
+  margin-left: -20px;
+  margin-top: 144px;
+  margin-bottom: 144px;
+
+  @media (min-width: 640px) {
+    width: 640px;
+    margin-left: calc(-640px / 2 + 50%);
+  }
+
+  @media (min-width: 780px) {
+    width: 780px;
+    margin-left: calc(-780px / 2 + 50%);
+  }
+
+  @media (min-width: 1100px) {
+    width: 1100px;
+    margin-left: calc(-1100px / 2 + 50%);
+  }
+
+  @media (min-width: 1440px) {
+    width: 1440px;
+    margin-left: calc(-1440px / 2 + 50%);
+  }
+
+  .video-player {
+    width: 100%;
+
+    video-js,
+    .video-js {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .v-fc {
+    position: relative;
+    max-width: 400px;
+    font-size: 16px;
+    line-height: 20px;
+    color: $cb1;
+    text-align: left;
+    margin-top: 0;
+    margin-left: 46px;
+    padding-top: 18px;
+    padding-bottom: 12px;
+    padding-left: 24px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background: $cp1;
+    }
+
+    &__t {
+      display: block;
+      font-family: $mcs;
+      text-transform: uppercase;
+    }
+  }
+
+  &__cnt {
+    @media (min-width: 640px) {
+      padding-left: 20px;
+    }
+
+    @media (min-width: 780px) {
+      padding-left: 40px;
+    }
+
+    @media (min-width: 1100px) {
+      padding-left: 90px;
+    }
+
+    @media (min-width: 1440px) {
+      padding-left: 120px;
+    }
+  }
+
+  &__i {
+    width: 65%;
+
+    &:not(:last-child) {
+      margin-bottom: 185px;
+    }
+
+    &:has(.v-ply) {
+      padding-left: 20px;
+    }
+  }
+
+  
+}

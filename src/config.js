@@ -45,12 +45,15 @@ if (process.env.NODE_ENV !== 'production') {
        currentPage = path.split('/views/pages/').pop().replace('.html', '');
     }
 
-    // Solo renderizamos si el body está vacío (evita pisar el trabajo de HtmlWebpackPlugin)
-    if (templates[currentPage]) {
+    // Solo renderizamos si el body está vacío (evita pisar el trabajo de HtmlWebpackPlugin).
+    // Si pisamos un body ya hidratado, scripts inline (p.ej. Brightcove) no se re-ejecutan
+    // y los players quedan huérfanos fuera del DOM.
+    const bodyIsEmpty = !document.body.innerHTML.trim();
+    if (templates[currentPage] && bodyIsEmpty) {
       console.log(`%c Renderizando plantilla: ${currentPage}`, "color: green; font-weight: bold");
       const pageData = getPageData(currentPage);
       document.body.innerHTML = templates[currentPage](pageData);
-    } else {
+    } else if (!templates[currentPage]) {
       console.warn(`No se encontró la plantilla local para: ${currentPage}. Es posible que estés viendo el HTML estático de Webpack.`);
     }
   } catch (e) {

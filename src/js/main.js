@@ -3,7 +3,7 @@ import fadeOnScroll from './helpers/fadeOnScroll';
 import removeElements from './helpers/removeEls';
 
 // NOTE: Modules
-import initSonidosPlayer from './modules/sonidos-player';
+import initAudioPlayer from './modules/audio-player';
 import initVideoSubtitles from './modules/video-subtitles';
 import initPreArticleHeader from './modules/pre-article-header';
 
@@ -14,7 +14,7 @@ export function initAll() {
 
   removeElements('.v-a--d-s-1 > .v-a-inf-c');
   fadeOnScroll(".v-a--d-s-1 .v-a-img-c > .scr-ind");
-  initSonidosPlayer();
+  initAudioPlayer();
   initVideoSubtitles();
   // Después de módulos que miden layout, para no mezclar lecturas + pin/ST
   initPreArticleHeader();
