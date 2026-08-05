@@ -21,9 +21,14 @@
   }
 
   &--01 {
-    width: 416px;
+    width: 50%;
+    min-width: 200px;
     height: 21vh;
     margin-left: 16px;
+
+    @media (min-width: $screen-xs) {
+      width: 416px;
+    }
   }
 
   &--02 {
@@ -32,9 +37,15 @@
   }
 
   &--03 {
-    width: 262px;
+    width: 35%;
+    min-width: 200px;
     height: 21vh;
     margin-left: auto;
-    margin-right: 32%;
+    margin-right: 8%;
+
+    @media (min-width: $screen-xs) {
+      width: 262px;
+      margin-right: 32%;
+    }
   }
 }

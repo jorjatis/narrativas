@@ -74,12 +74,16 @@
         max-width: none;
         margin: 0;
         font-family: $axs;
-        font-size: clamp(48px, 9vw, 90px);
+        font-size: 54px;
         line-height: 0.9;
         letter-spacing: -1.8px;
         text-transform: uppercase;
         text-align: center;
         color: $cb9;
+
+        @media (min-width: $screen-xs) {
+          font-size: 90px;
+        }
       }
 
       .v-a-t__line {
@@ -89,8 +93,13 @@
       .v-a-t__word {
         position: relative;
         display: block;
-        width: min(92vw, 720px);
-        margin-top: -18px;
+        width: 420px;
+        margin-top: -8px;
+
+        @media (min-width: $screen-xs) {
+          width: 720px;
+          margin-top: -18px;
+        }
       }
 
       .v-a-t__word-svg {
@@ -121,6 +130,12 @@
         margin-top: 0;
         text-align: center;
         color: $cb9;
+
+        @media (max-width: $screen-xs) {
+          max-width: 240px;
+          font-size: 18px;
+          line-height: 22px;
+        }
       }
     }
   }
