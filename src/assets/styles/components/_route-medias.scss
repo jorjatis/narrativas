@@ -1,30 +1,17 @@
 @use '../base/variables' as *;
 
 .v-n-route-medias {
-  width: 100vw;
-  margin-left: -20px;
-  margin-top: 144px;
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  overflow: hidden;
+  width: min(100vw, 1440px);
+  max-width: 1440px;
+  // Sale del contenedor del artículo y queda centrado en el viewport
+  margin-left: calc(50% - min(50vw, 720px));
+  margin-top: 58px;
   margin-bottom: 144px;
-
-  @media (min-width: 640px) {
-    width: 640px;
-    margin-left: calc(-640px / 2 + 50%);
-  }
-
-  @media (min-width: 780px) {
-    width: 780px;
-    margin-left: calc(-780px / 2 + 50%);
-  }
-
-  @media (min-width: 1100px) {
-    width: 1100px;
-    margin-left: calc(-1100px / 2 + 50%);
-  }
-
-  @media (min-width: 1440px) {
-    width: 1440px;
-    margin-left: calc(-1440px / 2 + 50%);
-  }
+  padding-top: 96px;
 
   .video-player {
     width: 100%;
@@ -49,6 +36,15 @@
     padding-bottom: 12px;
     padding-left: 24px;
 
+    @media (max-width: 540px) {
+      margin-left: 16px;
+      padding-left: 16px;
+    }
+
+    @container (width < 254px) {
+      display: block;
+    }
+
     &:before {
       content: '';
       position: absolute;
@@ -67,6 +63,9 @@
   }
 
   &__cnt {
+    position: relative;
+    z-index: 1;
+
     @media (min-width: 640px) {
       padding-left: 20px;
     }
@@ -93,8 +92,65 @@
 
     &:has(.v-ply) {
       padding-left: 20px;
+      width: 85%;
     }
   }
 
-  
+  &__map-track {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 55%;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  // Fondo a todo el hueco; el track va en capa aparte
+  &__map-base {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 72% top;
+    user-select: none;
+    // Fundido suave en el borde con el contenido (izq) y arriba
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0%, #000 64px, #000 100%),
+      linear-gradient(to right, transparent 0%, #000 18%, #000 100%);
+    mask-image:
+      linear-gradient(to bottom, transparent 0%, #000 64px, #000 100%),
+      linear-gradient(to right, transparent 0%, #000 18%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  &:not(.is-map-ready) &__map-path {
+    opacity: 0;
+  }
+
+  &__map {
+    position: absolute;
+    top: 140px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  &__map-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  &__map-path {
+    fill: none;
+    stroke: $cp7;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 }

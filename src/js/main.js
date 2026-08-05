@@ -6,6 +6,7 @@ import removeElements from './helpers/removeEls';
 import initAudioPlayer from './modules/audio-player';
 import initVideoSubtitles from './modules/video-subtitles';
 import initPreArticleHeader from './modules/pre-article-header';
+import initRouteMediasMap from './modules/route-medias-map';
 
 
 
@@ -18,6 +19,7 @@ export function initAll() {
   initVideoSubtitles();
   // Después de módulos que miden layout, para no mezclar lecturas + pin/ST
   initPreArticleHeader();
+  initRouteMediasMap();
 }
 
 // NOTE: Para prod el evento load de window se borra, dejamos solo:
