@@ -1,3 +1,5 @@
+import observeInView from '../helpers/observeInView';
+
 export default function initVideoSubtitles() {
   const scenes = [...document.querySelectorAll('.vid-subs')];
   if (!scenes.length) return;
@@ -44,8 +46,6 @@ function createVideoSubtitles(scene) {
     if (!player.classList.contains('is-active')) return;
     player.classList.toggle('is-play', playing);
     player.classList.toggle('is-pause', !playing);
-    // Solo se puede hacer scroll manual con el vídeo en pausa.
-    subsScroll.classList.toggle('is-locked', playing);
   };
 
   const updateScrub = (time = video.currentTime) => {
@@ -222,14 +222,6 @@ function createVideoSubtitles(scene) {
 
   subsScroll.addEventListener('scroll', updateSubsFade, { passive: true });
 
-  const blockManualScroll = (event) => {
-    if (!subsScroll.classList.contains('is-locked')) return;
-    event.preventDefault();
-  };
-
-  subsScroll.addEventListener('wheel', blockManualScroll, { passive: false });
-  subsScroll.addEventListener('touchmove', blockManualScroll, { passive: false });
-
   player.addEventListener('click', (event) => {
     if (event.target.closest('.vid-subs__scrub')) return;
     if (event.target.closest('.vid-subs__word')) return;
@@ -302,6 +294,16 @@ function createVideoSubtitles(scene) {
     updateScrub();
   });
   video.addEventListener('loadedmetadata', () => updateScrub());
+
+  // Si el bloque sale de pantalla (scroll / slideUp), pausar el vídeo
+  observeInView({
+    target: scene,
+    threshold: 0,
+    once: false,
+    onLeave: () => {
+      if (!video.paused) pause();
+    },
+  });
 
   const markVideoReady = () => {
     if (videoReady) return;

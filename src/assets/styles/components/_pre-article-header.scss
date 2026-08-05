@@ -4,49 +4,123 @@
 @use '../base/animations' as *;
 
 .v-n-preh {
+  --preh-header: 50px;
   margin-bottom: 220px;
-  
-  &-scene {
-    display: flex;
-    height: calc(100dvh - 50px);
 
-    @media (min-width: $screen-xs) {
-      height: calc(100dvh - 58px);
-    }
+  @media (min-width: $screen-xs) {
+    --preh-header: 58px;
+  }
+
+  &__stage {
+    position: relative;
+    height: calc(100dvh - var(--preh-header));
+    overflow: hidden;
+  }
+
+  &-scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    will-change: transform, opacity;
 
     &--01 {
-      display: flex;
       align-items: center;
       justify-content: center;
       padding: 0 20px;
+      z-index: 3;
+      background: $cb2;
+    }
+
+    &--02 {
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      background: $cb2;
+    }
+
+    &--03 {
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      opacity: 1;
+      background: $cb2;
+      .vid-frames {
+        clip-path: inset(0 100% 0 0);
+      }
     }
   }
 }
 
 .v-w {
-  .v-a--d-s-1 { 
+  .v-a--d-s-1 {
     > .v-a-inf-c {
       display: none;
     }
 
-    .v-a-inf-c {
+    .v-n-preh-scene--02 .v-a-inf-c {
       justify-content: center;
       padding: 0;
-      opacity: 0;
-      animation: fadeIn 0.5s ease-in-out forwards 0.2s;
+      opacity: 1;
 
       .v-a-t {
-        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: none;
+        margin: 0;
         font-family: $axs;
-        font-size: 90px;
-        line-height: 80px;
+        font-size: clamp(48px, 9vw, 90px);
+        line-height: 0.9;
         letter-spacing: -1.8px;
         text-transform: uppercase;
+        text-align: center;
         color: $cb9;
+      }
+
+      .v-a-t__line {
+        display: block;
+      }
+
+      .v-a-t__word {
+        position: relative;
+        display: block;
+        width: min(92vw, 720px);
+        margin-top: -18px;
+      }
+
+      .v-a-t__word-svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .v-a-t__word-bg {
+        fill: $cb9;
+      }
+
+      .v-a-t__path-track {
+        stroke: $cp4;
+        stroke-width: 4;
+      }
+
+      .v-a-t__path-draw {
+        stroke: $cp7;
+        stroke-width: 4;
+        stroke-dasharray: 533;
+        stroke-dashoffset: 533;
       }
 
       .v-a-s-t {
         max-width: 320px;
+        margin-top: 0;
+        text-align: center;
+        color: $cb9;
       }
     }
   }

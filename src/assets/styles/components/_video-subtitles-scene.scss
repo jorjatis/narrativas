@@ -134,18 +134,12 @@
   &__subs-scroll {
     height: 100%;
     overflow: hidden;
-    overflow-y: auto;
+    pointer-events: none;
     contain: content;
     scrollbar-width: none;
-    overscroll-behavior: contain;
 
     &::-webkit-scrollbar {
       display: none;
-    }
-
-    &.is-locked {
-      overflow-y: hidden;
-      touch-action: none;
     }
 
     p {
@@ -232,6 +226,7 @@
   &__word {
     color: $cp4;
     cursor: pointer;
+    pointer-events: auto;
     transition: color 0.15s ease;
 
     &:hover {
@@ -246,8 +241,6 @@
       color: $cp1;
     }
   }
-
-  // --- Estados (placeholders en .vid-subs, play en .v-ply) ---
 
   &.is-load {
     .vid-subs__video video,

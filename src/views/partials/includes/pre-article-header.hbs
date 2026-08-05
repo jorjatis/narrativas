@@ -1,19 +1,62 @@
 <div class="v-n-preh">
-  <div class="v-n-preh-scene v-n-preh-scene--01">
-    {{> ./includes/video-subtitles-scene }}
-  </div>
+  <div class="v-n-preh__stage">
+    <div class="v-n-preh-scene v-n-preh-scene--01">
+      {{> ./includes/video-subtitles-scene }}
+    </div>
 
-  <div class="v-n-preh-scene v-n-preh-scene--02">
-    <div class="v-a-inf-c">          
-      <h1 class="v-a-t">El último transhumante</h1>
-      <h2 class="v-a-s-t">El estrangulamiento del mercado energético</h2>           
+    <div class="v-n-preh-scene v-n-preh-scene--02">
+      <div class="v-a-inf-c">
+        <h1 class="v-a-t">
+          <span class="v-a-t__line">El último</span>
+          <span class="v-a-t__word">
+            <svg class="v-a-t__word-svg" viewBox="0 0 720 110" role="img" aria-label="transhumante">
+              <defs>
+                <pattern
+                  id="v-a-t-word-fill"
+                  patternUnits="userSpaceOnUse"
+                  x="0"
+                  y="0"
+                  width="720"
+                  height="110"
+                >
+                  <rect class="v-a-t__word-bg" x="0" y="0" width="720" height="110" />
+                  <path
+                    class="v-a-t__path-track"
+                    d="M20 58 C70 28, 120 88, 170 58 S270 28, 320 58 S420 88, 470 58 S570 28, 620 58 S680 88, 700 58"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    class="v-a-t__path-draw"
+                    d="M20 58 C70 28, 120 88, 170 58 S270 28, 320 58 S420 88, 470 58 S570 28, 620 58 S680 88, 700 58"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </pattern>
+              </defs>
+              <text
+                class="v-a-t__word-text"
+                x="360"
+                y="86"
+                text-anchor="middle"
+                font-family="ABC XCond Semibold, serif"
+                font-size="92"
+                letter-spacing="-1.8"
+                fill="url(#v-a-t-word-fill)"
+              >TRANSHUMANTE</text>
+            </svg>
+          </span>
+        </h1>
+        <h2 class="v-a-s-t">El estrangulamiento del mercado energético</h2>
+      </div>
+    </div>
+
+    <div class="v-n-preh-scene v-n-preh-scene--03">
+      {{> ./includes/video-frames-scene }}
     </div>
   </div>
-
-  <div class="v-n-preh-scene v-n-preh-scene--03">
-    {{> ./includes/video-frames-scene }}
-  </div>
 </div>
-
 
 {{> ./base/scroll-indicator}}
