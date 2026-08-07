@@ -29,6 +29,38 @@
     gap: 56px;
   }
 
+  &__sound-hint {
+    max-width: 539px;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    font-family: $atl;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.32px;
+    color: $cp3;
+    transition: opacity 0.3s ease;
+
+    @media (min-width: $screen-xs) {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    &.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    // Acerca el aviso al vídeo compensando el gap del contenedor.
+    + .vid-subs__video {
+      margin-top: -20px;
+
+      @media (min-width: $screen-xs) {
+        margin-top: -40px;
+      }
+    }
+  }
+
   &__video {
     position: relative;
     width: 100%;
@@ -57,6 +89,16 @@
 
       &:before {
         background: rgba($cb2, .85);
+      }
+    }
+
+    #icon-sound {
+      display: none;
+      width: 30px;
+      height: 30px;
+
+      path {
+        fill: $cp1;
       }
     }
   }
@@ -126,7 +168,8 @@
       height: 170px;
     }
 
-    &.is-end .vid-subs__subs-fade {
+    &.is-start .vid-subs__subs-fade--top,
+    &.is-end .vid-subs__subs-fade--bottom {
       opacity: 0;
     }
   }
@@ -163,13 +206,21 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
     height: 56px;
-    background: linear-gradient(to top, rgba($cb2, 1) 0%, rgba($cb2, 0) 100%);
     pointer-events: none;
     opacity: 1;
     transition: opacity 0.25s ease;
     z-index: 2;
+
+    &--top {
+      top: 0;
+      background: linear-gradient(to bottom, rgba($cb2, 1) 0%, rgba($cb2, 0) 100%);
+    }
+
+    &--bottom {
+      bottom: 0;
+      background: linear-gradient(to top, rgba($cb2, 1) 0%, rgba($cb2, 0) 100%);
+    }
   }
 
   &__subs-ph {
@@ -266,13 +317,45 @@
     }
   }
 
-  .vid-subs__video.is-play .v-ply__b {
+  .vid-subs__video.is-load .v-ply__b {
+    opacity: 0.3;
+    transform: scale(1);
+    pointer-events: none;
+  }
+
+  // Autoplay muteado: icono de auriculares visible para activar el sonido.
+  .vid-subs__video.is-muted.is-active {
+    #icon-play,
+    #icon-pause {
+      display: none;
+    }
+
+    #icon-sound {
+      display: block;
+    }
+
+    .v-ply__b {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+  }
+
+  // Reproduciendo con sonido: el pause solo aparece al hover.
+  .vid-subs__video.is-play:not(.is-muted) .v-ply__b {
     opacity: 0;
     transform: scale(0.9);
     pointer-events: none;
   }
 
-  .vid-subs__video.is-pause.is-active .v-ply__b {
+  .vid-subs__video.is-play:not(.is-muted):hover .v-ply__b {
+    opacity: 0.7;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+
+  // Pausado: play a opacidad completa.
+  .vid-subs__video.is-pause.is-active:not(.is-muted) .v-ply__b {
     opacity: 1;
     transform: scale(1);
   }

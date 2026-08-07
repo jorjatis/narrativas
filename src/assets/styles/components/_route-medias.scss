@@ -92,7 +92,10 @@
 
     &:has(.v-ply) {
       padding-left: 20px;
-      width: 85%;
+      
+      @media (max-width: $screen-xs) {
+        width: 85%;
+      }
     }
   }
 
@@ -106,7 +109,6 @@
     pointer-events: none;
   }
 
-  // Fondo a todo el hueco; el track va en capa aparte
   &__map-base {
     position: absolute;
     inset: 0;
@@ -116,7 +118,6 @@
     object-fit: cover;
     object-position: 72% top;
     user-select: none;
-    // Fundido suave en el borde con el contenido (izq) y arriba
     -webkit-mask-image:
       linear-gradient(to bottom, transparent 0%, #000 64px, #000 100%),
       linear-gradient(to right, transparent 0%, #000 18%, #000 100%);

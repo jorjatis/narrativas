@@ -1,9 +1,21 @@
 @use '../base/variables' as *;
 
+body:has(.v-h-a) {
+  .scr-ind {
+    @media (max-width: $screen-xs) {
+      height: calc(100dvh - 98px);
+    }
+
+    @media (min-width: $screen-xs) and (max-width: $screen-sm) {
+      height: calc(100dvh - 106px);
+    }
+  }
+}
+
 .scr-ind {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: calc(100dvh - 58px);
   top: 0;
   left: 0;
   display: flex;
@@ -14,6 +26,10 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity .3s ease, visibility .3s ease;
+
+  @media (min-width: $screen-xs) {
+    height: calc(100dvh - 58px);
+  }
 
   &.is-visible {
     opacity: 1;

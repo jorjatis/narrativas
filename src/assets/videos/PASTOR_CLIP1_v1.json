@@ -1,0 +1,372 @@
+[
+  {
+    "word": "Soy",
+    "start": 0.05,
+    "end": 0.33
+  },
+  {
+    "word": "Francisco",
+    "start": 0.35,
+    "end": 0.65
+  },
+  {
+    "word": "Morgado",
+    "start": 0.67,
+    "end": 0.99
+  },
+  {
+    "word": "Galet,",
+    "start": 1.83,
+    "end": 2.19
+  },
+  {
+    "word": "soy",
+    "start": 3.73,
+    "end": 3.91
+  },
+  {
+    "word": "extremeño",
+    "start": 3.97,
+    "end": 4.39
+  },
+  {
+    "word": "de",
+    "start": 4.43,
+    "end": 4.49
+  },
+  {
+    "word": "Torremocha.",
+    "start": 4.53,
+    "end": 6.09
+  },
+  {
+    "word": "Me",
+    "start": 6.09,
+    "end": 6.61
+  },
+  {
+    "word": "dedico",
+    "start": 6.63,
+    "end": 7.17
+  },
+  {
+    "word": "al",
+    "start": 7.81,
+    "end": 7.89
+  },
+  {
+    "word": "pastoreo",
+    "start": 7.97,
+    "end": 8.49
+  },
+  {
+    "word": "transhumante,",
+    "start": 8.99,
+    "end": 9.54
+  },
+  {
+    "word": "pastor",
+    "start": 9.55,
+    "end": 10.02
+  },
+  {
+    "word": "de",
+    "start": 10.04,
+    "end": 10.1
+  },
+  {
+    "word": "toda",
+    "start": 10.15,
+    "end": 10.34
+  },
+  {
+    "word": "la vida,",
+    "start": 10.36,
+    "end": 10.57
+  },
+  {
+    "word": "hijo",
+    "start": 10.6,
+    "end": 11.5
+  },
+  {
+    "word": "de",
+    "start": 11.56,
+    "end": 11.62
+  },
+  {
+    "word": "pastores",
+    "start": 11.68,
+    "end": 12.02
+  },
+  {
+    "word": "y",
+    "start": 12.1,
+    "end": 12.2
+  },
+  {
+    "word": "nieto",
+    "start": 12.36,
+    "end": 12.56
+  },
+  {
+    "word": "de",
+    "start": 12.6,
+    "end": 12.64
+  },
+  {
+    "word": "pastores.",
+    "start": 12.7,
+    "end": 13.02
+  },
+  {
+    "word": "He",
+    "start": 13.6,
+    "end": 13.7
+  },
+  {
+    "word": "recorrido",
+    "start": 13.72,
+    "end": 14.06
+  },
+  {
+    "word": "muchos",
+    "start": 14.08,
+    "end": 14.42
+  },
+  {
+    "word": "miles",
+    "start": 14.5,
+    "end": 14.72
+  },
+  {
+    "word": "de",
+    "start": 14.74,
+    "end": 14.8
+  },
+  {
+    "word": "kilómetros,",
+    "start": 14.86,
+    "end": 15.22
+  },
+  {
+    "word": "de",
+    "start": 15.68,
+    "end": 15.8
+  },
+  {
+    "word": "primaveras",
+    "start": 15.82,
+    "end": 16.26
+  },
+  {
+    "word": "y",
+    "start": 16.28,
+    "end": 16.32
+  },
+  {
+    "word": "de",
+    "start": 16.38,
+    "end": 16.44
+  },
+  {
+    "word": "vueltas",
+    "start": 16.48,
+    "end": 16.72
+  },
+  {
+    "word": "de",
+    "start": 16.8,
+    "end": 16.86
+  },
+  {
+    "word": "otoño.",
+    "start": 16.9,
+    "end": 17.28
+  },
+  {
+    "word": "Empecé",
+    "start": 21.83,
+    "end": 22.41
+  },
+  {
+    "word": "con",
+    "start": 23.47,
+    "end": 23.59
+  },
+  {
+    "word": "catorce",
+    "start": 23.63,
+    "end": 23.97
+  },
+  {
+    "word": "años,",
+    "start": 24.03,
+    "end": 24.31
+  },
+  {
+    "word": "con",
+    "start": 24.45,
+    "end": 24.59
+  },
+  {
+    "word": "un",
+    "start": 24.63,
+    "end": 24.69
+  },
+  {
+    "word": "mayoral",
+    "start": 24.73,
+    "end": 25.21
+  },
+  {
+    "word": "y",
+    "start": 25.49,
+    "end": 25.53
+  },
+  {
+    "word": "aquí",
+    "start": 25.57,
+    "end": 25.71
+  },
+  {
+    "word": "estoy",
+    "start": 25.75,
+    "end": 25.95
+  },
+  {
+    "word": "con",
+    "start": 25.99,
+    "end": 26.07
+  },
+  {
+    "word": "sesenta",
+    "start": 26.09,
+    "end": 26.29
+  },
+  {
+    "word": "y",
+    "start": 26.31,
+    "end": 26.33
+  },
+  {
+    "word": "cinco",
+    "start": 26.37,
+    "end": 26.53
+  },
+  {
+    "word": "años,",
+    "start": 26.59,
+    "end": 26.7
+  },
+  {
+    "word": "y",
+    "start": 26.71,
+    "end": 26.73
+  },
+  {
+    "word": "ahora",
+    "start": 26.84,
+    "end": 26.98
+  },
+  {
+    "word": "el",
+    "start": 27.02,
+    "end": 27.14
+  },
+  {
+    "word": "que venga",
+    "start": 27.16,
+    "end": 27.32
+  },
+  {
+    "word": "atrás,",
+    "start": 27.38,
+    "end": 27.58
+  },
+  {
+    "word": "a ver si",
+    "start": 28.12,
+    "end": 28.3
+  },
+  {
+    "word": "es capaz",
+    "start": 28.34,
+    "end": 28.52
+  },
+  {
+    "word": "de",
+    "start": 28.54,
+    "end": 28.64
+  },
+  {
+    "word": "hacer",
+    "start": 28.66,
+    "end": 28.92
+  },
+  {
+    "word": "lo",
+    "start": 29.28,
+    "end": 29.34
+  },
+  {
+    "word": "que",
+    "start": 29.36,
+    "end": 29.42
+  },
+  {
+    "word": "yo hago,",
+    "start": 29.46,
+    "end": 29.54
+  },
+  {
+    "word": "lo que yo he",
+    "start": 29.58,
+    "end": 29.66
+  },
+  {
+    "word": "hecho",
+    "start": 29.68,
+    "end": 29.86
+  },
+  {
+    "word": "desde",
+    "start": 30.82,
+    "end": 30.96
+  },
+  {
+    "word": "hace",
+    "start": 30.98,
+    "end": 31.14
+  },
+  {
+    "word": "cincuenta",
+    "start": 31.18,
+    "end": 31.5
+  },
+  {
+    "word": "y",
+    "start": 31.54,
+    "end": 31.58
+  },
+  {
+    "word": "un",
+    "start": 31.62,
+    "end": 31.66
+  },
+  {
+    "word": "años",
+    "start": 31.7,
+    "end": 31.8
+  },
+  {
+    "word": "en",
+    "start": 31.86,
+    "end": 31.92
+  },
+  {
+    "word": "transhumancia.",
+    "start": 31.94,
+    "end": 32.37
+  }
+]

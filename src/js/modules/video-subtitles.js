@@ -13,12 +13,14 @@ function createVideoSubtitles(scene) {
   const player = scene.querySelector('.vid-subs__video.v-ply');
   const video = player?.querySelector('video');
   const playButton = player?.querySelector('.v-ply__b');
+  const soundHint = scene.querySelector('.vid-subs__sound-hint');
   const subsBox = scene.querySelector('.vid-subs__subs');
   const subsScroll = subsBox?.querySelector('.vid-subs__subs-scroll');
   const paragraph = subsScroll?.querySelector('p');
   const scrub = scene.querySelector('.vid-subs__scrub');
   const scrubTrack = scene.querySelector('.vid-subs__scrub-track');
   const scrubFill = scene.querySelector('.vid-subs__scrub-fill');
+  const wantsAutoplay = video?.hasAttribute('autoplay');
 
   if (!player || !video || !subsBox || !subsScroll || !paragraph || !playButton) return;
 
@@ -46,6 +48,29 @@ function createVideoSubtitles(scene) {
     if (!player.classList.contains('is-active')) return;
     player.classList.toggle('is-play', playing);
     player.classList.toggle('is-pause', !playing);
+    syncMutedUi();
+  };
+
+  const syncMutedUi = () => {
+    const muted = Boolean(video.muted);
+    const active = player.classList.contains('is-active');
+
+    player.classList.toggle('is-muted', active && muted);
+
+    if (!active) {
+      playButton.setAttribute('aria-label', 'Reproducir o pausar el vídeo');
+      return;
+    }
+
+    if (muted) {
+      playButton.setAttribute('aria-label', 'Activar el sonido');
+      return;
+    }
+
+    playButton.setAttribute(
+      'aria-label',
+      video.paused || video.ended ? 'Reproducir el vídeo' : 'Pausar el vídeo',
+    );
   };
 
   const updateScrub = (time = video.currentTime) => {
@@ -58,7 +83,9 @@ function createVideoSubtitles(scene) {
 
   const updateSubsFade = () => {
     const maxScroll = subsScroll.scrollHeight - subsScroll.clientHeight;
+    const atStart = maxScroll <= 1 || subsScroll.scrollTop <= 2;
     const atEnd = maxScroll <= 1 || subsScroll.scrollTop >= maxScroll - 2;
+    subsBox.classList.toggle('is-start', atStart);
     subsBox.classList.toggle('is-end', atEnd);
   };
 
@@ -134,19 +161,39 @@ function createVideoSubtitles(scene) {
     }
   };
 
+  const hideSoundHint = () => {
+    soundHint?.classList.add('is-hidden');
+  };
+
+  const unmute = () => {
+    if (!video.muted) return;
+    video.muted = false;
+    hideSoundHint();
+    syncMutedUi();
+  };
+
   const maybeReady = () => {
     if (!videoReady || !transcriptReady) return;
 
     scene.classList.remove('is-load');
     player.classList.remove('is-load');
-    player.classList.add('is-active', 'is-pause');
-    player.classList.remove('is-play');
+    player.classList.add('is-active');
     playButton.disabled = false;
 
     syncWords(video.currentTime, { force: true });
     updateScrub();
     updateSubsFade();
     if (scrubTrack) scrubTrackWidth = scrubTrack.getBoundingClientRect().width;
+
+    if (wantsAutoplay) {
+      video.muted = true;
+      syncMutedUi();
+      play();
+    } else {
+      player.classList.add('is-pause');
+      player.classList.remove('is-play');
+      syncMutedUi();
+    }
   };
 
   const renderWords = (items) => {
@@ -190,6 +237,14 @@ function createVideoSubtitles(scene) {
 
   const toggle = () => {
     if (!player.classList.contains('is-active')) return;
+
+    // Primer clic con vídeo muteado: activa el sonido (y reproduce si estaba pausado).
+    if (video.muted) {
+      unmute();
+      if (video.paused || video.ended) play();
+      return;
+    }
+
     if (video.paused || video.ended) play();
     else pause();
   };
@@ -216,6 +271,7 @@ function createVideoSubtitles(scene) {
   const seekToWord = (wordEl) => {
     const start = Number(wordEl.dataset.start);
     if (!Number.isFinite(start)) return;
+    unmute();
     seekTo(start);
     if (video.paused) play();
   };
@@ -366,20 +422,21 @@ function scrollWordIntoView(container, wordEl) {
 
   const containerRect = container.getBoundingClientRect();
   const wordRect = wordEl.getBoundingClientRect();
-  const padding = 8;
 
-  const above = wordRect.top < containerRect.top + padding;
-  const below = wordRect.bottom > containerRect.bottom - padding;
-  if (!above && !below) return;
-
+  // Mantener la palabra activa centrada en vertical dentro de la caja.
   const offset =
     wordRect.top -
     containerRect.top -
     containerRect.height / 2 +
     wordRect.height / 2;
 
+  const maxScroll = Math.max(0, container.scrollHeight - container.clientHeight);
+  const nextTop = Math.min(Math.max(0, container.scrollTop + offset), maxScroll);
+
+  if (Math.abs(nextTop - container.scrollTop) < 1) return;
+
   container.scrollTo({
-    top: container.scrollTop + offset,
+    top: nextTop,
     behavior: 'auto',
   });
 }

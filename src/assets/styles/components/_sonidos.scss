@@ -45,6 +45,11 @@
       .v-ply__v {
         .v-ply__bars {
           gap: 6px;
+
+          .v-ply__group {
+            flex: 1 1 0;
+            min-width: 0;
+          }
         }
       }
     }
@@ -53,6 +58,22 @@
       .v-ply__v {
         .v-ply__bars {
           justify-content: space-between;
+
+          .v-ply__bar--v {
+            width: 4px;
+          }
+
+          .v-ply__group {
+            gap: 10px;
+          }
+
+          .v-ply__subgroup {
+            gap: 2px;
+
+            .v-ply__bar:nth-child(2) {
+              margin-right: 2px;
+            }
+          }
         }
       }
     }
@@ -61,6 +82,23 @@
       .v-ply__v {
         .v-ply__bars {
           justify-content: space-between;
+
+          .v-ply__bar--v {
+            width: 6px;
+          }
+
+          .v-ply__group {
+            gap: 7px;
+
+            &--01 {
+              margin-left: 12px;
+            }
+
+            &--02 {
+              margin-right: 12px;
+              gap: 6px;
+            }
+          }
         }
       }
     }
@@ -122,7 +160,8 @@
           }
         }
 
-        &__group {
+        &__group,
+        &__subgroup {
           display: flex;
           align-items: center;
           gap: 6px;
