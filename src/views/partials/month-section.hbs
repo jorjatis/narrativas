@@ -2,7 +2,12 @@
   <section class="month-group" id="{{slugify title}}" data-reveal data-month-section>
     <div class="month-group__header cintillo">
       <span class="cintillo__bar" aria-hidden="true"></span>
-      <h2 class="month-title cintillo__title">{{title}}</h2>
+      <h2 class="month-title cintillo__title">
+        <span data-lang-text="es">{{title}}</span>
+        {{#if titleEn}}
+          <span data-lang-text="en">{{titleEn}}</span>
+        {{/if}}
+      </h2>
     </div>
 
     <div class="grid">

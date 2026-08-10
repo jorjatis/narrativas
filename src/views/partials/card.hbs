@@ -24,12 +24,15 @@
   <div class="card-body">
     <h3 class="card-title">
       <a class="card-title-link" href="{{articleUrl}}" target="_blank" rel="noopener noreferrer">
-        {{title}}
+        <span class="card-title__lang card-title__lang--es" lang="es">{{title}}</span>
+        {{#if titleEn}}
+          <span class="card-title__lang card-title__lang--en" lang="en" aria-hidden="true">{{titleEn}}</span>
+        {{/if}}
       </a>
     </h3>
     <div class="card-actions">
-      <a class="v-btn v-btn-g v-btn--m" href="{{articleUrl}}" target="_blank" rel="noopener noreferrer" aria-label="Leer {{title}} en ABC">Leer en ABC</a>
-      <a class="v-btn v-btn-s" href="{{netlifyUrl}}" target="_blank" rel="noopener noreferrer" aria-label="Ver mockup de archivo de {{title}}">Ver mockup</a>
+      <a class="v-btn v-btn-g v-btn--m" href="{{articleUrl}}" target="_blank" rel="noopener noreferrer" data-i18n="readAbc" aria-label="Leer {{title}} en ABC">Leer en ABC</a>
+      <a class="v-btn v-btn-s" href="{{netlifyUrl}}" target="_blank" rel="noopener noreferrer" data-i18n="viewMockup" aria-label="Ver mockup de archivo de {{title}}">Ver mockup</a>
     </div>
   </div>
 </article>

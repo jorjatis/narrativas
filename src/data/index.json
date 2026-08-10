@@ -5,6 +5,7 @@
       "cards": [
         {
           "title": "Las mil vidas de la Cibeles",
+          "titleEn": "The thousand lives of Cibeles",
           "articleUrl": "https://www.abc.es/espana/madrid/cibeles-testigo-heridas-paso-tiempo-20260725205323-nt.html",
           "titleMedia": "19-las-mil-vidas-de-la-cibeles",
           "gif": true,
@@ -12,77 +13,89 @@
         },
         {
           "title": "90 Aniversario de la Guerra civil: El origen de la tragedia española",
+          "titleEn": "90th anniversary of the Civil War: The origins of Spain’s tragedy",
           "articleUrl": "https://www.abc.es/historia/julio-1936-comenzo-guerra-civil-20260718015745-nt.html",
           "titleMedia": "18-90-aniversario-gc",
           "gif": true,
           "netlifyUrl": "https://narrativas-90aniversariogc.netlify.app/"
         },
         {
-          "title": "Ranking camisetas España",
+          "title": "¿Cuál ha sido la mejor camiseta de España en un mundial?",
+          "titleEn": "What has been Spain’s best World Cup shirt?",
           "articleUrl": "https://www.abc.es/deportes/futbol/mundial/mejor-camiseta-espana-mundial-elige-tus-favoritas-20260627000243-nt.html",
           "titleMedia": "17-ranking-camisetas",
           "gif": true,
           "netlifyUrl": "https://narrativas-rankingcamisetaslaroja.netlify.app/"
         }
-      ]
+      ],
+      "titleEn": "July 2026"
     },
     {
       "title": "Junio 2026",
       "cards": [
         {
-          "title": "Tu once ideal",
+          "title": "Tu once ideal ante Argentina",
+          "titleEn": "Your ideal starting XI against Argentina",
           "articleUrl": "https://www.abc.es/deportes/futbol/mundial/elige-once-espana-mundial-20260615000540-ntrc.html",
           "titleMedia": "16-tu-once-ideal",
           "gif": true,
           "netlifyUrl": "https://narrativas-tuonceideal.netlify.app/"
         },
         {
-          "title": "Sagrada Familia 3D",
+          "title": "La Sagrada Familia, el Evangelio en piedra que soñó Gaudí",
+          "titleEn": "The Sagrada Familia, the Gospel in stone Gaudí dreamed of",
           "articleUrl": "https://www.abc.es/sociedad/sagrada-familia-biblia-piedra-sono-gaudi-20260610200930-nt.html",
           "titleMedia": "15-sagrada-familia-3d",
           "gif": true,
           "netlifyUrl": "https://narrativa-sagrada-familia-3d.netlify.app/"
         },
         {
-          "title": "Papamóvil",
+          "title": "Historia del papamóvil: Del porteo a hombros al coche eléctrico",
+          "titleEn": "History of the Popemobile: From being carried on shoulders to the electric car",
           "articleUrl": "https://www.abc.es/sociedad/papamovil-coche-refleja-personalidad-papa-20260606014015-nt.html",
           "titleMedia": "14-papamovil",
           "gif": true,
           "netlifyUrl": "https://narrativas-papamovil.netlify.app/"
         },
         {
-          "title": "Vestimentas del Papa",
+          "title": "¿Cómo viste el Papa? El mensaje de sus atuendos",
+          "titleEn": "How does the Pope dress? The message in his garments",
           "articleUrl": "https://www.abc.es/sociedad/viste-leon-xiv-mensaje-atuendos-papa-20260605014627-nt.html",
           "titleMedia": "13-vestimentas-del-papa",
           "gif": false,
           "netlifyUrl": "https://narrativa-vestimentaspapa.netlify.app/"
         }
-      ]
+      ],
+      "titleEn": "June 2026"
     },
     {
       "title": "Mayo 2026",
       "cards": [
         {
-          "title": "Santa María de Garoña",
+          "title": "El fin de Santa María de Garoña: Así desaparece una central nuclear",
+          "titleEn": "The end of Santa María de Garoña: How a nuclear plant disappears",
           "articleUrl": "https://www.abc.es/sociedad/narrativa-desmantelamiento-central-nuclear-20260510183301-nt.html",
           "titleMedia": "12-santa-maria-garona",
           "gif": false,
           "netlifyUrl": "https://narrativa-santamariadegarona.netlify.app/"
         },
         {
-          "title": "Cierre de Ormuz",
+          "title": "Cierre de Ormuz: El bloqueo que hace temblar la economía mundial",
+          "titleEn": "The Strait of Hormuz closure: The blockade shaking the world economy",
           "articleUrl": "https://www.abc.es/economia/cierre-ormuz-bloqueo-temblar-economia-mundial-20260502200728-nt.html",
           "titleMedia": "11-cierre-de-ormuz",
           "gif": true,
           "netlifyUrl": "https://narrativa-cierredeormuz.netlify.app/"
         }
-      ]
+      ],
+      "titleEn": "May 2026"
     },
     {
       "title": "Abril 2026",
       "cards": [
         {
-          "title": "Los anuncios más vistos del régimen iraní",
+          "title": "Lego, IA y murales: La propaganda de Irán contra Trump",
+          "titleEn": "Lego, AI and murals: Iran’s propaganda against Trump",
           "articleUrl": "https://www.abc.es/internacional/narrativa-propaganda-iran-20260426205725-nt.html",
           "titleMedia": "10-murales-iran",
           "gif": false,
@@ -90,6 +103,7 @@
         },
         {
           "title": "Para que llore mi madre, que llore la tuya: Una historia de bandas latinas",
+          "titleEn": "If my mother is to cry, let yours cry too: A story of Latino gangs",
           "articleUrl": "https://www.abc.es/podcast/narrativo/podcast-bandas-latinas/",
           "titleMedia": "09-bandas-latinas",
           "gif": false,
@@ -97,6 +111,7 @@
         },
         {
           "title": "Cuba contra Cuba: Relato íntimo de un fracaso",
+          "titleEn": "Cuba against Cuba: An intimate account of failure",
           "articleUrl": "https://www.abc.es/cultura/balance-intimo-fracaso-20260419193510-nt.html",
           "titleMedia": "08-cuba-contra-cuba",
           "gif": true,
@@ -104,18 +119,21 @@
         },
         {
           "title": "Artemis 2: Por qué no es (ni de lejos) una repetición del Apolo VIII",
+          "titleEn": "Artemis II: Why it is nowhere near a repeat of Apollo 8",
           "articleUrl": "https://www.abc.es/ciencia/lejos-repeticion-apolo-viii-20260331204004-nt.html",
           "titleMedia": "07-artemis-2",
           "gif": true,
           "netlifyUrl": "https://narrativa-artemis2.netlify.app/"
         }
-      ]
+      ],
+      "titleEn": "April 2026"
     },
     {
       "title": "Marzo 2026",
       "cards": [
         {
-          "title": "Semana Santa de Sevilla: La fiesta total: manual de uso y cifras de un fenómeno de masas",
+          "title": "Semana Santa de Sevilla: manual de uso y cifras de un fenómeno de masas",
+          "titleEn": "Seville’s Holy Week: a user’s guide and figures for a mass phenomenon",
           "articleUrl": "https://www.abc.es/sevilla/pasionensevilla/noticias-semana-santa-sevilla/narrativa-semana-santa-20260328024744-nts.html",
           "titleMedia": "06-ssanta-sevilla",
           "gif": true,
@@ -123,6 +141,7 @@
         },
         {
           "title": "Los pedxxx que acechan a tu hijo en Roblox (y tú ni te enteras)",
+          "titleEn": "The predators stalking your child on Roblox (and you don’t even notice)",
           "articleUrl": "https://www.abc.es/cultura/silenciosa-infiltracion-pedofilia-mundos-digitales-20260322041759-nt.html",
           "titleMedia": "05-pedxxx-roblox",
           "gif": true,
@@ -130,6 +149,7 @@
         },
         {
           "title": "El día que Nueva York amaneció sin indocumentados",
+          "titleEn": "The day New York woke up without undocumented immigrants",
           "articleUrl": "https://www.abc.es/internacional/dia-nueva-york-amanecio-indocumentados-20260314211032-nt.html",
           "titleMedia": "04-distopia-inmigrantes",
           "gif": false,
@@ -137,18 +157,21 @@
         },
         {
           "title": "Ultras: La 'kale borroka' del fútbol",
+          "titleEn": "Ultras: Football’s ‘kale borroka’",
           "articleUrl": "https://www.abc.es/espana/ultras-kale-borroka-futbol-20260308041254-nt.html",
           "titleMedia": "03-ultras",
           "gif": false,
           "netlifyUrl": "https://narrativa-gruposultra.netlify.app/"
         }
-      ]
+      ],
+      "titleEn": "March 2026"
     },
     {
       "title": "Febrero 2026",
       "cards": [
         {
           "title": "Más allá del reloj: un médico en 24 horas de guardia",
+          "titleEn": "Beyond the clock: a doctor on a 24-hour shift",
           "articleUrl": "https://www.abc.es/sociedad/anatomia-guardia-medica-horas-20260301124231-nt.html",
           "titleMedia": "02-urgencias",
           "gif": true,
@@ -156,12 +179,14 @@
         },
         {
           "title": "Viaje a la Dinamarca sin inmigrantes que imita Europa",
+          "titleEn": "A journey to the immigrant-free Denmark that Europe is copying",
           "articleUrl": "https://www.abc.es/internacional/dinamarca-quiere-sade-imita-europa-20260218194319-nt.html",
           "titleMedia": "01-modelomigratorio",
           "gif": true,
           "netlifyUrl": "https://narrativa-nuevomodelomigratorio.netlify.app/"
         }
-      ]
+      ],
+      "titleEn": "February 2026"
     }
   ]
 }

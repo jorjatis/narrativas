@@ -16,6 +16,15 @@
   row-gap: 10px;
 }
 
+.site-header__tools {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 0;
+  min-width: 0;
+}
+
 .site-header__logo-link {
   display: inline-flex;
   align-items: center;
@@ -75,19 +84,15 @@
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  min-height: 44px;
+  width: 44px;
+  height: 44px;
   margin: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
   color: var(--muted-color);
-  font-family: $mcs;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  text-transform: uppercase;
   cursor: pointer;
-  padding: 8px 0;
+  padding: 0;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   transition: color 0.2s var(--ease-out);
@@ -102,10 +107,77 @@
   transform: none;
 }
 
-.theme-toggle__label {
+.theme-toggle__icon {
+  display: none;
+  line-height: 0;
+}
+
+.theme-toggle__icon svg {
+  display: block;
+  overflow: visible;
+}
+
+.theme-toggle__icon--moon svg {
+  transform: translateY(1px);
+}
+
+html:not([data-theme="dark"]) .theme-toggle__icon--moon,
+html[data-theme="dark"] .theme-toggle__icon--sun {
+  display: block;
+}
+
+.site-header__tools-divider {
+  flex: 0 0 auto;
+  align-self: center;
+  width: 1px;
+  height: 14px;
+  margin: 0;
+  background: var(--text-color);
+  opacity: 0.22;
+}
+
+.lang-switch {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted-color);
+  font-family: $mcs;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s var(--ease-out);
+}
+
+.lang-switch:hover,
+.lang-switch:focus-visible {
+  color: var(--text-color);
+}
+
+.lang-switch__label {
   display: inline-block;
-  border-bottom: 1px solid currentColor;
-  padding-bottom: 2px;
+}
+
+[data-lang-text] {
+  display: none;
+}
+
+html[lang="es"] [data-lang-text="es"],
+html[lang="en"] [data-lang-text="en"] {
+  display: inline;
 }
 
 .months-nav {
@@ -256,6 +328,7 @@
 
 .card {
   min-width: 0;
+  height: 100%;
   display: flex;
   gap: 10px;
   flex-direction: column;
@@ -337,8 +410,9 @@
 }
 
 .card-body {
-  display: grid;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   gap: 16px;
   min-width: 0;
 }
@@ -346,8 +420,7 @@
 .card-title {
   margin: 0;
   min-width: 0;
-  min-height: calc(2 * 1.15em);
-  align-self: start;
+  flex: 1 0 auto;
   font-family: $ads;
   font-size: clamp(18px, 1.25vw, 22px);
   line-height: 1.15;
@@ -357,10 +430,43 @@
 }
 
 .card-title-link {
-  display: block;
+  display: grid;
   color: inherit;
   text-decoration: none;
   transition: color 0.2s var(--ease-out);
+}
+
+.card-title__lang {
+  grid-area: 1 / 1;
+  min-width: 0;
+  transition: opacity 0.25s var(--ease-out);
+}
+
+.card-title__lang--en {
+  opacity: 0;
+  pointer-events: none;
+}
+
+html[lang="en"] {
+  @media (hover: hover) and (pointer: fine) {
+    .card:has(.card-title__lang--en):hover .card-title__lang--es {
+      opacity: 0;
+    }
+
+    .card:has(.card-title__lang--en):hover .card-title__lang--en {
+      opacity: 1;
+    }
+  }
+
+  .card:has(.card-title__lang--en):focus-within .card-title__lang--es,
+  .card-title-link:has(.card-title__lang--en):focus-visible .card-title__lang--es {
+    opacity: 0;
+  }
+
+  .card:has(.card-title__lang--en):focus-within .card-title__lang--en,
+  .card-title-link:has(.card-title__lang--en):focus-visible .card-title__lang--en {
+    opacity: 1;
+  }
 }
 
 .card:is(:hover, :focus-within) .card-title-link,
@@ -375,7 +481,8 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px 16px;
-  margin-top: 4px;
+  flex: 0 0 auto;
+  margin-top: auto;
 }
 
 .site-footer {
@@ -458,7 +565,7 @@
   .site-header__top {
     grid-template-columns: auto 1fr auto;
     grid-template-areas:
-      "logo . toggle"
+      "logo . tools"
       "title title title";
   }
 
@@ -477,8 +584,8 @@
     line-height: 1.1;
   }
 
-  .theme-toggle {
-    grid-area: toggle;
+  .site-header__tools {
+    grid-area: tools;
   }
 
   .logo {
@@ -522,7 +629,6 @@
   }
 
   .card-title {
-    min-height: 0;
     font-size: 20px;
   }
 
@@ -535,6 +641,7 @@
   .card-media,
   .card-media-thumbnail,
   .card-media-preview,
+  .card-title__lang,
   .theme-toggle,
   .months-nav__link,
   .months-nav__link::after {

@@ -14,7 +14,27 @@
   <script>
     (function () {
       var theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      var storedLang = localStorage.getItem('lang');
+      var lang = 'es';
+
+      if (storedLang === 'en' || storedLang === 'es') {
+        lang = storedLang;
+      } else {
+        var locales = (navigator.languages && navigator.languages.length)
+          ? navigator.languages
+          : [navigator.language || ''];
+        var prefersSpanish = false;
+        for (var i = 0; i < locales.length; i++) {
+          if (String(locales[i]).toLowerCase().indexOf('es') === 0) {
+            prefersSpanish = true;
+            break;
+          }
+        }
+        lang = prefersSpanish ? 'es' : 'en';
+      }
+
       document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('lang', lang);
       document.documentElement.style.colorScheme = theme;
     })();
   </script>
