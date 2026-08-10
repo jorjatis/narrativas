@@ -8,8 +8,6 @@ import initVideoSubtitles from './modules/video-subtitles';
 import initPreArticleHeader from './modules/pre-article-header';
 import initRouteMediasMap from './modules/route-medias-map';
 
-
-
 export function initAll() {
   document.body.classList.add('is-loaded');
 
@@ -17,7 +15,6 @@ export function initAll() {
   fadeOnScroll(".v-a--d-s-1 .v-a-img-c > .scr-ind");
   initAudioPlayer();
   initVideoSubtitles();
-  // Después de módulos que miden layout, para no mezclar lecturas + pin/ST
   initPreArticleHeader();
   initRouteMediasMap();
 }

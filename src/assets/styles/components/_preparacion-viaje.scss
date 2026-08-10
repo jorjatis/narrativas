@@ -14,7 +14,7 @@
     grid-template-columns: repeat(2, 1fr);
 
     @media (min-width: 740px) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -41,7 +41,7 @@
       }
     }
 
-    &:nth-child(n + 5) {
+    &:nth-child(n + 4) {
       @media (min-width: 740px) {
         padding-top: 80px;
       }
@@ -55,7 +55,7 @@
       }
     }
 
-    &:not(:nth-child(4n)) {
+    &:not(:nth-child(3n)) {
       @media (min-width: 740px) {
         border-right: 1px solid $cb5;
       }

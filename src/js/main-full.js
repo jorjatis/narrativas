@@ -780,7 +780,6 @@ function scrollWordIntoView(container, wordEl) {
   });
 }
 
-
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }

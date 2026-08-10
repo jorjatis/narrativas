@@ -25,6 +25,7 @@
 
   .v-fc {
     position: relative;
+    z-index: 1;
     max-width: 400px;
     font-size: 16px;
     line-height: 20px;
@@ -35,10 +36,27 @@
     padding-top: 18px;
     padding-bottom: 12px;
     padding-left: 24px;
+    background-color: #fff;
+
+    // Extiende el blanco a la izquierda del filete para tapar etiquetas del mapa
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: -80px;
+      z-index: -1;
+      background-color: #fff;
+    }
 
     @media (max-width: 540px) {
       margin-left: 16px;
       padding-left: 16px;
+
+      &::after {
+        left: -24px;
+      }
     }
 
     @container (width < 254px) {
@@ -135,12 +153,14 @@
     object-fit: cover;
     object-position: right top;
     user-select: none;
+    // Fade izquierdo fuerte: las etiquetas del JPG (p. ej. «Los Llanos de Cáceres…»)
+    // se calaban bajo la columna de medios / epígrafes.
     -webkit-mask-image:
       linear-gradient(to bottom, transparent 0%, #000 64px, #000 100%),
-      linear-gradient(to right, transparent 0%, #000 22%, #000 100%);
+      linear-gradient(to right, transparent 0%, transparent 42%, #000 62%, #000 100%);
     mask-image:
       linear-gradient(to bottom, transparent 0%, #000 64px, #000 100%),
-      linear-gradient(to right, transparent 0%, #000 22%, #000 100%);
+      linear-gradient(to right, transparent 0%, transparent 42%, #000 62%, #000 100%);
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
   }
