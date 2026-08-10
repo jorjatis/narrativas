@@ -928,9 +928,13 @@ function createRouteMediasMap(root) {
     strokeDashoffset: pathLength,
   };
 
+  const placeLabel = () => positionMapLabel(root, path);
+
   if (prefersReducedMotion()) {
     gsap.set(path, { ...dash, strokeDashoffset: 0 });
     root.classList.add('is-map-ready');
+    placeLabel();
+    bindMapLabelResize(root, placeLabel);
     return;
   }
 
@@ -946,17 +950,68 @@ function createRouteMediasMap(root) {
       end: 'bottom 25%',
       scrub: 0.45,
       invalidateOnRefresh: true,
+      onRefresh: placeLabel,
     },
   });
 
   root.classList.add('is-map-ready');
+  placeLabel();
+  bindMapLabelResize(root, placeLabel);
 
-  const refresh = () => ScrollTrigger.refresh();
+  const refresh = () => {
+    placeLabel();
+    ScrollTrigger.refresh();
+  };
 
   root.querySelectorAll('img, video').forEach((media) => {
     if (media.complete) return;
     media.addEventListener('load', refresh, { once: true });
   });
+}
+
+function positionMapLabel(root, path) {
+  const label = root.querySelector('.v-n-route-medias__map-label');
+  const track = root.querySelector('.v-n-route-medias__map-track');
+  const svg = root.querySelector('.v-n-route-medias__map-svg');
+  if (!label || !track || !svg?.createSVGPoint) return;
+
+  const ctm = path.getScreenCTM?.();
+  if (!ctm) return;
+
+  const start = path.getPointAtLength(0);
+  const pt = svg.createSVGPoint();
+  pt.x = start.x;
+  pt.y = start.y;
+  const screen = pt.matrixTransform(ctm);
+  const trackRect = track.getBoundingClientRect();
+
+  label.style.left = `${screen.x - trackRect.left}px`;
+  label.style.top = `${screen.y - trackRect.top - 14}px`;
+  label.classList.add('is-placed');
+}
+
+function bindMapLabelResize(root, placeLabel) {
+  const track = root.querySelector('.v-n-route-medias__map-track');
+  if (!track) return;
+
+  let raf = 0;
+  const schedule = () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(placeLabel);
+  };
+
+  if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(schedule);
+    ro.observe(track);
+    ro.observe(root);
+  }
+
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('orientationchange', schedule, { passive: true });
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(schedule).catch(() => {});
+  }
 }
 
 function initAll() {

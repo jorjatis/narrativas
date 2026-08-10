@@ -179,7 +179,7 @@
     </div>
   </div>
 
-  <div class="v-n-route-medias__map-track" aria-hidden="true">
+  <div class="v-n-route-medias__map-track">
     <img
       class="v-n-route-medias__map-base"
       src="assets/images/map-track/mapa-base-trashumancia-basemuda.jpg"
@@ -187,14 +187,18 @@
       width="1920"
       height="4496"
       decoding="async"
+      aria-hidden="true"
     >
-    <div class="v-n-route-medias__map">
+    <p class="v-n-route-medias__map-label">
+      Su último camino<br>de vuelta
+    </p>
+    <div class="v-n-route-medias__map" aria-hidden="true">
       {{!-- Solo el track; el fondo va aparte a 100% del hueco --}}
       <svg
         class="v-n-route-medias__map-svg"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="900 320 1020 4176"
-        preserveAspectRatio="xMidYMin slice"
+        viewBox="0 0 1920 4496"
+        preserveAspectRatio="xMaxYMin slice"
         fill="none"
       >
         <path
