@@ -1,18 +1,23 @@
 <header class="site-header">
   <div class="site-header__top">
-    <a class="site-header__logo-link" href="./" aria-label="Ir al inicio de Narrativas visuales">
-      <img src="assets/images/logo-abc.svg" alt="" aria-hidden="true" class="logo">
+    <a class="site-header__logo-link" href="https://www.abc.es/" target="_blank" rel="noopener noreferrer" aria-label="Ir a ABC">
+      <img src="assets/images/logo-abc.svg" alt="" aria-hidden="true" class="logo" width="120" height="38">
     </a>
 
-    <button type="button" id="theme-toggle" class="theme-toggle" title="Cambiar modo" aria-label="Cambiar modo de color">
-      <span class="theme-toggle__icon" aria-hidden="true" data-theme-toggle-icon>&#9790;</span>
-    </button>
+    <span class="site-header__divider" aria-hidden="true"></span>
 
-    <p class="site-header__eyebrow">Portfolio de proyectos</p>
-    <h1>Narrativas visuales</h1>
+    <h1 class="site-header__title" data-reveal-child>Narrativas visuales</h1>
+
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Cambiar a modo oscuro">
+      <span class="theme-toggle__label" data-theme-toggle-label>Modo oscuro</span>
+    </button>
   </div>
 
-  <p class="site-header__intro">
-    Selección de narrativas visuales publicadas en ABC. Cada pieza enlaza al reportaje original y a su versión en Netlify.
-  </p>
+  <div class="site-header__hero">
+    <p class="site-header__meta" data-reveal-child>
+      {{countPieces months}} {{pluralize (countPieces months) "pieza" "piezas"}}
+      <span aria-hidden="true"> · </span>
+      {{countMonths months}} {{pluralize (countMonths months) "mes" "meses"}}
+    </p>
+  </div>
 </header>

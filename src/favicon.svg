@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Narrativas visuales ABC">
+  <rect width="32" height="32" rx="7" fill="#0E3A6F"/>
+  <path fill="#F4F6F9" d="M9.2 24V8.1h3.1l6.4 11.2h.1V8.1h3.1V24h-3.1L12.4 12.7h-.1V24H9.2z"/>
+  <rect x="8.5" y="26.2" width="15" height="1.6" rx="0.8" fill="#66BAFF"/>
+</svg>

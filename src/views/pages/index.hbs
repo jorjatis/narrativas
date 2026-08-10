@@ -4,15 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio | Narrativas ABC</title>
-  <meta name="theme-color" content="#ffffff">
-  <link rel="preconnect" href="https://static.vocstatic.com" crossorigin>
+  <title>Narrativas visuales | Portfolio ABC</title>
+  <meta name="description" content="Selección de narrativas visuales publicadas en ABC. Cada pieza enlaza al reportaje original y a un mockup de archivo.">
+  <meta name="theme-color" content="#ffffff" id="theme-color-meta">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <script>
+    (function () {
+      var theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.style.colorScheme = theme;
+    })();
+  </script>
 </head>
 
 <body>
   <a class="skip-link" href="#main-content">Saltar al contenido</a>
   <div class="site-shell">
     {{> ./header }}
+    {{> ./months-nav }}
 
     <main id="main-content">
       {{> ./month-section}}

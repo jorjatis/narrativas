@@ -1,65 +1,166 @@
 @use './variables'as *;
 
 @font-face {
-    font-family: 'Micrograph Regular';
-    src: url(//static.vocstatic.com/voc26/latest/assets/fonts/mcr.woff2) format("woff2"), url(//static.vocstatic.com/voc26/latest/assets/fonts/mcr.woff) format("woff"), url(//static.vocstatic.com/voc26/latest/assets/fonts/mcr.ttf) format("truetype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap
+  font-family: 'ABC Display ExtraLight';
+  src: url('../../fonts/adel.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Micrograph Semibold';
-    src: url(//static.vocstatic.com/voc26/latest/assets/fonts/mcs.woff2) format("woff2"), url(//static.vocstatic.com/voc26/latest/assets/fonts/mcs.woff) format("woff"), url(//static.vocstatic.com/voc26/latest/assets/fonts/mcs.ttf) format("truetype");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap
+  font-family: 'ABC Display Light';
+  src: url('../../fonts/adl.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Display Book';
+  src: url('../../fonts/adk.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Display Semibold';
+  src: url('../../fonts/ads.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Text Light';
+  src: url('../../fonts/atl.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Text Light Italic';
+  src: url('../../fonts/atli.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Text Semibold';
+  src: url('../../fonts/ats.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Text Semibold Italic';
+  src: url('../../fonts/atsi.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC XCond Semibold';
+  src: url('../../fonts/axs.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Micrograph Regular';
+  src: url('../../fonts/mcr.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Micrograph Semibold';
+  src: url('../../fonts/mcs.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 :root {
   --bg-color: #{$cb2};
-  --text-color: #{$cb1};
-  --card-bg: #{$cb3};
-  --card-border-color: rgba(0, 0, 0, .08);
+  --bg-accent: transparent;
+  --text-color: #{$cb9};
+  --card-bg: #{$cb2};
+  --card-border-color: #{$cp4};
   --border-top-color: #{$cp1};
-  --tag-bg-color: #{$cp5};
-  --tag-border-color: #{$cp4};
-  --tag-match-bg-color: #{$cp4};
-  --tag-match-border-color: #{$cp1};
+  --accent-color: #{$cp1};
   --focus-ring-color: #{$cp8};
-  --muted-color: rgba(0, 0, 0, .62);
+  --muted-color: #{$cb7};
+  --surface-elevated: #{$cb2};
+  --header-rule: #{$cp4};
+  --radius-media: 2px;
+  --radius-control: 2px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: light;
 }
 
 [data-theme="dark"] {
   --bg-color: #{$cb9};
+  --bg-accent: transparent;
   --text-color: #{$cb2};
-  --card-bg: #{rgba($cb2, .04)};
-  --card-border-color: rgba(255, 255, 255, .14);
-  --border-top-color: #{$cb2};
-  --tag-bg-color: rgba(255, 255, 255, .08);
-  --tag-border-color: rgba(255, 255, 255, .24);
-  --tag-match-bg-color: rgba(102, 186, 255, .18);
-  --tag-match-border-color: #{$cp9};
+  --card-bg: #{$cb9};
+  --card-border-color: rgba($cb2, 0.18);
+  --border-top-color: #{$cp9};
+  --accent-color: #{$cp9};
   --focus-ring-color: #{$cp9};
-  --muted-color: rgba(255, 255, 255, .68);
+  --muted-color: rgba($cb2, 0.68);
+  --surface-elevated: #1b1f26;
+  --header-rule: rgba($cb2, 0.18);
+  color-scheme: dark;
 
   .logo {
     filter: brightness(0) invert(1);
   }
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
+  position: relative;
   border-top: 5px solid var(--border-top-color);
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: $mcr;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   margin: 0;
   min-width: 320px;
-  padding: 20px 20px 40px;
+  overflow-x: clip;
+  padding:
+    max(20px, env(safe-area-inset-top))
+    max(20px, env(safe-area-inset-right))
+    max(48px, env(safe-area-inset-bottom))
+    max(20px, env(safe-area-inset-left));
+  transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
 }
 
 .site-shell {
+  position: relative;
+  z-index: 1;
   width: min(1680px, 100%);
   margin: 0 auto;
 }
@@ -86,9 +187,9 @@ body {
   top: -100px;
   left: 16px;
   z-index: 1000;
-  background: var(--bg-color);
+  background: var(--surface-elevated);
   color: var(--text-color);
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--card-border-color);
   border-radius: 6px;
   padding: 8px 12px;
   text-decoration: none;
@@ -105,8 +206,58 @@ img {
   height: auto;
 }
 
+[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s var(--ease-out),
+      transform 0.7s var(--ease-out);
+  }
+
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  .site-header [data-reveal-child] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.65s var(--ease-out),
+      transform 0.65s var(--ease-out);
+  }
+
+  .site-header.is-revealed [data-reveal-child] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .site-header.is-revealed [data-reveal-child]:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+
+  .site-header.is-revealed .site-header__hero [data-reveal-child]:nth-child(1) {
+    transition-delay: 0.12s;
+  }
+}
+
 @media (max-width: $screen-xs) {
   body {
-    padding: 18px 16px 40px;
+    padding:
+      max(16px, env(safe-area-inset-top))
+      max(16px, env(safe-area-inset-right))
+      max(40px, env(safe-area-inset-bottom))
+      max(16px, env(safe-area-inset-left));
+  }
+
+  .months-nav {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
   }
 }

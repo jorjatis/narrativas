@@ -56,6 +56,13 @@ module.exports = (env, argv) => {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/resource',
         },
+        {
+          test: /\.(woff2?|ttf|otf|eot)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: 'assets/fonts/[name][ext]',
+          },
+        },
       ],
     },
     optimization: {
@@ -98,6 +105,9 @@ module.exports = (env, argv) => {
           { from: 'src/assets/videos', to: 'assets/videos', noErrorOnMissing: true },
           { from: 'src/assets/audios', to: 'assets/audios', noErrorOnMissing: true },
           { from: 'src/favicon.ico', to: '', noErrorOnMissing: true },
+          { from: 'src/favicon.svg', to: '', noErrorOnMissing: true },
+          { from: 'src/favicon-32.png', to: '', noErrorOnMissing: true },
+          { from: 'src/apple-touch-icon.png', to: '', noErrorOnMissing: true },
           { from: 'src/js/vendors', to: 'js/vendors', noErrorOnMissing: true }
         ]
       })

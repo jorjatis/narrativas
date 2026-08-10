@@ -1,0 +1,13 @@
+{{#if months.length}}
+  <nav class="months-nav" aria-label="Índice de meses" data-months-nav>
+    <ul class="months-nav__list">
+      {{#each months}}
+        <li class="months-nav__item">
+          <a class="months-nav__link" href="#mes-{{slugify title}}" data-month-link>
+            {{title}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </nav>
+{{/if}}

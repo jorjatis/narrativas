@@ -1,0 +1,209 @@
+@use '../base/variables' as *;
+
+// Kraken / Vocento button primitives
+// Source: https://pre-tpl.vocento.com/kraken/landing-button.html (voc26.css)
+
+.v-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 24px;
+  height: 32px;
+  border: 1px solid $cp1;
+  border-radius: 2px;
+  background: transparent;
+  color: $cp1;
+  font-family: $mcs;
+  font-size: 0.875rem;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    text-decoration-color 0.3s ease;
+}
+
+.v-btn:hover {
+  border-color: $cp3;
+  color: $cp3;
+  text-decoration-color: $cp3;
+}
+
+.v-btn:focus-visible {
+  outline: none;
+  border-width: 2px;
+  border-color: $cp4;
+}
+
+.v-btn:active {
+  background: $cp6;
+  border-color: $cp2;
+  color: $cp2;
+}
+
+.v-btn--s {
+  padding: 0 16px;
+  height: 24px;
+  font-size: 0.75rem;
+}
+
+.v-btn--m {
+  padding: 0 24px;
+  height: 32px;
+  font-size: 0.875rem;
+}
+
+.v-btn--l {
+  padding: 0 32px;
+  height: 40px;
+  font-size: 1rem;
+}
+
+.v-btn--xl {
+  padding: 0 40px;
+  height: 48px;
+  font-size: 1.125rem;
+}
+
+// Filled / solid
+.v-btn-g {
+  color: $cb2;
+  border-color: transparent;
+  background: $cp1;
+}
+
+.v-btn-g:hover {
+  color: $cb2;
+  border-color: transparent;
+  background: $cp3;
+}
+
+.v-btn-g:focus-visible {
+  border-width: 2px;
+  border-color: $cp4;
+}
+
+.v-btn-g:active {
+  color: $cb2;
+  border-color: transparent;
+  background: $cp2;
+}
+
+// Text / link style
+.v-btn-s {
+  padding: 0;
+  height: auto;
+  min-height: 24px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: $cp1;
+  text-align: left;
+}
+
+.v-btn-s::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: $cp3;
+  transform: scaleX(0);
+  transform-origin: left top;
+  transition: transform 0.3s ease;
+}
+
+.v-btn-s:hover,
+.v-btn-s:focus-visible {
+  border: 0;
+  color: $cp1;
+  background: transparent;
+}
+
+.v-btn-s:hover::after,
+.v-btn-s:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.v-btn-s:active {
+  background: transparent;
+  color: $cp2;
+}
+
+[data-theme="dark"] {
+  .v-btn {
+    color: $cp9;
+    border-color: $cp9;
+  }
+
+  .v-btn:hover {
+    color: $cp10;
+    border-color: $cp10;
+  }
+
+  .v-btn:focus-visible {
+    border-color: rgba($cb2, 0.42);
+  }
+
+  .v-btn:active {
+    background: rgba($cb2, 0.08);
+    color: $cp8;
+    border-color: $cp8;
+  }
+
+  .v-btn-g {
+    color: $cb2;
+    border-color: transparent;
+    background: $cp7;
+  }
+
+  .v-btn-g:hover {
+    color: $cb1;
+    background: $cp9;
+  }
+
+  .v-btn-g:focus-visible {
+    border-color: $cp9;
+  }
+
+  .v-btn-g:active {
+    color: $cb2;
+    background: $cp8;
+  }
+
+  .v-btn-s {
+    color: $cp9;
+  }
+
+  .v-btn-s::after {
+    background: $cp9;
+  }
+
+  .v-btn-s:hover,
+  .v-btn-s:focus-visible {
+    color: $cp9;
+  }
+
+  .v-btn-s:active {
+    color: $cp8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-btn,
+  .v-btn-s::after {
+    transition: none;
+  }
+}

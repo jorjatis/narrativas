@@ -1,7 +1,12 @@
 {{#each months}}
-  <section class="month-group">
-    <div class="month-group__header">
-      <h2 class="month-title">{{title}}</h2>
+  <section class="month-group" id="mes-{{slugify title}}" data-reveal data-month-section>
+    <div class="month-group__header cintillo">
+      <span class="cintillo__bar" aria-hidden="true"></span>
+      <h2 class="month-title cintillo__title">{{title}}</h2>
+      <span class="month-count cintillo__count" aria-label="{{countPieces cards}} {{pluralize (countPieces cards) "pieza" "piezas"}}">
+        {{countPieces cards}}
+      </span>
+      <span class="cintillo__rule" aria-hidden="true"></span>
     </div>
 
     <div class="grid">
@@ -9,6 +14,5 @@
         {{> ./card }}
       {{/each}}
     </div>
-
   </section>
 {{/each}}

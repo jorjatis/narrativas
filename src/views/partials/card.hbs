@@ -1,6 +1,25 @@
-<article class="card">
+<article class="card{{#if gif}} card--has-preview{{/if}}" data-reveal{{#if gif}} data-media-preview{{/if}}>
   <a class="card-media" href="{{articleUrl}}" target="_blank" rel="noopener noreferrer" aria-label="Abrir {{title}}">
-    <img src="assets/images/covers/{{titleMedia}}{{#if gif}}.gif{{else}}.jpg{{/if}}" alt="{{title}}" loading="lazy" class="card-media-thumbnail">
+    <img
+      src="assets/images/covers/{{titleMedia}}.jpg"
+      alt=""
+      width="640"
+      height="360"
+      loading="lazy"
+      class="card-media-thumbnail"
+      decoding="async"
+    >
+    {{#if gif}}
+      <img
+        class="card-media-preview"
+        data-preview-src="assets/images/covers/{{titleMedia}}.gif"
+        alt=""
+        width="640"
+        height="360"
+        decoding="async"
+        aria-hidden="true"
+      >
+    {{/if}}
   </a>
   <div class="card-body">
     <h3 class="card-title">
@@ -9,12 +28,8 @@
       </a>
     </h3>
     <div class="card-actions">
-      <a class="card-action card-action--primary" href="{{articleUrl}}" target="_blank" rel="noopener noreferrer" title="Ver narrativa de {{title}} en ABC" aria-label="Ver narrativa de {{title}} en ABC">
-        Leer en ABC
-      </a>
-      <a class="card-action" href="{{netlifyUrl}}" target="_blank" rel="noopener noreferrer" title="Ver narrativa de {{title}} en Netlify" aria-label="Ver narrativa de {{title}} en Netlify">
-        Ver Netlify
-      </a>
+      <a class="v-btn v-btn-g v-btn--m" href="{{articleUrl}}" target="_blank" rel="noopener noreferrer" aria-label="Leer {{title}} en ABC">Leer en ABC</a>
+      <a class="v-btn v-btn-s" href="{{netlifyUrl}}" target="_blank" rel="noopener noreferrer" aria-label="Ver mockup de archivo de {{title}}">Ver mockup</a>
     </div>
   </div>
 </article>
