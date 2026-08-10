@@ -241,10 +241,6 @@ img {
   .site-header.is-revealed [data-reveal-child]:nth-child(1) {
     transition-delay: 0.05s;
   }
-
-  .site-header.is-revealed .site-header__hero [data-reveal-child]:nth-child(1) {
-    transition-delay: 0.12s;
-  }
 }
 
 @media (max-width: $screen-xs) {

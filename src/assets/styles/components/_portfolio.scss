@@ -57,13 +57,6 @@
   text-wrap: balance;
 }
 
-.site-header__hero {
-  display: grid;
-  gap: 10px;
-  width: min(1100px, 100%);
-  justify-self: stretch;
-}
-
 .site-header__meta {
   margin: 0;
   color: var(--muted-color);
