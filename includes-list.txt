@@ -9,9 +9,19 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/in
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/PASTOR_CLIP1_v1.mp4
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/PASTOR_CLIP1_v1.json
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/PASTOR_CLIP1_v1.vtt
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-01-sm.mp4
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-02-sm.mp4
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-03-sm.mp4
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-01.mp4
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-02.mp4
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-03.mp4
 
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_1.opus
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_1.mp3
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_2.opus
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_2.mp3
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_3.opus
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_3.mp3
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/images/map-track/mapa-base-trashumancia-basemuda.jpg
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/images/map-track/mapa-base-trashumancia-basemuda.svg
