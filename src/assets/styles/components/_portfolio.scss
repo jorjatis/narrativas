@@ -237,23 +237,6 @@
   color: $cp1;
 }
 
-.cintillo__count,
-.month-count {
-  flex: 0 0 auto;
-  color: var(--muted-color);
-  font-family: $mcs;
-  font-size: 13px;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
-.cintillo__rule {
-  flex: 1 1 auto;
-  height: 1px;
-  min-width: 24px;
-  background: var(--header-rule);
-}
-
 [data-theme="dark"] .cintillo__bar,
 [data-theme="dark"] .cintillo__title,
 [data-theme="dark"] .month-title {
