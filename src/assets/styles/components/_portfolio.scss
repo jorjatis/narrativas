@@ -14,6 +14,10 @@
   align-items: center;
   column-gap: 12px;
   row-gap: 10px;
+
+  @media (max-width: $screen-xs) {
+    row-gap: 6px;
+  }
 }
 
 .site-header__tools {
@@ -46,8 +50,8 @@
 .site-header__title {
   margin: 0;
   min-width: 0;
-  font-family: $ads;
-  font-size: 38px;
+  font-family: $mcs;
+  font-size: 28px;
   line-height: 1.1;
   letter-spacing: -0.19px;
   text-wrap: balance;
@@ -579,7 +583,7 @@ html[lang="en"] {
 
   .site-header__title {
     grid-area: title;
-    font-size: 32px;
+    font-size: 24px;
     letter-spacing: -0.16px;
     line-height: 1.1;
   }
@@ -606,7 +610,7 @@ html[lang="en"] {
   }
 
   .site-header__title {
-    font-size: 28px;
+    font-size: 20px;
     letter-spacing: -0.14px;
   }
 
