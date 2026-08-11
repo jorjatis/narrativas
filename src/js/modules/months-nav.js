@@ -2,6 +2,7 @@ export function initMonthsNav() {
   const nav = document.querySelector('[data-months-nav]');
   const sections = document.querySelectorAll('[data-month-section]');
   const links = nav ? nav.querySelectorAll('[data-month-link]') : [];
+  const list = nav ? nav.querySelector('.months-nav__list') : null;
 
   if (!nav || !sections.length || !links.length) {
     return;
@@ -16,12 +17,39 @@ export function initMonthsNav() {
     }
   });
 
-  const setActive = (id) => {
+  let activeId = null;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const scrollLinkIntoNav = (link) => {
+    if (!list || !link) {
+      return;
+    }
+
+    const listRect = list.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    const offset = linkRect.left - listRect.left - (listRect.width - linkRect.width) / 2;
+
+    list.scrollTo({
+      left: list.scrollLeft + offset,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+  };
+
+  const setActive = (id, { scrollNav = true } = {}) => {
+    if (id === activeId) {
+      return;
+    }
+
+    activeId = id;
+
     links.forEach((link) => {
       const isActive = link.getAttribute('href') === `#${id}`;
       link.classList.toggle('is-active', isActive);
       if (isActive) {
         link.setAttribute('aria-current', 'true');
+        if (scrollNav) {
+          scrollLinkIntoNav(link);
+        }
       } else {
         link.removeAttribute('aria-current');
       }
@@ -75,9 +103,11 @@ export function initMonthsNav() {
       }
 
       event.preventDefault();
+      link.blur();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       history.replaceState(null, '', href);
-      setActive(target.id);
+      setActive(target.id, { scrollNav: false });
+      scrollLinkIntoNav(link);
     });
   });
 }
