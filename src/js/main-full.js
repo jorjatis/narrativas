@@ -894,6 +894,9 @@ function createPreArticleHeader(root) {
 }
 
 const ST_ID = 'route-medias-map';
+const TIP_OFFSET_FROM_BOTTOM = 100;
+const MAP_INTRINSIC_W = 1920;
+const MAP_INTRINSIC_H = 4496;
 
 function initRouteMediasMap() {
   const root = document.querySelector('.v-n-route-medias');
@@ -913,11 +916,26 @@ function initRouteMediasMap() {
   createRouteMediasMap(root);
 }
 
+function syncMapSectionMinHeight(root) {
+  const track = root.querySelector('.v-n-route-medias__map-track');
+  if (!track) return false;
+
+  const trackWidth = track.getBoundingClientRect().width;
+  if (!trackWidth) return false;
+
+  const next = `${Math.ceil((trackWidth * MAP_INTRINSIC_H) / MAP_INTRINSIC_W)}px`;
+  if (root.style.minHeight === next) return false;
+  root.style.minHeight = next;
+  return true;
+}
+
 function createRouteMediasMap(root) {
   const path = root.querySelector('.v-n-route-medias__map-path');
-  if (!path?.getTotalLength) return;
+  const svg = root.querySelector('.v-n-route-medias__map-svg');
+  if (!path?.getTotalLength || !svg?.createSVGPoint) return;
 
   ScrollTrigger.getById(ST_ID)?.kill();
+  syncMapSectionMinHeight(root);
 
   const pathLength = path.getTotalLength();
   if (!pathLength) return;
@@ -927,38 +945,49 @@ function createRouteMediasMap(root) {
     strokeDashoffset: pathLength,
   };
 
-  const placeLabel = () => positionMapLabel(root, path);
+  const placeLabels = () => positionMapLabels(root, path);
 
   if (prefersReducedMotion()) {
     gsap.set(path, { ...dash, strokeDashoffset: 0 });
     root.classList.add('is-map-ready');
-    placeLabel();
-    bindMapLabelResize(root, placeLabel);
+    placeLabels();
+    bindMapLabelResize(root, placeLabels);
     return;
   }
 
   gsap.set(path, dash);
 
-  gsap.to(path, {
-    strokeDashoffset: 0,
+  const setOffset = gsap.quickTo(path, 'strokeDashoffset', {
+    duration: 0.45,
     ease: 'none',
-    scrollTrigger: {
-      id: ST_ID,
-      trigger: root,
-      start: 'top 75%',
-      end: 'bottom 25%',
-      scrub: 0.45,
-      invalidateOnRefresh: true,
-      onRefresh: placeLabel,
+    overwrite: true,
+  });
+
+  const syncTip = () => {
+    const drawn = lengthAtViewportGuide(path, svg, pathLength);
+    setOffset(pathLength - drawn);
+  };
+
+  ScrollTrigger.create({
+    id: ST_ID,
+    trigger: root,
+    start: 'top bottom',
+    end: 'bottom top',
+    onUpdate: syncTip,
+    onRefresh: () => {
+      placeLabels();
+      const drawn = lengthAtViewportGuide(path, svg, pathLength);
+      gsap.set(path, { strokeDashoffset: pathLength - drawn });
     },
   });
 
   root.classList.add('is-map-ready');
-  placeLabel();
-  bindMapLabelResize(root, placeLabel);
+  placeLabels();
+  syncTip();
+  bindMapLabelResize(root, placeLabels, syncTip);
 
   const refresh = () => {
-    placeLabel();
+    placeLabels();
     ScrollTrigger.refresh();
   };
 
@@ -968,7 +997,43 @@ function createRouteMediasMap(root) {
   });
 }
 
-function positionMapLabel(root, path) {
+function lengthAtViewportGuide(path, svg, pathLength) {
+  const ctm = path.getScreenCTM?.();
+  if (!ctm) return 0;
+
+  const targetY = window.innerHeight - TIP_OFFSET_FROM_BOTTOM;
+  const pt = svg.createSVGPoint();
+
+  const screenYAt = (len) => {
+    const p = path.getPointAtLength(len);
+    pt.x = p.x;
+    pt.y = p.y;
+    return pt.matrixTransform(ctm).y;
+  };
+
+  const startY = screenYAt(0);
+  const endY = screenYAt(pathLength);
+
+  if (targetY <= startY) return 0;
+  if (targetY >= endY) return pathLength;
+
+  let lo = 0;
+  let hi = pathLength;
+  for (let i = 0; i < 28; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (screenYAt(mid) < targetY) lo = mid;
+    else hi = mid;
+  }
+
+  return (lo + hi) / 2;
+}
+
+function positionMapLabels(root, path) {
+  positionTitleLabel(root, path);
+  positionPlaceLabels(root, path);
+}
+
+function positionTitleLabel(root, path) {
   const label = root.querySelector('.v-n-route-medias__map-label');
   const track = root.querySelector('.v-n-route-medias__map-track');
   const svg = root.querySelector('.v-n-route-medias__map-svg');
@@ -989,14 +1054,66 @@ function positionMapLabel(root, path) {
   label.classList.add('is-placed');
 }
 
-function bindMapLabelResize(root, placeLabel) {
+function positionPlaceLabels(root, path) {
+  const track = root.querySelector('.v-n-route-medias__map-track');
+  const svg = root.querySelector('.v-n-route-medias__map-svg');
+  const places = root.querySelectorAll('.v-n-route-medias__map-place');
+  if (!track || !svg?.createSVGPoint || !places.length) return;
+
+  const ctm = path.getScreenCTM?.();
+  if (!ctm) return;
+
+  const trackRect = track.getBoundingClientRect();
+  const limitRight = Math.min(trackRect.right, window.innerWidth) - 8;
+  const limitLeft = Math.max(trackRect.left, 0) + 8;
+  const pt = svg.createSVGPoint();
+
+  places.forEach((el) => {
+    const x = Number(el.dataset.mapX);
+    const y = Number(el.dataset.mapY);
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+
+    pt.x = x;
+    pt.y = y;
+    const screen = pt.matrixTransform(ctm);
+
+    el.style.left = `${screen.x - trackRect.left}px`;
+    el.style.top = `${screen.y - trackRect.top}px`;
+
+    const preferLeft = el.dataset.side === 'left';
+    el.classList.toggle('is-flip', preferLeft);
+    el.classList.add('is-placed');
+
+    const rect = el.getBoundingClientRect();
+    if (!el.classList.contains('is-flip') && rect.right > limitRight) {
+      el.classList.add('is-flip');
+    } else if (el.classList.contains('is-flip') && rect.left < limitLeft) {
+      el.classList.remove('is-flip');
+      const again = el.getBoundingClientRect();
+      if (again.right > limitRight) {
+        const overflowRight = again.right - limitRight;
+        el.classList.add('is-flip');
+        const flipped = el.getBoundingClientRect();
+        const overflowLeft = limitLeft - flipped.left;
+        if (overflowRight <= overflowLeft) el.classList.remove('is-flip');
+      }
+    }
+  });
+}
+
+function bindMapLabelResize(root, placeLabels, syncTip) {
   const track = root.querySelector('.v-n-route-medias__map-track');
   if (!track) return;
 
   let raf = 0;
   const schedule = () => {
     cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(placeLabel);
+    raf = requestAnimationFrame(() => {
+      const heightChanged = syncMapSectionMinHeight(root);
+      placeLabels();
+      syncTip?.();
+      if (heightChanged) ScrollTrigger.refresh();
+    });
   };
 
   if (typeof ResizeObserver !== 'undefined') {

@@ -12,9 +12,45 @@
 
 .vid-subs-scene {
   width: 100%;  
+  margin-bottom: 72px;
+
+  .v-n-lad {
+    margin-bottom: 36px;
+  }
+}
+
+.vid-subs-scene--preheader {
+  margin-bottom: 0;
 
   @media (min-width: 350px) {
     padding: 0 20px;
+  }
+
+  .vid-subs {
+    &__subs {
+      p {
+        @media (min-width: $screen-xs) {
+          font-size: 36px;
+          line-height: 42px;
+        }
+      }
+    }
+
+    &__subs-ph {
+      gap: 7px;
+
+      @media (min-width: $screen-xs) {
+        gap: 14px;
+      }
+
+      span {
+        height: 20px;
+
+        @media (min-width: $screen-xs) {
+          height: 28px;
+        }
+      }
+    }
   }
 }
 
@@ -23,10 +59,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
 
   @media (min-width: $screen-xs) {
-    gap: 56px;
+    gap: 32px;
   }
 
   &__sound-hint {
@@ -40,6 +76,7 @@
     letter-spacing: -0.32px;
     color: $cp3;
     transition: opacity 0.3s ease;
+    margin-bottom: 16px;
 
     @media (min-width: $screen-xs) {
       font-size: 18px;
@@ -194,11 +231,6 @@
       color: $cp4;
       opacity: 0;
       transition: opacity 0.3s ease;
-
-      @media (min-width: $screen-xs) {
-        font-size: 36px;
-        line-height: 42px;
-      }
     }
   }
 
@@ -295,7 +327,8 @@
 
   &.is-load {
     .vid-subs__video video,
-    .vid-subs__subs p {
+    .vid-subs__subs p,
+    .vid-subs__subs-fade {
       opacity: 0;
     }
   }
