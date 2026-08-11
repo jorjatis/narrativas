@@ -1,32 +1,40 @@
 <article class="card{{#if gif}} card--has-preview{{/if}}" data-reveal{{#if gif}} data-media-preview{{/if}}>
   <a class="card-media" href="{{articleUrl}}" target="_blank" rel="noopener noreferrer" aria-label="Abrir {{title}}">
     <img
-      src="assets/images/covers/{{titleMedia}}.jpg"
+      src="assets/images/covers/{{titleMedia}}.webp"
       alt=""
-      width="640"
-      height="360"
-      loading="lazy"
+      width="512"
+      height="288"
       class="card-media-thumbnail"
       decoding="async"
+      {{#if isLcp}}
+        fetchpriority="high"
+      {{else}}
+        loading="lazy"
+      {{/if}}
     >
     {{#if gif}}
-      <img
+      <video
         class="card-media-preview"
-        data-preview-src="assets/images/covers/{{titleMedia}}.gif"
-        alt=""
-        width="640"
-        height="360"
-        decoding="async"
+        muted
+        loop
+        playsinline
+        preload="none"
+        width="512"
+        height="288"
         aria-hidden="true"
-      >
+        data-preview-src="assets/images/covers/{{titleMedia}}.mp4"
+      ></video>
     {{/if}}
   </a>
   <div class="card-body">
     <h3 class="card-title">
       <a class="card-title-link" href="{{articleUrl}}" target="_blank" rel="noopener noreferrer">
-        <span class="card-title__lang card-title__lang--es" lang="es">{{title}}</span>
+        <span data-lang-text="es">{{title}}</span>
         {{#if titleEn}}
-          <span class="card-title__lang card-title__lang--en" lang="en" aria-hidden="true">{{titleEn}}</span>
+          <span data-lang-text="en">{{titleEn}}</span>
+        {{else}}
+          <span data-lang-text="en">{{title}}</span>
         {{/if}}
       </a>
     </h3>

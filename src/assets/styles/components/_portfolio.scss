@@ -393,6 +393,8 @@ html[lang="en"] [data-lang-text="en"] {
   opacity: 0;
   transition: opacity 0.35s var(--ease-out);
   pointer-events: none;
+  display: block;
+  background: transparent;
 }
 
 .card-media:hover .card-media-thumbnail,
@@ -427,43 +429,9 @@ html[lang="en"] [data-lang-text="en"] {
 }
 
 .card-title-link {
-  display: grid;
   color: inherit;
   text-decoration: none;
   transition: color 0.2s var(--ease-out);
-}
-
-.card-title__lang {
-  grid-area: 1 / 1;
-  min-width: 0;
-  transition: opacity 0.25s var(--ease-out);
-}
-
-.card-title__lang--en {
-  opacity: 0;
-  pointer-events: none;
-}
-
-html[lang="en"] {
-  @media (hover: hover) and (pointer: fine) {
-    .card:has(.card-title__lang--en):hover .card-title__lang--es {
-      opacity: 0;
-    }
-
-    .card:has(.card-title__lang--en):hover .card-title__lang--en {
-      opacity: 1;
-    }
-  }
-
-  .card:has(.card-title__lang--en):focus-within .card-title__lang--es,
-  .card-title-link:has(.card-title__lang--en):focus-visible .card-title__lang--es {
-    opacity: 0;
-  }
-
-  .card:has(.card-title__lang--en):focus-within .card-title__lang--en,
-  .card-title-link:has(.card-title__lang--en):focus-visible .card-title__lang--en {
-    opacity: 1;
-  }
 }
 
 .card:is(:hover, :focus-within) .card-title-link,
@@ -638,7 +606,6 @@ html[lang="en"] {
   .card-media,
   .card-media-thumbnail,
   .card-media-preview,
-  .card-title__lang,
   .theme-toggle,
   .months-nav__link,
   .months-nav__link::after {

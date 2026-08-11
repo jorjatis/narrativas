@@ -1,24 +1,43 @@
-function loadPreview(previewImg) {
-  const src = previewImg.getAttribute('data-preview-src');
-  if (!src || previewImg.getAttribute('src')) {
+function loadPreview(video) {
+  if (video.getAttribute('src')) {
     return;
   }
 
-  previewImg.setAttribute('src', src);
+  const src = video.getAttribute('data-preview-src');
+  if (!src) {
+    return;
+  }
+
+  video.setAttribute('src', src);
+  video.load();
 }
 
 function showPreview(card) {
-  const previewImg = card.querySelector('.card-media-preview');
-  if (!previewImg) {
+  const video = card.querySelector('.card-media-preview');
+  if (!video) {
     return;
   }
 
-  loadPreview(previewImg);
+  loadPreview(video);
   card.classList.add('is-previewing');
+  const playPromise = video.play();
+  if (playPromise) {
+    playPromise.catch(() => {});
+  }
 }
 
 function hidePreview(card) {
+  const video = card.querySelector('.card-media-preview');
   card.classList.remove('is-previewing');
+
+  if (!video) {
+    return;
+  }
+
+  video.pause();
+  if (video.readyState > 0) {
+    video.currentTime = 0;
+  }
 }
 
 export function initMediaPreview() {

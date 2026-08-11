@@ -1,10 +1,9 @@
 const STRINGS = {
   es: {
-    docTitle: 'Narrativas visuales | Portfolio ABC',
-    docDescription:
-      'Selección de narrativas visuales publicadas en ABC. Cada pieza enlaza al reportaje original y a un mockup de archivo.',
+    docTitle: 'Historias visuales | Portfolio ABC',
+    docDescription: 'Selección de historias visuales publicadas en ABC.',
     skipLink: 'Saltar al contenido',
-    brandTitle: 'Narrativas visuales',
+    brandTitle: 'Historias visuales',
     logoLabel: 'Ir a ABC',
     monthsNav: 'Índice de meses',
     langSwitch: 'Cambiar a inglés',
@@ -19,11 +18,11 @@ const STRINGS = {
     viewMockupAria: 'Ver mockup de archivo de {title}',
   },
   en: {
-    docTitle: 'Visual narratives | ABC Portfolio',
+    docTitle: 'Visual stories | ABC Portfolio',
     docDescription:
-      'A selection of visual narratives published in ABC. Each piece links to the original report and an archive mockup.',
+      'A selection of visual stories published in ABC. Each piece links to the original report and an archive mockup.',
     skipLink: 'Skip to content',
-    brandTitle: 'Visual narratives',
+    brandTitle: 'Visual stories',
     logoLabel: 'Go to ABC',
     monthsNav: 'Months index',
     langSwitch: 'Switch to Spanish',
@@ -43,6 +42,19 @@ function normalizeLang(value) {
   return value === 'en' ? 'en' : 'es';
 }
 
+function isSpainTimezone() {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    return (
+      tz === 'Europe/Madrid' ||
+      tz === 'Atlantic/Canary' ||
+      tz === 'Africa/Ceuta'
+    );
+  } catch {
+    return false;
+  }
+}
+
 function detectPreferredLang() {
   const stored = localStorage.getItem('lang');
   if (stored === 'en' || stored === 'es') {
@@ -53,13 +65,25 @@ function detectPreferredLang() {
     ...(navigator.languages || []),
     navigator.language,
     Intl.DateTimeFormat().resolvedOptions().locale,
-  ].filter(Boolean);
+  ]
+    .filter(Boolean)
+    .map((locale) => String(locale).toLowerCase());
 
-  const prefersSpanish = candidates.some((locale) =>
-    String(locale).toLowerCase().startsWith('es')
-  );
+  const prefersSpanish = candidates.some((locale) => locale.startsWith('es'));
+  const prefersEnglish = candidates.some((locale) => locale.startsWith('en'));
 
-  return prefersSpanish ? 'es' : 'en';
+  // Navegador / locale en español → ES
+  if (prefersSpanish) {
+    return 'es';
+  }
+
+  // Inglés explícito, o fuera de España sin señal de español → EN
+  if (prefersEnglish || !isSpainTimezone()) {
+    return 'en';
+  }
+
+  // En España sin preferencia clara de idioma → ES
+  return 'es';
 }
 
 export function getLang() {
@@ -151,23 +175,27 @@ function syncMeta(lang) {
 
 function syncCards(lang) {
   document.querySelectorAll('.card').forEach((card) => {
-    const titleEs = card.querySelector('.card-title__lang--es')?.textContent?.trim() || '';
+    const titleEs =
+      card.querySelector('.card-title [data-lang-text="es"]')?.textContent?.trim() || '';
+    const titleEn =
+      card.querySelector('.card-title [data-lang-text="en"]')?.textContent?.trim() || titleEs;
+    const title = lang === 'en' ? titleEn : titleEs;
 
     const media = card.querySelector('.card-media');
     if (media) {
-      media.setAttribute('aria-label', `${t('openArticle', lang)} ${titleEs}`);
+      media.setAttribute('aria-label', `${t('openArticle', lang)} ${title}`);
     }
 
     const readBtn = card.querySelector('[data-i18n="readAbc"]');
     if (readBtn) {
       readBtn.textContent = t('readAbc', lang);
-      readBtn.setAttribute('aria-label', fill(t('readAbcAria', lang), { title: titleEs }));
+      readBtn.setAttribute('aria-label', fill(t('readAbcAria', lang), { title }));
     }
 
     const mockupBtn = card.querySelector('[data-i18n="viewMockup"]');
     if (mockupBtn) {
       mockupBtn.textContent = t('viewMockup', lang);
-      mockupBtn.setAttribute('aria-label', fill(t('viewMockupAria', lang), { title: titleEs }));
+      mockupBtn.setAttribute('aria-label', fill(t('viewMockupAria', lang), { title }));
     }
   });
 }

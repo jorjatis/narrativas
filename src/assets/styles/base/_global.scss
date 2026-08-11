@@ -1,72 +1,8 @@
 @use './variables'as *;
 
 @font-face {
-  font-family: 'ABC Display ExtraLight';
-  src: url('../../fonts/adel.woff2') format('woff2');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ABC Display Light';
-  src: url('../../fonts/adl.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ABC Display Book';
-  src: url('../../fonts/adk.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: 'ABC Display Semibold';
   src: url('../../fonts/ads.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ABC Text Light';
-  src: url('../../fonts/atl.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ABC Text Light Italic';
-  src: url('../../fonts/atli.woff2') format('woff2');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ABC Text Semibold';
-  src: url('../../fonts/ats.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ABC Text Semibold Italic';
-  src: url('../../fonts/atsi.woff2') format('woff2');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ABC XCond Semibold';
-  src: url('../../fonts/axs.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -107,7 +43,7 @@ html {
   --border-top-color: #{$cp1};
   --accent-color: #{$cp1};
   --focus-ring-color: #{$cp8};
-  --muted-color: #{$cb7};
+  --muted-color: #5c5c5c;
   --surface-elevated: #{$cb2};
   --header-rule: #{$cp4};
   --radius-media: 2px;
@@ -125,7 +61,7 @@ html {
   --border-top-color: #{$cp9};
   --accent-color: #{$cp9};
   --focus-ring-color: #{$cp9};
-  --muted-color: rgba($cb2, 0.68);
+  --muted-color: #cecece;
   --surface-elevated: #1b1f26;
   --header-rule: rgba($cb2, 0.18);
   color-scheme: dark;

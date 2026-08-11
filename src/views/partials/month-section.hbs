@@ -12,7 +12,15 @@
 
     <div class="grid">
       {{#each cards}}
-        {{> ./card }}
+        {{#ifCond @../index "==" 0}}
+          {{#ifCond @index "==" 0}}
+            {{> ./card isLcp=true }}
+          {{else}}
+            {{> ./card }}
+          {{/ifCond}}
+        {{else}}
+          {{> ./card }}
+        {{/ifCond}}
       {{/each}}
     </div>
   </section>
