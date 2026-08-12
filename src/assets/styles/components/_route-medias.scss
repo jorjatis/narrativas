@@ -42,6 +42,11 @@
     }
   }
 
+  &__video-ph {
+    width: 100%;
+    background: transparent;
+  }
+
   .v-fc {
     position: relative;
     z-index: 1;
@@ -324,4 +329,63 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
+}
+
+// Overlay mobile: el player se mueve a body para salir de overflow/isolation
+.v-n-route-medias-video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: rgba($cb1, 0.88);
+  overscroll-behavior: contain;
+
+  &__panel {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+
+    .video-player {
+      width: 100%;
+
+      video-js,
+      .video-js {
+        width: 100%;
+        display: block;
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid rgba($cb2, 0.35);
+    border-radius: 4px;
+    background: #1a1a1a;
+    color: $cb2;
+    cursor: pointer;
+    appearance: none;
+
+    svg {
+      display: block;
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+
+body.is-route-video-modal {
+  overflow: hidden;
 }

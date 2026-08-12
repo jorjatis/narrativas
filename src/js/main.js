@@ -7,6 +7,7 @@ import initAudioPlayer from './modules/audio-player';
 import initVideoSubtitles from './modules/video-subtitles';
 import initPreArticleHeader from './modules/pre-article-header';
 import initRouteMediasMap from './modules/route-medias-map';
+import initRouteMediasVideoModal from './modules/route-medias-video-modal';
 
 export function initAll() {
   document.body.classList.add('is-loaded');
@@ -17,6 +18,7 @@ export function initAll() {
   initVideoSubtitles();
   initPreArticleHeader();
   initRouteMediasMap();
+  initRouteMediasVideoModal();
 }
 
 // NOTE: Para prod el evento load de window se borra, dejamos solo:
