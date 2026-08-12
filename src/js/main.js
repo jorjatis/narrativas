@@ -6,6 +6,7 @@ import removeElements from './helpers/removeEls';
 import initAudioPlayer from './modules/audio-player';
 import initVideoSubtitles from './modules/video-subtitles';
 import initPreArticleHeader from './modules/pre-article-header';
+import initHasPaywall from './modules/hasPaywall';
 import initRouteMediasMap from './modules/route-medias-map';
 import initRouteMediasVideoModal from './modules/route-medias-video-modal';
 
@@ -17,6 +18,7 @@ export function initAll() {
   initAudioPlayer();
   initVideoSubtitles();
   initPreArticleHeader();
+  initHasPaywall();
   initRouteMediasMap();
   initRouteMediasVideoModal();
 }

@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { prefersReducedMotion } from '../helpers/prefersReducedMotion';
+import { hasArticlePaywall } from './hasPaywall';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,8 +36,15 @@ function createPreArticleHeader(root) {
   const pathTrack = root.querySelector('.v-a-t__path-track');
   const pathDraw = root.querySelector('.v-a-t__path-draw');
   const frames = [...root.querySelectorAll('.vid-frames')];
+  const skipScene03 = hasArticlePaywall() || root.classList.contains('is-paywall');
 
   if (!stage || !scene01 || !scene02 || !scene03) return;
+
+  if (skipScene03) {
+    root.classList.add('is-paywall');
+    scene03.style.display = 'none';
+    scene03.setAttribute('aria-hidden', 'true');
+  }
 
   const headerOffset = getHeaderOffset(root);
   const pathLength = pathDraw?.getTotalLength?.() || 533;
@@ -49,23 +57,35 @@ function createPreArticleHeader(root) {
 
   if (prefersReducedMotion()) {
     gsap.set(scene01, { autoAlpha: 0, yPercent: -100 });
-    gsap.set(scene02, { autoAlpha: 0, yPercent: -100 });
-    gsap.set(scene03, { autoAlpha: 1 });
-    if (pathDraw && pathLength) gsap.set(pathDraw, { strokeDashoffset: 0 });
-    gsap.set(frames, { clipPath: 'inset(0 0% 0 0)' });
+
+    if (skipScene03) {
+      gsap.set(scene02, { autoAlpha: 1, yPercent: 0 });
+      gsap.set(scene03, { autoAlpha: 0 });
+      if (pathDraw && pathLength) gsap.set(pathDraw, { strokeDashoffset: 0 });
+    } else {
+      gsap.set(scene02, { autoAlpha: 0, yPercent: -100 });
+      gsap.set(scene03, { autoAlpha: 1 });
+      if (pathDraw && pathLength) gsap.set(pathDraw, { strokeDashoffset: 0 });
+      gsap.set(frames, { clipPath: 'inset(0 0% 0 0)' });
+    }
+
     root.classList.add('is-ready');
     return;
   }
 
   gsap.set(scene02, { autoAlpha: 0, yPercent: 0 });
-  gsap.set(scene03, { autoAlpha: 1, yPercent: 0 });
+  gsap.set(scene03, { autoAlpha: skipScene03 ? 0 : 1, yPercent: 0 });
+
+  const scrollEnd = skipScene03
+    ? () => `+=${Math.round(window.innerHeight * 1.35)}`
+    : () => `+=${Math.round(window.innerHeight * 3)}`;
 
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: {
       trigger: root,
       start: `top ${headerOffset}px`,
-      end: () => `+=${Math.round(window.innerHeight * 3)}`,
+      end: scrollEnd,
       pin: true,
       scrub: 0.65,
       anticipatePin: 1,
@@ -82,6 +102,12 @@ function createPreArticleHeader(root) {
     tl.to(pathDraw, { strokeDashoffset: 0, duration: 1.1 }, 1);
   } else {
     tl.to({}, { duration: 1.1 }, 1);
+  }
+
+  if (skipScene03) {
+    tl.to({}, { duration: 0.55 }, 2.1);
+    root.classList.add('is-ready');
+    return;
   }
 
   // Sale el bloque 2

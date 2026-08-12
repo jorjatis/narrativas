@@ -11,6 +11,12 @@
     --preh-header: 58px;
   }
 
+  &.is-paywall {
+    .v-n-preh-scene--03 {
+      display: none !important;
+    }
+  }
+
   &__stage {
     position: relative;
     height: calc(100dvh - var(--preh-header));
@@ -126,13 +132,13 @@
       }
 
       .v-a-s-t {
-        max-width: 320px;
+        max-width: 100%;
         margin-top: 0;
         text-align: center;
         color: $cb9;
 
         @media (max-width: $screen-xs) {
-          max-width: 240px;
+          padding: 0 20px;
           font-size: 18px;
           line-height: 22px;
         }

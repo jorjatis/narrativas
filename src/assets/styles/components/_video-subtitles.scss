@@ -25,33 +25,6 @@
   @media (min-width: 350px) {
     padding: 0 20px;
   }
-
-  .vid-subs {
-    &__subs {
-      p {
-        @media (min-width: $screen-xs) {
-          font-size: 36px;
-          line-height: 42px;
-        }
-      }
-    }
-
-    &__subs-ph {
-      gap: 7px;
-
-      @media (min-width: $screen-xs) {
-        gap: 14px;
-      }
-
-      span {
-        height: 20px;
-
-        @media (min-width: $screen-xs) {
-          height: 28px;
-        }
-      }
-    }
-  }
 }
 
 .vid-subs {
@@ -231,6 +204,11 @@
       color: $cp4;
       opacity: 0;
       transition: opacity 0.3s ease;
+
+      @media (min-width: $screen-xs) {
+        font-size: 36px;
+        line-height: 42px;
+      }
     }
   }
 
@@ -267,7 +245,7 @@
     @media (min-width: $screen-xs) {
       gap: 14px;
     }
-
+    
     span {
       display: block;
       height: 20px;

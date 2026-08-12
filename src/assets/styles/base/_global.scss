@@ -17,29 +17,27 @@ body {
   // }
 
   // Paywall
-  &:has(ev-engagement[group-name="paywall-abc"][redirect="false"]) {
-    .v-w>* {
+  .v-w>* {
+    margin-bottom: 0;
+    padding-bottom: 40px;
+
+    @media (min-width: $screen-xs) {
       margin-bottom: 0;
-      padding-bottom: 40px;
-
-      @media (min-width: $screen-xs) {
-        margin-bottom: 0;
-        padding-bottom: 70px;
-      }
+      padding-bottom: 70px;
     }
+  }
 
-    .v-w-c--2 {
-      position: relative;
-      background: $cb2;
-    }
+  .v-w-c--2 {
+    position: relative;
+    background: $cb2;
+  }
 
-    .v-f {
-      background: $cb2;
+  .v-f {
+    background: $cb2;
 
-      &__w--3 {
-        &:before {
-          background: $cb2;
-        }
+    &__w--3 {
+      &:before {
+        background: $cb2;
       }
     }
   }
@@ -129,16 +127,11 @@ body {
   }
 }
 
-.ai2html {
+.voc-ai2html {
   display: flex;
   justify-content: center;
-  margin-top: 80px !important;
-  margin-bottom: 80px !important;
-
-  @media (min-width: $screen-xs) {
-    margin-top: 112px !important;
-    margin-bottom: 112px !important;
-  }
+  margin-top: 40px !important;
+  margin-bottom: 60px !important;
 }
 
 body.is-loaded {

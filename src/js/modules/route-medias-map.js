@@ -12,6 +12,8 @@ const TIP_OFFSET_FROM_BOTTOM = 100;
 /** Proporción intrínseca del JPG/SVG del mapa (para no recortar el recorrido) */
 const MAP_INTRINSIC_W = 1920;
 const MAP_INTRINSIC_H = 4496;
+/** Muestras para localizar el punto del path más cercano a cada label */
+const PATH_SAMPLE_STEPS = 240;
 
 export default function initRouteMediasMap() {
   const root = document.querySelector('.v-n-route-medias');
@@ -62,12 +64,24 @@ function createRouteMediasMap(root) {
     strokeDashoffset: pathLength,
   };
 
-  const placeLabels = () => positionMapLabels(root, path);
+  const dots = buildMapDots(root, path, pathLength);
+  const places = buildMapPlaces(root, path, pathLength);
+
+  const placeLabels = () => {
+    positionMapLabels(root, path);
+    positionMapDots(root, path, dots);
+  };
+
+  const revealAlongPath = (drawn) => {
+    syncPathRevealVisibility(dots, drawn, pathLength);
+    syncPathRevealVisibility(places, drawn, pathLength);
+  };
 
   if (prefersReducedMotion()) {
     gsap.set(path, { ...dash, strokeDashoffset: 0 });
     root.classList.add('is-map-ready');
     placeLabels();
+    revealAlongPath(pathLength);
     bindMapLabelResize(root, placeLabels);
     return;
   }
@@ -84,6 +98,7 @@ function createRouteMediasMap(root) {
   const syncTip = () => {
     const drawn = lengthAtViewportGuide(path, svg, pathLength);
     setOffset(pathLength - drawn);
+    revealAlongPath(drawn);
   };
 
   ScrollTrigger.create({
@@ -97,6 +112,7 @@ function createRouteMediasMap(root) {
       // En refresh aplicamos al instante (sin lerp) para no quedar desfasados
       const drawn = lengthAtViewportGuide(path, svg, pathLength);
       gsap.set(path, { strokeDashoffset: pathLength - drawn });
+      revealAlongPath(drawn);
     },
   });
 
@@ -179,8 +195,9 @@ function positionTitleLabel(root, path) {
 }
 
 /**
- * Sitúa los topónimos en coords del mapa y, si se cortan por la derecha
- * del track/viewport, los voltea al otro lado del ancla.
+ * Sitúa los topónimos en coords del mapa y elige lado (is-flip) para que
+ * no se corten por los bordes del track/viewport. Si el ancla está muy al
+ * borde, empuja el label para que quepa entero.
  */
 function positionPlaceLabels(root, path) {
   const track = root.querySelector('.v-n-route-medias__map-track');
@@ -204,29 +221,153 @@ function positionPlaceLabels(root, path) {
     pt.x = x;
     pt.y = y;
     const screen = pt.matrixTransform(ctm);
+    const anchorLeft = screen.x - trackRect.left;
 
-    el.style.left = `${screen.x - trackRect.left}px`;
+    el.style.left = `${anchorLeft}px`;
     el.style.top = `${screen.y - trackRect.top}px`;
 
     const preferLeft = el.dataset.side === 'left';
     el.classList.toggle('is-flip', preferLeft);
     el.classList.add('is-placed');
 
-    const rect = el.getBoundingClientRect();
+    let rect = el.getBoundingClientRect();
+
+    // Desborde derecha → texto a la izquierda del punto
     if (!el.classList.contains('is-flip') && rect.right > limitRight) {
       el.classList.add('is-flip');
-    } else if (el.classList.contains('is-flip') && rect.left < limitLeft) {
+      rect = el.getBoundingClientRect();
+    }
+
+    // Desborde izquierda → texto a la derecha del punto
+    if (el.classList.contains('is-flip') && rect.left < limitLeft) {
       el.classList.remove('is-flip');
-      const again = el.getBoundingClientRect();
+      rect = el.getBoundingClientRect();
       // Si ambos lados cortan, quédate en el que menos desborde
-      if (again.right > limitRight) {
-        const overflowRight = again.right - limitRight;
+      if (rect.right > limitRight) {
+        const overflowRight = rect.right - limitRight;
         el.classList.add('is-flip');
         const flipped = el.getBoundingClientRect();
         const overflowLeft = limitLeft - flipped.left;
         if (overflowRight <= overflowLeft) el.classList.remove('is-flip');
+        rect = el.getBoundingClientRect();
       }
     }
+
+    // Ancla pegada al borde: empuja para que el label quepa entero
+    // (p. ej. Cáceres en mobile, cortado por la izquierda)
+    if (rect.left < limitLeft) {
+      el.style.left = `${anchorLeft + (limitLeft - rect.left)}px`;
+    } else if (rect.right > limitRight) {
+      el.style.left = `${anchorLeft - (rect.right - limitRight)}px`;
+    }
+  });
+}
+
+/**
+ * Precomputa longitud a lo largo del path para cada punto (inicio + labels).
+ * Los dots de lugar se anclan al punto del path más cercano a su (x,y),
+ * así quedan encima de la línea a la misma altura que el topónimo.
+ */
+function buildMapDots(root, path, pathLength) {
+  const nodes = [...root.querySelectorAll('.v-n-route-medias__map-dot')];
+  return nodes.map((el) => {
+    if (el.hasAttribute('data-path-start')) {
+      return { el, length: 0 };
+    }
+    if (el.hasAttribute('data-path-end')) {
+      return { el, length: pathLength };
+    }
+
+    return { el, length: lengthFromMapCoords(el, path, pathLength) };
+  });
+}
+
+/** Topónimos con la longitud del path a la que deben hacer fade-in. */
+function buildMapPlaces(root, path, pathLength) {
+  const nodes = [...root.querySelectorAll('.v-n-route-medias__map-place')];
+  return nodes.map((el) => ({
+    el,
+    length: lengthFromMapCoords(el, path, pathLength),
+  }));
+}
+
+function lengthFromMapCoords(el, path, pathLength) {
+  const x = Number(el.dataset.mapX);
+  const y = Number(el.dataset.mapY);
+  if (!Number.isFinite(x) || !Number.isFinite(y)) {
+    return Number.POSITIVE_INFINITY;
+  }
+  return closestLengthOnPath(path, pathLength, x, y);
+}
+
+/** Longitud del path más cercana a un punto del viewBox (muestreo + refinamiento). */
+function closestLengthOnPath(path, pathLength, x, y) {
+  let bestLen = 0;
+  let bestDist = Number.POSITIVE_INFINITY;
+
+  for (let i = 0; i <= PATH_SAMPLE_STEPS; i += 1) {
+    const len = (i / PATH_SAMPLE_STEPS) * pathLength;
+    const p = path.getPointAtLength(len);
+    const dist = (p.x - x) ** 2 + (p.y - y) ** 2;
+    if (dist < bestDist) {
+      bestDist = dist;
+      bestLen = len;
+    }
+  }
+
+  const step = pathLength / PATH_SAMPLE_STEPS;
+  let lo = Math.max(0, bestLen - step);
+  let hi = Math.min(pathLength, bestLen + step);
+
+  for (let i = 0; i < 24; i += 1) {
+    const m1 = lo + (hi - lo) / 3;
+    const m2 = hi - (hi - lo) / 3;
+    const p1 = path.getPointAtLength(m1);
+    const p2 = path.getPointAtLength(m2);
+    const d1 = (p1.x - x) ** 2 + (p1.y - y) ** 2;
+    const d2 = (p2.x - x) ** 2 + (p2.y - y) ** 2;
+    if (d1 < d2) hi = m2;
+    else lo = m1;
+  }
+
+  return (lo + hi) / 2;
+}
+
+function positionMapDots(root, path, dots) {
+  const track = root.querySelector('.v-n-route-medias__map-track');
+  const svg = root.querySelector('.v-n-route-medias__map-svg');
+  if (!track || !svg?.createSVGPoint || !dots.length) return;
+
+  const ctm = path.getScreenCTM?.();
+  if (!ctm) return;
+
+  const trackRect = track.getBoundingClientRect();
+  const pt = svg.createSVGPoint();
+
+  dots.forEach(({ el, length }) => {
+    if (!Number.isFinite(length)) return;
+
+    const p = path.getPointAtLength(length);
+    pt.x = p.x;
+    pt.y = p.y;
+    const screen = pt.matrixTransform(ctm);
+
+    el.style.left = `${screen.x - trackRect.left}px`;
+    el.style.top = `${screen.y - trackRect.top}px`;
+    el.classList.add('is-placed');
+  });
+}
+
+function syncPathRevealVisibility(items, drawn, pathLength) {
+  // Un pequeño margen para que el tip ya haya “pintado” el punto
+  const revealPad = Math.max(2, pathLength * 0.0005);
+
+  items.forEach(({ el, length }) => {
+    if (!Number.isFinite(length)) {
+      el.classList.remove('is-visible');
+      return;
+    }
+    el.classList.toggle('is-visible', drawn + revealPad >= length);
   });
 }
 

@@ -41,17 +41,27 @@ body:has(.v-h-a) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    padding-bottom: 24px;
+    gap: 6px;
+    padding-bottom: 12px;
+
+    @media (min-width: $screen-xs) {
+      gap: 12px;
+      padding-bottom: 24px;
+    }
   }
 
   &__m {
     position: relative;
     display: block;
-    width: 20px;
-    height: 30px;
+    width: 16px;
+    height: 24px;
     border: 2px solid $cb1;
     border-radius: 16px;
+
+    @media (min-width: $screen-xs) {
+      width: 20px;
+      height: 30px;
+    }
   }
 
   &__w {

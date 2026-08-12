@@ -41,6 +41,113 @@ function removeEls(target, { all = true, delay = 0 } = {}) {
   });
 }
 
+function getTriggerLineFromRootMargin(rootMargin) {
+  const parts = String(rootMargin).trim().split(/\s+/);
+  const bottom = parts[2] || "0px";
+  const match = bottom.match(/^(-?\d+(?:\.\d+)?)%$/);
+  if (!match) return null;
+
+  const value = Number(match[1]);
+
+  return `${100 + value}vh`;
+}
+
+function observeInView({
+  target,
+  threshold = 0,
+  rootMargin = "0px",
+  once = true,
+  markers = false,
+  onEnter = () => {},
+  onLeave = () => {}
+} = {}) {
+  let elements = [];
+
+  if (typeof target === "string") {
+    elements = document.querySelectorAll(target);
+  } else if (target instanceof HTMLElement) {
+    elements = [target];
+  } else if (target instanceof NodeList || Array.isArray(target)) {
+    elements = target;
+  }
+
+  if (!elements.length) {
+    console.warn(`[observeInView] Elemento(s) no encontrado(s): ${target}`);
+    return null;
+  }
+
+  if (markers) {
+    const triggerTop = getTriggerLineFromRootMargin(rootMargin);
+
+    if (triggerTop) {
+      const marker = document.createElement("div");
+      marker.style.position = "fixed";
+      marker.style.left = "0";
+      marker.style.right = "0";
+      marker.style.top = triggerTop;
+      marker.style.borderTop = "2px dashed red";
+      marker.style.zIndex = "9999";
+      marker.style.pointerEvents = "none";
+      marker.innerHTML = `<span style="
+        position:absolute;
+        right:10px;
+        top:-10px;
+        font-size:12px;
+        background:red;
+        color:white;
+        padding:2px 6px;
+      ">trigger ${triggerTop}</span>`;
+      document.body.appendChild(marker);
+    } else {
+      console.warn(
+        "[observeInView] markers solo dibuja línea con rootMargin bottom en % (ej. 0px 0px -40% 0px). threshold es % del elemento, no del viewport."
+      );
+    }
+  }
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
+          if (markers) console.log("[observeInView] ENTER", entry);
+
+          onEnter(entry);
+
+          if (once) {
+            obs.unobserve(entry.target);
+          }
+        } else {
+          if (markers) console.log("[observeInView] LEAVE", entry);
+
+          onLeave(entry);
+        }
+      });
+    },
+    {
+      threshold: [threshold],
+      rootMargin
+    }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+
+  return observer;
+}
+
+function prefersReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function motionDuration(defaultDuration) {
+  return prefersReducedMotion() ? 0 : defaultDuration;
+}
+
+function scrollBehavior() {
+  return prefersReducedMotion() ? "auto" : "smooth";
+}
+
+gsap.registerPlugin(ScrollTrigger);
+
 function initAudioPlayer() {
   const players = [...document.querySelectorAll('.v-ply.is-audio-player')];
   if (!players.length) return;
@@ -247,98 +354,6 @@ function createPlayer(player) {
   };
 }
 
-function getTriggerLineFromRootMargin(rootMargin) {
-  const parts = String(rootMargin).trim().split(/\s+/);
-  const bottom = parts[2] || "0px";
-  const match = bottom.match(/^(-?\d+(?:\.\d+)?)%$/);
-  if (!match) return null;
-
-  const value = Number(match[1]);
-  return `${100 + value}vh`;
-}
-
-function observeInView({
-  target,
-  threshold = 0,
-  rootMargin = "0px",
-  once = true,
-  markers = false,
-  onEnter = () => {},
-  onLeave = () => {}
-} = {}) {
-  let elements = [];
-
-  if (typeof target === "string") {
-    elements = document.querySelectorAll(target);
-  } else if (target instanceof HTMLElement) {
-    elements = [target];
-  } else if (target instanceof NodeList || Array.isArray(target)) {
-    elements = target;
-  }
-
-  if (!elements.length) {
-    console.warn(`[observeInView] Elemento(s) no encontrado(s): ${target}`);
-    return null;
-  }
-
-  if (markers) {
-    const triggerTop = getTriggerLineFromRootMargin(rootMargin);
-
-    if (triggerTop) {
-      const marker = document.createElement("div");
-      marker.style.position = "fixed";
-      marker.style.left = "0";
-      marker.style.right = "0";
-      marker.style.top = triggerTop;
-      marker.style.borderTop = "2px dashed red";
-      marker.style.zIndex = "9999";
-      marker.style.pointerEvents = "none";
-      marker.innerHTML = `<span style="
-        position:absolute;
-        right:10px;
-        top:-10px;
-        font-size:12px;
-        background:red;
-        color:white;
-        padding:2px 6px;
-      ">trigger ${triggerTop}</span>`;
-      document.body.appendChild(marker);
-    } else {
-      console.warn(
-        "[observeInView] markers solo dibuja línea con rootMargin bottom en % (ej. 0px 0px -40% 0px). threshold es % del elemento, no del viewport."
-      );
-    }
-  }
-
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
-          if (markers) console.log("[observeInView] ENTER", entry);
-
-          onEnter(entry);
-
-          if (once) {
-            obs.unobserve(entry.target);
-          }
-        } else {
-          if (markers) console.log("[observeInView] LEAVE", entry);
-
-          onLeave(entry);
-        }
-      });
-    },
-    {
-      threshold: [threshold],
-      rootMargin
-    }
-  );
-
-  elements.forEach((el) => observer.observe(el));
-
-  return observer;
-}
-
 function initVideoSubtitles() {
   const scenes = [...document.querySelectorAll('.vid-subs')];
   if (!scenes.length) return;
@@ -478,7 +493,7 @@ function createVideoSubtitles(scene) {
     if (!force && activeIndex === lastActiveIndex) return;
 
     if (force || lastActiveIndex < 0 || Math.abs(activeIndex - lastActiveIndex) > 8) {
-      // Seek grande o primer sync: repinta el rango completo de forma barata.
+
       wordEls.forEach((el, index) => {
         el.classList.toggle('vid-subs__word--over', index <= activeIndex);
         el.classList.toggle('is-active', index === activeIndex);
@@ -577,7 +592,6 @@ function createVideoSubtitles(scene) {
   const toggle = () => {
     if (!player.classList.contains('is-active')) return;
 
-    // Primer clic con vídeo muteado: activa el sonido (y reproduce si estaba pausado).
     if (video.muted) {
       unmute();
       if (video.paused || video.ended) play();
@@ -683,14 +697,13 @@ function createVideoSubtitles(scene) {
     if (!video.ended) setPlaying(false);
   });
   video.addEventListener('play', () => setPlaying(true));
-  // Solo rAF actualiza scrub durante play; timeupdate cubre pause/seek externo.
+
   video.addEventListener('timeupdate', () => {
     if (dragging || (!video.paused && rafId)) return;
     updateScrub();
   });
   video.addEventListener('loadedmetadata', () => updateScrub());
 
-  // Si el bloque sale de pantalla (scroll / slideUp), pausar el vídeo
   observeInView({
     target: scene,
     threshold: 0,
@@ -762,7 +775,6 @@ function scrollWordIntoView(container, wordEl) {
   const containerRect = container.getBoundingClientRect();
   const wordRect = wordEl.getBoundingClientRect();
 
-  // Mantener la palabra activa centrada en vertical dentro de la caja.
   const offset =
     wordRect.top -
     containerRect.top -
@@ -780,28 +792,91 @@ function scrollWordIntoView(container, wordEl) {
   });
 }
 
-function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-function motionDuration(defaultDuration) {
-  return prefersReducedMotion() ? 0 : defaultDuration;
-}
-
-function scrollBehavior() {
-  return prefersReducedMotion() ? "auto" : "smooth";
-}
-
-gsap.registerPlugin(ScrollTrigger);
-
 function getHeaderOffset(root) {
   const raw = getComputedStyle(root).getPropertyValue('--preh-header').trim();
   const value = Number.parseFloat(raw);
   return Number.isFinite(value) ? value : 58;
 }
 
+const PAYWALL_SELECTOR = 'ev-engagement[group-name="paywall-abc"][redirect="false"]';
+const MAIN_PAYWALL_SELECTOR = 'main.v-w-c, main.v-d-c';
+const PREH_ROOT = '.v-n-preh';
+
+function getPaywallMain() {
+  return document.querySelector(MAIN_PAYWALL_SELECTOR);
+}
+
+function hasPaywallMainStyles(main = getPaywallMain()) {
+  if (!main) return false;
+
+  const { height, overflowY, overflow, position } = main.style;
+  const clipped = overflowY === 'clip' || overflow === 'clip';
+
+  return Boolean(height) && clipped && position === 'relative';
+}
+
+function hasArticlePaywall() {
+  if (document.querySelector(PAYWALL_SELECTOR)) return true;
+  return hasPaywallMainStyles();
+}
+
+function applyPrehPaywall() {
+  const root = document.querySelector(PREH_ROOT);
+  if (!root || root.classList.contains('is-paywall')) return;
+
+  root.classList.add('is-paywall');
+
+  const scene01 = root.querySelector('.v-n-preh-scene--01');
+  const scene02 = root.querySelector('.v-n-preh-scene--02');
+  const scene03 = root.querySelector('.v-n-preh-scene--03');
+  const pathDraw = root.querySelector('.v-a-t__path-draw');
+
+  if (scene03) {
+    scene03.style.display = 'none';
+    scene03.setAttribute('aria-hidden', 'true');
+  }
+
+  if (!root.classList.contains('is-ready')) return;
+
+  ScrollTrigger.getAll().forEach((st) => {
+    if (st.trigger === root) st.kill();
+  });
+
+  if (scene01) gsap.set(scene01, { autoAlpha: 0, yPercent: -100 });
+  if (scene02) gsap.set(scene02, { autoAlpha: 1, yPercent: 0 });
+  if (pathDraw) gsap.set(pathDraw, { strokeDashoffset: 0 });
+
+  ScrollTrigger.refresh();
+}
+
+function initHasPaywall() {
+  if (hasArticlePaywall()) {
+    applyPrehPaywall();
+    return;
+  }
+
+  const scope = document.body;
+  const main = getPaywallMain();
+
+  const check = () => {
+    if (!hasArticlePaywall()) return;
+    applyPrehPaywall();
+    observer.disconnect();
+  };
+
+  const observer = new MutationObserver(check);
+  observer.observe(scope, { childList: true, subtree: true });
+
+  if (main) {
+    observer.observe(main, {
+      attributes: true,
+      attributeFilter: ['style', 'class'],
+    });
+  }
+}
+
 function initPreArticleHeader() {
-  const root = document.querySelector('.v-n-preh');
+  const root = document.querySelector(PREH_ROOT);
   if (!root) return;
 
   const run = () => {
@@ -825,8 +900,15 @@ function createPreArticleHeader(root) {
   const pathTrack = root.querySelector('.v-a-t__path-track');
   const pathDraw = root.querySelector('.v-a-t__path-draw');
   const frames = [...root.querySelectorAll('.vid-frames')];
+  const skipScene03 = hasArticlePaywall() || root.classList.contains('is-paywall');
 
   if (!stage || !scene01 || !scene02 || !scene03) return;
+
+  if (skipScene03) {
+    root.classList.add('is-paywall');
+    scene03.style.display = 'none';
+    scene03.setAttribute('aria-hidden', 'true');
+  }
 
   const headerOffset = getHeaderOffset(root);
   const pathLength = pathDraw?.getTotalLength?.() || 533;
@@ -839,23 +921,35 @@ function createPreArticleHeader(root) {
 
   if (prefersReducedMotion()) {
     gsap.set(scene01, { autoAlpha: 0, yPercent: -100 });
-    gsap.set(scene02, { autoAlpha: 0, yPercent: -100 });
-    gsap.set(scene03, { autoAlpha: 1 });
-    if (pathDraw && pathLength) gsap.set(pathDraw, { strokeDashoffset: 0 });
-    gsap.set(frames, { clipPath: 'inset(0 0% 0 0)' });
+
+    if (skipScene03) {
+      gsap.set(scene02, { autoAlpha: 1, yPercent: 0 });
+      gsap.set(scene03, { autoAlpha: 0 });
+      if (pathDraw && pathLength) gsap.set(pathDraw, { strokeDashoffset: 0 });
+    } else {
+      gsap.set(scene02, { autoAlpha: 0, yPercent: -100 });
+      gsap.set(scene03, { autoAlpha: 1 });
+      if (pathDraw && pathLength) gsap.set(pathDraw, { strokeDashoffset: 0 });
+      gsap.set(frames, { clipPath: 'inset(0 0% 0 0)' });
+    }
+
     root.classList.add('is-ready');
     return;
   }
 
   gsap.set(scene02, { autoAlpha: 0, yPercent: 0 });
-  gsap.set(scene03, { autoAlpha: 1, yPercent: 0 });
+  gsap.set(scene03, { autoAlpha: skipScene03 ? 0 : 1, yPercent: 0 });
+
+  const scrollEnd = skipScene03
+    ? () => `+=${Math.round(window.innerHeight * 1.35)}`
+    : () => `+=${Math.round(window.innerHeight * 3)}`;
 
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
     scrollTrigger: {
       trigger: root,
       start: `top ${headerOffset}px`,
-      end: () => `+=${Math.round(window.innerHeight * 3)}`,
+      end: scrollEnd,
       pin: true,
       scrub: 0.65,
       anticipatePin: 1,
@@ -872,8 +966,13 @@ function createPreArticleHeader(root) {
     tl.to({}, { duration: 1.1 }, 1);
   }
 
-  tl.to(scene02, { yPercent: -100, duration: 1 }, 2.3);
+  if (skipScene03) {
+    tl.to({}, { duration: 0.55 }, 2.1);
+    root.classList.add('is-ready');
+    return;
+  }
 
+  tl.to(scene02, { yPercent: -100, duration: 1 }, 2.3);
   tl.to({}, { duration: 0.55 }, 3.3);
 
   frames.forEach((frame, index) => {
@@ -894,9 +993,15 @@ function createPreArticleHeader(root) {
 }
 
 const ST_ID = 'route-medias-map';
+const LABEL_OFFSET_Y = 14;
+const PLACE_EDGE_PAD = 8;
+
 const TIP_OFFSET_FROM_BOTTOM = 100;
+
 const MAP_INTRINSIC_W = 1920;
 const MAP_INTRINSIC_H = 4496;
+
+const PATH_SAMPLE_STEPS = 240;
 
 function initRouteMediasMap() {
   const root = document.querySelector('.v-n-route-medias');
@@ -945,12 +1050,24 @@ function createRouteMediasMap(root) {
     strokeDashoffset: pathLength,
   };
 
-  const placeLabels = () => positionMapLabels(root, path);
+  const dots = buildMapDots(root, path, pathLength);
+  const places = buildMapPlaces(root, path, pathLength);
+
+  const placeLabels = () => {
+    positionMapLabels(root, path);
+    positionMapDots(root, path, dots);
+  };
+
+  const revealAlongPath = (drawn) => {
+    syncPathRevealVisibility(dots, drawn, pathLength);
+    syncPathRevealVisibility(places, drawn, pathLength);
+  };
 
   if (prefersReducedMotion()) {
     gsap.set(path, { ...dash, strokeDashoffset: 0 });
     root.classList.add('is-map-ready');
     placeLabels();
+    revealAlongPath(pathLength);
     bindMapLabelResize(root, placeLabels);
     return;
   }
@@ -966,6 +1083,7 @@ function createRouteMediasMap(root) {
   const syncTip = () => {
     const drawn = lengthAtViewportGuide(path, svg, pathLength);
     setOffset(pathLength - drawn);
+    revealAlongPath(drawn);
   };
 
   ScrollTrigger.create({
@@ -976,8 +1094,10 @@ function createRouteMediasMap(root) {
     onUpdate: syncTip,
     onRefresh: () => {
       placeLabels();
+
       const drawn = lengthAtViewportGuide(path, svg, pathLength);
       gsap.set(path, { strokeDashoffset: pathLength - drawn });
+      revealAlongPath(drawn);
     },
   });
 
@@ -1050,10 +1170,15 @@ function positionTitleLabel(root, path) {
   const trackRect = track.getBoundingClientRect();
 
   label.style.left = `${screen.x - trackRect.left}px`;
-  label.style.top = `${screen.y - trackRect.top - 14}px`;
+  label.style.top = `${screen.y - trackRect.top - LABEL_OFFSET_Y}px`;
   label.classList.add('is-placed');
 }
 
+/**
+ * Sitúa los topónimos en coords del mapa y elige lado (is-flip) para que
+ * no se corten por los bordes del track/viewport. Si el ancla está muy al
+ * borde, empuja el label para que quepa entero.
+ */
 function positionPlaceLabels(root, path) {
   const track = root.querySelector('.v-n-route-medias__map-track');
   const svg = root.querySelector('.v-n-route-medias__map-svg');
@@ -1064,8 +1189,8 @@ function positionPlaceLabels(root, path) {
   if (!ctm) return;
 
   const trackRect = track.getBoundingClientRect();
-  const limitRight = Math.min(trackRect.right, window.innerWidth) - 8;
-  const limitLeft = Math.max(trackRect.left, 0) + 8;
+  const limitRight = Math.min(trackRect.right, window.innerWidth) - PLACE_EDGE_PAD;
+  const limitLeft = Math.max(trackRect.left, 0) + PLACE_EDGE_PAD;
   const pt = svg.createSVGPoint();
 
   places.forEach((el) => {
@@ -1076,28 +1201,146 @@ function positionPlaceLabels(root, path) {
     pt.x = x;
     pt.y = y;
     const screen = pt.matrixTransform(ctm);
+    const anchorLeft = screen.x - trackRect.left;
 
-    el.style.left = `${screen.x - trackRect.left}px`;
+    el.style.left = `${anchorLeft}px`;
     el.style.top = `${screen.y - trackRect.top}px`;
 
     const preferLeft = el.dataset.side === 'left';
     el.classList.toggle('is-flip', preferLeft);
     el.classList.add('is-placed');
 
-    const rect = el.getBoundingClientRect();
+    let rect = el.getBoundingClientRect();
+
+    // Desborde derecha → texto a la izquierda del punto
     if (!el.classList.contains('is-flip') && rect.right > limitRight) {
       el.classList.add('is-flip');
-    } else if (el.classList.contains('is-flip') && rect.left < limitLeft) {
+      rect = el.getBoundingClientRect();
+    }
+
+    // Desborde izquierda → texto a la derecha del punto
+    if (el.classList.contains('is-flip') && rect.left < limitLeft) {
       el.classList.remove('is-flip');
-      const again = el.getBoundingClientRect();
-      if (again.right > limitRight) {
-        const overflowRight = again.right - limitRight;
+      rect = el.getBoundingClientRect();
+      // Si ambos lados cortan, quédate en el que menos desborde
+      if (rect.right > limitRight) {
+        const overflowRight = rect.right - limitRight;
         el.classList.add('is-flip');
         const flipped = el.getBoundingClientRect();
         const overflowLeft = limitLeft - flipped.left;
         if (overflowRight <= overflowLeft) el.classList.remove('is-flip');
+        rect = el.getBoundingClientRect();
       }
     }
+
+    // Ancla pegada al borde: empuja para que el label quepa entero
+    // (p. ej. Cáceres en mobile, cortado por la izquierda)
+    if (rect.left < limitLeft) {
+      el.style.left = `${anchorLeft + (limitLeft - rect.left)}px`;
+    } else if (rect.right > limitRight) {
+      el.style.left = `${anchorLeft - (rect.right - limitRight)}px`;
+    }
+  });
+}
+
+function buildMapDots(root, path, pathLength) {
+  const nodes = [...root.querySelectorAll('.v-n-route-medias__map-dot')];
+  return nodes.map((el) => {
+    if (el.hasAttribute('data-path-start')) {
+      return { el, length: 0 };
+    }
+    if (el.hasAttribute('data-path-end')) {
+      return { el, length: pathLength };
+    }
+
+    return { el, length: lengthFromMapCoords(el, path, pathLength) };
+  });
+}
+
+function buildMapPlaces(root, path, pathLength) {
+  const nodes = [...root.querySelectorAll('.v-n-route-medias__map-place')];
+  return nodes.map((el) => ({
+    el,
+    length: lengthFromMapCoords(el, path, pathLength),
+  }));
+}
+
+function lengthFromMapCoords(el, path, pathLength) {
+  const x = Number(el.dataset.mapX);
+  const y = Number(el.dataset.mapY);
+  if (!Number.isFinite(x) || !Number.isFinite(y)) {
+    return Number.POSITIVE_INFINITY;
+  }
+  return closestLengthOnPath(path, pathLength, x, y);
+}
+
+function closestLengthOnPath(path, pathLength, x, y) {
+  let bestLen = 0;
+  let bestDist = Number.POSITIVE_INFINITY;
+
+  for (let i = 0; i <= PATH_SAMPLE_STEPS; i += 1) {
+    const len = (i / PATH_SAMPLE_STEPS) * pathLength;
+    const p = path.getPointAtLength(len);
+    const dist = (p.x - x) ** 2 + (p.y - y) ** 2;
+    if (dist < bestDist) {
+      bestDist = dist;
+      bestLen = len;
+    }
+  }
+
+  const step = pathLength / PATH_SAMPLE_STEPS;
+  let lo = Math.max(0, bestLen - step);
+  let hi = Math.min(pathLength, bestLen + step);
+
+  for (let i = 0; i < 24; i += 1) {
+    const m1 = lo + (hi - lo) / 3;
+    const m2 = hi - (hi - lo) / 3;
+    const p1 = path.getPointAtLength(m1);
+    const p2 = path.getPointAtLength(m2);
+    const d1 = (p1.x - x) ** 2 + (p1.y - y) ** 2;
+    const d2 = (p2.x - x) ** 2 + (p2.y - y) ** 2;
+    if (d1 < d2) hi = m2;
+    else lo = m1;
+  }
+
+  return (lo + hi) / 2;
+}
+
+function positionMapDots(root, path, dots) {
+  const track = root.querySelector('.v-n-route-medias__map-track');
+  const svg = root.querySelector('.v-n-route-medias__map-svg');
+  if (!track || !svg?.createSVGPoint || !dots.length) return;
+
+  const ctm = path.getScreenCTM?.();
+  if (!ctm) return;
+
+  const trackRect = track.getBoundingClientRect();
+  const pt = svg.createSVGPoint();
+
+  dots.forEach(({ el, length }) => {
+    if (!Number.isFinite(length)) return;
+
+    const p = path.getPointAtLength(length);
+    pt.x = p.x;
+    pt.y = p.y;
+    const screen = pt.matrixTransform(ctm);
+
+    el.style.left = `${screen.x - trackRect.left}px`;
+    el.style.top = `${screen.y - trackRect.top}px`;
+    el.classList.add('is-placed');
+  });
+}
+
+function syncPathRevealVisibility(items, drawn, pathLength) {
+
+  const revealPad = Math.max(2, pathLength * 0.0005);
+
+  items.forEach(({ el, length }) => {
+    if (!Number.isFinite(length)) {
+      el.classList.remove('is-visible');
+      return;
+    }
+    el.classList.toggle('is-visible', drawn + revealPad >= length);
   });
 }
 
@@ -1130,11 +1373,7 @@ function bindMapLabelResize(root, placeLabels, syncTip) {
   }
 }
 
-/**
- * En mobile (≤699px), al reproducir un vídeo de route-medias lo abre
- * en un overlay a ancho de pantalla (evita overflow/isolation del bloque).
- */
-const ROUTE_MEDIAS_VIDEO_MQ = '(max-width: 699px)';
+const MQ_MOBILE = '(max-width: 699px)';
 
 function initRouteMediasVideoModal() {
   const root = document.querySelector('.v-n-route-medias');
@@ -1143,7 +1382,7 @@ function initRouteMediasVideoModal() {
   const shells = [...root.querySelectorAll('.video-player')];
   if (!shells.length) return;
 
-  const mq = window.matchMedia(ROUTE_MEDIAS_VIDEO_MQ);
+  const mq = window.matchMedia(MQ_MOBILE);
   let active = null;
 
   const close = ({ pause = true } = {}) => {
@@ -1155,7 +1394,7 @@ function initRouteMediasVideoModal() {
       try {
         video.pause();
       } catch (_) {
-        /* ignore */
+        
       }
     }
 
@@ -1260,6 +1499,7 @@ function initAll() {
   initAudioPlayer();
   initVideoSubtitles();
   initPreArticleHeader();
+  initHasPaywall();
   initRouteMediasMap();
   initRouteMediasVideoModal();
 }

@@ -7,6 +7,8 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/in
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-sonidos.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-subs-01.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-subs-02.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-01.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-02.html
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/PASTOR_CLIP1_v1.mp4
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/PASTOR_CLIP1_v1.json
@@ -48,3 +50,5 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/im
 <!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-sonidos.html" -->
 <!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-subs-01.html" -->
 <!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-subs-02.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-01.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-02.html" -->

@@ -1,0 +1,64 @@
+@use '../base/variables' as *;
+
+.vid-inc {
+  margin: 80px 0;
+}
+
+.v-n-route-medias .v-fc,
+.vid-inc .v-fc {
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+  font-size: 16px;
+  line-height: 20px;
+  color: $cb1;
+  text-align: left;
+  margin-top: 0;
+  margin-left: 46px;
+  padding-top: 18px;
+  padding-bottom: 12px;
+  padding-left: 24px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -80px;
+    z-index: -1;
+    background: rgba($cb2, 0.6);
+    box-shadow: 0 0 28px 20px rgba($cb2, 0.6);
+    clip-path: inset(0 -48px -48px -100px);
+  }
+
+  @media (max-width: 540px) {
+    margin-left: 16px;
+    padding-left: 16px;
+
+    &::after {
+      left: -24px;
+      clip-path: inset(0 -48px -48px -40px);
+    }
+  }
+
+  @container (width < 254px) {
+    display: block;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: $cp1;
+  }
+
+  .v-fc__t {
+    display: block;
+    font-family: $mcs;
+    text-transform: uppercase;
+  }
+}
