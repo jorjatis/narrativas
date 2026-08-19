@@ -287,6 +287,17 @@
       margin-left: -50px;
     }
 
+    &.llanos {
+      white-space: normal;
+      line-height: 1.2;
+      text-align: center;
+      transform: translate(-50%, calc(-100% - 8px));
+
+      &.is-flip {
+        transform: translate(-50%, calc(-100% - 8px));
+      }
+    }
+
     @media (min-width: 500px) {
       font-size: 12px;
     }

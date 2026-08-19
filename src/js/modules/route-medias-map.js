@@ -214,42 +214,44 @@ function positionPlaceLabels(root, path) {
   const pt = svg.createSVGPoint();
 
   places.forEach((el) => {
-    const x = Number(el.dataset.mapX);
-    const y = Number(el.dataset.mapY);
-    if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+    const anchor = placeAnchorPoint(el, path);
+    if (!anchor) return;
 
-    pt.x = x;
-    pt.y = y;
+    pt.x = anchor.x;
+    pt.y = anchor.y;
     const screen = pt.matrixTransform(ctm);
     const anchorLeft = screen.x - trackRect.left;
 
     el.style.left = `${anchorLeft}px`;
     el.style.top = `${screen.y - trackRect.top}px`;
 
+    const centered = el.hasAttribute('data-path-end');
     const preferLeft = el.dataset.side === 'left';
-    el.classList.toggle('is-flip', preferLeft);
+    el.classList.toggle('is-flip', !centered && preferLeft);
     el.classList.add('is-placed');
 
     let rect = el.getBoundingClientRect();
 
-    // Desborde derecha → texto a la izquierda del punto
-    if (!el.classList.contains('is-flip') && rect.right > limitRight) {
-      el.classList.add('is-flip');
-      rect = el.getBoundingClientRect();
-    }
-
-    // Desborde izquierda → texto a la derecha del punto
-    if (el.classList.contains('is-flip') && rect.left < limitLeft) {
-      el.classList.remove('is-flip');
-      rect = el.getBoundingClientRect();
-      // Si ambos lados cortan, quédate en el que menos desborde
-      if (rect.right > limitRight) {
-        const overflowRight = rect.right - limitRight;
+    if (!centered) {
+      // Desborde derecha → texto a la izquierda del punto
+      if (!el.classList.contains('is-flip') && rect.right > limitRight) {
         el.classList.add('is-flip');
-        const flipped = el.getBoundingClientRect();
-        const overflowLeft = limitLeft - flipped.left;
-        if (overflowRight <= overflowLeft) el.classList.remove('is-flip');
         rect = el.getBoundingClientRect();
+      }
+
+      // Desborde izquierda → texto a la derecha del punto
+      if (el.classList.contains('is-flip') && rect.left < limitLeft) {
+        el.classList.remove('is-flip');
+        rect = el.getBoundingClientRect();
+        // Si ambos lados cortan, quédate en el que menos desborde
+        if (rect.right > limitRight) {
+          const overflowRight = rect.right - limitRight;
+          el.classList.add('is-flip');
+          const flipped = el.getBoundingClientRect();
+          const overflowLeft = limitLeft - flipped.left;
+          if (overflowRight <= overflowLeft) el.classList.remove('is-flip');
+          rect = el.getBoundingClientRect();
+        }
       }
     }
 
@@ -285,10 +287,31 @@ function buildMapDots(root, path, pathLength) {
 /** Topónimos con la longitud del path a la que deben hacer fade-in. */
 function buildMapPlaces(root, path, pathLength) {
   const nodes = [...root.querySelectorAll('.v-n-route-medias__map-place')];
-  return nodes.map((el) => ({
-    el,
-    length: lengthFromMapCoords(el, path, pathLength),
-  }));
+  return nodes.map((el) => {
+    if (el.hasAttribute('data-path-end')) {
+      return { el, length: pathLength };
+    }
+    if (el.hasAttribute('data-path-start')) {
+      return { el, length: 0 };
+    }
+
+    return { el, length: lengthFromMapCoords(el, path, pathLength) };
+  });
+}
+
+/** Ancla de un topónimo: coords del mapa o extremo del tracking. */
+function placeAnchorPoint(el, path) {
+  if (el.hasAttribute('data-path-end')) {
+    return path.getPointAtLength(path.getTotalLength());
+  }
+  if (el.hasAttribute('data-path-start')) {
+    return path.getPointAtLength(0);
+  }
+
+  const x = Number(el.dataset.mapX);
+  const y = Number(el.dataset.mapY);
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+  return { x, y };
 }
 
 function lengthFromMapCoords(el, path, pathLength) {
