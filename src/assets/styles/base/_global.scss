@@ -4,17 +4,19 @@ html {
   scroll-behavior: unset !important;
 }
 
+$bg-color: #F5F5F5;
+
 body {
   touch-action: pan-y;
 
   // Si tiene fondo de color diferente al blanco
-  // background: $cp15;
-  // .v-h__c {
-  //   transition: background 0.2s ease;
-  // }
-  // .v-h:not(.is-fixed) .v-h__c, .v-w-c--2,.v-f__w--3:before {
-  //   background: $cp15;
-  // }
+  background: $bg-color;
+  .v-h__c {
+    transition: background 0.2s ease;
+  }
+  .v-h:not(.is-fixed) .v-h__c, .v-w-c--2,.v-f__w--3:before {
+    background: $bg-color;
+  }
 
   // Paywall
   .v-w>* {
@@ -29,15 +31,15 @@ body {
 
   .v-w-c--2 {
     position: relative;
-    background: $cb2;
+    background: $bg-color;
   }
 
   .v-f {
-    background: $cb2;
+    background: $bg-color;
 
     &__w--3 {
       &:before {
-        background: $cb2;
+        background: $bg-color;
       }
     }
   }
@@ -53,11 +55,6 @@ body {
 
 .v-w {
   .v-a--d-s-1 {
-    @media (min-width: $screen-sm) {
-      height: auto;
-      min-height: calc(100svh - 58px);
-    } 
-
     .v-a-lnk {
       > div {
         height: 100%;

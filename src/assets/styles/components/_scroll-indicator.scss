@@ -15,7 +15,7 @@ body:has(.v-h-a) {
 .scr-ind {
   position: absolute;
   width: 100%;
-  height: calc(100dvh - 58px);
+  height: calc(100dvh - 50px);
   top: 0;
   left: 0;
   display: flex;
@@ -23,17 +23,10 @@ body:has(.v-h-a) {
   justify-content: center;
   pointer-events: none;
   z-index: 10;
-  opacity: 0;
-  visibility: hidden;
   transition: opacity .3s ease, visibility .3s ease;
 
   @media (min-width: $screen-xs) {
     height: calc(100dvh - 58px);
-  }
-
-  &.is-visible {
-    opacity: 1;
-    visibility: visible;
   }
 
   &__c {
