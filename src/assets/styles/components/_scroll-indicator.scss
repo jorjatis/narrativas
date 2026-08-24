@@ -1,16 +1,16 @@
 @use '../base/variables' as *;
 
-body:has(.v-h-a) {
-  .scr-ind {
-    @media (max-width: $screen-xs) {
-      height: calc(100dvh - 98px);
-    }
+// body:has(.v-h-a) {
+//   .scr-ind {
+//     @media (max-width: $screen-xs) {
+//       height: calc(100dvh - 98px);
+//     }
 
-    @media (min-width: $screen-xs) and (max-width: $screen-sm) {
-      height: calc(100dvh - 106px);
-    }
-  }
-}
+//     @media (min-width: $screen-xs) and (max-width: $screen-sm) {
+//       height: calc(100dvh - 106px);
+//     }
+//   }
+// }
 
 .scr-ind {
   position: absolute;
@@ -23,10 +23,17 @@ body:has(.v-h-a) {
   justify-content: center;
   pointer-events: none;
   z-index: 10;
+  opacity: 0;
+  visibility: hidden;
   transition: opacity .3s ease, visibility .3s ease;
 
   @media (min-width: $screen-xs) {
     height: calc(100dvh - 58px);
+  }
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
   }
 
   &__c {

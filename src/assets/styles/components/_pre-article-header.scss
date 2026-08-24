@@ -1,7 +1,7 @@
-@use '../base/variables' as *;
-@use '../base/variables-custom' as *;
-@use '../base/actions' as *;
-@use '../base/animations' as *;
+@use "../base/variables" as *;
+@use "../base/variables-custom" as *;
+@use "../base/actions" as *;
+@use "../base/animations" as *;
 
 .v-w {
   .v-a--d-s-1 {
@@ -42,16 +42,18 @@
     }
 
     @media (min-width: 390px) {
+      max-width: 510px;
       font-size: 54px;
       line-height: 48px;
     }
 
     @media (min-width: 699px) {
+      max-width: 620px;
       font-size: 64px;
       line-height: 58px;
     }
 
-    @media (min-width: 960px) {
+    @media (min-width: 1025px) {
       max-width: 910px;
       font-size: 96px;
       line-height: 85px;
@@ -92,10 +94,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 24px;
 
     .v-n-preh__face {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 70px;
 
       @media (min-width: 350px) {
@@ -119,14 +123,115 @@
       }
 
       &--1 {
-        top: 5%;
-        left: 5%
+        top: 28%;
+        left: 47%;
       }
 
       &--2 {
-        bottom: 5%;
-        right: 5%;
+        top: 31%;
+        left: 65%;
       }
+
+      &--3 {
+        top: 26%;
+        left: 81%;
+      }
+
+      &--4 {
+        top: 45%;
+        left: 88%;
+      }
+
+      &--5 {
+        top: 62%;
+        left: 80%;
+      }
+
+      &--6 {
+        top: 71%;
+        left: 66%;
+      }
+
+      &--7 {
+        top: 69%;
+        left: 42%;
+      }
+
+      &--8 {
+        top: 60%;
+        left: 19%;
+      }
+
+      &--9 {
+        top: 39%;
+        left: 12%;
+      }
+
+      &--10 {
+        top: 31%;
+        left: 27%;
+      }
+
+      &--11 {
+        top: 14%;
+        left: 59%;
+      }
+
+      &--12 {
+        top: 21%;
+        left: 97%;
+      }
+
+      &--13 {
+        top: 38%;
+        left: 103%;
+      }
+
+      &--14 {
+        top: 61%;
+        left: 98%;
+      }
+
+      &--15 {
+        top: 80%;
+        left: 88%;
+      }
+
+      &--16 {
+        top: 78%;
+        left: 27%;
+      }
+
+      &--17 {
+        top: 73%;
+        left: 6%;
+      }
+
+      &--18 {
+        top: 53%;
+        left: 0%;
+      }
+
+      &--19 {
+        top: 19%;
+        left: 9%;
+      }
+
+      &--20 {
+        top: 83%;
+        left: 54%;
+      }
+
+      &--21 {
+        top: 16%;
+        left: 34%;
+      }
+    }
+
+    .v-n-preh__img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
   }
 
@@ -176,7 +281,7 @@
           right: 30px;
         }
 
-         @media (max-width: 375px) {
+        @media (max-width: 375px) {
           right: 10px;
         }
       }
@@ -257,7 +362,7 @@
         &-line {
           width: 100%;
           height: 2px;
-          background: #FF9000;
+          background: #ff9000;
         }
       }
 

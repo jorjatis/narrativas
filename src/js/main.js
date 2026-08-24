@@ -1,13 +1,18 @@
 // NOTE: Helpers
 import syncNarrativeData from "./helpers/syncNarrativeData";
+import fadeOnScroll from "./helpers/fadeOnScroll";
 
 // NOTE: Modules
-import initPreheaderScroll from "./modules/preheader-scroll";
+import preHeaderScene from "./modules/preHeaderScene";
 
 export function initAll() {
   syncNarrativeData();
+
+  document.body.classList.add("is-loaded");
+
+  fadeOnScroll(".v-a--d-s-1 .v-a-img-c > .scr-ind");
   
-  initPreheaderScroll();
+  preHeaderScene();
 }
 
 // NOTE: Para prod el evento load de window se borra, dejamos solo:
