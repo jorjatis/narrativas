@@ -1,54 +1,11 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/styles.css
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/scripts.js
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-pre-header.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-preparacion-viaje.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-route-medias.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-sonidos.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-subs-01.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-subs-02.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-01.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-02.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/includes/inc-pre-header.html
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/PASTOR_CLIP1_v1.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/PASTOR_CLIP1_v1.json
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/PASTOR_CLIP1_v1.vtt
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/video-subs-denuncia.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/video-subs-denuncia.json
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/video-subs-denuncia.vtt
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/video-subs-jubilacion.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/video-subs-jubilacion.json
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/video-subs-jubilacion.vtt
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-01-sm.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-02-sm.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-03-sm.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-01.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-02.mp4
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/videos/loop-03.mp4
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_1.opus
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_1.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_2.opus
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_2.mp3
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_3.opus
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/audios/silbido_3.mp3
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/images/map-track/mapa-base-trashumancia-basemuda.jpg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/images/map-track/mapa-base-trashumancia-basemuda.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/images/map-track/mapa-base-trashumancia-basemuda.wbm
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/images/map-track/mapa-base-trashumancia-track.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/images/map-track/mapa-base-trashumancia.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/images/map-track/mapa-track-path.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/15/transhumancia/images/audio-img-francisco.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/images/mockup-face1.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/images/mockup-face2.webp
 
 
 
-
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-pre-header.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-preparacion-viaje.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-route-medias.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-sonidos.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-subs-01.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-subs-02.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-01.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/15/transhumancia/includes/inc-video-02.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/includes/inc-pre-header.html" -->

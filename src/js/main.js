@@ -10,7 +10,7 @@ export function initAll() {
 
   document.body.classList.add("is-loaded");
 
-  fadeOnScroll(".v-a--d-s-1 .v-a-img-c > .scr-ind");
+  fadeOnScroll(".v-n-preh .scr-ind");
   
   preHeaderScene();
 }

@@ -47,15 +47,33 @@ function destTo(el, target) {
   };
 }
 
+function headerPinOffset() {
+  const desktop = window.matchMedia("(min-width: 699px)").matches;
+  const headerH = desktop ? 58 : 50;
+  const banner = document.querySelector(".v-h-a");
+  const bannerOn = Boolean(
+    banner &&
+    getComputedStyle(banner).display !== "none" &&
+    banner.offsetHeight > 0
+  );
+  return headerH + (bannerOn ? 48 : 0);
+}
+
+function syncChromeOffset() {
+  const offset = headerPinOffset();
+  document.documentElement.style.setProperty("--preh-offset", `${offset}px`);
+  return offset;
+}
+
 export default function preHeaderScene() {
-  const scene = document.querySelector(".v-n-preh__scene");
+  const preh = document.querySelector(".v-n-preh");
+  const scene = preh?.querySelector(".v-n-preh__scene");
   const phase1 = scene?.querySelector(".v-n-preh__phase--1");
   const phase2 = scene?.querySelector(".v-n-preh__phase--2");
   const phase3 = scene?.querySelector(".v-n-preh__phase--3");
-  if (!scene || !phase1) return;
+  if (!preh || !scene || !phase1) return;
 
   const mainFace = phase1.querySelector(".v-n-preh__face--main");
-  const facePhase1 = mainFace?.querySelector("img");
   const txtDashPhase1 = phase1.querySelector(".v-n-preh__txt-slash");
   const subCPhase1 = phase1.querySelector(".v-n-preh__sub-c");
   const subsPhase1 = phase1.querySelectorAll(".v-n-preh__sub");
@@ -87,12 +105,14 @@ export default function preHeaderScene() {
   if (slotFace) gsap.set(slotFace, { autoAlpha: 0 });
   if (convoLine) gsap.set(convoLine, { scaleX: 0, transformOrigin: "left center" });
 
+  syncChromeOffset();
+
   const intro = gsap.timeline({
     defaults: { duration: 0.7, ease: "power2.out" },
   });
 
   intro
-    .fromTo(facePhase1, { autoAlpha: 0 }, { autoAlpha: 1 })
+    .fromTo(mainFace, { autoAlpha: 0 }, { autoAlpha: 1 })
     .fromTo(subsPhase1, { autoAlpha: 0 }, { autoAlpha: 1, stagger: 0.12 }, "<");
 
   const typedPhase1 = typewriter(txtPhase1, { timeline: intro, position: "-=0.5" });
@@ -104,181 +124,260 @@ export default function preHeaderScene() {
     `<${typedPhase1?.at(5) ?? 0}`
   );
 
-  const scroll = gsap.timeline({
-    paused: true,
-    defaults: { ease: "none" },
-  });
-
-  scroll.fromTo(
-    [txtPhase1, subCPhase1, txtDashPhase1],
-    { opacity: 1 },
-    {
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.out",
-      immediateRender: false,
-    }
-  );
-
-  typewriter(txtPhase2, {
-    timeline: scroll,
-    stagger: { amount: 1 },
-  });
-
-  if (otherFaces.length) {
-    scroll.to(
-      otherFaces,
-      {
-        autoAlpha: 1,
-        duration: 0.4,
-        stagger: { amount: 0.8, from: "random" },
-        ease: "power1.out",
-      },
-      0.6
-    );
-  }
-
   const syncDest = () => {
     if (mainFace && homeFace) Object.assign(dest2, destTo(mainFace, homeFace));
     if (mainFace && slotFace) Object.assign(dest3, destTo(mainFace, slotFace));
   };
 
-  intro.then(() => {
-    syncDest();
+  const addLead = (scroll, position) => {
+    if (!txtLead) return;
+    scroll.fromTo(
+      txtLead,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.55, ease: "power1.out", immediateRender: false },
+      position
+    );
+    return typewriter(txtLead, {
+      timeline: scroll,
+      position: `${position}+=0.55`,
+      fill: true,
+      fillFrom: 0.3,
+      showTarget: false,
+      stagger: { amount: 2.6 },
+      duration: 0.02,
+    });
+  };
 
-    if (mainFace && homeFace) {
-      scroll.to(
-        mainFace,
-        {
-          x: () => dest2.x,
-          y: () => dest2.y,
-          scale: () => dest2.scale,
-          transformOrigin: "0% 0%",
-          duration: 0.7,
-          ease: "power2.inOut",
-        },
-        0.5
-      );
-    }
-
-    const fadeOutP2 = [txtPhase2, ...otherFaces].filter(Boolean);
-    scroll.addLabel("phase3");
-
-    if (fadeOutP2.length) {
-      scroll.to(
-        fadeOutP2,
-        { autoAlpha: 0, duration: 0.55, ease: "power2.out" },
-        "phase3"
-      );
-    }
-
-    if (mainFace && slotFace) {
-      scroll.to(
-        mainFace,
-        {
-          x: () => dest3.x,
-          y: () => dest3.y,
-          scale: () => dest3.scale,
-          transformOrigin: "0% 0%",
-          duration: 0.75,
-          ease: "power2.inOut",
-        },
-        "phase3"
-      );
-    }
-
+  const addConvo = (scroll, start) => {
     if (anonSub) {
-      scroll.to(anonSub, { autoAlpha: 1, duration: 0.3, ease: "power2.out" }, "phase3+=0.5");
+      scroll.to(anonSub, { autoAlpha: 1, duration: 0.3, ease: "power2.out" }, `${start}+=0.15`);
     }
-
     if (convoLine) {
       scroll.to(
         convoLine,
         { scaleX: 1, duration: 0.5, ease: "power2.out" },
-        "phase3+=0.7"
+        `${start}+=0.35`
       );
     }
-
     if (hermanos) {
       scroll.to(
         hermanos,
         { autoAlpha: 1, duration: 0.35, ease: "power2.out" },
-        "phase3+=0.8"
+        `${start}+=0.45`
       );
     }
-
     const pachasBits = [pachasFace, pachasSub].filter(Boolean);
     if (pachasBits.length) {
       scroll.to(
         pachasBits,
         { autoAlpha: 1, duration: 0.45, ease: "power2.out" },
-        "phase3+=1.2"
+        `${start}+=0.85`
       );
     }
+  };
 
-    scroll.addLabel("lead", "phase3+=1.7");
-
-    if (txtLead) {
-      scroll.set(txtLead, { autoAlpha: 1 }, "lead");
-      typewriter(txtLead, {
-        timeline: scroll,
-        position: "lead",
-        fill: true,
-        fillFrom: 0.3,
-        showTarget: false,
-        stagger: { amount: 1.5 },
-        duration: 0.02,
-      });
-    }
-
-    scroll.addLabel("quote", "+=0.15");
-
-    if (txtQuote) {
-      scroll.set(txtQuote, { autoAlpha: 1 }, "quote");
-      const typedQuote = typewriter(txtQuote, {
-        timeline: scroll,
-        position: "quote",
-        showTarget: false,
-        stagger: { amount: 0.7 },
-      });
-
-      if (quoteSlash) {
-        scroll.fromTo(
-          quoteSlash,
-          { autoAlpha: 0 },
-          { autoAlpha: 1, duration: 0.2, ease: "power2.out", immediateRender: false },
-          `quote+=${typedQuote?.at(5) ?? 0}`
-        );
-      }
-    }
-
-    scroll.addLabel("endCopy", "+=0.12");
-
-    if (txtEnd) {
-      scroll.set(txtEnd, { autoAlpha: 1 }, "endCopy");
-      typewriter(txtEnd, {
-        timeline: scroll,
-        position: "endCopy",
-        showTarget: false,
-        stagger: { amount: 0.9 },
-      });
-    }
-
-    scroll.to({}, { duration: 0.85 });
-
-    ScrollTrigger.create({
-      animation: scroll,
-      trigger: scene,
-      start: "top top",
-      end: () => {
-        const vh = window.innerHeight;
-        const scaled = scroll.duration() * vh * 0.48;
-        return `+=${Math.round(gsap.utils.clamp(vh * 2.4, vh * 3.6, scaled))}`;
-      },
-      pin: true,
-      scrub: true,
-      invalidateOnRefresh: true,
-      onRefresh: syncDest,
+  const addQuote = (scroll, position) => {
+    if (!txtQuote) return;
+    scroll.set(txtQuote, { autoAlpha: 1 }, position);
+    const typedQuote = typewriter(txtQuote, {
+      timeline: scroll,
+      position,
+      showTarget: false,
+      stagger: { amount: 0.95 },
     });
+    if (quoteSlash) {
+      scroll.fromTo(
+        quoteSlash,
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.2, ease: "power2.out", immediateRender: false },
+        `${position}+=${typedQuote?.at(5) ?? 0}`
+      );
+    }
+    return typedQuote;
+  };
+
+  const addEnd = (scroll, position) => {
+    if (!txtEnd) return;
+    scroll.set(txtEnd, { autoAlpha: 1 }, position);
+    return typewriter(txtEnd, {
+      timeline: scroll,
+      position,
+      showTarget: false,
+      stagger: { amount: 1.15 },
+    });
+  };
+
+  intro.then(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add(
+      {
+        isMobile: "(max-width: 698px)",
+        isDesktop: "(min-width: 699px)",
+      },
+      (context) => {
+        const { isMobile } = context.conditions;
+        const reversions = [];
+        const remember = (typed) => {
+          if (typed?.revert) reversions.push(() => typed.revert());
+        };
+
+        syncDest();
+
+        const scroll = gsap.timeline({
+          paused: true,
+          defaults: { ease: "none" },
+        });
+
+        scroll.fromTo(
+          [txtPhase1, subCPhase1, txtDashPhase1],
+          { opacity: 1 },
+          {
+            opacity: 0,
+            duration: 0.65,
+            ease: "power2.out",
+            immediateRender: false,
+          }
+        );
+
+        if (txtPhase2) {
+          scroll.set(txtPhase2, { autoAlpha: 1 }, 0.65);
+        }
+
+        remember(
+          typewriter(txtPhase2, {
+            timeline: scroll,
+            position: 0.65,
+            stagger: { amount: 1.25 },
+            showTarget: false,
+          })
+        );
+
+        if (otherFaces.length) {
+          scroll.to(
+            otherFaces,
+            {
+              autoAlpha: 1,
+              duration: 0.5,
+              stagger: { amount: 1, from: "random" },
+              ease: "power1.out",
+            },
+            0.7
+          );
+        }
+
+        if (mainFace && homeFace) {
+          scroll.to(
+            mainFace,
+            {
+              x: () => dest2.x,
+              y: () => dest2.y,
+              scale: () => dest2.scale,
+              transformOrigin: "0% 0%",
+              duration: 0.9,
+              ease: "power2.inOut",
+            },
+            0.55
+          );
+        }
+
+        const fadeOutP2 = [txtPhase2, ...otherFaces].filter(Boolean);
+        scroll.to({}, { duration: 1.5 });
+        scroll.addLabel("phase3");
+
+        if (fadeOutP2.length) {
+          scroll.to(
+            fadeOutP2,
+            { autoAlpha: 0, duration: 0.55, ease: "power2.out" },
+            "phase3"
+          );
+        }
+
+        if (isMobile) {
+          if (mainFace) {
+            scroll.to(mainFace, { autoAlpha: 0, duration: 0.4, ease: "power2.out" }, "phase3");
+          }
+
+          scroll.addLabel("lead", "phase3+=0.4");
+          remember(addLead(scroll, "lead"));
+
+          scroll.addLabel("phase3b", "+=0.25");
+          if (txtLead) {
+            scroll.to(txtLead, { autoAlpha: 0, duration: 0.4, ease: "power2.out" }, "phase3b");
+          }
+
+          if (mainFace && slotFace) {
+            scroll.set(
+              mainFace,
+              {
+                x: () => dest3.x,
+                y: () => dest3.y,
+                scale: () => dest3.scale,
+                transformOrigin: "0% 0%",
+              },
+              "phase3b"
+            );
+            scroll.to(mainFace, { autoAlpha: 1, duration: 0.4, ease: "power2.out" }, "phase3b+=0.15");
+          }
+
+          addConvo(scroll, "phase3b+=0.35");
+          scroll.addLabel("quote", "phase3b+=1.75");
+          remember(addQuote(scroll, "quote"));
+          scroll.addLabel("endCopy", "+=0.12");
+          remember(addEnd(scroll, "endCopy"));
+        } else {
+          const slotMove = 0.75;
+          if (mainFace && slotFace) {
+            scroll.to(
+              mainFace,
+              {
+                x: () => dest3.x,
+                y: () => dest3.y,
+                scale: () => dest3.scale,
+                transformOrigin: "0% 0%",
+                duration: slotMove,
+                ease: "power2.inOut",
+              },
+              "phase3"
+            );
+          }
+
+          addConvo(scroll, `phase3+=${slotMove * 0.72}`);
+          scroll.addLabel("lead", "phase3+=2.15");
+          remember(addLead(scroll, "lead"));
+          scroll.addLabel("quote", "+=0.15");
+          remember(addQuote(scroll, "quote"));
+          scroll.addLabel("endCopy", "+=0.12");
+          remember(addEnd(scroll, "endCopy"));
+        }
+
+        scroll.to({}, { duration: 1.4 });
+
+        const refreshScene = () => {
+          syncChromeOffset();
+          syncDest();
+        };
+
+        ScrollTrigger.create({
+          animation: scroll,
+          trigger: preh,
+          start: () => `top ${headerPinOffset()}px`,
+          end: () => {
+            const vh = window.innerHeight;
+            const scaled = scroll.duration() * vh * 1.1;
+            return `+=${Math.round(gsap.utils.clamp(vh * 5.5, vh * 11, scaled))}`;
+          },
+          pin: true,
+          anticipatePin: 1,
+          scrub: true,
+          invalidateOnRefresh: true,
+          onRefresh: refreshScene,
+        });
+
+        return () => {
+          reversions.forEach((fn) => fn());
+        };
+      }
+    );
   });
 }

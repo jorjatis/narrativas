@@ -15,7 +15,7 @@
 .scr-ind {
   position: absolute;
   width: 100%;
-  height: calc(100dvh - 50px);
+  height: calc(100svh - 50px);
   top: 0;
   left: 0;
   display: flex;
@@ -28,7 +28,7 @@
   transition: opacity .3s ease, visibility .3s ease;
 
   @media (min-width: $screen-xs) {
-    height: calc(100dvh - 58px);
+    height: calc(100svh - 58px);
   }
 
   &.is-visible {
@@ -113,4 +113,8 @@
       animation: none;
     }
   }
+}
+
+.v-n-preh .scr-ind {
+  height: 100%;
 }

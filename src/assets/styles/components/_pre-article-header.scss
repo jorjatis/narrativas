@@ -41,7 +41,12 @@
       line-height: 40px;
     }
 
-    @media (min-width: 390px) {
+    @media (min-width: 361px) {
+      font-size: 48px;
+      line-height: 42px;
+    }
+
+    @media (min-width: 391px) {
       max-width: 510px;
       font-size: 54px;
       line-height: 48px;
@@ -123,63 +128,131 @@
       }
 
       &--1 {
-        top: 28%;
-        left: 47%;
+        top: 26%;
+        left: 46%;
       }
 
       &--2 {
-        top: 31%;
-        left: 65%;
+        top: 29%;
+        left: 67%;
+
+        @media (max-width: $screen-xs) {
+          top: 30%;
+          left: 68%;
+        }
+
+        @media (max-width: 330px) {
+          top: 28%;
+        }
       }
 
       &--3 {
-        top: 26%;
-        left: 81%;
+        top: 24%;
+        left: 79%;
+
+        @media (max-width: $screen-xs) {
+          top: 27%;
+          left: 88%;
+        }
       }
 
       &--4 {
-        top: 45%;
-        left: 88%;
+        top: 43%;
+        left: 89%;
+
+        @media (max-width: $screen-xs) {
+          top: 49%;
+          left: 92%;
+        }
+
+        @media (max-width: 330px) {
+          top: 51%;
+          left: 99%;
+        }
       }
 
       &--5 {
         top: 62%;
         left: 80%;
+
+        @media (max-width: $screen-xs) {
+          top: 64%;
+          left: 80%;
+        }
       }
 
       &--6 {
-        top: 71%;
+        top: 73%;
         left: 66%;
       }
 
       &--7 {
-        top: 69%;
-        left: 42%;
+        top: 72%;
+        left: 41%;
+        
+        @media (max-width: $screen-xs) {
+          top: 70%;
+          left: 42%;
+        }
+
+        @media (max-width: 330px) {
+          top: 73%;
+        }
       }
 
       &--8 {
         top: 60%;
         left: 19%;
+
+        @media (max-width: $screen-xs) {
+          top: 66%;
+          left: 22%;
+        }
       }
 
       &--9 {
         top: 39%;
         left: 12%;
+
+        @media (max-width: $screen-xs) {
+          top: 40%;
+          left: 5%;
+        }
+
+        @media (max-width: 330px) {
+          top: 38%;
+          left: 4%;
+        }
       }
 
       &--10 {
-        top: 31%;
-        left: 27%;
+        top: 30%;
+        left: 24%;
+
+        @media (max-width: $screen-xs) {
+          top: 28%;
+          left: 21%;
+        }
       }
 
       &--11 {
-        top: 14%;
-        left: 59%;
+        top: 13%;
+        left: 57%;
+
+        @media (max-width: $screen-xs) {
+          top: 10%;
+          left: 62%;
+        }
       }
 
       &--12 {
-        top: 21%;
-        left: 97%;
+        top: 17%;
+        left: 93%;
+
+        @media (max-width: $screen-xs) {
+          top: 13%;
+          left: 90%;
+        }
       }
 
       &--13 {
@@ -188,43 +261,58 @@
       }
 
       &--14 {
-        top: 61%;
-        left: 98%;
+        top: 66%;
+        left: 99%;
       }
 
       &--15 {
-        top: 80%;
+        top: 82%;
         left: 88%;
       }
 
       &--16 {
-        top: 78%;
+        top: 80%;
         left: 27%;
+
+        @media (max-width: $screen-xs) {
+          top: 86%;
+          left: 29%;
+        }
       }
 
       &--17 {
-        top: 73%;
-        left: 6%;
+        top: 77%;
+        left: 8%;
       }
 
       &--18 {
-        top: 53%;
+        top: 54%;
         left: 0%;
       }
 
       &--19 {
-        top: 19%;
-        left: 9%;
+        top: 15%;
+        left: 7%;
       }
 
       &--20 {
-        top: 83%;
+        top: 82%;
         left: 54%;
+
+        @media (max-width: $screen-xs) {
+          top: 84%;
+          left: 59%;
+        }
       }
 
       &--21 {
         top: 16%;
-        left: 34%;
+        left: 35%;
+
+        @media (max-width: $screen-xs) {
+          top: 13%;
+          left: 33%;
+        }
       }
     }
 
