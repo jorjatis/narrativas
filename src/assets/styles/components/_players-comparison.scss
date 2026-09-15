@@ -1,0 +1,253 @@
+@use '../base/variables' as *;
+
+.v-n-players-comparison {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 120px;
+
+  @media (min-width: 880px) {
+    width: 840px;
+    margin-left: calc(-840px / 2 + 50%);
+  }
+
+  @media (min-width: 980px) {
+    width: 940px;
+    margin-left: calc(-940px / 2 + 50%);
+  }
+
+  @media (min-width: 1190px) {
+    width: 1150px;
+    margin-left: calc(-1150px / 2 + 50%);
+  }
+
+  .v-slc {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    max-width: 245px;
+    width: 100%;
+    margin: 0 auto 60px;
+
+    &__t {
+      font-family: $mcs;
+    }
+  }
+
+  .player {
+    flex: 1 0 0;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+    column-gap: 20px;
+    align-items: start;
+
+    @media (min-width: 880px) {
+      grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    }
+  }
+
+  .player-left {
+    .player-stats {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -15px;
+        bottom: 0;
+        width: 1px;
+        background: $cb1;
+      }
+    }
+
+    .player-stat,
+    .player-stat__name {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .player-stat-bar__bar {
+      margin-left: auto;
+      transform-origin: right center;
+    }
+
+    .player-stat-bar__value {
+      right: 0;
+    }
+  }
+
+  .player-right {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 180px);
+
+    @media (min-width: 880px) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 260px);
+    }
+
+    .player-img {
+      grid-column: 2;
+    }
+
+    .player-stats {
+      grid-column: 1;
+    }
+
+    .player-stat,
+    .player-stat__name {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .player-stat-bar__bar {
+      transform-origin: left center;
+    }
+
+    .player-stat-bar__value {
+      left: 0;
+    }
+  }
+
+  .player-img {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 180px;
+    width: 100%;
+    min-height: 480px;
+    margin: 0;
+    background: lightgrey;
+    border-radius: 2px;
+
+    @media (min-width: 880px) {
+      max-width: 260px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 480px;
+      object-fit: contain;
+      object-position: bottom center;
+
+      &[hidden] {
+        display: none;
+      }
+    }
+  }
+
+  .player-stats {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .player-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .player-stat__name {
+    font-family: $mcr;
+    font-size: 12px;
+    line-height: 14px;
+    color: $cb8;
+  }
+
+  .player-stat-bar {
+    position: relative;
+    width: 100%;
+    height: 26px;
+  }
+
+  .player-stat-bar__bar {
+    height: 100%;
+    width: 0%;
+    min-width: 0;
+    background: $cp9;
+    border-radius: 2px;
+    transform: scaleX(0);
+
+    &.is-zero {
+      background: transparent;
+    }
+  }
+
+  .player-stat-bar__value {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 8px;
+    font-family: $mcs;
+    font-size: 12px;
+    line-height: 14px;
+    color: $cp1;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  @media (max-width: 880px) {
+    gap: 16px;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 64px;
+    overflow-x: hidden;
+
+    .v-slc {
+      grid-column: 1;
+      max-width: 100%;
+      min-width: 0;
+      margin: 0 auto 16px;
+    }
+
+    .player,
+    .player-right {
+      grid-template-columns: minmax(0, 1fr);
+      column-gap: 0;
+    }
+
+    .player-img,
+    .player-right .player-img {
+      grid-column: 1;
+      grid-row: 2;
+      max-width: 140px;
+      min-height: 200px;
+      margin: 0 auto 12px;
+    }
+
+    .player-img img {
+      min-height: 200px;
+    }
+
+    .player-stats,
+    .player-right .player-stats {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    .player-left .player-stats::after {
+      right: -8px;
+    }
+
+    .player-stat {
+      gap: 2px;
+    }
+
+    .player-stat-bar {
+      height: 22px;
+    }
+
+    .player-stat-bar__value {
+      padding: 0 6px;
+    }
+  }
+}

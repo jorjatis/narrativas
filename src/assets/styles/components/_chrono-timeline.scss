@@ -1,0 +1,135 @@
+@use '../base/variables' as *;
+
+.v-n-chrono-timeline {
+  margin-top: 98px;
+
+  @media (min-width: 1040px) {
+    width: 1000px;
+    margin-left: calc(-1000px / 2 + 50%);
+  }
+
+  .chrono-box {
+    max-width: 297px;
+    width: 100%;
+    min-height: 180px;
+    margin: 0 auto 162px;
+    padding: 32px 38px;
+    font-family: $mcr;
+    font-size: 16px;
+    line-height: 20px;
+    color: $cb1;
+    background: $cp12;
+    border-radius: 4px;
+    box-shadow: 0 0 32px 5px rgba($cb1, .08);
+
+    &__t {
+      font-family: $mcs;
+    }
+  }
+
+  .player-box + .chrono-box {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .player-box {
+    display: flex;
+
+    .player-years {
+      position: relative;
+      display: inline-flex;
+      gap: 64px;
+      min-width: 83px;
+      margin-top: 80px;
+
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        background: $cb1;
+        transform: rotate(45deg);
+      }
+
+      &:before {
+        width: 66px;
+        top: 23px;
+        left: -50px;
+      }
+
+      &:after {
+        width: 101px;
+        top: 11px;
+        right: -85px;
+      }
+    }
+
+    .player-year {
+      font-family: $mcs;
+      font-size: 36px;
+      line-height: 24px;
+      color: $cb1;
+    }
+
+    .player {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto 1fr auto;
+      max-width: 280px;
+      width: 100%;
+      margin-left: 40px;
+      padding-top: 2px;
+      padding-bottom: 24px;
+      padding-left: 6px;
+      border-left: 1px solid $cb1;
+
+      &__name {
+        grid-column: 1;
+        grid-row: 1;
+        display: block;
+        width: 100%;
+        min-width: 110px;
+        margin-bottom: 16px;
+        font-family: $mcs;
+        font-size: 16px;
+        line-height: 110%;
+        letter-spacing: -.32px;
+        color: $cb1;
+      }
+
+      &__age,
+      &__d {
+        font-family: $mcr;
+        font-size: 16px;
+        line-height: 110%;
+        letter-spacing: -.32px;
+        color: $cb1;
+      }
+
+      &__age {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      &__img {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        max-width: 200px;
+        margin: 0;
+
+        img {
+          display: block;
+          width: 100%;
+        }
+      }
+
+      &__d {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        margin-top: 18px;
+        padding-left: 14px;
+      }
+    }
+  }
+}
