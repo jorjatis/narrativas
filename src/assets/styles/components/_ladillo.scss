@@ -1,0 +1,84 @@
+@use '../base/variables' as *;
+
+.v-n-suh {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 72px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &:after {
+    content: '';
+    width: 240px;
+    height: 1px;
+    background: $cb1;
+
+    @media (min-width: $screen-xs) {
+      width: 337px;
+    }
+  }
+  
+  &__t {
+    font-family: $mcs;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: -.11px;
+    color: $cb1;
+    text-transform: uppercase;
+  }
+
+  &__l {
+    position: relative;
+    width: 220px;
+    height: 1px;
+    margin-left: 42px;
+    background: $cb1;
+
+    @media (min-width: 440px) {
+      width: 268px
+    }
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 1px;
+      background: $cb1;
+      transform: rotate(-45deg);
+    }
+
+    &:before {
+      width: 40px;
+      top: -10px;
+      left: 50%;
+    }
+
+    &:after {
+      width: 64px;
+      top: -18px;
+      left: 85%;
+    }
+  }
+}
+
+.v-n-suh--01 {
+  &:after {
+    margin-left: 0;
+
+    @media (min-width: $screen-xs) {
+      margin-left: 114px;
+    }
+  }
+}
+
+.v-n-suh--02 {
+  &:after {
+    margin-left: auto;
+
+    @media (min-width: $screen-xs) {
+      margin-left: -87px;
+    }
+  }
+}

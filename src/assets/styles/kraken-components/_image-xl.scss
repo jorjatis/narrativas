@@ -1,0 +1,68 @@
+@use '../base/variables' as *;
+
+.v-c-cmp--xl:has(.v-cmp-m) {
+  margin-bottom: 64px;
+
+  @media (min-width: 900px) {
+    margin-bottom: 106px;
+  }
+
+  .v-fc {
+    position: relative;
+    width: 50%;
+    margin: 0 0 0 70px;
+    padding: 14px 0 0 16px;
+    text-align: left;    
+
+    @media (min-width: 900px) {
+      position: absolute;
+      left: 50%;
+      margin: 0 auto;
+      transform: translateX(-400px);
+    }
+
+    @media (min-width: 980px) {
+      transform: translateX(-440px);
+    }
+
+    @media (min-width: 1140px) {
+      width: 146px;
+      transform: translateX(-510px);
+    }
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      background: $cb1;
+    }
+
+    &:before {
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: calc(100% + 20px);
+
+      @media (min-width: 900px) {
+        height: calc(100% + 70px);
+      }
+    }
+
+    &:after {
+      bottom: -10px;
+      left: -30px;
+      width: 68px;
+      height: 1px;
+      transform: rotate(45deg);
+
+      @media (min-width: 900px) {
+        bottom: -40px;
+        left: -60px;
+        width: 158px;
+      }
+    }
+
+    &__t {
+      font-family: $mcs;
+    }
+  }
+}

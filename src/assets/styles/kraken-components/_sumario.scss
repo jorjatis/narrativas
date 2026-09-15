@@ -1,0 +1,72 @@
+@use '../base/variables' as *;
+
+.v-cmp-smy {
+  margin-top: 192px;
+  margin-bottom: 130px;
+
+  @media (min-width: 860px) {
+    margin-left: -50px;
+  }
+
+  @media (min-width: 1000px) {
+    margin-left: -100px;
+  }
+
+  @media (min-width: 1200px) {
+    margin-left: -208px;
+  }
+
+  .v-a-inf-c {
+    &:before {
+      content: none;
+    }
+  }
+
+  .v-a-t {
+    position: relative;
+    padding: 0 35px;
+
+    @media (min-width: 420px) {
+      padding: 0 70px;
+    }
+
+    @media (min-width: 740px) {
+      padding: 0;
+    }
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      width: 53px;
+      height: 1px;
+      background: $cb1;
+      transform: rotate(-45deg);
+
+      @media (min-width: 420px) {
+        width: 106px;
+      }
+    }
+
+    &:before {
+      top: -20px;
+      left: 0;
+
+      @media (min-width: 740px) {
+        left: -60px;
+      }
+    }
+
+    &:after {
+      bottom: 0;
+      right: 0;
+
+      @media (min-width: 420px) {
+        bottom: 20px;
+      }
+
+      @media (min-width: 740px) {
+        right: -10px;
+      }
+    }
+  }
+}
