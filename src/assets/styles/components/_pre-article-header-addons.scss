@@ -56,8 +56,8 @@
     position: relative;
     width: fit-content;
     z-index: 10;
-    opacity: 0;
-    visibility: hidden;
+    // opacity: 0;
+    // visibility: hidden;
   }
 }
 
@@ -112,8 +112,8 @@
 }
 
 .v-n-preh__phase--2 .v-n-preh__faces .v-n-preh__face {
-  opacity: 0;
-  visibility: hidden;
+  // opacity: 0;
+  // visibility: hidden;
 }
 
 @media (max-width: 698px) {

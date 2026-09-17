@@ -63,6 +63,32 @@
       font-size: 96px;
       line-height: 85px;
     }
+
+    .t-peruanos,
+    .t-guerra {
+      display: inline-block;
+      overflow: hidden;
+      color: $cb2;
+      line-height: 0.82;
+      vertical-align: -0.12em;
+      transform: translateY(-2px);
+
+      @media (min-width: $screen-xs) {
+        transform: translateY(-5px);
+      }
+
+      > span {
+        background: $cp7;
+      }
+
+      > span:first-child {
+        padding-left: 6px;
+      }
+
+      > span:last-child {
+        padding-right: 6px;
+      }
+    }
   }
 
   &__txt {
@@ -327,7 +353,9 @@
     font-family: $mcs;
     font-size: 16px;
     line-height: 20px;
-    color: $cb9;
+    color: $cb2;
+    background: $cp7;
+    padding: 1px 6px;
   }
 
   &__sub--2 {
@@ -450,7 +478,7 @@
         &-line {
           width: 100%;
           height: 2px;
-          background: #ff9000;
+          background: $cp7;
         }
       }
 
