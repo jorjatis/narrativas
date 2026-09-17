@@ -12,7 +12,7 @@ const PLAYERS_DATA = {
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-lionel-messi.webp",
       position: "Delantero / Mediocentro ofensivo",
       titles: "Copa América (2), Finalissima y Mundial",
-      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-lionel-messi.webp",
       stats: {
         matches: { value: 31, percent: 15 },
         minutes: { value: 2932, percent: 28 },
@@ -28,7 +28,7 @@ const PLAYERS_DATA = {
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-juan-roman-riquelme.webp",
       position: "Mediapunta",
       titles: "Oro JJOO 2008",
-      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-juan-roman-riquelme.webp",
       stats: {
         matches: { value: 5, percent: 15 },
         minutes: { value: 449, percent: 28 },
@@ -44,7 +44,7 @@ const PLAYERS_DATA = {
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-alfredo-rojas.webp",
       position: "Delantero Centro",
       titles: "0",
-      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-alfredo-rojas.webp",
       stats: {
         matches: { value: 1, percent: 15 },
         minutes: { value: 90, percent: 28 },
@@ -60,7 +60,7 @@ const PLAYERS_DATA = {
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-jose-sanfilippo.webp",
       position: "Delantero Centro",
       titles: "0",
-      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-jose-sanfilippo.webp",
       stats: {
         matches: { value: 2, percent: 15 },
         minutes: { value: 180, percent: 28 },
@@ -76,7 +76,7 @@ const PLAYERS_DATA = {
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-antonio-rattin.webp",
       position: "Pivote / Centrocampista",
       titles: "0",
-      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-antonio-rattin.webp",
       stats: {
         matches: { value: 4, percent: 15 },
         minutes: { value: 304, percent: 28 },
@@ -92,7 +92,7 @@ const PLAYERS_DATA = {
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-ramon-heredia.webp",
       position: "Defensa y Centrocampista",
       titles: "0",
-      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-ramon-heredia.webp",
       stats: {
         matches: { value: 6, percent: 15 },
         minutes: { value: 540, percent: 28 },
@@ -108,7 +108,7 @@ const PLAYERS_DATA = {
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-mario-alberto-kempes.webp",
       position: "Delantero Centro",
       titles: "Mundial",
-      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-mario-alberto-kempes.webp",
       stats: {
         matches: { value: 7, percent: 15 },
         minutes: { value: 660, percent: 28 },
@@ -124,7 +124,7 @@ const PLAYERS_DATA = {
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-diego-armando-maradona.webp",
       position: "Mediapunta / Delantero",
       titles: "Mundial",
-      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-diego-armando-maradona.webp",
       stats: {
         matches: { value: 21, percent: 15 },
         minutes: { value: 1936, percent: 28 },
@@ -140,7 +140,7 @@ const PLAYERS_DATA = {
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-ariel-ortega.webp",
       position: "Mediapunta / Delantero",
       titles: "0",
-      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-ariel-ortega.webp",
       stats: {
         matches: { value: 8, percent: 15 },
         minutes: { value: 707, percent: 28 },
