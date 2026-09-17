@@ -9,10 +9,10 @@ const PLAYERS_DATA = {
     {
       id: "messi",
       name: "Lionel Messi",
-      image: "./assets/images/player-lionel-messi.webp",
-      position: "Delantero / mediapunta",
+      image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-lionel-messi.webp",
+      position: "Delantero / Mediocentro ofensivo",
       titles: "Copa América (2), Finalissima y Mundial",
-      pitchZones: "./assets/images/pitch-lionel-messi.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
       stats: {
         matches: { value: 31, percent: 15 },
         minutes: { value: 2932, percent: 28 },
@@ -25,10 +25,10 @@ const PLAYERS_DATA = {
     {
       id: "riquelme",
       name: "Juan Román Riquelme",
-      image: "./assets/images/player-juan-roman-riquelme.webp",
+      image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-juan-roman-riquelme.webp",
       position: "Mediapunta",
       titles: "Oro JJOO 2008",
-      pitchZones: "./assets/images/pitch-juan-roman-riquelme.webp",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
       stats: {
         matches: { value: 5, percent: 15 },
         minutes: { value: 449, percent: 28 },
@@ -39,35 +39,115 @@ const PLAYERS_DATA = {
       },
     },
     {
-      id: "maradona",
-      name: "Diego Armando Maradona",
-      image: "./assets/images/player-diego-armando-maradona.webp",
-      position: "Mediapunta",
-      titles: "Mundial 1986",
-      pitchZones: "./assets/images/pitch-diego-armando-maradona.webp",
+      id: "rojas",
+      name: "Alfredo Rojas",
+      image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-alfredo-rojas.webp",
+      position: "Delantero Centro",
+      titles: "0",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
       stats: {
-        matches: { value: 21, percent: 15 },
-        minutes: { value: 1890, percent: 28 },
-        goals: { value: 8, percent: 20 },
-        goalsPer90: { value: 0.38, percent: 35 },
-        goalsAfter80: { value: 12, percent: 18 },
-        teamGoalsOnPitch: { value: 28, percent: 25 },
+        matches: { value: 1, percent: 15 },
+        minutes: { value: 90, percent: 28 },
+        goals: { value: 0, percent: 20 },
+        goalsPer90: { value: 0, percent: 35 },
+        goalsAfter80: { value: 0, percent: 18 },
+        teamGoalsOnPitch: { value: 1, percent: 25 },
+      },
+    },
+    {
+      id: "sanfilippo",
+      name: "José Sanfilippo",
+      image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-jose-sanfilippo.webp",
+      position: "Delantero Centro",
+      titles: "0",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      stats: {
+        matches: { value: 2, percent: 15 },
+        minutes: { value: 180, percent: 28 },
+        goals: { value: 1, percent: 20 },
+        goalsPer90: { value: 0.5, percent: 35 },
+        goalsAfter80: { value: 100, percent: 18 },
+        teamGoalsOnPitch: { value: 2, percent: 25 },
+      },
+    },
+    {
+      id: "rattin",
+      name: "Antonio Rattín",
+      image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-antonio-rattin.webp",
+      position: "Pivote / Centrocampista",
+      titles: "0",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      stats: {
+        matches: { value: 4, percent: 15 },
+        minutes: { value: 304, percent: 28 },
+        goals: { value: 0, percent: 20 },
+        goalsPer90: { value: 0, percent: 35 },
+        goalsAfter80: { value: 0, percent: 18 },
+        teamGoalsOnPitch: { value: 4, percent: 25 },
+      },
+    },
+    {
+      id: "heredia",
+      name: "Ramón Heredia",
+      image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-ramon-heredia.webp",
+      position: "Defensa y Centrocampista",
+      titles: "0",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      stats: {
+        matches: { value: 6, percent: 15 },
+        minutes: { value: 540, percent: 28 },
+        goals: { value: 1, percent: 20 },
+        goalsPer90: { value: 0.17, percent: 35 },
+        goalsAfter80: { value: 0, percent: 18 },
+        teamGoalsOnPitch: { value: 9, percent: 25 },
       },
     },
     {
       id: "kempes",
       name: "Mario Alberto Kempes",
-      image: "./assets/images/player-mario-alberto-kempes.webp",
-      position: "Delantero",
-      titles: "Mundial 1978",
-      pitchZones: "./assets/images/pitch-mario-alberto-kempes.webp",
+      image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-mario-alberto-kempes.webp",
+      position: "Delantero Centro",
+      titles: "Mundial",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
       stats: {
-        matches: { value: 12, percent: 15 },
-        minutes: { value: 1080, percent: 28 },
+        matches: { value: 7, percent: 15 },
+        minutes: { value: 660, percent: 28 },
         goals: { value: 6, percent: 20 },
-        goalsPer90: { value: 0.5, percent: 35 },
-        goalsAfter80: { value: 8, percent: 18 },
-        teamGoalsOnPitch: { value: 18, percent: 25 },
+        goalsPer90: { value: 0.82, percent: 35 },
+        goalsAfter80: { value: 16.67, percent: 18 },
+        teamGoalsOnPitch: { value: 15, percent: 25 },
+      },
+    },
+    {
+      id: "maradona",
+      name: "Diego Armando Maradona",
+      image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-diego-armando-maradona.webp",
+      position: "Mediapunta / Delantero",
+      titles: "Mundial",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      stats: {
+        matches: { value: 21, percent: 15 },
+        minutes: { value: 1936, percent: 28 },
+        goals: { value: 8, percent: 20 },
+        goalsPer90: { value: 0.37, percent: 35 },
+        goalsAfter80: { value: 0, percent: 18 },
+        teamGoalsOnPitch: { value: 31, percent: 25 },
+      },
+    },
+    {
+      id: "ortega",
+      name: "Ariel Ortega",
+      image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-ariel-ortega.webp",
+      position: "Mediapunta / Delantero",
+      titles: "0",
+      pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo.webp",
+      stats: {
+        matches: { value: 8, percent: 15 },
+        minutes: { value: 707, percent: 28 },
+        goals: { value: 2, percent: 20 },
+        goalsPer90: { value: 0.41, percent: 35 },
+        goalsAfter80: { value: 0, percent: 18 },
+        teamGoalsOnPitch: { value: 12, percent: 25 },
       },
     },
   ],
@@ -157,14 +237,23 @@ export default function playersComparison() {
   };
 
   populateSelects();
+  syncSelectState();
   renderPlayer("left");
   renderPlayer("right");
   renderStats();
   bindSelects();
+  window.addEventListener("resize", syncPositionHeights);
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(() => {
+      renderStats();
+      syncPositionHeights();
+    });
+  }
 
   observeInView({
     target: root,
-    threshold: 0.2,
+    threshold: 0.5,
     once: true,
     onEnter: animateBars,
   });
@@ -184,6 +273,22 @@ export default function playersComparison() {
     });
   }
 
+  function syncSelectState() {
+    ["left", "right"].forEach((side) => {
+      const other = side === "left" ? "right" : "left";
+
+      sides[side].querySelectorAll("[data-player-id]").forEach((button) => {
+        const id = button.dataset.playerId;
+        const isSelected = id === selected[side];
+        const isTaken = id === selected[other];
+
+        button.classList.toggle("is-selected", isSelected);
+        button.classList.toggle("is-taken", isTaken);
+        button.disabled = isSelected || isTaken;
+      });
+    });
+  }
+
   function bindSelects() {
     ["left", "right"].forEach((side) => {
       const list = sides[side].querySelector(".v-slc__u");
@@ -191,16 +296,18 @@ export default function playersComparison() {
 
       list.addEventListener("click", (event) => {
         const button = event.target.closest("[data-player-id]");
-        if (!button) return;
+        if (!button || button.disabled) return;
 
         const id = button.dataset.playerId;
+        const other = side === "left" ? "right" : "left";
 
-        if (id === selected[side]) return;
+        if (id === selected[side] || id === selected[other]) return;
 
         selected[side] = id;
         const label = sides[side].querySelector(".v-slc__t");
         if (label) label.textContent = getPlayer(id).name;
 
+        syncSelectState();
         renderPlayer(side);
         renderStats(side, true);
       });
@@ -216,6 +323,21 @@ export default function playersComparison() {
     setImage(el.querySelector(".player-pitch"), player.pitchZones, `Posición de ${player.name}`);
 
     if (position) position.textContent = player.position || "";
+    syncPositionHeights();
+  }
+
+  function syncPositionHeights() {
+    const values = [...root.querySelectorAll(".player-position__value")];
+
+    values.forEach((el) => {
+      el.style.minHeight = "";
+    });
+
+    const max = values.reduce((height, el) => Math.max(height, el.offsetHeight), 0);
+
+    values.forEach((el) => {
+      el.style.minHeight = max ? `${max}px` : "";
+    });
   }
 
   function renderStats(side, animate = false) {
@@ -255,8 +377,27 @@ export default function playersComparison() {
     const valueEl = bar.querySelector(".stat-bar__value");
     const percent = (value / max) * 100;
 
+    const scale = percent / 100;
+    const isZero = value === 0;
+
     if (valueEl) valueEl.textContent = formatStat(value);
-    if (animate && fill) fill.style.transform = `scaleX(${percent / 100})`;
+    if (!fill) return;
+
+    bar.classList.toggle("is-zero", isZero);
+    bar.style.setProperty("--bar", String(scale));
+
+    if (animate) fill.style.transform = `scaleX(${scale})`;
+
+    placeValue(bar, scale, isZero);
+    requestAnimationFrame(() => placeValue(bar, scale, isZero));
+  }
+
+  function placeValue(bar, scale, isZero) {
+    const valueEl = bar.querySelector(".stat-bar__value");
+    if (!valueEl) return;
+
+    const fillWidth = bar.offsetWidth * scale;
+    bar.classList.toggle("is-outside", !isZero && fillWidth < valueEl.offsetWidth + 16);
   }
 
   function animateBars() {
