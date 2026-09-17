@@ -1,63 +1,148 @@
-import gsap from "gsap";
 import observeInView from "../helpers/observeInView";
 
-const STATS = [
-  { key: "goals", label: "Goles" },
-  { key: "assists", label: "Asistencias" },
-  { key: "matches", label: "Partidos" },
-  { key: "titles", label: "Títulos" },
-  { key: "worldCups", label: "Mundiales" },
-];
-
-const PLAYERS = [
-  {
-    id: "messi",
-    name: "Lionel Messi",
-    image: "",
-    stats: { goals: 112, assists: 58, matches: 191, titles: 8, worldCups: 1 },
+const PLAYERS_DATA = {
+  defaults: {
+    left: "messi",
+    right: "riquelme",
   },
-  {
-    id: "maradona",
-    name: "Diego Maradona",
-    image: "",
-    stats: { goals: 34, assists: 26, matches: 91, titles: 4, worldCups: 1 },
-  },
-  {
-    id: "riquelme",
-    name: "Juan Román Riquelme",
-    image: "",
-    stats: { goals: 17, assists: 24, matches: 51, titles: 3, worldCups: 0 },
-  },
-  {
-    id: "ortega",
-    name: "Ariel Ortega",
-    image: "",
-    stats: { goals: 17, assists: 12, matches: 87, titles: 2, worldCups: 0 },
-  },
-  {
-    id: "aimar",
-    name: "Pablo Aimar",
-    image: "",
-    stats: { goals: 8, assists: 10, matches: 52, titles: 2, worldCups: 0 },
-  },
-];
-
-const DEFAULTS = {
-  left: "messi",
-  right: "riquelme",
+  players: [
+    {
+      id: "messi",
+      name: "Lionel Messi",
+      image: "./assets/images/player-lionel-messi.webp",
+      position: "Delantero / mediapunta",
+      titles: "Copa América (2), Finalissima y Mundial",
+      pitchZones: "./assets/images/pitch-lionel-messi.webp",
+      stats: {
+        matches: { value: 31, percent: 15 },
+        minutes: { value: 2932, percent: 28 },
+        goals: { value: 20, percent: 20 },
+        goalsPer90: { value: 0.61, percent: 35 },
+        goalsAfter80: { value: 25, percent: 18 },
+        teamGoalsOnPitch: { value: 56, percent: 25 },
+      },
+    },
+    {
+      id: "riquelme",
+      name: "Juan Román Riquelme",
+      image: "./assets/images/player-juan-roman-riquelme.webp",
+      position: "Mediapunta",
+      titles: "Oro JJOO 2008",
+      pitchZones: "./assets/images/pitch-juan-roman-riquelme.webp",
+      stats: {
+        matches: { value: 5, percent: 15 },
+        minutes: { value: 449, percent: 28 },
+        goals: { value: 0, percent: 20 },
+        goalsPer90: { value: 0, percent: 35 },
+        goalsAfter80: { value: 0, percent: 18 },
+        teamGoalsOnPitch: { value: 10, percent: 25 },
+      },
+    },
+    {
+      id: "maradona",
+      name: "Diego Armando Maradona",
+      image: "./assets/images/player-diego-armando-maradona.webp",
+      position: "Mediapunta",
+      titles: "Mundial 1986",
+      pitchZones: "./assets/images/pitch-diego-armando-maradona.webp",
+      stats: {
+        matches: { value: 21, percent: 15 },
+        minutes: { value: 1890, percent: 28 },
+        goals: { value: 8, percent: 20 },
+        goalsPer90: { value: 0.38, percent: 35 },
+        goalsAfter80: { value: 12, percent: 18 },
+        teamGoalsOnPitch: { value: 28, percent: 25 },
+      },
+    },
+    {
+      id: "kempes",
+      name: "Mario Alberto Kempes",
+      image: "./assets/images/player-mario-alberto-kempes.webp",
+      position: "Delantero",
+      titles: "Mundial 1978",
+      pitchZones: "./assets/images/pitch-mario-alberto-kempes.webp",
+      stats: {
+        matches: { value: 12, percent: 15 },
+        minutes: { value: 1080, percent: 28 },
+        goals: { value: 6, percent: 20 },
+        goalsPer90: { value: 0.5, percent: 35 },
+        goalsAfter80: { value: 8, percent: 18 },
+        teamGoalsOnPitch: { value: 18, percent: 25 },
+      },
+    },
+  ],
 };
+
+const PLAYERS = PLAYERS_DATA.players;
+const DEFAULTS = PLAYERS_DATA.defaults;
 
 function getPlayer(id) {
   return PLAYERS.find((player) => player.id === id);
 }
 
-function maxForStat(key) {
-  return Math.max(...PLAYERS.map((player) => Number(player.stats[key]) || 0), 1);
+function getStatValue(player, key) {
+  const stat = player?.stats?.[key];
+
+  if (stat && typeof stat === "object") return Number(stat.value) || 0;
+
+  return Number(stat) || 0;
+}
+
+function getStatPercent(key) {
+  for (const player of PLAYERS) {
+    const percent = Number(player.stats?.[key]?.percent);
+
+    if (Number.isFinite(percent)) return percent / 100;
+  }
+
+  return 0.15;
+}
+
+const STAT_SCALE = ["matches", "minutes", "goals", "goalsPer90", "goalsAfter80", "teamGoalsOnPitch"].reduce(
+  (scales, key) => {
+    const max = PLAYERS.reduce((current, player) => {
+      const value = getStatValue(player, key);
+      return value > current ? value : current;
+    }, 0);
+
+    scales[key] = Math.max(max * (1 + getStatPercent(key)), 1);
+    return scales;
+  },
+  {}
+);
+
+function formatStat(value) {
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) return String(value ?? "");
+
+  if (!Number.isInteger(number)) {
+    return number.toLocaleString("es-AR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+
+  return number.toLocaleString("es-AR");
+}
+
+function setImage(img, src, alt = "") {
+  if (!img) return;
+
+  img.alt = alt;
+
+  if (src) {
+    img.src = src;
+    img.hidden = false;
+  } else {
+    img.removeAttribute("src");
+    img.hidden = true;
+  }
 }
 
 export default function playersComparison() {
   const root = document.querySelector(".v-n-players-comparison");
-  if (!root) return;
+  if (!root || PLAYERS.length < 2) return;
 
   const sides = {
     left: root.querySelector(".player-left"),
@@ -66,21 +151,22 @@ export default function playersComparison() {
 
   if (!sides.left || !sides.right) return;
 
-  const selected = { ...DEFAULTS };
+  const selected = {
+    left: getPlayer(DEFAULTS.left) ? DEFAULTS.left : PLAYERS[0].id,
+    right: getPlayer(DEFAULTS.right) ? DEFAULTS.right : PLAYERS[1].id,
+  };
 
   populateSelects();
-  renderSide("left");
-  renderSide("right");
+  renderPlayer("left");
+  renderPlayer("right");
+  renderStats();
   bindSelects();
 
   observeInView({
     target: root,
     threshold: 0.2,
     once: true,
-    onEnter: () => {
-      animateBars("left");
-      animateBars("right");
-    },
+    onEnter: animateBars,
   });
 
   function populateSelects() {
@@ -108,73 +194,72 @@ export default function playersComparison() {
         if (!button) return;
 
         const id = button.dataset.playerId;
-        const otherSide = side === "left" ? "right" : "left";
 
-        if (id === selected[side] || id === selected[otherSide]) return;
+        if (id === selected[side]) return;
 
         selected[side] = id;
         const label = sides[side].querySelector(".v-slc__t");
         if (label) label.textContent = getPlayer(id).name;
 
-        renderSide(side);
-        animateBars(side);
+        renderPlayer(side);
+        renderStats(side, true);
       });
     });
   }
 
-  function renderSide(side) {
+  function renderPlayer(side) {
     const player = getPlayer(selected[side]);
     const el = sides[side];
-    const img = el.querySelector(".player-img img");
+    const position = el.querySelector(".player-position__value");
 
-    if (img) {
-      img.alt = player.name;
+    setImage(el.querySelector(".player-img img"), player.image, player.name);
+    setImage(el.querySelector(".player-pitch"), player.pitchZones, `Posición de ${player.name}`);
 
-      if (player.image) {
-        img.src = player.image;
-        img.hidden = false;
-      } else {
-        img.removeAttribute("src");
-        img.hidden = true;
+    if (position) position.textContent = player.position || "";
+  }
+
+  function renderStats(side, animate = false) {
+    const left = getPlayer(selected.left);
+    const right = getPlayer(selected.right);
+
+    const titlesRow = root.querySelector('.stat-row[data-stat="titles"]');
+    if (titlesRow) {
+      if (!side || side === "left") {
+        const leftText = titlesRow.querySelector(".stat-row__text--left");
+        if (leftText) leftText.textContent = left.titles || "";
+      }
+      if (!side || side === "right") {
+        const rightText = titlesRow.querySelector(".stat-row__text--right");
+        if (rightText) rightText.textContent = right.titles || "";
       }
     }
 
-    const items = el.querySelectorAll(".player-stat");
+    root.querySelectorAll(".stat-row--bar").forEach((row) => {
+      const key = row.dataset.stat;
+      const max = STAT_SCALE[key] || 1;
 
-    STATS.forEach((stat, index) => {
-      const item = items[index];
-      if (!item) return;
+      if (!side || side === "left") {
+        setBar(row.querySelector(".stat-bar--left"), getStatValue(left, key), max, animate);
+      }
 
-      const value = Number(player.stats[stat.key]) || 0;
-      const percent = (value / maxForStat(stat.key)) * 100;
-      const nameEl = item.querySelector(".player-stat__name");
-      const valueEl = item.querySelector(".player-stat-bar__value");
-      const barEl = item.querySelector(".player-stat-bar__bar");
-
-      if (nameEl) nameEl.textContent = stat.label;
-      if (valueEl) valueEl.textContent = value;
-
-      if (barEl) {
-        barEl.dataset.width = String(percent);
-        barEl.classList.toggle("is-zero", value === 0);
-        gsap.killTweensOf(barEl);
-        gsap.set(barEl, { width: `${percent}%`, scaleX: 0 });
+      if (!side || side === "right") {
+        setBar(row.querySelector(".stat-bar--right"), getStatValue(right, key), max, animate);
       }
     });
   }
 
-  function animateBars(side) {
-    const bars = sides[side].querySelectorAll(".player-stat-bar__bar");
+  function setBar(bar, value, max, animate) {
+    if (!bar) return;
 
-    gsap.killTweensOf(bars);
+    const fill = bar.querySelector(".stat-bar__fill");
+    const valueEl = bar.querySelector(".stat-bar__value");
+    const percent = (value / max) * 100;
 
-    gsap.to(bars, {
-      scaleX: 1,
-      duration: 0.8,
-      ease: "power2.out",
-      stagger: 0.06,
-      overwrite: true,
-      force3D: true,
-    });
+    if (valueEl) valueEl.textContent = formatStat(value);
+    if (animate && fill) fill.style.transform = `scaleX(${percent / 100})`;
+  }
+
+  function animateBars() {
+    renderStats(undefined, true);
   }
 }

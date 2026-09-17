@@ -1,7 +1,9 @@
 <div class="v-n-suh v-n-suh--02">
   <span class="v-n-suh__l"></span>
-  <h3 class="v-n-suh__t">Compara sus datos</h3>
-</div> 
+  <h3 class="v-n-suh__t">Compara <br> sus datos</h3>
+</div>
+
+<p class="v-n-players-comparison__lead">Las estadísticas recopiladas hacen referencia exclusivamente a partidos de la fase final del Mundial en los que el jugador lucía el 10</p>
 
 <div class="v-n-players-comparison">
   <div class="player player-left">
@@ -25,48 +27,107 @@
       <img src="" alt="Lionel Messi" hidden>
     </figure>
 
-    <ul class="player-stats">
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-    </ul>
+    <div class="player-position">
+      <span class="player-position__label">Posición</span>
+      <span class="player-position__value"></span>
+      <img class="player-pitch" src="" alt="" hidden>
+    </div>
   </div>
+
+  <ul class="comparison-stats">
+    <li class="stat-row stat-row--text" data-stat="titles">
+      <span class="stat-row__label">Títulos</span>
+      <div class="stat-row__texts">
+        <span class="stat-row__text stat-row__text--left"></span>
+        <span class="stat-row__divider"></span>
+        <span class="stat-row__text stat-row__text--right"></span>
+      </div>
+    </li>
+
+    <li class="stat-row stat-row--bar" data-stat="matches">
+      <span class="stat-row__label">Nº de partidos</span>
+      <div class="stat-row__track">
+        <div class="stat-bar stat-bar--left">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+        <div class="stat-bar stat-bar--right">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+      </div>
+    </li>
+
+    <li class="stat-row stat-row--bar" data-stat="minutes">
+      <span class="stat-row__label">Minutos jugados</span>
+      <div class="stat-row__track">
+        <div class="stat-bar stat-bar--left">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+        <div class="stat-bar stat-bar--right">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+      </div>
+    </li>
+
+    <li class="stat-row stat-row--bar" data-stat="goals">
+      <span class="stat-row__label">Goles</span>
+      <div class="stat-row__track">
+        <div class="stat-bar stat-bar--left">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+        <div class="stat-bar stat-bar--right">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+      </div>
+    </li>
+
+    <li class="stat-row stat-row--bar" data-stat="goalsPer90">
+      <span class="stat-row__label">Promedio de goles 90'</span>
+      <div class="stat-row__track">
+        <div class="stat-bar stat-bar--left">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+        <div class="stat-bar stat-bar--right">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+      </div>
+    </li>
+
+    <li class="stat-row stat-row--bar" data-stat="goalsAfter80">
+      <span class="stat-row__label">% Goles anotados después del Min.80</span>
+      <div class="stat-row__track">
+        <div class="stat-bar stat-bar--left">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+        <div class="stat-bar stat-bar--right">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+      </div>
+    </li>
+
+    <li class="stat-row stat-row--bar" data-stat="teamGoalsOnPitch">
+      <span class="stat-row__label">Nº de goles del equipo estando él en el campo</span>
+      <div class="stat-row__track">
+        <div class="stat-bar stat-bar--left">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+        <div class="stat-bar stat-bar--right">
+          <div class="stat-bar__fill"></div>
+          <span class="stat-bar__value"></span>
+        </div>
+      </div>
+    </li>
+  </ul>
 
   <div class="player player-right">
     <div class="v-slc" data-voc-component="select">
@@ -89,46 +150,10 @@
       <img src="" alt="Juan Román Riquelme" hidden>
     </figure>
 
-    <ul class="player-stats">
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-
-      <li class="player-stat">
-        <span class="player-stat__name"></span>
-        <div class="player-stat-bar">
-          <div class="player-stat-bar__bar"></div>
-          <span class="player-stat-bar__value"></span>
-        </div>
-      </li>
-    </ul>
+    <div class="player-position">
+      <span class="player-position__label">Posición</span>
+      <span class="player-position__value"></span>
+      <img class="player-pitch" src="" alt="" hidden>
+    </div>
   </div>
 </div>
