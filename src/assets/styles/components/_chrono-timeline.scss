@@ -1,18 +1,36 @@
 @use '../base/variables' as *;
 
 .v-n-chrono-timeline {
+  --chrono-pipe-w: 24px;
+  --chrono-pipe-gutter: 18px;
+  --chrono-pipe-color: #88e0ff;
+
   position: relative;
   margin-top: 98px;
   margin-bottom: 340px;
+  width: 100%;
   max-width: 343px;
   margin-left: auto;
   margin-right: auto;
+  overflow: visible;
 
   @media (min-width: 1140px) {
+    --chrono-pipe-w: 42px;
+
     width: 1000px;
     max-width: unset;
     margin-left: calc(-1000px / 2 + 50%);
     margin-right: unset;
+  }
+
+  .chrono-pipeline {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .chrono-box {
@@ -31,103 +49,22 @@
     background: $cp12;
     border-radius: 4px;
     box-shadow: 0 0 32px 5px rgba($cb1, .08);
+    z-index: 1;
 
     &__t {
       font-family: $mcs;
     }
   }
 
-  .pipeline--v {
-    position: absolute;
-    top: 0;
-    left: 18px;
-    width: 24px;
-    height: 100%;
-    background: #88e0ff;
-
-    @media (min-width: 1140px) {
-      width: 42px;
-    }
-  }
-
-  .pipeline--h {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    left: 18px;
-    width: calc(50%);
-    height: 24px;
-    background: #88e0ff;
-
-    @media (min-width: 1140px) {
-      display: block;
-      height: 42px;
-    }
-  }
-
-  .pipeline-shadow {
-    position: absolute;
-    top: 0;
-    width: 42px;
-    height: 100%;
-    z-index: 2;
-    background: linear-gradient(280deg, #88E0FF 10%, #4E7383 100%);
-    clip-path: polygon(0 100%, 100% 0, 100% 0, 100% 100%);
-    opacity: 0.3;
-
-    &--01 {
-      left: 0;
-      transform: rotate(90deg);
-    }
-
-    &--02 {
-      right: 0;
-      transform: rotate(-90deg);
-    }
-
-    &--03 {
-      left: 0;
-      transform: rotate(0deg);
-    }
-
-    &--04 {
-      right: 0;
-      transform: rotate(0deg);
-      background: linear-gradient(350deg, #88E0FF 10%, #4E7383 100%);
-    }
-  }
-
   &__item {
     position: relative;
     padding: 80px 0;
+    z-index: 1;
 
     &:has(.chrono-box) {
       @media (min-width: 1140px) {
         display: flex;
         justify-content: center;
-      }
-
-      .pipeline--v {
-        @media (min-width: 1140px) {
-          left: unset;
-        }
-      }
-    }
-
-    &--01 {
-      .pipeline--h {
-        display: block;
-        top: 0;
-
-        @media (min-width: 1140px) {
-          display: none;
-        }
-      }
-
-      .pipeline-shadow {
-        @media (max-width: 1139px) {
-          width: 24px;
-        }
       }
     }
 
@@ -135,9 +72,11 @@
       @media (min-width: 1140px) {
         padding-bottom: 160px;
       }
+    }
 
-      .pipeline--h {
-        width: calc(50% + 2px);
+    &[data-pipe="jog"] {
+      @media (min-width: 1140px) {
+        padding-bottom: 160px;
       }
     }
 
@@ -154,159 +93,16 @@
           transform: translateY(-90px);
         }
       }
-
-      .pipeline--v {
-        @media (min-width: 1140px) {
-          display: none;
-        }
-      }
     }
 
-    &--09 {      
-      .pipeline-box {
-        .pipeline--v {
-          &-01 {
-            @media (min-width: 1140px) {
-              height: 206px;
-            }
-          }
-
-          &-02 {
-            display: none;
-
-            @media (min-width: 1140px) {
-              display: block;
-              top: 206px;
-              left: 464px;
-              height: 385px;
-            }
-          }
-        }
-
-        .pipeline--h {
-          &-01 {
-            top: 206px;
-            bottom: unset;
-            width: 488px;
-          }
-
-          &-02 {
-            width: 488px;
-          }
-        }
-      }
-    }
-
-    &--10 {      
-      .pipeline-box {
-        .pipeline--v {
-          &-01 {
-            @media (min-width: 1140px) {
-              height: 206px;
-            }
-          }
-
-          &-02 {
-            display: none;
-
-            @media (min-width: 1140px) {
-              display: block;
-              top: 206px;
-              left: 178px;
-              height: 385px;
-            }
-          }
-        }
-
-        .pipeline--h {
-          &-01 {
-            top: 206px;
-            bottom: unset;
-            width: 202px;
-          }
-
-          &-02 {
-            width: 202px;
-          }
-        }
-      }
-    }
-
-    &--12 {      
-      .pipeline-box {
-        .pipeline--v {
-          &-01 {
-            @media (min-width: 1140px) {
-              height: 206px;
-            }
-          }
-
-          &-02 {
-            display: none;
-
-            @media (min-width: 1140px) {
-              display: block;
-              top: 206px;
-              left: 629px;
-              height: 385px;
-            }
-          }
-        }
-
-        .pipeline--h {
-          &-01 {
-            top: 206px;
-            bottom: unset;
-            width: 653px;
-          }
-
-          &-02 {
-            width: 500px;
-            left: 171px;
-          }
-        }
-      }
-    }
-
-    &--13 { 
+    &--13 {
       display: none;
+      min-height: 0;
+      padding: 0;
 
-      @media (min-width: 1140px) {    
+      @media (min-width: 1140px) {
         display: block;
-
-        .pipeline-box {
-          .pipeline--v {
-            &-01 {
-              height: 135px;
-              left: 171px;
-            }
-
-            &-02 {
-              top: 130px;
-              left: 434px;
-              height: 150px;
-
-              &:after {
-                content: '';
-                position: absolute;
-                bottom: -50px;
-                left: 0;
-                width: 100%;
-                height: 50px;
-                background: linear-gradient(180deg,rgba(136, 224, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
-              }
-            }
-          }
-
-          .pipeline--h {
-            &-01 {
-              top: 130px;
-              left: 171px;
-              bottom: unset;
-              width: 305px;
-            }
-          }
-        }
+        min-height: 280px;
       }
     }
   }
@@ -314,6 +110,7 @@
   .player-box {
     position: relative;
     display: flex;
+    align-items: flex-start;
 
     .player-years {
       position: relative;
@@ -323,11 +120,12 @@
       min-width: 83px;
       margin-top: 12px;
 
-      @media (min-width: 1140px) {
-        flex-direction: row;
-        gap: 64px;
-        margin-top: 80px;
-      }
+    @media (min-width: 1140px) {
+      flex-direction: row;
+      gap: 64px;
+      margin-top: 80px;
+      align-self: flex-start;
+    }
 
       &:before, &:after {
         content: '';
@@ -360,7 +158,7 @@
         left: 54px;
 
         @media (min-width: 1140px) {
-          width: 101px;         
+          width: 101px;
           top: 10px;
           left: unset;
           right: -90px;

@@ -2,12 +2,14 @@
 import fadeOnScroll from "./helpers/fadeOnScroll";
 
 // NOTE: Modules
+import chronoPipeline from "./modules/chronoPipeline";
 import playersComparison from "./modules/playersComparison";
 
 export function initAll() {
   document.body.classList.add("is-loaded");
 
   fadeOnScroll(".v-n-preh .scr-ind");
+  chronoPipeline();
   playersComparison();
 }
 
