@@ -88,9 +88,9 @@
       .chrono-box {
         @media (min-width: 1140px) {
           position: absolute;
+          top: -90px;
           right: 0;
           margin-bottom: 0;
-          transform: translateY(-90px);
         }
       }
     }
@@ -119,6 +119,7 @@
       gap: 16px;
       min-width: 83px;
       margin-top: 12px;
+      overflow: visible;
 
     @media (min-width: 1140px) {
       flex-direction: row;
@@ -178,11 +179,23 @@
       }
     }
 
+    .player-year__label {
+      display: inline-block;
+      overflow: hidden;
+      padding: 0.28em 0.1em 0.2em;
+      margin: -0.28em -0.1em -0.2em;
+    }
+
+    .player-year__text {
+      display: inline-block;
+    }
+
     .player-year-cup {
       position: absolute;
       top: 50%;
       right: -12px;
       width: 16px;
+      overflow: visible;
       transform: translateY(-50%);
       z-index: 1;
 
@@ -197,6 +210,19 @@
         width: 24px;
         transform: translateX(-50%);
       }
+
+      svg {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .player-year-cup__confetti {
+      position: absolute;
+      background: #111;
+      pointer-events: none;
+      z-index: 4;
+      border-radius: 0.5px;
     }
 
     .player {

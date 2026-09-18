@@ -200,6 +200,7 @@ function cornerShadows(points) {
     if (dx1 * dy2 - dy1 * dx2 === 0) continue;
 
     corners.push({
+      i,
       x: b.x,
       y: b.y,
       ...shadowVariant(dx1, dy1, dx2, dy2),
@@ -339,6 +340,7 @@ function drawTimeline(timeline) {
   mask.setAttribute("maskUnits", "userSpaceOnUse");
 
   const maskPath = document.createElementNS(SVG_NS, "path");
+  maskPath.classList.add("chrono-pipeline__mask-path");
   maskPath.setAttribute("d", pathD);
   maskPath.setAttribute("fill", "none");
   maskPath.setAttribute("stroke", "#fff");
@@ -363,7 +365,25 @@ function drawTimeline(timeline) {
   main.setAttribute("stroke", useFade ? `url(#${fadeId})` : color);
   Object.entries(strokeAttrs).forEach(([key, value]) => main.setAttribute(key, value));
 
-  svg.append(defs, main);
+  const clipId = `${uid}-draw`;
+  const clip = document.createElementNS(SVG_NS, "clipPath");
+  clip.setAttribute("id", clipId);
+  clip.setAttribute("clipPathUnits", "userSpaceOnUse");
+
+  const clipRect = document.createElementNS(SVG_NS, "rect");
+  clipRect.classList.add("chrono-pipeline__draw-clip");
+  clipRect.setAttribute("x", "-80");
+  clipRect.setAttribute("y", "-80");
+  clipRect.setAttribute("width", String(width + 160));
+  clipRect.setAttribute("height", "0");
+  clip.append(clipRect);
+  defs.append(clip);
+
+  const drawn = document.createElementNS(SVG_NS, "g");
+  drawn.classList.add("chrono-pipeline__drawn");
+  drawn.setAttribute("clip-path", `url(#${clipId})`);
+
+  drawn.append(main);
 
   const size = strokeWidth;
   const shadows = document.createElementNS(SVG_NS, "g");
@@ -372,7 +392,9 @@ function drawTimeline(timeline) {
   cornerShadows(points).forEach((corner) => {
     const group = document.createElementNS(SVG_NS, "g");
     group.classList.add("chrono-pipeline__shadow");
-    group.setAttribute("opacity", "0.3");
+    group.dataset.i = String(corner.i);
+    group.dataset.y = String(round(corner.y));
+    group.setAttribute("opacity", "0");
     group.setAttribute(
       "transform",
       `translate(${round(corner.x)} ${round(corner.y)}) rotate(${corner.rotate}) translate(${round(-size / 2)} ${round(-size / 2)})`
@@ -385,7 +407,14 @@ function drawTimeline(timeline) {
     shadows.append(group);
   });
 
-  svg.append(shadows);
+  drawn.append(shadows);
+  svg.append(defs, drawn);
+
+  timeline.dispatchEvent(
+    new CustomEvent("chrono-pipeline:drawn", {
+      detail: { points, strokeWidth },
+    })
+  );
 }
 
 function whenImagesReady(root) {
