@@ -33,6 +33,16 @@
     z-index: 0;
   }
 
+  // Punto de entrada del pipeline: centrado para empalmar con el que baja
+  // desde el 10 de la cabecera.
+  &__start {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+  }
+
   .chrono-box {
     position: relative;
     display: flex;
