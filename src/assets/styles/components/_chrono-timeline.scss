@@ -56,11 +56,12 @@
     bottom: 0;
     left: 18px;
     width: calc(50%);
-    height: 42px;
+    height: 24px;
     background: #88e0ff;
 
     @media (min-width: 1140px) {
       display: block;
+      height: 42px;
     }
   }
 
@@ -109,6 +110,23 @@
       .pipeline--v {
         @media (min-width: 1140px) {
           left: unset;
+        }
+      }
+    }
+
+    &--01 {
+      .pipeline--h {
+        display: block;
+        top: 0;
+
+        @media (min-width: 1140px) {
+          display: none;
+        }
+      }
+
+      .pipeline-shadow {
+        @media (max-width: 1139px) {
+          width: 24px;
         }
       }
     }

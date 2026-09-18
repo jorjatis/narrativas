@@ -21,7 +21,7 @@
   &__c {
     display: grid;
     grid-template-columns: minmax(0, 160px) minmax(0, 1fr) minmax(0, 160px);
-    column-gap: 20px;
+    column-gap: 50px;
     align-items: start;
 
     @media (max-width: 879px) {
