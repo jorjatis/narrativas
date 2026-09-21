@@ -1,8 +1,8 @@
 import gsap from "gsap";
 import lottie from "lottie-web/build/player/lottie_light";
-import animationData from "@images/diez-animacion.json";
+import animationData from "@images/el10-intro.json";
 
-const PIPE_OVERLAP = 8;
+const PIPE_OVERLAP = 22;
 const BLOCK_HIDDEN = "inset(0% 0% 100% 0%)";
 const BLOCK_SHOWN = "inset(0% 0% 0% 0%)";
 const WORD_DURATION = 0.52;
@@ -34,28 +34,17 @@ function mountLottie(host) {
   });
 }
 
-// El JSON trae el 10 centrado en un lienzo cuadrado mucho más grande que el
-// trazo. Reencuadramos el viewBox al contenido del último fotograma (el trazo
-// se dibuja con trim paths) para que el 10 llene su caja y el pipeline pueda
-// arrancar justo en su base.
+// El JSON nuevo ya viene recortado al 10. Mantenemos el lienzo nativo para
+// no abrir un hueco bajo el trazo (el recorte por bbox + stroke lo agrandaba).
 function fitToContent(anim, host) {
   const svg = host.querySelector("svg");
   if (!svg) return;
 
-  anim.goToAndStop(anim.totalFrames - 1, true);
-  const box = svg.getBBox();
-  anim.goToAndStop(0, true);
+  const width = Number(svg.getAttribute("width")) || anim.animationData?.w;
+  const height = Number(svg.getAttribute("height")) || anim.animationData?.h;
+  if (!width || !height) return;
 
-  if (box.width < 1 || box.height < 1) return;
-
-  const strokes = [...svg.querySelectorAll("[stroke-width]")].map(
-    (el) => Number(el.getAttribute("stroke-width")) || 0
-  );
-  const pad = Math.max(0, ...strokes) / 2;
-  const width = box.width + pad * 2;
-  const height = box.height + pad * 2;
-
-  svg.setAttribute("viewBox", `${box.x - pad} ${box.y - pad} ${width} ${height}`);
+  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   host.style.aspectRatio = `${width} / ${height}`;
 }
 
@@ -78,6 +67,9 @@ function placePipe(pipe, host, timeline) {
     height,
     left: timelineBox.left + start.x - start.width / 2 - originBox.left,
     top: top - originBox.top,
+    // El 10 proyecta su sombra sobre el arranque del tubo. La atamos al ancho
+    // del trazo para que caiga igual en cualquier breakpoint.
+    "--pipe-shadow": `${start.width * 1.7}px`,
   });
 
   return true;
@@ -86,7 +78,7 @@ function placePipe(pipe, host, timeline) {
 function endState(preh, words, pipe, anim) {
   gsap.set(preh, { autoAlpha: 1 });
   gsap.set(words, { clipPath: BLOCK_SHOWN });
-  gsap.set(pipe, { scaleY: 1 });
+  gsap.set(pipe, { clipPath: BLOCK_SHOWN });
   anim?.goToAndStop(anim.totalFrames - 1, true);
 }
 
@@ -134,11 +126,13 @@ function setupHeader(preh) {
   const growPipe = () => {
     if (!place()) return;
     grown = true;
+    // Se revela con clip-path, no con scaleY, para que la sombra del arranque
+    // salga ya a tamaño real en el primer fotograma en lugar de estirarse.
     gsap.fromTo(
       pipe,
-      { scaleY: 0 },
+      { clipPath: BLOCK_HIDDEN },
       {
-        scaleY: 1,
+        clipPath: BLOCK_SHOWN,
         duration: gsap.utils.clamp(1.1, 2.4, pipe.offsetHeight / 760),
         ease: "power1.inOut",
       }

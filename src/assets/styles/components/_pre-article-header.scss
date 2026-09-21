@@ -15,21 +15,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 20px;
 
-  // El pipeline del 10 baja hasta la cronología, fuera de este contenedor.
   &:has(.v-n-preh) {
     overflow: visible;
   }
 }
 
-// Las medidas del bloque están calculadas sobre sus 590px de diseño y se
-// expresan en cqw para que la camiseta, el 10 y los textos escalen juntos.
 .v-n-preh {
   position: relative;
   container-type: inline-size;
   max-width: 590px;
   width: 100%;
   opacity: 0;
+
+  @media (max-height: 850px) {
+    max-width: 480px;
+  }
 
   &__txt {
     display: block;
@@ -49,9 +51,16 @@
     left: 0;
     width: 0;
     height: 0;
-    background: var(--chrono-pipe-color, #88e0ff);
-    transform: scaleY(0);
-    transform-origin: 50% 0;
+    background-color: var(--chrono-pipe-color, #88e0ff);
+    background-image: linear-gradient(
+      180deg,
+      rgba(26, 82, 110, 0.55) 0%,
+      rgba(26, 82, 110, 0.28) 45%,
+      rgba(26, 82, 110, 0) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% var(--pipe-shadow, 70px);
+    clip-path: inset(0% 0% 100% 0%);
     pointer-events: none;
     z-index: -1;
   }
@@ -74,6 +83,12 @@
     letter-spacing: -0.203cqw;
   }
 
+  .v-n-preh__txt--02 {
+    position: relative;
+    z-index: 0;
+    margin-top: 4.5cqw;
+  }
+
   &__c {
     position: absolute;
     top: 29.492cqw;
@@ -85,11 +100,11 @@
 
   &__anim {
     position: relative;
+    z-index: 1;
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 840 / 830;
   }
 
-  // La camiseta queda por detrás del pipeline, que arranca dentro de ella.
   &__img {
     position: relative;
     z-index: -2;
