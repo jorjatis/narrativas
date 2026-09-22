@@ -1,0 +1,231 @@
+@use '../base/variables' as *;
+
+.v-c-cmp:has(.v-n-dnd-player) {
+  .v-n-suh {
+    margin-bottom: 32px;
+  }
+}
+
+.v-n-dnd-player {
+  &__lead {
+    position: relative;
+    font-family: $mcr;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: -.09px;
+    color: $cb1;
+    text-align: center;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 180px;
+      height: 1px;
+      margin: 24px auto 36px;
+      background: $cb1;
+    }
+  }
+
+  &__c {
+    position: relative;
+    width: 100%;
+    margin: 238px auto;
+
+    @media (min-width: 900px) {
+      width: 739px;
+      margin-left: calc(-739px / 2 + 50%);
+    }
+  }
+
+  &__drag-item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    z-index: 1;
+
+    &--01 {
+      flex-direction: column;
+      gap: 55px;
+      top: -25%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &--02 {
+      flex-direction: row-reverse;
+      top: 25%;
+      right: -25%;
+    }
+
+    &--03 {
+      flex-direction: column-reverse;
+      bottom: -15%;
+      right: 10%;
+    }
+
+    &--04 {
+      flex-direction: column-reverse;
+      bottom: -15%;
+      left: 10%;
+    }
+
+    &--05 {
+      flex-direction: row;
+      top: 25%;
+      left: -25%;
+    }
+  }
+
+  &__drop-zone {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__name {
+    position: relative;
+    max-width: 118px;
+    width: 100%;
+    font-family: $mcs;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.08px;
+    color: $cb1;
+    text-align: center;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      width: 52px;
+      height: 1px;
+      background: $cb1;
+      transform: rotate(45deg);
+    }
+
+    &:before {
+      top: 0;
+      right: -24px;
+    }
+
+    &:after {
+      bottom: -14px;
+      left: -24px;
+    }
+
+    &-l {
+      content: '';
+      position: absolute;
+      bottom: -24px;
+      left: -8px;
+      width: 104px;
+      height: 1px;
+      background: $cb1;
+    }
+  }
+
+  &__img {
+    position: relative;
+    width: 200px;
+    cursor: pointer;
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      aspect-ratio: 1;
+      background: #BABABA;
+      border-radius: 100%;
+      z-index: -1;
+    }
+  }
+
+  &__bg {
+    position: relative;
+    width: 100%;
+  }
+
+  &__pentagon {
+    &--02 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 75%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+@media (max-height: 1150px) {
+  .v-n-dnd-player__c {
+    width: 520px;
+    margin-top: 130px;
+    margin-bottom: 130px;
+    margin-left: calc(-520px / 2 + 50%);
+  }
+
+  .v-n-dnd-player__drag-item {
+    gap: 8px;
+  }
+
+  .v-n-dnd-player__drag-item--01 {
+    gap: 26px;
+    top: -15%;
+  }
+
+  .v-n-dnd-player__drag-item--02 {
+    right: -28%;
+  }
+
+  .v-n-dnd-player__drag-item--03 {
+    flex-direction: row-reverse;
+    bottom: -5%;
+    right: -12%;
+  }
+
+  .v-n-dnd-player__drag-item--04 {
+    flex-direction: row;
+    bottom: -5%;
+    left: -12%;
+  }
+
+  .v-n-dnd-player__drag-item--05 {
+    left: -28%;
+  }
+
+  .v-n-dnd-player__name {
+    &:before, &:after {
+      width: 32px;
+    }
+
+    &:before {
+      top: 4px;
+      right: 0px;
+    }
+
+    &:after {
+      bottom: -4px;
+      left: 0;
+    }
+
+    &-l {
+      bottom: -8px;
+      left: 12px;
+      width: 80px;
+    }
+  }
+
+  .v-n-dnd-player__img {
+    width: 120px;
+  }
+
+  .v-n-dnd-player__drop-zone {
+    width: 120px;
+  }
+}

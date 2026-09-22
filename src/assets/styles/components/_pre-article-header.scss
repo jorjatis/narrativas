@@ -9,16 +9,16 @@
       display: none;
     }
   }
-}
 
-.v-a-img-c {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
+  .v-a-img-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
 
-  &:has(.v-n-preh) {
-    overflow: visible;
+    &:has(.v-n-preh) {
+      overflow: visible;
+    }
   }
 }
 
