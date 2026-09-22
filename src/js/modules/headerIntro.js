@@ -165,3 +165,5 @@
 // export default function headerIntro() {
 //   document.querySelectorAll(".v-n-preh").forEach(setupHeader);
 // }
+
+export default function headerIntro() {}

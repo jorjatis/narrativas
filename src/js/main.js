@@ -8,8 +8,10 @@ import headerIntro from "./modules/headerIntro";
 import chronoPipeline from "./modules/chronoPipeline";
 import chronoAnimations from "./modules/chronoAnimations";
 import playersComparison from "./modules/playersComparison";
+import dndPlayer from "./modules/dndPlayer";
 
 export function initAll() {
+  dndPlayer();
   moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
   removeEls(".v-a--d-s-1 .v-a-inf-c");
 

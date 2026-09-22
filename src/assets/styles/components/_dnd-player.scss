@@ -28,8 +28,22 @@
 
   &__c {
     position: relative;
+    container-type: inline-size;
+    --dnd-pentagon-scale: 0.8;
     width: 100%;
-    margin: 238px auto;
+    margin: 140px auto;
+
+    @media (min-width: 380px) {
+      margin: 150px auto;
+    }
+
+    @media (min-width: 500px) {
+      margin: 180px auto;
+    }
+
+    @media (min-width: 980px) {
+      margin: 238px auto;
+    }
 
     @media (min-width: 1200px) {
       width: 739px;
@@ -41,80 +55,127 @@
     position: absolute;
     display: flex;
     align-items: center;
-    gap: 36px;
+    gap: 16px;
     z-index: 1;
+    visibility: hidden;
+
+    @media (min-width: 981px) {
+      gap: 36px;
+    }
+
+    &.is-anchored {
+      visibility: visible;
+    }
 
     &--01 {
       flex-direction: column;
-      gap: 55px;
-      top: -25%;
-      left: 50%;
-      transform: translateX(-50%);
+
+      @media (min-width: 981px) {
+        gap: 55px;
+      }
     }
 
     &--02 {
-      flex-direction: row-reverse;
-      top: 25%;
-      right: -25%;
+      flex-direction: column;
+
+      @media (min-width: 981px) {
+        flex-direction: row-reverse;
+      }
     }
 
     &--03 {
       flex-direction: column-reverse;
-      bottom: -15%;
-      right: 10%;
     }
 
     &--04 {
       flex-direction: column-reverse;
-      bottom: -15%;
-      left: 10%;
     }
 
     &--05 {
-      flex-direction: row;
-      top: 25%;
-      left: -25%;
+      flex-direction: column;
+
+      @media (min-width: 981px) {
+        flex-direction: row;
+      }
     }
   }
 
   &__drop-zone {
     position: absolute;
-    width: 200px;
-    height: 200px;
+    aspect-ratio: 1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: calc(0.34 * var(--dnd-pentagon-scale) * 100cqi);
+
+    @media (min-width: 400px) {
+      width: calc(0.30 * var(--dnd-pentagon-scale) * 100cqi);
+    }
+
+    @media (min-width: 480px) {
+      width: calc(0.25 * var(--dnd-pentagon-scale) * 100cqi);
+    }
   }
 
   &__name {
     position: relative;
-    max-width: 118px;
+    max-width: 100px;
     width: 100%;
     font-family: $mcs;
-    font-size: 16px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 16px;
     letter-spacing: -0.08px;
     color: $cb1;
     text-align: center;
+
+    @media (min-width: 480px) {
+      max-width: unset;
+      width: 118px;
+      font-size: 16px;
+      line-height: 18px;
+    }
 
     &:before,
     &:after {
       content: '';
       position: absolute;
-      width: 52px;
+      width: 26px;
       height: 1px;
       background: $cb1;
       transform: rotate(45deg);
+
+      @media (min-width: 981px) {
+        width: 52px;
+      }
     }
 
     &:before {
-      top: 0;
-      right: -24px;
+      display: none;
+
+      @media (min-width: 390px) {
+        display: block;
+        top: 6px;
+        right: 4px;
+      }
+
+      @media (min-width: 981px) {
+        right: -24px;
+      }
     }
 
     &:after {
-      bottom: -14px;
-      left: -24px;
+      display: none;
+
+      @media (min-width: 480px) {
+        display: block;
+        bottom: 8px;
+        left: -4px;
+      }
+
+      @media (min-width: 981px) {
+        bottom: -14px;
+        left: -24px;
+      }
     }
 
     &-l {
@@ -122,16 +183,30 @@
       position: absolute;
       bottom: -24px;
       left: -8px;
+      display: none;
       width: 104px;
       height: 1px;
       background: $cb1;
+
+      @media (min-width: 981px) {
+        display: block;
+      }
     }
   }
 
   &__img {
     position: relative;
-    width: 200px;
+    flex-shrink: 0;
     cursor: pointer;
+    width: calc(0.34 * var(--dnd-pentagon-scale) * 100cqi);
+
+    @media (min-width: 400px) {
+      width: calc(0.30 * var(--dnd-pentagon-scale) * 100cqi);
+    }
+
+    @media (min-width: 480px) {
+      width: calc(0.25 * var(--dnd-pentagon-scale) * 100cqi);
+    }
 
     &:before {
       content: '';
@@ -148,10 +223,17 @@
 
   &__bg {
     position: relative;
-    width: 100%;
+    width: calc(var(--dnd-pentagon-scale) * 100%);
+    margin-inline: auto;
   }
 
   &__pentagon {
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     &--02 {
       position: absolute;
       top: 50%;
@@ -162,11 +244,11 @@
   }
 }
 
-@media (max-height: 1150px) {
+@media (min-width: 1200px) and (max-height: 1150px) {
   .v-n-dnd-player__c {
     width: 520px;
-    margin-top: 130px;
-    margin-bottom: 130px;
+    margin-top: 180px;
+    margin-bottom: 180px;
     margin-left: calc(-520px / 2 + 50%);
   }
 
@@ -176,27 +258,14 @@
 
   .v-n-dnd-player__drag-item--01 {
     gap: 26px;
-    top: -15%;
-  }
-
-  .v-n-dnd-player__drag-item--02 {
-    right: -28%;
   }
 
   .v-n-dnd-player__drag-item--03 {
     flex-direction: row-reverse;
-    bottom: -5%;
-    right: -12%;
   }
 
   .v-n-dnd-player__drag-item--04 {
     flex-direction: row;
-    bottom: -5%;
-    left: -12%;
-  }
-
-  .v-n-dnd-player__drag-item--05 {
-    left: -28%;
   }
 
   .v-n-dnd-player__name {
