@@ -30,6 +30,8 @@ function anchorFaces(root) {
 
   if (!svgRect.width || !svgRect.height) return;
 
+  const placed = [];
+
   root.querySelectorAll(".v-n-dnd-player__drag-item").forEach((item) => {
     const modifier = [...item.classList].find((className) => className.includes("--"));
     const key = modifier && modifier.split("--").pop();
@@ -42,11 +44,15 @@ function anchorFaces(root) {
     const imgRect = img.getBoundingClientRect();
     const itemRect = item.getBoundingClientRect();
     const circle = imgRect.width;
-    const imgCenterX = imgRect.left + circle / 2 - itemRect.left;
-    const imgCenterY = imgRect.bottom - circle / 2 - itemRect.top;
-    const left = point.x - imgCenterX;
-    const top = point.y - imgCenterY;
 
+    placed.push({
+      item,
+      left: point.x - (imgRect.left + circle / 2 - itemRect.left),
+      top: point.y - (imgRect.bottom - circle / 2 - itemRect.top),
+    });
+  });
+
+  placed.forEach(({ item, left, top }) => {
     item.style.left = `${left}px`;
     item.style.top = `${top}px`;
     item.style.right = "auto";
@@ -65,6 +71,21 @@ function facePoint(figure) {
     x: rect.left + size / 2,
     y: rect.bottom - size / 2,
   };
+}
+
+function circleAt(x, y, diameter) {
+  return {
+    left: x - diameter / 2,
+    top: y - diameter / 2,
+    width: diameter,
+    height: diameter,
+  };
+}
+
+function ghostCircle(ghost, size) {
+  const scale = Number(gsap.getProperty(ghost, "scale")) || 1;
+
+  return circleAt(Number(gsap.getProperty(ghost, "x")), Number(gsap.getProperty(ghost, "y")), size * scale);
 }
 
 function circlesTouch(a, b) {
@@ -89,6 +110,8 @@ function bindDrag(root) {
   let session = null;
   let occupant = null;
   let blockScroll = null;
+  let outroPlayed = false;
+  let replaying = false;
 
   items.forEach((item) => {
     item.querySelectorAll("img").forEach((img) => {
@@ -97,6 +120,10 @@ function bindDrag(root) {
     item.addEventListener("contextmenu", (event) => event.preventDefault());
     item.addEventListener("pointerdown", (event) => beginDrag(event, item, false), { passive: false });
   });
+
+  const again = root.querySelector(".v-n-dnd-player__again");
+
+  if (again) again.addEventListener("click", replay);
 
   function lockScroll() {
     if (blockScroll) return;
@@ -132,11 +159,11 @@ function bindDrag(root) {
     });
   }
 
-  function parkInBox(ghost) {
-    const rect = ghost.getBoundingClientRect();
-    const boxRect = box.getBoundingClientRect();
-    const x = rect.left + rect.width / 2 - boxRect.left;
-    const y = rect.top + rect.height / 2 - boxRect.top;
+  function parkInBox(ghost, known) {
+    const rect = known ? null : ghost.getBoundingClientRect();
+    const boxRect = known ? known.boxRect : box.getBoundingClientRect();
+    const x = known ? known.x - boxRect.left : rect.left + rect.width / 2 - boxRect.left;
+    const y = known ? known.y - boxRect.top : rect.top + rect.height / 2 - boxRect.top;
 
     ghost.style.position = "absolute";
     ghost.style.left = "0px";
@@ -153,10 +180,12 @@ function bindDrag(root) {
     });
   }
 
-  function pinGhost(ghost, figure) {
-    const boxRect = box.getBoundingClientRect();
-    const dropRect = dropZone.getBoundingClientRect();
-    const size = figure.getBoundingClientRect().width || ghost.getBoundingClientRect().width;
+  function pinGhost(ghost, figure, known) {
+    const boxRect = known ? null : box.getBoundingClientRect();
+    const dropRect = known ? null : dropZone.getBoundingClientRect();
+    const size = known ? known.size : (figure.getBoundingClientRect().width || ghost.getBoundingClientRect().width);
+    const x = known ? known.x : dropRect.left + dropRect.width / 2 - boxRect.left;
+    const y = known ? known.y : dropRect.top + dropRect.height / 2 - boxRect.top;
 
     box.appendChild(ghost);
     setGhostSize(ghost, size);
@@ -170,8 +199,8 @@ function bindDrag(root) {
       xPercent: -50,
       yPercent: -50,
       scale: 1,
-      x: dropRect.left + dropRect.width / 2 - boxRect.left,
-      y: dropRect.top + dropRect.height / 2 - boxRect.top,
+      x,
+      y,
     });
   }
 
@@ -239,13 +268,373 @@ function bindDrag(root) {
     });
   }
 
+  function formatVotes(value) {
+    return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  function buildRanking() {
+    const list = root.querySelector(".v-n-dnd-player__ranking-list");
+
+    if (!list) return [];
+    if (list.childElementCount) return [...list.children];
+
+    const players = items
+      .map((item) => {
+        const img = item.querySelector("img");
+
+        return {
+          name: (img && img.alt) || "",
+          src: (img && img.getAttribute("src")) || "",
+          votes: Number(item.dataset.votes) || 0,
+          share: Number(item.dataset.share) || 0,
+        };
+      })
+      .sort((a, b) => b.share - a.share || b.votes - a.votes);
+
+    players.forEach((player) => {
+      const row = document.createElement("li");
+      const face = document.createElement("figure");
+      const photo = document.createElement("img");
+      const body = document.createElement("div");
+      const name = document.createElement("p");
+      const meta = document.createElement("div");
+      const votes = document.createElement("span");
+      const bar = document.createElement("span");
+
+      row.className = "v-n-dnd-player__row";
+      row.style.setProperty("--bar", `${player.share}%`);
+      face.className = "v-n-dnd-player__row-face";
+      photo.src = player.src;
+      photo.alt = "";
+      body.className = "v-n-dnd-player__row-body";
+      name.className = "v-n-dnd-player__row-name";
+      name.textContent = player.name;
+      meta.className = "v-n-dnd-player__row-meta";
+      votes.className = "v-n-dnd-player__row-votes";
+      votes.textContent = formatVotes(player.votes);
+      bar.className = "v-n-dnd-player__row-bar";
+      bar.append(document.createElement("i"));
+      face.append(photo);
+      meta.append(votes, bar);
+      body.append(name, meta);
+      row.append(face, body);
+      list.append(row);
+    });
+
+    return [...list.children];
+  }
+
+  function centerDelta(from, to) {
+    return {
+      x: from.left + from.width / 2 - (to.left + to.width / 2),
+      y: from.top + from.height / 2 - (to.top + to.height / 2),
+      scale: to.width ? from.width / to.width : 1,
+    };
+  }
+
+  function restoreFlag(flag) {
+    if (!flag) return;
+
+    flag.removeAttribute("style");
+    dropZone.prepend(flag);
+  }
+
+  function playResult() {
+    if (!occupant) return;
+
+    const ghost = occupant.ghost;
+    const flag = dropZone.querySelector(".v-n-dnd-player__flag");
+    const num = dropZone.querySelector(".v-n-dnd-player__num");
+    const fromGhost = ghost.getBoundingClientRect();
+    const fromNum = num.getBoundingClientRect();
+    const hero = root.querySelector(".v-n-dnd-player__hero");
+    const vote = root.querySelector(".v-n-dnd-player__vote");
+    const voteName = root.querySelector(".v-n-dnd-player__vote-name");
+    const chosen = occupant.item.querySelector("img");
+
+    if (!hero || !vote || !num) return;
+    if (voteName) voteName.textContent = (chosen && chosen.alt) || "";
+
+    if (flag) {
+      const flagRect = flag.getBoundingClientRect();
+
+      flag.style.position = "fixed";
+      flag.style.left = `${flagRect.left}px`;
+      flag.style.top = `${flagRect.top}px`;
+      flag.style.width = `${flagRect.width}px`;
+      flag.style.height = `${flagRect.height}px`;
+      flag.style.margin = "0";
+      document.body.appendChild(flag);
+    }
+
+    ghost.style.pointerEvents = "none";
+    root.classList.add("is-finished");
+    hero.append(ghost, num);
+    gsap.set(ghost, { clearProps: "all" });
+    gsap.set(num, { clearProps: "all" });
+
+    const placed = ghost.getBoundingClientRect();
+    const shift = (fromGhost.top + fromGhost.height / 2) - (placed.top + placed.height / 2);
+
+    if (shift > 1) box.style.paddingTop = `${shift}px`;
+
+    const ghostMove = centerDelta(fromGhost, ghost.getBoundingClientRect());
+    const numMove = centerDelta(fromNum, num.getBoundingClientRect());
+    const face = ghost.querySelector(".v-n-dnd-player__img");
+    const ranking = root.querySelector(".v-n-dnd-player__ranking");
+    const laurelL = root.querySelector(".v-n-dnd-player__laurel--l");
+    const laurelR = root.querySelector(".v-n-dnd-player__laurel--r");
+    const laurelSvg = root.querySelectorAll(".v-n-dnd-player__laurel svg");
+    const rows = buildRanking();
+    const rowNames = root.querySelectorAll(".v-n-dnd-player__row-name");
+    const rowVotes = root.querySelectorAll(".v-n-dnd-player__row-votes");
+    const rowBars = root.querySelectorAll(".v-n-dnd-player__row-bar i");
+    const rowTops = rows.map((row) => row.getBoundingClientRect().top);
+    const firstTop = rowTops[0] || 0;
+    const time = (value) => (reduced ? 0.01 : value);
+
+    if (rows.length) gsap.set(rows, { y: (index) => firstTop - rowTops[index] });
+
+    gsap.set(ghost, {
+      transformOrigin: "50% 50%",
+      x: ghostMove.x,
+      y: ghostMove.y,
+      scale: ghostMove.scale,
+    });
+    gsap.set(num, {
+      transformOrigin: "50% 50%",
+      x: numMove.x,
+      y: numMove.y,
+      scale: numMove.scale,
+    });
+    if (ranking) gsap.set(ranking, { autoAlpha: 0 });
+
+    const tl = gsap.timeline({ defaults: { overwrite: "auto" } });
+
+    tl.to(ghost, {
+      x: 0,
+      y: 0,
+      scale: 1,
+      duration: time(0.7),
+      ease: "power3.inOut",
+    }, 0);
+    tl.to(num, {
+      x: 0,
+      y: 0,
+      scale: 1,
+      duration: time(0.75),
+      ease: "power3.inOut",
+    }, 0);
+    tl.to(box, {
+      paddingTop: 0,
+      duration: time(0.9),
+      ease: "power2.inOut",
+    }, 0.35);
+
+    if (face) {
+      tl.to(face, {
+        "--face-bg": "#88E0FF",
+        "--face-scale": 1.12,
+        duration: time(0.6),
+        ease: "power2.out",
+      }, 0.12);
+    }
+
+    if (flag) {
+      tl.to(flag, {
+        autoAlpha: 0,
+        duration: time(0.35),
+        ease: "power1.out",
+        onComplete: () => restoreFlag(flag),
+      }, 0);
+    }
+
+    tl.from(vote, { y: 28, autoAlpha: 0, duration: time(0.5), ease: "power3.out" }, 0.28);
+    tl.fromTo(laurelSvg, {
+      clipPath: "inset(0% 0% 100% 0%)",
+    }, {
+      clipPath: "inset(0% 0% 0% 0%)",
+      duration: time(1.05),
+      ease: "power2.inOut",
+      stagger: 0.08,
+    }, 0.62);
+    tl.from(laurelL, { x: 16, duration: time(1.05), ease: "power2.out" }, 0.62);
+    tl.from(laurelR, { x: -16, duration: time(1.05), ease: "power2.out" }, 0.62);
+
+    if (ranking) {
+      tl.to(ranking, { autoAlpha: 1, duration: time(0.35), ease: "power1.out" }, 1.45);
+    }
+
+    tl.to(rows, {
+      y: 0,
+      duration: time(0.7),
+      ease: "power3.out",
+      stagger: 0.07,
+    }, 1.5);
+    tl.from(rowNames, {
+      x: -36,
+      autoAlpha: 0,
+      duration: time(0.45),
+      ease: "power2.out",
+      stagger: 0.07,
+    }, 1.62);
+    tl.from(rowVotes, {
+      autoAlpha: 0,
+      duration: time(0.35),
+      stagger: 0.07,
+    }, 1.76);
+    tl.from(rowBars, {
+      scaleX: 0,
+      duration: time(0.55),
+      ease: "power2.out",
+      stagger: 0.08,
+    }, 1.86);
+  }
+
+  function replay() {
+    if (!outroPlayed || replaying) return;
+
+    replaying = true;
+
+    const result = root.querySelector(".v-n-dnd-player__result");
+    const looseFlag = document.querySelector("body > .v-n-dnd-player__flag");
+
+    root.querySelectorAll("*").forEach((node) => gsap.killTweensOf(node));
+    if (looseFlag) gsap.killTweensOf(looseFlag);
+    if (again) again.disabled = true;
+
+    gsap.to(result, {
+      autoAlpha: 0,
+      duration: reduced ? 0.01 : 0.45,
+      ease: "power1.out",
+      overwrite: true,
+      onComplete: revealBoard,
+    });
+  }
+
+  function revealBoard() {
+    const result = root.querySelector(".v-n-dnd-player__result");
+    const num = root.querySelector(".v-n-dnd-player__num");
+    const flag = root.querySelector(".v-n-dnd-player__flag") || document.querySelector("body > .v-n-dnd-player__flag");
+    const bg = root.querySelector(".v-n-dnd-player__bg");
+    const list = root.querySelector(".v-n-dnd-player__ranking-list");
+
+    if (occupant && occupant.ghost) {
+      occupant.ghost.remove();
+      occupant.item._ghost = null;
+    }
+
+    occupant = null;
+
+    items.forEach((item) => {
+      const figure = item.querySelector(".v-n-dnd-player__img");
+
+      item.classList.remove("is-lifted", "is-placed");
+      item.style.zIndex = "";
+      item._ghost = null;
+      item._token = (item._token || 0) + 1;
+
+      if (!figure) return;
+
+      figure.classList.remove("is-lifted");
+      gsap.set(figure, { clearProps: "all" });
+    });
+
+    if (bg) gsap.set(bg, { clearProps: "all" });
+    if (num) {
+      dropZone.appendChild(num);
+      gsap.set(num, { clearProps: "all" });
+    }
+
+    restoreFlag(flag);
+    if (list) list.replaceChildren();
+    box.style.paddingTop = "";
+    box.style.marginTop = "";
+    box.style.marginBottom = "";
+    box.style.minHeight = "";
+    box.style.overflowAnchor = "";
+
+    const incoming = root.querySelectorAll(".v-n-dnd-player__lead, .v-n-dnd-player__drag-item, .v-n-dnd-player__bg, .v-n-dnd-player__drop-zone");
+
+    gsap.set(incoming, { autoAlpha: 0 });
+    root.classList.remove("is-finished", "is-selected", "is-dragging", "is-over");
+    if (result) gsap.set(result, { clearProps: "all" });
+    gsap.set(root.querySelectorAll(".v-n-dnd-player__vote, .v-n-dnd-player__laurel, .v-n-dnd-player__laurel svg, .v-n-dnd-player__ranking"), { clearProps: "all" });
+    requestAnimationFrame(() => {
+      anchorFaces(root);
+      requestAnimationFrame(() => {
+        box.scrollIntoView({
+          behavior: reduced ? "auto" : "smooth",
+          block: "center",
+        });
+      });
+    });
+
+    gsap.to(incoming, {
+      autoAlpha: 1,
+      duration: reduced ? 0.01 : 0.5,
+      ease: "power1.out",
+      overwrite: true,
+      onComplete: () => {
+        gsap.set(incoming, { clearProps: "opacity,visibility" });
+        root.classList.remove("is-clearing");
+        outroPlayed = false;
+        replaying = false;
+        if (again) again.disabled = false;
+      },
+    });
+  }
+
+  function playOutro() {
+    if (outroPlayed) return;
+
+    outroPlayed = true;
+    root.classList.add("is-clearing");
+
+    const names = root.querySelectorAll(".v-n-dnd-player__name, .v-n-dnd-player__lead");
+    const bg = root.querySelector(".v-n-dnd-player__bg");
+    const circles = items
+      .map((item) => item.querySelector(".v-n-dnd-player__img"))
+      .filter(Boolean);
+
+    if (occupant) occupant.ghost.style.pointerEvents = "none";
+
+    const tl = gsap.timeline({
+      defaults: { overwrite: "auto" },
+      onComplete: playResult,
+    });
+
+    tl.to(names, {
+      autoAlpha: 0,
+      duration: reduced ? 0.01 : 0.35,
+      ease: "power1.out",
+    }, 0);
+
+    tl.to(circles, {
+      autoAlpha: 0,
+      duration: reduced ? 0.01 : 0.35,
+      ease: "power1.out",
+    }, 0);
+
+    tl.to(bg, {
+      scale: 0,
+      autoAlpha: 0,
+      duration: reduced ? 0.01 : 0.9,
+      ease: "power2.in",
+      transformOrigin: "50% 50%",
+    }, 0.08);
+  }
+
   function beginDrag(event, item, fromGhost) {
-    if (session || event.button > 0) return;
+    if (session || outroPlayed || event.button > 0) return;
 
     const figure = item.querySelector(".v-n-dnd-player__img");
     const origin = figure && facePoint(figure);
 
     if (!origin || !origin.size) return;
+
+    const boxRect = box.getBoundingClientRect();
+    const zoneRect = dropZone.getBoundingClientRect();
 
     event.preventDefault();
 
@@ -306,7 +695,14 @@ function bindDrag(root) {
       moved: false,
       setX,
       setY,
+      size: origin.size,
+      boxRect,
+      zoneRect,
+      dropX: zoneRect.left + zoneRect.width / 2 - boxRect.left,
+      dropY: zoneRect.top + zoneRect.height / 2 - boxRect.top,
     };
+
+    const overZone = () => circlesTouch(ghostCircle(ghost, origin.size), zoneRect);
 
     gsap.to(ghost, {
       x: event.clientX,
@@ -317,7 +713,7 @@ function bindDrag(root) {
       overwrite: true,
       onUpdate: () => {
         if (!session || session.ghost !== ghost) return;
-        root.classList.toggle("is-over", circlesTouch(ghost.getBoundingClientRect(), dropZone.getBoundingClientRect()));
+        root.classList.toggle("is-over", overZone());
       },
     });
 
@@ -336,7 +732,7 @@ function bindDrag(root) {
 
       session.setX(ev.clientX);
       session.setY(ev.clientY);
-      root.classList.toggle("is-over", circlesTouch(ghost.getBoundingClientRect(), dropZone.getBoundingClientRect()));
+      root.classList.toggle("is-over", circlesTouch(circleAt(ev.clientX, ev.clientY, origin.size * LIFT), zoneRect));
     };
 
     const onUp = (ev) => {
@@ -374,7 +770,9 @@ function bindDrag(root) {
 
     ghost.classList.remove("is-dragging");
 
-    const over = circlesTouch(ghost.getBoundingClientRect(), dropZone.getBoundingClientRect());
+    const centerX = Number(gsap.getProperty(ghost, "x"));
+    const centerY = Number(gsap.getProperty(ghost, "y"));
+    const over = circlesTouch(ghostCircle(ghost, current.size), current.zoneRect);
 
     if (!over) {
       sendHome(item);
@@ -384,15 +782,12 @@ function bindDrag(root) {
     if (occupant && occupant.item !== item) sendHome(occupant.item);
 
     root.classList.add("is-selected");
-    parkInBox(ghost);
+    parkInBox(ghost, { x: centerX, y: centerY, boxRect: current.boxRect });
     occupant = { item, ghost, pinned: false };
 
-    const boxRect = box.getBoundingClientRect();
-    const dropRect = dropZone.getBoundingClientRect();
-
     gsap.to(ghost, {
-      x: dropRect.left + dropRect.width / 2 - boxRect.left,
-      y: dropRect.top + dropRect.height / 2 - boxRect.top,
+      x: current.dropX,
+      y: current.dropY,
       scale: 1,
       duration: reduced ? 0.01 : 0.48,
       ease: "power3.out",
@@ -400,16 +795,22 @@ function bindDrag(root) {
       onComplete: () => {
         if (item._token !== token || !occupant || occupant.ghost !== ghost) return;
 
-        pinGhost(ghost, figure);
+        pinGhost(ghost, figure, { size: current.size, x: current.dropX, y: current.dropY });
         item.classList.add("is-placed");
         occupant.pinned = true;
+        playOutro();
       },
     });
   }
 
-  return function syncPlaced() {
-    if (!occupant || !occupant.pinned || session) return;
-    pinGhost(occupant.ghost, occupant.item.querySelector(".v-n-dnd-player__img"));
+  return {
+    syncPlaced() {
+      if (outroPlayed || !occupant || !occupant.pinned || session) return;
+      pinGhost(occupant.ghost, occupant.item.querySelector(".v-n-dnd-player__img"));
+    },
+    isClearing() {
+      return outroPlayed;
+    },
   };
 }
 
@@ -419,10 +820,12 @@ export default function dndPlayer() {
   if (!roots.length) return;
 
   roots.forEach((root) => {
-    const syncPlaced = bindDrag(root);
+    const drag = bindDrag(root);
     const place = () => {
+      if (drag.isClearing()) return;
+
       anchorFaces(root);
-      syncPlaced();
+      drag.syncPlaced();
     };
     const observer = new ResizeObserver(place);
     const box = root.querySelector(".v-n-dnd-player__c");

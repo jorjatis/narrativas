@@ -141,6 +141,11 @@
       transition: opacity 0.15s linear;
     }
 
+    .v-n-dnd-player__num {
+      position: absolute;
+      inset: 0;
+    }
+
     &:after {
       content: "";
       position: absolute;
@@ -159,6 +164,79 @@
 
   &.is-over &__drop-zone > svg {
     opacity: 0.32;
+  }
+
+  &.is-clearing {
+    pointer-events: none;
+
+    .v-n-dnd-player__name,
+    .v-n-dnd-player__drop-zone > svg,
+    .v-n-dnd-player__drop-zone:after {
+      transition: none;
+    }
+  }
+
+  &.is-finished {
+    pointer-events: auto;
+
+    .v-n-dnd-player__lead,
+    .v-n-dnd-player__drag-item,
+    .v-n-dnd-player__bg {
+      display: none;
+    }
+
+    .v-n-dnd-player__c {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 560px;
+      margin: 8px auto 64px;
+    }
+
+    .v-n-dnd-player__result {
+      display: flex;
+    }
+
+    .v-n-dnd-player__ghost,
+    .v-n-dnd-player__drop-zone,
+    .v-n-dnd-player__laurel,
+    .v-n-dnd-player__num {
+      pointer-events: none;
+    }
+
+    .v-n-dnd-player__drop-zone {
+      display: none;
+    }
+
+    .v-n-dnd-player__ghost {
+      position: relative;
+      left: auto;
+      top: auto;
+      z-index: 3;
+      width: 150px;
+      height: auto;
+      margin: 0;
+      cursor: default;
+
+      @media (min-width: 480px) {
+        width: 200px;
+      }
+
+      .v-n-dnd-player__img:before {
+        opacity: 0;
+        transition: opacity 0.25s ease 0.5s;
+      }
+    }
+
+    .v-n-dnd-player__num {
+      position: relative;
+      inset: auto;
+      z-index: 1;
+      width: 88px;
+      height: auto;
+      margin-top: 2px;
+    }
   }
 
   &__ghost {
@@ -283,6 +361,8 @@
   }
 
   &__img {
+    --face-scale: 1;
+    --face-bg: #BABABA;
     position: relative;
     flex-shrink: 0;
     cursor: grab;
@@ -307,15 +387,19 @@
       left: 0;
       width: 100%;
       aspect-ratio: 1;
-      background: #BABABA;
+      background: var(--face-bg, #BABABA);
       border-radius: 100%;
       z-index: -1;
+      transform: scale(var(--face-scale, 1));
+      transform-origin: center center;
     }
 
     img {
       -webkit-user-drag: none;
       pointer-events: none;
       -webkit-touch-callout: none;
+      transform: scale(var(--face-scale, 1));
+      transform-origin: center center;
     }
 
     &.is-lifted img {
@@ -348,6 +432,223 @@
       width: 75%;
       transform: translate(-50%, -50%);
     }
+  }
+
+  &__result {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__vote {
+    position: relative;
+    gap: 52px;
+    margin: 0 0 50px;
+    font-family: $mcr;
+    font-size: 22px;
+    line-height: 25px;
+    text-align: center;
+    color: $cb1;
+    letter-spacing: -0.11px;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      width: 55px;
+      height: 1px;
+      background: $cb1;
+      top: 50%;
+      transform: rotate(45deg);
+    }
+
+    &:before {
+      left: -100px;
+    }
+
+    &:after {
+      right: -100px;
+    }
+
+    &-kicker,
+    &-name {
+      display: block;
+    }
+
+    &-name {
+      font-family: $mcs;
+    }
+  }
+
+  &__hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 420px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 50%;
+      width: 150px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #88e0ff;
+      transform: translateX(-50%) scale(1.12);
+      transform-origin: center;
+      pointer-events: none;
+      opacity: 0;
+
+      @media (min-width: 480px) {
+        width: 200px;
+      }
+    }
+  }
+
+  &.is-finished &__hero:before {
+    animation: dnd-disc-in 0.25s ease 0.5s both;
+  }
+
+  &__laurel {
+    position: absolute;
+    z-index: 1;
+    bottom: 8px;
+    width: 40%;
+    pointer-events: none;
+
+    &--l {
+      left: 0;
+    }
+
+    &--r {
+      right: 0;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__laurel-motion {
+    .v-n-dnd-player__laurel--r & {
+      transform: scaleX(-1);
+    }
+  }
+
+  &__ranking {
+    width: 100%;
+    max-width: 620px;
+    margin-top: 48px;
+  }
+
+  &__ranking-title {
+    margin: 0 0 32px;
+    font-family: $mcr;
+    font-size: 18px;
+    line-height: 22px;
+    color: $cb1;
+    text-align: center;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 148px;
+      height: 1px;
+      margin: 10px auto 0;
+      background: $cb1;
+    }
+  }
+
+  &__ranking-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__row {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 32px;
+    margin: 0 0 32px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 68px;
+      left: -20px;
+      width: 182px;
+      height: 1px;
+      background: $cb1;
+      transform: rotate(20deg);
+      transform-origin: left center;
+    }
+  }
+
+  &__row-face {
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #88e0ff;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__row-name {
+    margin: 0 0 16px;
+    font-family: $mcr;
+    font-size: 18px;
+    line-height: 20px;
+    color: $cb1;
+  }
+
+  &__row-meta {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 22px;
+  }
+
+  &__row-votes {
+    font-family: $mcs;
+    font-size: 16px;
+    line-height: 18px;
+    color: $cb1;
+  }
+
+  &__row-bar {
+    display: block;
+    height: 18px;
+    width: 100%;
+    background: #d7f3ff;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+
+    i {
+      display: block;
+      height: 100%;
+      width: var(--bar, 0%);
+      background: #88e0ff;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+      transform-origin: left center;
+    }
+  }
+
+  .v-btn-c {
+    margin-top: 80px;
   }
 }
 
@@ -411,10 +712,23 @@
   cursor: grabbing !important;
 }
 
+@keyframes dnd-disc-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v-n-dnd-player__name,
   .v-n-dnd-player__drop-zone > svg,
   .v-n-dnd-player__drop-zone:after {
     transition: none;
+  }
+
+  .v-n-dnd-player.is-finished .v-n-dnd-player__hero:before,
+  .v-n-dnd-player.is-finished .v-n-dnd-player__ghost .v-n-dnd-player__img:before {
+    animation-duration: 0.01s;
+    animation-delay: 0s;
+    transition-duration: 0.01s;
+    transition-delay: 0s;
   }
 }
