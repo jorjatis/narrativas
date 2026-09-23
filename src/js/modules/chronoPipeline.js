@@ -1,6 +1,7 @@
 const SVG_NS = "http://www.w3.org/2000/svg";
 const X_SNAP = 4;
 const FADE_LENGTH = 50;
+const TIP_FADE = 96;
 
 function cssNumber(el, prop, fallback) {
   const raw = getComputedStyle(el).getPropertyValue(prop).trim();
@@ -305,19 +306,24 @@ function drawTimeline(timeline) {
   const last = points[points.length - 1];
   const fadeCorner = points[points.length - 2] || last;
   const fadeLen = Math.hypot(last.x - fadeCorner.x, last.y - fadeCorner.y);
-  const useFade = flourishStartIndex >= 0 && fadeLen >= FADE_LENGTH * 0.4;
+  const hasFlourish = flourishStartIndex >= 0;
+  const verticalEnd = Math.abs(last.y - fadeCorner.y) >= Math.abs(last.x - fadeCorner.x);
+  const useFade = fadeLen >= FADE_LENGTH * 0.4 && (hasFlourish || verticalEnd);
   const pathD = pointsToPath(points);
 
-  const fadeDelay = useFade ? strokeWidth : 0;
   const fadeNx = fadeLen ? (last.x - fadeCorner.x) / fadeLen : 0;
   const fadeNy = fadeLen ? (last.y - fadeCorner.y) / fadeLen : 0;
+  const tip = hasFlourish ? 0 : Math.min(TIP_FADE, fadeLen);
+  const fadeDelay = hasFlourish && useFade ? strokeWidth : 0;
+  const fadeStartX = hasFlourish ? fadeCorner.x + fadeNx * fadeDelay : last.x - fadeNx * tip;
+  const fadeStartY = hasFlourish ? fadeCorner.y + fadeNy * fadeDelay : last.y - fadeNy * tip;
 
   const defs = document.createElementNS(SVG_NS, "defs");
   const gradient = document.createElementNS(SVG_NS, "linearGradient");
   gradient.setAttribute("id", fadeId);
   gradient.setAttribute("gradientUnits", "userSpaceOnUse");
-  gradient.setAttribute("x1", String(round(fadeCorner.x + fadeNx * fadeDelay)));
-  gradient.setAttribute("y1", String(round(fadeCorner.y + fadeNy * fadeDelay)));
+  gradient.setAttribute("x1", String(round(fadeStartX)));
+  gradient.setAttribute("y1", String(round(fadeStartY)));
   gradient.setAttribute("x2", String(round(last.x)));
   gradient.setAttribute("y2", String(round(last.y)));
 

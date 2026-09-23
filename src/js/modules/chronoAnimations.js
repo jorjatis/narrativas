@@ -3,6 +3,33 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Al cruzar el breakpoint, matchMedia mata el último ScrollTrigger y
+// pone a 0 la posición que el refresh iba a restaurar. La página se queda arriba.
+let scrollLock = 0;
+let scrollAnchor = 0;
+
+ScrollTrigger.addEventListener("refreshInit", () => {
+  if (scrollLock === 0) {
+    scrollAnchor = window.scrollY || document.documentElement.scrollTop || 0;
+  }
+  scrollLock += 1;
+});
+
+ScrollTrigger.addEventListener("refresh", () => {
+  scrollLock = Math.max(0, scrollLock - 1);
+  if (scrollLock > 0 || scrollAnchor < 2) return;
+
+  const restore = () => {
+    const current = window.scrollY || document.documentElement.scrollTop || 0;
+    if (current + 2 >= scrollAnchor) return;
+    window.scrollTo(0, scrollAnchor);
+    ScrollTrigger.update();
+  };
+
+  restore();
+  requestAnimationFrame(restore);
+});
+
 const DRAW_LEAD = 40;
 const HORIZ_SCROLL_MIN = 100;
 const HORIZ_SCROLL_MAX = 230;

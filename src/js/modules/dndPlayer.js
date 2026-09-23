@@ -339,6 +339,43 @@ function bindDrag(root) {
     dropZone.prepend(flag);
   }
 
+  function scrollResultIntoView() {
+    const heading = root.previousElementSibling;
+    const target = heading && heading.classList.contains("v-n-suh") ? heading : root;
+    const header = document.querySelector("header.v-h");
+    let offset = 0;
+
+    if (header) {
+      const pos = getComputedStyle(header).position;
+      if (pos === "fixed" || pos === "sticky") offset = header.getBoundingClientRect().height;
+    }
+
+    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+    const from = window.scrollY;
+
+    if (Math.abs(from - top) < 2) return;
+
+    if (reduced) {
+      window.scrollTo(0, top);
+      return;
+    }
+
+    if (root._scrollState) gsap.killTweensOf(root._scrollState);
+
+    const state = { y: from };
+    root._scrollState = state;
+
+    // Corto a propósito: el scroll nativo no tiene duración y se solapa
+    // con el clip-path de los laureles, que pinta en CPU.
+    gsap.to(state, {
+      y: top,
+      duration: 0.38,
+      ease: "power3.out",
+      overwrite: true,
+      onUpdate: () => window.scrollTo(0, state.y),
+    });
+  }
+
   function playResult() {
     if (!occupant) return;
 
@@ -356,15 +393,8 @@ function bindDrag(root) {
     if (voteName) voteName.textContent = (chosen && chosen.alt) || "";
 
     if (flag) {
-      const flagRect = flag.getBoundingClientRect();
-
-      flag.style.position = "fixed";
-      flag.style.left = `${flagRect.left}px`;
-      flag.style.top = `${flagRect.top}px`;
-      flag.style.width = `${flagRect.width}px`;
-      flag.style.height = `${flagRect.height}px`;
-      flag.style.margin = "0";
-      document.body.appendChild(flag);
+      gsap.killTweensOf(flag);
+      flag.style.visibility = "hidden";
     }
 
     ghost.style.pointerEvents = "none";
@@ -440,15 +470,6 @@ function bindDrag(root) {
       }, 0.12);
     }
 
-    if (flag) {
-      tl.to(flag, {
-        autoAlpha: 0,
-        duration: time(0.35),
-        ease: "power1.out",
-        onComplete: () => restoreFlag(flag),
-      }, 0);
-    }
-
     tl.from(vote, { y: 28, autoAlpha: 0, duration: time(0.5), ease: "power3.out" }, 0.28);
     tl.fromTo(laurelSvg, {
       clipPath: "inset(0% 0% 100% 0%)",
@@ -489,6 +510,8 @@ function bindDrag(root) {
       ease: "power2.out",
       stagger: 0.08,
     }, 1.86);
+
+    requestAnimationFrame(() => scrollResultIntoView());
   }
 
   function replay() {

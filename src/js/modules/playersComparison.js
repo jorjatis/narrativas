@@ -242,7 +242,10 @@ export default function playersComparison() {
   renderPlayer("right");
   renderStats();
   bindSelects();
-  window.addEventListener("resize", syncPositionHeights);
+  window.addEventListener("resize", () => {
+    syncPositionHeights();
+    requestAnimationFrame(() => renderStats());
+  });
 
   if (document.fonts?.ready) {
     document.fonts.ready.then(() => {
@@ -396,8 +399,11 @@ export default function playersComparison() {
     const valueEl = bar.querySelector(".stat-bar__value");
     if (!valueEl) return;
 
+    if (!bar.offsetWidth) return;
+
     const fillWidth = bar.offsetWidth * scale;
-    bar.classList.toggle("is-outside", !isZero && fillWidth < valueEl.offsetWidth + 16);
+    // Margen amplio: en móvil la barra de 1 unidad no cubre el número y se sale.
+    bar.classList.toggle("is-outside", !isZero && fillWidth < valueEl.offsetWidth + 40);
   }
 
   function animateBars() {

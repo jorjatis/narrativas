@@ -401,7 +401,7 @@
 
     &.is-outside .stat-bar__value {
       left: auto;
-      right: calc(var(--bar, 0) * 100% + 16px);
+      right: calc(var(--bar, 0) * 100% + 28px);
     }
 
     &.is-zero .stat-bar__value {
@@ -463,7 +463,7 @@
 
     &.is-outside .stat-bar__value {
       right: auto;
-      left: calc(var(--bar, 0) * 100% + 16px);
+      left: calc(var(--bar, 0) * 100% + 28px);
     }
 
     &.is-zero .stat-bar__value {

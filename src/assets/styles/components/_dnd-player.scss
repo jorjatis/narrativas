@@ -31,10 +31,10 @@
     container-type: inline-size;
     --dnd-pentagon-scale: 0.8;
     width: 100%;
-    margin: 140px auto;
+    margin: 100px auto;
 
     @media (min-width: 380px) {
-      margin: 150px auto;
+      margin: 120px auto;
     }
 
     @media (min-width: 500px) {
@@ -214,12 +214,16 @@
       left: auto;
       top: auto;
       z-index: 3;
-      width: 150px;
+      width: 120px;
       height: auto;
       margin: 0;
       cursor: default;
 
-      @media (min-width: 480px) {
+      @media (min-width: 361px) {
+        max-width: 150px;
+      }
+
+      @media (min-width: $screen-xs) {
         width: 200px;
       }
 
@@ -233,9 +237,13 @@
       position: relative;
       inset: auto;
       z-index: 1;
-      width: 88px;
+      width: 75px;
       height: auto;
-      margin-top: 2px;
+
+      @media (min-width: $screen-xs) {
+        width: 88px;
+        margin-top: 2px;
+      }
     }
   }
 
@@ -444,30 +452,48 @@
   &__vote {
     position: relative;
     gap: 52px;
-    margin: 0 0 50px;
+    margin: 0 0 36px;
     font-family: $mcr;
-    font-size: 22px;
-    line-height: 25px;
+    font-size: 18px;
+    line-height: 21px;
     text-align: center;
     color: $cb1;
     letter-spacing: -0.11px;
 
+    @media (min-width: $screen-xs) {
+      margin: 0 0 50px;
+      font-size: 22px;
+      line-height: 25px;
+    }
+
     &:before, &:after {
       content: '';
       position: absolute;
-      width: 55px;
+      width: 35px;
       height: 1px;
       background: $cb1;
       top: 50%;
       transform: rotate(45deg);
+
+      @media (min-width: $screen-xs) {
+        width: 55px;
+      }
     }
 
     &:before {
-      left: -100px;
+      left: -50px;
+
+      @media (min-width: $screen-xs) {
+        left: -100px;
+      }
     }
 
     &:after {
-      right: -100px;
+      right: -50px;
+
+      @media (min-width: $screen-xs) {
+        right: -100px;
+      }
     }
 
     &-kicker,
@@ -486,7 +512,11 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 420px;
+    max-width: 320px;
+
+    @media (min-width: $screen-xs) {
+      max-width: 420px;
+    }
 
     &:before {
       content: "";
@@ -494,7 +524,7 @@
       z-index: 0;
       top: 0;
       left: 50%;
-      width: 150px;
+      width: 120px;
       aspect-ratio: 1;
       border-radius: 50%;
       background: #88e0ff;
@@ -503,7 +533,11 @@
       pointer-events: none;
       opacity: 0;
 
-      @media (min-width: 480px) {
+      @media (min-width: 361px) {
+        max-width: 150px;
+      }
+
+      @media (min-width: $screen-xs) {
         width: 200px;
       }
     }
@@ -544,16 +578,26 @@
   &__ranking {
     width: 100%;
     max-width: 620px;
-    margin-top: 48px;
+    margin-top: 24px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: 48px;
+    }
   }
 
   &__ranking-title {
-    margin: 0 0 32px;
+    margin: 0 0 24px;
     font-family: $mcr;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 16px;
+    line-height: 20px;
     color: $cb1;
     text-align: center;
+
+    @media (min-width: $screen-xs) {
+      margin: 0 0 32px;
+      font-size: 18px;
+      line-height: 22px;
+    }
 
     &:after {
       content: "";
@@ -576,29 +620,45 @@
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    gap: 32px;
-    margin: 0 0 32px;
+    gap: 16px;
+    margin: 0 0 16px;
+
+    @media (min-width: $screen-xs) {
+      gap: 32px;
+      margin: 0 0 32px;
+    }
 
     &:before {
       content: "";
       position: absolute;
-      top: 68px;
-      left: -20px;
-      width: 182px;
+      top: 48px;
+      left: -8px;
+      width: 92px;
       height: 1px;
       background: $cb1;
       transform: rotate(20deg);
       transform-origin: left center;
+
+      @media (min-width: $screen-xs) {
+        top: 68px;
+        left: -20px;
+        width: 182px;
+      }
     }
   }
 
   &__row-face {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     margin: 0;
     border-radius: 50%;
     overflow: hidden;
     background: #88e0ff;
+
+    @media (min-width: $screen-xs) {
+      width: 100px;
+      height: 100px;
+    }
 
     img {
       display: block;
@@ -609,33 +669,52 @@
   }
 
   &__row-name {
-    margin: 0 0 16px;
+    margin: 0 0 8px;
     font-family: $mcr;
-    font-size: 18px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 18px;
     color: $cb1;
+
+    @media (min-width: $screen-xs) {
+      margin: 0 0 16px;
+      font-size: 18px;
+      line-height: 20px;
+    }
   }
 
   &__row-meta {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
-    gap: 22px;
+    gap: 12px;
+
+    @media (min-width: $screen-xs) {
+      gap: 22px;
+    }
   }
 
   &__row-votes {
     font-family: $mcs;
-    font-size: 16px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 16px;
     color: $cb1;
+
+    @media (min-width: $screen-xs) {
+      font-size: 16px;
+      line-height: 18px;
+    }
   }
 
   &__row-bar {
     display: block;
-    height: 18px;
+    height: 12px;
     width: 100%;
     background: #d7f3ff;
     clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+
+    @media (min-width: $screen-xs) {
+      height: 18px;
+    }
 
     i {
       display: block;
@@ -648,7 +727,11 @@
   }
 
   .v-btn-c {
-    margin-top: 80px;
+    margin-top: 50px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: 80px;
+    }    
   }
 }
 
