@@ -9,16 +9,16 @@
     "coverUrl": "https://s1.abcstatics.com/abc/www/multimedia/espana/2026/07/25/cibeles-1200x672.jpg",
     "img": {
       "exists": true,
-      "preArticleHeader": true,
-      "src": false,
-      "figcaption": true,
+      "preArticleHeader": false,
+      "src": "https://s1.abcstatics.com/abc/www/multimedia/internacional/2026/09/27/0001.jpg",
+      "figcaption": false,
       "figcaptionText": false
     },
     "infoContainer": {
       "exists": true,
-      "pretitle": false,
-      "title": "Así captó Rusia a decenas de peruanos para la guerra de Ucrania",
-      "description": "Tras recorrer decenas de miles de kilómetros junto a sus ovejas a lo largo de su vida, Paco Morgado comparte reflexiones sobre el oficio de la trashumancia y su día a día antes de finalizar un trayecto que supondrá su jubilación",
+      "pretitle": "Fotoreportaje",
+      "title": "Mongolia: los últimos hombres libres",
+      "description": "Los nómadas kazajos del Macizo del Altái en Mongolia mantienen una forma de vida única marcada por la migración estacional y la residencia en yurtas en un entorno tan hermoso como duro",
       "chevronDown": true
     }
   }

@@ -117,4 +117,8 @@
 
 .v-n-preh .scr-ind {
   height: 100%;
+
+  @media (max-width: $screen-sm) {
+    height: calc(100% - 48px);
+  }
 }
