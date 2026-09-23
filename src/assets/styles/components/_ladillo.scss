@@ -9,6 +9,10 @@
   flex-direction: column;
   gap: 16px;
 
+  @media (min-width: 879px) {
+    gap: 12px;
+  }
+
   &:after {
     content: '';
     width: 240px;
@@ -28,6 +32,11 @@
     color: $cb1;
     text-transform: uppercase;
     text-align: center;
+
+    @media (max-width: 879px) {
+      font-size: 20px;
+      line-height: 24px;
+    }
   }
 
   &__l {

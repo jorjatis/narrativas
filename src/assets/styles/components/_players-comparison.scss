@@ -16,6 +16,11 @@
     letter-spacing: -.09px;
     color: $cb1;
     text-align: center;
+
+    @media (max-width: 879px) {
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 
   &__c {
@@ -136,6 +141,7 @@
     width: 100%;
     min-width: 0;
     margin: 0 auto 24px;
+    z-index: 2;
 
     @media (max-width: 879px) {
       margin-bottom: 0;

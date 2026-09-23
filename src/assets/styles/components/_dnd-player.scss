@@ -16,6 +16,11 @@
     color: $cb1;
     text-align: center;
 
+    @media (max-width: 879px) {
+      font-size: 16px;
+      line-height: 18px;
+    }
+
     &:after {
       content: '';
       display: block;
