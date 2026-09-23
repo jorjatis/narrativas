@@ -1,9 +1,11 @@
 @use '../base/variables' as *;
+@use './piece-mixins' as *;
+
 
 .v-n-players-comparison {
   margin-bottom: 120px;
 
-  @media (max-width: 879px) {
+  @media (max-width: $bp-piece-md-max) {
     margin-bottom: 64px;
   }
 
@@ -17,7 +19,7 @@
     color: $cb1;
     text-align: center;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       font-size: 16px;
       line-height: 20px;
     }
@@ -29,7 +31,7 @@
     column-gap: 50px;
     align-items: start;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       grid-template-rows: auto auto auto auto auto auto;
       column-gap: 16px;
@@ -37,21 +39,18 @@
       margin-left: 0;
     }
 
-    @media (min-width: 880px) {
-      width: 840px;
-      margin-left: calc(-840px / 2 + 50%);
+    @media (min-width: $bp-piece-md) {
+      @include piece-full-bleed(840px);
       grid-template-columns: minmax(0, 200px) minmax(0, 1fr) minmax(0, 200px);
     }
 
     @media (min-width: 980px) {
-      width: 940px;
-      margin-left: calc(-940px / 2 + 50%);
+      @include piece-full-bleed(940px);
       grid-template-columns: minmax(0, 220px) minmax(0, 1fr) minmax(0, 220px);
     }
 
     @media (min-width: 1240px) {
-      width: 1200px;
-      margin-left: calc(-1200px / 2 + 50%);
+      @include piece-full-bleed(1200px);
       grid-template-columns: minmax(0, 260px) minmax(0, 1fr) minmax(0, 260px);
       column-gap: 30px;
     }
@@ -67,7 +66,7 @@
     align-items: center;
     min-width: 0;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       display: grid;
       grid-template-rows: subgrid;
       grid-row: 2 / 6;
@@ -76,16 +75,16 @@
       margin-top: 16px;
     }
 
-    @media (max-width: 400px) { 
+    @media (max-width: $bp-piece-sm) { 
       margin-top: 8px;
     }
   }
 
   &__picks {
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       position: sticky;
       top: 50px;
-      z-index: 6;
+      z-index: 20;
       grid-column: 1 / -1;
       grid-row: 1;
       display: grid;
@@ -100,7 +99,7 @@
       }
     }
 
-    @media (min-width: 880px) {
+    @media (min-width: $bp-piece-md) {
       display: contents;
 
       .v-slc[data-side="left"] {
@@ -121,7 +120,7 @@
     grid-column: 1;
     grid-row: 2;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       grid-row: 2 / 6;
     }
   }
@@ -130,7 +129,7 @@
     grid-column: 3;
     grid-row: 2;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       grid-column: 2;
       grid-row: 2 / 6;
     }
@@ -141,9 +140,10 @@
     width: 100%;
     min-width: 0;
     margin: 0 auto 24px;
-    z-index: 3;
+    position: relative;
+    z-index: 20;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       margin-bottom: 0;
     }
 
@@ -198,11 +198,11 @@
     width: 100%;
     max-width: 240px;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       max-width: 180px;
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       max-width: 130px;
     }
   }
@@ -214,7 +214,7 @@
     margin: 0 0 24px;
     border-radius: 2px;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       aspect-ratio: 1;
       max-width: 180px;
       max-height: 180px;
@@ -224,7 +224,7 @@
       border-radius: 100%;
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       max-width: 130px;
       max-height: 130px;
       margin-bottom: 12px;
@@ -257,8 +257,8 @@
     pointer-events: none;
 
     &.is-talking {
-      // Arranca con el bocadillo (0.35s) y sigue el ritmo de la frase
-      animation: messi-talk 2.8s linear 0.35s 1 both;
+      // Espera a que el bocadillo termine de girar (~0.5s)
+      animation: messi-talk 2.8s linear 0.5s 1 both;
     }
 
     &[hidden] {
@@ -268,7 +268,7 @@
 
   .player-bubble {
     position: absolute;
-    z-index: 2;
+    z-index: 5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -301,71 +301,83 @@
       height: 40px;
       background: center / contain no-repeat
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='%23f2f9ff'%3E%3Cpath d='M48 2C28 4 12 16 1 46C20 32 34 28 48 34Z'/%3E%3C/svg%3E");
+      transform: scaleY(-1) rotate(45deg);
     }
   }
 
   .player-left .player-bubble {
-    top: 22%;
-    left: 85%;
+    top: 17%;
+    left: 87%;
+    z-index: 6;
     transform: rotate(-2deg);
     transform-origin: left center;
 
     &::before {
-      left: -30px;
+      left: -21px;
     }
 
     &.is-in {
-      animation: messi-bubble-left 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: messi-bubble-left 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
-    @media (max-width: 879px) {
-      top: 0;
-      left: 34%;
+    @media (max-width: $bp-piece-md-max) {
+      top: 13%;
+      left: 91%;
     }
   }
 
   .player-right .player-bubble {
-    top: 22%;
-    right: 85%;
+    top: 17%;
+    right: 87%;
     left: auto;
     transform: rotate(2deg);
     transform-origin: right center;
 
     &::before {
-      right: -30px;
+      right: -21px;
       left: auto;
-      transform: scaleX(-1);
+      // Espejo del rabito izquierdo para que apunte a la boca
+      transform: scaleX(-1) scaleY(-1) rotate(45deg);
     }
 
     &.is-in {
-      animation: messi-bubble-right 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: messi-bubble-right 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
-    @media (max-width: 879px) {
-      top: 0;
-      right: 34%;
+    @media (max-width: $bp-piece-md-max) {
+      top: 13%;
+      right: 91%;
     }
   }
 
-  @media (max-width: 879px) {
+  @media (max-width: $bp-piece-md-max) {
     .player-bubble {
-      max-width: 92px;
+      max-width: 140px;
       padding: 5px 7px;
-      font-size: 11px;
-      line-height: 13px;
+      font-size: 14px;
+      line-height: 18px;
     }
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: $bp-piece-sm) {
     .player-bubble {
-      max-width: 96px;
-      font-size: 11px;
-      line-height: 13px;
+      max-width: 110px;
+      font-size: 13px;
+      line-height: 15px;
     }
   }
 
-  &.is-messi-duel .player {
-    z-index: 2;
+  &.is-messi-duel {
+    .player-left,
+    .player-right {
+      position: relative;
+      z-index: 1;
+    }
+
+    &.is-messi-duel-left .player-left,
+    &.is-messi-duel-right .player-right {
+      z-index: 2;
+    }
   }
 
   .player-position {
@@ -375,7 +387,7 @@
     width: 100%;
     text-align: center;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       display: grid;
       grid-template-rows: subgrid;
       grid-row: span 3;
@@ -389,7 +401,7 @@
     line-height: 24px;
     color: $cb1;
 
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       font-size: 16px;
       line-height: 20px;
     }
@@ -404,7 +416,7 @@
     line-height: 20px;
     color: $cb1;
 
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       font-size: 14px;
       line-height: 16px;
       margin: 4px 0 0;
@@ -417,7 +429,7 @@
     max-width: 220px;
     height: auto;
 
-    @media (min-width: 880px) {
+    @media (min-width: $bp-piece-md) {
       display: block;
     }
 
@@ -438,14 +450,14 @@
     padding: 0;
     list-style: none;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       grid-column: 1 / -1;
       grid-row: 6;
       gap: 14px;
       margin-top: 32px;
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       gap: 10px;
       margin-top: 12px;
     }
@@ -457,7 +469,7 @@
     align-items: center;
     gap: 16px;
 
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       gap: 12px;
     }
   }
@@ -470,7 +482,7 @@
     color: $cb1;
     text-align: center;
 
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       font-size: 14px;
       line-height: 16px;
     }
@@ -491,7 +503,7 @@
     line-height: 18px;
     color: $cb1;
 
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       font-size: 14px;
       line-height: 16px;
     }
@@ -524,11 +536,7 @@
     height: 18px;
     overflow: visible;
 
-    @media (max-width: 879px) {
-      height: 18px;
-    }
-
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       height: 14px;
     }
 
@@ -562,7 +570,6 @@
     background: #88E0FF;
     transform: scaleX(0);
     transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform;
     backface-visibility: hidden;
   }
 
@@ -578,125 +585,11 @@
   }
 
   .stat-bar--left {
-    clip-path: inset(0 0 0 -16px);
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: 16px;
-      height: 100%;
-      transform: skewX(35deg);
-      transform-origin: right center;
-    }
-
-    &::before {
-      z-index: 0;
-      left: -6px;
-      background: inherit;
-    }
-
-    &::after {
-      z-index: 1;
-      right: 0;
-      background: #88E0FF;
-    }
-
-    .stat-bar__fill {
-      transform-origin: right center;
-    }
-
-    .stat-bar__cap {
-      left: calc((1 - var(--bar, 0)) * 100% - 6px);
-      background: #88E0FF;
-      transform: skewX(35deg);
-      transform-origin: right center;
-    }
-
-    .stat-bar__value {
-      left: calc((1 - var(--bar, 0)) * 100% + 8px);
-      right: auto;
-    }
-
-    &.is-outside .stat-bar__value {
-      left: auto;
-      right: calc(var(--bar, 0) * 100% + 28px);
-    }
-
-    &.is-zero .stat-bar__value {
-      left: auto;
-      right: 8px;
-    }
-
-    &.is-zero {
-      &::after,
-      .stat-bar__cap {
-        display: none;
-      }
-    }
+    @include piece-stat-bar-side(left, #88E0FF);
   }
 
   .stat-bar--right {
-    clip-path: inset(0 -16px 0 0);
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: 16px;
-      height: 100%;
-      transform: skewX(-35deg);
-      transform-origin: left center;
-    }
-
-    &::before {
-      z-index: 1;
-      left: 0;
-      background: #5EB6D5;
-    }
-
-    &::after {
-      z-index: 0;
-      right: -6px;
-      background: inherit;
-    }
-
-    .stat-bar__fill {
-      background: #5EB6D5;
-      transform-origin: left center;
-    }
-
-    .stat-bar__cap {
-      right: calc((1 - var(--bar, 0)) * 100% - 6px);
-      left: auto;
-      background: #5EB6D5;
-      transform: skewX(-35deg);
-      transform-origin: left center;
-    }
-
-    .stat-bar__value {
-      right: calc((1 - var(--bar, 0)) * 100% + 8px);
-      left: auto;
-    }
-
-    &.is-outside .stat-bar__value {
-      right: auto;
-      left: calc(var(--bar, 0) * 100% + 28px);
-    }
-
-    &.is-zero .stat-bar__value {
-      right: auto;
-      left: 8px;
-    }
-
-    &.is-zero {
-      &::before,
-      .stat-bar__cap {
-        display: none;
-      }
-    }
+    @include piece-stat-bar-side(right, #5EB6D5);
   }
 
   .stat-bar__value {
@@ -712,7 +605,7 @@
     white-space: nowrap;
     pointer-events: none;
 
-    @media (max-width: 400px) {
+    @media (max-width: $bp-piece-sm) {
       font-size: 13px;
       line-height: 15px;
     }
@@ -769,24 +662,34 @@
 @keyframes messi-bubble-left {
   from {
     opacity: 0;
-    transform: translateY(8px) rotate(-2deg) scale(0.82);
+    transform: rotate(-110deg) scale(0.55);
+  }
+
+  55% {
+    opacity: 1;
+    transform: rotate(8deg) scale(1.04);
   }
 
   to {
     opacity: 1;
-    transform: rotate(-2deg);
+    transform: rotate(-2deg) scale(1);
   }
 }
 
 @keyframes messi-bubble-right {
   from {
     opacity: 0;
-    transform: translateY(8px) rotate(2deg) scale(0.82);
+    transform: rotate(110deg) scale(0.55);
+  }
+
+  55% {
+    opacity: 1;
+    transform: rotate(-8deg) scale(1.04);
   }
 
   to {
     opacity: 1;
-    transform: rotate(2deg);
+    transform: rotate(2deg) scale(1);
   }
 }
 

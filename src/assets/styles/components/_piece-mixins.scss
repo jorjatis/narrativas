@@ -1,0 +1,128 @@
+// Breakpoints y utilidades locales de los includes de la pieza
+// (independientes del design system Kraken del mockup).
+
+$bp-piece-md: 880px;
+$bp-piece-sm: 400px;
+$bp-piece-md-max: $bp-piece-md - 1;
+
+@mixin piece-full-bleed($width) {
+  width: $width;
+  max-width: $width;
+  margin-left: calc(#{$width} / -2 + 50%);
+}
+
+@mixin piece-stat-bar-side($dir, $fill) {
+  $skew: -35deg;
+  $origin: left;
+
+  @if $dir == left {
+    $skew: 35deg;
+    $origin: right;
+  }
+
+  @if $dir == left {
+    clip-path: inset(0 0 0 -16px);
+  } @else {
+    clip-path: inset(0 -16px 0 0);
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 16px;
+    height: 100%;
+    transform: skewX($skew);
+    transform-origin: $origin center;
+  }
+
+  @if $dir == left {
+    &::before {
+      z-index: 0;
+      left: -6px;
+      background: inherit;
+    }
+
+    &::after {
+      z-index: 1;
+      right: 0;
+      background: $fill;
+    }
+  } @else {
+    &::before {
+      z-index: 1;
+      left: 0;
+      background: $fill;
+    }
+
+    &::after {
+      z-index: 0;
+      right: -6px;
+      background: inherit;
+    }
+  }
+
+  .stat-bar__fill {
+    @if $dir == right {
+      background: $fill;
+    }
+    transform-origin: $origin center;
+  }
+
+  .stat-bar__cap {
+    @if $dir == left {
+      left: calc((1 - var(--bar, 0)) * 100% - 6px);
+    } @else {
+      right: calc((1 - var(--bar, 0)) * 100% - 6px);
+      left: auto;
+    }
+    background: $fill;
+    transform: skewX($skew);
+    transform-origin: $origin center;
+  }
+
+  .stat-bar__value {
+    @if $dir == left {
+      left: calc((1 - var(--bar, 0)) * 100% + 8px);
+      right: auto;
+    } @else {
+      right: calc((1 - var(--bar, 0)) * 100% + 8px);
+      left: auto;
+    }
+  }
+
+  &.is-outside .stat-bar__value {
+    @if $dir == left {
+      left: auto;
+      right: calc(var(--bar, 0) * 100% + 28px);
+    } @else {
+      right: auto;
+      left: calc(var(--bar, 0) * 100% + 28px);
+    }
+  }
+
+  &.is-zero .stat-bar__value {
+    @if $dir == left {
+      left: auto;
+      right: 8px;
+    } @else {
+      right: auto;
+      left: 8px;
+    }
+  }
+
+  &.is-zero {
+    @if $dir == left {
+      &::after,
+      .stat-bar__cap {
+        display: none;
+      }
+    } @else {
+      &::before,
+      .stat-bar__cap {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
 @use '../base/variables' as *;
+@use './piece-mixins' as *;
+
 
 .v-n-chrono-timeline {
   --chrono-pipe-w: 24px;
@@ -17,9 +19,8 @@
   @media (min-width: 1140px) {
     --chrono-pipe-w: 42px;
 
-    width: 1000px;
+    @include piece-full-bleed(1000px);
     max-width: unset;
-    margin-left: calc(-1000px / 2 + 50%);
     margin-right: unset;
   }
 

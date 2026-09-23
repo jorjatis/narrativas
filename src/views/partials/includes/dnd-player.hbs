@@ -4,65 +4,66 @@
 </div>
 
 <div class="v-n-dnd-player">
-  <p class="v-n-dnd-player__lead">Pulsa y arrastra un jugador encima del 10</p>
+  <p class="v-n-dnd-player__lead" id="dnd-player-lead">Pulsa y arrastra un jugador encima del 10, o selecciónalo con el teclado y pulsa Enter</p>
 
   <div class="v-n-dnd-player__c">
-    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--01" data-id="player01" data-votes="0" data-share="0">
+    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--01" data-vertex="01" data-id="player01" data-votes="0" data-share="0" role="button" tabindex="0" aria-describedby="dnd-player-lead dnd-drop-label">
       <p class="v-n-dnd-player__name">
         <span class="v-n-dnd-player__name-l"></span>
-        Lautaro Martínez
+        Lautaro <br> Martínez
       </p>
       <figure class="v-n-dnd-player__img">
         <img
           src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/dnd-player-mock.webp"
-          alt="Lautaro Martínez" draggable="false">
+          alt="Lautaro Martínez" width="120" height="120" loading="lazy" decoding="async" draggable="false">
       </figure>
     </div>
-    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--02" data-id="player02" data-votes="0" data-share="0">
+    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--02" data-vertex="02" data-id="player02" data-votes="0" data-share="0" role="button" tabindex="0" aria-describedby="dnd-player-lead dnd-drop-label">
       <p class="v-n-dnd-player__name">
         <span class="v-n-dnd-player__name-l"></span>
-        Lautaro Martínez
+        Enzo <br> Fernández
       </p>
       <figure class="v-n-dnd-player__img">
         <img
           src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/dnd-player-mock.webp"
-          alt="Lautaro Martínez" draggable="false">
+          alt="Enzo Fernández" width="120" height="120" loading="lazy" decoding="async" draggable="false">
       </figure>
     </div>
-    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--03" data-id="player03" data-votes="0" data-share="0">
+    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--03" data-vertex="03" data-id="player03" data-votes="0" data-share="0" role="button" tabindex="0" aria-describedby="dnd-player-lead dnd-drop-label">
       <p class="v-n-dnd-player__name">
         <span class="v-n-dnd-player__name-l"></span>
-        Lautaro Martínez
+        Alexis <br> Allister
       </p>
       <figure class="v-n-dnd-player__img">
         <img
           src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/dnd-player-mock.webp"
-          alt="Lautaro Martínez" draggable="false">
+          alt="Alexis Allister" width="120" height="120" loading="lazy" decoding="async" draggable="false">
       </figure>
     </div>
-    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--04" data-id="player04" data-votes="0" data-share="0">
+    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--04" data-vertex="04" data-id="player04" data-votes="0" data-share="0" role="button" tabindex="0" aria-describedby="dnd-player-lead dnd-drop-label">
       <p class="v-n-dnd-player__name">
         <span class="v-n-dnd-player__name-l"></span>
-        Lautaro Martínez
+        Julián <br> Álvarez
       </p>
       <figure class="v-n-dnd-player__img">
         <img
           src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/dnd-player-mock.webp"
-          alt="Lautaro Martínez" draggable="false">
+          alt="Julián Álvarez" width="120" height="120" loading="lazy" decoding="async" draggable="false">
       </figure>
     </div>
-    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--05" data-id="player05" data-votes="0" data-share="0">
+    <div class="v-n-dnd-player__drag-item v-n-dnd-player__drag-item--05" data-vertex="05" data-id="player05" data-votes="0" data-share="0" role="button" tabindex="0" aria-describedby="dnd-player-lead dnd-drop-label">
       <p class="v-n-dnd-player__name">
         <span class="v-n-dnd-player__name-l"></span>
-        Lautaro Martínez
+        Rodrigo <br> De Paul
       </p>
       <figure class="v-n-dnd-player__img">
         <img
           src="https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/dnd-player-mock.webp"
-          alt="Lautaro Martínez" draggable="false">
+          alt="Rodrigo De Paul" width="120" height="120" loading="lazy" decoding="async" draggable="false">
       </figure>
     </div>
-    <div class="v-n-dnd-player__drop-zone">
+    <div class="v-n-dnd-player__drop-zone" role="region" aria-labelledby="dnd-drop-label">
+      <p class="v-n-dnd-player__drop-label" id="dnd-drop-label">Zona para soltar el dorsal 10</p>
       <svg class="v-n-dnd-player__flag" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 198 198"
         aria-hidden="true">
         <path fill="#88e0ff"
@@ -77,7 +78,7 @@
         <path fill="#000" d="M73 126.599v-70.23H48.81V71.4h8.72v55.2h-5.84v15.03h27.15v-15.03z" />
       </svg>
     </div>
-    <div class="v-n-dnd-player__bg">
+    <div class="v-n-dnd-player__bg" aria-hidden="true">
       <div class="v-n-dnd-player__pentagon v-n-dnd-player__pentagon--01">
         <svg width="703" height="669" viewBox="0 0 703 669" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M702.243 255.509L568.239 667.932H134.592L0.58725 255.509L351.415 0.617188L702.243 255.509Z"
@@ -94,7 +95,7 @@
       </div>
     </div>
 
-    <div class="v-n-dnd-player__result">
+    <div class="v-n-dnd-player__result" aria-live="polite" aria-atomic="true">
       <p class="v-n-dnd-player__vote">
         <span class="v-n-dnd-player__vote-kicker">Has votado a</span>
         <strong class="v-n-dnd-player__vote-name"></strong>

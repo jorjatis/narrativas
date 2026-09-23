@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import prefersReducedMotion from "../helpers/prefersReducedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,10 +40,6 @@ const LAG_SOFT = 260;
 const DRAW_SMOOTH = 95;
 const DESKTOP_MQ = "(min-width: 1140px)";
 const drawCache = new WeakMap();
-
-function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
 
 function wrapYearLabels(root) {
   root.querySelectorAll(".player-year").forEach((year) => {
@@ -234,15 +231,10 @@ function setupPipeDraw(timeline) {
   }
 
   prev?.kill();
-  if (timeline._chronoDrawScroll) {
-    window.removeEventListener("scroll", timeline._chronoDrawScroll);
-  }
 
   updateDraw(timeline);
 
   const onScroll = () => updateDraw(timeline);
-  timeline._chronoDrawScroll = onScroll;
-  window.addEventListener("scroll", onScroll, { passive: true });
 
   ScrollTrigger.create({
     id,

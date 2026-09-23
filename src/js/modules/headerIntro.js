@@ -1,15 +1,12 @@
 import gsap from "gsap";
 import lottie from "lottie-web/build/player/lottie_light";
 import animationData from "@images/el10-intro.json";
+import prefersReducedMotion from "../helpers/prefersReducedMotion";
 
 const PIPE_OVERLAP = 22;
 const BLOCK_HIDDEN = "inset(0% 0% 100% 0%)";
 const BLOCK_SHOWN = "inset(0% 0% 0% 0%)";
 const WORD_DURATION = 0.52;
-
-function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
 
 function readPipeStart(timeline) {
   const path = timeline.querySelector(".chrono-pipeline__path");
@@ -75,6 +72,27 @@ function placePipe(pipe, host, timeline) {
   return true;
 }
 
+// Sin cronología (noticia cerrada): un tramo corto centrado bajo el 10.
+function placePipeStub(pipe, host) {
+  const hostBox = host.getBoundingClientRect();
+  if (hostBox.height < 2) return false;
+
+  const originBox = pipe.parentElement.getBoundingClientRect();
+  const width = window.matchMedia("(min-width: 1140px)").matches ? 42 : 24;
+  const height = Math.round(Math.min(200, Math.max(110, hostBox.height * 0.42)));
+  const top = hostBox.bottom - PIPE_OVERLAP;
+
+  gsap.set(pipe, {
+    width,
+    height,
+    left: hostBox.left + hostBox.width / 2 - width / 2 - originBox.left,
+    top: top - originBox.top,
+    "--pipe-shadow": `${width * 1.7}px`,
+  });
+
+  return true;
+}
+
 function endState(preh, words, pipe, anim) {
   gsap.set(preh, { autoAlpha: 1 });
   gsap.set(words, { clipPath: BLOCK_SHOWN });
@@ -119,8 +137,9 @@ function setupHeader(preh) {
   let grown = false;
 
   const place = () => {
-    if (!timeline || !ready) return false;
-    return placePipe(pipe, animHost, timeline);
+    if (!ready) return false;
+    if (timeline) return placePipe(pipe, animHost, timeline);
+    return placePipeStub(pipe, animHost);
   };
 
   const growPipe = () => {

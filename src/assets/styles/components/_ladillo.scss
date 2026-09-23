@@ -1,4 +1,6 @@
 @use '../base/variables' as *;
+@use './piece-mixins' as *;
+
 
 .v-n-suh {
   position: relative;
@@ -9,7 +11,7 @@
   flex-direction: column;
   gap: 16px;
 
-  @media (min-width: 879px) {
+  @media (min-width: $bp-piece-md-max) {
     gap: 12px;
   }
 
@@ -33,7 +35,7 @@
     text-transform: uppercase;
     text-align: center;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       font-size: 20px;
       line-height: 24px;
     }

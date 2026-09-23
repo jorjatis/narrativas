@@ -1,4 +1,6 @@
 @use '../base/variables' as *;
+@use './piece-mixins' as *;
+
 
 .v-c-cmp:has(.v-n-dnd-player) {
   .v-n-suh {
@@ -7,6 +9,18 @@
 }
 
 .v-n-dnd-player {
+  &__drop-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   &__lead {
     position: relative;
     font-family: $mcr;
@@ -16,7 +30,7 @@
     color: $cb1;
     text-align: center;
 
-    @media (max-width: 879px) {
+    @media (max-width: $bp-piece-md-max) {
       font-size: 16px;
       line-height: 18px;
     }
@@ -51,8 +65,7 @@
     }
 
     @media (min-width: 1200px) {
-      width: 739px;
-      margin-left: calc(-739px / 2 + 50%);
+      @include piece-full-bleed(739px);
     }
   }
 
@@ -265,7 +278,6 @@
     user-select: none;
 
     &.is-dragging {
-      will-change: transform;
     }
 
     &.is-placed {
@@ -714,7 +726,7 @@
     display: block;
     height: 12px;
     width: 100%;
-    background: #d7f3ff;
+    background: #F2F9FF;
     clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
 
     @media (min-width: $screen-xs) {
@@ -745,7 +757,7 @@
     width: 520px;
     margin-top: 180px;
     margin-bottom: 180px;
-    margin-left: calc(-520px / 2 + 50%);
+    @include piece-full-bleed(520px);
   }
 
   .v-n-dnd-player__drag-item {

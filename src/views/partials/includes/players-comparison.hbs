@@ -9,7 +9,7 @@
   <div class="v-n-players-comparison__c">
     <div class="v-n-players-comparison__picks">
       <div class="v-slc" data-side="left" data-voc-component="select">
-        <button class="v-slc__h v-slc__b" type="button">
+        <button class="v-slc__h v-slc__b" type="button" id="players-comparison-left-btn" aria-label="Elegir jugador izquierda" aria-haspopup="listbox" aria-expanded="false" aria-controls="players-comparison-left-list">
           <span class="v-slc__t">Lionel Messi</span>
           <span class="v-b-i">
             <svg width="8" height="5" aria-hidden="true">
@@ -19,12 +19,12 @@
         </button>
         <div class="v-slc__c">
           <div class="v-slc__n">
-            <ul class="v-slc__u"></ul>
+            <ul class="v-slc__u" id="players-comparison-left-list" role="listbox" aria-labelledby="players-comparison-left-btn"></ul>
           </div>
         </div>
       </div>
       <div class="v-slc" data-side="right" data-voc-component="select">
-        <button class="v-slc__h v-slc__b" type="button">
+        <button class="v-slc__h v-slc__b" type="button" id="players-comparison-right-btn" aria-label="Elegir jugador derecha" aria-haspopup="listbox" aria-expanded="false" aria-controls="players-comparison-right-list">
           <span class="v-slc__t">Juan Román Riquelme</span>
           <span class="v-b-i">
             <svg width="8" height="5" aria-hidden="true">
@@ -34,7 +34,7 @@
         </button>
         <div class="v-slc__c">
           <div class="v-slc__n">
-            <ul class="v-slc__u"></ul>
+            <ul class="v-slc__u" id="players-comparison-right-list" role="listbox" aria-labelledby="players-comparison-right-btn"></ul>
           </div>
         </div>
       </div>
