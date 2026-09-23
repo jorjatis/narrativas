@@ -261,9 +261,13 @@ export default function playersComparison() {
     onEnter: animateBars,
   });
 
+  function sideSelect(side) {
+    return root.querySelector(`.v-slc[data-side="${side}"]`);
+  }
+
   function populateSelects() {
-    Object.values(sides).forEach((sideEl) => {
-      const list = sideEl.querySelector(".v-slc__u");
+    Object.keys(sides).forEach((side) => {
+      const list = sideSelect(side)?.querySelector(".v-slc__u");
       if (!list) return;
 
       list.innerHTML = PLAYERS.map(
@@ -280,7 +284,7 @@ export default function playersComparison() {
     ["left", "right"].forEach((side) => {
       const other = side === "left" ? "right" : "left";
 
-      sides[side].querySelectorAll("[data-player-id]").forEach((button) => {
+      sideSelect(side)?.querySelectorAll("[data-player-id]").forEach((button) => {
         const id = button.dataset.playerId;
         const isSelected = id === selected[side];
         const isTaken = id === selected[other];
@@ -294,7 +298,7 @@ export default function playersComparison() {
 
   function bindSelects() {
     ["left", "right"].forEach((side) => {
-      const list = sides[side].querySelector(".v-slc__u");
+      const list = sideSelect(side)?.querySelector(".v-slc__u");
       if (!list) return;
 
       list.addEventListener("click", (event) => {
@@ -307,7 +311,7 @@ export default function playersComparison() {
         if (id === selected[side] || id === selected[other]) return;
 
         selected[side] = id;
-        const label = sides[side].querySelector(".v-slc__t");
+        const label = sideSelect(side)?.querySelector(".v-slc__t");
         if (label) label.textContent = getPlayer(id).name;
 
         syncSelectState();

@@ -65,40 +65,69 @@
     @media (max-width: 879px) {
       display: grid;
       grid-template-rows: subgrid;
-      grid-row: 1 / 6;
+      grid-row: 2 / 6;
       align-items: stretch;
       justify-items: center;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 400px) { 
+      margin-top: 8px;
+    }
+  }
+
+  &__picks {
+    @media (max-width: 879px) {
+      position: sticky;
+      top: 50px;
+      z-index: 6;
+      grid-column: 1 / -1;
+      grid-row: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 16px;
+      align-items: start;
+      background: #fff;
+      padding: 8px 0;
+
+      .v-slc {
+        margin-bottom: 0;
+      }
+    }
+
+    @media (min-width: 880px) {
+      display: contents;
+
+      .v-slc[data-side="left"] {
+        grid-column: 1;
+        grid-row: 1;
+        left: 50%;
+      }
+
+      .v-slc[data-side="right"] {
+        grid-column: 3;
+        grid-row: 1;
+        right: 50%;
+      }
     }
   }
 
   .player-left {
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 2;
 
     @media (max-width: 879px) {
-      grid-row: 1 / 6;
-    }
-
-    .v-slc {
-      @media (min-width: 880px) {
-        left: 50%;
-      }
+      grid-row: 2 / 6;
     }
   }
 
   .player-right {
     grid-column: 3;
-    grid-row: 1;
+    grid-row: 2;
 
     @media (max-width: 879px) {
       grid-column: 2;
-      grid-row: 1 / 6;
-    }
-
-    .v-slc {
-      @media (min-width: 880px) {
-        right: 50%;
-      }
+      grid-row: 2 / 6;
     }
   }
 
@@ -109,7 +138,7 @@
     margin: 0 auto 24px;
 
     @media (max-width: 879px) {
-      margin-bottom: 16px;
+      margin-bottom: 0;
     }
 
     &__h,
@@ -175,6 +204,12 @@
       border-radius: 100%;
     }
 
+    @media (max-width: 400px) {
+      max-width: 130px;
+      max-height: 130px;
+      margin-bottom: 12px;
+    }
+
     img {
       &[hidden] {
         display: none;
@@ -202,6 +237,11 @@
     font-size: 18px;
     line-height: 24px;
     color: $cb1;
+
+    @media (max-width: 400px) {
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 
   .player-position__value {
@@ -212,6 +252,12 @@
     font-size: 16px;
     line-height: 20px;
     color: $cb1;
+
+    @media (max-width: 400px) {
+      font-size: 14px;
+      line-height: 16px;
+      margin: 4px 0 0;
+    }
   }
 
   .player-pitch {
@@ -231,7 +277,7 @@
 
   .comparison-stats {
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 1 / span 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -244,8 +290,13 @@
     @media (max-width: 879px) {
       grid-column: 1 / -1;
       grid-row: 6;
-      margin-top: 32px;
       gap: 14px;
+      margin-top: 32px;
+    }
+
+    @media (max-width: 400px) {
+      gap: 10px;
+      margin-top: 12px;
     }
   }
 
@@ -254,6 +305,10 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
+
+    @media (max-width: 400px) {
+      gap: 12px;
+    }
   }
 
   .stat-row__label {
@@ -263,6 +318,11 @@
     letter-spacing: -.09px;
     color: $cb1;
     text-align: center;
+
+    @media (max-width: 400px) {
+      font-size: 14px;
+      line-height: 16px;
+    }
   }
 
   .stat-row__texts {
@@ -279,6 +339,11 @@
     font-size: 16px;
     line-height: 18px;
     color: $cb1;
+
+    @media (max-width: 400px) {
+      font-size: 14px;
+      line-height: 16px;
+    }
 
     &--left {
       text-align: right;
@@ -310,6 +375,10 @@
 
     @media (max-width: 879px) {
       height: 18px;
+    }
+
+    @media (max-width: 400px) {
+      height: 14px;
     }
 
     &::after {
@@ -491,5 +560,10 @@
     color: $cb1;
     white-space: nowrap;
     pointer-events: none;
+
+    @media (max-width: 400px) {
+      font-size: 13px;
+      line-height: 15px;
+    }
   }
 }
