@@ -141,7 +141,7 @@
     width: 100%;
     min-width: 0;
     margin: 0 auto 24px;
-    z-index: 2;
+    z-index: 3;
 
     @media (max-width: 879px) {
       margin-bottom: 0;
@@ -193,6 +193,20 @@
     }
   }
 
+  .player-portrait {
+    position: relative;
+    width: 100%;
+    max-width: 240px;
+
+    @media (max-width: 879px) {
+      max-width: 180px;
+    }
+
+    @media (max-width: 400px) {
+      max-width: 130px;
+    }
+  }
+
   .player-img {
     width: 100%;
     max-width: 240px;
@@ -221,6 +235,137 @@
         display: none;
       }
     }
+  }
+
+  .player-img__stage {
+    position: relative;
+    display: block;
+  }
+
+  .player-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .player-mouth {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+
+    &.is-talking {
+      // Arranca con el bocadillo (0.35s) y sigue el ritmo de la frase
+      animation: messi-talk 2.8s linear 0.35s 1 both;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .player-bubble {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 250px;
+    height: 100px;
+    margin: 0;
+    padding: 0 16px;
+    border-radius: 24px;
+    background: #f2f9ff;
+    font-family: $mcr;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    color: $cb1;
+    text-align: center;
+    pointer-events: none;
+    filter: drop-shadow(2px 3px 6px rgba(0, 0, 0, 0.28));
+
+    &[hidden] {
+      display: none;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: auto;
+      bottom: 10px;
+      width: 36px;
+      height: 40px;
+      background: center / contain no-repeat
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='%23f2f9ff'%3E%3Cpath d='M48 2C28 4 12 16 1 46C20 32 34 28 48 34Z'/%3E%3C/svg%3E");
+    }
+  }
+
+  .player-left .player-bubble {
+    top: 22%;
+    left: 85%;
+    transform: rotate(-2deg);
+    transform-origin: left center;
+
+    &::before {
+      left: -30px;
+    }
+
+    &.is-in {
+      animation: messi-bubble-left 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @media (max-width: 879px) {
+      top: 0;
+      left: 34%;
+    }
+  }
+
+  .player-right .player-bubble {
+    top: 22%;
+    right: 85%;
+    left: auto;
+    transform: rotate(2deg);
+    transform-origin: right center;
+
+    &::before {
+      right: -30px;
+      left: auto;
+      transform: scaleX(-1);
+    }
+
+    &.is-in {
+      animation: messi-bubble-right 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @media (max-width: 879px) {
+      top: 0;
+      right: 34%;
+    }
+  }
+
+  @media (max-width: 879px) {
+    .player-bubble {
+      max-width: 92px;
+      padding: 5px 7px;
+      font-size: 11px;
+      line-height: 13px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .player-bubble {
+      max-width: 96px;
+      font-size: 11px;
+      line-height: 13px;
+    }
+  }
+
+  &.is-messi-duel .player {
+    z-index: 2;
   }
 
   .player-position {
@@ -570,6 +715,86 @@
     @media (max-width: 400px) {
       font-size: 13px;
       line-height: 15px;
+    }
+  }
+}
+
+// qué-mi-rás (3) · pausa · bo-bo (2) · pausa · an-da-pa-lla-bo-bo (6)
+@keyframes messi-talk {
+  0%,
+  8%,
+  16%,
+  24%,
+  32%,
+  40%,
+  48%,
+  56%,
+  63%,
+  70%,
+  77%,
+  84%,
+  91%,
+  100% {
+    transform: translateY(0);
+  }
+
+  // qué · mi · rás
+  4%,
+  12%,
+  20% {
+    transform: translateY(7%);
+  }
+
+  // pausa 24% → 32%
+
+  // bo · bo?
+  36%,
+  44% {
+    transform: translateY(7%);
+  }
+
+  // pausa 48% → 56%
+
+  // an · da · pa · lla · bo · bo
+  59.5%,
+  66.5%,
+  73.5%,
+  80.5%,
+  87.5%,
+  94.5% {
+    transform: translateY(7%);
+  }
+}
+
+@keyframes messi-bubble-left {
+  from {
+    opacity: 0;
+    transform: translateY(8px) rotate(-2deg) scale(0.82);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(-2deg);
+  }
+}
+
+@keyframes messi-bubble-right {
+  from {
+    opacity: 0;
+    transform: translateY(8px) rotate(2deg) scale(0.82);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-n-players-comparison {
+    .player-mouth,
+    .player-bubble {
+      animation: none;
     }
   }
 }

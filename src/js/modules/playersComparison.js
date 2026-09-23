@@ -10,6 +10,10 @@ const PLAYERS_DATA = {
       id: "messi",
       name: "Lionel Messi",
       image: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-lionel-messi.webp",
+      mirrorImage: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-lionel-messi-flip.webp",
+      mirrorImage2: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-lionel-messi-flip-2.webp",
+      mouth: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-lionel-messi-mouth.webp",
+      mouth2: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/player-lionel-messi-mouth-2.webp",
       position: "Delantero / Mediocentro ofensivo",
       titles: "Copa América (2), Finalissima y Mundial",
       pitchZones: "https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/images/campo-lionel-messi.webp",
@@ -235,6 +239,7 @@ export default function playersComparison() {
     left: getPlayer(DEFAULTS.left) ? DEFAULTS.left : PLAYERS[0].id,
     right: getPlayer(DEFAULTS.right) ? DEFAULTS.right : PLAYERS[1].id,
   };
+  let messiTalkSide = null;
 
   populateSelects();
   syncSelectState();
@@ -289,9 +294,11 @@ export default function playersComparison() {
         const isSelected = id === selected[side];
         const isTaken = id === selected[other];
 
+        const canMirror = id === "messi";
+
         button.classList.toggle("is-selected", isSelected);
-        button.classList.toggle("is-taken", isTaken);
-        button.disabled = isSelected || isTaken;
+        button.classList.toggle("is-taken", isTaken && !canMirror);
+        button.disabled = isSelected || (isTaken && !canMirror);
       });
     });
   }
@@ -308,28 +315,100 @@ export default function playersComparison() {
         const id = button.dataset.playerId;
         const other = side === "left" ? "right" : "left";
 
-        if (id === selected[side] || id === selected[other]) return;
+        const mirroringMessi = id === "messi" && id === selected[other];
+
+        if (id === selected[side] || (id === selected[other] && !mirroringMessi)) return;
+
+        const enteringMessiDuel = id === "messi" && selected[other] === "messi";
 
         selected[side] = id;
         const label = sideSelect(side)?.querySelector(".v-slc__t");
         if (label) label.textContent = getPlayer(id).name;
 
+        if (enteringMessiDuel) {
+          messiTalkSide = other;
+        } else if (!(selected.left === "messi" && selected.right === "messi")) {
+          messiTalkSide = null;
+        }
+
         syncSelectState();
-        renderPlayer(side);
+        renderPlayer("left");
+        renderPlayer("right");
         renderStats(side, true);
       });
     });
+  }
+
+  function isMessiDuel() {
+    return selected.left === "messi" && selected.right === "messi";
   }
 
   function renderPlayer(side) {
     const player = getPlayer(selected[side]);
     const el = sides[side];
     const position = el.querySelector(".player-position__value");
+    const duel = isMessiDuel();
+    const talking = duel && side === messiTalkSide;
+    const talkImage =
+      side === "left" ? player.mirrorImage : player.mirrorImage2;
+    const talkMouth = side === "left" ? player.mouth : player.mouth2;
+    let image = player.image;
 
-    setImage(el.querySelector(".player-img img"), player.image, player.name);
+    if (duel && side === "left" && player.mirrorImage) {
+      image = player.mirrorImage;
+    } else if (talking && talkImage) {
+      image = talkImage;
+    }
+
+    setImage(el.querySelector(".player-photo"), image, player.name);
     setImage(el.querySelector(".player-pitch"), player.pitchZones, `Posición de ${player.name}`);
 
+    const mouth = el.querySelector(".player-mouth");
+    const bubble = el.querySelector(".player-bubble");
+
+    if (mouth) {
+      const isTalking = talking && talkMouth;
+      const wasTalking = mouth.classList.contains("is-talking");
+
+      if (isTalking) mouth.src = talkMouth;
+      mouth.hidden = !isTalking;
+
+      if (isTalking && !wasTalking) {
+        mouth.classList.remove("is-talking");
+        void mouth.offsetWidth;
+        mouth.classList.add("is-talking");
+
+        if (bubble) {
+          bubble.hidden = false;
+          bubble.classList.remove("is-in");
+          void bubble.offsetWidth;
+          bubble.classList.add("is-in");
+        }
+
+        const hideBubble = (event) => {
+          if (event && !String(event.animationName).startsWith("messi-talk")) return;
+          if (bubble) bubble.hidden = true;
+          mouth.classList.remove("is-talking");
+        };
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          window.setTimeout(hideBubble, 3000);
+        } else {
+          mouth.addEventListener("animationend", hideBubble, { once: true });
+        }
+      } else if (!isTalking) {
+        mouth.classList.remove("is-talking");
+        if (bubble) {
+          bubble.hidden = true;
+          bubble.classList.remove("is-in");
+        }
+      }
+    } else if (bubble) {
+      bubble.hidden = true;
+    }
+
     if (position) position.textContent = player.position || "";
+    root.classList.toggle("is-messi-duel", duel);
     syncPositionHeights();
   }
 
