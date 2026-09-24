@@ -2,3 +2,238 @@
 @use "../base/variables-custom" as *;
 @use "../base/actions" as *;
 @use "../base/animations" as *;
+
+body {
+  .v-h-a~.v-w {
+    .v-a--d-s-1 {
+      @media (max-width: 1024px) {
+        min-height: unset;
+        height: calc(100svh - 48px);
+        margin-top: -100px;
+      }
+
+      @media (max-width: 698px) {
+        min-height: unset;
+        height: calc(100svh - 48px);
+        margin-top: -72px;
+      }
+
+      .scr-ind {
+        @media (max-width: $screen-sm) {
+          height: calc(100svh - 48px);
+        }
+      }
+    }
+  }
+
+  .v-hpr {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .v-h {   
+    &--t3 {
+      &:not(.is-fixed) {
+        .v-log--1 {
+          .v-log__i {
+            filter: invert(1);
+          }
+        }
+        
+        .v-h {
+          &__w {
+            &--1 {
+              .v-hmb {
+                background: $cp1;
+                transition: background 0.3s ease;
+
+                &:hover {
+                  background: $cp3;
+                }
+              }
+
+              svg {
+                fill: $cb2;
+                transition: fill 0.3s ease;
+              }
+            }
+
+            &--3 {
+              .v-btn {
+                &--2 {
+                  color: $cb2;
+                  border-color: $cb2;
+                  transition: opacity 0.3s ease;
+
+                  &:hover {
+                    opacity: .7;
+                  }
+
+                  .v-i {
+                    svg {
+                      fill: $cb2;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          &__c {
+            background: transparent;
+            border-bottom-color: transparent;
+            transition: background 0.3s ease;
+          }
+        }
+      }
+
+      &.is-fixed {
+        .v-hpr {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  &.is-loaded {
+    .v-w {
+      .v-a--d-s-1 {
+        .v-a-inf-c {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .v-a-img-c {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+.v-w {
+  .v-a--d-s-1 {
+    min-height: 100svh;
+    margin-top: -72px;
+
+    @media (min-width: 699px) {
+      margin-top: -100px;
+    }
+
+    @media (min-width: 1024px) {
+      height: 100svh;
+      margin-top: -98px;
+    }
+
+    .v-a-img-c {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .5s ease, visibility .5s ease;
+
+      .scr-ind {
+        height: 100svh;
+
+        &__m {
+          border-color: $cb2;
+        }
+
+        &__w {
+          background: $cb2;
+        }
+
+        &__txt {
+          color: $cb2;
+        }
+      }
+    }
+
+    .v-a-inf-c {
+      position: absolute;
+      top: 50%;
+      left: min(calc(50% + 50px), calc(100% - 8em - 1.25rem));
+      transform: translateY(calc(-50% - 20px));
+      align-items: flex-start;
+      justify-content: flex-start;
+      max-width: calc(100% - 1.25rem);
+      width: auto;
+      padding: 0;
+      font-size: clamp(32px, 5.125vw, 90px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, visibility 1s ease;
+      transition-delay: 0.5s;
+
+      @media (max-width: $screen-xs) {
+        grid-area: unset;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: unset;
+        font-size: 42px;
+        text-align: center;
+      }
+
+      .v-a-t {
+        font-family: $axs;
+        font-size: 1.2em;
+        line-height: 80%;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        text-align: left;
+        color: $cb9;
+        white-space: nowrap;
+
+        @media (min-width: 400px) {
+          font-size: 1.4em;
+        }
+
+        @media (min-width: $screen-sm) {
+          font-size: 1.2em;
+        }
+
+        @media (max-width: $screen-xs) {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          white-space: normal;
+        }
+
+        span {
+          display: block;
+          font-size: (40 / 70) * 1em;
+          letter-spacing: -0.02em;
+
+          @media (max-width: $screen-xs) {
+            width: fit-content;
+            padding: 0.12em 0.22em;
+            background: $cb2;
+            text-align: center;
+          }
+
+          &:last-child {
+            font-size: 1em;
+
+            @media (max-width: $screen-xs) {
+              margin-top: -14px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .v-d--abc {
+    .v-a-s-t {
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
