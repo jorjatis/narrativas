@@ -1,11 +1,9 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/styles.css
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/scripts.js
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/includes/inc-pre-header.html
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/images/mockup-face1.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/images/mockup-face2.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-cintillo-first.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-video.html
 
 
-
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/includes/inc-pre-header.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-cintillo-first.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-video.html" -->
