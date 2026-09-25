@@ -2,7 +2,7 @@
 import './assets/styles/styles.scss';
 
 // // Cargar js principal
-import './js/main.js';
+import './js/main-full.js';
 
 /**
  * Lógica de Renderizado Dinámico

@@ -43,23 +43,11 @@
  * ----------------------------------------
  */
 
-function getTriggerLineFromRootMargin(rootMargin) {
-  const parts = String(rootMargin).trim().split(/\s+/);
-  const bottom = parts[2] || "0px";
-  const match = bottom.match(/^(-?\d+(?:\.\d+)?)%$/);
-  if (!match) return null;
-
-  const value = Number(match[1]);
-  // bottom -40% → línea de disparo al 60% desde arriba
-  return `${100 + value}vh`;
-}
-
 export default function observeInView({
   target,
   threshold = 0,
   rootMargin = "0px",
   once = true,
-  markers = false,
   onEnter = () => {},
   onLeave = () => {}
 } = {}) {
@@ -78,49 +66,16 @@ export default function observeInView({
     return null;
   }
 
-  if (markers) {
-    const triggerTop = getTriggerLineFromRootMargin(rootMargin);
-
-    if (triggerTop) {
-      const marker = document.createElement("div");
-      marker.style.position = "fixed";
-      marker.style.left = "0";
-      marker.style.right = "0";
-      marker.style.top = triggerTop;
-      marker.style.borderTop = "2px dashed red";
-      marker.style.zIndex = "9999";
-      marker.style.pointerEvents = "none";
-      marker.innerHTML = `<span style="
-        position:absolute;
-        right:10px;
-        top:-10px;
-        font-size:12px;
-        background:red;
-        color:white;
-        padding:2px 6px;
-      ">trigger ${triggerTop}</span>`;
-      document.body.appendChild(marker);
-    } else {
-      console.warn(
-        "[observeInView] markers solo dibuja línea con rootMargin bottom en % (ej. 0px 0px -40% 0px). threshold es % del elemento, no del viewport."
-      );
-    }
-  }
-
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
-          if (markers) console.log("[observeInView] ENTER", entry);
-
           onEnter(entry);
 
           if (once) {
             obs.unobserve(entry.target);
           }
         } else {
-          if (markers) console.log("[observeInView] LEAVE", entry);
-
           onLeave(entry);
         }
       });

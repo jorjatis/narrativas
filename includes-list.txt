@@ -1,11 +1,13 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/styles.css
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/scripts.js
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/includes/inc-pre-header.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/includes/inc-pre-header.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/includes/inc-players-comparison.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/includes/inc-dnd-player.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/15/diez-argentina/includes/inc-timeline.html
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/images/mockup-face1.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/images/mockup-face2.webp
 
-
-
-<!-- #include virtual="/comun/narrativas/redaccion/2026/08/29/soldados-peruanos/includes/inc-pre-header.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/15/diez-argentina/includes/inc-pre-header.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/15/diez-argentina/includes/inc-players-comparison.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/15/diez-argentina/includes/inc-dnd-player.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/15/diez-argentina/includes/inc-timeline.html" -->
