@@ -3,7 +3,7 @@
 .v-n-drawing {
   &--01 {
     position: relative;
-    max-width: 220px;
+    max-width: 140px;
     transform: unset;
     margin: 0 auto;
 
@@ -23,17 +23,17 @@
     position: relative;
     transform: unset;
     margin: 70px auto 50px;
-    max-width: 300px;
+    max-width: 190px;
 
     @media (min-width: 1040px) {
       position: absolute;
       max-width: 190px;
-      transform: translate(calc(-100% - 15px), 130px) rotate(-10deg);
+      transform: translate(calc(0% - 35px), 130px) rotate(-10deg);
     }
 
     @media (min-width: 1200px) {
       max-width: 235px;
-      transform: translate(calc(-100% - 50px), 130px) rotate(-10deg);
+      transform: translate(calc(0% - 100px), 130px) rotate(-10deg);
     }
   }
 
@@ -41,7 +41,7 @@
     position: relative;
     transform: unset;
     margin: 0 auto;
-    max-width: 260px;
+    max-width: 180px;
     
     @media (min-width: 950px) {
       position: absolute;
