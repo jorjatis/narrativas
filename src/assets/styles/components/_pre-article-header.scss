@@ -14,13 +14,17 @@ body {
 
       @media (max-width: 698px) {
         min-height: unset;
-        height: calc(100svh - 48px);
+        height: auto;
         margin-top: -72px;
       }
 
       .scr-ind {
         @media (max-width: $screen-sm) {
           height: calc(100svh - 48px);
+        }
+
+        @media (max-width: $screen-xs) {
+          display: none;
         }
       }
     }
@@ -129,10 +133,21 @@ body {
       margin-top: -98px;
     }
 
+    @media (max-width: $screen-xs) {
+      min-height: unset;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .v-a-img-c {
       opacity: 0;
       visibility: hidden;
       transition: opacity .5s ease, visibility .5s ease;
+
+      @media (max-width: 698px) {
+        height: 50vh;
+      }
 
       .scr-ind {
         height: 100svh;
@@ -155,7 +170,7 @@ body {
       position: absolute;
       top: 50%;
       left: min(calc(50% + 50px), calc(100% - 8em - 1.25rem));
-      transform: translateY(calc(-50% - 20px));
+      transform: translateY(calc(-50% + 40px));
       align-items: flex-start;
       justify-content: flex-start;
       max-width: calc(100% - 1.25rem);
@@ -168,12 +183,13 @@ body {
       transition-delay: 0.5s;
 
       @media (max-width: $screen-xs) {
-        grid-area: unset;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
+        position: relative;
+        top: unset;
+        left: unset;
+        transform: unset;
+        margin-top: 28px;
+        display: flex;
         align-items: center;
-        justify-content: center;
         width: 100%;
         max-width: unset;
         font-size: 42px;
