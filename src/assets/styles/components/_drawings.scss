@@ -23,17 +23,17 @@
     position: relative;
     transform: unset;
     margin: 70px auto 50px;
-    max-width: 190px;
+    max-width: 200px;
 
     @media (min-width: 1040px) {
       position: absolute;
       max-width: 190px;
-      transform: translate(calc(0% - 35px), 130px) rotate(-10deg);
+      transform: translate(calc(0% - 35px), 20px) rotate(-10deg);
     }
 
     @media (min-width: 1200px) {
       max-width: 235px;
-      transform: translate(calc(0% - 100px), 130px) rotate(-10deg);
+      transform: translate(calc(0% - 100px), 0px) rotate(-10deg);
     }
   }
 
