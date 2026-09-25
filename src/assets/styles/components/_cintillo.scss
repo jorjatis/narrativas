@@ -1,21 +1,12 @@
 @use "../base/variables" as *;
 
-.v-n-suh {
-  &--first {
-    text-align: center;
-    font-family: $mcs;
-    font-size: 18px;
-    line-height: 24px;
-  }
-}
-
 .v-cmp-suh {
   flex: 1 0 auto;
   max-width: 160px;
   margin: 70px auto;
   font-family: $axs;
-  font-size: 26px;
-  line-height: 23px;
+  font-size: 30px;
+  line-height: 27px;
   text-transform: uppercase;
   text-align: center;
   color: $cp1;

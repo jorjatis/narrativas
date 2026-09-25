@@ -3,7 +3,15 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/scripts
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-cintillo-first.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-video.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-img.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-01.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-02.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-03.html
 
 
 <!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-cintillo-first.html" -->
 <!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-video.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-img.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-01.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-02.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-03.html" -->

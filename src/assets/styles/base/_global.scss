@@ -53,7 +53,7 @@ body {
 }
 
 .v-w {
-  .v-a--d-s-1 {   
+  .v-a--d-s-1 {  
     .v-a-lnk {
       > div {
         height: 100%;
@@ -110,6 +110,14 @@ body {
       color: $cb1;
       margin: 36px 0 92px;
     }
+
+    // .v-c-cmp--xl {
+    //   .v-cmp-m {
+    //     .v-fc {
+    //       text-align: center;
+    //     }
+    //   }
+    // }
 
     .v-cmp-gli {
       @media (max-width: $screen-xs) {

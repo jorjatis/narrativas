@@ -181,12 +181,15 @@ body {
       }
 
       .v-a-t {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         font-family: $axs;
         font-size: 1.2em;
-        line-height: 80%;
+        line-height: 70%;
         letter-spacing: -0.02em;
         text-transform: uppercase;
-        text-align: left;
+        text-align: center;
         color: $cb9;
         white-space: nowrap;
 
@@ -199,30 +202,33 @@ body {
         }
 
         @media (max-width: $screen-xs) {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
           white-space: normal;
+          line-height: 80%;
         }
 
         span {
           display: block;
-          font-size: (40 / 70) * 1em;
-          letter-spacing: -0.02em;
+          font-size: 1em;
+          letter-spacing: -1.4px;
 
           @media (max-width: $screen-xs) {
             width: fit-content;
             padding: 0.12em 0.22em;
-            background: $cb2;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
           }
+        }
 
-          &:last-child {
-            font-size: 1em;
+        span.v-a-t__loc {
+          font-family: $mcr;
+          font-size: 0.22em;
+          line-height: 1;
+          letter-spacing: 1.6em;
+          text-indent: 1.8em;
+          color: $cp1;
+          margin: -0.2px 0;
 
-            @media (max-width: $screen-xs) {
-              margin-top: -14px;
-            }
+          @media (min-width: $screen-xs) {
+            margin: 12px 0 9px;
           }
         }
       }
@@ -231,7 +237,7 @@ body {
 
   .v-d--abc {
     .v-a-s-t {
-      max-width: 400px;
+      max-width: 410px;
       margin-left: auto;
       margin-right: auto;
     }

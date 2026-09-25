@@ -11,7 +11,7 @@ export function initAll() {
   removeEls(".v-a--d-s-1 .v-a-inf-c .v-i");
 
   document.body.classList.add("is-loaded");
-  document.querySelector('.v-a--d-s-1 .v-a-inf-c .v-a-t').innerHTML = '<span>Los últimos</span><span>hombres libres</span>';
+  document.querySelector('.v-a--d-s-1 .v-a-inf-c .v-a-t').innerHTML = '<span>Los últimos</span><span class="v-a-t__loc">Mongolia</span><span>hombres libres</span>';
 
   moveEls(".v-d--abc .scr-ind", ".v-a--d-s-1 .v-a-img-c", "prepend");
 
