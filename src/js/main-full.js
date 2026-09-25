@@ -705,6 +705,8 @@ function chronoPipeline() {
     [...timeline.querySelectorAll(".v-n-chrono-timeline__item")].forEach((item) => {
       ro.observe(item);
     });
+
+    window.addEventListener("resize", draw);
   });
 }
 
@@ -935,10 +937,15 @@ function setupPipeDraw(timeline) {
   }
 
   prev?.kill();
+  if (timeline._chronoDrawScroll) {
+    window.removeEventListener("scroll", timeline._chronoDrawScroll);
+  }
 
   updateDraw(timeline);
 
   const onScroll = () => updateDraw(timeline);
+  timeline._chronoDrawScroll = onScroll;
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   ScrollTrigger.create({
     id,
@@ -1510,6 +1517,7 @@ function playersComparison() {
     right: getPlayer(DEFAULTS.right) ? DEFAULTS.right : PLAYERS[1].id,
   };
   let messiTalkSide = null;
+  let statsDrawn = false;
 
   populateSelects();
   syncSelectState();
@@ -1791,7 +1799,33 @@ function playersComparison() {
     bar.classList.toggle("is-zero", isZero);
     bar.style.setProperty("--bar", String(scale));
 
-    if (animate) fill.style.transform = `scaleX(${scale})`;
+    if (!statsDrawn && !animate) {
+      bar.style.setProperty("--tip", "0");
+      fill.style.transform = "scaleX(0)";
+      bar.classList.remove("is-on", "is-done");
+      requestAnimationFrame(() => placeValue(bar, scale, isZero));
+      return;
+    }
+
+    if (animate) statsDrawn = true;
+
+    const reduced = prefersReducedMotion();
+    bar.classList.add("is-on");
+    bar.style.setProperty("--tip", String(scale));
+    fill.style.transform = `scaleX(${scale})`;
+
+    if (isZero || reduced) {
+      bar.classList.add("is-done");
+    } else if (animate && !bar.classList.contains("is-done")) {
+      fill.addEventListener(
+        "transitionend",
+        (event) => {
+          if (event.propertyName !== "transform") return;
+          bar.classList.add("is-done");
+        },
+        { once: true }
+      );
+    }
 
     requestAnimationFrame(() => placeValue(bar, scale, isZero));
   }

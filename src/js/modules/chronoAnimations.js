@@ -231,10 +231,15 @@ function setupPipeDraw(timeline) {
   }
 
   prev?.kill();
+  if (timeline._chronoDrawScroll) {
+    window.removeEventListener("scroll", timeline._chronoDrawScroll);
+  }
 
   updateDraw(timeline);
 
   const onScroll = () => updateDraw(timeline);
+  timeline._chronoDrawScroll = onScroll;
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   ScrollTrigger.create({
     id,

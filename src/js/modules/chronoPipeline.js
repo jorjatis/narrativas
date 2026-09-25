@@ -457,5 +457,7 @@ export default function chronoPipeline() {
     [...timeline.querySelectorAll(".v-n-chrono-timeline__item")].forEach((item) => {
       ro.observe(item);
     });
+
+    window.addEventListener("resize", draw);
   });
 }

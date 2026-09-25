@@ -72,14 +72,29 @@ $bp-piece-md-max: $bp-piece-md - 1;
 
   .stat-bar__cap {
     @if $dir == left {
-      left: calc((1 - var(--bar, 0)) * 100% - 6px);
+      left: calc((1 - var(--tip, 0)) * 100% - 6px);
     } @else {
-      right: calc((1 - var(--bar, 0)) * 100% - 6px);
+      right: calc((1 - var(--tip, 0)) * 100% - 6px);
       left: auto;
     }
     background: $fill;
     transform: skewX($skew);
     transform-origin: $origin center;
+    opacity: 0;
+  }
+
+  &.is-on:not(.is-zero) .stat-bar__cap {
+    opacity: 1;
+  }
+
+  @if $dir == left {
+    &:not(.is-done)::after {
+      visibility: hidden;
+    }
+  } @else {
+    &:not(.is-done)::before {
+      visibility: hidden;
+    }
   }
 
   .stat-bar__value {
