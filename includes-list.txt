@@ -1,17 +1,18 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/styles.css
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/scripts.js
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-cintillo-first.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-video.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-img.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-01.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-02.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-03.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-pre-header.html
+
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-01.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-02.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-03.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-04.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-05.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-06.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-07.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-08.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-09.webp
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-bg.webp
 
 
-<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-cintillo-first.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-video.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-parallax-img.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-01.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-02.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/09/26/mongolia/includes/inc-drawing-03.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-pre-header.html" -->
