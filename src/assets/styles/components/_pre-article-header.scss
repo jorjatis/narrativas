@@ -3,3 +3,186 @@
 @use "../base/actions" as *;
 @use "../base/animations" as *;
 
+.v-w {
+  .v-a--d-s-1 {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 0 20px;
+
+    .v-a-inf-c {
+      justify-content: flex-start;
+
+      .v-a-t {
+        display: none;
+      }
+
+      .v-a-s-t {
+        max-width: 298px;
+        width: 100%;
+        margin: 0 auto;
+
+        &::after {
+          content: "";
+          display: block;
+          width: 55px;
+          height: 5px;
+          margin: 55px auto 0;
+          background: linear-gradient(
+            90deg,
+            #ffb330 0,
+            #ffb330 6px,
+            #e60000 6px,
+            #e60000 12px,
+            #ffb330 12px,
+            #ffb330 18px,
+            #e60000 18px,
+            #e60000 24px,
+            #ffb330 24px,
+            #ffb330 30px,
+            #e60000 30px,
+            #e60000 36px,
+            #ffb330 36px,
+            #ffb330 43px,
+            #e60000 43px,
+            #e60000 49px,
+            #ffb330 49px,
+            #ffb330 55px
+          );
+        }
+      }
+    }
+
+    .v-a-img-c {
+      display: flex;
+      flex-direction: column-reverse;
+      margin-top: 24px;
+      margin-bottom: 40px;
+
+      @media (min-width: $screen-xs) {
+        flex-direction: column;
+        margin-top: 92px;
+        margin-bottom: 100px;
+      }
+
+      .v-a-preh-img {
+        display: grid;
+        max-width: 330px;
+        width: 100%;
+        margin: 36px auto 0;
+
+        @media (min-width: $screen-xs) {
+          margin: 0 auto 52px;
+        }
+
+        > img {
+          grid-area: 1/1;
+        }
+      }
+
+      .v-a-preh-t {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__c {
+          display: flex;
+          margin-left: 11px;
+
+          @media (min-width: $screen-xs) {
+            gap: 12px;
+            margin-left: 30px;
+          }
+        }
+      }
+
+      .v-a-preh-t-s--01 {
+        font-family: $axs;
+        font-size: 60px;
+        line-height: 100%;
+        letter-spacing: -1.2px;
+        color: $cb9;
+        text-transform: uppercase;
+
+        @media (min-width: $screen-xs) {
+          font-size: 105px;
+          letter-spacing: -2.1px;
+        }
+      }
+
+      .v-a-preh-t-s--02 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 280px;
+        padding: 0 10px;
+        font-family: $axs;
+        font-size: 40px;
+        line-height: 110%;
+        letter-spacing: -.8px;
+        color: $cb9;
+        text-transform: uppercase;
+
+        @media (min-width: $screen-xs) {
+          position: unset;
+          left: unset;
+          transform: unset;
+          display: unset;
+          justify-content: unset;
+          width: auto;
+          max-width: auto;
+          padding: 0;
+          font-size: 60px;
+          letter-spacing: -1.2px;
+        }
+      }
+
+      .v-a-preh-t-s--03 {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 186px;
+        height: 56px;
+        margin-top: 2px;
+        border-bottom: 1px solid $cb1;
+        overflow: hidden;
+        transform: translate(14px, 22px);
+
+        @media (min-width: $screen-xs) {
+          width: 330px;
+          height: 98px;
+          transform: unset;
+        }
+        
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 6px;
+          background: $cb2;
+        }
+
+        .v-a-preh-t-s-of {
+          font-family: $mcs;
+          font-size: 106px;
+          line-height: 110%;
+          letter-spacing: -2.1px;
+          color: #FFB330;
+          text-transform: uppercase;
+          transform: translateY(-18px);
+
+          @media (min-width: $screen-xs) {
+            font-size: 190px;
+            letter-spacing: -3.8px;
+            transform: translateY(-26px);
+          }
+        }
+      }
+    }
+  }
+}

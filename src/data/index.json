@@ -8,8 +8,8 @@
     },
     "coverUrl": "https://s1.abcstatics.com/abc/www/multimedia/espana/2026/07/25/cibeles-1200x672.jpg",
     "img": {
-      "exists": false,
-      "preArticleHeader": false,
+      "exists": true,
+      "preArticleHeader": true,
       "src": false,
       "figcaption": false,
       "figcaptionText": false
@@ -17,8 +17,8 @@
     "infoContainer": {
       "exists": true,
       "pretitle": false,
-      "title": "Mongolia: los últimos hombres libres",
-      "description": "Los nómadas kazajos del Macizo del Altái, en Mongolia, mantienen una forma de vida única marcada por la migración estacional y la residencia en yurtas en un entorno tan hermoso como duro",
+      "title": "Beneficiados tras el 1-O",
+      "description": "Este 2026 es un año clave para la cuestión migratoria en Europa. En junio entrarán en vigor reformas muy profundas que han tomado como modelo uno de los países",
       "chevronDown": true
     }
   }
