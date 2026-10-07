@@ -2,18 +2,28 @@
 
 // Debajo de esto: SVG mobile + sin leyenda (no cabe timeline + leyenda).
 $chrono-desk: 1250px;
-// Cabecera sticky
-$chrono-offset-mobile: 50px;
+// Cabecera sticky (+ 8px de aire en mobile entre cabecera y nombres)
+$chrono-offset-mobile: 58px; // 50 + 8
 $chrono-offset-desk: 58px;
 
 .v-n-chrono {
   width: 100%;
-  margin: 192px 0;
+  margin-top: 90px;
+  margin-bottom: 90px;
+  margin-left: auto;
+  margin-right: auto;
   overflow: visible;
+
+  @media (min-width: 375px) {
+    width: 310px;
+    margin-top: 192px;
+    margin-bottom: 192px;
+  }
 
   @media (min-width: $chrono-desk) {
     width: 730px;
     margin-left: calc(50% - (730px / 2));
+    margin-right: unset;
   }
 
   &__stage {
@@ -48,7 +58,7 @@ $chrono-offset-desk: 58px;
     }
   }
 
-  // Desk: stack names + hueco caras + body. Mov: SVG completo.
+  // Desk: names + hueco caras + body. Mov: hueco nombres + body.
   &__graphic--desk {
     display: none;
 
@@ -72,9 +82,9 @@ $chrono-offset-desk: 58px;
     height: auto;
   }
 
-  &__faces-gap {
+  &__faces-gap,
+  &__names-gap {
     width: 100%;
-    // Misma altura que las caras sticky (viewBox h = face_y1 - face_y0)
   }
 
   &--detenidos .v-n-chrono__faces-gap {
@@ -85,7 +95,15 @@ $chrono-offset-desk: 58px;
     aspect-ratio: 546.99 / 52;
   }
 
-  // Caras sticky: JS coloca top bajo los nombres y luego en 0 al scrollear
+  &--detenidos .v-n-chrono__names-gap {
+    aspect-ratio: 304.53 / 145;
+  }
+
+  &--profugos .v-n-chrono__names-gap {
+    aspect-ratio: 309.11 / 170;
+  }
+
+  // Caras sticky (desktop): JS coloca top bajo los nombres y luego en 0
   &__heads {
     display: none;
     position: absolute;
@@ -104,6 +122,28 @@ $chrono-offset-desk: 58px;
 
     @media (min-width: $chrono-desk) {
       display: block;
+    }
+  }
+
+  // Nombres sticky (mobile): fijos arriba mientras scrollea el body
+  &__names-sticky {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: $cb2;
+    pointer-events: none;
+    z-index: 3;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    @media (min-width: $chrono-desk) {
+      display: none;
     }
   }
 
@@ -195,11 +235,13 @@ $chrono-offset-desk: 58px;
       overflow: visible;
     }
 
-    .v-n-chrono__heads {
+    .v-n-chrono__heads,
+    .v-n-chrono__names-sticky {
       display: none;
     }
 
-    .v-n-chrono__faces-gap {
+    .v-n-chrono__faces-gap,
+    .v-n-chrono__names-gap {
       display: none;
     }
 
