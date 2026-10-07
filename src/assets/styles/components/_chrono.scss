@@ -1,0 +1,156 @@
+@use "../base/variables" as *;
+
+// Debajo de esto: SVG mobile + sin leyenda (no cabe timeline + leyenda).
+$chrono-desk: 1250px;
+// Cabecera sticky
+$chrono-offset-mobile: 50px;
+$chrono-offset-desk: 58px;
+
+.v-n-chrono {
+  width: 100%;
+  margin: 192px 0;
+
+  @media (min-width: $chrono-desk) {
+    width: 730px;
+    margin-left: calc(50% - (730px / 2));
+  }
+
+  &__stage {
+    position: relative;
+    width: 100%;
+    height: calc(100svh - #{$chrono-offset-mobile});
+
+    @media (min-width: $screen-xs) {
+      height: calc(100svh - #{$chrono-offset-desk});
+    }
+  }
+
+  &__viewport {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: $cb2;
+  }
+
+  &__graphic {
+    display: block;
+    width: 100%;
+    will-change: transform;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__cartelas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  &__cartela {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25em;
+    padding: 24px 8px;
+    box-sizing: border-box;
+    background: $cb2;
+    opacity: 0;
+    visibility: hidden;
+
+    p {
+      margin: 0;
+      font-family: $atl;
+      font-size: 18px;
+      line-height: 28px;
+      color: $cb1;
+
+      @media (min-width: $screen-xs) {
+        font-size: 20px;
+        line-height: 32px;
+      }
+    }
+  }
+
+  &__legend {
+    display: none;
+    width: 204px;
+    padding: 12px;
+    background: $cb2;
+    box-shadow: 0 2px 12px rgba($cb1, 0.12);
+    box-sizing: border-box;
+
+    // Absoluta arriba a la derecha dentro del stage pineado:
+    // al acabar el pin sube y sale por arriba (no se suelta abajo como sticky).
+    @media (min-width: $chrono-desk) {
+      display: block;
+      position: absolute;
+      top: 24px;
+      right: -240px;
+      z-index: 3;
+    }
+  }
+
+  &__legend-map {
+    position: relative;
+    width: 100%;
+  }
+
+  &__legend-key {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  &__legend-img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__legend-view {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 40px;
+    border: 2px solid $cp17;
+    background: rgba($cp17, 0.28);
+    box-sizing: border-box;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  &--reduced {
+    .v-n-chrono__viewport {
+      height: auto;
+      overflow: visible;
+    }
+
+    .v-n-chrono__cartela {
+      position: relative;
+      inset: auto;
+      visibility: visible;
+      margin: 32px 0;
+      padding: 0;
+    }
+
+    .v-n-chrono__legend {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: #{($chrono-desk - 1)}) {
+  .v-n-chrono {
+    &__legend {
+      display: none;
+    }
+  }
+}

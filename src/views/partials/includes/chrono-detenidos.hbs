@@ -1,0 +1,50 @@
+{{!--
+  Cronología detenidos
+  - Añadir/quitar cartelas: <article class="v-n-chrono__cartela" data-at="0.XX">
+  - data-at: fracción 0–1 de la altura del SVG donde se pausa el scroll
+--}}
+<div class="v-n-chrono v-n-chrono--detenidos" data-chrono="detenidos">
+  <div class="v-n-chrono__stage">
+    <div class="v-n-chrono__viewport">
+      <picture class="v-n-chrono__graphic">
+        <source media="(max-width: 1249px)" srcset="assets/images/crono-detenidos-mov.svg">
+        <img src="assets/images/crono-detenidos-desk.svg" alt="Cronología de detenidos" width="739" height="6763">
+      </picture>
+
+      <div class="v-n-chrono__cartelas">
+        <article class="v-n-chrono__cartela" data-at="0.22">
+          <p>Hoy el edificio sigue siendo el mismo, pero ya no está solo. La plaza se ha llenado. No de más espacio,
+            sino de más presencia. La gente ocupa casi todo. Se cruzan, se paran, hacen fotos.</p>
+          <p>Ahora hay más cosas ocurriendo al mismo tiempo. Más estímulos. Menos pausa. El monumento ya no tiene
+            tanto aire alrededor.</p>
+        </article>
+
+        <article class="v-n-chrono__cartela" data-at="0.45">
+          <p>Antes Madrid parecía caminar. Ahora circula. Antes se miraba la ciudad. Ahora se atraviesa. En esta
+            parte de la ciudad, el Edificio España ya estaba ahí. Alto, rotundo, ocupando el cielo.</p>
+          <p>La plaza se abre delante de él como un espacio amplio, poco ocupado. El monumento se ve entero. Hay
+            distancia. Hay aire.</p>
+        </article>
+
+        <article class="v-n-chrono__cartela" data-at="0.7">
+          <p>Hoy, en cambio, el metro cuadrado de construcción no baja de 1.300 euros por metro cuadrado. Algo que
+            nos dice mucho de cuánto ha subido el precio de la vivienda, de la construcción y, en definitiva, de
+            nuestra pobreza.</p>
+          <p>Eso sí, hoy, en Madrid viven más de 665.000 personas extranjeras. Un poco, sí que hemos cambiado.</p>
+        </article>
+      </div>
+    </div>
+
+    <aside class="v-n-chrono__legend" aria-hidden="true">
+      {{!-- Minimapa: solo las líneas; el rectángulo amarillo se mueve aquí --}}
+      <div class="v-n-chrono__legend-map">
+        <img class="v-n-chrono__legend-img" src="assets/images/leyenda-detenidos-map.svg" alt="" width="204" height="304">
+        <div class="v-n-chrono__legend-view"></div>
+      </div>
+      {{!-- Clave fija (qué es cada color); no scrollea --}}
+      <div class="v-n-chrono__legend-key">
+        <img class="v-n-chrono__legend-img" src="assets/images/leyenda-detenidos-key.svg" alt="" width="204" height="92">
+      </div>
+    </aside>
+  </div>
+</div>
