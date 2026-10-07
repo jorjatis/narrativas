@@ -1,37 +1,25 @@
 {{!--
   Cronología prófugos
-  - Añadir/quitar cartelas: <article class="v-n-chrono__cartela" data-at="0.XX">
-  - data-at: fracción 0–1 de la altura del SVG donde se pausa el scroll
+  - Desk: SVG partido en names + faces (sticky) + body
+  - Cartelas: <article class="v-n-chrono__cartela" data-at="0.XX"> (0–1 del scroll del graphic)
 --}}
 <div class="v-n-chrono v-n-chrono--profugos" data-chrono="profugos">
   <div class="v-n-chrono__stage">
     <div class="v-n-chrono__viewport">
-      <picture class="v-n-chrono__graphic">
-        <source media="(max-width: 1249px)" srcset="assets/images/crono-profugos-mov.svg">
-        <img src="assets/images/crono-profugos-desk.svg" alt="Cronología de prófugos" width="547" height="6785">
-      </picture>
 
-      <div class="v-n-chrono__cartelas">
-        <article class="v-n-chrono__cartela" data-at="0.2">
-          <p>Hoy el edificio sigue siendo el mismo, pero ya no está solo. La plaza se ha llenado. No de más espacio,
-            sino de más presencia. La gente ocupa casi todo. Se cruzan, se paran, hacen fotos.</p>
-          <p>Ahora hay más cosas ocurriendo al mismo tiempo. Más estímulos. Menos pausa. El monumento ya no tiene
-            tanto aire alrededor.</p>
-        </article>
+      {{!-- Desktop ≥1250: nombres + hueco caras + timeline --}}
+      <div class="v-n-chrono__graphic v-n-chrono__graphic--desk">
+        <img class="v-n-chrono__names" src="assets/images/crono-profugos-names.svg" alt="" width="547" height="152">
+        <div class="v-n-chrono__faces-gap" aria-hidden="true"></div>
+        <img class="v-n-chrono__body" src="assets/images/crono-profugos-body.svg" alt="Cronología de prófugos" width="547" height="6581">
+      </div>
+      <div class="v-n-chrono__heads" aria-hidden="true">
+        <img src="assets/images/crono-profugos-faces.svg" alt="" width="547" height="52">
+      </div>
 
-        <article class="v-n-chrono__cartela" data-at="0.5">
-          <p>Antes Madrid parecía caminar. Ahora circula. Antes se miraba la ciudad. Ahora se atraviesa. En esta
-            parte de la ciudad, el Edificio España ya estaba ahí. Alto, rotundo, ocupando el cielo.</p>
-          <p>La plaza se abre delante de él como un espacio amplio, poco ocupado. El monumento se ve entero. Hay
-            distancia. Hay aire.</p>
-        </article>
-
-        <article class="v-n-chrono__cartela" data-at="0.75">
-          <p>Hoy, en cambio, el metro cuadrado de construcción no baja de 1.300 euros por metro cuadrado. Algo que
-            nos dice mucho de cuánto ha subido el precio de la vivienda, de la construcción y, en definitiva, de
-            nuestra pobreza.</p>
-          <p>Eso sí, hoy, en Madrid viven más de 665.000 personas extranjeras. Un poco, sí que hemos cambiado.</p>
-        </article>
+      {{!-- Mobile &lt;1250: SVG único --}}
+      <div class="v-n-chrono__graphic v-n-chrono__graphic--mov">
+        <img src="assets/images/crono-profugos-mov.svg" alt="Cronología de prófugos" width="309" height="6759">
       </div>
     </div>
 
@@ -41,5 +29,29 @@
         <div class="v-n-chrono__legend-view"></div>
       </div>
     </aside>
+
+    {{!-- Full-bleed: fuera del viewport para tapar también la leyenda --}}
+    <div class="v-n-chrono__cartelas">
+      <article class="v-n-chrono__cartela" data-at="0.2">
+        <p class="v-d-p">Hoy el edificio sigue siendo el mismo, pero ya no está solo. La plaza se ha llenado. No de más espacio,
+          sino de más presencia. La gente ocupa casi todo. Se cruzan, se paran, hacen fotos.</p>
+        <p class="v-d-p">Ahora hay más cosas ocurriendo al mismo tiempo. Más estímulos. Menos pausa. El monumento ya no tiene
+          tanto aire alrededor.</p>
+      </article>
+
+      <article class="v-n-chrono__cartela" data-at="0.5">
+        <p class="v-d-p">Antes Madrid parecía caminar. Ahora circula. Antes se miraba la ciudad. Ahora se atraviesa. En esta
+          parte de la ciudad, el Edificio España ya estaba ahí. Alto, rotundo, ocupando el cielo.</p>
+        <p class="v-d-p">La plaza se abre delante de él como un espacio amplio, poco ocupado. El monumento se ve entero. Hay
+          distancia. Hay aire.</p>
+      </article>
+
+      <article class="v-n-chrono__cartela" data-at="0.75">
+        <p class="v-d-p">Hoy, en cambio, el metro cuadrado de construcción no baja de 1.300 euros por metro cuadrado. Algo que
+          nos dice mucho de cuánto ha subido el precio de la vivienda, de la construcción y, en definitiva, de
+          nuestra pobreza.</p>
+        <p class="v-d-p">Eso sí, hoy, en Madrid viven más de 665.000 personas extranjeras. Un poco, sí que hemos cambiado.</p>
+      </article>
+    </div>
   </div>
 </div>

@@ -14,6 +14,7 @@ const RESIZE_DEBOUNCE_MS = 150;
 /** Cabecera sticky. */
 const HEADER_OFFSET = () =>
   window.matchMedia("(min-width: 699px)").matches ? 58 : 50;
+const MQ_CHRONO_DESK = "(min-width: 1250px)";
 
 function clamp01(n) {
   return gsap.utils.clamp(0, 1, Number.isFinite(n) ? n : 0);
@@ -39,15 +40,27 @@ function waitForImage(img) {
   });
 }
 
+function waitForImages(imgs) {
+  return Promise.all(imgs.filter(Boolean).map(waitForImage));
+}
+
+function activeGraphic(root) {
+  const desk = root.querySelector(".v-n-chrono__graphic--desk");
+  const mov = root.querySelector(".v-n-chrono__graphic--mov");
+  const isDesk = window.matchMedia(MQ_CHRONO_DESK).matches;
+  if (isDesk && desk) return desk;
+  if (mov) return mov;
+  return root.querySelector(".v-n-chrono__graphic");
+}
+
 function setupChrono(root) {
   const stage = root.querySelector(".v-n-chrono__stage");
   const viewport = root.querySelector(".v-n-chrono__viewport");
-  const graphic = root.querySelector(".v-n-chrono__graphic");
-  const graphicImg = graphic?.querySelector("img");
+  const heads = root.querySelector(".v-n-chrono__heads");
   const legendMap = root.querySelector(".v-n-chrono__legend-map");
   const legendView = root.querySelector(".v-n-chrono__legend-view");
 
-  if (!stage || !viewport || !graphic || !graphicImg) return () => {};
+  if (!stage || !viewport) return () => {};
 
   if (prefersReducedMotion()) {
     root.classList.add("v-n-chrono--reduced");
@@ -59,14 +72,22 @@ function setupChrono(root) {
   let resizeTimer = null;
   let destroyed = false;
 
-  const updateLegend = () => {
+  const updateHeads = (graphic) => {
+    if (!heads || !heads.offsetParent) return;
+    const names = graphic.querySelector(".v-n-chrono__names");
+    const namesH = names ? names.offsetHeight : 0;
+    const gy = Number(gsap.getProperty(graphic, "y")) || 0;
+    // Bajo los nombres al inicio; al scrollear sube hasta top: 0 y se queda
+    gsap.set(heads, { top: Math.max(0, namesH + gy) });
+  };
+
+  const updateLegend = (graphic) => {
     if (!legendMap || !legendView) return;
-    // Hidden on mobile via CSS (display: none on aside)
     if (!root.querySelector(".v-n-chrono__legend")?.offsetParent) return;
 
     const mapH = legendMap.offsetHeight;
     const viewportH = viewport.clientHeight;
-    const graphicH = graphic.offsetHeight || graphicImg.offsetHeight;
+    const graphicH = graphic.offsetHeight;
     if (mapH <= 0 || graphicH <= 0) return;
 
     const travel = Math.max(graphicH - viewportH, 0);
@@ -80,6 +101,11 @@ function setupChrono(root) {
     });
   };
 
+  const onScrub = (graphic) => {
+    updateHeads(graphic);
+    updateLegend(graphic);
+  };
+
   const build = () => {
     if (destroyed) return;
 
@@ -88,8 +114,11 @@ function setupChrono(root) {
       ctx = null;
     }
 
+    const graphic = activeGraphic(root);
+    if (!graphic) return;
+
     const viewportH = viewport.clientHeight;
-    const graphicH = graphic.offsetHeight || graphicImg.offsetHeight;
+    const graphicH = graphic.offsetHeight;
     const travel = Math.max(graphicH - viewportH, 0);
 
     gsap.set(graphic, { y: 0 });
@@ -97,7 +126,7 @@ function setupChrono(root) {
       cartelas.map((c) => c.el),
       { yPercent: 100, autoAlpha: 0 }
     );
-    updateLegend();
+    onScrub(graphic);
 
     ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "none" } });
@@ -109,11 +138,11 @@ function setupChrono(root) {
           tl.to(graphic, {
             y: -travel * at,
             duration: delta * SEGMENT_SCALE,
-            onUpdate: updateLegend,
+            onUpdate: () => onScrub(graphic),
           });
         } else {
           tl.set(graphic, { y: -travel * at });
-          tl.add(() => updateLegend());
+          tl.add(() => onScrub(graphic));
         }
 
         tl.set(el, { autoAlpha: 1 });
@@ -131,7 +160,7 @@ function setupChrono(root) {
         tl.to(graphic, {
           y: -travel,
           duration: (1 - prevAt) * SEGMENT_SCALE,
-          onUpdate: updateLegend,
+          onUpdate: () => onScrub(graphic),
         });
       } else {
         tl.set(graphic, { y: -travel });
@@ -147,22 +176,25 @@ function setupChrono(root) {
         animation: tl,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        onUpdate: updateLegend,
-        onRefresh: updateLegend,
+        onUpdate: () => onScrub(graphic),
+        onRefresh: () => onScrub(graphic),
       });
     }, root);
 
     ScrollTrigger.refresh();
   };
 
-  waitForImage(graphicImg).then(() => {
+  const imgs = root.querySelectorAll(
+    ".v-n-chrono__graphic img, .v-n-chrono__heads img"
+  );
+  waitForImages([...imgs]).then(() => {
     if (!destroyed) build();
   });
 
   const onResize = () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      waitForImage(graphicImg).then(() => {
+      waitForImages([...imgs]).then(() => {
         if (!destroyed) build();
       });
     }, RESIZE_DEBOUNCE_MS);
@@ -180,7 +212,8 @@ function setupChrono(root) {
 
 /**
  * Pin + scrub de cronologías .v-n-chrono.
- * Cartelas: data-at="0–1" (fracción de altura del SVG donde se pausa).
+ * Desk: names scrollean, faces sticky, body scrollea.
+ * Cartelas: data-at="0–1" (fracción del scroll del graphic).
  */
 export default function chronoScroll(root = document) {
   const nodes = root.querySelectorAll(".v-n-chrono");
