@@ -1,13 +1,7 @@
-{{!--
-  Cronología detenidos
-  - Desk: SVG partido en names + faces (sticky) + body
-  - Cartelas: <article class="v-n-chrono__cartela" data-at="0.XX"> (0–1 del scroll del graphic)
---}}
 <div class="v-n-chrono v-n-chrono--detenidos" data-chrono="detenidos">
   <div class="v-n-chrono__stage">
     <div class="v-n-chrono__viewport">
 
-      {{!-- Desktop ≥1250: nombres + hueco caras + timeline --}}
       <div class="v-n-chrono__graphic v-n-chrono__graphic--desk">
         <img class="v-n-chrono__names" src="assets/images/crono-detenidos-names.svg" alt="" width="739" height="130">
         <div class="v-n-chrono__faces-gap" aria-hidden="true"></div>
@@ -17,7 +11,6 @@
         <img src="assets/images/crono-detenidos-faces.svg" alt="" width="739" height="52">
       </div>
 
-      {{!-- Mobile &lt;1250: nombres sticky + body --}}
       <div class="v-n-chrono__graphic v-n-chrono__graphic--mov">
         <div class="v-n-chrono__names-gap" aria-hidden="true"></div>
         <img class="v-n-chrono__body" src="assets/images/crono-detenidos-mov-body.svg" alt="Cronología de detenidos" width="305" height="6588">
@@ -37,7 +30,6 @@
       </div>
     </aside>
 
-    {{!-- Full-bleed: fuera del viewport para tapar también la leyenda --}}
     <div class="v-n-chrono__cartelas">
       <article class="v-n-chrono__cartela" data-at="0.22">
         <p class="v-d-p">Hoy el edificio sigue siendo el mismo, pero ya no está solo. La plaza se ha llenado. No de más espacio,

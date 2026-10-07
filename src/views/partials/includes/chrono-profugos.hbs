@@ -1,13 +1,7 @@
-{{!--
-  Cronología prófugos
-  - Desk: SVG partido en names + faces (sticky) + body
-  - Cartelas: <article class="v-n-chrono__cartela" data-at="0.XX"> (0–1 del scroll del graphic)
---}}
 <div class="v-n-chrono v-n-chrono--profugos" data-chrono="profugos">
   <div class="v-n-chrono__stage">
     <div class="v-n-chrono__viewport">
 
-      {{!-- Desktop ≥1250: nombres + hueco caras + timeline --}}
       <div class="v-n-chrono__graphic v-n-chrono__graphic--desk">
         <img class="v-n-chrono__names" src="assets/images/crono-profugos-names.svg" alt="" width="547" height="152">
         <div class="v-n-chrono__faces-gap" aria-hidden="true"></div>
@@ -17,7 +11,6 @@
         <img src="assets/images/crono-profugos-faces.svg" alt="" width="547" height="52">
       </div>
 
-      {{!-- Mobile &lt;1250: nombres sticky + body --}}
       <div class="v-n-chrono__graphic v-n-chrono__graphic--mov">
         <div class="v-n-chrono__names-gap" aria-hidden="true"></div>
         <img class="v-n-chrono__body" src="assets/images/crono-profugos-mov-body.svg" alt="Cronología de prófugos" width="309" height="6589">
@@ -34,7 +27,6 @@
       </div>
     </aside>
 
-    {{!-- Full-bleed: fuera del viewport para tapar también la leyenda --}}
     <div class="v-n-chrono__cartelas">
       <article class="v-n-chrono__cartela" data-at="0.2">
         <p class="v-d-p">Hoy el edificio sigue siendo el mismo, pero ya no está solo. La plaza se ha llenado. No de más espacio,
