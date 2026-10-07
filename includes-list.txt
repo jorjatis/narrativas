@@ -2,6 +2,15 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostras
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/scripts.js
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-pre-header.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-01.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-02.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-03.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-04.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-05.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-06.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-07.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-08.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-ladillo-custom.html
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-01.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-02.webp
@@ -16,3 +25,12 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostras
 
 
 <!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-pre-header.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-01.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-02.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-03.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-04.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-05.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-06.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-07.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-left-image-08.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-ladillo-custom.html" -->

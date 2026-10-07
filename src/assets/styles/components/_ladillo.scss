@@ -1,0 +1,59 @@
+@use "../base/variables" as *;
+
+.v-d--abc {
+  .v-c-cmp:has(.v-cmp-suh) {
+    max-width: 370px;
+    margin: 64px auto 72px;
+  }
+
+  .v-cmp-suh {
+    display: inline;
+    font-family: $atl;
+    font-size: 24px;
+    line-height: 32px;
+    color: $cp1;
+    border-bottom: 1px solid $cb1;
+
+    @media (min-width: 480px) {
+      font-size: 28px;
+      line-height: 36px;
+    }
+  }
+}
+
+.v-n-cmp-suh {
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+  width: 100%;
+  height: 200px;
+  margin: 80px auto;
+  padding: 36px;
+  border: 1px solid $cb1;
+
+  @media (min-width: 480px) {
+    height: 300px;
+  }
+
+  &__txt {
+    position: relative;
+    max-width: 230px;
+    font-family: $mcs;
+    font-size: 28px;
+    line-height: 30px;
+    letter-spacing: -0.14px;
+    color: $cb1;
+    text-transform: uppercase;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 64px;
+      background: #FFB330;
+      transform: skewX(-20deg) translateX(-40px);
+    }
+  }
+}
