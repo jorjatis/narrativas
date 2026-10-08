@@ -4,11 +4,28 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+function fadeOnScroll(selector, threshold) {
+  if (threshold === undefined) threshold = 50;
+  var indicators = document.querySelectorAll(selector);
+  if (!indicators.length) return;
+
+  var update = function () {
+    var visible = window.scrollY < threshold;
+    indicators.forEach(function (el) {
+      el.classList.toggle("is-visible", visible);
+      el.setAttribute("aria-hidden", String(!visible));
+    });
+  };
+
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+}
+
 var MQ_DESKTOP = "(min-width: 699px)";
 var FACE_STAGGER = 0.16;
 var FACE_DURATION = 0.45;
 var LINE_DURATION = 0.7;
-var OF_END_Y = { mobile: -18, desktop: -26 };
+var OF_END_Y = { mobile: -23, desktop: -26 };
 var OF_START_Y = { mobile: 30, desktop: 60 };
 
 function preArticleHeader(root) {
@@ -386,7 +403,7 @@ function chronoScroll(root) {
   if (!nodes.length) return;
 
   var cleanups = [];
-  [].forEach.call(nodes, function (node) {
+  nodes.forEach(function (node) {
     cleanups.push(setupChrono(node));
   });
 
@@ -395,6 +412,80 @@ function chronoScroll(root) {
       if (fn) fn();
     });
   };
+}
+
+function observeInView(options) {
+  options = options || {};
+  var target = options.target;
+  var threshold = options.threshold !== undefined ? options.threshold : 0;
+  var rootMargin = options.rootMargin || "0px";
+  var once = options.once !== undefined ? options.once : true;
+  var onEnter = options.onEnter || function () {};
+  var onLeave = options.onLeave || function () {};
+
+  var elements = [];
+  if (typeof target === "string") {
+    elements = document.querySelectorAll(target);
+  } else if (target instanceof HTMLElement) {
+    elements = [target];
+  } else if (target instanceof NodeList || Array.isArray(target)) {
+    elements = target;
+  }
+
+  if (!elements.length) return null;
+
+  var observer = new IntersectionObserver(
+    function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
+          onEnter(entry);
+          if (once) obs.unobserve(entry.target);
+        } else {
+          onLeave(entry);
+        }
+      });
+    },
+    {
+      threshold: [threshold],
+      rootMargin: rootMargin,
+    }
+  );
+
+  Array.prototype.forEach.call(elements, function (el) {
+    observer.observe(el);
+  });
+
+  return observer;
+}
+
+function videoAutoplayInView(root) {
+  root = root || document;
+  var videos = root.querySelectorAll("video.v-n-video-autoplay");
+  if (!videos.length) return null;
+
+  if (prefersReducedMotion()) {
+    videos.forEach(function (video) {
+      video.removeAttribute("autoplay");
+      video.pause();
+    });
+    return null;
+  }
+
+  return observeInView({
+    target: videos,
+    threshold: 0.5,
+    once: false,
+    onEnter: function (entry) {
+      var video = entry.target;
+      var playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(function () {});
+      }
+    },
+    onLeave: function (entry) {
+      entry.target.pause();
+    },
+  });
 }
 
 function refreshScrollTriggerOnMedia(root) {
@@ -423,42 +514,8 @@ function refreshScrollTriggerOnMedia(root) {
   }
 }
 
-function videoAutoplayInView(root) {
-  root = root || document;
-  var videos = root.querySelectorAll("video.v-n-video-autoplay");
-  if (!videos.length) return;
-
-  if (prefersReducedMotion()) {
-    videos.forEach(function (video) {
-      video.removeAttribute("autoplay");
-      video.pause();
-    });
-    return;
-  }
-
-  var observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        var video = entry.target;
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-          var playPromise = video.play();
-          if (playPromise && typeof playPromise.catch === "function") {
-            playPromise.catch(function () {});
-          }
-        } else {
-          video.pause();
-        }
-      });
-    },
-    { threshold: [0.5] }
-  );
-
-  videos.forEach(function (video) {
-    observer.observe(video);
-  });
-}
-
 function initAll() {
+  fadeOnScroll(".scr-ind");
   preArticleHeader();
   chronoScroll();
   videoAutoplayInView();

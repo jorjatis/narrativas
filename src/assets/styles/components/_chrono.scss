@@ -177,7 +177,6 @@ $chrono-offset-desk: 66px; // 58 + 8
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -242,10 +241,12 @@ $chrono-offset-desk: 66px; // 58 + 8
         height: auto;
       }
 
-      .video-player,
-      video-js {
-        display: block;
-        width: 100%;
+      figcaption {
+        margin-top: 8px;
+        text-align: right;
+        font-size: 12px;
+        line-height: 115%;
+        color: $cb8;
       }
     }
 
