@@ -5,7 +5,7 @@ const MQ_DESKTOP = `(min-width: 699px)`;
 const FACE_STAGGER = 0.16;
 const FACE_DURATION = 0.45;
 const LINE_DURATION = 0.7;
-const OF_END_Y = { mobile: -18, desktop: -26 };
+const OF_END_Y = { mobile: -23, desktop: -26 };
 const OF_START_Y = { mobile: 30, desktop: 60 };
 
 /**
@@ -26,8 +26,11 @@ export default function preArticleHeader(root = document) {
   const faces = gsap.utils.toArray(imgFig.querySelectorAll(".v-a-preh-img__face"));
   const word01 = textBlock.querySelector(".v-a-preh-t-s--01");
   const word02 = textBlock.querySelector(".v-a-preh-t-s--02");
+  const word04 = textBlock.querySelector(".v-a-preh-t-s--04");
+  const word05 = textBlock.querySelector(".v-a-preh-t-s--05");
   const line = textBlock.querySelector(".v-a-preh-t-s-line");
   const of = textBlock.querySelector(".v-a-preh-t-s-of");
+  const words = [word01, word02, word04, word05].filter(Boolean);
   const isDesktop = window.matchMedia(MQ_DESKTOP).matches;
   const ofEndY = isDesktop ? OF_END_Y.desktop : OF_END_Y.mobile;
   const ofStartY = isDesktop ? OF_START_Y.desktop : OF_START_Y.mobile;
@@ -35,7 +38,7 @@ export default function preArticleHeader(root = document) {
   const showFinal = () => {
     gsap.set([imgFig, textBlock, subtitle].filter(Boolean), { opacity: 1 });
     gsap.set([bg, ...faces].filter(Boolean), { opacity: 1 });
-    gsap.set([word01, word02].filter(Boolean), { opacity: 1 });
+    gsap.set(words, { opacity: 1 });
     if (line) gsap.set(line, { scaleX: 1 });
     if (subtitle) gsap.set(subtitle, { "--flag-scale": 1 });
     if (of) gsap.set(of, { y: ofEndY });
@@ -48,7 +51,7 @@ export default function preArticleHeader(root = document) {
 
   gsap.set([imgFig, textBlock], { opacity: 0 });
   gsap.set([bg, ...faces], { opacity: 0 });
-  gsap.set([word01, word02], { opacity: 0 });
+  gsap.set(words, { opacity: 0 });
   gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
   gsap.set(of, { y: ofStartY });
   if (subtitle) gsap.set(subtitle, { opacity: 0, "--flag-scale": 0 });
@@ -68,7 +71,6 @@ export default function preArticleHeader(root = document) {
   const playText = (at) => {
     tl.set(textBlock, { opacity: 1 }, at);
     tl.to(word01, { opacity: 1, duration: 0.5 }, at);
-    tl.to(word02, { opacity: 1, duration: 0.4 }, ">-0.1");
     tl.to(
       line,
       { scaleX: 1, duration: LINE_DURATION, ease: "power2.inOut" },
@@ -80,6 +82,9 @@ export default function preArticleHeader(root = document) {
       { y: ofEndY, duration: 0.55, ease: "power2.out" },
       `<${LINE_DURATION * 0.75}`
     );
+    tl.to(word02, { opacity: 1, duration: 0.4 }, ">-0.15");
+    tl.to(word04, { opacity: 1, duration: 0.45 }, ">-0.25");
+    tl.to(word05, { opacity: 1, duration: 0.5 }, ">-0.2");
   };
 
   const playSubtitle = (at) => {

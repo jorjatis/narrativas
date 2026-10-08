@@ -25,8 +25,11 @@ function preArticleHeader(root) {
   var faces = gsap.utils.toArray(imgFig.querySelectorAll(".v-a-preh-img__face"));
   var word01 = textBlock.querySelector(".v-a-preh-t-s--01");
   var word02 = textBlock.querySelector(".v-a-preh-t-s--02");
+  var word04 = textBlock.querySelector(".v-a-preh-t-s--04");
+  var word05 = textBlock.querySelector(".v-a-preh-t-s--05");
   var line = textBlock.querySelector(".v-a-preh-t-s-line");
   var of = textBlock.querySelector(".v-a-preh-t-s-of");
+  var words = [word01, word02, word04, word05].filter(Boolean);
 
   var isDesktop = window.matchMedia(MQ_DESKTOP).matches;
   var ofEndY = isDesktop ? OF_END_Y.desktop : OF_END_Y.mobile;
@@ -35,7 +38,7 @@ function preArticleHeader(root) {
   var showFinal = function () {
     gsap.set([imgFig, textBlock, subtitle].filter(Boolean), { opacity: 1 });
     gsap.set([bg].concat(faces).filter(Boolean), { opacity: 1 });
-    gsap.set([word01, word02].filter(Boolean), { opacity: 1 });
+    gsap.set(words, { opacity: 1 });
     if (line) gsap.set(line, { scaleX: 1 });
     if (subtitle) gsap.set(subtitle, { "--flag-scale": 1 });
     if (of) gsap.set(of, { y: ofEndY });
@@ -48,7 +51,7 @@ function preArticleHeader(root) {
 
   gsap.set([imgFig, textBlock], { opacity: 0 });
   gsap.set([bg].concat(faces), { opacity: 0 });
-  gsap.set([word01, word02], { opacity: 0 });
+  gsap.set(words, { opacity: 0 });
   gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
   gsap.set(of, { y: ofStartY });
   if (subtitle) gsap.set(subtitle, { opacity: 0, "--flag-scale": 0 });
@@ -68,7 +71,6 @@ function preArticleHeader(root) {
   var playText = function (at) {
     tl.set(textBlock, { opacity: 1 }, at);
     tl.to(word01, { opacity: 1, duration: 0.5 }, at);
-    tl.to(word02, { opacity: 1, duration: 0.4 }, ">-0.1");
     tl.to(
       line,
       { scaleX: 1, duration: LINE_DURATION, ease: "power2.inOut" },
@@ -80,6 +82,9 @@ function preArticleHeader(root) {
       { y: ofEndY, duration: 0.55, ease: "power2.out" },
       "<" + LINE_DURATION * 0.75
     );
+    tl.to(word02, { opacity: 1, duration: 0.4 }, ">-0.15");
+    tl.to(word04, { opacity: 1, duration: 0.45 }, ">-0.25");
+    tl.to(word05, { opacity: 1, duration: 0.5 }, ">-0.2");
   };
 
   var playSubtitle = function (at) {

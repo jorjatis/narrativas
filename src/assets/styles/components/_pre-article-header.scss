@@ -101,7 +101,7 @@ body {
       @media (min-width: $screen-xs) {
         flex-direction: column;
         margin-top: 56px;
-        margin-bottom: 100px;
+        margin-bottom: 90px;
       }
 
       .v-a-preh-img {
@@ -112,7 +112,7 @@ body {
         opacity: 0;
 
         @media (min-width: $screen-xs) {
-          margin: 0 auto 52px;
+          margin: 0 auto;
         }
 
         > img {
@@ -126,68 +126,77 @@ body {
       }
 
       .v-a-preh-t {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         opacity: 0;
+        max-width: 260px;
+        width: 100%;
+        margin: 0 auto;
+
+        @media (min-width: $screen-xs) {
+          max-width: 390px;
+        }
 
         &__c {
           display: flex;
-          margin-left: 11px;
+          margin-top: 2px;
+          transform: translateX(10px);
 
           @media (min-width: $screen-xs) {
-            gap: 12px;
-            margin-left: 30px;
+            margin-top: 8px;
+            transform: translateX(16px);
           }
         }
       }
 
       .v-a-preh-t-s--01,
-      .v-a-preh-t-s--02 {
+      .v-a-preh-t-s--02,
+      .v-a-preh-t-s--04,
+      .v-a-preh-t-s--05 {
         opacity: 0;
       }
 
       .v-a-preh-t-s--01 {
         font-family: $axs;
-        font-size: 60px;
+        font-size: 28px;
         line-height: 100%;
-        letter-spacing: -1.2px;
+        letter-spacing: -.56px;
         color: $cb9;
         text-transform: uppercase;
+        margin-left: 60px;
 
         @media (min-width: $screen-xs) {
-          font-size: 105px;
-          letter-spacing: -2.1px;
+          font-size: 42px;
+          letter-spacing: -.8px;
+          margin-left: 85px;
         }
       }
 
       .v-a-preh-t-s--02 {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        max-width: 280px;
-        padding: 0 10px;
         font-family: $axs;
-        font-size: 40px;
+        font-size: 28px;
         line-height: 110%;
         letter-spacing: -.8px;
         color: $cb9;
         text-transform: uppercase;
 
         @media (min-width: $screen-xs) {
-          position: unset;
-          left: unset;
-          transform: unset;
-          display: unset;
-          justify-content: unset;
-          width: auto;
-          max-width: auto;
-          padding: 0;
-          font-size: 60px;
-          letter-spacing: -1.2px;
+          font-size: 42px;
+          letter-spacing: -.84px;
+        }
+      }
+
+      .v-a-preh-t-s--04 {
+        font-family: $axs;
+        font-size: 70px;
+        line-height: 100%;
+        letter-spacing: -.8px;
+        color: $cb9;
+        text-transform: uppercase;
+        margin-top: -6px;
+
+        @media (min-width: $screen-xs) {
+          margin-top: -9px;
+          font-size: 105px;
+          letter-spacing: -2.1px;
         }
       }
 
@@ -195,16 +204,14 @@ body {
         position: relative;
         display: flex;
         justify-content: center;
-        width: 186px;
+        width: 193px;
         height: 56px;
-        margin-top: 2px;
+        margin-top: 4px;
         overflow: hidden;
-        transform: translate(14px, 22px);
 
         @media (min-width: $screen-xs) {
-          width: 330px;
-          height: 98px;
-          transform: unset;
+          width: 284px;
+          height: 85px;
         }
 
         // Separación fija (no anima)
@@ -234,19 +241,36 @@ body {
 
         .v-a-preh-t-s-of {
           font-family: $mcs;
-          font-size: 106px;
+          font-size: 118px;
           line-height: 110%;
           letter-spacing: -2.1px;
           color: #FFB330;
           text-transform: uppercase;
           // Posición final; GSAP parte desde más abajo
-          transform: translateY(-18px);
+          transform: translateY(-23px);
 
           @media (min-width: $screen-xs) {
-            font-size: 190px;
+            font-size: 175px;
             letter-spacing: -3.8px;
-            transform: translateY(-26px);
+            transform: translateY(-28px);
           }
+        }
+      }
+
+      .v-a-preh-t-s--05 {
+        font-family: $atl;
+        line-height: 115%;
+        display: block;
+        font-size: 20px;
+        max-width: 215px;
+        margin-left: 42px;
+        margin-top: 4px;
+
+        @media (min-width: $screen-xs) {
+          font-size: 32px;
+          max-width: 320px;
+          margin-left: 65px;
+          margin-top: 8px;
         }
       }
     }

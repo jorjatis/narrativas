@@ -24,17 +24,20 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostras
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-08.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-09.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-bg.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-body.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-names.svg
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-faces.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-profugos-body.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-body.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-mov-names.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-mov-body.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-profugos-names.svg
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-profugos-faces.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-profugos-body.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-profugos-mov-names.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-profugos-mov-body.svg
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/leyenda-detenidos-desk.svg
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/leyenda-detenidos-key.svg
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/leyenda-detenidos-map.svg
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/leyenda-profugos-desk.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-mov-body.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-mov-names.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-profugos-mov-body.svg
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-names.svg
 
 
 

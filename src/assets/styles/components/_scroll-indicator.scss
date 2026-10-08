@@ -27,7 +27,11 @@
   visibility: hidden;
   transition: opacity .3s ease, visibility .3s ease;
 
-  @media (min-height: 1240px) {
+  @media (max-width: $screen-xs) and (min-height: 1075px) {
+    display: none;
+  }
+
+  @media (min-width: $screen-xs) and (min-height: 1240px) {
     display: none;
   }
 

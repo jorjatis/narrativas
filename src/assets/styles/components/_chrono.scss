@@ -34,7 +34,7 @@ $chrono-offset-desk: 66px; // 58 + 8
 
   &--profugos {
     @media (min-width: $chrono-desk) {
-      width: 478px;
+      width: 486px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -106,15 +106,15 @@ $chrono-offset-desk: 66px; // 58 + 8
   }
 
   &--profugos .v-n-chrono__faces-gap {
-    aspect-ratio: 546.99 / 52;
+    aspect-ratio: 485.54 / 52;
   }
 
   &--detenidos .v-n-chrono__names-gap {
-    aspect-ratio: 304.53 / 145;
+    aspect-ratio: 308.81 / 178.05;
   }
 
   &--profugos .v-n-chrono__names-gap {
-    aspect-ratio: 309.11 / 170;
+    aspect-ratio: 308.91 / 194.2;
   }
 
   // Caras sticky (desktop): JS coloca top bajo los nombres y luego en 0
