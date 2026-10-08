@@ -295,7 +295,7 @@ function setupChrono(root) {
       cartelas.map(function (c) {
         return c.el;
       }),
-      { yPercent: 100, autoAlpha: 0 }
+      { yPercent: 0, y: viewportH, autoAlpha: 0 }
     );
     onScrub(graphic);
 
@@ -322,13 +322,12 @@ function setupChrono(root) {
           });
         }
 
-        var heightFactor = Math.max(1, el.offsetHeight / Math.max(viewportH, 1));
+        var cartelaH = el.offsetHeight;
+        var travelPx = viewportH + cartelaH;
+        var duration =
+          CARTELA_SCROLL_UNITS() * (travelPx / Math.max(viewportH, 1));
         tl.set(el, { autoAlpha: 1 });
-        tl.fromTo(
-          el,
-          { yPercent: 100 },
-          { yPercent: -100, duration: CARTELA_SCROLL_UNITS() * heightFactor }
-        );
+        tl.fromTo(el, { y: viewportH }, { y: -cartelaH, duration: duration });
         tl.set(el, { autoAlpha: 0 });
 
         prevAt = at;

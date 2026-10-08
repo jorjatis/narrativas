@@ -170,9 +170,11 @@ function setupChrono(root) {
     const graphicH = graphic.offsetHeight;
     const travel = Math.max(graphicH - viewportH, 0);
 
+    // Entrada/salida respecto al viewport (no yPercent del alto propio:
+    // cartelas cortas "aparecían" a medias al hacerse visibles).
     gsap.set(
       cartelas.map((c) => c.el),
-      { yPercent: 100, autoAlpha: 0 }
+      { yPercent: 0, y: viewportH, autoAlpha: 0 }
     );
     onScrub(graphic);
 
@@ -193,14 +195,12 @@ function setupChrono(root) {
           tl.add(() => onScrub(graphic));
         }
 
-        // Más alto que el viewport → más scroll de página (sin scroll interior)
-        const heightFactor = Math.max(1, el.offsetHeight / Math.max(viewportH, 1));
+        const cartelaH = el.offsetHeight;
+        const travelPx = viewportH + cartelaH;
+        const duration =
+          CARTELA_SCROLL_UNITS() * (travelPx / Math.max(viewportH, 1));
         tl.set(el, { autoAlpha: 1 });
-        tl.fromTo(
-          el,
-          { yPercent: 100 },
-          { yPercent: -100, duration: CARTELA_SCROLL_UNITS() * heightFactor }
-        );
+        tl.fromTo(el, { y: viewportH }, { y: -cartelaH, duration });
         tl.set(el, { autoAlpha: 0 });
 
         prevAt = at;
