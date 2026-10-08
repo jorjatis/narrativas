@@ -5,11 +5,13 @@ import refreshScrollTriggerOnMedia from "./helpers/refreshScrollTriggerOnMedia.j
 // NOTE: Modules
 import preArticleHeader from "./modules/preArticleHeader.js";
 import chronoScroll from "./modules/chronoScroll.js";
+import videoAutoplayInView from "./modules/videoAutoplayInView.js";
 
 export function initAll() {
   fadeOnScroll(".scr-ind");
   preArticleHeader();
   chronoScroll();
+  videoAutoplayInView();
   refreshScrollTriggerOnMedia();
 }
 

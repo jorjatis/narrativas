@@ -1,4 +1,4 @@
-@use '../base/variables' as *;
+@use "../base/variables" as *;
 
 html {
   scroll-behavior: unset !important;
@@ -6,7 +6,7 @@ html {
   scrollbar-gutter: stable;
 }
 
-$bg-color: #FFF;
+$bg-color: #fff;
 
 body {
   touch-action: pan-y;
@@ -21,7 +21,7 @@ body {
   // }
 
   // Paywall
-  .v-w>* {
+  .v-w > * {
     margin-bottom: 0;
     padding-bottom: 40px;
 
@@ -55,7 +55,7 @@ body {
 }
 
 .v-w {
-  .v-a--d-s-1 {  
+  .v-a--d-s-1 {
     .v-a-lnk {
       > div {
         height: 100%;
@@ -78,7 +78,7 @@ body {
       @media (max-width: 500px) {
         padding-bottom: 90px;
       }
-      
+
       .v-a-p-t,
       .v-a-t,
       .v-a-s-t {
@@ -87,7 +87,7 @@ body {
 
       .v-i {
         display: none;
-        
+
         @media (max-width: 500px) {
           margin-top: 12px;
         }
@@ -98,7 +98,7 @@ body {
       }
     }
 
-    .v-a-img-c {     
+    .v-a-img-c {
       &:after {
         content: none;
       }
@@ -108,7 +108,9 @@ body {
   .v-d--abc {
     .v-a-s-t {
       text-align: center;
-      font: 1.375rem/1.75rem ABC Text Light,serif;
+      font:
+        1.375rem/1.75rem ABC Text Light,
+        serif;
       color: $cb1;
       margin: 36px 0 92px;
     }
@@ -143,6 +145,24 @@ body {
   }
 }
 
+.v-n-video-autoplay {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 90px 0;
+}
+
+.v-c-cmp:has(.v-n-video-autoplay) {
+  @media (max-width: 609px) {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+}
+
 .voc-ai2html {
   display: flex;
   justify-content: center;
@@ -156,4 +176,6 @@ body.is-loaded {
   }
 }
 
-.v-crt--t2 .v-crt__c { z-index: 20; }
+.v-crt--t2 .v-crt__c {
+  z-index: 20;
+}

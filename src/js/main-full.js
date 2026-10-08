@@ -433,9 +433,48 @@ function refreshScrollTriggerOnMedia(root) {
   }
 }
 
+/**
+ * Reproduce videos .v-n-video-autoplay cuando el 50% entra en viewport.
+ */
+function videoAutoplayInView(root) {
+  root = root || document;
+  var videos = root.querySelectorAll("video.v-n-video-autoplay");
+  if (!videos.length) return;
+
+  if (prefersReducedMotion()) {
+    videos.forEach(function (video) {
+      video.removeAttribute("autoplay");
+      video.pause();
+    });
+    return;
+  }
+
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        var video = entry.target;
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          var playPromise = video.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(function () {});
+          }
+        } else {
+          video.pause();
+        }
+      });
+    },
+    { threshold: [0.5] }
+  );
+
+  videos.forEach(function (video) {
+    observer.observe(video);
+  });
+}
+
 function initAll() {
   preArticleHeader();
   chronoScroll();
+  videoAutoplayInView();
   refreshScrollTriggerOnMedia();
 }
 

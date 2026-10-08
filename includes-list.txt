@@ -13,6 +13,7 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostras
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-ladillo-custom.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-chrono-detenidos.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-chrono-profugos.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-video-colas.html
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-01.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/preh-img-face-02.webp
@@ -39,6 +40,7 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostras
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/leyenda-detenidos-map.svg
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/leyenda-profugos-desk.svg
 
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/videos/video-colas.mp4
 
 
 <!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-pre-header.html" -->
@@ -53,3 +55,4 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostras
 <!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-ladillo-custom.html" -->
 <!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-chrono-profugos.html" -->
 <!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-chrono-detenidos.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-video-colas.html" -->
