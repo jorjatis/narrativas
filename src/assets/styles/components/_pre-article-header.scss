@@ -16,6 +16,10 @@ body {
     height: auto;
     padding: 0 20px;
 
+    @media (max-height: 1140px) {
+      min-height: 100dvh;
+    }
+
     .v-a-inf-c {
       justify-content: flex-start;
 
@@ -24,7 +28,7 @@ body {
       }
 
       .v-a-s-t {
-        max-width: 398px;
+        max-width: 609px;
         width: 100%;
         margin: 0 auto;
         font-size: 20px;

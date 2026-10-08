@@ -61,6 +61,10 @@
 
   &--07 {
     max-width: 300px;
+
+    @media (min-width: 1120px) {
+      transform: translate(-190px, -100px);
+    }
   }
 
   &--08 {
