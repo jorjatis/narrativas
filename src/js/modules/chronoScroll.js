@@ -193,11 +193,13 @@ function setupChrono(root) {
           tl.add(() => onScrub(graphic));
         }
 
+        // Más alto que el viewport → más scroll de página (sin scroll interior)
+        const heightFactor = Math.max(1, el.offsetHeight / Math.max(viewportH, 1));
         tl.set(el, { autoAlpha: 1 });
         tl.fromTo(
           el,
           { yPercent: 100 },
-          { yPercent: -100, duration: CARTELA_SCROLL_UNITS() }
+          { yPercent: -100, duration: CARTELA_SCROLL_UNITS() * heightFactor }
         );
         tl.set(el, { autoAlpha: 0 });
 

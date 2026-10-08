@@ -7,16 +7,11 @@
 
   .v-cmp-suh {
     display: inline;
-    font-family: $atl;
+    font-family: $ats;
     font-size: 24px;
     line-height: 32px;
     color: $cp1;
     border-bottom: 1px solid $cb1;
-
-    @media (min-width: 480px) {
-      font-size: 28px;
-      line-height: 36px;
-    }
   }
 }
 

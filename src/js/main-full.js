@@ -76,7 +76,6 @@ function preArticleHeader(root) {
       { scaleX: 1, duration: LINE_DURATION, ease: "power2.inOut" },
       ">-0.05"
     );
-    // Al 75% de la línea, 1-O sube a su posición final
     tl.to(
       of,
       { y: ofEndY, duration: 0.55, ease: "power2.out" },
@@ -99,7 +98,6 @@ function preArticleHeader(root) {
 
   if (isDesktop) {
     playImages(0);
-    // Face-06 (índice 5) arranca en 0.35 + 5 * stagger
     playText(0.35 + 5 * FACE_STAGGER);
     playSubtitle(">-0.25");
   } else {
@@ -126,7 +124,6 @@ function SCROLL_PX_PER_UNIT() {
 
 var RESIZE_DEBOUNCE_MS = 150;
 
-/** Cabecera sticky + 8px aire: 66 desk (58+8) / 58 mobile (50+8). */
 function HEADER_OFFSET() {
   return window.matchMedia("(min-width: 699px)").matches ? 66 : 58;
 }
@@ -194,7 +191,6 @@ function setupChrono(root) {
   var resizeTimer = null;
   var destroyed = false;
 
-  /** Iguala el hueco del graphic a la altura real del sticky (evita saltito al pin). */
   var syncStickyGaps = function (graphic) {
     var isDesk = window.matchMedia(MQ_CHRONO_DESK).matches;
 
@@ -222,13 +218,11 @@ function setupChrono(root) {
   var updateHeads = function (graphic) {
     var isDesk = window.matchMedia(MQ_CHRONO_DESK).matches;
 
-    // Mobile: nombres siempre sticky arriba
     if (!isDesk && namesSticky && namesSticky.offsetParent) {
       gsap.set(namesSticky, { top: 0 });
       return;
     }
 
-    // Desktop: caras bajo los nombres, luego se quedan en top: 0
     if (!heads || !heads.offsetParent) return;
     var names = graphic.querySelector(".v-n-chrono__names");
     var namesH = names ? names.offsetHeight : 0;
@@ -311,11 +305,12 @@ function setupChrono(root) {
           });
         }
 
+        var heightFactor = Math.max(1, el.offsetHeight / Math.max(viewportH, 1));
         tl.set(el, { autoAlpha: 1 });
         tl.fromTo(
           el,
           { yPercent: 100 },
-          { yPercent: -100, duration: CARTELA_SCROLL_UNITS() }
+          { yPercent: -100, duration: CARTELA_SCROLL_UNITS() * heightFactor }
         );
         tl.set(el, { autoAlpha: 0 });
 
@@ -402,10 +397,6 @@ function chronoScroll(root) {
   };
 }
 
-/**
- * Recalcula ScrollTrigger cuando media lazy (img/video/iframe) cambia el layout.
- * Necesario en prod: el markup trae loading="lazy" y no se puede quitar.
- */
 function refreshScrollTriggerOnMedia(root) {
   root = root || document;
   var timer = null;
@@ -423,7 +414,6 @@ function refreshScrollTriggerOnMedia(root) {
       refresh();
     }
   };
-  // capture: load no burbujea
   root.addEventListener("load", onMediaEvent, true);
   root.addEventListener("loadedmetadata", onMediaEvent, true);
   root.addEventListener("loadeddata", onMediaEvent, true);
@@ -433,9 +423,6 @@ function refreshScrollTriggerOnMedia(root) {
   }
 }
 
-/**
- * Reproduce videos .v-n-video-autoplay cuando el 50% entra en viewport.
- */
 function videoAutoplayInView(root) {
   root = root || document;
   var videos = root.querySelectorAll("video.v-n-video-autoplay");
@@ -478,5 +465,4 @@ function initAll() {
   refreshScrollTriggerOnMedia();
 }
 
-// En prod se llama directo (sin window load)
 initAll();

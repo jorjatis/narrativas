@@ -140,10 +140,28 @@ def keep_only_faces(root) -> None:
                 defs.remove(child)
 
 
+def hide_cartela_markers(root) -> list[tuple[str, float]]:
+    """Oculta líneas marcadoras bloqueN-cartela y devuelve (id, y1)."""
+    markers: list[tuple[str, float]] = []
+    for line in root.xpath(".//svg:line", namespaces=NS):
+        lid = line.get("id") or ""
+        if "cartela" not in lid:
+            continue
+        y1 = float(line.get("y1") or 0)
+        markers.append((lid, y1))
+        # Solo señalización: no deben verse
+        line.set("display", "none")
+        style = line.get("style") or ""
+        if "display" not in style:
+            line.set("style", (style + ";display:none").strip(";"))
+    markers.sort(key=lambda m: m[1])
+    return markers
+
+
 def write_svg(root, out: Path, viewbox: str) -> None:
     root = copy.deepcopy(root)
+    hide_cartela_markers(root)
     root.set("viewBox", viewbox)
-    # ensure xmlns
     out.write_bytes(
         etree.tostring(
             root,
@@ -254,24 +272,43 @@ def detect_mov_names_h(src: Path) -> float:
     return round(first, 2)
 
 
+def print_cartela_ats(src: Path) -> None:
+    tree = etree.parse(str(src))
+    root = tree.getroot()
+    _, _, _, h = parse_viewbox(root)
+    markers = hide_cartela_markers(copy.deepcopy(root))
+    # re-read without mutating
+    markers = []
+    for line in root.xpath(".//svg:line", namespaces=NS):
+        lid = line.get("id") or ""
+        if "cartela" not in lid:
+            continue
+        markers.append((lid, float(line.get("y1") or 0)))
+    markers.sort(key=lambda m: m[1])
+    print(f"  cartela data-at ({src.name}, H={h}):")
+    for lid, y in markers:
+        at = round(y / h, 3)
+        print(f'    {lid}: y={y} -> data-at="{at}"')
+
+
 def main() -> None:
     img = Path("src/assets/images")
 
     d_names, d_faces = detect_desk_bands(img / "crono-detenidos-desk.svg")
     print(f"detenidos desk bands: names_h={d_names}, faces_h={d_faces}")
-    # Prefer classic round splits if very close to previous
     if abs(d_names - 130) < 1:
         d_names = 130.0
     if abs(d_faces - 52) < 6:
         d_faces = 52.0
+    print_cartela_ats(img / "crono-detenidos-desk.svg")
     split_desk(img / "crono-detenidos-desk.svg", "crono-detenidos", d_names, d_faces)
 
     p_names, p_faces = detect_desk_bands(img / "crono-profugos-desk.svg")
     print(f"profugos desk bands: names_h={p_names}, faces_h={p_faces}")
-    if abs(p_names - 152) < 4:
-        p_names = 152.0
+    # No forzar 152: el arte nuevo empieza ~149
     if abs(p_faces - 52) < 8:
         p_faces = 52.0
+    print_cartela_ats(img / "crono-profugos-desk.svg")
     split_desk(img / "crono-profugos-desk.svg", "crono-profugos", p_names, p_faces)
 
     dm = detect_mov_names_h(img / "crono-detenidos-mov.svg")
