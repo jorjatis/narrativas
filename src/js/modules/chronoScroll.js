@@ -24,8 +24,9 @@ const SCROLL_PX_PER_UNIT = () => {
   return vh * (isDesk ? 4 : 6.5);
 };
 const RESIZE_DEBOUNCE_MS = 150;
-/** Cabecera sticky: 58 desk / 50+8 aire mobile. */
-const HEADER_OFFSET = () => 58;
+/** Cabecera sticky + 8px aire: 66 desk (58+8) / 58 mobile (50+8). */
+const HEADER_OFFSET = () =>
+  window.matchMedia("(min-width: 699px)").matches ? 66 : 58;
 
 function clamp01(n) {
   return gsap.utils.clamp(0, 1, Number.isFinite(n) ? n : 0);

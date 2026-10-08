@@ -24,16 +24,27 @@ body {
       }
 
       .v-a-s-t {
-        max-width: 298px;
+        max-width: 398px;
         width: 100%;
         margin: 0 auto;
+        font-size: 20px;
+        line-height: 24px;
         opacity: 0;
+        --flag-scale: 0;
 
-        .v-a-s-t-flag {
+        @media (min-width: $screen-xs) {
+          font-size: 22px;
+          line-height: 26px;
+        }
+
+        &::before,
+        &::after {
+          content: "";
           display: block;
           width: 55px;
           height: 5px;
-          margin: 55px auto 0;
+          margin-left: auto;
+          margin-right: auto;
           background: linear-gradient(
             90deg,
             #ffb330 0,
@@ -55,8 +66,24 @@ body {
             #ffb330 49px,
             #ffb330 55px
           );
-          transform: scaleX(0);
+          transform: scaleX(var(--flag-scale));
           transform-origin: left center;
+        }
+
+        &::before {
+          margin-bottom: 25px;
+
+          @media (min-width: $screen-xs) {
+            margin-bottom: 55px;
+          }
+        }
+
+        &::after {
+          margin-top: 25px;
+
+          @media (min-width: $screen-xs) {
+            margin-top: 55px;
+          }
         }
       }
     }
@@ -65,7 +92,7 @@ body {
       display: flex;
       flex-direction: column-reverse;
       margin-top: 24px;
-      margin-bottom: 40px;
+      margin-bottom: 8px;
 
       @media (min-width: $screen-xs) {
         flex-direction: column;
@@ -77,7 +104,7 @@ body {
         display: grid;
         max-width: 330px;
         width: 100%;
-        margin: 36px auto 0;
+        margin: 52px auto 0;
         opacity: 0;
 
         @media (min-width: $screen-xs) {

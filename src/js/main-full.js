@@ -27,7 +27,6 @@ function preArticleHeader(root) {
   var word02 = textBlock.querySelector(".v-a-preh-t-s--02");
   var line = textBlock.querySelector(".v-a-preh-t-s-line");
   var of = textBlock.querySelector(".v-a-preh-t-s-of");
-  var flag = subtitle && subtitle.querySelector(".v-a-s-t-flag");
 
   var isDesktop = window.matchMedia(MQ_DESKTOP).matches;
   var ofEndY = isDesktop ? OF_END_Y.desktop : OF_END_Y.mobile;
@@ -38,7 +37,7 @@ function preArticleHeader(root) {
     gsap.set([bg].concat(faces).filter(Boolean), { opacity: 1 });
     gsap.set([word01, word02].filter(Boolean), { opacity: 1 });
     if (line) gsap.set(line, { scaleX: 1 });
-    if (flag) gsap.set(flag, { scaleX: 1 });
+    if (subtitle) gsap.set(subtitle, { "--flag-scale": 1 });
     if (of) gsap.set(of, { y: ofEndY });
   };
 
@@ -51,9 +50,8 @@ function preArticleHeader(root) {
   gsap.set([bg].concat(faces), { opacity: 0 });
   gsap.set([word01, word02], { opacity: 0 });
   gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
-  if (flag) gsap.set(flag, { scaleX: 0, transformOrigin: "left center" });
   gsap.set(of, { y: ofStartY });
-  if (subtitle) gsap.set(subtitle, { opacity: 0 });
+  if (subtitle) gsap.set(subtitle, { opacity: 0, "--flag-scale": 0 });
 
   var tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
@@ -86,13 +84,11 @@ function preArticleHeader(root) {
   var playSubtitle = function (at) {
     if (!subtitle) return;
     tl.to(subtitle, { opacity: 1, duration: 0.5 }, at);
-    if (flag) {
-      tl.to(
-        flag,
-        { scaleX: 1, duration: 0.55, ease: "power2.inOut" },
-        "<0.15"
-      );
-    }
+    tl.to(
+      subtitle,
+      { "--flag-scale": 1, duration: 0.55, ease: "power2.inOut" },
+      "<0.15"
+    );
   };
 
   if (isDesktop) {
@@ -124,7 +120,7 @@ function SCROLL_PX_PER_UNIT() {
 var RESIZE_DEBOUNCE_MS = 150;
 
 function HEADER_OFFSET() {
-  return 58;
+  return window.matchMedia("(min-width: 699px)").matches ? 66 : 58;
 }
 
 function clamp01(n) {
@@ -395,9 +391,36 @@ function chronoScroll(root) {
   };
 }
 
+function refreshScrollTriggerOnMedia(root) {
+  root = root || document;
+  var timer = null;
+  var refresh = function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      ScrollTrigger.refresh();
+    }, 120);
+  };
+  var onMediaEvent = function (e) {
+    var el = e.target;
+    if (!el || !el.tagName) return;
+    var tag = el.tagName;
+    if (tag === "IMG" || tag === "VIDEO" || tag === "IFRAME" || tag === "SOURCE") {
+      refresh();
+    }
+  };
+  root.addEventListener("load", onMediaEvent, true);
+  root.addEventListener("loadedmetadata", onMediaEvent, true);
+  root.addEventListener("loadeddata", onMediaEvent, true);
+  root.addEventListener("error", onMediaEvent, true);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(refresh).catch(function () {});
+  }
+}
+
 function initAll() {
   preArticleHeader();
   chronoScroll();
+  refreshScrollTriggerOnMedia();
 }
 
 initAll();

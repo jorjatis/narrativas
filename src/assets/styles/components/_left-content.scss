@@ -20,8 +20,11 @@
   }
 
   &--01 {
-    margin-top: 0;
-    max-width: 203px;
+    max-width: 150px;
+
+    @media (min-width: $screen-xs) {
+      max-width: 203px;
+    }
 
     @media (min-width: 1120px) {
       transform: translate(-127px, 114px);
@@ -29,7 +32,11 @@
   }
 
   &--02 {
-    max-width: 245px;
+    max-width: 160px;
+
+    @media (min-width: $screen-xs) {
+      max-width: 245px;
+    }
 
     @media (min-width: 1120px) {
       transform: translate(-155px, 50px);

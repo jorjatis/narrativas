@@ -2,6 +2,8 @@
 
 html {
   scroll-behavior: unset !important;
+  // Evita el salto L/R al pinear ScrollTrigger (scrollbar on/off)
+  scrollbar-gutter: stable;
 }
 
 $bg-color: #FFF;

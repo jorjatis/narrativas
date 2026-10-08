@@ -28,8 +28,6 @@ export default function preArticleHeader(root = document) {
   const word02 = textBlock.querySelector(".v-a-preh-t-s--02");
   const line = textBlock.querySelector(".v-a-preh-t-s-line");
   const of = textBlock.querySelector(".v-a-preh-t-s-of");
-  const flag = subtitle?.querySelector(".v-a-s-t-flag");
-
   const isDesktop = window.matchMedia(MQ_DESKTOP).matches;
   const ofEndY = isDesktop ? OF_END_Y.desktop : OF_END_Y.mobile;
   const ofStartY = isDesktop ? OF_START_Y.desktop : OF_START_Y.mobile;
@@ -39,7 +37,7 @@ export default function preArticleHeader(root = document) {
     gsap.set([bg, ...faces].filter(Boolean), { opacity: 1 });
     gsap.set([word01, word02].filter(Boolean), { opacity: 1 });
     if (line) gsap.set(line, { scaleX: 1 });
-    if (flag) gsap.set(flag, { scaleX: 1 });
+    if (subtitle) gsap.set(subtitle, { "--flag-scale": 1 });
     if (of) gsap.set(of, { y: ofEndY });
   };
 
@@ -52,9 +50,8 @@ export default function preArticleHeader(root = document) {
   gsap.set([bg, ...faces], { opacity: 0 });
   gsap.set([word01, word02], { opacity: 0 });
   gsap.set(line, { scaleX: 0, transformOrigin: "left center" });
-  if (flag) gsap.set(flag, { scaleX: 0, transformOrigin: "left center" });
   gsap.set(of, { y: ofStartY });
-  if (subtitle) gsap.set(subtitle, { opacity: 0 });
+  if (subtitle) gsap.set(subtitle, { opacity: 0, "--flag-scale": 0 });
 
   const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
@@ -88,13 +85,11 @@ export default function preArticleHeader(root = document) {
   const playSubtitle = (at) => {
     if (!subtitle) return;
     tl.to(subtitle, { opacity: 1, duration: 0.5 }, at);
-    if (flag) {
-      tl.to(
-        flag,
-        { scaleX: 1, duration: 0.55, ease: "power2.inOut" },
-        "<0.15"
-      );
-    }
+    tl.to(
+      subtitle,
+      { "--flag-scale": 1, duration: 0.55, ease: "power2.inOut" },
+      "<0.15"
+    );
   };
 
   if (isDesktop) {

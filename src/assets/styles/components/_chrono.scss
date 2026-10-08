@@ -2,12 +2,15 @@
 
 // Debajo de esto: SVG mobile + sin leyenda (no cabe timeline + leyenda).
 $chrono-desk: 1250px;
-// Cabecera sticky (+ 8px de aire en mobile entre cabecera y nombres)
+// Cabecera sticky + 8px de aire entre cabecera y nombres
 $chrono-offset-mobile: 58px; // 50 + 8
-$chrono-offset-desk: 58px;
+$chrono-offset-desk: 66px; // 58 + 8
 
 .v-n-chrono {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 20px;
   margin-top: 90px;
   margin-bottom: 90px;
   margin-left: auto;
@@ -16,14 +19,25 @@ $chrono-offset-desk: 58px;
 
   @media (min-width: 375px) {
     width: 310px;
+    padding: 0;
     margin-top: 192px;
     margin-bottom: 192px;
   }
 
-  @media (min-width: $chrono-desk) {
-    width: 730px;
-    margin-left: calc(50% - (730px / 2));
-    margin-right: unset;
+  &--detenidos {
+    @media (min-width: $chrono-desk) {
+      width: 730px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  &--profugos {
+    @media (min-width: $chrono-desk) {
+      width: 478px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   &__stage {
@@ -147,7 +161,7 @@ $chrono-offset-desk: 58px;
     }
   }
 
-  // Full-bleed 100vw (no el ancho de 730px) para tapar la leyenda
+  // Full-bleed 100vw (no el ancho del chrono) para tapar la leyenda
   &__cartelas {
     position: absolute;
     top: 0;
@@ -164,22 +178,60 @@ $chrono-offset-desk: 58px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 1.25em;
+    align-items: stretch;
     padding: 24px 20px;
     box-sizing: border-box;
     background: $cb2;
     opacity: 0;
     visibility: hidden;
 
-    p {
-      margin: 0;
+    // Misma columna que .v-d del artículo
+    &-content {
       max-width: 609px;
       width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25em;
+    }
 
+    &-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 8px;
+      font-family: $mcs;
+      font-size: 22px;
+      line-height: 26px;
+      letter-spacing: -.11px;
+      color: $cp1;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-xs) {
+        margin-left: -22px;
+      }
+
+
+      &:before {
+        content: "";
+        display: block;
+        width: 10px;
+        height: 10px;
+        background: #FFB330;
+      }
+    }
+
+    // Mismo desplazamiento que .v-d--abc .v-d-p
+    &-title,
+    p {
       @media (min-width: 1120px) {
         transform: translateX(225px);
       }
+    }
+
+    p {
+      margin: 0;
     }
   }
 
