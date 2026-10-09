@@ -1,6 +1,64 @@
 {
   "months": [
     {
+      "title": "Octubre 2026",
+      "titleEn": "October 2026",
+      "cards": [
+        {
+          "title": "Del 1-O a la amnistía: Un traje a medida para borrar el 'Procés'",
+          "titleEn": "From 1-O to amnesty: A tailored suit to erase the 'Procés'",
+          "articleUrl": "",
+          "titleMedia": "24-1o-amnistia",
+          "gif": true,
+          "netlifyUrl": "https://narrativas-beneficiadostrasel1o.netlify.app/"
+        }
+      ]
+    },
+    {
+      "title": "Septiembre 2026",
+      "titleEn": "September 2026",
+      "cards": [
+        {
+          "title": "¿Quién será el sucesor de Messi en la selección Argentina?",
+          "titleEn": "Who will be Messi's successor in the Argentine national team?",
+          "articleUrl": "https://www.abc.es/deportes/futbol/sucesor-messi-seleccion-argentina-20261005010631-nt.html",
+          "titleMedia": "23-diez-argentina",
+          "gif": true,
+          "netlifyUrl": "https://narrativas-diezargentina.netlify.app"
+        },
+        {
+          "title": "Mongolia: los últimos hombres libres",
+          "titleEn": "Mongolia: the last free men",
+          "articleUrl": "https://www.abc.es/internacional/mongolia-ultimos-hombres-libres-20260927020051-nt.html",
+          "titleMedia": "22-mongolia",
+          "gif": false,
+          "netlifyUrl": "https://narrativas-mongolia.netlify.app"
+        },
+        {
+          "title": "Así captó Rusia a decenas de peruanos para la guerra de Ucrania",
+          "titleEn": "How Russia captured dozens of Peruvians for the war in Ukraine",
+          "articleUrl": "",
+          "titleMedia": "21-soldados-peruanos",
+          "gif": true,
+          "netlifyUrl": "https://narrativas-soldadosperuanos.netlify.app"
+        }
+      ]
+    },
+    {
+      "title": "Agosto 2026",
+      "titleEn": "August 2026",
+      "cards": [
+        {
+          "title": "El último viaje de un pastor trashumante",
+          "titleEn": "The last journey of a transhuming shepherd",
+          "articleUrl": "https://www.abc.es/sociedad/ultimo-viaje-pastor-trashumante-20260816014226-nt.html",
+          "titleMedia": "20-ultimo-viaje-pastor-trashumante",
+          "gif": false,
+          "netlifyUrl": "https://narrativas-transhumancia.netlify.app/"
+        }
+      ]
+    },
+    {
       "title": "Julio 2026",
       "cards": [
         {

@@ -18,6 +18,8 @@ export function initMonthsNav() {
   });
 
   let activeId = null;
+  let ignoreObserver = false;
+  let unlockTimer = null;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const scrollLinkIntoNav = (link) => {
@@ -33,6 +35,29 @@ export function initMonthsNav() {
       left: list.scrollLeft + offset,
       behavior: prefersReducedMotion ? 'auto' : 'smooth',
     });
+  };
+
+  const unlockObserver = () => {
+    ignoreObserver = false;
+    if (unlockTimer) {
+      clearTimeout(unlockTimer);
+      unlockTimer = null;
+    }
+    window.removeEventListener('scrollend', unlockObserver);
+  };
+
+  const lockObserverDuringNav = () => {
+    unlockObserver();
+    ignoreObserver = true;
+
+    if ('onscrollend' in window) {
+      window.addEventListener('scrollend', unlockObserver, { once: true });
+    }
+
+    unlockTimer = window.setTimeout(
+      unlockObserver,
+      prefersReducedMotion ? 100 : 1200
+    );
   };
 
   const setActive = (id, { scrollNav = true } = {}) => {
@@ -64,6 +89,10 @@ export function initMonthsNav() {
         entries.forEach((entry) => {
           visibility.set(entry.target.id, entry.intersectionRatio);
         });
+
+        if (ignoreObserver) {
+          return;
+        }
 
         let bestId = null;
         let bestRatio = 0;
@@ -104,10 +133,14 @@ export function initMonthsNav() {
 
       event.preventDefault();
       link.blur();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.replaceState(null, '', href);
+      lockObserverDuringNav();
       setActive(target.id, { scrollNav: false });
       scrollLinkIntoNav(link);
+      target.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start',
+      });
+      history.replaceState(null, '', href);
     });
   });
 }
