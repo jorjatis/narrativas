@@ -247,7 +247,7 @@ def detect_desk_bands(src: Path) -> tuple[float, float]:
 
 
 def detect_mov_names_h(src: Path) -> float:
-    """Hasta justo antes de la primera línea horizontal del timeline."""
+    """Solo nombres: corta antes de las fechas del eje (p. ej. 2017 Oct)."""
     tree = etree.parse(str(src))
     root = tree.getroot()
     line_ys = []
@@ -256,20 +256,30 @@ def detect_mov_names_h(src: Path) -> float:
         y2 = line.get("y2")
         if y1 and y2 and abs(float(y1) - float(y2)) < 0.5:
             y = float(y1)
-            if y < 400:
+            if 50 < y < 400:
                 line_ys.append(y)
-    if not line_ys:
-        return 145.0
-    first = min(line_ys)
-    # names terminan un poco antes del timeline; padding ~0
-    # usar el primer hueco: text baseline o valor redondo
-    text_ys = []
-    for t in root.xpath(".//svg:text", namespaces=NS):
-        text_ys.extend(element_y_hints(t))
-    if text_ys:
-        # incluir textos + margen hasta timeline
-        return round(first, 2)  # crop just at first timeline line
-    return round(first, 2)
+    first = min(line_ys) if line_ys else 180.0
+
+    name_ys: list[float] = []
+    date_ys: list[float] = []
+    for p in root.xpath(".//svg:path", namespaces=NS):
+        d = p.get("d") or ""
+        for m in re.finditer(r"[ML]\s*([-\d.]+)[ ,]+([-\d.]+)", d):
+            x, y = float(m.group(1)), float(m.group(2))
+            if y < 0 or y > first + 5:
+                continue
+            if x < 55:
+                date_ys.append(y)
+            elif x > 55:
+                name_ys.append(y)
+
+    names_bottom = max(name_ys) if name_ys else first - 30
+    dates_top = min(date_ys) if date_ys else first
+    if dates_top > names_bottom + 2:
+        crop = round((names_bottom + dates_top) / 2, 2)
+    else:
+        crop = round(names_bottom + 4, 2)
+    return min(crop, first)
 
 
 def print_cartela_ats(src: Path) -> None:

@@ -82,4 +82,20 @@
       transform: translate(-170px, -90px);
     }    
   }
+
+  &--10 {
+    max-width: 300px;
+
+    @media (min-width: 1120px) {
+      transform: translate(-170px, -90px);
+    }    
+  }
+
+  &--11 {
+    max-width: 300px;
+
+    @media (min-width: 1120px) {
+      transform: translate(-170px, -90px);
+    }    
+  }
 }

@@ -1,21 +1,5 @@
 @use "../base/variables" as *;
 
-.v-d--abc {
-  .v-c-cmp:has(.v-cmp-suh) {
-    margin-bottom: 24px;
-  }
-
-  .v-cmp-suh {
-    display: inline;
-    font-family: $mcs;
-    font-size: 24px;
-    line-height: 32px;
-    color: $cp1;
-    border-bottom: 1px solid $cb1;
-    padding-left: 32px;
-  }
-}
-
 .v-n-cmp-suh {
   display: flex;
   align-items: center;

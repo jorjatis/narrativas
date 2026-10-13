@@ -30,6 +30,19 @@ $chrono-offset-desk: 66px; // 58 + 8
       margin-left: auto;
       margin-right: auto;
     }
+
+    .v-n-chrono__cartela--01 {
+      .v-n-chrono__cartela-media {
+        img {
+          margin: 0 auto;
+          width: 299px;
+
+          @media (min-width: 871px) {
+            width: 671px;
+          }
+        }
+      }
+    }
   }
 
   &--profugos {
@@ -110,11 +123,11 @@ $chrono-offset-desk: 66px; // 58 + 8
   }
 
   &--detenidos .v-n-chrono__names-gap {
-    aspect-ratio: 308.81 / 178.05;
+    aspect-ratio: 304.54 / 153.06;
   }
 
   &--profugos .v-n-chrono__names-gap {
-    aspect-ratio: 308.91 / 194.2;
+    aspect-ratio: 314.35 / 169.47;
   }
 
   // Caras sticky (desktop): JS coloca top bajo los nombres y luego en 0
