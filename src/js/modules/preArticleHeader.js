@@ -5,7 +5,7 @@ const MQ_DESKTOP = `(min-width: 699px)`;
 const FACE_STAGGER = 0.16;
 const FACE_DURATION = 0.45;
 const LINE_DURATION = 0.7;
-const OF_END_Y = { mobile: -23, desktop: -26 };
+const OF_END_Y = { mobile: -20, desktop: -26 };
 const OF_START_Y = { mobile: 30, desktop: 60 };
 
 /**

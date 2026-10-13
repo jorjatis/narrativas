@@ -74,4 +74,12 @@
       transform: translate(-110px, 100px);
     }    
   }
+
+  &--09 {
+    max-width: 300px;
+
+    @media (min-width: 1120px) {
+      transform: translate(-170px, -90px);
+    }    
+  }
 }

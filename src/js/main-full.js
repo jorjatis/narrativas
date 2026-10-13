@@ -132,6 +132,8 @@ var MQ_CHRONO_DESK = "(min-width: 1250px)";
 function CARTELA_SCROLL_UNITS() {
   return window.matchMedia(MQ_CHRONO_DESK).matches ? 0.85 : 0.5;
 }
+/** Cuánto pesa la altura en la duración (0 = fija, 1 = ∝ recorrido). */
+var CARTELA_HEIGHT_BLEND = 0.3;
 
 function SCROLL_PX_PER_UNIT() {
   var vh = Math.max(window.innerHeight, 600);
@@ -324,8 +326,10 @@ function setupChrono(root) {
 
         var cartelaH = el.offsetHeight;
         var travelPx = viewportH + cartelaH;
+        var heightRatio = travelPx / Math.max(viewportH, 1);
         var duration =
-          CARTELA_SCROLL_UNITS() * (travelPx / Math.max(viewportH, 1));
+          CARTELA_SCROLL_UNITS() *
+          (1 - CARTELA_HEIGHT_BLEND + CARTELA_HEIGHT_BLEND * heightRatio);
         tl.set(el, { autoAlpha: 1 });
         tl.fromTo(el, { y: viewportH }, { y: -cartelaH, duration: duration });
         tl.set(el, { autoAlpha: 0 });
@@ -371,7 +375,7 @@ function setupChrono(root) {
   };
 
   var imgs = root.querySelectorAll(
-    ".v-n-chrono__graphic img, .v-n-chrono__heads img, .v-n-chrono__names-sticky img"
+    ".v-n-chrono__graphic img, .v-n-chrono__heads img, .v-n-chrono__names-sticky img, .v-n-chrono__cartela img"
   );
   waitForImages([].slice.call(imgs)).then(function () {
     if (!destroyed) build();
@@ -500,9 +504,11 @@ function refreshScrollTriggerOnMedia(root) {
     var el = e.target;
     if (!el || !el.tagName) return;
     var tag = el.tagName;
-    if (tag === "IMG" || tag === "VIDEO" || tag === "IFRAME" || tag === "SOURCE") {
-      refresh();
-    }
+    // Solo img/iframe: VIDEO/SOURCE + Brightcove disparan load al pinchar
+    // y un refresh recalcula pins de chrono → salto de scroll hacia arriba.
+    if (tag !== "IMG" && tag !== "IFRAME") return;
+    if (el.closest && el.closest(".video-player, .video-js, video-js")) return;
+    refresh();
   };
   root.addEventListener("load", onMediaEvent, true);
   root.addEventListener("loadedmetadata", onMediaEvent, true);

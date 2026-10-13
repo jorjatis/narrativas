@@ -3,8 +3,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const DEBOUNCE_MS = 120;
 
 /**
- * Recalcula ScrollTrigger cuando media lazy (img/video/iframe) cambia el layout.
+ * Recalcula ScrollTrigger cuando media lazy (img/iframe) cambia el layout.
  * Necesario en prod: el markup trae loading="lazy" y no se puede quitar.
+ *
+ * No reacciona a VIDEO/SOURCE ni a players Brightcove/video-js: al pinchar
+ * disparan loadedmetadata/loadeddata y un refresh recalcula los pins de
+ * cronología, provocando un salto de scroll hacia arriba.
  */
 export default function refreshScrollTriggerOnMedia(root = document) {
   let timer = null;
@@ -20,9 +24,14 @@ export default function refreshScrollTriggerOnMedia(root = document) {
     const el = e.target;
     if (!el || !el.tagName) return;
     const tag = el.tagName;
-    if (tag === "IMG" || tag === "VIDEO" || tag === "IFRAME" || tag === "SOURCE") {
-      refresh();
-    }
+
+    // Solo layout-relevant: imgs lazy e iframes. VIDEO/SOURCE no: el player
+    // ya reserva ratio (vjs-fluid) y los eventos se disparan al interactuar.
+    if (tag !== "IMG" && tag !== "IFRAME") return;
+
+    if (el.closest?.(".video-player, .video-js, video-js")) return;
+
+    refresh();
   };
 
   // capture: load no burbujea
