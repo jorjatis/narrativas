@@ -129,11 +129,8 @@ function preArticleHeader(root) {
 var SEGMENT_SCALE = 1;
 var MQ_CHRONO_DESK = "(min-width: 1250px)";
 
-function CARTELA_SCROLL_UNITS() {
-  return window.matchMedia(MQ_CHRONO_DESK).matches ? 0.85 : 0.5;
-}
-/** Cuánto pesa la altura en la duración (0 = fija, 1 = ∝ recorrido). */
-var CARTELA_HEIGHT_BLEND = 0.3;
+/** >1: la cartela va un poco más rápida que el gráfico, mismo ritmo de scroll. */
+var CARTELA_VS_GRAPHIC = 1.2;
 
 function SCROLL_PX_PER_UNIT() {
   var vh = Math.max(window.innerHeight, 600);
@@ -326,10 +323,10 @@ function setupChrono(root) {
 
         var cartelaH = el.offsetHeight;
         var travelPx = viewportH + cartelaH;
-        var heightRatio = travelPx / Math.max(viewportH, 1);
         var duration =
-          CARTELA_SCROLL_UNITS() *
-          (1 - CARTELA_HEIGHT_BLEND + CARTELA_HEIGHT_BLEND * heightRatio);
+          travel > 1
+            ? travelPx / (travel * CARTELA_VS_GRAPHIC)
+            : travelPx / Math.max(viewportH, 1);
         tl.set(el, { autoAlpha: 1 });
         tl.fromTo(el, { y: viewportH }, { y: -cartelaH, duration: duration });
         tl.set(el, { autoAlpha: 0 });

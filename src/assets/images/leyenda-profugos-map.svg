@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" id="Capa_2" data-name="Capa 2" viewBox="0 0 199.67 304">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fc3636;
+      }
+
+      .cls-2 {
+        fill: #ffb330;
+      }
+
+      .cls-3 {
+        stroke: #797979;
+        stroke-width: 1.4px;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        fill: none;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-4 {
+        stroke: #cce8ff;
+      }
+
+      .cls-4, .cls-5 {
+        stroke-width: 2px;
+      }
+
+      .cls-5 {
+        stroke: #66baff;
+      }
+    </style>
+  </defs>
+  <g id="Cronograma_PROFUGOS" data-name="Cronograma PROFUGOS">
+    <g>
+      <line class="cls-3" x1=".72" x2=".72" y2="299.06"/>
+      <line class="cls-3" x1="100.05" x2="100.05" y2="299.06"/>
+      <line class="cls-3" x1="166.26" y1="8.46" x2="166.26" y2="225.71"/>
+      <line class="cls-3" x1="198.97" y1="8.46" x2="198.97" y2="157.99"/>
+      <line class="cls-3" x1="133.15" x2="133.15" y2="112.85"/>
+      <line class="cls-3" x1="66.94" x2="66.94" y2="180.29"/>
+      <line class="cls-3" x1="33.96" x2="33.96" y2="299.06"/>
+      <rect class="cls-1" x="61" y="174.39" width="12" height="2"/>
+      <rect class="cls-2" x="187.41" y="202.61" width="12" height="2"/>
+      <rect class="cls-2" x="0" y="298.53" width="100.74" height="2"/>
+      <rect class="cls-2" x="127.24" y="292.89" width="12" height="2"/>
+      <rect class="cls-2" x="159.66" y="295.71" width="12" height="2"/>
+      <rect class="cls-1" x="132.6" y="174.39" width="34.38" height="2"/>
+    </g>
+  </g>
+</svg>

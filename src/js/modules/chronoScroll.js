@@ -8,16 +8,10 @@ gsap.registerPlugin(ScrollTrigger);
 const SEGMENT_SCALE = 1;
 const MQ_CHRONO_DESK = "(min-width: 1250px)";
 /**
- * Peso base de cada cartela en la timeline.
- * En mobile el SCROLL_PX es mayor (gráfico más lento); bajamos el peso para
- * que no se alargue tanto (~mismo scroll absoluto que desktop).
- * La duración final mezcla base + un poco de altura para que cartelas
- * cortas y largas se sientan a velocidades parecidas (no ∝ altura).
+ * La cartela recorre px al mismo ritmo que el gráfico (px de timeline por
+ * px de scroll). >1 la hace un poco más rápida para que el cambio no se note.
  */
-const CARTELA_SCROLL_UNITS = () =>
-  window.matchMedia(MQ_CHRONO_DESK).matches ? 0.85 : 0.5;
-/** Cuánto pesa la altura en la duración (0 = fija, 1 = ∝ recorrido). */
-const CARTELA_HEIGHT_BLEND = 0.3;
+const CARTELA_VS_GRAPHIC = 1.2;
 /**
  * Page-scroll pixels per timeline unit.
  * Desktop: ~4 viewports. Mobile (&lt;1250): ~6.5 viewports (gráfico más lento).
@@ -201,11 +195,11 @@ function setupChrono(root) {
 
         const cartelaH = el.offsetHeight;
         const travelPx = viewportH + cartelaH;
-        const heightRatio = travelPx / Math.max(viewportH, 1);
-        // Base dominante + ligera compensación por alto → ritmos cercanos
+        // Misma velocidad que el gráfico, un poco más rápida.
         const duration =
-          CARTELA_SCROLL_UNITS() *
-          (1 - CARTELA_HEIGHT_BLEND + CARTELA_HEIGHT_BLEND * heightRatio);
+          travel > 1
+            ? travelPx / (travel * CARTELA_VS_GRAPHIC)
+            : travelPx / Math.max(viewportH, 1);
         tl.set(el, { autoAlpha: 1 });
         tl.fromTo(el, { y: viewportH }, { y: -cartelaH, duration });
         tl.set(el, { autoAlpha: 0 });
