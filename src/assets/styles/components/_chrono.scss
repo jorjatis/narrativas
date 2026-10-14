@@ -35,7 +35,11 @@ $chrono-offset-desk: 66px; // 58 + 8
       .v-n-chrono__cartela-media {
         img {
           margin: 0 auto;
-          width: 299px;
+          width: 100%;
+
+          @media (min-width: 360px) {
+            width: 299px;
+          }
 
           @media (min-width: 871px) {
             width: 671px;
@@ -232,6 +236,7 @@ $chrono-offset-desk: 66px; // 58 + 8
 
       &:before {
         content: "";
+        flex: 0 0 auto;
         display: block;
         width: 10px;
         height: 10px;

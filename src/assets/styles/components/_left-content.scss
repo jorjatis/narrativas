@@ -87,15 +87,15 @@
     max-width: 300px;
 
     @media (min-width: 1120px) {
-      transform: translate(-170px, -90px);
+      transform: translate(-180px, 50px);
     }    
   }
 
   &--11 {
-    max-width: 300px;
+    max-width: 120px;    
 
     @media (min-width: 1120px) {
-      transform: translate(-170px, -90px);
+      transform: translate(-50px, -90px);
     }    
   }
 }
