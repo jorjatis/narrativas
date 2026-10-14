@@ -1,18 +1,11 @@
 // NOTE: Helpers
-import fadeOnScroll from "./helpers/fadeOnScroll";
-import refreshScrollTriggerOnMedia from "./helpers/refreshScrollTriggerOnMedia.js";
+import removeEls from "./helpers/removeEls";
 
 // NOTE: Modules
-import preArticleHeader from "./modules/preArticleHeader.js";
-import chronoScroll from "./modules/chronoScroll.js";
-import videoAutoplayInView from "./modules/videoAutoplayInView.js";
 
 export function initAll() {
-  fadeOnScroll(".scr-ind");
-  preArticleHeader();
-  chronoScroll();
-  videoAutoplayInView();
-  refreshScrollTriggerOnMedia();
+  removeEls(".v-a--d-s-1 .v-a-inf-c .v-a-t");
+  removeEls(".v-a--d-s-1 .v-a-inf-c .v-i");
 }
 
 // NOTE: Para prod el evento load de window se borra, dejamos solo:

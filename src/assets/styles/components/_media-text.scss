@@ -1,0 +1,92 @@
+@use "../base/variables" as *;
+
+.v-n-media-txt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100vw;
+  margin-top: 50px;
+  margin-bottom: 80px;
+  margin-left: -50vw;
+  left: 50%;
+  position: relative;
+
+  @media (min-width: $screen-xs) {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+
+  @media (min-width: 1500px) {
+    max-width: 1500px;
+    margin-left: calc(-1500px / 2 + 50%);
+    left: unset;
+  }
+
+  > * {
+    flex: 1 0 0;
+  }
+
+  &__inf-c {
+    padding: 0 20px;
+
+    @media (min-width: $screen-xs) {
+      padding-left: 60px;
+      padding-right: 20px;
+    }
+
+    @media (min-width: $screen-ms) {
+      padding-left: 80px;
+    }
+
+    @media (min-width: $screen-sm) {
+      padding-left: 120px;
+    }
+  }
+
+  &__c {
+    max-width: 380px;
+    width: 100%;
+  }
+
+  &__author {
+    display: block;
+    font-family: $mcs;
+    font-size: 16px;
+    line-height: 18px;
+    color: $cb1;
+  }
+
+  &__cargo {
+    display: block;
+    margin-bottom: 24px;
+    font-family: $mcr;
+    font-size: 16px;
+    line-height: 18px;
+    color: $cb1;
+  }
+
+  &__p {
+    display: inline;
+    font-family: $atl;
+    font-size: 18px;
+    line-height: 150%;
+    color: #767676;
+    border-bottom: 1px solid #767676;
+
+    @media (min-width: $screen-xs) {
+      font-size: 20px;
+    }
+
+    @media (min-width: $screen-ms) {
+      font-size: 24px;
+    }
+
+    @media (min-width: $screen-sm) {
+      font-size: 28px;
+    }
+  }
+}

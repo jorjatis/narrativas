@@ -6,14 +6,9 @@
 @use './base/global';
 
 // // Kraken componentes
+@use './kraken-components/ladillo';
 
 // // Componentes
 @use './components/pre-article-header';
 @use './components/scroll-indicator';
-@use './components/left-content';
-@use './components/ladillo';
-@use './components/chrono';
-
-.v-a--cmp-m {
-  margin: 72px 0;
-}
+@use './components/media-text';
