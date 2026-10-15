@@ -117,12 +117,13 @@ function setupChrono(root) {
       return;
     }
 
-    // Desktop: caras bajo los nombres, luego se quedan en top: 0
+    // Desktop: las caras siguen el hueco .faces-gap y luego pinan en top: 0
     if (!heads || !heads.offsetParent) return;
-    const names = graphic.querySelector(".v-n-chrono__names");
-    const namesH = names ? names.offsetHeight : 0;
-    const gy = Number(gsap.getProperty(graphic, "y")) || 0;
-    gsap.set(heads, { top: Math.max(0, namesH + gy) });
+    const gap = graphic.querySelector(".v-n-chrono__faces-gap");
+    if (!gap) return;
+    const viewportRect = viewport.getBoundingClientRect();
+    const gapRect = gap.getBoundingClientRect();
+    gsap.set(heads, { top: Math.max(0, gapRect.top - viewportRect.top) });
   };
 
   const updateLegend = (graphic) => {

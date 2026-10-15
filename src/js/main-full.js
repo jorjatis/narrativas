@@ -239,11 +239,13 @@ function setupChrono(root) {
       return;
     }
 
+    // Desktop: caras alineadas con .faces-gap; al subir, pinan en top: 0
     if (!heads || !heads.offsetParent) return;
-    var names = graphic.querySelector(".v-n-chrono__names");
-    var namesH = names ? names.offsetHeight : 0;
-    var gy = Number(gsap.getProperty(graphic, "y")) || 0;
-    gsap.set(heads, { top: Math.max(0, namesH + gy) });
+    var gap = graphic.querySelector(".v-n-chrono__faces-gap");
+    if (!gap) return;
+    var viewportRect = viewport.getBoundingClientRect();
+    var gapRect = gap.getBoundingClientRect();
+    gsap.set(heads, { top: Math.max(0, gapRect.top - viewportRect.top) });
   };
 
   var updateLegend = function (graphic) {

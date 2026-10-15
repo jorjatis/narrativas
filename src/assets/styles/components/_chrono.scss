@@ -26,32 +26,15 @@ $chrono-offset-desk: 66px; // 58 + 8
 
   &--detenidos {
     @media (min-width: $chrono-desk) {
-      width: 730px;
+      width: 749px;
       margin-left: auto;
       margin-right: auto;
-    }
-
-    .v-n-chrono__cartela--01 {
-      .v-n-chrono__cartela-media {
-        img {
-          margin: 0 auto;
-          width: 100%;
-
-          @media (min-width: 360px) {
-            width: 299px;
-          }
-
-          @media (min-width: 871px) {
-            width: 671px;
-          }
-        }
-      }
     }
   }
 
   &--profugos {
     @media (min-width: $chrono-desk) {
-      width: 486px;
+      width: 492px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -82,7 +65,8 @@ $chrono-offset-desk: 66px; // 58 + 8
     width: 100%;
     will-change: transform;
 
-    img {
+    img,
+    svg {
       display: block;
       width: 100%;
       height: auto;
@@ -110,28 +94,35 @@ $chrono-offset-desk: 66px; // 58 + 8
   &__body {
     display: block;
     width: 100%;
+    max-width: 100%;
     height: auto;
   }
 
   &__faces-gap,
   &__names-gap {
     width: 100%;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   }
 
   &--detenidos .v-n-chrono__faces-gap {
-    aspect-ratio: 738.76 / 52;
+    aspect-ratio: 749.054 / 52;
   }
 
   &--profugos .v-n-chrono__faces-gap {
-    aspect-ratio: 485.54 / 52;
+    aspect-ratio: 492.202 / 52;
   }
 
   &--detenidos .v-n-chrono__names-gap {
-    aspect-ratio: 304.54 / 115.53;
+    aspect-ratio: 333.757 / 154.16;
   }
 
   &--profugos .v-n-chrono__names-gap {
-    aspect-ratio: 314.35 / 129.26;
+    aspect-ratio: 326.112 / 134.74;
   }
 
   // Caras sticky (desktop): JS coloca top bajo los nombres y luego en 0
@@ -145,7 +136,8 @@ $chrono-offset-desk: 66px; // 58 + 8
     pointer-events: none;
     z-index: 3;
 
-    img {
+    img,
+    svg {
       display: block;
       width: 100%;
       height: auto;
@@ -154,6 +146,17 @@ $chrono-offset-desk: 66px; // 58 + 8
     @media (min-width: $chrono-desk) {
       display: block;
     }
+  }
+
+  // Evita que un SVG de caras con height erróneo (~6796) tape el body
+  &--detenidos .v-n-chrono__heads img,
+  &--detenidos .v-n-chrono__heads svg {
+    aspect-ratio: 749.054 / 52;
+  }
+
+  &--profugos .v-n-chrono__heads img,
+  &--profugos .v-n-chrono__heads svg {
+    aspect-ratio: 492.202 / 52;
   }
 
   // Nombres sticky (mobile): fijos arriba mientras scrollea el body
@@ -167,7 +170,8 @@ $chrono-offset-desk: 66px; // 58 + 8
     pointer-events: none;
     z-index: 3;
 
-    img {
+    img,
+    svg {
       display: block;
       width: 100%;
       height: auto;

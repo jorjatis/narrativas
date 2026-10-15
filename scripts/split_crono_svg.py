@@ -162,6 +162,11 @@ def write_svg(root, out: Path, viewbox: str) -> None:
     root = copy.deepcopy(root)
     hide_cartela_markers(root)
     root.set("viewBox", viewbox)
+    # width/height deben coincidir con el viewBox: si no, <img> usa el
+    # alto original (~6796px) y la cabecera sticky tapa todo el crono.
+    parts = [float(x) for x in viewbox.replace(",", " ").split()]
+    root.set("width", f"{parts[2]:g}")
+    root.set("height", f"{parts[3]:g}")
     out.write_bytes(
         etree.tostring(
             root,
@@ -185,7 +190,7 @@ def split_desk(src: Path, prefix: str, names_h: float, faces_h: float) -> None:
     # names
     names_root = copy.deepcopy(root)
     strip_images_and_face_clips(names_root)
-    write_svg(names_root, out_dir / f"{prefix}-names.svg", f"0 0 {w} {names_h}")
+    write_svg(names_root, out_dir / f"{prefix}-names.svg", f"0 0 {w:.3f} {names_h:.2f}")
 
     # faces
     faces_root = copy.deepcopy(root)
@@ -193,14 +198,16 @@ def split_desk(src: Path, prefix: str, names_h: float, faces_h: float) -> None:
     write_svg(
         faces_root,
         out_dir / f"{prefix}-faces.svg",
-        f"0 {names_h} {w} {faces_h}",
+        f"0 {names_h:.2f} {w:.3f} {faces_h:.2f}",
     )
 
     # body
     body_root = copy.deepcopy(root)
     strip_images_and_face_clips(body_root)
     write_svg(
-        body_root, out_dir / f"{prefix}-body.svg", f"0 {face_end} {w} {body_h}"
+        body_root,
+        out_dir / f"{prefix}-body.svg",
+        f"0 {face_end:.2f} {w:.3f} {body_h:.2f}",
     )
 
 
@@ -213,11 +220,17 @@ def split_mov(src: Path, prefix: str, names_h: float) -> None:
     out_dir = src.parent
 
     names_root = copy.deepcopy(root)
-    write_svg(names_root, out_dir / f"{prefix}-mov-names.svg", f"0 0 {w} {names_h}")
+    write_svg(
+        names_root,
+        out_dir / f"{prefix}-mov-names.svg",
+        f"0 0 {w:.3f} {names_h:.2f}",
+    )
 
     body_root = copy.deepcopy(root)
     write_svg(
-        body_root, out_dir / f"{prefix}-mov-body.svg", f"0 {names_h} {w} {body_h}"
+        body_root,
+        out_dir / f"{prefix}-mov-body.svg",
+        f"0 {names_h:.2f} {w:.3f} {body_h:.2f}",
     )
 
 
@@ -246,12 +259,23 @@ def detect_desk_bands(src: Path) -> tuple[float, float]:
     return names_h, faces_h
 
 
+def text_translate(el) -> tuple[float, float] | None:
+    tr = el.get("transform") or ""
+    m = re.search(r"translate\(\s*([-\d.]+)[ ,]+([-\d.]+)\s*\)", tr)
+    if not m:
+        return None
+    return float(m.group(1)), float(m.group(2))
+
+
 def detect_mov_names_h(src: Path) -> float:
     """Solo nombres: corta antes de las fechas del eje (p. ej. 2017 Oct)."""
     tree = etree.parse(str(src))
     root = tree.getroot()
     line_ys = []
     for line in root.xpath(".//svg:line", namespaces=NS):
+        lid = line.get("id") or ""
+        if "cartela" in lid:
+            continue
         y1 = line.get("y1")
         y2 = line.get("y2")
         if y1 and y2 and abs(float(y1) - float(y2)) < 0.5:
@@ -260,18 +284,21 @@ def detect_mov_names_h(src: Path) -> float:
                 line_ys.append(y)
     first = min(line_ys) if line_ys else 180.0
 
+    # Nombres en vertical: la baseline del rotate(-90) es el borde inferior.
     name_ys: list[float] = []
     date_ys: list[float] = []
-    for p in root.xpath(".//svg:path", namespaces=NS):
-        d = p.get("d") or ""
-        for m in re.finditer(r"[ML]\s*([-\d.]+)[ ,]+([-\d.]+)", d):
-            x, y = float(m.group(1)), float(m.group(2))
-            if y < 0 or y > first + 5:
-                continue
-            if x < 55:
-                date_ys.append(y)
-            elif x > 55:
-                name_ys.append(y)
+    for text in root.xpath(".//svg:text", namespaces=NS):
+        pos = text_translate(text)
+        if pos is None:
+            continue
+        x, y = pos
+        if y < 0 or y > first + 5:
+            continue
+        rotated = "rotate" in (text.get("transform") or "")
+        if rotated and y < 250:
+            name_ys.append(y)
+        elif (not rotated) and x < 80:
+            date_ys.append(y)
 
     names_bottom = max(name_ys) if name_ys else first - 30
     dates_top = min(date_ys) if date_ys else first
@@ -306,9 +333,7 @@ def main() -> None:
 
     d_names, d_faces = detect_desk_bands(img / "crono-detenidos-desk.svg")
     print(f"detenidos desk bands: names_h={d_names}, faces_h={d_faces}")
-    if abs(d_names - 130) < 1:
-        d_names = 130.0
-    if abs(d_faces - 52) < 6:
+    if abs(d_faces - 52) < 8:
         d_faces = 52.0
     print_cartela_ats(img / "crono-detenidos-desk.svg")
     split_desk(img / "crono-detenidos-desk.svg", "crono-detenidos", d_names, d_faces)
