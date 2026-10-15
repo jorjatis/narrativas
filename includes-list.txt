@@ -14,6 +14,7 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostras
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-chrono-detenidos.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-chrono-profugos.html
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-video-colas.html
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-graf-penas.html
 
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/cerdan-en-bruselas.webp
 https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/images/crono-detenidos-body.svg
@@ -74,3 +75,4 @@ https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/06/beneficiadostras
 <!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-chrono-profugos.html" -->
 <!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-chrono-detenidos.html" -->
 <!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-video-colas.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/06/beneficiadostrasel1O/includes/inc-graf-penas.html" -->

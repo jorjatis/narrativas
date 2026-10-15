@@ -20,6 +20,8 @@ ITEMS = [
     ("leyenda-detenidos-key.svg", "leyenda-detenidos-key", "ld-key", "v-n-chrono__legend-img"),
     ("leyenda-profugos-map.svg", "leyenda-profugos-map", "lp-map", "v-n-chrono__legend-img"),
     ("leyenda-profugos-key.svg", "leyenda-profugos-key", "lp-key", "v-n-chrono__legend-img"),
+    ("graf-penas-desk.svg", "graf-penas-desk", "gp-desk", "v-n-graf-penas__svg"),
+    ("graf-penas-mov.svg", "graf-penas-mov", "gp-mov", "v-n-graf-penas__svg"),
 ]
 
 

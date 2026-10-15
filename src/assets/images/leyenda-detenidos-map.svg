@@ -6,32 +6,32 @@
         stroke: #797979;
       }
 
-      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
         stroke-miterlimit: 10;
       }
 
-      .cls-1, .cls-2, .cls-4, .cls-5 {
+      .cls-1, .cls-2, .cls-4, .cls-5, .cls-6 {
         fill: none;
       }
 
-      .cls-6 {
+      .cls-7 {
         font-family: 'Micrograph Regular', sans-serif;
         font-size: 16px;
       }
 
-      .cls-2 {
-        stroke: #e7ebf1;
+      .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-width: 2px;
       }
 
-      .cls-2, .cls-3, .cls-4, .cls-5 {
-        stroke-width: 2px;
+      .cls-2, .cls-5 {
+        stroke: #e7ebf1;
       }
 
       .cls-3 {
         stroke: #cce8ff;
       }
 
-      .cls-3, .cls-7 {
+      .cls-3, .cls-8 {
         fill: #ffb330;
       }
 
@@ -40,6 +40,10 @@
       }
 
       .cls-5 {
+        stroke-dasharray: 2.127 3.19;
+      }
+
+      .cls-6 {
         stroke: #cfd8e2;
       }
     </style>
@@ -63,7 +67,7 @@
       <line class="cls-1" x1="18.795" y1="81.818" x2="18.795" y2="114.545"/>
       <line class="cls-1" x1="18.795" y1="43.636" x2="18.795" y2="80"/>
       <line class="cls-1" x1="18.795" x2="18.795" y2="43.636"/>
-      <rect class="cls-7" x=".005" y="114.543" width="19.291" height="2"/>
+      <rect class="cls-8" x=".005" y="114.543" width="19.291" height="2"/>
       <line class="cls-1" x1="37.081" y1="198.182" x2="37.081" y2="300"/>
       <line class="cls-1" x1="37.081" y1="81.818" x2="37.081" y2="196.364"/>
       <line class="cls-1" x1="37.081" y1="43.636" x2="37.081" y2="80"/>
@@ -87,7 +91,7 @@
       <line class="cls-1" x1="183.365" y1="1.818" x2="183.365" y2="3.636"/>
       <g>
         <line class="cls-1" x1="201.65" y1="49.091" x2="201.65" y2="80"/>
-        <rect class="cls-7" x="164.589" y="80" width="37.561" height="2"/>
+        <rect class="cls-8" x="164.589" y="80" width="37.561" height="2"/>
       </g>
       <line class="cls-1" x1="201.65" y1="1.818" x2="201.65" y2="3.636"/>
       <line class="cls-1" x1="146.794" y1="116.364" x2="146.794" y2="278.182"/>
@@ -95,9 +99,9 @@
       <line class="cls-1" x1="146.794" y1="43.636" x2="146.794" y2="80"/>
       <line class="cls-1" x1="146.794" y1="7.273" x2="146.794" y2="43.636"/>
       <line class="cls-1" x1="146.794" y1="1.818" x2="146.794" y2="3.636"/>
-      <rect class="cls-7" y="80" width="147.333" height="2"/>
-      <rect class="cls-7" x="109.72" y="114.545" width="37.575" height="2"/>
-      <polygon class="cls-7" points="92.431 196.426 92.431 198.208 36.587 198.182 36.587 196.364 92.431 196.426"/>
+      <rect class="cls-8" x="0" y="80" width="147.333" height="2"/>
+      <rect class="cls-8" x="109.72" y="114.545" width="37.575" height="2"/>
+      <polygon class="cls-8" points="92.431 196.426 92.431 198.208 36.587 198.182 36.587 196.364 92.431 196.426"/>
     </g>
   </g>
 </svg>
