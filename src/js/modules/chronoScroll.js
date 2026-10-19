@@ -4,6 +4,10 @@ import { prefersReducedMotion } from "../helpers/prefersReducedMotion.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// iOS: al mostrar/ocultar la barra de URL cambia innerHeight y un refresh
+// de pins salta el scroll hacia el chrono. Ignorar ese resize de altura.
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 /** Relative timeline weight for full graphic travel (0 → 1). */
 const SEGMENT_SCALE = 1;
 const MQ_CHRONO_DESK = "(min-width: 1250px)";
@@ -94,7 +98,6 @@ function setupChrono(root) {
         gap.style.aspectRatio = "auto";
         gap.style.height = `${h}px`;
       }
-      gsap.set(namesSticky, { top: 0 });
       return;
     }
 
@@ -111,11 +114,8 @@ function setupChrono(root) {
   const updateHeads = (graphic) => {
     const isDesk = window.matchMedia(MQ_CHRONO_DESK).matches;
 
-    // Mobile: nombres siempre sticky arriba
-    if (!isDesk && namesSticky?.offsetParent) {
-      gsap.set(namesSticky, { top: 0 });
-      return;
-    }
+    // Mobile: nombres fijos por CSS (top:0); no tocarlos en scrub (rebote en iOS)
+    if (!isDesk) return;
 
     // Desktop: las caras siguen el hueco .faces-gap y luego pinan en top: 0
     if (!heads || !heads.offsetParent) return;
@@ -224,6 +224,8 @@ function setupChrono(root) {
         end: () =>
           `+=${Math.max(tl.duration() * SCROLL_PX_PER_UNIT(), viewportH)}`,
         pin: true,
+        // fixed: en móvil, pinType "transform" hacía rebotar los nombres sticky
+        pinType: "fixed",
         scrub: true,
         animation: tl,
         anticipatePin: 1,
@@ -243,9 +245,15 @@ function setupChrono(root) {
     if (!destroyed) build();
   });
 
+  // Solo reconstruir si cambia el ancho (o el breakpoint desk/mov).
+  // En iOS el alto cambia al hacer scroll por la barra del navegador.
+  let lastLayoutKey = `${window.innerWidth}|${window.matchMedia(MQ_CHRONO_DESK).matches}`;
   const onResize = () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
+      const key = `${window.innerWidth}|${window.matchMedia(MQ_CHRONO_DESK).matches}`;
+      if (key === lastLayoutKey) return;
+      lastLayoutKey = key;
       waitForImages([...imgs]).then(() => {
         if (!destroyed) build();
       });

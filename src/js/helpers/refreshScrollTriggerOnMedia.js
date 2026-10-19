@@ -12,13 +12,32 @@ const DEBOUNCE_MS = 120;
  */
 export default function refreshScrollTriggerOnMedia(root = document) {
   let timer = null;
+  let pending = false;
+
+  const doRefresh = () => {
+    pending = false;
+    ScrollTrigger.refresh();
+  };
 
   const refresh = () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      ScrollTrigger.refresh();
+      // Si el usuario está scrolleando (p. ej. dentro de un pin), esperar
+      // al final para no saltar hacia el chrono en iOS.
+      if (ScrollTrigger.isScrolling()) {
+        pending = true;
+        return;
+      }
+      doRefresh();
     }, DEBOUNCE_MS);
   };
+
+  const onScrollEnd = () => {
+    if (!pending) return;
+    clearTimeout(timer);
+    timer = setTimeout(doRefresh, DEBOUNCE_MS);
+  };
+  ScrollTrigger.addEventListener("scrollEnd", onScrollEnd);
 
   const onMediaEvent = (e) => {
     const el = e.target;
@@ -46,6 +65,8 @@ export default function refreshScrollTriggerOnMedia(root = document) {
 
   return () => {
     clearTimeout(timer);
+    pending = false;
+    ScrollTrigger.removeEventListener("scrollEnd", onScrollEnd);
     root.removeEventListener("load", onMediaEvent, true);
     root.removeEventListener("loadedmetadata", onMediaEvent, true);
     root.removeEventListener("loadeddata", onMediaEvent, true);

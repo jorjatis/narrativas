@@ -150,6 +150,10 @@ body {
   width: 100%;
   height: auto;
   margin: 90px 0;
+
+  @media (min-width: 1120px) {
+    transform: translateX(225px);
+  }
 }
 
 .v-c-cmp:has(.v-n-video-autoplay) {

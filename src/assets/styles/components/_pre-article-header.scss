@@ -22,13 +22,14 @@ body {
 
     .v-a-inf-c {
       justify-content: flex-start;
+      padding-bottom: 60px;
 
       .v-a-t {
         display: none;
       }
 
       .v-a-s-t {
-        max-width: 609px;
+        max-width: 500px;
         width: 100%;
         margin: 0 auto;
         font-size: 20px;
@@ -41,7 +42,6 @@ body {
           line-height: 26px;
         }
 
-        &::before,
         &::after {
           content: "";
           display: block;
@@ -74,14 +74,6 @@ body {
           transform-origin: left center;
         }
 
-        &::before {
-          margin-bottom: 25px;
-
-          @media (min-width: $screen-xs) {
-            margin-bottom: 55px;
-          }
-        }
-
         &::after {
           margin-top: 25px;
 
@@ -99,20 +91,24 @@ body {
       margin-bottom: 8px;
 
       @media (min-width: $screen-xs) {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
         margin-top: 56px;
-        margin-bottom: 90px;
+        margin-bottom: 20px;
       }
 
       .v-a-preh-img {
         display: grid;
         max-width: 330px;
         width: 100%;
-        margin: 52px auto 0;
+        margin: 24px auto 0;
         opacity: 0;
 
         @media (min-width: $screen-xs) {
-          margin: 0 auto;
+          flex: 1 1 0;
+          max-width: 750px;
+          margin: 0;
         }
 
         > img {
@@ -132,7 +128,13 @@ body {
         margin: 0 auto;
 
         @media (min-width: $screen-xs) {
+          flex: 1 1 0;
           max-width: 390px;
+        }
+
+        @media (min-width: 900px) {
+          margin: 60px 0 0;
+          margin-left: -60px;
         }
 
         &__c {
@@ -164,8 +166,13 @@ body {
         margin-left: 60px;
 
         @media (min-width: $screen-xs) {
-          font-size: 42px;
+          font-size: 34px;
           letter-spacing: -.8px;
+          margin-left: 65px;
+        }
+
+        @media (min-width: 900px) {
+          font-size: 42px;
           margin-left: 85px;
         }
       }
@@ -179,8 +186,12 @@ body {
         text-transform: uppercase;
 
         @media (min-width: $screen-xs) {
-          font-size: 42px;
+          font-size: 34px;
           letter-spacing: -.84px;
+        }
+
+        @media (min-width: 900px) {
+          font-size: 42px;
         }
       }
 
@@ -195,8 +206,12 @@ body {
 
         @media (min-width: $screen-xs) {
           margin-top: -9px;
-          font-size: 105px;
+          font-size: 88px;
           letter-spacing: -2.1px;
+        }
+
+        @media (min-width: 900px) {
+          font-size: 105px;
         }
       }
 
@@ -267,10 +282,21 @@ body {
         margin-top: 4px;
 
         @media (min-width: $screen-xs) {
-          font-size: 32px;
+          font-size: 24px;
           max-width: 320px;
           margin-left: 65px;
           margin-top: 8px;
+        }
+
+        @media (min-width: 900px) {
+          font-size: 32px;
+        }
+      }
+
+      // En fila, el indicador no debe ocupar una tercera columna
+      .scr-ind {
+        @media (min-width: $screen-xs) {
+          flex: 1 0 100%;
         }
       }
     }

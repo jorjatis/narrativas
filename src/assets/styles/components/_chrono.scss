@@ -169,6 +169,9 @@ $chrono-offset-desk: 66px; // 58 + 8
     background: $cb2;
     pointer-events: none;
     z-index: 3;
+    // Capa propia: evita micro-rebotes al scrubear el graphic en iOS
+    transform: translateZ(0);
+    backface-visibility: hidden;
 
     img,
     svg {

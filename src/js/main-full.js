@@ -1,5 +1,9 @@
 gsap.registerPlugin(ScrollTrigger);
 
+// iOS: al mostrar/ocultar la barra de URL cambia innerHeight y un refresh
+// de pins salta el scroll hacia el chrono. Ignorar ese resize de altura.
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -217,7 +221,6 @@ function setupChrono(root) {
         gap.style.aspectRatio = "auto";
         gap.style.height = h + "px";
       }
-      gsap.set(namesSticky, { top: 0 });
       return;
     }
 
@@ -234,10 +237,8 @@ function setupChrono(root) {
   var updateHeads = function (graphic) {
     var isDesk = window.matchMedia(MQ_CHRONO_DESK).matches;
 
-    if (!isDesk && namesSticky && namesSticky.offsetParent) {
-      gsap.set(namesSticky, { top: 0 });
-      return;
-    }
+    // Mobile: nombres fijos por CSS (top:0); no tocarlos en scrub (rebote en iOS)
+    if (!isDesk) return;
 
     // Desktop: caras alineadas con .faces-gap; al subir, pinan en top: 0
     if (!heads || !heads.offsetParent) return;
@@ -357,6 +358,8 @@ function setupChrono(root) {
           return "+=" + Math.max(tl.duration() * SCROLL_PX_PER_UNIT(), viewportH);
         },
         pin: true,
+        // fixed: en móvil, pinType "transform" hacía rebotar los nombres sticky
+        pinType: "fixed",
         scrub: true,
         animation: tl,
         anticipatePin: 1,
@@ -380,9 +383,17 @@ function setupChrono(root) {
     if (!destroyed) build();
   });
 
+  // Solo reconstruir si cambia el ancho (o el breakpoint desk/mov).
+  // En iOS el alto cambia al hacer scroll por la barra del navegador.
+  var lastLayoutKey =
+    window.innerWidth + "|" + window.matchMedia(MQ_CHRONO_DESK).matches;
   var onResize = function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
+      var key =
+        window.innerWidth + "|" + window.matchMedia(MQ_CHRONO_DESK).matches;
+      if (key === lastLayoutKey) return;
+      lastLayoutKey = key;
       waitForImages([].slice.call(imgs)).then(function () {
         if (!destroyed) build();
       });
@@ -493,12 +504,29 @@ function videoAutoplayInView(root) {
 function refreshScrollTriggerOnMedia(root) {
   root = root || document;
   var timer = null;
+  var pending = false;
+  var doRefresh = function () {
+    pending = false;
+    ScrollTrigger.refresh();
+  };
   var refresh = function () {
     clearTimeout(timer);
     timer = setTimeout(function () {
-      ScrollTrigger.refresh();
+      // Si el usuario está scrolleando (p. ej. dentro de un pin), esperar
+      // al final para no saltar hacia el chrono en iOS.
+      if (ScrollTrigger.isScrolling()) {
+        pending = true;
+        return;
+      }
+      doRefresh();
     }, 120);
   };
+  var onScrollEnd = function () {
+    if (!pending) return;
+    clearTimeout(timer);
+    timer = setTimeout(doRefresh, 120);
+  };
+  ScrollTrigger.addEventListener("scrollEnd", onScrollEnd);
   var onMediaEvent = function (e) {
     var el = e.target;
     if (!el || !el.tagName) return;
