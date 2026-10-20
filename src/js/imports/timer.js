@@ -1,183 +1,169 @@
-export default function initClockBox() {
+const DIGIT_HEIGHT = 24;
+const INITIAL_TIME = "00:00";
 
-  const gsap = window.gsap;
-  const ScrollTrigger = window.ScrollTrigger;
+export default function initClockBox() {
+  const { gsap, ScrollTrigger } = window;
 
   if (!gsap || !ScrollTrigger) return;
 
-  const isMobile = window.innerWidth < 1025;
+  ScrollTrigger.matchMedia({
+    "(min-width: 1025px)": initDesktopTimers,
+    "(max-width: 1024px)": initMobileTimer
+  });
+}
 
-  const allTimers = document.querySelectorAll('.timer');
-  if (!allTimers.length) return;
+function initDesktopTimers() {
+  const { gsap } = window;
+  const timers = document.querySelectorAll(".timer.is-desktop");
 
-  /*
-  ==========================================================
-  DESKTOP TIMERS (lo que ya tenías)
-  ==========================================================
-  */
+  timers.forEach((timer) => {
+    if (timer.dataset.timerInit) return;
+    timer.dataset.timerInit = "true";
 
-  if (isMobile) {
+    const startTime = timer.getAttribute("data-time-start");
+    const endTime = timer.getAttribute("data-time-spin");
+    const frontFace = timer.querySelector(".timer-front");
 
-    const mobileTimer = document.querySelector('.timer.is-mobile');
-    const desktopTimers = Array.from(document.querySelectorAll('.timer.is-desktop'));
+    if (!startTime || !endTime || !frontFace) return;
 
-    if (!mobileTimer || !desktopTimers.length) return;
-
-    let currentTime = "00:00";
-    mobileTimer.dataset.current = currentTime;
-
-    // Ordenamos por posición vertical (importante)
-    desktopTimers.sort((a, b) =>
-      a.getBoundingClientRect().top - b.getBoundingClientRect().top
-    );
-
-    const firstTimer = desktopTimers[0];
-
-    // 👇 RESET cuando estamos por encima del primero
-    ScrollTrigger.create({
-      trigger: firstTimer,
-      start: "top center",
-      onLeaveBack: () => {
-        updateMobileTimer("00:00");
+    const columns = renderTimerFace(frontFace, startTime, endTime);
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: timer,
+        start: "top 70%",
+        toggleActions: "play none none none",
+        once: true
       }
     });
 
-    // 👇 Cambios normales al entrar en cada bloque
-    desktopTimers.forEach(timer => {
-
-      const targetTime = timer.getAttribute('data-time-spin');
-      if (!targetTime) return;
-
-      ScrollTrigger.create({
-        trigger: timer,
-        start: "top center",
-        onEnter: () => updateMobileTimer(targetTime),
-        onEnterBack: () => updateMobileTimer(targetTime)
-      });
-
-    });
-
-    function updateMobileTimer(newTime) {
-
-      if (newTime === currentTime) return;
-
-      animateToTime(mobileTimer, currentTime, newTime);
-      currentTime = newTime;
-      mobileTimer.dataset.current = newTime;
-    }
-
-  }
-
-  /*
-  ==========================================================
-  MOBILE STICKY TIMER
-  ==========================================================
-  */
-
-  if (isMobile) {
-
-    const mobileTimer = document.querySelector('.timer.is-mobile');
-    const desktopTimers = document.querySelectorAll('.timer.is-desktop');
-
-    if (!mobileTimer || !desktopTimers.length) return;
-
-    let currentTime = "00:00";
-    mobileTimer.dataset.current = currentTime;
-
-    desktopTimers.forEach(timer => {
-
-      const targetTime = timer.getAttribute('data-time-spin');
-      if (!targetTime) return;
-
-      ScrollTrigger.create({
-        trigger: timer,
-        start: "top top",
-        onEnter: () => updateMobileTimer(targetTime),
-        onEnterBack: () => updateMobileTimer(targetTime)
-      });
-
-    });
-
-    function updateMobileTimer(newTime) {
-
-      if (newTime === currentTime) return;
-
-      animateToTime(mobileTimer, currentTime, newTime);
-      currentTime = newTime;
-      mobileTimer.dataset.current = newTime;
-    }
-
-  }
-
-  /*
-  ==========================================================
-  FUNCIONES COMPARTIDAS
-  ==========================================================
-  */
-
-  function animateToTime(timerElement, oldTime, newTime) {
-
-    const frontFace = timerElement.querySelector('.timer-front');
-    if (!frontFace) return;
-
-    const digitHeight = 24;
-
-    frontFace.innerHTML = '';
-
-    for (let i = 0; i < newTime.length; i++) {
-
-      const newChar = newTime[i];
-
-      if (newChar === ':') {
-        const colon = document.createElement('div');
-        colon.className = 'colon';
-        colon.innerText = ':';
-        frontFace.appendChild(colon);
-        continue;
-      }
-
-      const wrap = document.createElement('div');
-      wrap.className = 'digit-wrap';
-
-      const strip = document.createElement('div');
-      strip.className = 'digit-strip';
-
-      const oldDigit = parseInt(oldTime[i]);
-      const newDigit = parseInt(newChar);
-
-      const sequence = getSpinSequence(oldDigit, newDigit);
-
-      sequence.forEach(num => {
-        const d = document.createElement('div');
-        d.className = 'digit';
-        d.innerText = num;
-        strip.appendChild(d);
-      });
-
-      wrap.appendChild(strip);
-      frontFace.appendChild(wrap);
-
-      gsap.to(strip, {
-        y: -(sequence.length - 1) * digitHeight,
-        duration: 0.8,
+    columns.reverse().forEach((column, index) => {
+      timeline.to(column.element, {
+        y: -column.steps * DIGIT_HEIGHT,
+        duration: 1.2,
         ease: "power2.inOut"
-      });
+      }, index * 0.15);
+    });
+  });
+}
 
+function initMobileTimer() {
+  const { ScrollTrigger } = window;
+  const mobileTimer = document.querySelector(".timer.is-mobile");
+  const desktopTimers = Array.from(document.querySelectorAll(".timer.is-desktop"))
+    .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+
+  if (!mobileTimer || !desktopTimers.length || mobileTimer.dataset.timerInit) return;
+
+  mobileTimer.dataset.timerInit = "true";
+  mobileTimer.dataset.current = INITIAL_TIME;
+
+  let currentTime = INITIAL_TIME;
+
+  desktopTimers.forEach((timer, index) => {
+    const targetTime = timer.getAttribute("data-time-spin");
+    if (!targetTime) return;
+
+    ScrollTrigger.create({
+      trigger: timer,
+      start: "top center",
+      onEnter: () => updateMobileTimer(targetTime),
+      onEnterBack: () => updateMobileTimer(targetTime),
+      onLeaveBack: () => {
+        const previousTimer = desktopTimers[index - 1];
+        updateMobileTimer(previousTimer?.getAttribute("data-time-spin") || INITIAL_TIME);
+      }
+    });
+  });
+
+  function updateMobileTimer(newTime) {
+    if (!newTime || newTime === currentTime) return;
+
+    animateToTime(mobileTimer, currentTime, newTime);
+    currentTime = newTime;
+    mobileTimer.dataset.current = newTime;
+  }
+}
+
+function animateToTime(timer, oldTime, newTime) {
+  const { gsap } = window;
+  const frontFace = timer.querySelector(".timer-front");
+
+  if (!gsap || !frontFace) return;
+
+  const columns = renderTimerFace(frontFace, oldTime, newTime);
+
+  columns.forEach((column) => {
+    gsap.to(column.element, {
+      y: -column.steps * DIGIT_HEIGHT,
+      duration: 0.8,
+      ease: "power2.inOut"
+    });
+  });
+}
+
+function renderTimerFace(frontFace, startTime, endTime) {
+  const columns = [];
+  frontFace.innerHTML = "";
+
+  for (let i = 0; i < endTime.length; i += 1) {
+    const endChar = endTime[i];
+
+    if (endChar === ":") {
+      frontFace.appendChild(createColon());
+      continue;
     }
 
+    const sequence = getSpinSequence(
+      Number.parseInt(startTime[i], 10),
+      Number.parseInt(endChar, 10),
+      getDigitMax(i)
+    );
+    const wrap = document.createElement("div");
+    const strip = document.createElement("div");
+
+    wrap.className = "digit-wrap";
+    strip.className = "digit-strip";
+
+    sequence.forEach((digit) => {
+      const digitEl = document.createElement("div");
+      digitEl.className = "digit";
+      digitEl.textContent = digit;
+      strip.appendChild(digitEl);
+    });
+
+    wrap.appendChild(strip);
+    frontFace.appendChild(wrap);
+    columns.push({ element: strip, steps: sequence.length - 1 });
   }
 
-  function getSpinSequence(start, end) {
+  return columns;
+}
 
-    let res = [start];
-    let curr = start;
+function createColon() {
+  const colon = document.createElement("div");
+  colon.className = "colon";
+  colon.textContent = ":";
+  return colon;
+}
 
-    while (curr !== end) {
-      curr = (curr + 1) % 10;
-      res.push(curr);
-    }
+function getDigitMax(index) {
+  if (index === 0) return 2;
+  if (index === 3) return 5;
+  return 9;
+}
 
-    return res;
+function getSpinSequence(start, end, max) {
+  const safeStart = Number.isNaN(start) ? 0 : start;
+  const safeEnd = Number.isNaN(end) ? 0 : end;
+  const result = [safeStart];
+  let current = safeStart;
+
+  while (current !== safeEnd) {
+    current = current + 1 > max ? 0 : current + 1;
+    result.push(current);
+
+    if (result.length > max + 2) break;
   }
 
+  return result;
 }

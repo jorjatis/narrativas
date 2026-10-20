@@ -64,8 +64,7 @@ export default function initTypewriterBusca() {
       trigger: busca,
       start: "top 90%",
       once: true,
-      onEnter: runTypewriter,
-      markers:true
+      onEnter: runTypewriter
     });
 
   });

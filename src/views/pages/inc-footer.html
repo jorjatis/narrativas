@@ -1,0 +1,754 @@
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+
+<script>
+  console.log('test 10');
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initMoveEls() {
+    const gridDoctors = document.querySelector('.grid-doctors');
+    const lifelineMobile = document.querySelector('.lifeline-mobile');
+    const vAth = document.querySelector('.v-ath.v-ath--t1');
+
+    if (!vAth) return;
+
+    if (gridDoctors) {
+      vAth.parentNode.insertBefore(gridDoctors, vAth);
+    }
+
+    if (lifelineMobile) {
+      vAth.after(lifelineMobile);
+    }
+  }
+
+  function initGridDoctors() {
+    const { gsap } = window;
+    const doctorCards = document.querySelectorAll(".doctor-card");
+
+    if (!gsap || !doctorCards.length) return;
+
+    gsap.from(doctorCards, {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: ".grid-doctors__g",
+        start: "top 70%",
+        toggleActions: "play none none none"
+      }
+    });
+  }
+
+  const PATHS_DESKTOP = {
+    high: "M32.56,0v61.05c0,3.65,2.37,6.87,5.85,7.95l12.3,3.84c1.65.51,1.5,2.89-.2,3.19l-27.87,4.97c-1.38.25-1.31,2.26.09,2.4l34.42,5.83c.99.17.97,1.6-.03,1.74l-42.65,5.86c-1.45.13-1.48,2.24-.04,2.41l40.5,4.93c1.88.23,1.95,2.94.08,3.26l-28.3,4.85c-1.35.23-1.48,2.12-.17,2.53l12.34,3.86c2.23.94,2.51,3.98.5,5.32l-3.12,2.07c-2.32,1.54-3.72,4.15-3.72,6.94v66",
+    medium: "M32.56,0v23.16c0,1.99,1.23,3.77,3.09,4.48l7.97,3.03c4.19,1.59,4.09,7.56-.15,9.01l-21.93,7.49c-4.31,1.47-4.33,7.55-.03,9.05l7.85,2.74c1.92.67,3.21,2.48,3.21,4.52v18.1c0,1.28.51,2.51,1.42,3.41l1.82,1.79c1.89,1.87,1.9,4.92.02,6.8l-1.85,1.84c-.9.9-1.41,2.12-1.41,3.39v8.98c0,.9.26,1.79.74,2.55l.27.43c1.03,1.64.98,3.73-.14,5.31h0c-.57.81-.87,1.77-.87,2.76v21.02c0,1.99,1.23,3.77,3.09,4.48l7.97,3.03c4.19,1.59,4.09,7.56-.15,9.01l-21.93,7.49c-4.31,1.47-4.33,7.55-.03,9.05l7.85,2.74c1.92.67,3.21,2.48,3.21,4.52v18.83",
+    low: "M32.56,0v84.03c0,1.28.51,2.51,1.42,3.41l1.82,1.79c1.89,1.87,1.9,4.92.02,6.8l-1.85,1.84c-.9.9-1.41,2.12-1.41,3.39v8.98c0,.9.26,1.79.74,2.55l.27.43c1.03,1.64.98,3.73-.14,5.31h0c-.57.81-.87,1.77-.87,2.76v77.71"
+  };
+
+  const SEGMENT_HEIGHT_DESKTOP = 199;
+  const MIN_MARKER_SEGMENTS_DESKTOP = 3;
+  const MARKER_SELECTOR = ".lowLifeline, .mediumLifeline, .highLifeline";
+
+  function initLifelineDesktop() {
+    const { ScrollTrigger } = window;
+
+    console.group("LIFELINE DESKTOP");
+
+    console.log("window.innerWidth:", window.innerWidth);
+    console.log("ScrollTrigger:", !!ScrollTrigger);
+
+    if (!ScrollTrigger || window.innerWidth < 1025) return;
+
+    const lifeline = document.querySelector(".lifeline-desktop");
+    const paywall = document.querySelector(".v-d > .paywall");
+    const svg = lifeline?.querySelector(".lifeline-svg");
+    const content = svg?.querySelector(".lifeline-content");
+    const endEl = paywall?.lastElementChild?.previousElementSibling;
+
+    console.log({
+      lifeline,
+      paywall,
+      svg,
+      content,
+      endEl
+    });
+
+    if (!lifeline || !paywall || !svg || !content || !endEl) {
+      console.error("LIFELINE: falta algún elemento");
+      console.groupEnd();
+      return;
+    }
+
+    const build = () => {
+      console.log("build() ejecutándose");
+      content.innerHTML = "";
+
+      const startY = getPageTop(paywall);
+      const endY = getPageTop(endEl);
+      const totalHeight = Math.max(endY - startY, SEGMENT_HEIGHT_DESKTOP);
+      const markers = getMarkersDesktop();
+
+      console.log({
+        startY,
+        endY,
+        totalHeight,
+        markers: markers.length
+      });
+
+      console.log(markers);
+
+      let currentY = 0;
+      let currentType = "low";
+
+      svg.setAttribute("viewBox", `0 0 65 ${totalHeight}`);
+
+      const addWave = (type) => {
+        console.log("Añadiendo", type, "en", currentY);
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", PATHS_DESKTOP[type] || PATHS_DESKTOP.low);
+        path.setAttribute("transform", `translate(0, ${currentY})`);
+        path.classList.add(`line-${type}`);
+        content.appendChild(path);
+        currentY += SEGMENT_HEIGHT_DESKTOP;
+      };
+
+      const fillUntil = (targetY, type) => {
+        while (currentY + SEGMENT_HEIGHT_DESKTOP <= targetY) {
+          addWave(type);
+        }
+      };
+
+      markers.forEach((marker) => {
+        const markerY = getPageTop(marker) - startY;
+
+        fillUntil(markerY, currentType);
+        currentType = getMarkerType(marker);
+
+        for (let i = 0; i < MIN_MARKER_SEGMENTS_DESKTOP && currentY + SEGMENT_HEIGHT_DESKTOP <= totalHeight; i += 1) {
+          addWave(currentType);
+        }
+      });
+
+      fillUntil(totalHeight, currentType);
+
+      console.log(
+        "Segmentos creados:",
+        content.querySelectorAll("path").length
+      );
+
+      console.groupEnd();
+    };
+
+    build();
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        build();
+        ScrollTrigger.refresh();
+      }, 150);
+    });
+  }
+
+  function getMarkersDesktop() {
+    return Array.from(document.querySelectorAll(MARKER_SELECTOR)).sort(
+      (a, b) => getPageTop(a) - getPageTop(b)
+    );
+  }
+
+  function getMarkerType(marker) {
+    if (marker.classList.contains("highLifeline")) return "high";
+    if (marker.classList.contains("mediumLifeline")) return "medium";
+    return "low";
+  }
+
+  function getPageTop(element) {
+    return element.getBoundingClientRect().top + window.scrollY;
+  }
+
+  const PATHS_MOBILE = {
+    high: "M0 19.0h39.11c.09 0 .16-.06.19-.14l4.19-13.45c.06-.2.35-.18.39.02l3.45 19.36c.14.81 1.32.77 1.4-.05l3.75-22.13c.04-.23.36-.22.4 0l3.7 26.95c.08.85 1.31.87 1.41.02L61.5 1.17c.03-.23.36-.24.4 0l4.11 23.97c.04.21.33.23.39.03l2.95-9.44c.55-1.3 2.32-1.47 3.11-.29l2.6 3.9c.04.06.1.09.17.09h41.06",
+    medium: "M0 19.0h15.33c.08 0 .16-.05.19-.13l4.96-13.07c.07-.18.32-.17.38 0l9.13 26.75c.06.18.32.18.38 0l4.69-13.43c.03-.08.1-.13.19-.13h13.51c.05 0 .1-.02.14-.06l3.65-3.7c.08-.08.21-.08.28 0l3.69 3.7s.09.06.14.06h7.07s.07-.01.11-.03l2.35-1.48c.07-.04.16-.04.22 0l1.42 1c.47.33 1.03.51 1.61.51h14.08c.08 0 .16-.05.19-.13l4.96-13.07c.07-.18.32-.17.38 0l9.13 26.75c.06.18.32.18.38 0l4.69-13.43c.03-.08.1-.13.19-.13h12.85",
+    low: "M0 19.0h50.18c.05 0 .1-.02.14-.06l3.65-3.7c.08-.08.21-.08.28 0l3.69 3.7s.09.06.14.06h7.07s.07-.01.11-.03l2.35-1.48c.07-.04.16-.04.22 0l1.42 1c.47.33 1.03.51 1.61.51h45.4"
+  };
+
+  const SEGMENT_WIDTH_MOBILE = 116.27;
+  const SEGMENT_HEIGHT_MOBILE = 45;
+  const SPEED_MOBILE = 80;
+
+  function initLifelineMobile() {
+    const { gsap, ScrollTrigger } = window;
+
+    if (!gsap || !ScrollTrigger || window.innerWidth >= 1025) return;
+
+    const wrapper = document.querySelector(".lifeline-strip-wrapper");
+    const strip = document.querySelector(".lifeline-strip");
+
+    if (!wrapper || !strip || strip.dataset.lifelineMobileInit) return;
+    strip.dataset.lifelineMobileInit = "true";
+
+    let currentType = "low";
+    let offset = 0;
+
+    strip.innerHTML = "";
+    strip.style.transform = "translateX(0)";
+
+    const appendSegment = (type) => {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("viewBox", `0 0 ${SEGMENT_WIDTH_MOBILE} ${SEGMENT_HEIGHT_MOBILE}`);
+      svg.setAttribute("aria-hidden", "true");
+      svg.classList.add("lifeline-strip__segment");
+
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", PATHS_MOBILE[type] || PATHS_MOBILE.low);
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke", "#1d1d1b");
+      path.setAttribute("stroke-width", "2");
+      path.setAttribute("stroke-linecap", "round");
+      path.setAttribute("stroke-linejoin", "round");
+
+      svg.appendChild(path);
+      strip.appendChild(svg);
+    };
+
+    const visibleSegments = Math.ceil(wrapper.offsetWidth / SEGMENT_WIDTH_MOBILE) + 3;
+    for (let i = 0; i < visibleSegments; i += 1) {
+      appendSegment(currentType);
+    }
+
+    getMarkersMobile().forEach((marker, index) => {
+      if (index === 0) {
+        ScrollTrigger.create({
+          trigger: marker,
+          start: "top center",
+          onLeaveBack: () => {
+            currentType = "low";
+          }
+        });
+      }
+
+      ScrollTrigger.create({
+        trigger: marker,
+        start: "top center",
+        onEnter: () => {
+          currentType = getMarkerType(marker);
+        },
+        onEnterBack: () => {
+          currentType = getMarkerType(marker);
+        }
+      });
+    });
+
+    gsap.ticker.add((time, deltaTime) => {
+      offset -= (SPEED_MOBILE * deltaTime) / 1000;
+      strip.style.transform = `translateX(${offset}px)`;
+
+      if (Math.abs(offset) < SEGMENT_WIDTH_MOBILE) return;
+
+      appendSegment(currentType);
+      strip.firstElementChild?.remove();
+      offset += SEGMENT_WIDTH_MOBILE;
+      strip.style.transform = `translateX(${offset}px)`;
+    });
+  }
+
+  function getMarkersMobile() {
+    return Array.from(document.querySelectorAll(MARKER_SELECTOR)).sort(
+      (a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top
+    );
+  }
+
+  function initLinesTitle() {
+    const headingTitle = document.querySelector('.v-a--d-s-1');
+    if (!headingTitle) return;
+
+    const allLines = document.querySelectorAll('.lines-title');
+    allLines.forEach(line => headingTitle.appendChild(line));
+
+    function preparePath(path, reverse = false) {
+      const length = path.getTotalLength();
+
+      path.style.strokeDasharray = length;
+
+      path.style.strokeDashoffset = reverse ? -length : length;
+
+      path.style.setProperty('--path-length', reverse ? -length : length);
+    }
+
+    function resetPath(path, reverse = false) {
+      path.classList.remove('drawLeft', 'drawRight');
+
+      const length = path.getTotalLength();
+      path.style.strokeDashoffset = reverse ? -length : length;
+    }
+
+    function animatePair(leftPath, rightPath, reverse = false) {
+
+      preparePath(leftPath, reverse);
+      preparePath(rightPath, reverse);
+
+      function startCycle() {
+
+        leftPath.classList.add('drawLeft');
+
+        leftPath.addEventListener('animationend', function leftDone() {
+          leftPath.removeEventListener('animationend', leftDone);
+
+          rightPath.classList.add('drawRight');
+
+          rightPath.addEventListener('animationend', function rightDone() {
+            rightPath.removeEventListener('animationend', rightDone);
+
+            setTimeout(() => {
+              resetPath(leftPath, reverse);
+              resetPath(rightPath, reverse);
+              startCycle();
+            }, 1000);
+          });
+        });
+      }
+
+      startCycle();
+    }
+
+    const desktopLeft = document.querySelector('.lines-title.is-left.is-desktop svg path');
+    const desktopRight = document.querySelector('.lines-title.is-right.is-desktop svg path');
+
+    const mobileLeft = document.querySelector('.lines-title.is-left.is-mobile svg path');
+    const mobileRight = document.querySelector('.lines-title.is-right.is-mobile svg path');
+
+    if (desktopLeft && desktopRight) {
+      animatePair(desktopLeft, desktopRight);
+    }
+
+    if (mobileLeft && mobileRight) {
+      animatePair(mobileLeft, mobileRight, true);
+    }
+  }
+
+  const DIGIT_HEIGHT = 24;
+  const INITIAL_TIME = "00:00";
+
+  function initClockBox() {
+    const { gsap, ScrollTrigger } = window;
+
+    if (!gsap || !ScrollTrigger) return;
+
+    ScrollTrigger.matchMedia({
+      "(min-width: 1025px)": initDesktopTimers,
+      "(max-width: 1024px)": initMobileTimer
+    });
+  }
+
+  function initDesktopTimers() {
+    const { gsap } = window;
+    const timers = document.querySelectorAll(".timer.is-desktop");
+
+    timers.forEach((timer) => {
+      if (timer.dataset.timerInit) return;
+      timer.dataset.timerInit = "true";
+
+      const startTime = timer.getAttribute("data-time-start");
+      const endTime = timer.getAttribute("data-time-spin");
+      const frontFace = timer.querySelector(".timer-front");
+
+      if (!startTime || !endTime || !frontFace) return;
+
+      const columns = renderTimerFace(frontFace, startTime, endTime);
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: timer,
+          start: "top 70%",
+          toggleActions: "play none none none",
+          once: true
+        }
+      });
+
+      columns.reverse().forEach((column, index) => {
+        timeline.to(column.element, {
+          y: -column.steps * DIGIT_HEIGHT,
+          duration: 1.2,
+          ease: "power2.inOut"
+        }, index * 0.15);
+      });
+    });
+  }
+
+  function initMobileTimer() {
+    const { ScrollTrigger } = window;
+    const mobileTimer = document.querySelector(".timer.is-mobile");
+    const desktopTimers = Array.from(document.querySelectorAll(".timer.is-desktop"))
+      .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+
+    if (!mobileTimer || !desktopTimers.length || mobileTimer.dataset.timerInit) return;
+
+    mobileTimer.dataset.timerInit = "true";
+    mobileTimer.dataset.current = INITIAL_TIME;
+
+    let currentTime = INITIAL_TIME;
+
+    desktopTimers.forEach((timer, index) => {
+      const targetTime = timer.getAttribute("data-time-spin");
+      if (!targetTime) return;
+
+      ScrollTrigger.create({
+        trigger: timer,
+        start: "top center",
+        onEnter: () => updateMobileTimer(targetTime),
+        onEnterBack: () => updateMobileTimer(targetTime),
+        onLeaveBack: () => {
+          const previousTimer = desktopTimers[index - 1];
+          updateMobileTimer(previousTimer?.getAttribute("data-time-spin") || INITIAL_TIME);
+        }
+      });
+    });
+
+    function updateMobileTimer(newTime) {
+      if (!newTime || newTime === currentTime) return;
+
+      animateToTime(mobileTimer, currentTime, newTime);
+      currentTime = newTime;
+      mobileTimer.dataset.current = newTime;
+    }
+  }
+
+  function animateToTime(timer, oldTime, newTime) {
+    const { gsap } = window;
+    const frontFace = timer.querySelector(".timer-front");
+
+    if (!gsap || !frontFace) return;
+
+    const columns = renderTimerFace(frontFace, oldTime, newTime);
+
+    columns.forEach((column) => {
+      gsap.to(column.element, {
+        y: -column.steps * DIGIT_HEIGHT,
+        duration: 0.8,
+        ease: "power2.inOut"
+      });
+    });
+  }
+
+  function renderTimerFace(frontFace, startTime, endTime) {
+    const columns = [];
+    frontFace.innerHTML = "";
+
+    for (let i = 0; i < endTime.length; i += 1) {
+      const endChar = endTime[i];
+
+      if (endChar === ":") {
+        frontFace.appendChild(createColon());
+        continue;
+      }
+
+      const sequence = getSpinSequence(
+        Number.parseInt(startTime[i], 10),
+        Number.parseInt(endChar, 10),
+        getDigitMax(i)
+      );
+      const wrap = document.createElement("div");
+      const strip = document.createElement("div");
+
+      wrap.className = "digit-wrap";
+      strip.className = "digit-strip";
+
+      sequence.forEach((digit) => {
+        const digitEl = document.createElement("div");
+        digitEl.className = "digit";
+        digitEl.textContent = digit;
+        strip.appendChild(digitEl);
+      });
+
+      wrap.appendChild(strip);
+      frontFace.appendChild(wrap);
+      columns.push({ element: strip, steps: sequence.length - 1 });
+    }
+
+    return columns;
+  }
+
+  function createColon() {
+    const colon = document.createElement("div");
+    colon.className = "colon";
+    colon.textContent = ":";
+    return colon;
+  }
+
+  function getDigitMax(index) {
+    if (index === 0) return 2;
+    if (index === 3) return 5;
+    return 9;
+  }
+
+  function getSpinSequence(start, end, max) {
+    const safeStart = Number.isNaN(start) ? 0 : start;
+    const safeEnd = Number.isNaN(end) ? 0 : end;
+    const result = [safeStart];
+    let current = safeStart;
+
+    while (current !== safeEnd) {
+      current = current + 1 > max ? 0 : current + 1;
+      result.push(current);
+
+      if (result.length > max + 2) break;
+    }
+
+    return result;
+  }
+
+  function initVideoPlayers(selector = '.doc-prf') {
+
+    const blocks = document.querySelectorAll(selector);
+    if (!blocks.length) return;
+
+    blocks.forEach(block => {
+
+      const media = block.querySelector('.doc-prf__media');
+      const video = block.querySelector('.doc-prf__video');
+      const buttonWrap = block.querySelector('.n-btn-ply');
+      const button = buttonWrap?.querySelector('button');
+
+      if (!media || !video || !buttonWrap || !button) {
+        console.warn('Video player mal estructurado:', block);
+        return;
+      }
+
+      function setState(state) {
+        media.classList.remove('is-loading', 'is-playing', 'is-paused');
+        media.classList.add(state);
+      }
+
+      setState('is-paused');
+
+      button.addEventListener('click', async () => {
+        if (video.paused) {
+          document.querySelectorAll('.doc-prf__video').forEach(v => {
+            if (v !== video) {
+              v.pause();
+              const other = v.closest('.doc-prf');
+              other?.querySelector('.n-btn-ply')?.classList
+                .remove('is-playing');
+              other?.querySelector('.n-btn-ply')?.classList
+                .add('is-paused');
+            }
+          });
+
+          const isReady = video.readyState >= 3;
+
+          if (!isReady) {
+            setState('is-loading');
+          }
+
+          try {
+            await video.play();
+            setState('is-playing');
+          } catch (err) {
+            setState('is-paused');
+          }
+
+        } else {
+          video.pause();
+          setState('is-paused');
+        }
+      });
+
+      video.addEventListener('ended', () => {
+        setState('is-paused');
+      });
+
+    });
+
+  }
+
+  function initDocPrfScroll() {
+
+    const { gsap, ScrollTrigger } = window;
+    if (!gsap || !ScrollTrigger) return;
+
+    gsap.utils.toArray(".doc-prf").forEach((block) => {
+
+      const media = block.querySelector(".doc-prf__media");
+      const name = block.querySelector(".clock-heading__name");
+
+      if (!media || !name) return;
+
+      const getOffset = () => {
+        const mediaRect = media.getBoundingClientRect();
+        const nameRect = name.getBoundingClientRect();
+        return mediaRect.top - nameRect.bottom;
+      };
+
+      let offset = 0;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: block,
+          start: "top 15%",
+          toggleActions: "play none none reverse",
+          invalidateOnRefresh: true,
+          onRefresh: () => {
+            offset = getOffset();
+          }
+        }
+      });
+
+      tl.to(media, {
+        y: () => -offset,
+        duration: 0.8,
+        ease: "power2.out"
+      }, 0);
+
+      tl.to(block, {
+        marginBottom: () => -offset,
+        duration: 0.8,
+        ease: "power2.out"
+      }, 0);
+
+    });
+
+    ScrollTrigger.refresh();
+  }
+
+  function initTypewriterBusca() {
+    const { ScrollTrigger } = window;
+
+    const buscas = document.querySelectorAll(".busca");
+    if (!buscas.length) return;
+
+    buscas.forEach((busca) => {
+
+      if (busca.dataset.typewriterInit) return;
+      busca.dataset.typewriterInit = "true";
+
+      const timeEl = busca.querySelector(".busca__time");
+      const textEl = busca.querySelector(".busca__txt");
+      const typedContainer = busca.querySelector(".busca__typed");
+
+      if (!timeEl || !textEl || !typedContainer) return;
+
+      const fullTime = timeEl.dataset.text || "";
+      const fullText = textEl.dataset.text || "";
+
+      const speed = 40;
+
+      timeEl.textContent = "";
+      typedContainer.innerHTML = "";
+
+      function runTypewriter() {
+        let i = 0;
+
+        function typeTime() {
+          if (i < fullTime.length) {
+            timeEl.textContent += fullTime[i];
+            i++;
+            setTimeout(typeTime, speed);
+          } else {
+            i = 0;
+            setTimeout(typeText, 100);
+          }
+        }
+
+        function typeText() {
+          if (i < fullText.length) {
+
+            if (i === 0) {
+              const firstSentence = fullText.split(".")[0] + ".";
+              const bold = document.createElement("b");
+              bold.textContent = firstSentence;
+              typedContainer.appendChild(bold);
+              i += firstSentence.length;
+            } else {
+              typedContainer.innerHTML += fullText[i];
+              i++;
+            }
+
+            setTimeout(typeText, speed);
+          }
+        }
+
+        typeTime();
+      }
+
+      ScrollTrigger.create({
+        trigger: busca,
+        start: "top 90%",
+        once: true,
+        onEnter: runTypewriter
+      });
+
+    });
+  }
+
+  function initClockHeading() {
+    const { gsap, ScrollTrigger } = window;
+
+    const clocks = document.querySelectorAll(".clock-heading");
+    if (!clocks.length) return;
+
+    clocks.forEach((clock) => {
+
+      const clockFace = clock.querySelector(".clock-heading__time-clock");
+      const timeTxt = clock.querySelector(".clock-heading__time-txt");
+
+      if (!clockFace || !timeTxt) return;
+
+      const time = timeTxt.textContent.trim();
+      const [hoursRaw, minutesRaw] = time.split(":");
+
+      let hours = parseInt(hoursRaw, 10);
+      const minutes = parseInt(minutesRaw, 10);
+
+      hours = hours % 12;
+
+      const minuteDeg = minutes * 6;
+      const hourDeg = (hours * 30) + (minutes * 0.5);
+
+      ScrollTrigger.create({
+        trigger: clock,
+        start: "top 50%",
+        once: true,
+        onEnter: () => {
+          const tl = gsap.timeline();
+          tl.to(clockFace, {
+            "--minute-rotate": minuteDeg + "deg",
+            duration: 0.45,
+            ease: "linear",
+            autoRound: false
+          }).to(clockFace, {
+            "--hour-rotate": hourDeg + "deg",
+            duration: 0.45,
+            ease: "linear",
+            autoRound: false
+          }, 0);
+        }
+      });
+    });
+  }
+
+  function initAll() {
+    initMoveEls();
+    initVideoPlayers();
+    initGridDoctors();
+    initLinesTitle();
+    initClockHeading();
+    initTypewriterBusca();
+    initDocPrfScroll();
+
+    requestAnimationFrame(() => {
+      initClockBox();
+      initLifelineDesktop();
+      initLifelineMobile();
+      ScrollTrigger.refresh(true);
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAll, { once: true });
+  } else {
+    initAll();
+  }
+</script>
