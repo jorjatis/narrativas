@@ -7,10 +7,18 @@
         {
           "title": "Del 1-O a la amnistía: Un traje a medida para borrar el 'Procés'",
           "titleEn": "From 1-O to amnesty: A tailored suit to erase the 'Procés'",
-          "articleUrl": "",
-          "titleMedia": "24-1o-amnistia",
+          "articleUrl": "https://www.abc.es/espana/amnistia-traje-medida-borrar-proces-20261010194659-nt.html",
+          "titleMedia": "25-1o-amnistia",
           "gif": true,
           "netlifyUrl": "https://narrativas-beneficiadostrasel1o.netlify.app/"
+        },
+        {
+          "title": "Ceuta: retrato de una ciudad herida",
+          "titleEn": "Ceuta: portrait of a wounded city",
+          "articleUrl": "https://www.abc.es/espana/ceuta-retrato-ciudad-herida-20261018012815-nt.html",
+          "titleMedia": "24-ceuta-herida",
+          "gif": false,
+          "netlifyUrl": "https://narrativa-ceuta.netlify.app/"
         }
       ]
     },
