@@ -505,44 +505,77 @@ function refreshScrollTriggerOnMedia(root) {
   root = root || document;
   var timer = null;
   var pending = false;
-  var doRefresh = function () {
+  var tops = new Map();
+
+  var docTop = function (el) {
+    return el.getBoundingClientRect().top + window.scrollY;
+  };
+  var pinnedTriggers = function () {
+    return ScrollTrigger.getAll().filter(function (t) {
+      return t.pin && t.pin.parentNode;
+    });
+  };
+  var record = function () {
+    tops.clear();
+    pinnedTriggers().forEach(function (t) {
+      tops.set(t, docTop(t.pin.parentNode));
+    });
+  };
+  // Solo refresca si algún pin-spacer se ha movido desde el último refresh:
+  // un refresh innecesario (p. ej. al pinchar el vídeo) salta el scroll en iOS.
+  var isStale = function () {
+    return pinnedTriggers().some(function (t) {
+      var prev = tops.get(t);
+      return (
+        prev === undefined || Math.abs(docTop(t.pin.parentNode) - prev) > 2
+      );
+    });
+  };
+  var check = function () {
+    if (!isStale()) return;
+    // Dentro de un pin y scrolleando: esperar al final (salto en iOS).
+    if (
+      ScrollTrigger.isScrolling() &&
+      pinnedTriggers().some(function (t) {
+        return t.isActive;
+      })
+    ) {
+      pending = true;
+      return;
+    }
     pending = false;
     ScrollTrigger.refresh();
   };
-  var refresh = function () {
+  var schedule = function () {
     clearTimeout(timer);
-    timer = setTimeout(function () {
-      // Si el usuario está scrolleando (p. ej. dentro de un pin), esperar
-      // al final para no saltar hacia el chrono en iOS.
-      if (ScrollTrigger.isScrolling()) {
-        pending = true;
-        return;
-      }
-      doRefresh();
-    }, 120);
+    timer = setTimeout(check, 120);
   };
-  var onScrollEnd = function () {
-    if (!pending) return;
-    clearTimeout(timer);
-    timer = setTimeout(doRefresh, 120);
-  };
-  ScrollTrigger.addEventListener("scrollEnd", onScrollEnd);
+
+  ScrollTrigger.addEventListener("refresh", record);
+  ScrollTrigger.addEventListener("scrollEnd", function () {
+    if (pending) schedule();
+  });
+  record();
+
   var onMediaEvent = function (e) {
-    var el = e.target;
-    if (!el || !el.tagName) return;
-    var tag = el.tagName;
-    // Solo img/iframe: VIDEO/SOURCE + Brightcove disparan load al pinchar
-    // y un refresh recalcula pins de chrono → salto de scroll hacia arriba.
-    if (tag !== "IMG" && tag !== "IFRAME") return;
-    if (el.closest && el.closest(".video-player, .video-js, video-js")) return;
-    refresh();
+    var tag = e.target && e.target.tagName;
+    if (tag === "IMG" || tag === "IFRAME") schedule();
   };
   root.addEventListener("load", onMediaEvent, true);
-  root.addEventListener("loadedmetadata", onMediaEvent, true);
-  root.addEventListener("loadeddata", onMediaEvent, true);
   root.addEventListener("error", onMediaEvent, true);
+
+  // Cambios de layout sin evento load (fuentes, publi, Brightcove, paywall).
+  // En prod el main puede tener alto fijo: observar también el artículo.
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(schedule);
+    ro.observe(document.body);
+    document.querySelectorAll(".v-n-chrono").forEach(function (node) {
+      ro.observe(node.closest(".v-d") || node.parentElement);
+    });
+  }
+
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(refresh).catch(function () {});
+    document.fonts.ready.then(schedule).catch(function () {});
   }
 }
 

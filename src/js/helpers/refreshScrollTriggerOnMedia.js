@@ -1,75 +1,98 @@
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const DEBOUNCE_MS = 120;
+const TOLERANCE_PX = 2;
+
+function docTop(el) {
+  return el.getBoundingClientRect().top + window.scrollY;
+}
+
+function pinnedTriggers() {
+  return ScrollTrigger.getAll().filter((t) => t.pin && t.pin.parentNode);
+}
 
 /**
- * Recalcula ScrollTrigger cuando media lazy (img/iframe) cambia el layout.
- * Necesario en prod: el markup trae loading="lazy" y no se puede quitar.
+ * Recalcula ScrollTrigger cuando cambia el layout por encima de los pins
+ * (img lazy, fuentes, publi, player Brightcove, paywall...).
+ * Necesario en prod: el JS arranca antes de que la página termine de montar.
  *
- * No reacciona a VIDEO/SOURCE ni a players Brightcove/video-js: al pinchar
- * disparan loadedmetadata/loadeddata y un refresh recalcula los pins de
- * cronología, provocando un salto de scroll hacia arriba.
+ * Solo refresca si algún pin-spacer se ha movido respecto al último refresh:
+ * un refresh innecesario (p. ej. al pinchar el vídeo) salta el scroll en iOS.
  */
 export default function refreshScrollTriggerOnMedia(root = document) {
   let timer = null;
   let pending = false;
+  const tops = new Map();
 
-  const doRefresh = () => {
+  const record = () => {
+    tops.clear();
+    pinnedTriggers().forEach((t) => tops.set(t, docTop(t.pin.parentNode)));
+  };
+
+  const isStale = () =>
+    pinnedTriggers().some((t) => {
+      const prev = tops.get(t);
+      return (
+        prev === undefined ||
+        Math.abs(docTop(t.pin.parentNode) - prev) > TOLERANCE_PX
+      );
+    });
+
+  const check = () => {
+    if (!isStale()) return;
+    // Dentro de un pin y scrolleando: esperar al final (salto en iOS).
+    if (
+      ScrollTrigger.isScrolling() &&
+      pinnedTriggers().some((t) => t.isActive)
+    ) {
+      pending = true;
+      return;
+    }
     pending = false;
     ScrollTrigger.refresh();
   };
 
-  const refresh = () => {
+  const schedule = () => {
     clearTimeout(timer);
-    timer = setTimeout(() => {
-      // Si el usuario está scrolleando (p. ej. dentro de un pin), esperar
-      // al final para no saltar hacia el chrono en iOS.
-      if (ScrollTrigger.isScrolling()) {
-        pending = true;
-        return;
-      }
-      doRefresh();
-    }, DEBOUNCE_MS);
+    timer = setTimeout(check, DEBOUNCE_MS);
   };
 
   const onScrollEnd = () => {
-    if (!pending) return;
-    clearTimeout(timer);
-    timer = setTimeout(doRefresh, DEBOUNCE_MS);
+    if (pending) schedule();
   };
+
+  ScrollTrigger.addEventListener("refresh", record);
   ScrollTrigger.addEventListener("scrollEnd", onScrollEnd);
+  record();
 
   const onMediaEvent = (e) => {
-    const el = e.target;
-    if (!el || !el.tagName) return;
-    const tag = el.tagName;
-
-    // Solo layout-relevant: imgs lazy e iframes. VIDEO/SOURCE no: el player
-    // ya reserva ratio (vjs-fluid) y los eventos se disparan al interactuar.
-    if (tag !== "IMG" && tag !== "IFRAME") return;
-
-    if (el.closest?.(".video-player, .video-js, video-js")) return;
-
-    refresh();
+    const tag = e.target?.tagName;
+    if (tag === "IMG" || tag === "IFRAME") schedule();
   };
 
   // capture: load no burbujea
   root.addEventListener("load", onMediaEvent, true);
-  root.addEventListener("loadedmetadata", onMediaEvent, true);
-  root.addEventListener("loadeddata", onMediaEvent, true);
   root.addEventListener("error", onMediaEvent, true);
 
+  // En prod el main puede tener alto fijo (paywall), así que se observa
+  // también el contenedor del artículo de cada chrono.
+  const ro = new ResizeObserver(schedule);
+  ro.observe(document.body);
+  document.querySelectorAll(".v-n-chrono").forEach((node) => {
+    ro.observe(node.closest(".v-d") || node.parentElement);
+  });
+
   if (document.fonts?.ready) {
-    document.fonts.ready.then(refresh).catch(() => {});
+    document.fonts.ready.then(schedule).catch(() => {});
   }
 
   return () => {
     clearTimeout(timer);
     pending = false;
+    ro.disconnect();
+    ScrollTrigger.removeEventListener("refresh", record);
     ScrollTrigger.removeEventListener("scrollEnd", onScrollEnd);
     root.removeEventListener("load", onMediaEvent, true);
-    root.removeEventListener("loadedmetadata", onMediaEvent, true);
-    root.removeEventListener("loadeddata", onMediaEvent, true);
     root.removeEventListener("error", onMediaEvent, true);
   };
 }

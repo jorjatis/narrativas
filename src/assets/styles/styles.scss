@@ -18,3 +18,13 @@
 .v-a--cmp-m {
   margin: 72px 0;
 }
+
+.twitter-tweet {
+  @media (min-width: 1120px) {
+    transform: translateX(225px);
+  }
+
+  iframe {
+    margin: 32px 0;
+  }
+}

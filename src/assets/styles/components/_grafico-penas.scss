@@ -4,6 +4,10 @@
   width: 100%;
   max-width: 552px;
   margin: 98px auto;
+  
+  @media (min-width: 1120px) {
+    transform: translateX(225px);
+  }
 
   &__graphic--desk {
     display: none;
