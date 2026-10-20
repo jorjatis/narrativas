@@ -1,0 +1,36 @@
+@use "../base/variables" as *;
+
+.v-d--abc {
+  .v-cmp-smy {
+    max-width: 371px;
+    width: 100%;
+    margin: 55px auto 74px;
+
+    .v-a-inf-c{
+      &:before {
+        content: none;
+      }
+    }
+
+    .v-a-t {    
+      display: inline;
+      font-family: $atl;
+      font-size: 18px;
+      line-height: 150%;
+      color: #767676;
+      border-bottom: 1px solid #767676;
+
+      @media (min-width: $screen-xs) {
+        font-size: 20px;
+      }
+
+      @media (min-width: $screen-ms) {
+        font-size: 24px;
+      }
+
+      @media (min-width: $screen-sm) {
+        font-size: 28px;
+      }
+    }
+  }
+}
