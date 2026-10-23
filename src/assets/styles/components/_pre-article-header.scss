@@ -7,6 +7,40 @@ body {
   .v-h-a~.v-w .v-a--d {
     min-height: auto;
   }
+
+  &:has(.v-h-a) {
+    .scr-ind {
+      @media (max-width: $screen-sm) {
+        margin-top: -106px;
+      }
+
+      @media (max-width: $screen-xs) {
+        margin-top: -98px;
+      }
+    }
+  }
+}
+
+.v-a--d-s-1 {
+  .scr-ind {
+    margin-top: -50px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: -56px;
+    }
+
+    @media (min-height: 1200px) and (min-width: $screen-xs) and (max-width: $screen-sm) {
+      display: none;
+    }
+
+    @media (min-height: 1340px) and (min-width: $screen-sm) {
+      display: none;
+    }
+
+    @media (min-height: 960px) and (max-width: $screen-xs) {
+      display: none;
+    }
+  }
 }
 
 .v-w {
@@ -14,6 +48,10 @@ body {
     display: flex;
     flex-direction: column;
     height: auto;
+
+    .v-a-img-c {
+      overflow: unset;
+    }
 
     .v-a-inf-c {
       justify-content: unset;
