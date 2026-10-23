@@ -48,11 +48,29 @@ function moveEls(el, target, position = "prepend") {
   actions[position]();
 }
 
+function fadeOnScroll(selector, threshold = 50) {
+  const indicators = document.querySelectorAll(selector);
+  if (!indicators.length) return;
+
+  const update = () => {
+    const visible = window.scrollY < threshold;
+
+    indicators.forEach((el) => {
+      el.classList.toggle("is-visible", visible);
+      el.setAttribute("aria-hidden", String(!visible));
+    });
+  };
+
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+}
+
 function initAll() {
   document.body.classList.add("is-loaded");
   removeEls(".v-a--d-s-1 .v-a-inf-c .v-a-t");
   removeEls(".v-a--d-s-1 .v-a-inf-c .v-i");
-  moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");
+  moveEls(".v-a--d-s-1 .v-a-inf-c .v-a-s-t", ".v-d--abc", "prepend");  
+  fadeOnScroll(".v-a--d-s-1 .v-a-img-c .scr-ind");
 }
 
 initAll();
