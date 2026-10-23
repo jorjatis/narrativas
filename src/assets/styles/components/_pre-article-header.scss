@@ -15,9 +15,6 @@ body {
     flex-direction: column;
     height: auto;
 
-    .v-a-img-c {
-
-    }
     .v-a-inf-c {
       justify-content: unset;
       padding: 0;
@@ -31,10 +28,18 @@ body {
         margin: 42px auto 36px;
         padding: 0 24px;
         box-sizing: content-box;
+        opacity: 0;
+        animation: fadeIn 0.7s ease forwards;
+        animation-delay: 0.85s;
 
         @media (min-width: $screen-xs) {
           margin-top: 110px;
           margin-bottom: 124px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          opacity: 1;
+          animation: none;
         }
       }
     }
@@ -44,13 +49,18 @@ body {
 .v-n-preh {
   display: flex;
   flex-direction: column;
-  max-width: 500px;
+  max-width: 400px;
   margin: 42px auto 0;
   padding: 0 24px;
   box-sizing: content-box;
 
   @media (min-width: $screen-xs) {
+    margin-top: 56px;
+  }
+
+  @media (min-width: $screen-sm) {
     margin-top: 110px;
+    max-width: 500px;
   }
 
   &__img {
@@ -67,11 +77,46 @@ body {
     }
   }
 
+  &__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    animation: fadeIn 0.7s ease forwards;
+    animation-delay: 0.35s;
+
+    @media (min-width: $screen-xs) {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  &__svg-clip {
+    transform-box: fill-box;
+    transform-origin: left center;
+
+    @media (min-width: $screen-xs) {
+      transform: scaleX(0);
+      animation: v-n-preh-reveal 1.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+  }
+
+  &__svg-dot {
+    @media (min-width: $screen-xs) {
+      opacity: 0;
+      animation: fadeIn 0.45s ease forwards;
+      animation-delay: var(--d, 0.45s);
+    }
+  }
+
   &__t-c {
     display: flex;
     flex-direction: column;
     order: 1;
-    
+    opacity: 0;
+    animation: fadeIn 0.65s ease forwards;
+    animation-delay: 0.2s;
+
     @media (min-width: $screen-xs) {
       order: 2;
     }
@@ -89,8 +134,12 @@ body {
       letter-spacing: -0.92px;
 
       @media (min-width: $screen-xs) {
-        font-size: 70px;
+        font-size: 62px;
         letter-spacing: -1.4px;
+      }
+
+      @media (min-width: $screen-sm) {
+        font-size: 70px;
       }
     }
 
@@ -98,9 +147,13 @@ body {
       font-size: 70px;
       letter-spacing: -1.4px;
 
-      @media (min-width: $screen-xs) {        
-        font-size: 120px;
+      @media (min-width: $screen-xs) {
+        font-size: 84px;
         letter-spacing: -2.4px;
+      }
+
+      @media (min-width: $screen-sm) {
+        font-size: 120px;
       }
     }
   }
@@ -118,6 +171,9 @@ body {
     text-transform: uppercase;
     color: $cp3;
     order: 2;
+    opacity: 0;
+    animation: fadeIn 0.65s ease forwards;
+    animation-delay: 0.45s;
 
     @media (min-width: $screen-xs) {
       max-width: unset;
@@ -126,5 +182,26 @@ body {
       letter-spacing: -0.8px;
       order: 3;
     }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__svg,
+    &__svg-dot,
+    &__t-c,
+    &__st {
+      opacity: 1;
+      animation: none;
+    }
+
+    &__svg-clip {
+      transform: none;
+      animation: none;
+    }
+  }
+}
+
+@keyframes v-n-preh-reveal {
+  to {
+    transform: scaleX(1);
   }
 }
