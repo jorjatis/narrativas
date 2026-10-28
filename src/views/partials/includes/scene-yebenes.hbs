@@ -1,0 +1,103 @@
+<section class="scene-yebenes" aria-label="Recreación del accidente de Yébenes">
+  <div class="scene-yebenes__stage">
+    <div class="scene-yebenes__world">
+      <picture>
+        <source media="(max-width: 699px)" srcset="assets/images/Yebenes%20vertical%2003.jpg">
+        <img
+          class="scene-yebenes__img"
+          src="assets/images/Yebenes%20horizontal%2003.jpg"
+          width="1920"
+          height="1080"
+          alt="Estado de los dos trenes tras el alcance."
+          draggable="false"
+          loading="eager"
+          decoding="async"
+        >
+      </picture>
+
+      <div class="scene-yebenes__mark" data-x="36.9" data-y="35" style="left: 36.9%; top: 35%;">
+        <span class="scene-yebenes__dot"></span>
+        <span class="scene-yebenes__line"></span>
+        <div class="scene-yebenes__frame">
+          <video class="scene-yebenes__video" muted playsinline loop preload="auto">
+            <source src="assets/videos/video-2.mp4" type="video/mp4">
+          </video>
+          <div class="scene-yebenes__mock" aria-hidden="true">
+            <span class="scene-yebenes__mock-label">Vídeo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene-yebenes__mark" data-x="56.3" data-y="47.2" style="left: 56.3%; top: 47.2%;">
+        <span class="scene-yebenes__dot"></span>
+        <span class="scene-yebenes__line"></span>
+        <div class="scene-yebenes__frame">
+          <video class="scene-yebenes__video" muted playsinline loop preload="auto">
+            <source src="assets/videos/video-3.mp4" type="video/mp4">
+          </video>
+          <div class="scene-yebenes__mock" aria-hidden="true">
+            <span class="scene-yebenes__mock-label">Vídeo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-yebenes__slides">
+      <div class="scene-yebenes__slide">
+        <div class="scene-yebenes__plate">
+          <picture>
+            <source media="(max-width: 699px)" srcset="assets/images/Yebenes%20verticaL%2001.jpg">
+            <img src="assets/images/Yebenes%20horizontal%2001.jpg" alt="El AVE se aproxima al tren Iryo, parado en la misma vía." draggable="false" loading="eager" decoding="async">
+          </picture>
+          <p class="scene-yebenes__tag scene-yebenes__tag--iryo">Iryo</p>
+          <p class="scene-yebenes__ave">
+            <span class="scene-yebenes__ave-draw">
+              <svg class="scene-yebenes__ave-head" viewBox="0 0 14 16" aria-hidden="true" focusable="false">
+                <path d="M12.5 1.2 1.5 8l11 6.8"></path>
+              </svg>
+              <span class="scene-yebenes__ave-shaft"></span>
+            </span>
+            <span class="scene-yebenes__ave-label">AVE</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="scene-yebenes__slide">
+        <div class="scene-yebenes__plate">
+          <picture>
+            <source media="(max-width: 699px)" srcset="assets/images/Yebenes%20vertical%2002.jpg">
+            <img src="assets/images/Yebenes%20horizontal%2002.jpg" alt="El AVE alcanza al Iryo." draggable="false" loading="eager" decoding="async">
+          </picture>
+          <p class="scene-yebenes__lead">A las 8.53h el AVE colisiona con el tren Iryo parado en la misma vía tras la caída del sistema LZB</p>
+        </div>
+      </div>
+
+      <div class="scene-yebenes__slide">
+        <div class="scene-yebenes__plate">
+          <picture>
+            <source media="(max-width: 699px)" srcset="assets/images/Yebenes%20vertical%2003.jpg">
+            <img src="assets/images/Yebenes%20horizontal%2003.jpg" alt="Estado de los dos trenes tras el alcance." draggable="false" loading="eager" decoding="async">
+          </picture>
+          <p class="scene-yebenes__cap scene-yebenes__cap--wagons">
+            Varios vagones descarrilan y caen a ambos lados del terraplén
+          </p>
+          <p class="scene-yebenes__cap scene-yebenes__cap--iryo">
+            Las tres últimas unidades del convoy del Iryo son las más afectadas
+          </p>
+          <p class="scene-yebenes__cap scene-yebenes__cap--machine">
+            La máquina delantera y el primer vagón del AVE quedan destrozados
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-yebenes__aerial">
+      <video class="scene-yebenes__video" muted playsinline loop preload="auto">
+        <source src="assets/videos/video-1.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="scene-yebenes__callouts"></div>
+    {{> base/scroll-indicator }}
+  </div>
+</section>

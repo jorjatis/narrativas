@@ -1,18 +1,3 @@
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/styles.css
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/scripts.js
+https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/28/accidente-trenes/inc-scene-trenes.html
 
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/images/img-01.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/images/img-02.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/images/img-03.webp
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/images/preh-img.webp
-
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/includes/inc-pre-header.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/includes/inc-media-text-01.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/includes/inc-media-text-02.html
-https://s1.abcstatics.com/comun/narrativas/redaccion/2026/10/13/ceuta/includes/inc-media-text-03.html
-
-
-<!-- #include virtual="/comun/narrativas/redaccion/2026/10/13/ceuta/includes/inc-pre-header.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/10/13/ceuta/includes/inc-media-text-01.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/10/13/ceuta/includes/inc-media-text-02.html" -->
-<!-- #include virtual="/comun/narrativas/redaccion/2026/10/13/ceuta/includes/inc-media-text-03.html" -->
+<!-- #include virtual="/comun/narrativas/redaccion/2026/10/28/accidente-trenes/inc-scene-trenes.html" -->

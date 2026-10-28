@@ -1,0 +1,585 @@
+@use "../base/variables" as *;
+
+.v-c-cmp:has(.scene-yebenes) {
+  width: 100vw;
+  max-width: none;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 0;
+  background: #fff;
+}
+
+.scene-yebenes {
+  --dot: 10px;
+  --line-w: clamp(88px, 10vw, 150px);
+  --video-w: min(300px, 32vh, 28vw);
+  --anchor-x: 50%;
+  --anchor-y: 50%;
+  --scene-top: 0px;
+
+  position: relative;
+  z-index: 1;
+  height: calc(100vh - var(--scene-top));
+  height: calc(100dvh - var(--scene-top));
+  background: #fff;
+  color: #111;
+  user-select: none;
+
+  @media (max-width: $screen-xs) {
+    --line-w: 36px;
+    --video-w: min(168px, 46vw);
+  }
+
+  &:not(.is-ready) {
+    .scene-yebenes__world,
+    .scene-yebenes__slides,
+    .scene-yebenes__aerial,
+    .scene-yebenes__callouts,
+    .scr-ind {
+      visibility: hidden;
+    }
+  }
+
+  &__stage {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .scr-ind {
+    height: 100%;
+    z-index: 4;
+
+    &__c {
+      filter: none;
+    }
+
+    &__m {
+      border-color: #111;
+    }
+
+    &__w {
+      background: #111;
+    }
+
+    &__txt {
+      color: #111;
+    }
+  }
+
+  &__world {
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+
+    picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  &__slides {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  &__slide {
+    position: absolute;
+    inset: 0;
+
+    picture {
+      opacity: 0;
+    }
+
+    &:first-child picture {
+      opacity: 1;
+    }
+  }
+
+  &__plate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--slide-w, 100%);
+    height: var(--slide-h, 100%);
+    transform: translate(-50%, -50%);
+    container-type: size;
+    container-name: yeplate;
+
+    picture,
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      object-fit: contain;
+      pointer-events: none;
+    }
+  }
+
+  &__lead,
+  &__tag,
+  &__ave,
+  &__cap {
+    position: absolute;
+    margin: 0;
+    color: #1a1a1a;
+    font-family: $mcr, sans-serif;
+    font-size: 16px;
+    line-height: 1.35;
+  }
+
+  &__lead,
+  &__tag,
+  &__cap,
+  &__ave-label {
+    opacity: 0;
+  }
+
+  &__lead {
+    top: 10%;
+    right: 30%;
+    width: min(320px, 30%);
+  }
+
+  &__tag--iryo {
+    top: 56%;
+    left: 66.5%;
+  }
+
+  &__ave {
+    top: 0%;
+    left: 10%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__ave-draw {
+    display: flex;
+    align-items: center;
+    transform: rotate(211deg);
+    transform-origin: right center;
+    top: 15px;
+    position: relative;
+    left: 37px;
+  }
+
+  &__ave-label {
+    opacity: 0;
+  }
+
+  &__ave-shaft {
+    width: 108px;
+    height: 1.5px;
+    background: #1a1a1a;
+    transform: scaleX(0);
+    transform-origin: right center;
+  }
+
+  &__ave-head {
+    width: 16px;
+    height: 16px;
+    display: block;
+    fill: none;
+    stroke: #1a1a1a;
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    opacity: 0;
+    top: 0px;
+    left: 12px;
+    position: relative;
+  }
+
+  &__cap {
+    width: min(250px, 28%);
+    font-size: 15px;
+  }
+
+  &__curve {
+    position: absolute;
+    overflow: visible;
+    pointer-events: none;
+    opacity: 0;
+
+    path {
+      fill: none;
+      stroke: #1a1a1a;
+      stroke-width: 1.6px;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+  }
+
+  &__curve--wagons {
+    left: 16%;
+    top: 10%;
+    width: 26%;
+    height: 30%;
+  }
+
+  &__curve--iryo {
+    left: 30%;
+    top: 18%;
+    width: 22%;
+    height: 20%;
+  }
+
+  &__curve--machine {
+    left: 50%;
+    top: 32%;
+    width: 18%;
+    height: 18%;
+  }
+
+  &__cap--wagons {
+    top: 3%;
+    left: 30%;
+    width: min(200px, 22%);
+  }
+
+  &__cap--iryo {
+    top: 44%;
+    left: 8%;
+    width: min(230px, 24%);
+    text-align: right;
+  }
+
+  &__cap--machine {
+    top: 30%;
+    right: 23%;
+    bottom: auto;
+    width: min(220px, 24%);
+  }
+
+  @container yeplate (max-height: 520px) {
+    .scene-yebenes__cap {
+      font-size: 12px;
+      line-height: 1.22;
+    }
+
+    .scene-yebenes__cap--wagons {
+      width: 24%;
+    }
+
+    .scene-yebenes__cap--iryo,
+    .scene-yebenes__cap--machine {
+      width: 26%;
+    }
+  }
+
+  @media (max-width: $screen-xs) {
+    .scene-yebenes__lead,
+    .scene-yebenes__tag,
+    .scene-yebenes__ave,
+    .scene-yebenes__cap {
+      font-size: 13px;
+    }
+
+    .scene-yebenes__lead {
+      top: 12%;
+      right: 5%;
+      left: auto;
+      width: 46%;
+    }
+
+    .scene-yebenes__tag--iryo {
+      top: 46%;
+      left: auto;
+      right: 33%;
+    }
+
+    .scene-yebenes__ave {
+      top: 2%;
+      left: 5%;
+    }
+
+    .scene-yebenes__ave-label {
+      order: -1;
+    }
+
+    .scene-yebenes__ave-draw {
+      flex-direction: row-reverse;
+      transform: rotate(63deg);
+      transform-origin: left center;
+      left: -13px;
+    }
+
+    .scene-yebenes__ave-head {
+      transform: scaleX(-1);
+      top: 0px;
+      left: -13px;
+    }
+
+    .scene-yebenes__ave-shaft {
+      width: 78px;
+      transform-origin: left center;
+    }
+
+    .scene-yebenes__cap {
+      width: 46%;
+    }
+
+    .scene-yebenes__cap--wagons {
+      top: 1%;
+      left: auto;
+      right: 2%;
+      width: 52%;
+    }
+
+    .scene-yebenes__curve--wagons {
+      left: 22%;
+      top: 8%;
+      width: 30%;
+      height: 26%;
+    }
+
+    .scene-yebenes__cap--iryo {
+      top: 42%;
+      bottom: auto;
+      left: 5%;
+      right: unset;
+      text-align: left;
+      width: 35%;
+    }
+
+    .scene-yebenes__curve--iryo {
+      left: 18%;
+      top: 22%;
+      width: 28%;
+      height: 18%;
+    }
+
+    .scene-yebenes__cap--machine {
+      top: 20%;
+      bottom: auto;
+      left: 50%;
+    }
+
+    .scene-yebenes__curve--machine {
+      left: 8%;
+      top: 42%;
+      width: 22%;
+      height: 22%;
+    }
+  }
+
+  &__aerial {
+    position: absolute;
+    z-index: 3;
+    top: 22%;
+    left: 74.5%;
+    height: 49%;
+    aspect-ratio: 9 / 16;
+    transform: translateX(-50%);
+    overflow: hidden;
+    pointer-events: none;
+    clip-path: inset(0 0 100% 0);
+
+    @media (max-width: $screen-xs) {
+      top: 50%;
+      left: 50%;
+      right: auto;
+      height: auto;
+      width: min(58vw, 200px);
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__callouts {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  &__mark {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+
+    &.is-anchored {
+      left: var(--anchor-x);
+      top: var(--anchor-y);
+    }
+  }
+
+  &__dot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: 50%;
+    background: $cp1;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__line {
+    position: absolute;
+    left: calc(var(--dot) / 2);
+    top: 0;
+    width: var(--line-w);
+    height: 2px;
+    margin-top: -1px;
+    background: $cp1;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  &__frame {
+    position: absolute;
+    top: 0;
+    left: calc(var(--dot) / 2 + var(--line-w));
+    width: var(--video-w);
+    aspect-ratio: 9 / 16;
+    box-sizing: border-box;
+    border: 0;
+    background: transparent;
+    transform: translateY(-50%);
+    overflow: hidden;
+    clip-path: inset(0 0 100% 0);
+  }
+
+  &__video,
+  &__mock {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__video {
+    object-fit: cover;
+    background: #111;
+    z-index: 1;
+  }
+
+  &__frame:not(.has-media) &__video {
+    display: none;
+  }
+
+  &__frame.has-media &__mock {
+    display: none;
+  }
+
+  &__mock {
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.05), transparent 28%),
+      linear-gradient(160deg, #f7f4ee 0%, #e7e1d6 100%);
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -40%;
+      height: 40%;
+      background: linear-gradient(180deg, transparent, rgba(17, 17, 17, 0.08), transparent);
+      transform: translateY(0);
+    }
+  }
+
+  &__frame.is-playing &__mock::before {
+    animation: scene-yebenes-play 2.6s linear infinite;
+  }
+
+  &__mock-label {
+    position: relative;
+    z-index: 1;
+    font-family: $mcr, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #111;
+  }
+
+  &.is-static {
+    height: auto;
+    --video-w: min(168px, 28vw);
+    --line-w: 72px;
+
+    .scene-yebenes__stage {
+      height: auto;
+      overflow: hidden;
+    }
+
+    .scene-yebenes__world {
+      position: relative;
+      width: 100%;
+      height: auto;
+      transform: none !important;
+    }
+
+    .scene-yebenes__img {
+      width: 100%;
+      height: auto;
+    }
+
+    .scene-yebenes__dot,
+    .scene-yebenes__aerial {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scene-yebenes__aerial {
+      clip-path: none;
+    }
+
+    .scene-yebenes__dot {
+      transform: translate(-50%, -50%);
+    }
+
+    .scene-yebenes__line {
+      transform: none;
+    }
+
+    .scene-yebenes__frame {
+      clip-path: none;
+    }
+
+    .scene-yebenes__slides,
+    .scr-ind {
+      display: none;
+    }
+  }
+}
+
+@keyframes scene-yebenes-play {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(350%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-yebenes__mock::before {
+    animation: none !important;
+  }
+}
