@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import refreshScrollTriggerOnMedia from "./helpers/refreshScrollTriggerOnMedia";
+import refreshScrollTriggerOnMedia from "../helpers/refreshScrollTriggerOnMedia";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,25 +30,31 @@ function frameFor(width) {
 
 // Scroll (en alturas de viewport) por unidad de recorrido sobre la imagen.
 const SCROLL_PER_UNIT = 2.05;
-// Tres planos antes del vídeo: cada uno se queda un poco y se cruza con el siguiente.
-const S1 = 0.85;
-const XF = 0.4;
-const S2 = 0.7;
-const S3 = 1;
-const SOUT = 0.45;
-const SLIDES = S1 + XF + S2 + XF + S3 + SOUT;
-// El vídeo aéreo empieza en cuanto se ha ido el último plano.
-const INTRO = 0;
+// Scroll que aguanta cada uno de los tres planos antes del vídeo.
+const SLIDE_HOLDS = [1.05, 1.1, 1.2];
+// Margen tras el último plano para que se vayan sus textos antes de la aérea.
+const SOUT = 0.35;
 // La aérea se queda en pantalla, y un poco más antes de salir.
-const AERIAL_HOLD = 1.6;
+const AERIAL_HOLD = 1.85;
 // Travelling desde el plano general hasta el primer punto.
 const APPROACH = 1.25;
 // Salir de cada punto cuesta scroll, con un margen extra antes de moverse.
-const HOLD = 1.6;
+const HOLD = 1.9;
 // Travelling de vuelta al plano general.
 const EXIT = 1.25;
+// En móvil se scrollea más rápido y con inercia: todo se alarga, sobre todo
+// los tramos con vídeo, que si no pasan desapercibidos.
+const PACE = {
+  wide: { slides: 1.1, videos: 1.45, moves: 1.1 },
+  narrow: { slides: 1.7, videos: 2.7, moves: 1.5 },
+};
+// Los cambios de plano y los revelados van por tiempo: una vez disparados se
+// completan aunque se deje de scrollear.
+const SHOT_FADE = 0.6;
 // El indicador aguanta un tramo al entrar en la escena.
 const INDICATOR_PX = 280;
+// Scrub con catch-up: un flick recorre lo saltado en vez de saltárselo.
+const SCRUB = { wide: 0.55, narrow: 1.2 };
 
 const CLIP_HIDDEN = "inset(0% 0% 100% 0%)";
 const CLIP_SHOWN = "inset(0% 0% 0% 0%)";
@@ -64,6 +70,26 @@ function headerOffset() {
   if (cs.display === "none" || cs.visibility === "hidden") return 0;
   if (cs.position !== "sticky" && cs.position !== "fixed") return 0;
   return Math.round(header.getBoundingClientRect().height) || 0;
+}
+
+// ScrollTrigger sube el scroll a 0 para medir al refrescar; con scroll suave
+// ese salto no es instantáneo y el start sale desplazado. ABC vuelve a poner
+// `scroll-behavior: smooth` en línea sobre <html>, así que hay que vigilarlo.
+function keepInstantScroll() {
+  const html = document.documentElement;
+  const force = () => {
+    if (
+      html.style.getPropertyValue("scroll-behavior") !== "auto" ||
+      html.style.getPropertyPriority("scroll-behavior") !== "important"
+    ) {
+      html.style.setProperty("scroll-behavior", "auto", "important");
+    }
+  };
+  force();
+  new MutationObserver(force).observe(html, {
+    attributes: true,
+    attributeFilter: ["style"],
+  });
 }
 
 function mediaSrc(video) {
@@ -116,7 +142,7 @@ function buildCallout(mark) {
       "-=0.08"
     );
 
-  return { mark, frame, video, tl, open: false };
+  return { mark, frame, video, tl, open: false, hiding: false, hideGen: 0 };
 }
 
 function buildAerial(aerial) {
@@ -130,7 +156,7 @@ function buildAerial(aerial) {
     { clipPath: CLIP_SHOWN, duration: 0.58, ease: "power2.inOut" }
   );
 
-  return { mark: aerial, frame: aerial, video, tl, open: false };
+  return { mark: aerial, frame: aerial, video, tl, open: false, hiding: false, hideGen: 0 };
 }
 
 export function initSceneYebenes() {
@@ -138,6 +164,7 @@ export function initSceneYebenes() {
   if (!root || root.dataset.bound === "1") return;
   root.dataset.bound = "1";
 
+  keepInstantScroll();
   refreshScrollTriggerOnMedia();
 
   const stage = root.querySelector(".scene-yebenes__stage");
@@ -148,25 +175,9 @@ export function initSceneYebenes() {
   const marks = [...root.querySelectorAll(".scene-yebenes__mark")];
   if (!stage || !world || !aerial || marks.length < 2) return;
 
-  const opening = frameFor(stage.clientWidth || window.innerWidth);
-  const points = opening.points;
-  const T01 = normDist(points[0], points[1], opening.w / opening.h) * SCROLL_PER_UNIT;
-  const PRE = SLIDES + INTRO;
-  const FIRST_STOP = PRE + AERIAL_HOLD + APPROACH;
-  const TOTAL = FIRST_STOP + HOLD + T01 + HOLD + EXIT;
-
-  const holdStarts = [FIRST_STOP, FIRST_STOP + HOLD + T01];
-  const aerialStart = PRE / TOTAL;
-  const aerialEnd = (PRE + AERIAL_HOLD) / TOTAL;
-  const s1Until = S1 / TOTAL;
-  const s2From = (S1 + XF) / TOTAL;
-  const s2Until = (S1 + XF + S2) / TOTAL;
-  const s3From = (S1 + XF + S2 + XF) / TOTAL;
-  const s3Until = (S1 + XF + S2 + XF + S3) / TOTAL;
-
   const state = {
     fit: { x: 0, y: 0, scale: 1 },
-    points: points.map(() => ({ x: 0, y: 0 })),
+    points: FRAMES.wide.points.map(() => ({ x: 0, y: 0 })),
   };
 
   const layout = () => {
@@ -219,6 +230,7 @@ export function initSceneYebenes() {
   mm.add(
     {
       reduce: "(prefers-reduced-motion: reduce)",
+      narrow: "(max-width: 699px)",
       always: "(min-width: 1px)",
     },
     (context) => {
@@ -226,6 +238,29 @@ export function initSceneYebenes() {
         root.classList.add("is-static", "is-ready");
         return () => root.classList.remove("is-static", "is-ready");
       }
+
+      const narrow = context.conditions.narrow;
+      const pace = narrow ? PACE.narrow : PACE.wide;
+      const opening = frameFor(stage.clientWidth || window.innerWidth);
+      const [p0, p1] = opening.points;
+
+      const slideEnds = [];
+      SLIDE_HOLDS.reduce((sum, hold) => {
+        slideEnds.push(sum + hold * pace.slides);
+        return slideEnds[slideEnds.length - 1];
+      }, 0);
+      const PRE = slideEnds[slideEnds.length - 1] + SOUT * pace.slides;
+      const aerialHold = AERIAL_HOLD * pace.videos;
+      const hold = HOLD * pace.videos;
+      const approach = APPROACH * pace.moves;
+      const travel = normDist(p0, p1, opening.w / opening.h) * SCROLL_PER_UNIT * pace.moves;
+      const exit = EXIT * pace.moves;
+      const firstStop = PRE + aerialHold + approach;
+      const TOTAL = firstStop + hold + travel + hold + exit;
+
+      const holdStarts = [firstStop, firstStop + hold + travel];
+      const aerialStart = PRE / TOTAL;
+      const aerialEnd = (PRE + aerialHold) / TOTAL;
 
       const items = marks.map((mark) => {
         callouts.appendChild(mark);
@@ -237,8 +272,11 @@ export function initSceneYebenes() {
       const aerialItem = buildAerial(aerial);
 
       const show = (item) => {
+        item.hideGen += 1;
+        item.hiding = false;
         item.open = true;
         item.fade?.kill();
+        item.tl.eventCallback("onComplete", null);
         gsap.set(item.mark, { autoAlpha: 1 });
         item.frame.classList.add("is-playing");
         item.tl.timeScale(1);
@@ -246,25 +284,42 @@ export function initSceneYebenes() {
         playVideo(item.video);
       };
 
-      const hide = (item) => {
-        item.open = false;
-        item.frame.classList.remove("is-playing");
-        stopVideo(item.video);
-        item.tl.pause();
-        item.fade = gsap.to(item.mark, {
-          autoAlpha: 0,
-          duration: 0.18,
-          ease: "power1.out",
-          overwrite: "auto",
-        });
+      const hide = (item, force = false) => {
+        if (!force && item.hiding) return;
+        const gen = ++item.hideGen;
+        item.hiding = true;
+        const close = () => {
+          if (item.hideGen !== gen) return;
+          item.hiding = false;
+          item.open = false;
+          item.tl.eventCallback("onComplete", null);
+          item.frame.classList.remove("is-playing");
+          stopVideo(item.video);
+          item.tl.pause();
+          item.fade = gsap.to(item.mark, {
+            autoAlpha: 0,
+            duration: 0.18,
+            ease: "power1.out",
+            overwrite: "auto",
+          });
+        };
+
+        item.tl.eventCallback("onComplete", null);
+        if (!force && item.tl.isActive()) {
+          item.tl.eventCallback("onComplete", close);
+          return;
+        }
+        close();
       };
 
+      gsap.set(image, { "--sat": 1 });
+
       const dim = () => {
-        gsap.to(image, { filter: "saturate(0.5)", duration: 0.45, ease: "power1.out", overwrite: true });
+        gsap.to(image, { "--sat": 0.5, duration: 0.45, ease: "power1.out", overwrite: "auto" });
       };
 
       const clearDim = () => {
-        gsap.to(image, { filter: "saturate(1)", duration: 0.2, ease: "power1.out", overwrite: true });
+        gsap.to(image, { "--sat": 1, duration: 0.2, ease: "power1.out", overwrite: "auto" });
       };
 
       const showCallout = (item) => {
@@ -273,9 +328,9 @@ export function initSceneYebenes() {
         item.dimCall = gsap.delayedCall(0.4, dim);
       };
 
-      const hideCallout = (item) => {
+      const hideCallout = (item, force = false) => {
         item.dimCall?.kill();
-        hide(item);
+        hide(item, force);
         clearDim();
       };
 
@@ -287,7 +342,6 @@ export function initSceneYebenes() {
       const aveLabel = slide1.querySelector(".scene-yebenes__ave-label");
       const aveShaft = slide1.querySelector(".scene-yebenes__ave-shaft");
       const aveHead = slide1.querySelector(".scene-yebenes__ave-head");
-      const narrow = window.matchMedia("(max-width: 699px)").matches;
       const slide1Notes = [iryoTag, aveLabel, aveHead, aveShaft];
       const noteGroups = ["wagons", "iryo", "machine"].map((name) =>
         [
@@ -338,11 +392,69 @@ export function initSceneYebenes() {
         });
       };
 
+      const shots = slides.map((slide) => slide.querySelector("picture"));
+      const WORLD = shots.length;
+      // El último plano es la misma imagen que el mundo: el mundo se muestra
+      // debajo y el plate no se funde, para que no haya un fade de más.
+      const LAST = shots.length - 1;
+      let current = 0;
+      let zTop = 1;
+
+      gsap.set(shots, { autoAlpha: (index) => (index === 0 ? 1 : 0) });
       gsap.set(world, { autoAlpha: 0 });
+
+      const stageAt = (progress) => {
+        const units = progress * TOTAL;
+        const index = slideEnds.findIndex((end) => units < end);
+        return index === -1 ? WORLD : index;
+      };
+
+      // El plano entrante se funde por encima del que ya está opaco, así
+      // nunca asoma el fondo blanco a mitad de transición.
+      const showShot = (index) => {
+        if (index >= LAST) gsap.set(world, { autoAlpha: 1 });
+
+        if (index === WORLD || index === LAST) {
+          gsap.set(shots[LAST], { autoAlpha: 0, overwrite: true });
+          gsap.to(
+            shots.filter((_, i) => i !== LAST),
+            {
+              autoAlpha: 0,
+              duration: SHOT_FADE,
+              ease: "power1.inOut",
+              overwrite: true,
+            }
+          );
+          return;
+        }
+
+        const incoming = shots[index];
+        gsap.set(slides[index], { zIndex: ++zTop });
+        gsap.to(incoming, {
+          autoAlpha: 1,
+          duration: SHOT_FADE,
+          ease: "power1.inOut",
+          overwrite: true,
+          onComplete: () => {
+            if (current !== index) return;
+            gsap.set(
+              shots.filter((shot) => shot !== incoming),
+              { autoAlpha: 0, overwrite: true }
+            );
+            gsap.set(world, { autoAlpha: 0 });
+          },
+        });
+      };
 
       const sync = (progress, active) => {
         const started = active || progress > 0.001;
-        if (started && progress < s1Until) {
+        const next = stageAt(progress);
+        if (next !== current) {
+          current = next;
+          showShot(next);
+        }
+
+        if (started && current === 0) {
           if (!slide1On) {
             slide1On = true;
             slide1Fade?.kill();
@@ -354,7 +466,7 @@ export function initSceneYebenes() {
           slide1Fade = hideNotes(slide1Notes, tl1);
         }
 
-        if (progress >= s2From && progress < s2Until) {
+        if (current === 1) {
           if (!slide2On) {
             slide2On = true;
             slide2Fade?.kill();
@@ -365,7 +477,7 @@ export function initSceneYebenes() {
           slide2Fade = gsap.to(lead, { autoAlpha: 0, duration: 0.32, ease: "power1.out", overwrite: "auto" });
         }
 
-        if (progress >= s3From && progress < s3Until) {
+        if (current === 2) {
           if (!slide3On) {
             slide3On = true;
             slide3Fade?.kill();
@@ -377,15 +489,23 @@ export function initSceneYebenes() {
         }
 
         const aerialInside = progress >= aerialStart && progress < aerialEnd;
-        if (aerialInside && !aerialItem.open) show(aerialItem);
-        else if (!aerialInside && aerialItem.open) hide(aerialItem);
+        if (aerialInside && !aerialItem.open) {
+          items.forEach((item) => {
+            if (item.open) hideCallout(item, true);
+          });
+          show(aerialItem);
+        } else if (!aerialInside && aerialItem.open) {
+          hide(aerialItem, items.some((item) => item.open));
+        }
 
         items.forEach((item, index) => {
           const start = holdStarts[index] / TOTAL;
-          const end = (holdStarts[index] + HOLD) / TOTAL;
+          const end = (holdStarts[index] + hold) / TOTAL;
           const inside = progress >= start && progress < end;
-          if (inside && !item.open) showCallout(item);
-          else if (!inside && item.open) hideCallout(item);
+          if (inside && !item.open) {
+            if (aerialItem.open) hide(aerialItem, true);
+            showCallout(item);
+          } else if (!inside && item.open) hideCallout(item);
         });
       };
 
@@ -402,20 +522,24 @@ export function initSceneYebenes() {
 
       const camera = gsap.timeline({
         defaults: { ease: "none", force3D: true },
+        // El playhead (no el scroll crudo): con scrub numérico un flick
+        // recorre los beats y los fadeIns llegan a dispararse.
+        onUpdate() {
+          const st = this.scrollTrigger;
+          const progress = this.progress();
+          sync(progress, Boolean(st?.isActive) || progress > 0.001);
+          if (st) syncIndicator(st);
+        },
         scrollTrigger: {
           trigger: root,
           start: () => `top ${headerOffset()}px`,
           end: () => `+=${(stage.clientHeight || window.innerHeight) * TOTAL}`,
           pin: true,
-          scrub: true,
+          scrub: narrow ? SCRUB.narrow : SCRUB.wide,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            sync(self.progress, self.isActive);
-            syncIndicator(self);
-          },
           onRefresh: (self) => {
-            sync(self.progress, self.isActive);
+            sync(self.animation?.progress() ?? self.progress, self.isActive);
             syncIndicator(self);
           },
         },
@@ -436,24 +560,15 @@ export function initSceneYebenes() {
         {
           ...at(() => state.points[0]),
           scale: 1,
-          duration: APPROACH,
+          duration: approach,
         },
-        PRE + AERIAL_HOLD
+        PRE + aerialHold
       );
-
-      const shots = slides.map((slide) => slide.querySelector("picture"));
-      const atSlide = (units) => units;
-      camera.to(shots[0], { autoAlpha: 0, duration: XF, immediateRender: false }, atSlide(S1));
-      camera.to(shots[1], { autoAlpha: 1, duration: XF, immediateRender: false }, atSlide(S1));
-      camera.to(shots[1], { autoAlpha: 0, duration: XF, immediateRender: false }, atSlide(S1 + XF + S2));
-      camera.to(shots[2], { autoAlpha: 1, duration: XF, immediateRender: false }, atSlide(S1 + XF + S2));
-      camera.to(shots[2], { autoAlpha: 0, duration: SOUT, immediateRender: false }, atSlide(S1 + XF + S2 + XF + S3));
-      camera.to(world, { autoAlpha: 1, duration: SOUT, immediateRender: false }, atSlide(S1 + XF + S2 + XF + S3));
       camera.fromTo(
         world,
         { ...at(() => state.points[0]), scale: 1 },
-        { ...at(() => state.points[1]), scale: 1, duration: T01, immediateRender: false },
-        FIRST_STOP + HOLD
+        { ...at(() => state.points[1]), scale: 1, duration: travel, immediateRender: false },
+        firstStop + hold
       );
       camera.fromTo(
         world,
@@ -462,10 +577,10 @@ export function initSceneYebenes() {
           x: () => state.fit.x,
           y: () => state.fit.y,
           scale: () => state.fit.scale,
-          duration: EXIT,
+          duration: exit,
           immediateRender: false,
         },
-        FIRST_STOP + HOLD + T01 + HOLD
+        firstStop + hold + travel + hold
       );
 
       root.classList.add("is-ready");
@@ -481,9 +596,10 @@ export function initSceneYebenes() {
           mark.style.left = `${x}%`;
           mark.style.top = `${y}%`;
         });
-        gsap.killTweensOf([image, aerial]);
-        gsap.set(aerial, { clearProps: "opacity,visibility" });
-        gsap.set(image, { clearProps: "filter" });
+        gsap.killTweensOf([image, aerial, world, ...shots]);
+        gsap.set([aerial, world, ...shots], { clearProps: "opacity,visibility" });
+        gsap.set(slides, { clearProps: "zIndex" });
+        gsap.set(image, { clearProps: "--sat" });
         root.classList.remove("is-ready");
       };
     }

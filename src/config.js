@@ -4,6 +4,15 @@ import './assets/styles/styles.scss';
 // // Cargar js principal
 import './js/main.js';
 
+// import gsap from 'gsap';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// window.gsap = gsap;
+// window.ScrollTrigger = ScrollTrigger;
+
+// // Tras los globals, como en prod (scripts de GSAP y luego el full).
+// require('./js/main-full.js');
+
 /**
  * Lógica de Renderizado Dinámico
  * Solo se ejecuta en Modo Desarrollo (npm start / webpack serve)

@@ -1,5 +1,5 @@
 // NOTE: Helpers
-import { initSceneYebenes } from "./scene-yebenes";
+import { initSceneYebenes } from "./modules/scene-yebenes";
 
 // NOTE: Modules
 
