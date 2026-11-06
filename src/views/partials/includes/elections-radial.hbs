@@ -2,7 +2,7 @@
   <h3 class="v-elec-t">Cómo de cerca estás de los partidos <br> políticos según la temática</h3>
   
   <div class="v-slc-c v-slc-c--c">
-    <div class="v-slc" data-voc-component="select">
+    <div class="v-slc" data-voc-component="select" data-series="tu">
       <button class="v-slc__h v-slc__b" type="button">
         <span class="v-slc__t">
           <span class="v-slc__party-color is-default"></span>
@@ -18,23 +18,23 @@
         <div class="v-slc__n">
           <ul class="v-slc__u">
             <li class="v-slc__l">
-               <button class="v-slc__a" type="button">
+               <button class="v-slc__a" type="button" data-series="tu">
                 <span class="v-slc__party-color is-default"></span>
                 TÚ
               </button>
-              <button class="v-slc__a" type="button">
+              <button class="v-slc__a" type="button" data-series="pp">
                 <span class="v-slc__party-color is-pp"></span>
                 PP
               </button>
             </li>
             <li class="v-slc__l">
-              <button class="v-slc__a" type="button">
+              <button class="v-slc__a" type="button" data-series="psoe">
                 <span class="v-slc__party-color is-psoe"></span>
                 PSOE
               </button>
             </li>
             <li class="v-slc__l">
-              <button class="v-slc__a" type="button">
+              <button class="v-slc__a" type="button" data-series="vox">
                 <span class="v-slc__party-color is-vox"></span>
                 VOX
               </button>
@@ -46,7 +46,7 @@
 
     <span class="v-slc__txt">Vs.</span>
 
-    <div class="v-slc" data-voc-component="select">
+    <div class="v-slc" data-voc-component="select" data-series="pp">
       <button class="v-slc__h v-slc__b" type="button">
         <span class="v-slc__t">
           <span class="v-slc__party-color is-pp"></span>
@@ -62,23 +62,23 @@
         <div class="v-slc__n">
           <ul class="v-slc__u">
             <li class="v-slc__l">
-              <button class="v-slc__a" type="button">
+              <button class="v-slc__a" type="button" data-series="tu">
                 <span class="v-slc__party-color is-default"></span>
                 TÚ
               </button>
-              <button class="v-slc__a" type="button">
+              <button class="v-slc__a" type="button" data-series="pp">
                 <span class="v-slc__party-color is-pp"></span>
                 PP
               </button>
             </li>
             <li class="v-slc__l">
-              <button class="v-slc__a" type="button">
+              <button class="v-slc__a" type="button" data-series="psoe">
                 <span class="v-slc__party-color is-psoe"></span>
                 PSOE
               </button>
             </li>
             <li class="v-slc__l">
-              <button class="v-slc__a" type="button">
+              <button class="v-slc__a" type="button" data-series="vox">
                 <span class="v-slc__party-color is-vox"></span>
                 VOX
               </button>
@@ -88,4 +88,6 @@
       </div>
     </div>
   </div>
+
+  <div class="v-elec-radial__chart"></div>
 </div>

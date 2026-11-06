@@ -2,4 +2,73 @@
 
 .v-elec-radial {
   margin-top: 100px;
+
+  &__chart {
+    width: 100%;
+    margin: 28px auto 0;
+
+    @media (max-width: 439px) {
+      width: calc(100vw - 8px);
+      margin-left: calc(50% - 50vw + 6px);
+    }
+
+    @media (min-width: $screen-xs) {
+      margin-top: 48px;
+    }
+
+    @media (min-width: 840px) {
+      width: 800px;
+      margin-left: calc(50% - (800px / 2));
+    }
+  }
+
+  &__grid {
+    fill: none;
+    stroke: $cb6;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  &__tick {
+    font-family: $mcr;
+    font-size: 14px;
+    line-height: normal;
+    fill: #767676; 
+
+    @media (max-width: 840px) {
+      display: none;
+    }
+  }
+
+  &__label {
+    font-family: $mcs;
+    font-size: 12px;
+    line-height: normal;
+    fill: $cb8;
+
+    @media (max-width: ($screen-xs - 1px)) {
+      text-anchor: middle;
+    }
+
+    @media (min-width: 440px) {
+      font-size: 14px;
+    }
+
+    @media (min-width: 840px) {
+      font-size: 16px;
+    }
+  }
+
+  &__area {
+    stroke: none;
+    fill-opacity: 0.1;
+  }
+
+  &__line {
+    fill: none;
+    stroke-width: 2;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 2;
+    vector-effect: non-scaling-stroke;
+  }
 }

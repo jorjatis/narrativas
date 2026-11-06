@@ -16,18 +16,6 @@
 .v-elec-bars {
   margin-top: 100px;
 
-  .v-slc-c {
-    position: sticky;
-    top: 52px;
-    z-index: 3;
-    padding: 8px 0 0;
-    background: $cp15;
-
-    @media (min-width: $screen-xs) {
-      top: 60px;
-    }
-  }
-
   &__list {
     position: relative;
     height: 510px;

@@ -1,12 +1,18 @@
 // NOTE: Helpers
 
 // NOTE: Modules
-import { initMockDataBars } from './modules/mockData';
+import { initBars } from './modules/electionsBars';
+import { initRadial } from './modules/electionsRadial';
 import { loadMoreQuestions } from './modules/loadMoreQuestions';
+import { selectPartyColor } from './modules/selectPartyColor';
+import { selectRivals } from './modules/selectRivals';
 
 export function initAll() {
-  initMockDataBars();
+  initBars();
+  initRadial();
   loadMoreQuestions();
+  selectPartyColor();
+  selectRivals();
 }
 
 // NOTE: Para prod el evento load de window se borra, dejamos solo:

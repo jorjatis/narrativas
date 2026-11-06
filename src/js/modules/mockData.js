@@ -1,6 +1,4 @@
-const partyChosen = 'pp';
-
-const parties = [
+export const parties = [
   { id: 'pp', name: 'PP', colorClass: 'is-pp' },
   { id: 'psoe', name: 'PSOE', colorClass: 'is-psoe' },
   { id: 'vox', name: 'VOX', colorClass: 'is-vox' },
@@ -17,9 +15,29 @@ const parties = [
   { id: 'salf', name: 'SALF', colorClass: 'is-salf' },
 ];
 
-function getParty(id) {
+export const partyChosen = 'pp';
+
+export function getParty(id) {
   return parties.find((party) => party.id === id);
 }
+
+export const themes = [
+  'Inmigración',
+  'Vivienda',
+  'Territorialidad',
+  'Impuestos',
+  'Derechos sociales',
+  'Medio ambiente',
+  'Seguridad',
+  'Unión Europea',
+];
+
+export const themeScores = {
+  tu: [4, 2, 3, 3, 5, 3, 3, 3],
+  pp: [2, 4, 4, 3, 2, 2, 5, 3],
+  psoe: [3, 4, 2, 4, 5, 4, 2, 4],
+  vox: [5, 1, 5, 1, 2, 1, 5, 2],
+};
 
 const userAnswers = [
   4, 3, 2, 3, 4, 2, 3, 4, 3, 3, 4, 4, 5, 2, 3, 4, 3, 2, 2, 4, 3, 3, 2, 3
@@ -46,60 +64,4 @@ export function getDistances(partyId) {
   if (!answers) return [];
 
   return userAnswers.map((userScore, index) => distance(userScore, answers[index]));
-}
-
-function setColorClass(el, colorClass) {
-  el.classList.remove('is-default');
-  parties.forEach((party) => el.classList.remove(`is-${party.id}`));
-  el.classList.add(colorClass);
-}
-
-function applyParty(root, party) {
-  const distances = getDistances(party.id);
-  const items = root.querySelectorAll('.v-elec-bars__item');
-
-  items.forEach((item, index) => {
-    if (distances[index] == null) return;
-    item.style.setProperty('--dist', distances[index]);
-
-    const dot = item.querySelector('.v-elec-bars__dot--party');
-    const name = item.querySelector('.v-elec-bars__name--party');
-    if (dot) setColorClass(dot, party.colorClass);
-    if (name) {
-      name.textContent = party.name;
-      name.classList.toggle('is-on-top', distances[index] === 0);
-    }
-  });
-}
-
-function setSelectLabel(select, party) {
-  const label = select.querySelector('.v-slc__t');
-  if (!label) return;
-
-  const dot = document.createElement('span');
-  dot.className = `v-slc__party-color ${party.colorClass}`;
-  label.replaceChildren(dot, document.createTextNode(party.name));
-}
-
-export function initMockDataBars() {
-  const root = document.querySelector('.v-elec-bars');
-  if (!root) return;
-
-  const select = root.querySelector('.v-slc');
-  const initial = getParty(partyChosen);
-  if (!select || !initial || !partyAnswers[initial.id]) return;
-
-  applyParty(root, initial);
-  setSelectLabel(select, initial);
-
-  select.addEventListener('click', (event) => {
-    const option = event.target.closest('.v-slc__a');
-    if (!option || !select.contains(option)) return;
-
-    const party = getParty(option.dataset.party);
-    if (!party || !partyAnswers[party.id]) return;
-
-    applyParty(root, party);
-    requestAnimationFrame(() => setSelectLabel(select, party));
-  }, true);
 }
