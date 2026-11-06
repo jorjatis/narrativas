@@ -2,12 +2,14 @@
 
 // NOTE: Modules
 import { initBars } from './modules/electionsBars';
+import { initMatriz } from './modules/electionsMatriz';
 import { initRadial } from './modules/electionsRadial';
 import { loadMoreQuestions } from './modules/loadMoreQuestions';
 import { selectPartyColor } from './modules/selectPartyColor';
 import { selectRivals } from './modules/selectRivals';
 
 export function initAll() {
+  initMatriz();
   initBars();
   initRadial();
   loadMoreQuestions();

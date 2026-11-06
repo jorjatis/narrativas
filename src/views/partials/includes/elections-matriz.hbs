@@ -1,5 +1,5 @@
 <div class="v-elec-wdg v-elec-matriz">
-  <h3 class="v-elec-t">Este es el partido más cercano  a tus posiciones</h3>
+  <h3 class="v-elec-t">Este es el partido más <span class="v-elec-matriz__break"></span>cercano a tus posiciones</h3>
 
   <div class="v-elec-res">
     <div class="v-elec-res__party">
@@ -7,17 +7,55 @@
       <h4 class="v-elec-res__party-name">VOX</h4>
     </div>
     <p class="v-elec-res__txt">
-      Qué tan cerca estás de tu elección (<span class="v-elec-res__party-chosen">PP</span>): 
-      <span class="v-elec-res__party-percent">30%</span>
+      Qué tan cerca estás de tu elección (<span class="v-elec-res__party-chosen">PP</span>):
+      <span class="v-elec-res__party-percent">84%</span>
     </p>
   </div>
 
+  <div class="v-elec-matriz__chart">
+    <p class="v-elec-matriz__axis v-elec-matriz__axis--n">
+      <span class="v-elec-matriz__k"><span class="v-elec-matriz__eje">Eje </span><span class="v-elec-matriz__word">social</span></span>
+      <span class="v-elec-matriz__v">Conservador</span>
+    </p>
+    <p class="v-elec-matriz__axis v-elec-matriz__axis--w">
+      <span class="v-elec-matriz__k"><span class="v-elec-matriz__eje">Eje </span><span class="v-elec-matriz__word">económico</span></span>
+      <span class="v-elec-matriz__v">Izquierda</span>
+    </p>
+    <div class="v-elec-matriz__frame">
+      <div class="v-elec-matriz__plot"></div>
+    </div>
+    <p class="v-elec-matriz__axis v-elec-matriz__axis--e">
+      <span class="v-elec-matriz__v">Derecha</span>
+    </p>
+    <div class="v-elec-matriz__south">
+      <p class="v-elec-matriz__axis v-elec-matriz__axis--s">
+        <span class="v-elec-matriz__v">Progresista</span>
+      </p>
+      <label class="v-elec-matriz__toggle">
+        <input class="v-elec-matriz__input" type="checkbox" checked>
+        <span class="v-elec-matriz__switch" aria-hidden="true"></span>
+        Otros lectores
+      </label>
+    </div>
+  </div>
+
   <div class="v-btn-c v-btn-c--c">
-    <button class="v-btn v-btn-g v-btn-i--l v-btn--xl">
+    <button class="v-btn v-btn-g v-btn-i--l v-btn--xl" type="button">
       <span class="v-i">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 14"><path d="m10.501.9 5.985 5.388.513.462-.528.443-5.986 5.029-.985.829V8.723c-2.38 0-4.385.105-6.104.755a7.5 7.5 0 0 0-2.335 1.4l-.942-.703c.233-.499.51-1.024.84-1.55 1.48-2.362 3.991-4.723 8.135-4.868L9.5 3.75V-.001zm.198 4.05H9.5c-3.445 0-5.64 1.686-7.057 3.624q.26-.117.529-.22c1.945-.734 4.149-.83 6.528-.83h1.2v2.952l4.47-3.757-4.47-4.026z"/></svg>
       </span>
       Compartir mi resultado
     </button>
+  </div>
+
+  <div class="v-elec-matriz__mock">
+    <div class="v-elec-matriz__mock-row">
+      <label class="v-elec-matriz__mock-field">
+        <span class="v-elec-matriz__mock-k">Elige partido</span>
+        <select class="v-elec-matriz__mock-select"></select>
+      </label>
+      <button class="v-elec-matriz__mock-btn" type="button">Tú random</button>
+      <button class="v-elec-matriz__mock-btn v-elec-matriz__mock-btn--block" type="button">Otros random</button>
+    </div>
   </div>
 </div>
