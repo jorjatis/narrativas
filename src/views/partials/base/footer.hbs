@@ -3,9 +3,17 @@
     <div class="v-f__w v-f__w--1">
       <div class="v-f__g v-f__g--1">
         <div class="v-log v-log--1">
-          <p class="v-log__p">Copyright © DIARIO ABC, S.L.</p>
+          {{#if metadata.edition.ppll}}
+            <p class="v-log__p">Copyright © DIARIO EL CORREO, S.A.<span>Sociedad Unipersonal.</span><span>C/ Gran Vía 45, 3ª planta, 48011 Bilbao</span> </p>
+          {{else}}
+            <p class="v-log__p">Copyright © DIARIO ABC, S.L.</p>
+          {{/if}}
           <a href="#" class="v-log__a" title="[TEXTO ANCHOR TEXT]">
-            <img class="v-log__i" src="assets/images/logos/logo-abc-2.svg" alt="[ALTERNATIVE TEXT]">
+            {{#if metadata.edition.ppll}}
+              <img class="v-log__i" src="assets/images/logos/logo-elcorreo.svg" alt="[ALTERNATIVE TEXT]">
+            {{else}}
+              <img class="v-log__i" src="assets/images/logos/logo-abc-2.svg" alt="[ALTERNATIVE TEXT]">
+            {{/if}}
           </a>
         </div>
         <div class="v-f__n v-f__n--1">

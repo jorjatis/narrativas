@@ -1,0 +1,226 @@
+@use "../base/variables" as *;
+
+@property --dist {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@keyframes showMoreChevron {
+  0% { transform: translateY(0); }
+  35% { transform: translateY(6px); }
+  70% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.v-elec-bars {
+  margin-top: 100px;
+
+  &__list {
+    position: relative;
+    height: 510px;
+    margin: 32px auto 0;
+    padding: 0 20px;
+    overflow: hidden;
+
+    @media (min-width: $screen-xxs) {
+      padding: 0 32px;
+    }
+
+    @media (min-width: $screen-xs) {
+      height: 752px;
+      margin-top: 42px;
+      padding: 0 24px;
+    }
+
+    &.is-open {
+      height: auto;
+    }
+
+    &:not(.is-open)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      height: 92px;
+      background: linear-gradient(to bottom, rgba($cp15, 0) 0%, rgba($cp15, .25) 28%, $cp15 100%);
+      pointer-events: none;
+    }
+  }
+
+  &__item {
+    text-align: center;
+    transition: --dist .45s ease;
+
+    & + & {
+      margin-top: 16px;
+
+      @media (min-width: $screen-xs) {
+        margin-top: 24px;
+      }
+    }
+  }
+
+  &__k {
+    font: 15px/normal $mcr;
+    color: $cb8;
+
+    @media (min-width: $screen-xs) {
+      font-size: 16px;
+    }
+
+    b {
+      font-family: $mcs;
+    }
+  }
+
+  &__q {
+    max-width: 260px;
+    margin: 8px auto 0;
+    font: 16px/normal $atl;
+    letter-spacing: -.08px;
+
+    @media (min-width: $screen-xs) {
+      max-width: 360px;
+      margin-top: 16px;
+      font-size: 22px;
+      letter-spacing: -.11px;
+    }
+  }
+
+  &__bar {
+    margin-top: 16px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: 36px;
+    }
+  }
+
+  &__track {
+    position: relative;
+    height: 20px;
+
+    @media (min-width: $screen-xs) {
+      height: 40px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: $cb5;
+      transform: translateY(-50%);
+
+      @media (min-width: $screen-xs) {
+        height: 5px;
+      }
+    }
+  }
+
+  &__fill {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 0;
+    width: calc(var(--dist) * 1%);
+    height: 3px;
+    background: $cb9;
+    transform: translateY(-50%);
+  }
+
+  &__dot {
+    position: absolute;
+    top: 50%;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    @media (min-width: $screen-xs) {
+      width: 40px;
+      height: 40px;
+      border-width: 4px;
+    }
+
+    &--party {
+      left: 0;
+      z-index: 1;
+    }
+
+    &--you {
+      left: calc(var(--dist) * 1%);
+      z-index: 2;
+      background: $cb2;
+      border-color: $cb9;
+    }
+  }
+
+  &__labels {
+    position: relative;
+    height: 16px;
+    margin-top: 8px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: 12px;
+    }
+  }
+
+  &__name {
+    position: absolute;
+    top: 0;
+    font: 16px/1 $mcs;
+    color: $cb8;
+    transform: translateX(-50%);
+
+    @media (min-width: $screen-xs) {
+      font-size: 18px;
+    }
+
+    &--party {
+      left: 0;
+      transition: opacity .45s ease;
+
+      &.is-on-top {
+        opacity: 0;
+      }
+    }
+
+    &--you {
+      left: calc(var(--dist) * 1%);
+    }
+  }
+
+  &__more {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 36px auto 0;
+    font: 18px/1 $mcr;
+    cursor: pointer;
+
+    &[hidden] {
+      display: none;
+    }
+
+    &:hover {
+      opacity: .7;
+    }
+
+    .v-b-i {
+      display: block;
+      width: 15px;
+      height: 9px;
+    }
+
+    &:hover .v-b-i {
+      animation: showMoreChevron .7s ease;
+    }
+  }
+}

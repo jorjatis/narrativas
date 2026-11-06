@@ -1,0 +1,163 @@
+@use "../base/variables" as *;
+@use "../base/variables-custom" as *;
+
+.is-default { background: $cb9; }
+.is-pp { background: $pp; }
+.is-psoe { background: $psoe; }
+.is-vox { background: $vox; }
+.is-frente-amplio { background: $frente-amplio; }
+.is-erc { background: $erc; }
+.is-eh-bildu { background: $eh-bildu; }
+.is-junts { background: $junts; }
+.is-pnv { background: $pnv; }
+.is-podemos { background: $podemos; }
+.is-cc { background: $cc; }
+.is-adelante { background: $adelante; }
+.is-bng { background: $bng; }
+.is-compromis { background: $compromis; }
+.is-salf { background: $salf; }
+
+.v-elec-wdg {
+  .v-slc-c {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+
+    @media (min-width: $screen-xs) {
+      margin-top: 60px;
+    }
+
+    &--c {
+      justify-content: center;
+      gap: 16px;
+    }
+  }
+
+  .v-slc {
+    width: max-content;
+    min-width: 160px;
+    font: 16px/1 $mcs;
+    color: $cb9;
+
+    @media (min-width: $screen-xs) {
+      min-width: 180px;
+      font-size: 18px;
+    }
+
+    .v-b-i {
+      width: 15px;
+      height: 9px;
+    }
+
+    &__h {
+      height: 50px;
+      padding: 0 18px 0 12px;
+      border-color: #D6D4CE;
+    }
+
+    &__party-color {
+      display: block;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    &__c {
+      padding: 4px 0 8px;
+    }
+
+    &__a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px 8px 12px;
+      font-family: $mcr;
+      line-height: 1.25;
+    }
+
+    &__txt {
+      font: 18px/1 $mcr;
+      text-transform: uppercase;
+    }
+
+    &.is-open {
+      filter: none;
+
+      .v-slc__t {
+        font-family: $mcs;
+      }
+    }
+  }
+}
+
+.v-elec-h {
+  margin-top: 49px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+
+  svg {
+    width: 49px;
+  }
+
+  span {
+    font-family: $ats;
+    font-size: 20px;
+    line-height: normal;
+  }
+}
+
+.v-elec-t {
+  font-family: $ats;
+  font-size: 22px;
+  line-height: normal;
+  color: $cb9;
+  text-align: center;
+
+  @media (min-width: $screen-xs) {
+    font-size: 30px;
+  }
+}
+
+.v-elec-res {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 36px;
+  font-family: $mcr;
+  line-height: normal;
+  color: $cb8;
+  text-align: center;
+
+  &__txt {
+    margin-top: 6px;
+    font-size: 16px;
+  }
+
+  &__party {
+    &-color {
+      display: block;
+      width: 30px;
+      aspect-ratio: 1;
+      border-radius: 100%;
+
+      @media (min-width: $screen-xs) {
+        width: 50px;
+      }
+    }
+
+    &-name {
+      margin-top: 8px;
+      font-family: $mcs;
+      font-size: 18px;
+    }
+
+    &-percent {
+      display: block;
+      margin-top: 2px;
+      font-family: $mcs;
+      font-size: 16px;
+    }
+  }
+}

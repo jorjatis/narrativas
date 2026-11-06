@@ -145,7 +145,7 @@
 </div>
 
 {{!-- Cabecera --}}
-<header class="v-h v-h--t3" data-voc-component="header">
+<header class="v-h {{#if metadata.edition.ppll}}v-h--t2{{else}}v-h--t3{{/if}}" data-voc-component="header">
   <div class="v-h__c">
     <div class="v-h__g v-c">
       <div class="v-h__w v-h__w--1">
@@ -162,6 +162,8 @@
           <a href="#" class="v-log__a" title="[TEXTO ANCHOR TEXT]">
             {{#if metadata.edition.sevilla}}
             <img class="v-log__i" src="assets/images/logos/logo-ABCSevilla.svg" alt="[ALTERNATIVE TEXT]">
+            {{else if metadata.edition.ppll}}
+            <img class="v-log__i" src="assets/images/logos/logo-elcorreo.svg" alt="[ALTERNATIVE TEXT]">
             {{else}}
             <img class="v-log__i" src="assets/images/logos/logo-abc.svg" alt="[ALTERNATIVE TEXT]">
             {{/if}}

@@ -1,181 +1,33 @@
 @use "../base/variables" as *;
 
-html {
-  scroll-behavior: unset !important;
-  // Evita el salto L/R al pinear ScrollTrigger (scrollbar on/off)
-  scrollbar-gutter: stable;
+.v-h, .v-f {
+  background: $cb2;
 }
 
-$bg-color: #fff;
-
-body {
-  touch-action: pan-y;
-
-  // Si tiene fondo de color diferente al blanco
-  // background: $bg-color;
-  // .v-h__c {
-  //   transition: background 0.2s ease;
-  // }
-  // .v-h:not(.is-fixed) .v-h__c, .v-w-c--2,.v-f__w--3:before {
-  //   background: $bg-color;
-  // }
-
-  // Paywall
-  .v-w > * {
-    margin-bottom: 0;
-    padding-bottom: 40px;
-
-    @media (min-width: $screen-xs) {
-      padding-bottom: 70px;
-    }
-  }
-
-  .v-w-c--2 {
-    position: relative;
-    background: $bg-color;
-  }
-
-  .v-f {
-    background: $bg-color;
-
-    &__w--3 {
-      &:before {
-        background: $bg-color;
-      }
-    }
-  }
-
-  // Publicidad cabecera
-  &:has(.v-h-a) {
-    .v-h-a {
-      position: relative;
-      z-index: 12;
-    }
-  }
+body, .v-w {
+  background: $cp15;
 }
 
-.v-w {
-  .v-a--d-s-1 {
-    .v-a-lnk {
-      > div {
-        height: 100%;
-        display: flex;
-        justify-content: center;
+.v-btn:hover .v-i svg, .v-btn:hover .v-b-i svg {
+    fill: $cb2;
+}
 
-        video-js {
-          > video {
-            object-fit: cover !important;
-          }
-        }
-      }
-    }
+.v-btn-c {
+  margin-top: 50px;
 
-    .v-a-inf-c {
-      // display: none;
-      justify-content: flex-end;
-      padding-bottom: 110px;
-
-      @media (max-width: 500px) {
-        padding-bottom: 90px;
-      }
-
-      .v-a-p-t,
-      .v-a-t,
-      .v-a-s-t {
-        color: $cb1;
+  .v-btn {
+    &--xl {
+      @media (max-width: $screen-xs) {
+        height: 42px;
+        font-size: 16px;
       }
 
       .v-i {
-        display: none;
-
-        @media (max-width: 500px) {
-          margin-top: 12px;
-        }
-
-        svg {
-          fill: $cb1;
+        @media (max-width: $screen-xs) {
+          width: 16px;
+          height: 16px;
         }
       }
     }
-
-    .v-a-img-c {
-      &:after {
-        content: none;
-      }
-    }
   }
-
-  .v-d--abc {
-    .v-a-s-t {
-      text-align: center;
-      font:
-        1.375rem/1.75rem ABC Text Light,
-        serif;
-      color: $cb1;
-      margin: 36px 0 92px;
-    }
-
-    // .v-c-cmp--xl {
-    //   .v-cmp-m {
-    //     .v-fc {
-    //       text-align: center;
-    //     }
-    //   }
-    // }
-
-    .v-cmp-gli {
-      @media (max-width: $screen-xs) {
-        padding-bottom: 30px;
-      }
-
-      .v-sld.is-touch .v-sld__b-c {
-        display: flex;
-      }
-    }
-  }
-}
-
-.v-cmp-crd {
-  margin-top: 92px;
-}
-
-.v-c-cmp > .v-d-p {
-  &:not(:last-child) {
-    margin-bottom: 24px;
-  }
-}
-
-.v-n-video-autoplay {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 90px 0;
-}
-
-.v-c-cmp:has(.v-n-video-autoplay) {
-  @media (max-width: 609px) {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-}
-
-.voc-ai2html {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px !important;
-  margin-bottom: 60px !important;
-}
-
-body.is-loaded {
-  .v-w .v-a--d-s-1 .v-a-inf-c .v-a-t {
-    opacity: 1;
-  }
-}
-
-.v-crt--t2 .v-crt__c {
-  z-index: 20;
 }

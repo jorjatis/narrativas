@@ -1,10 +1,12 @@
 // NOTE: Helpers
-import { initSceneYebenes } from "./modules/scene-yebenes";
 
 // NOTE: Modules
+import { initMockDataBars } from './modules/mockData';
+import { loadMoreQuestions } from './modules/loadMoreQuestions';
 
 export function initAll() {
-  initSceneYebenes();
+  initMockDataBars();
+  loadMoreQuestions();
 }
 
 // NOTE: Para prod el evento load de window se borra, dejamos solo:

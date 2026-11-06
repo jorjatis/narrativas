@@ -45,6 +45,11 @@ $cb9: #202020;
 // ---------------------------------------
 // Fuentes
 // ---------------------------------------
+// $marca llega desde styles.scss (@use ... with). Default: abc.
+// La ven todos los partials que cargan estas variables, incluido _global.scss.
+// Con ppll se sustituye cada familia ABC por su equivalente PPLL.
+
+$marca: abc !default;
 
 $adel: 'ABC Display ExtraLight', serif;
 $adl: 'ABC Display Light', serif;
@@ -58,6 +63,21 @@ $atsi: 'ABC Text Semibold Italic', serif;
 $mcr: 'Micrograph Regular', sans-serif;
 $mcs: 'Micrograph Semibold', sans-serif;
 $axs: 'ABC XCond Semibold', serif;
+
+@if $marca == ppll {
+  $adel: 'PPLL Vocento Light', serif !global;
+  $adl: 'PPLL Vocento Light', serif !global;
+  $ads: 'PPLL Vocento Semibold', serif !global;
+
+  $atl: 'PPLL Vocento Light', serif !global;
+  $atli: 'PPLL Vocento Light Italic', serif !global;
+  $ats: 'PPLL Vocento Semibold', serif !global;
+  $atsi: 'PPLL Vocento Semibold Italic', serif !global;
+
+  $mcr: 'PPLL Sans Regular', serif !global;
+  $mcs: 'PPLL Sans Semibold', serif !global;
+  $axs: 'PPLL Sans Semibold', serif !global;
+}
 
 // ---------------------------------------
 // Media queries

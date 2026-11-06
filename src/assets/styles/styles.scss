@@ -1,8 +1,17 @@
-@use './base/variables' as *;
-@use './base/variables-custom' as *;
+// Marcador del proyecto: abc | ppll
+// Lo leen las fuentes y cualquier partial cargado debajo, como _global.scss
+@use './base/variables' as * with (
+  $marca: ppll,
+);
 
-// // Kraken componentes
+@use './base/global';
 
-// // Componentes
-@use './components/scroll-indicator';
-@use './components/scene-yebenes';
+@use './kraken-components/select';
+@use './kraken-components/notas-al-pie';
+@use './kraken-components/credits';
+
+@use './components/elections-global';
+
+@use './components/elections-matriz';
+@use './components/elections-radial';
+@use './components/elections-bars';

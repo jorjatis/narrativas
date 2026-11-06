@@ -1,6 +1,7 @@
 {
   "metadata": {
     "edition": {
+      "ppll": false, 
       "sevilla": false
     },
     "subedition": {
@@ -9,7 +10,7 @@
     "coverUrl": "https://s1.abcstatics.com/abc/www/multimedia/espana/2026/07/25/cibeles-1200x672.jpg",
     "img": {
       "exists": true,
-      "preArticleHeader": true,
+      "preArticleHeader": false,
       "src": false,
       "figcaption": false,
       "figcaptionText": false
