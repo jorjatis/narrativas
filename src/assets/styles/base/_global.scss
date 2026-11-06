@@ -1,33 +1,9 @@
 @use "../base/variables" as *;
 
-.v-h, .v-f {
+.v-h:not(.is-fixed), .v-f {
   background: $cb2;
 }
 
 body, .v-w {
   background: $cp15;
-}
-
-.v-btn:hover .v-i svg, .v-btn:hover .v-b-i svg {
-    fill: $cb2;
-}
-
-.v-btn-c {
-  margin-top: 50px;
-
-  .v-btn {
-    &--xl {
-      @media (max-width: $screen-xs) {
-        height: 42px;
-        font-size: 16px;
-      }
-
-      .v-i {
-        @media (max-width: $screen-xs) {
-          width: 16px;
-          height: 16px;
-        }
-      }
-    }
-  }
 }

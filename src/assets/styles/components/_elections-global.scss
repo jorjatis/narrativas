@@ -17,7 +17,31 @@
 .is-compromis { background: $compromis; }
 .is-salf { background: $salf; }
 
-.v-elec-wdg {
+.v-elec-widgets {
+  .v-btn:hover .v-i svg, .v-btn:hover .v-b-i svg {
+    fill: $cb2;
+  }
+
+  .v-btn-c {
+    margin-top: 50px;
+
+    .v-btn {
+      &--xl {
+        @media (max-width: $screen-xs) {
+          height: 42px;
+          font-size: 16px;
+        }
+
+        .v-i {
+          @media (max-width: $screen-xs) {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
+
   .v-slc-c {
     display: flex;
     align-items: center;
@@ -82,8 +106,6 @@
     }
 
     &.is-open {
-      filter: none;
-
       .v-slc__t {
         font-family: $mcs;
       }
