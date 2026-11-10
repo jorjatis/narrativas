@@ -457,8 +457,9 @@ export function initMatriz() {
     fadeReaders(input.checked, false);
   });
 
-  const select = root.querySelector('.v-elec-matriz__mock-select');
-  const randomBtn = root.querySelector('.v-elec-matriz__mock-btn');
+  const mock = document.querySelector('.v-elec-mock-options');
+  const select = mock?.querySelector('.v-elec-mock-options__select');
+  const randomBtn = mock?.querySelector('.v-elec-mock-options__btn');
 
   function describe(next) {
     svg.setAttribute('aria-label', `Matriz económica y social. El partido más cercano es ${next.closest.party.name}. Elegiste ${next.chosen.party.name} y la cercanía es del ${next.closeness}%.`);
@@ -521,7 +522,7 @@ export function initMatriz() {
     syncModel(getMatrixModel());
   });
 
-  root.querySelector('.v-elec-matriz__mock-btn--block')?.addEventListener('click', rebuildReaders);
+  mock?.querySelector('.v-elec-mock-options__btn--block')?.addEventListener('click', rebuildReaders);
 
   new ResizeObserver(() => layout()).observe(plot);
 }

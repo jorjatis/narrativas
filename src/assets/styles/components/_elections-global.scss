@@ -18,7 +18,8 @@
 .is-salf { background: $salf; }
 
 .v-elec-widgets {
-  .v-btn:hover .v-i svg, .v-btn:hover .v-b-i svg {
+  .v-btn:hover .v-i svg, 
+  .v-btn:hover .v-b-i svg {
     fill: $cb2;
   }
 
@@ -27,15 +28,21 @@
 
     .v-btn {
       &--xl {
-        @media (max-width: $screen-xs) {
-          height: 42px;
-          font-size: 16px;
+        height: 42px;
+        font-size: 16px;
+
+        @media (min-width: $screen-xs) {
+          height: 48px;
+          font-size: 18px;
         }
 
         .v-i {
-          @media (max-width: $screen-xs) {
-            width: 16px;
-            height: 16px;
+          width: 16px;
+          height: 16px;
+
+          @media (min-width: $screen-xs) {
+            width: 24px;
+            height: 24px;
           }
         }
       }
@@ -45,11 +52,8 @@
   .v-slc-c {
     display: flex;
     align-items: center;
-    max-width: 100%;
-    min-width: 0;
     margin-top: 40px;
-    padding: 8px 0 0;
-    background: $cp15;
+    padding: 8px 0 4px;
 
     @media (min-width: $screen-xs) {
       margin-top: 60px;
@@ -72,49 +76,33 @@
   }
 
   .v-slc {
-    width: auto;
-    min-width: 0;
-    max-width: 100%;
     flex: 0 1 160px;
-    flex-basis: max(160px, max-content);
     font: 16px/1 $mcs;
     color: $cb9;
 
     @media (min-width: $screen-xs) {
       flex-basis: 180px;
-      flex-basis: max(180px, max-content);
       font-size: 18px;
     }
 
     .v-b-i {
       width: 15px;
       height: 9px;
-      flex-shrink: 0;
     }
 
     &__h {
       height: 50px;
-      min-width: 0;
       padding: 0 18px 0 12px;
-      border-color: #D6D4CE;
-      overflow: hidden;
-    }
-
-    &__t {
-      min-width: 0;
-      flex-shrink: 1;
     }
 
     &__party-color {
-      display: block;
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      flex-shrink: 0;
     }
 
     &__c {
-      padding: 4px 0 8px;
+      padding-bottom: 8px;
     }
 
     &__a {
@@ -139,23 +127,17 @@
       font: 18px/1 $mcr;
       text-transform: uppercase;
     }
-
-    &.is-open {
-      .v-slc__t {
-        font-family: $mcs;
-      }
-    }
   }
 }
 
 .v-elec-h {
-  margin-top: 49px;
+  margin: 42px 0 28px;
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
 
   svg {
-    width: 49px;
+    width: 50px;
   }
 
   span {
@@ -179,17 +161,33 @@
 
 .v-elec-res {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-top: 36px;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 28px;
   font-family: $mcr;
   line-height: normal;
   color: $cb8;
-  text-align: center;
+
+  @media (min-width: $screen-xs) {
+    flex-direction: column;
+    gap: 0;
+    margin-top: 36px;
+  }
 
   &__txt {
-    margin-top: 6px;
+    max-width: 160px;
+    padding-left: 16px;
+    border-left: 1px solid #d6d4ce;
     font-size: 16px;
+    text-align: center;
+
+    @media (min-width: $screen-xs) {
+      max-width: none;
+      margin-top: 6px;
+      padding-left: 0;
+      border-left: 0;
+    }
   }
 
   &__party {
@@ -208,14 +206,18 @@
     &-name {
       margin-top: 8px;
       font-family: $mcs;
-      font-size: 18px;
+      font-size: 16px;
+      text-align: center;
+
+      @media (min-width: $screen-xs) {
+        font-size: 18px;
+      }
     }
 
     &-percent {
       display: block;
       margin-top: 2px;
       font-family: $mcs;
-      font-size: 16px;
     }
   }
 }

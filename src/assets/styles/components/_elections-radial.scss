@@ -1,15 +1,20 @@
 @use "../base/variables" as *;
 
 .v-elec-radial {
-  margin-top: 100px;
+  margin-top: 64px;
+
+  @media (min-width: $screen-xs) {
+    margin-top: 82px;
+  }
 
   &__chart {
-    width: 100%;
-    margin: 28px auto 0;
+    width: calc(100vw - 8px);
+    margin-top: 24px;
+    margin-left: calc(50% - 50vw + 6px);
 
-    @media (max-width: 439px) {
-      width: calc(100vw - 8px);
-      margin-left: calc(50% - 50vw + 6px);
+    @media (min-width: 440px) {
+      width: 100%;
+      margin-left: auto;
     }
 
     @media (min-width: $screen-xs) {
@@ -30,25 +35,21 @@
   }
 
   &__tick {
+    display: none;
     font-family: $mcr;
     font-size: 14px;
     line-height: normal;
-    fill: #767676; 
+    fill: #767676;
 
-    @media (max-width: 840px) {
-      display: none;
+    @media (min-width: 841px) {
+      display: inline;
     }
   }
 
   &__label {
     font-family: $mcs;
     font-size: 12px;
-    line-height: normal;
     fill: $cb8;
-
-    @media (max-width: ($screen-xs - 1px)) {
-      text-anchor: middle;
-    }
 
     @media (min-width: 440px) {
       font-size: 14px;
@@ -60,7 +61,6 @@
   }
 
   &__area {
-    stroke: none;
     fill-opacity: 0.1;
   }
 

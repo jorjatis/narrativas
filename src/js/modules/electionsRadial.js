@@ -1,4 +1,4 @@
-import { getParty, themes, themeScores } from './mockData';
+import { getParty, onUserAnswersChange, themes, themeScores } from './mockData';
 
 const NS = 'http://www.w3.org/2000/svg';
 const LEVELS = 5;
@@ -169,20 +169,28 @@ export function initRadial() {
       const cos = Math.cos(a);
       const sin = Math.sin(a);
       let x = geom.cx + cos * (geom.r + geom.gap);
-      let y = geom.cy + sin * (geom.r + geom.gap) - (index === 0 ? 8 : 0);
+      let y = geom.cy + sin * (geom.r + geom.gap);
+      let baseline = sin > 0.35 ? 'hanging' : sin < -0.35 ? 'auto' : 'middle';
 
       if (geom.narrow) {
+        y -= index === 0 ? 8 : 0;
         if (cos > 0.35) x += box.width / 2;
         else if (cos < -0.35) x -= box.width / 2;
         if (lines.length > 1 && sin < -0.2) y -= geom.lineStep;
+      } else {
+        const extra = (box.width / 2) * Math.abs(cos) + (box.height / 2) * Math.abs(sin);
+        const dist = geom.r + geom.gap + extra;
+        x = geom.cx + cos * dist;
+        y = geom.cy + sin * dist;
+        baseline = 'middle';
       }
 
       const label = svgEl('text', {
         class: 'v-elec-radial__label',
         x,
         y,
-        'text-anchor': geom.narrow ? 'middle' : (cos > 0.35 ? 'start' : cos < -0.35 ? 'end' : 'middle'),
-        'dominant-baseline': sin > 0.35 ? 'hanging' : sin < -0.35 ? 'auto' : 'middle',
+        'text-anchor': 'middle',
+        'dominant-baseline': baseline,
       });
       lines.forEach((line, lineIndex) => {
         const tspan = svgEl('tspan', { x, dy: lineIndex === 0 ? 0 : '1.2em' });
@@ -299,6 +307,12 @@ export function initRadial() {
       describe();
       animate(index, id);
     }, true);
+  });
+
+  onUserAnswersChange(() => {
+    selects.forEach((select, index) => {
+      if (select.dataset.series === 'tu') animate(index, 'tu');
+    });
   });
 
   describe();

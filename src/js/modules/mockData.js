@@ -25,11 +25,31 @@ export function setMatrixChosen(id) {
   matrixChosenId = id;
 }
 
+const userListeners = new Set();
+
+export function onUserAnswersChange(listener) {
+  userListeners.add(listener);
+}
+
+function scoreFromAnswers(answers) {
+  return Math.round(axisScore(answers) * 10) / 10;
+}
+
+// Las 24 respuestas del test alimentan la matriz (12 + 12), el radial
+// (3 por temática, en el orden del cuestionario) y las barras.
 export function randomizeMatrixYou() {
+  userAnswers = Array.from({ length: userAnswers.length }, () => 1 + Math.floor(Math.random() * 5));
   matrixYou = {
-    economic: Math.round((12 + Math.random() * 76) * 10) / 10,
-    social: Math.round((12 + Math.random() * 76) * 10) / 10,
+    economic: scoreFromAnswers(userAnswers.slice(0, MATRIX_AXIS)),
+    social: scoreFromAnswers(userAnswers.slice(MATRIX_AXIS)),
   };
+  const nextTu = themes.map((_, index) => {
+    const slice = userAnswers.slice(index * 3, index * 3 + 3);
+    const mean = slice.reduce((sum, value) => sum + value, 0) / slice.length;
+    return Math.round(mean * 10) / 10;
+  });
+  themeScores.tu.splice(0, themeScores.tu.length, ...nextTu);
+  userListeners.forEach((listener) => listener());
 }
 
 export function getParty(id) {
@@ -54,7 +74,7 @@ export const themeScores = {
   vox: [5, 1, 5, 1, 2, 1, 5, 2],
 };
 
-const userAnswers = [
+let userAnswers = [
   4, 3, 2, 3, 4, 2, 3, 4, 3, 3, 4, 4, 5, 2, 3, 4, 3, 2, 2, 4, 3, 3, 2, 3
 ];
 

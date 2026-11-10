@@ -1,4 +1,4 @@
-import { getDistances, getParty, parties, partyChosen } from './mockData';
+import { getDistances, getParty, onUserAnswersChange, parties, partyChosen } from './mockData';
 
 function setColorClass(el, colorClass) {
   el.classList.remove('is-default');
@@ -12,7 +12,7 @@ function applyParty(root, party) {
 
   items.forEach((item, index) => {
     if (distances[index] == null) return;
-    item.style.setProperty('--dist', distances[index]);
+    item.style.setProperty('--distance', distances[index]);
 
     const dot = item.querySelector('.v-elec-bars__dot--party');
     const name = item.querySelector('.v-elec-bars__name--party');
@@ -32,7 +32,8 @@ export function initBars() {
   const initial = getParty(partyChosen);
   if (!select || !initial || !getDistances(initial.id).length) return;
 
-  applyParty(root, initial);
+  let current = initial;
+  applyParty(root, current);
 
   const label = select.querySelector('.v-slc__t');
   if (label) label.textContent = initial.name;
@@ -44,6 +45,9 @@ export function initBars() {
     const party = getParty(option.dataset.party);
     if (!party || !getDistances(party.id).length) return;
 
-    applyParty(root, party);
+    current = party;
+    applyParty(root, current);
   }, true);
+
+  onUserAnswersChange(() => applyParty(root, current));
 }

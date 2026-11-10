@@ -1,6 +1,6 @@
 @use "../base/variables" as *;
 
-@property --dist {
+@property --distance {
   syntax: "<number>";
   inherits: true;
   initial-value: 0;
@@ -14,7 +14,11 @@
 }
 
 .v-elec-bars {
-  margin-top: 100px;
+  margin-top: 64px;
+
+  @media (min-width: $screen-xs) {
+    margin-top: 82px;
+  }
 
   &__list {
     position: relative;
@@ -52,7 +56,7 @@
 
   &__item {
     text-align: center;
-    transition: --dist .45s ease;
+    transition: --distance .45s ease;
 
     & + & {
       margin-top: 16px;
@@ -64,7 +68,7 @@
   }
 
   &__k {
-    font: 15px/normal $mcr;
+    font: 14px/normal $mcr;
     color: $cb8;
 
     @media (min-width: $screen-xs) {
@@ -128,7 +132,7 @@
     top: 50%;
     left: 0;
     z-index: 0;
-    width: calc(var(--dist) * 1%);
+    width: calc(var(--distance) * 1%);
     height: 3px;
     background: $cb9;
     transform: translateY(-50%);
@@ -156,7 +160,7 @@
     }
 
     &--you {
-      left: calc(var(--dist) * 1%);
+      left: calc(var(--distance) * 1%);
       z-index: 2;
       background: $cb2;
       border-color: $cb9;
@@ -194,7 +198,7 @@
     }
 
     &--you {
-      left: calc(var(--dist) * 1%);
+      left: calc(var(--distance) * 1%);
     }
   }
 
@@ -212,16 +216,16 @@
 
     &:hover {
       opacity: .7;
+
+      .v-b-i {
+        animation: showMoreChevron .7s ease;
+      }
     }
 
     .v-b-i {
       display: block;
       width: 15px;
       height: 9px;
-    }
-
-    &:hover .v-b-i {
-      animation: showMoreChevron .7s ease;
     }
   }
 }
