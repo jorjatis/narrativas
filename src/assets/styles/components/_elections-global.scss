@@ -130,6 +130,26 @@
   }
 }
 
+.v-elec-share-img {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+
+  .v-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.v-elec-capture {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+  background: $cp15;
+  pointer-events: none;
+}
+
 .v-elec-h {
   margin: 42px 0 28px;
   display: flex;

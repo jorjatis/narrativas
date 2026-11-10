@@ -2,12 +2,14 @@
 
 // NOTE: Modules
 import { initElectionsMock } from './modules/electionsMock';
+import { initElectionsShare } from './modules/electionsShare';
 import { loadMoreQuestions } from './modules/loadMoreQuestions';
 import { selectPartyColor } from './modules/selectPartyColor';
 import { selectRivals } from './modules/selectRivals';
 
 export function initAll() {
   initElectionsMock();
+  initElectionsShare();
   loadMoreQuestions();
   selectPartyColor();
   selectRivals();
