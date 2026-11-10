@@ -1,13 +1,11 @@
-import { getDistances, getParty, onUserAnswersChange, parties, partyChosen } from './mockData';
-
-function setColorClass(el, colorClass) {
+function paintColor(el, colorClass) {
+  if (el.dataset.partyColor) el.classList.remove(el.dataset.partyColor);
   el.classList.remove('is-default');
-  parties.forEach((party) => el.classList.remove(party.colorClass));
   el.classList.add(colorClass);
+  el.dataset.partyColor = colorClass;
 }
 
-function applyParty(root, party) {
-  const distances = getDistances(party.id);
+function applyParty(root, party, distances) {
   const items = root.querySelectorAll('.v-elec-bars__item');
 
   items.forEach((item, index) => {
@@ -16,7 +14,7 @@ function applyParty(root, party) {
 
     const dot = item.querySelector('.v-elec-bars__dot--party');
     const name = item.querySelector('.v-elec-bars__name--party');
-    if (dot) setColorClass(dot, party.colorClass);
+    if (dot) paintColor(dot, party.colorClass);
     if (name) {
       name.textContent = party.name;
       name.classList.toggle('is-on-top', distances[index] === 0);
@@ -24,16 +22,17 @@ function applyParty(root, party) {
   });
 }
 
-export function initBars() {
+export function initBars(source) {
   const root = document.querySelector('.v-elec-bars');
-  if (!root) return;
+  if (!root || !source) return;
 
   const select = root.querySelector('.v-slc');
-  const initial = getParty(partyChosen);
-  if (!select || !initial || !getDistances(initial.id).length) return;
+  const initial = source.party(source.chosenId);
+  const initialDistances = initial && source.distances(initial.id);
+  if (!select || !initial || !initialDistances?.length) return;
 
   let current = initial;
-  applyParty(root, current);
+  applyParty(root, current, initialDistances);
 
   const label = select.querySelector('.v-slc__t');
   if (label) label.textContent = initial.name;
@@ -42,12 +41,13 @@ export function initBars() {
     const option = event.target.closest('.v-slc__a');
     if (!option || !select.contains(option)) return;
 
-    const party = getParty(option.dataset.party);
-    if (!party || !getDistances(party.id).length) return;
+    const party = source.party(option.dataset.party);
+    const distances = party && source.distances(party.id);
+    if (!party || !distances?.length) return;
 
     current = party;
-    applyParty(root, current);
+    applyParty(root, current, distances);
   }, true);
 
-  onUserAnswersChange(() => applyParty(root, current));
+  source.subscribe?.(() => applyParty(root, current, source.distances(current.id)));
 }

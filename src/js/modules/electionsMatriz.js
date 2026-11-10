@@ -1,5 +1,144 @@
-import gsap from 'gsap';
-import { parties, getMatrixModel, getMatrixReaders, partyChosen, randomizeMatrixYou, setMatrixChosen } from './mockData';
+const EASES = {
+  'power1.out': (t) => 1 - (1 - t) ** 2,
+  'power2.out': (t) => 1 - (1 - t) ** 3,
+  'power2.inOut': (t) => (t < 0.5 ? 4 * t ** 3 : 1 - ((-2 * t + 2) ** 3) / 2),
+  'power3.out': (t) => 1 - (1 - t) ** 4,
+};
+
+const running = new Map();
+
+function motionTargets(targets) {
+  if (!targets) return [];
+  return (Array.isArray(targets) ? targets : [targets]).filter(Boolean);
+}
+
+function stopNode(node) {
+  running.get(node)?.forEach((stop) => stop());
+  running.delete(node);
+}
+
+function killMotion(targets) {
+  motionTargets(targets).forEach(stopNode);
+}
+
+function trackMotion(node, stop) {
+  let jobs = running.get(node);
+  if (!jobs) {
+    jobs = new Set();
+    running.set(node, jobs);
+  }
+  jobs.add(stop);
+  return () => {
+    jobs.delete(stop);
+    if (!jobs.size) running.delete(node);
+  };
+}
+
+function opacityOf(node) {
+  const value = parseFloat(node.style.opacity);
+  return Number.isFinite(value) ? value : 1;
+}
+
+function opacityTo(node, value) {
+  node.style.opacity = String(value);
+  node.style.visibility = value <= 0.001 ? 'hidden' : 'visible';
+}
+
+function motionValue(raw, index, node) {
+  return typeof raw === 'function' ? raw(index, node) : raw;
+}
+
+function staggerMs(index, count, stagger) {
+  if (!stagger || count < 2) return 0;
+  if (typeof stagger === 'number') return stagger * index * 1000;
+  const each = stagger.each ?? (stagger.amount || 0) / (count - 1);
+  const order = stagger.from === 'center' ? Math.abs(index - (count - 1) / 2) : index;
+  return each * order * 1000;
+}
+
+function setMotion(targets, vars) {
+  const items = motionTargets(targets);
+  killMotion(items);
+  items.forEach((node, index) => {
+    if (vars.autoAlpha != null) opacityTo(node, motionValue(vars.autoAlpha, index, node));
+    if (!vars.attr) return;
+    Object.entries(vars.attr).forEach(([key, raw]) => {
+      node.setAttribute(key, motionValue(raw, index, node));
+    });
+  });
+}
+
+function tweenMotion(targets, vars) {
+  const items = motionTargets(targets);
+  if (!items.length) {
+    vars.onComplete?.();
+    return;
+  }
+
+  const duration = (vars.duration ?? 0) * 1000;
+  const delay = (vars.delay ?? 0) * 1000;
+  const ease = EASES[vars.ease] || ((t) => t);
+  let pending = items.length;
+
+  const finish = () => {
+    pending -= 1;
+    if (!pending) vars.onComplete?.();
+  };
+
+  items.forEach((node, index) => {
+    const wait = delay + staggerMs(index, items.length, vars.stagger);
+    const fromOpacity = opacityOf(node);
+    const toOpacity = vars.autoAlpha == null ? null : motionValue(vars.autoAlpha, index, node);
+    const fromAttr = {};
+    const toAttr = {};
+    if (vars.attr) {
+      Object.entries(vars.attr).forEach(([key, raw]) => {
+        fromAttr[key] = parseFloat(node.getAttribute(key)) || 0;
+        toAttr[key] = motionValue(raw, index, node);
+      });
+    }
+
+    const paint = (t) => {
+      if (toOpacity != null) opacityTo(node, fromOpacity + (toOpacity - fromOpacity) * t);
+      Object.keys(toAttr).forEach((key) => {
+        node.setAttribute(key, fromAttr[key] + (toAttr[key] - fromAttr[key]) * t);
+      });
+    };
+
+    if (duration <= 0 && wait <= 0) {
+      paint(1);
+      finish();
+      return;
+    }
+
+    let startedAt = 0;
+    let frame = 0;
+    let stopped = false;
+    const untrack = trackMotion(node, () => {
+      stopped = true;
+      cancelAnimationFrame(frame);
+    });
+
+    const tick = (now) => {
+      if (stopped) return;
+      if (!startedAt) startedAt = now;
+      const elapsed = now - startedAt - wait;
+      if (elapsed < 0) {
+        frame = requestAnimationFrame(tick);
+        return;
+      }
+      const t = duration <= 0 ? 1 : Math.min(1, elapsed / duration);
+      paint(ease(t));
+      if (t < 1) {
+        frame = requestAnimationFrame(tick);
+        return;
+      }
+      untrack();
+      finish();
+    };
+    frame = requestAnimationFrame(tick);
+  });
+}
 
 const NS = 'http://www.w3.org/2000/svg';
 const CELLS = 6;
@@ -109,12 +248,17 @@ function nameBox(point, place) {
   return { x: point.x - w / 2, y: point.y + 3, w, h };
 }
 
+function paintColor(el, colorClass) {
+  if (el.dataset.partyColor) el.classList.remove(el.dataset.partyColor);
+  el.classList.remove('is-default');
+  el.classList.add(colorClass);
+  el.dataset.partyColor = colorClass;
+}
+
 function markerBlocks(result) {
   const boxes = [];
-  parties.forEach((party) => {
-    const score = result.scores[party.id];
-    if (!score) return;
-    const point = toPoint(score);
+  result.parties.forEach((party) => {
+    const point = toPoint(party);
     boxes.push({ x: point.x - 3.2, y: point.y - 3.2, w: 6.4, h: 6.4 });
     boxes.push(nameBox(point, LABEL_PLACE[party.id] || 'below'));
   });
@@ -130,41 +274,35 @@ function paintHeader(root, result) {
   const chosen = root.querySelector('.v-elec-res__party-chosen');
   const percent = root.querySelector('.v-elec-res__party-percent');
 
-  if (color) {
-    color.classList.remove('is-default');
-    parties.forEach((party) => color.classList.remove(party.colorClass));
-    color.classList.add(result.closest.party.colorClass);
-  }
-  if (name) name.textContent = result.closest.party.name;
-  if (chosen) chosen.textContent = result.chosen.party.name;
+  if (color) paintColor(color, result.closest.colorClass);
+  if (name) name.textContent = result.closest.name;
+  if (chosen) chosen.textContent = result.chosen.name;
   if (percent) percent.textContent = `${result.closeness}%`;
 }
 
-export function initMatriz() {
+export function initMatriz(model) {
   const root = document.querySelector('.v-elec-matriz');
   const plot = root?.querySelector('.v-elec-matriz__plot');
   const input = root?.querySelector('.v-elec-matriz__input');
-  if (!root || !plot || !input || root.dataset.ready === 'true') return;
+  if (!root || !plot || !input || !model?.you || !model.chosen || !model.closest || root.dataset.ready === 'true') return;
 
-  const result = getMatrixModel();
-  if (!result.you || !result.chosen || !result.closest) return;
+  let result = model;
   root.dataset.ready = 'true';
   paintHeader(root, result);
 
-  let readers = getMatrixReaders();
+  let readers = model.readers || [];
   let anchor = pickCallout(readers, markerBlocks(result));
   const view = {
     you: toPoint(result.you),
-    chosen: toPoint(result.chosen.score),
+    chosen: toPoint(result.chosen),
   };
   const maxForce = Math.max(...readers.map((dot) => dot.force));
   const chosenPoint = view.chosen;
   const youPoint = view.you;
 
-  const placed = parties
-    .filter((party) => result.scores[party.id])
+  const placed = result.parties
     .map((party) => {
-      const point = toPoint(result.scores[party.id]);
+      const point = toPoint(party);
       return {
         party,
         point,
@@ -178,7 +316,7 @@ export function initMatriz() {
     viewBox: '0 0 100 100',
     role: 'img',
     focusable: 'false',
-    'aria-label': `Matriz económica y social. El partido más cercano es ${result.closest.party.name}. Elegiste ${result.chosen.party.name} y la cercanía es del ${result.closeness}%.`,
+    'aria-label': `Matriz económica y social. El partido más cercano es ${result.closest.name}. Elegiste ${result.chosen.name} y la cercanía es del ${result.closeness}%.`,
   });
   const grid = svgEl('g', { class: 'v-elec-matriz__grids' });
   const readerLayer = svgEl('g', { class: 'v-elec-matriz__readers' });
@@ -250,10 +388,10 @@ export function initMatriz() {
     return dot;
   }
 
-  function rebuildReaders() {
-    gsap.killTweensOf(readerDots);
-    gsap.killTweensOf(callout);
-    readers = getMatrixReaders((Math.random() * 0x7fffffff) >>> 0);
+  function setReaders(next) {
+    killMotion(readerDots);
+    killMotion(callout);
+    readers = next;
     const max = Math.max(...readers.map((dot) => dot.force), 1);
     readerLayer.replaceChildren();
     readerDots = readers.map((reader) => {
@@ -261,14 +399,14 @@ export function initMatriz() {
       readerLayer.appendChild(dot);
       return dot;
     });
-    anchor = pickCallout(readers, markerBlocks(getMatrixModel()));
+    anchor = pickCallout(readers, markerBlocks(result));
     anchorDot = readerDots[readers.indexOf(anchor)];
     layout();
     const visible = input.checked && state.revealed;
-    gsap.set(readerDots, {
+    setMotion(readerDots, {
       autoAlpha: (index, el) => (visible ? +el.dataset.opacity : 0),
     });
-    gsap.set(callout, { autoAlpha: visible ? 1 : 0 });
+    setMotion(callout, { autoAlpha: visible ? 1 : 0 });
   }
 
   const partyDots = [];
@@ -280,12 +418,14 @@ export function initMatriz() {
       cy: CENTER,
       r: 1.6,
     });
+    dot.dataset.id = party.id;
     dot.dataset.x = point.x;
     dot.dataset.y = point.y;
     partyLayer.appendChild(dot);
     partyDots.push(dot);
 
     const label = svgEl('text', { class: 'v-elec-matriz__label' });
+    label.dataset.id = party.id;
     label.dataset.x = point.x;
     label.dataset.y = point.y;
     label.dataset.place = LABEL_PLACE[party.id] || 'below';
@@ -350,38 +490,36 @@ export function initMatriz() {
     calloutLine.setAttribute('y2', ay - ar - 1.5 / unit);
   }
 
-  function fadeReaders(on, intro) {
-    const duration = state.reduce ? 0 : (intro ? 0.28 : 0.25);
-    gsap.killTweensOf(readerDots);
-    gsap.killTweensOf(callout);
-    gsap.to(readerDots, {
+  function fadeReaders(on, introFade) {
+    const duration = state.reduce ? 0 : (introFade ? 0.28 : 0.25);
+    killMotion(readerDots);
+    killMotion(callout);
+    tweenMotion(readerDots, {
       autoAlpha: (index, el) => (on ? +el.dataset.opacity : 0),
       duration,
       ease: 'power1.out',
-      stagger: intro && on && !state.reduce ? { each: 0.004, from: 'center' } : 0,
-      overwrite: true,
+      stagger: introFade && on && !state.reduce ? { each: 0.004, from: 'center' } : 0,
     });
-    gsap.to(callout, {
+    tweenMotion(callout, {
       autoAlpha: on ? 1 : 0,
       duration,
-      delay: intro && on && !state.reduce ? 0.12 : 0,
+      delay: introFade && on && !state.reduce ? 0.12 : 0,
       ease: 'power1.out',
-      overwrite: true,
     });
   }
 
   function showFinal() {
-    gsap.set(partyDots, {
+    setMotion(partyDots, {
       autoAlpha: 1,
       attr: {
         cx: (index, el) => +el.dataset.x,
         cy: (index, el) => +el.dataset.y,
       },
     });
-    gsap.set(partyLabels, { autoAlpha: 1 });
-    gsap.set(you, { autoAlpha: 1, attr: { cx: view.you.x, cy: view.you.y } });
-    gsap.set(youLabel, { autoAlpha: 1 });
-    gsap.set(link, {
+    setMotion(partyLabels, { autoAlpha: 1 });
+    setMotion(you, { autoAlpha: 1, attr: { cx: view.you.x, cy: view.you.y } });
+    setMotion(youLabel, { autoAlpha: 1 });
+    setMotion(link, {
       autoAlpha: 1,
       attr: { x1: view.chosen.x, y1: view.chosen.y, x2: view.you.x, y2: view.you.y },
     });
@@ -389,30 +527,15 @@ export function initMatriz() {
     fadeReaders(input.checked, false);
   }
 
-  layout();
-  gsap.set(partyDots, { autoAlpha: 1, attr: { cx: CENTER, cy: CENTER } });
-  gsap.set(partyLabels, { autoAlpha: 0 });
-  gsap.set(you, { autoAlpha: 0, attr: { cx: chosenPoint.x, cy: chosenPoint.y } });
-  gsap.set(youLabel, { autoAlpha: 0 });
-  gsap.set(link, {
-    autoAlpha: 0,
-    attr: { x1: chosenPoint.x, y1: chosenPoint.y, x2: chosenPoint.x, y2: chosenPoint.y },
-  });
-  gsap.set(readerDots, { autoAlpha: 0 });
-  gsap.set(callout, { autoAlpha: 0 });
+  let introToken = 0;
 
-  let intro = null;
-  const motion = gsap.matchMedia();
-  motion.add('(prefers-reduced-motion: reduce)', () => {
-    state.reduce = true;
-    showFinal();
-  });
-  motion.add('(prefers-reduced-motion: no-preference)', () => {
-    state.reduce = false;
-    intro = gsap.timeline({ defaults: { ease: 'power2.out' } });
-    const tl = intro;
+  function playIntro() {
+    const token = ++introToken;
+    const dotsEnd = 0.42 + 0.01 * Math.max(0, partyDots.length - 1);
+    const labelsEnd = dotsEnd + 0.24;
+    const youEnd = labelsEnd + 0.42;
 
-    tl.to(partyDots, {
+    tweenMotion(partyDots, {
       attr: {
         cx: (index, el) => +el.dataset.x,
         cy: (index, el) => +el.dataset.y,
@@ -421,55 +544,108 @@ export function initMatriz() {
       ease: 'power3.out',
       stagger: 0.01,
     });
-    tl.to(partyLabels, {
+    tweenMotion(partyLabels, {
       autoAlpha: 1,
       duration: 0.18,
+      delay: dotsEnd,
       stagger: { amount: 0.06 },
       ease: 'power1.out',
     });
-    tl.addLabel('you');
-    tl.add(() => {
-      gsap.set(link, {
-        autoAlpha: 1,
-        attr: { x1: view.chosen.x, y1: view.chosen.y, x2: view.chosen.x, y2: view.chosen.y },
-      });
-    }, 'you');
-    tl.to(you, { autoAlpha: 1, duration: 0.1, ease: 'power1.out' }, 'you');
-    tl.to(you, {
+    tweenMotion(link, {
+      autoAlpha: 1,
+      duration: 0,
+      delay: labelsEnd,
+      attr: { x1: view.chosen.x, y1: view.chosen.y },
+    });
+    tweenMotion(you, {
+      autoAlpha: 1,
+      duration: 0.1,
+      delay: labelsEnd,
+      ease: 'power1.out',
+    });
+    tweenMotion(you, {
       attr: { cx: () => view.you.x, cy: () => view.you.y },
       duration: 0.42,
+      delay: labelsEnd,
       ease: 'power2.inOut',
-    }, 'you');
-    tl.to(link, {
+    });
+    tweenMotion(link, {
       attr: { x2: () => view.you.x, y2: () => view.you.y },
       duration: 0.42,
+      delay: labelsEnd,
       ease: 'power2.inOut',
-    }, 'you');
-    tl.to(youLabel, { autoAlpha: 1, duration: 0.15, ease: 'power1.out' });
-    tl.add(() => {
-      state.revealed = true;
-      fadeReaders(input.checked, true);
     });
+    tweenMotion(youLabel, {
+      autoAlpha: 1,
+      duration: 0.15,
+      delay: youEnd,
+      ease: 'power1.out',
+      onComplete() {
+        if (token !== introToken) return;
+        state.revealed = true;
+        fadeReaders(input.checked, true);
+      },
+    });
+  }
+
+  function stopIntro() {
+    introToken += 1;
+    killMotion([you, link, youLabel, ...partyDots, ...partyLabels]);
+  }
+
+  layout();
+  setMotion(partyDots, { autoAlpha: 1, attr: { cx: CENTER, cy: CENTER } });
+  setMotion(partyLabels, { autoAlpha: 0 });
+  setMotion(you, { autoAlpha: 0, attr: { cx: chosenPoint.x, cy: chosenPoint.y } });
+  setMotion(youLabel, { autoAlpha: 0 });
+  setMotion(link, {
+    autoAlpha: 0,
+    attr: { x1: chosenPoint.x, y1: chosenPoint.y, x2: chosenPoint.x, y2: chosenPoint.y },
   });
+  setMotion(readerDots, { autoAlpha: 0 });
+  setMotion(callout, { autoAlpha: 0 });
+
+  const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function applyMotion() {
+    state.reduce = reduceQuery.matches;
+    if (state.reduce) {
+      stopIntro();
+      showFinal();
+      return;
+    }
+    if (!state.revealed) playIntro();
+  }
+  applyMotion();
+  reduceQuery.addEventListener('change', applyMotion);
 
   input.addEventListener('change', () => {
     if (!state.revealed) return;
     fadeReaders(input.checked, false);
   });
 
-  const mock = document.querySelector('.v-elec-mock-options');
-  const select = mock?.querySelector('.v-elec-mock-options__select');
-  const randomBtn = mock?.querySelector('.v-elec-mock-options__btn');
-
   function describe(next) {
-    svg.setAttribute('aria-label', `Matriz económica y social. El partido más cercano es ${next.closest.party.name}. Elegiste ${next.chosen.party.name} y la cercanía es del ${next.closeness}%.`);
+    svg.setAttribute('aria-label', `Matriz económica y social. El partido más cercano es ${next.closest.name}. Elegiste ${next.chosen.name} y la cercanía es del ${next.closeness}%.`);
   }
 
-  function syncModel(next) {
-    intro?.kill();
+  function update(next) {
+    result = next;
+    stopIntro();
     state.revealed = true;
     view.you = toPoint(next.you);
-    view.chosen = toPoint(next.chosen.score);
+    view.chosen = toPoint(next.chosen);
+    next.parties.forEach((party) => {
+      const point = toPoint(party);
+      const dot = partyDots.find((el) => el.dataset.id === party.id);
+      const label = partyLabels.find((el) => el.dataset.id === party.id);
+      if (dot) {
+        dot.dataset.x = point.x;
+        dot.dataset.y = point.y;
+      }
+      if (label) {
+        label.dataset.x = point.x;
+        label.dataset.y = point.y;
+      }
+    });
     youLabel.dataset.x = view.you.x;
     youLabel.dataset.y = view.you.y;
     anchor = pickCallout(readers, markerBlocks(next));
@@ -478,51 +654,30 @@ export function initMatriz() {
     describe(next);
     layout();
 
-    gsap.killTweensOf([you, link, youLabel, ...partyDots, ...partyLabels]);
-    gsap.set(partyDots, {
+    killMotion([you, link, youLabel, ...partyDots, ...partyLabels]);
+    setMotion(partyDots, {
       autoAlpha: 1,
       attr: { cx: (index, el) => +el.dataset.x, cy: (index, el) => +el.dataset.y },
     });
-    gsap.set(partyLabels, { autoAlpha: 1 });
-    gsap.set(youLabel, { autoAlpha: 1 });
+    setMotion(partyLabels, { autoAlpha: 1 });
+    setMotion(youLabel, { autoAlpha: 1 });
 
     const duration = state.reduce ? 0 : 0.35;
-    gsap.to(you, {
+    tweenMotion(you, {
       autoAlpha: 1,
       attr: { cx: view.you.x, cy: view.you.y },
       duration,
       ease: 'power2.out',
-      overwrite: true,
     });
-    gsap.to(link, {
+    tweenMotion(link, {
       autoAlpha: 1,
       attr: { x1: view.chosen.x, y1: view.chosen.y, x2: view.you.x, y2: view.you.y },
       duration,
       ease: 'power2.out',
-      overwrite: true,
     });
   }
-
-  if (select) {
-    parties.forEach((party) => {
-      const option = document.createElement('option');
-      option.value = party.id;
-      option.textContent = party.name;
-      option.selected = party.id === partyChosen;
-      select.appendChild(option);
-    });
-    select.addEventListener('change', () => {
-      setMatrixChosen(select.value);
-      syncModel(getMatrixModel());
-    });
-  }
-
-  randomBtn?.addEventListener('click', () => {
-    randomizeMatrixYou();
-    syncModel(getMatrixModel());
-  });
-
-  mock?.querySelector('.v-elec-mock-options__btn--block')?.addEventListener('click', rebuildReaders);
 
   new ResizeObserver(() => layout()).observe(plot);
+
+  return { update, setReaders };
 }

@@ -1,5 +1,3 @@
-import { getParty, onUserAnswersChange, themes, themeScores } from './mockData';
-
 const NS = 'http://www.w3.org/2000/svg';
 const LEVELS = 5;
 const DURATION = 450;
@@ -11,8 +9,8 @@ function svgEl(name, attrs = {}) {
   return node;
 }
 
-function angle(index) {
-  return -Math.PI / 2 + (index * 2 * Math.PI) / themes.length;
+function angle(index, count) {
+  return -Math.PI / 2 + (index * 2 * Math.PI) / count;
 }
 
 function parseColor(color) {
@@ -25,20 +23,16 @@ function rgb(color) {
   return `rgb(${color.map((channel) => Math.round(channel)).join(', ')})`;
 }
 
-function seriesName(id) {
-  if (id === 'tu') return 'Tú';
-  return getParty(id)?.name ?? id;
-}
-
 function seriesColor(select, id) {
   const swatch = select.querySelector(`.v-slc__a[data-series="${id}"] .v-slc__party-color`);
   if (!swatch) return [32, 32, 32];
   return parseColor(getComputedStyle(swatch).backgroundColor);
 }
 
-export function initRadial() {
+export function initRadial(source) {
   const root = document.querySelector('.v-elec-radial');
-  if (!root) return;
+  const themes = source?.themes;
+  if (!root || !themes?.length) return;
 
   const slot = root.querySelector('.v-elec-radial__chart');
   const selects = [...root.querySelectorAll('.v-slc-c > .v-slc')];
@@ -60,7 +54,7 @@ export function initRadial() {
   const layers = [0, 1].map((index) => {
     const id = selects[index].dataset.series;
     return {
-      values: (themeScores[id] || []).slice(),
+      values: (source.values(id) || []).slice(),
       color: seriesColor(selects[index], id),
       fill: svgEl('polygon', { class: 'v-elec-radial__area' }),
       line: svgEl('polygon', { class: 'v-elec-radial__line' }),
@@ -75,7 +69,7 @@ export function initRadial() {
   });
 
   function point(index, value) {
-    const a = angle(index);
+    const a = angle(index, themes.length);
     const dist = (Math.min(LEVELS, Math.max(0, value)) / LEVELS) * geom.r;
     return [geom.cx + Math.cos(a) * dist, geom.cy + Math.sin(a) * dist];
   }
@@ -120,7 +114,7 @@ export function initRadial() {
     let radius = limit;
 
     textWidths.forEach((textWidth, index) => {
-      const abs = Math.abs(Math.cos(angle(index)));
+      const abs = Math.abs(Math.cos(angle(index, themes.length)));
       if (abs < 0.35) return;
       radius = Math.min(radius, (limit - textWidth) / abs - gap);
     });
@@ -165,7 +159,7 @@ export function initRadial() {
     themes.forEach((theme, index) => {
       const lines = labelLines(theme, geom.narrow);
       const box = measureBox(lines);
-      const a = angle(index);
+      const a = angle(index, themes.length);
       const cos = Math.cos(a);
       const sin = Math.sin(a);
       let x = geom.cx + cos * (geom.r + geom.gap);
@@ -225,7 +219,7 @@ export function initRadial() {
   }
 
   function describe() {
-    const names = selects.map((select) => seriesName(select.dataset.series));
+    const names = selects.map((select) => source.name(select.dataset.series));
     svg.setAttribute('aria-label', `Comparación por temática entre ${names[0]} y ${names[1]}, en una escala de 0 a 5`);
   }
 
@@ -279,7 +273,7 @@ export function initRadial() {
   }
 
   function animate(index, id) {
-    const target = themeScores[id];
+    const target = source.values(id);
     if (!target) return;
 
     const layer = layers[index];
@@ -301,7 +295,7 @@ export function initRadial() {
       if (!option || !select.contains(option) || option.classList.contains('is-disabled')) return;
 
       const id = option.dataset.series;
-      if (!id || id === select.dataset.series || !themeScores[id]) return;
+      if (!id || id === select.dataset.series || !source.values(id)) return;
 
       select.dataset.series = id;
       describe();
@@ -309,7 +303,7 @@ export function initRadial() {
     }, true);
   });
 
-  onUserAnswersChange(() => {
+  source.subscribe?.(() => {
     selects.forEach((select, index) => {
       if (select.dataset.series === 'tu') animate(index, 'tu');
     });
