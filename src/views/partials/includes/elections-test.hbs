@@ -1,0 +1,2028 @@
+<div class="v-elec-intro">
+  {{> includes/elections-heading }}
+  <h1 class="v-elec-intro__t">¿De qué partido estás más cerca?</h1>
+  <p class="v-elec-intro__st">Responde a las preguntas y descubre qué candidato se acerca más a tus ideas políticas de cara a las próximas elecciones</p>
+  <p class="v-elec-intro__note">Todas las respuestas de este cuestionario son anónimas</p>
+  <button class="v-btn v-btn-g v-btn--xl" id="v-elec-start" type="button">Empezar</button>
+</div>
+
+<div class="v-elec-test">
+  {{> includes/elections-heading }}
+  <div class="v-elec-test__sld" id="v-elec-test-sld">
+    <button class="v-elec-test__nav" id="v-elec-test-prev" type="button" data-elec-prev aria-label="Anterior">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="20" viewBox="0 0 12 20" fill="none" aria-hidden="true">
+        <path d="M10 20L0 10L10 0L11.775 1.775L3.55 10L11.775 18.225L10 20Z" fill="#202020" />
+      </svg>
+    </button>
+    <button class="v-elec-test__nav" id="v-elec-test-next" type="button" data-elec-next aria-label="Siguiente">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="20" viewBox="0 0 12 20" fill="none" aria-hidden="true">
+        <path d="M1.775 20L0 18.225L8.225 10L0 1.775L1.775 0L11.775 10L1.775 20Z" fill="#1C1B1F" />
+      </svg>
+    </button>
+
+    <div class="v-elec-test__track">
+      <ul class="v-elec-test__list" id="v-elec-test-list">
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="1">
+              <b>1</b>/<span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">El gobierno debería limitar por ley el precio de los alquileres</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-1" id="elec-q-1-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-1-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-1" id="elec-q-1-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-1-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-1" id="elec-q-1-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-1-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-1" id="elec-q-1-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-1-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-1" id="elec-q-1-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-1-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="2">
+              <b>2</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Es necesario reformar las pensiones para garantizar su viabilidad</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-2" id="elec-q-2-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-2-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-2" id="elec-q-2-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-2-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-2" id="elec-q-2-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-2-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-2" id="elec-q-2-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-2-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-2" id="elec-q-2-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-2-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="3">
+              <b>3</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">La política migratoria de España debería ser más estricta</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-3" id="elec-q-3-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-3-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-3" id="elec-q-3-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-3-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-3" id="elec-q-3-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-3-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-3" id="elec-q-3-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-3-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-3" id="elec-q-3-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-3-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="4">
+              <b>4</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">El transporte ferroviario de pasajeros en España es seguro</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-4" id="elec-q-4-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-4-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-4" id="elec-q-4-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-4-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-4" id="elec-q-4-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-4-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-4" id="elec-q-4-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-4-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-4" id="elec-q-4-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-4-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="5">
+              <b>5</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">La sanidad pública debería tener más presupuesto que la privada</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-5" id="elec-q-5-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-5-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-5" id="elec-q-5-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-5-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-5" id="elec-q-5-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-5-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-5" id="elec-q-5-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-5-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-5" id="elec-q-5-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-5-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="6">
+              <b>6</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">La educación concertada debería financiarse igual que la pública</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-6" id="elec-q-6-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-6-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-6" id="elec-q-6-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-6-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-6" id="elec-q-6-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-6-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-6" id="elec-q-6-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-6-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-6" id="elec-q-6-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-6-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="7">
+              <b>7</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Hay que bajar los impuestos para impulsar la economía</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-7" id="elec-q-7-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-7-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-7" id="elec-q-7-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-7-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-7" id="elec-q-7-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-7-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-7" id="elec-q-7-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-7-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-7" id="elec-q-7-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-7-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="8">
+              <b>8</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">El salario mínimo debería subir cada año con la inflación</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-8" id="elec-q-8-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-8-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-8" id="elec-q-8-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-8-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-8" id="elec-q-8-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-8-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-8" id="elec-q-8-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-8-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-8" id="elec-q-8-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-8-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="9">
+              <b>9</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">España debe reducir las emisiones aunque encarezca la energía</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-9" id="elec-q-9-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-9-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-9" id="elec-q-9-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-9-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-9" id="elec-q-9-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-9-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-9" id="elec-q-9-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-9-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-9" id="elec-q-9-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-9-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="10">
+              <b>10</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Hay que prolongar la vida de las centrales nucleares</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-10" id="elec-q-10-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-10-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-10" id="elec-q-10-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-10-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-10" id="elec-q-10-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-10-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-10" id="elec-q-10-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-10-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-10" id="elec-q-10-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-10-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="11">
+              <b>11</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Las empresas deberían publicar la brecha salarial</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-11" id="elec-q-11-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-11-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-11" id="elec-q-11-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-11-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-11" id="elec-q-11-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-11-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-11" id="elec-q-11-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-11-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-11" id="elec-q-11-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-11-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="12">
+              <b>12</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Hace falta más presencia policial en las calles</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-12" id="elec-q-12-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-12-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-12" id="elec-q-12-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-12-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-12" id="elec-q-12-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-12-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-12" id="elec-q-12-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-12-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-12" id="elec-q-12-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-12-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="13">
+              <b>13</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Los delitos de corrupción deberían prescribir más tarde</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-13" id="elec-q-13-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-13-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-13" id="elec-q-13-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-13-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-13" id="elec-q-13-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-13-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-13" id="elec-q-13-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-13-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-13" id="elec-q-13-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-13-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="14">
+              <b>14</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">El Estado debería aumentar las ayudas al cine y al teatro</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-14" id="elec-q-14-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-14-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-14" id="elec-q-14-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-14-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-14" id="elec-q-14-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-14-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-14" id="elec-q-14-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-14-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-14" id="elec-q-14-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-14-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="15">
+              <b>15</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Las ayudas al campo deben ligarse al cuidado del medio ambiente</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-15" id="elec-q-15-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-15-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-15" id="elec-q-15-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-15-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-15" id="elec-q-15-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-15-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-15" id="elec-q-15-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-15-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-15" id="elec-q-15-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-15-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="16">
+              <b>16</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Hay que priorizar la industria nacional frente a las importaciones</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-16" id="elec-q-16-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-16-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-16" id="elec-q-16-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-16-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-16" id="elec-q-16-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-16-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-16" id="elec-q-16-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-16-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-16" id="elec-q-16-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-16-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="17">
+              <b>17</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Se deberían expropiar viviendas vacías para destinarlas a alquiler social</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-17" id="elec-q-17-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-17-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-17" id="elec-q-17-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-17-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-17" id="elec-q-17-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-17-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-17" id="elec-q-17-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-17-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-17" id="elec-q-17-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-17-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="18">
+              <b>18</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">La edad de jubilación debería retrasarse</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-18" id="elec-q-18-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-18-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-18" id="elec-q-18-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-18-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-18" id="elec-q-18-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-18-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-18" id="elec-q-18-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-18-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-18" id="elec-q-18-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-18-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="19">
+              <b>19</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Quien llegue de forma irregular debería ser devuelto a su país</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-19" id="elec-q-19-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-19-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-19" id="elec-q-19-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-19-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-19" id="elec-q-19-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-19-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-19" id="elec-q-19-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-19-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-19" id="elec-q-19-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-19-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="20">
+              <b>20</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">La eutanasia debería seguir regulada como hasta ahora</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-20" id="elec-q-20-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-20-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-20" id="elec-q-20-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-20-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-20" id="elec-q-20-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-20-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-20" id="elec-q-20-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-20-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-20" id="elec-q-20-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-20-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="21">
+              <b>21</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">La asignatura de religión debería salir del horario escolar</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-21" id="elec-q-21-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-21-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-21" id="elec-q-21-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-21-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-21" id="elec-q-21-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-21-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-21" id="elec-q-21-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-21-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-21" id="elec-q-21-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-21-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="22">
+              <b>22</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Las grandes fortunas deberían pagar un impuesto específico</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-22" id="elec-q-22-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-22-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-22" id="elec-q-22-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-22-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-22" id="elec-q-22-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-22-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-22" id="elec-q-22-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-22-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-22" id="elec-q-22-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-22-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--q">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="23">
+              <b>23</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">La jornada laboral debería reducirse a cuatro días</h2>
+
+            <div class="v-elec-test__more">
+              <button class="v-elec-test__more-bt" type="button" aria-expanded="false">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <use href="#icon-elec-more"></use>
+                </svg>
+                <span class="v-elec-test__more-bt--1">Necesito saber más</span>
+                <span class="v-elec-test__more-bt--2">Cerrar</span>
+              </button>
+              <div class="v-elec-test__more-txt">Esta es la aclaración</div>
+            </div>
+
+            <fieldset class="v-elec-test__group">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-23" id="elec-q-23-1" value="1">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-23-1">
+                  <span class="v-elec-test__ic">
+                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-1"></use>
+                    </svg>
+                  </span>
+                  <span>Muy de acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-23" id="elec-q-23-2" value="2">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-23-2">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-2"></use>
+                    </svg>
+                  </span>
+                  <span>De acuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-23" id="elec-q-23-3" value="3">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-23-3">
+                  <span class="v-elec-test__ic">
+                    <svg width="25" height="19" viewBox="0 0 25 19" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-3"></use>
+                    </svg>
+                  </span>
+                  <span>Depende</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-23" id="elec-q-23-4" value="4">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-23-4">
+                  <span class="v-elec-test__ic">
+                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-4"></use>
+                    </svg>
+                  </span>
+                  <span>En desacuerdo</span>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-q-23" id="elec-q-23-5" value="5">
+                <label class="v-elec-test__bt" data-elec-next for="elec-q-23-5">
+                  <span class="v-elec-test__ic">
+                    <svg width="27" height="16" viewBox="0 0 27 16" fill="none" aria-hidden="true">
+                      <use href="#icon-elec-gauge-5"></use>
+                    </svg>
+                  </span>
+                  <span>Muy en desacuerdo</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+
+        <li class="v-elec-test__item v-elec-test__item--party">
+          <div class="v-elec-test__card">
+            <div class="v-elec-test__prog" data-elec-step="24">
+              <b>24</b> / <span>24</span>
+              <div class="v-elec-test__prog-bar">
+                <div class="v-elec-test__prog-val"></div>
+              </div>
+            </div>
+
+            <h2 class="v-elec-test__qt">Qué partido crees que se acerca más a tu posición ideológica</h2>
+
+            <fieldset class="v-elec-test__group v-elec-test__group--p">
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-pp" value="pp">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-pp">
+                  <span class="v-elec-test__pr is-pp"></span>
+                  <abbr title="Partido Popular">PP</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-psoe" value="psoe">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-psoe">
+                  <span class="v-elec-test__pr is-psoe"></span>
+                  <abbr title="Partido Socialista Obrero Español">PSOE</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-vox" value="vox">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-vox">
+                  <span class="v-elec-test__pr is-vox"></span>
+                  <abbr title="Vox">VOX</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-frente-amplio" value="frente-amplio">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-frente-amplio">
+                  <span class="v-elec-test__pr is-frente-amplio"></span>
+                  <abbr title="Frente Amplio">F. Amplio</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-erc" value="erc">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-erc">
+                  <span class="v-elec-test__pr is-erc"></span>
+                  <abbr title="Esquerra Republicana de Catalunya">ERC</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-eh-bildu" value="eh-bildu">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-eh-bildu">
+                  <span class="v-elec-test__pr is-eh-bildu"></span>
+                  <abbr title="Euskal Herria Bildu">EH Bildu</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-junts" value="junts">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-junts">
+                  <span class="v-elec-test__pr is-junts"></span>
+                  <abbr title="Junts per Catalunya">Junts</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-pnv" value="pnv">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-pnv">
+                  <span class="v-elec-test__pr is-pnv"></span>
+                  <abbr title="Partido Nacionalista Vasco">PNV</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-podemos" value="podemos">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-podemos">
+                  <span class="v-elec-test__pr is-podemos"></span>
+                  <abbr title="Podemos">Podemos</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-cc" value="cc">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-cc">
+                  <span class="v-elec-test__pr is-cc"></span>
+                  <abbr title="Coalición Canaria">CC</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-adelante" value="adelante">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-adelante">
+                  <span class="v-elec-test__pr is-adelante"></span>
+                  <abbr title="Adelante Andalucía">Adelante</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-bng" value="bng">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-bng">
+                  <span class="v-elec-test__pr is-bng"></span>
+                  <abbr title="Bloque Nacionalista Galego">BNG</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-compromis" value="compromis">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-compromis">
+                  <span class="v-elec-test__pr is-compromis"></span>
+                  <abbr title="Compromís">Compromís</abbr>
+                </label>
+              </div>
+              <div class="v-elec-test__opt">
+                <input type="radio" name="elec-p" id="elec-p-salf" value="salf">
+                <label class="v-elec-test__bt v-elec-test__bt--p" for="elec-p-salf">
+                  <span class="v-elec-test__pr is-salf"></span>
+                  <abbr title="Se Acabó La Fiesta">SALF</abbr>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <p class="v-elec-intro__note">Todas las respuestas de este cuestionario son anónimas</p>
+  </div>
+</div>

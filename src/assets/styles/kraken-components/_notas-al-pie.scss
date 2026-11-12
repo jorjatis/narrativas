@@ -2,5 +2,11 @@
 
 .v-cmp-ftn {
   margin-top: 72px;
-  background: rgba($cb9, .2);
+  font-family: $adl;
+  background: rgba(32, 32, 32, 0.10);
+
+  &__t {
+    margin-bottom: 16px;
+    font-family: $ads;
+  }
 }

@@ -22,7 +22,7 @@
 
   &__list {
     position: relative;
-    height: 510px;
+    height: 570px;
     margin: 32px auto 0;
     padding: 0 20px;
     overflow: hidden;
@@ -32,7 +32,7 @@
     }
 
     @media (min-width: $screen-xs) {
-      height: 752px;
+      height: 822px;
       margin-top: 42px;
       padding: 0 24px;
     }
@@ -78,6 +78,15 @@
     b {
       font-family: $mcs;
       font-size: 15px;
+
+      &:last-child {
+        display: block;
+        font-size: 14px;
+
+        @media (min-width: $screen-xs) {
+          font-size: 16px;
+        }
+      }
     }
   }
 
@@ -149,8 +158,8 @@
     transform: translate(-50%, -50%);
 
     @media (min-width: $screen-xs) {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       border-width: 4px;
     }
 
@@ -171,10 +180,6 @@
     position: relative;
     height: 16px;
     margin-top: 8px;
-
-    @media (min-width: $screen-xs) {
-      margin-top: 12px;
-    }
   }
 
   &__name {

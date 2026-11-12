@@ -1,0 +1,427 @@
+@use "../base/variables" as *;
+
+.v-elec-test {
+  container-type: inline-size;
+  box-sizing: border-box;
+  min-height: 100dvh;
+  margin-top: -110px;
+  padding-top: 86px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe center;
+
+  @media (min-width: $screen-xs) {
+    margin-top: -143px;
+    padding-top: 123px;
+  }
+
+  :where(svg) {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    color: $cb1;
+  }
+
+  &__bt {
+    background: transparent;
+    font-family: inherit;
+    display: grid;
+    align-items: center;
+    justify-content: start;
+    gap: 15px;
+    grid-template-columns: 30px 1fr;
+    border: 1px solid #d6d4ce;
+    min-height: 36px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    font-size: 15px;
+    line-height: 1.2;
+    text-align: left;
+    cursor: pointer;
+
+    @media (min-width: 700px) {
+      min-height: 44px;
+      padding: 0 14px;
+      font-size: 16px;
+    }
+
+    @media (min-width: 1100px) {
+      min-height: 50px;
+      gap: 15px;
+      padding: 0 16px;
+      font-size: 18px;
+    }
+
+    &--p {
+      color: $cb8;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      gap: 5px;
+      padding: 7px;
+      grid-template-columns: 1fr;
+
+      @media (min-width: $screen-sm) {
+        grid-template-columns: auto 1fr;
+        padding: 0 16px;
+        gap: 15px;
+      }
+    }
+  }
+
+  &__nav {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: $cb2;
+    border: 1px solid rgba(214, 212, 206, 0.50);
+    border-radius: 30px;
+    cursor: pointer;
+
+    @media (min-width: 700px) {
+      left: calc(50% - min(700px, calc(100vw - 88px)) / 2 - 40px);
+      width: 60px;
+      height: 60px;
+    }
+
+    @media (min-width: 1100px) {
+      left: calc(50% - 440px);
+    }
+
+    & + & {
+      left: auto;
+      right: 0;
+
+      @media (min-width: 700px) {
+        right: calc(50% - min(700px, calc(100vw - 88px)) / 2 - 40px);
+      }
+
+      @media (min-width: 1100px) {
+        right: calc(50% - 440px);
+      }
+    }
+
+    &[disabled] {
+      opacity: .3;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__prog {
+    text-align: center;
+    color: $cb8;
+    font-size: 14px;
+    line-height: 1;
+
+    @media (min-width: 700px) {
+      font-size: 16px;
+    }
+
+    b {
+      font-family: $mcs;
+    }
+
+    &-bar {
+      width: 80px;
+      height: 8px;
+      margin: 6px auto 0;
+
+      @media (min-width: 700px) {
+        width: 110px;
+        height: 10px;
+        margin-top: 8px;
+      }
+      background: $cb5;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    &-val {
+      height: 100%;
+      background: $cb1;
+      width: 0;
+    }
+  }
+
+  &__sld {
+    position: relative;
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    flex-shrink: 0;
+  }
+
+  &__sld > .v-elec-intro__note {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    right: auto;
+    width: max-content;
+    max-width: min(420px, calc(100% - 40px));
+    transform: translateX(-50%);
+    display: none;
+    margin: 20px 0 0;
+    text-align: center;
+  }
+
+  &:has(.v-elec-test__item--q:first-child.v-elec-test__item--on) &__sld > .v-elec-intro__note {
+    display: block;
+  }
+
+  &__track {
+    margin-top: 16px;
+  }
+
+  &__list {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding-inline: 0;
+    padding-block: 12px;
+    list-style: none;
+    transition: transform .3s ease, height .3s ease;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 0;
+
+    @media (min-width: 700px) {
+      padding-inline: calc((100% - min(700px, calc(100vw - 88px))) / 2);
+      gap: 20px;
+    }
+
+    @media (min-width: 1100px) {
+      padding-inline: calc((100% - 700px) / 2);
+      padding-block: 16px;
+      gap: 120px;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__item {
+    flex: 0 0 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    scroll-snap-align: center;
+    opacity: .4;
+    transition: opacity .3s ease;
+
+    @media (min-width: 700px) {
+      flex-basis: min(700px, calc(100vw - 88px));
+      padding-inline: 0;
+    }
+
+    @media (min-width: 1100px) {
+      flex-basis: 700px;
+    }
+
+    &--on {
+      opacity: 1;
+    }
+  }
+
+  &__card {
+    box-sizing: border-box;
+    height: min(620px, calc(100dvh - 190px));
+    max-height: 620px;
+  }
+
+  &__card {
+    padding: 12px 30px 14px;
+    background: $cb2;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    @media (min-width: 700px) {
+      padding: 18px 20px 22px;
+    }
+
+    @media (min-width: 1100px) {
+      padding: 26px 22px 42px;
+    }
+  }
+
+  &__more {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+
+    @media (min-width: 700px) {
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 1100px) {
+      margin-bottom: 24px;
+    }
+
+    &-bt {
+      position: relative;
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      line-height: 110%;
+      color: $cb8;
+      white-space: nowrap;
+
+      svg {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        max-width: none;
+        transition: transform 0.3s ease;
+      }
+
+      &[aria-expanded="true"] svg {
+        transform: rotate(45deg);
+      }
+
+      &[aria-expanded="true"] &--1 {
+        display: none;
+      }
+
+      &--2 {
+        display: none;
+      }
+
+      &[aria-expanded="true"] &--2 {
+        display: inline;
+      }
+    }
+
+    &-txt {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      width: 100%;
+      max-width: 500px;
+      background: $cb3;
+      border: 1px solid #d6d4ce;
+      padding: 28px 20px;
+      font-size: 18px;
+      line-height: normal;
+      color: $cb8;
+      transition: opacity .3s ease, visibility 0s linear .3s;
+    }
+
+    &-bt[aria-expanded="true"] + &-txt {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity .3s ease, visibility 0s linear 0s;
+    }
+  }
+
+  &__qt {
+    height: 80px;
+    margin: 8px 0 10px;
+    font-family: $ads;
+    font-size: 17px;
+    line-height: 115%;
+    text-align: center;
+
+    @media (min-width: 700px) {
+      height: 72px;
+      margin: 16px 0 18px;
+      font-size: 22px;
+    }
+
+    @media (min-width: 1100px) {
+      height: 83px;
+      margin: 28px 0 32px;
+      font-size: 24px;
+    }
+  }
+
+  &__group {
+    margin: 0 auto;
+    border: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    overflow: hidden;
+    max-width: none;
+
+    @media (min-width: 700px) {
+      gap: 8px;
+      max-width: 300px;
+    }
+
+    input {
+      opacity: 0;
+      appearance: auto;
+      width: auto;
+      height: auto;
+      top: 20px;
+      right: 20px;
+      position: absolute;
+    }
+
+    &--p {
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 560px;
+      width: 100%;
+    }
+  }
+
+  &__opt {
+    position: relative;
+  }
+
+  input[type="radio"]:focus-visible {
+    opacity: 1;
+  }
+
+  input[type="radio"]:checked + label {
+    border-color: $cb1;
+    border-width: 2px;
+    font-weight: 600;
+  }
+
+  &__ic {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__pr {
+    width: 16px;
+    height: 16px;
+    border-radius: 12px;
+
+    &:not([class*="is-"]) {
+      background: #ebebeb;
+    }
+
+    @media (min-width: $screen-sm) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

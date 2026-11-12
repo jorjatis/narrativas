@@ -9,11 +9,29 @@ import {
   onUserAnswersChange,
   parties,
   partyChosen,
-  randomizeMatrixYou,
-  setMatrixChosen,
   themeScores,
   themes,
 } from './mockData';
+
+function partyOption(attribute, party) {
+  const item = document.createElement('li');
+  item.className = 'v-slc__l';
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'v-slc__a';
+  button.dataset[attribute] = party.id;
+  const swatch = document.createElement('span');
+  swatch.className = `v-slc__party-color ${party.colorClass}`;
+  button.append(swatch, document.createTextNode(party.name));
+  item.append(button);
+  return item;
+}
+
+function fillPartySelect(select, attribute, extra = []) {
+  const list = select?.querySelector('.v-slc__u');
+  if (!list) return;
+  list.replaceChildren(...[...extra, ...parties].map((party) => partyOption(attribute, party)));
+}
 
 function seriesName(id) {
   if (id === 'tu') return 'Tú';
@@ -47,38 +65,25 @@ function matrizModel(readers) {
   };
 }
 
-function bindMockPanel(matriz, readers) {
-  const panel = document.querySelector('.v-elec-mock-options');
-  const select = panel?.querySelector('.v-elec-mock-options__select');
-  if (!panel || !select || !matriz) return readers;
+function bindAnswers(matriz, readers) {
+  if (!matriz) return readers;
 
-  parties.forEach((party) => {
-    const option = document.createElement('option');
-    option.value = party.id;
-    option.textContent = party.name;
-    option.selected = party.id === partyChosen;
-    select.appendChild(option);
-  });
-
-  select.addEventListener('change', () => {
-    setMatrixChosen(select.value);
+  onUserAnswersChange(() => {
     matriz.update(matrizModel(readers.current));
-  });
-
-  panel.querySelector('.v-elec-mock-options__btn')?.addEventListener('click', () => {
-    randomizeMatrixYou();
-    matriz.update(matrizModel(readers.current));
-  });
-
-  panel.querySelector('.v-elec-mock-options__btn--block')?.addEventListener('click', () => {
-    readers.current = getMatrixReaders((Math.random() * 0x7fffffff) >>> 0);
-    matriz.setReaders(readers.current);
   });
 
   return readers;
 }
 
 export function initElectionsMock() {
+  const you = { id: 'tu', name: 'Tú', colorClass: 'is-default' };
+  document.querySelectorAll('.v-elec-radial .v-slc').forEach((select) => {
+    fillPartySelect(select, 'series', [you]);
+  });
+  document.querySelectorAll('.v-elec-bars .v-slc').forEach((select) => {
+    fillPartySelect(select, 'party');
+  });
+
   const readers = { current: getMatrixReaders() };
   const matriz = initMatriz(matrizModel(readers.current));
 
@@ -96,5 +101,5 @@ export function initElectionsMock() {
     subscribe: onUserAnswersChange,
   });
 
-  bindMockPanel(matriz, readers);
+  bindAnswers(matriz, readers);
 }

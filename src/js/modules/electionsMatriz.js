@@ -438,7 +438,7 @@ export function initMatriz(model) {
   youLabel.dataset.x = youPoint.x;
   youLabel.dataset.y = youPoint.y;
   youLabel.dataset.place = 'below';
-  youLabel.textContent = 'TÚ';
+  youLabel.textContent = 'Tú';
   labelLayer.appendChild(youLabel);
 
   svg.append(grid, readerLayer, link, partyLayer, you, labelLayer, callout);

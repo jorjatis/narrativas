@@ -19,6 +19,14 @@ $party-fills: (
 );
 
 .v-elec-matriz {
+  margin-top: 24px;
+  
+  .v-elec-t {
+    @media (min-width: $screen-xs) {
+      font-size: 30px;
+    }
+  }
+  
   &__chart {
     position: relative;
     display: grid;

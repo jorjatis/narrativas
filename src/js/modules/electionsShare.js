@@ -170,6 +170,21 @@ function downloadBlob(blob) {
   URL.revokeObjectURL(url);
 }
 
+function showImageFeedback(button) {
+  const label = button.querySelector('.v-elec-share-img__t');
+  const done = button.getAttribute('data-elec-done');
+  if (!label || !done) return;
+
+  if (!button.dataset.elecLabel) button.dataset.elecLabel = label.textContent;
+  label.textContent = done;
+  button.classList.add('is-active');
+  window.clearTimeout(Number(button.dataset.elecTimer));
+  button.dataset.elecTimer = String(window.setTimeout(() => {
+    button.classList.remove('is-active');
+    label.textContent = button.dataset.elecLabel;
+  }, 2000));
+}
+
 function bindImageActions(modal) {
   let pending = null;
 
@@ -184,7 +199,9 @@ function bindImageActions(modal) {
 
       if (action === 'copy') {
         const blob = canvas().then((shot) => toBlob(shot, 'image/png'));
-        navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]).catch(() => {});
+        navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+          .then(() => showImageFeedback(button))
+          .catch(() => {});
         return;
       }
 
@@ -192,6 +209,7 @@ function bindImageActions(modal) {
         const blob = await toBlob(shot, 'image/jpeg', 0.92);
         if (action === 'download') {
           downloadBlob(blob);
+          showImageFeedback(button);
           return;
         }
         const file = new File([blob], IMAGE_NAME, { type: 'image/jpeg' });
