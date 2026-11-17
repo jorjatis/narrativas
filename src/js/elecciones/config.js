@@ -99,6 +99,18 @@ export const CONFIG = Object.freeze({
   /** Identificador de esta edición del test. Cambiarlo = clave nueva de localStorage (empiezan de cero). */
   TEST_ID: 'generales-29n',
 
+  /**
+   * Analítica (Adobe Tags, plan "Etiquetado Narrativas"): ver src/js/elecciones/analitica.js.
+   * CAMPANA es el primer trozo de AEP_customName ("29n-elecciones|paso|04|"). No es TEST_ID: lo fija analítica.
+   * PASO_COMPARTIR / PASO_REINICIAR: el nº de paso que se envía en esos hitos (24 preguntas → 01..24; después, 25 y 26).
+   */
+  ANALITICA: Object.freeze({
+    CAMPANA: '29n-elecciones',
+    EVENTO: 'narrativa',
+    PASO_COMPARTIR: 25,
+    PASO_REINICIAR: 26,
+  }),
+
   /** Número máximo de veces que un lector puede completar el test. */
   MAX_INTENTOS: 10,
 

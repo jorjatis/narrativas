@@ -4,6 +4,8 @@ const cargarHtml2canvas = () =>
   (html2canvasCargado ??= import(/* webpackChunkName: "html2canvas" */ 'html2canvas').then((m) => m.default));
 import { capacidadesImagen, copiarAlPortapapeles, datosCompartir, nombreDelMedio } from '../elecciones/compartir';
 import { logoDelMedio } from '../elecciones/logos';
+import { trackNarrativa } from '../elecciones/analitica';
+import { CONFIG } from '../elecciones/config';
 
 const IMAGE_NAME = 'elecciones-resultado.jpg';
 // Ancho máximo de la imagen, en px CSS (con scale: 2, el fichero mide el doble).
@@ -294,6 +296,11 @@ export function initElectionsShare(app) {
   bindImageActions(modal, app);
   document.querySelectorAll('[popovertarget="shareResults"]').forEach((button) => {
     button.addEventListener('click', fill);
+    // Analítica, hito "Compartir": clic en "Compartir mi resultado", con el partido más afín como resultado.
+    button.addEventListener('click', () => {
+      const partido = app.resultadoActual()?.masCercano?.nombre ?? '';
+      trackNarrativa('compartir', CONFIG.ANALITICA.PASO_COMPARTIR, partido);
+    });
   });
   modal.addEventListener('toggle', (event) => {
     if (event.newState === 'open') fill();

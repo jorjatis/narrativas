@@ -1,3 +1,6 @@
+import { CONFIG } from '../elecciones/config.js';
+import { trackNarrativa } from '../elecciones/analitica.js';
+
 /**
  * Carrusel del test. La lógica (qué se guarda, cuándo termina, qué se envía) está en el "app" de
  * electionsApp.js; aquí solo se mueve el carrusel y se le avisa de lo que hace el lector.
@@ -13,6 +16,9 @@ export function initElectionsTest(app) {
   let moving = false;
   let paso = 0;
   let resizing = false;
+  // Analítica: la tarjeta más avanzada ya enviada como "paso" en este intento. Así ir atrás y volver a avanzar
+  // no repite el evento y el embudo cuenta cada pregunta una sola vez (ver avisarPaso).
+  let pasoEnviado = 0;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const shell = document.querySelector('.v-elec');
 
@@ -139,6 +145,8 @@ export function initElectionsTest(app) {
   }
 
   function empezar() {
+    // "Empezar" (no "Continuar": el mismo botón cuando el lector vuelve con el test a medias).
+    if (!shell?.classList.contains('is-resume')) trackNarrativa('iniciar', 0);
     alColapsarMarca(() => {
       verLogo(reduce ? 'auto' : 'smooth');
       saltar(maxReachable()); // si vuelve a medias, a la primera sin contestar
@@ -168,11 +176,14 @@ export function initElectionsTest(app) {
     });
 
     const partyIndex = slides().findIndex((li) => li.classList.contains('v-elec-test__item--party'));
+    pasoEnviado = partyIndex; // las pruebas no cuentan en la analítica
     irA(partyIndex);
   }
 
   function reiniciar() {
     if (!app.alReiniciar()) return; // sin intentos o IP bloqueada (el botón ya no se muestra)
+    trackNarrativa('reiniciar', CONFIG.ANALITICA.PASO_REINICIAR);
+    pasoEnviado = 0; // intento nuevo: el embudo vuelve a contar desde la primera pregunta
     shell?.classList.remove('is-resume');
     root.querySelectorAll('input[type="radio"]').forEach((input) => {
       input.checked = false;
@@ -189,6 +200,7 @@ export function initElectionsTest(app) {
     const items = slides();
     const current = Math.max(0, Math.min(items.length - 1, index));
     if (current !== paso) app.alVer(current);
+    avisarPaso(current);
     paso = current;
     const last = items.length - 1;
 
@@ -206,6 +218,16 @@ export function initElectionsTest(app) {
     prevBtn.hidden = current === 0;
     nextBtn.hidden = current >= last;
     nextBtn.disabled = nextBtn.hidden || !answered(items[current]);
+  }
+
+  /**
+   * Analítica, hito "Avance": el lector ha llegado a la tarjeta `indice` (1..23 preguntas, 24 la de partido).
+   * Solo cuenta la primera vez que llega a cada una en este intento.
+   */
+  function avisarPaso(indice) {
+    if (indice <= pasoEnviado) return;
+    pasoEnviado = indice;
+    trackNarrativa('paso', indice);
   }
 
   function mover(direccion) {
@@ -369,6 +391,8 @@ export function initElectionsTest(app) {
 
   // Al volver a la página: se marca lo que ya contestó y se retoma donde lo dejó.
   const inicial = app.estadoInicial();
+  // Al volver a medias, lo que ya avanzó se envió en su visita: no se repite al saltar a donde lo dejó.
+  pasoEnviado = inicial.actual || 0;
   inicial.respuestas.forEach(({ idPreg, idResp }) => {
     const li = root.querySelector(`.v-elec-test__item--q[data-elec-q="${CSS.escape(idPreg)}"]`);
     const input = li?.querySelector(`input[value="${idResp}"]`);
