@@ -19,7 +19,11 @@ $party-fills: (
 );
 
 .v-elec-matriz {
-  margin-top: 24px;
+  margin-top: 16px;
+
+  @media (min-width: 421px) {
+    margin-top: 24px;
+  }
   
   .v-elec-t {
     @media (min-width: $screen-xs) {
@@ -33,7 +37,11 @@ $party-fills: (
     grid-template-columns: minmax(0, 1fr);
     column-gap: 12px;
     justify-content: center;
-    margin-top: 24px;
+    margin-top: 16px;
+
+    @media (min-width: 421px) {
+      margin-top: 24px;
+    }
 
     @media (min-width: $screen-xs) {
       grid-template-columns: max-content minmax(0, 1fr) max-content;
@@ -41,7 +49,7 @@ $party-fills: (
       margin-left: -32px;
     }
 
-    @media (min-width: 940px) {
+    @media (min-width: 950px) {
       grid-template-columns: max-content 713px max-content;
       margin-left: calc(50% - 16px);
       transform: translateX(-50%);
@@ -51,8 +59,12 @@ $party-fills: (
   &__axis {
     &--n {
       grid-column: 1;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       text-align: center;
+
+      @media (min-width: 421px) {
+        margin-bottom: 8px;
+      }
 
       @media (min-width: $screen-xs) {
         grid-column: 2;
@@ -98,8 +110,12 @@ $party-fills: (
   }
 
   &__k {
-    font: 16px/110% $mcr;
+    font: 14px/110% $mcr;
     color: $cb8;
+
+    @media (min-width: 421px) {
+      font-size: 16px;
+    }
   }
 
   &__eje {
@@ -121,9 +137,13 @@ $party-fills: (
   &__v {
     display: block;
     margin-top: 2px;
-    font: 16px/normal $mcs;
+    font: 14px/normal $mcs;
     text-transform: uppercase;
     color: $cb8;
+
+    @media (min-width: 421px) {
+      font-size: 16px;
+    }
   }
 
   &__frame {
@@ -132,6 +152,43 @@ $party-fills: (
 
     @media (min-width: $screen-xs) {
       grid-column: 2;
+    }
+  }
+
+  &__plot {
+    position: relative;
+  }
+
+  &__svg {
+    -webkit-tap-highlight-color: transparent;
+
+    &.is-pointing {
+      cursor: pointer;
+    }
+  }
+
+  &__tooltip {
+    position: absolute;
+    z-index: 2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: $cb9;
+    font: 13px/1.2 $mcs;
+    color: $cb2;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: translate(-50%, -100%);
+
+    &.is-below {
+      transform: translateX(-50%);
+    }
+
+    &[hidden] {
+      display: none;
+    }
+
+    @media (min-width: 421px) {
+      font-size: 14px;
     }
   }
 
@@ -144,7 +201,7 @@ $party-fills: (
 
     &--cross {
       stroke: $cb8;
-      stroke-width: 1.5;
+      stroke-width: 1;
       stroke-dasharray: none;
     }
   }
@@ -159,6 +216,13 @@ $party-fills: (
 
   &__party {
     fill: $cb7;
+    stroke: transparent;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+
+    &.is-active {
+      stroke: $cb9;
+    }
 
     @each $name, $color in $party-fills {
       &.is-#{$name} {
@@ -179,6 +243,10 @@ $party-fills: (
     font-family: $mcr;
     fill: $cb8;
     pointer-events: none;
+
+    &.is-muted {
+      display: none;
+    }
 
     &--you {
       font-family: $mcs;
@@ -206,7 +274,11 @@ $party-fills: (
     position: relative;
     grid-column: 1;
     min-height: 24px;
-    margin-top: 10px;
+    margin-top: 4px;
+
+    @media (min-width: 421px) {
+      margin-top: 10px;
+    }
 
     @media (min-width: $screen-xs) {
       grid-column: 2;
@@ -221,13 +293,15 @@ $party-fills: (
     display: inline-flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 6px;
+    gap: 2px;
     cursor: pointer;
-    font: 16px/110% $mcr;
+    font: 14px/110% $mcr;
     color: $cb8;
     user-select: none;
 
-    @media (min-width: 431px) {
+    @media (min-width: 421px) {
+      gap: 6px;
+      font-size: 16px;
       top: 50%;
       transform: translateY(-50%);
       flex-direction: row;
@@ -281,5 +355,75 @@ $party-fills: (
   &__input:focus-visible + &__switch {
     outline: 2px solid $cb9;
     outline-offset: 2px;
+  }
+}
+
+@media (min-width: 950px) and (max-height: 1180px) {
+  .v-elec-matriz__chart {
+    grid-template-columns: max-content 600px max-content;
+  } 
+}
+
+@media (min-width: 950px) and (max-height: 1080px) {
+  .v-elec-matriz__chart {
+    grid-template-columns: max-content 500px max-content;
+  } 
+
+  .v-elec-res {
+    margin-top: 24px;
+  }
+}
+
+@media (min-width: $screen-xs) and (max-height: 959px) {
+  .v-elec-res {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    margin-top: 16px;
+
+    &__party-color {
+      width: 30px;
+    }
+
+    &__party-name {
+      font-size: 16px;
+    }
+
+    &__txt {
+      max-width: 160px;
+      padding-left: 16px;
+      border-left: 1px solid #d6d4ce;
+    }
+  }
+
+  .v-elec-matriz {
+    margin-top: 12px;
+
+    .v-elec-t {
+      font-size: 24px;
+    }
+  }
+
+  .v-elec-matriz__chart {
+    grid-template-columns: max-content 380px max-content;
+    margin-top: 24px;
+  } 
+
+  .v-elec-matriz__toggle {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0px;
+    margin-top: 6px;
+  }
+}
+
+@media (min-width: $screen-xs) and (max-height: 750px) {
+  .v-elec-matriz__chart {
+    grid-template-columns: max-content 300px max-content;
+  }
+
+  .v-elec-matriz__toggle {
+    font-size: 12px;
+    gap: 4px;
   }
 }

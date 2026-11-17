@@ -1,8 +1,11 @@
 <div class="v-elec">
+{{> includes/elections-boot }}
+{{> includes/elections-icons }}
 {{> includes/elections-test }}
 
 <div class="v-elec-widgets">
   {{> includes/elections-heading }}
+  <p class="v-elec-aviso" id="v-elec-aviso" role="status" hidden></p>
   {{> ./includes/elections-matriz }}
 
   {{> ./includes/elections-radial }}
@@ -10,7 +13,7 @@
   {{> ./includes/elections-bars }}
 
   <div class="v-btn-c v-btn-c--c">
-    <button class="v-btn v-btn-g v-btn-i--l v-btn--l" id="v-elec-restart" type="button">
+    <button class="v-btn v-btn-g v-btn-i--l v-btn--l" id="v-elec-restart" type="button" hidden>
       <span class="v-i">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 14" aria-hidden="true"><use href="#icon-share-open-panel"></use></svg>
       </span>
@@ -19,14 +22,16 @@
   </div>
 </div>
 
-<div class="v-elec-mock-options">
+{{!-- Solo en la versión de pruebas (index-sandbox): rellena el test como un lector y lo envía a PRE --}}
+{{#if elecciones.rellenar}}
+<div class="v-elec-mock-options" hidden>
   <button class="v-elec-mock-options__btn" id="v-elec-fill" type="button">Rellenar test</button>
 </div>
+{{/if}}
 </div>
 
-{{> ./kraken-components/notas-al-pie 
-    title="La metodología"
-    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lobortis imperdiet lacus quis auctor. Aenean id blandit diam. Sed vestibulum augue odio, a sagittis urna posuere sit amet. Integer ultrices orci id enim semper sollicitudin. Ut tincidunt odio nec lobortis consectetur. Cras sodales vitae diam dignissim tristique. Pellentesque elementum ultricies libero at rutrum. Pellentesque suscipit, diam placerat mollis congue, mi est placerat mauris, id pretium neque est a massa. Sed tincidunt libero nec magna congue, sit amet vestibulum urna aliquet."
-}}
+{{#if elecciones.metodologia}}
+{{> ./kraken-components/notas-al-pie title="La metodología" text=elecciones.metodologia }}
+{{/if}}
 
 {{> ./kraken-components/credits }}

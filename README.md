@@ -118,3 +118,75 @@ Si deseas contribuir a este proyecto:
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Puedes ver más detalles en el archivo LICENSE.
+
+## Test electoral 29N
+
+### Dónde está cada cosa
+
+| Qué | Dónde |
+|---|---|
+| Preguntas, respuestas de los partidos y pesos | `src/data/elecciones/preguntas_29N.json` |
+| Coordenadas de los partidos | `src/data/elecciones/partidos_29N.json` |
+| Nombre en pantalla y clase de color de cada partido | `src/data/elecciones/partidos-visual.json` |
+| Datos para las plantillas (genera las 24 preguntas, las barras y los desplegables) | `src/data/lib/elecciones.js` (lo usan `index.js` e `index-sandbox.js`) |
+| Lógica: cálculo, localStorage, API, medio, compartir | `src/js/elecciones/` |
+| Conexión de la lógica con la visual | `src/js/modules/electionsApp.js` |
+
+Para cambiar preguntas o partidos basta con sustituir los JSON: las plantillas y el cálculo salen de ellos.
+Si los dos JSON no cuadran entre sí, `npm test` lo dice.
+
+El texto de **Necesito saber más** de cada pregunta es el campo `contexto` de `preguntas_29N.json`
+(`"p1": { "claim": "...", "contexto": "...", ... }`). Mientras falte, la pregunta enseña un aviso de
+"Contexto pendiente" y `npm test` lo recuerda con un TODO.
+
+La matriz se pinta de -2,2 a 2,2 para que los partidos extremos no queden pegados al borde
+(`MARGEN_PLANO` en `src/js/elecciones/config.js`); no afecta al cálculo ni a lo que se envía.
+
+### API
+
+Siempre se llama a preproducción (`API_BASE` en `src/js/elecciones/config.js`). En `localhost` y en
+`*.netlify.app` el medio se elige con `?medio=` (por defecto `elcorreo`); en un medio real sale de su dominio.
+
+### Dos versiones
+
+| Página | Para qué |
+|---|---|
+| `index-sandbox.html` | **Pruebas**: botón *Rellenar test* y avisos de lo que falta (contexto de las preguntas, metodología). |
+| `index-ok.html` | **Limpia**, la que se publica: nada de pruebas. Sin contexto en una pregunta no sale *Necesito saber más*; sin metodología no sale ese bloque. La metodología va en `src/data/index-ok.json`, campo `metodologia` (admite HTML). |
+
+Las dos usan las mismas plantillas; la diferencia está en `src/data/index-sandbox.js` / `index-ok.js`.
+
+### Para el CMS
+
+`npm run build` genera además **`dist/cms/v-elec.html`**: el bloque `<div class="v-elec">…</div>` de
+`index-ok.html`, que es lo que se pega en el CMS (lo hace `scripts/extraer-cms.js` y avisa si falta algo).
+
+- Es autocontenido: los iconos que usa (`<symbol>`) van dentro del propio bloque.
+- Ya lleva el `<link>` de `assets/styles/main.css` y el `<script>` de `js/main.js`, con `?v=` calculado del
+  contenido (cada subida rompe la caché sola). Solo hay que cambiar `RUTA_DIST` por la URL de la carpeta del FTP,
+  o lanzar el build con ella: `CMS_RUTA=https://servidor/carpeta npm run build`.
+- Subid la carpeta `dist` manteniendo su estructura: `js/vendors.js` (html2canvas, solo se descarga al
+  compartir) se busca junto a `js/main.js`.
+- Lleva al principio un `<script>` de arranque (`elections-boot.hbs`) que elige la vista inicial (portada,
+  "Continuar" o resultados) antes de pintar, según lo guardado en el navegador.
+- El footer y los `.v-c-cmp` de créditos y metodología del CMS quedan ocultos hasta que hay resultados
+  (`body:has(.v-elec.is-widgets-on)` en `_elections-global.scss`).
+- Del medio se usan: `<title>`, `og:site_name` (nombre del medio en el texto de compartir), `link[rel=canonical]`
+  (enlace del texto), `apple-touch-icon` (logo del modal) y el JS de Vocento (desplegables y modal).
+
+### Carrusel
+
+Las tarjetas a las que aún no se puede ir (`.v-elec-test__item--locked`) no tienen punto de snap y son
+`inert`. Si el lector está en la última tarjeta permitida, el gesto hacia delante (dedo, trackpad o rueda)
+se cancela al empezar, así que el carrusel ni se mueve; hacia atrás y el scroll vertical funcionan normal.
+
+### Probar
+
+```bash
+npm test     # tests (Node 20.10 o superior)
+npm start    # página en http://localhost:8080  ->  ?medio=ideal para otro medio
+```
+
+En `index-sandbox.html` está el botón **Rellenar test**: contesta las 24 preguntas al azar por el mismo
+camino que un lector y deja el test en la pregunta de partido. Al elegir partido se termina y se envía a
+preproducción como un voto más (cuenta para los 10 intentos y para el límite de 150 por IP).

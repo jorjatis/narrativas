@@ -1,0 +1,72 @@
+{
+  "PP": {
+    "slug": "pp",
+    "nombre": "PP",
+    "titulo": "Partido Popular"
+  },
+  "PSOE": {
+    "slug": "psoe",
+    "nombre": "PSOE",
+    "titulo": "Partido Socialista Obrero Español"
+  },
+  "Vox": {
+    "slug": "vox",
+    "nombre": "VOX",
+    "titulo": "Vox"
+  },
+  "Frente Amplio": {
+    "slug": "frente-amplio",
+    "nombre": "F. Amplio",
+    "titulo": "Frente Amplio"
+  },
+  "ERC": {
+    "slug": "erc",
+    "nombre": "ERC",
+    "titulo": "Esquerra Republicana de Catalunya"
+  },
+  "EH Bildu": {
+    "slug": "eh-bildu",
+    "nombre": "EH Bildu",
+    "titulo": "Euskal Herria Bildu"
+  },
+  "Junts": {
+    "slug": "junts",
+    "nombre": "Junts",
+    "titulo": "Junts per Catalunya"
+  },
+  "PNV": {
+    "slug": "pnv",
+    "nombre": "PNV",
+    "titulo": "Partido Nacionalista Vasco"
+  },
+  "Podemos": {
+    "slug": "podemos",
+    "nombre": "Podemos",
+    "titulo": "Podemos"
+  },
+  "CC": {
+    "slug": "cc",
+    "nombre": "CC",
+    "titulo": "Coalición Canaria"
+  },
+  "Adelante": {
+    "slug": "adelante",
+    "nombre": "Adelante",
+    "titulo": "Adelante Andalucía"
+  },
+  "BNG": {
+    "slug": "bng",
+    "nombre": "BNG",
+    "titulo": "Bloque Nacionalista Galego"
+  },
+  "Compromis": {
+    "slug": "compromis",
+    "nombre": "Compromís",
+    "titulo": "Compromís"
+  },
+  "SALF": {
+    "slug": "salf",
+    "nombre": "SALF",
+    "titulo": "Se Acabó La Fiesta"
+  }
+}

@@ -11,8 +11,9 @@
 @use './kraken-components/credits';
 
 @use './components/elections-global';
-@use './components/elections-test';
 
+@use './components/elections-intro';
+@use './components/elections-test';
 @use './components/elections-matriz';
 @use './components/elections-radial';
 @use './components/elections-bars';

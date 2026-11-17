@@ -18,27 +18,19 @@
         <div class="v-slc__n">
           <ul class="v-slc__u">
             <li class="v-slc__l">
-               <button class="v-slc__a" type="button" data-series="tu">
+              <button class="v-slc__a" type="button" data-series="tu">
                 <span class="v-slc__party-color is-default"></span>
                 Tú
               </button>
-              <button class="v-slc__a" type="button" data-series="pp">
-                <span class="v-slc__party-color is-pp"></span>
-                PP
-              </button>
             </li>
+            {{#each elecciones.partidos}}
             <li class="v-slc__l">
-              <button class="v-slc__a" type="button" data-series="psoe">
-                <span class="v-slc__party-color is-psoe"></span>
-                PSOE
+              <button class="v-slc__a" type="button" data-series="{{slug}}">
+                <span class="v-slc__party-color is-{{slug}}"></span>
+                {{nombre}}
               </button>
             </li>
-            <li class="v-slc__l">
-              <button class="v-slc__a" type="button" data-series="vox">
-                <span class="v-slc__party-color is-vox"></span>
-                VOX
-              </button>
-            </li>
+            {{/each}}
           </ul>
         </div>
       </div>
@@ -66,23 +58,15 @@
                 <span class="v-slc__party-color is-default"></span>
                 Tú
               </button>
-              <button class="v-slc__a" type="button" data-series="pp">
-                <span class="v-slc__party-color is-pp"></span>
-                PP
-              </button>
             </li>
+            {{#each elecciones.partidos}}
             <li class="v-slc__l">
-              <button class="v-slc__a" type="button" data-series="psoe">
-                <span class="v-slc__party-color is-psoe"></span>
-                PSOE
+              <button class="v-slc__a" type="button" data-series="{{slug}}">
+                <span class="v-slc__party-color is-{{slug}}"></span>
+                {{nombre}}
               </button>
             </li>
-            <li class="v-slc__l">
-              <button class="v-slc__a" type="button" data-series="vox">
-                <span class="v-slc__party-color is-vox"></span>
-                VOX
-              </button>
-            </li>
+            {{/each}}
           </ul>
         </div>
       </div>

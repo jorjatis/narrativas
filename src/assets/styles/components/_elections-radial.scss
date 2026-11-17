@@ -8,9 +8,9 @@
   }
 
   &__chart {
-    width: calc(100vw - 8px);
+    width: calc(100vw - 24px); // ocupa la pantalla menos 12px por lado
     margin-top: 24px;
-    margin-left: calc(50% - 50vw + 6px);
+    margin-left: calc(50% - 50vw + 12px);
 
     @media (min-width: 440px) {
       width: 100%;

@@ -1,0 +1,1 @@
+// Aqui va todo el js de main.js pero sin modulos, todo tirado

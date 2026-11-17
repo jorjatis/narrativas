@@ -1,0 +1,96 @@
+@use "../base/variables" as *;
+@use "../base/variables-custom" as *;
+
+.v-elec-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  margin-top: -72px;
+  padding-top: 48px;
+  text-align: center;
+
+  @media (min-width: $screen-xs) {
+    margin-top: -78px;
+    padding-top: 58px;
+  }
+
+  &__t {
+    margin-top: 10px;
+    font-family: $ads;
+    font-size: 32px;
+    line-height: 110%;
+    letter-spacing: -0.63px;
+
+    @media (min-width: 376px) {
+      font-size: 36px;
+    }
+
+    @media (min-width: $screen-xs) {
+      margin-top: 20px;
+      font-size: 60px;
+      letter-spacing: 0;
+    }
+  }
+
+  &__st {
+    margin-top: 16px;
+    font-family: $adl;
+    font-size: 18px;
+    line-height: 110%;
+
+    @media (min-width: 376px) {
+      font-size: 20px;
+    }
+
+    @media (min-width: $screen-xs) {
+      margin-top: 32px;
+      font-size: 24px;
+    }
+
+    // Centrado en cualquier contenedor: con calc(50% - 335px) solo se centraba si el padre ocupaba todo
+    // el ancho de la página, y en el CMS se iba a la derecha.
+    @media (min-width: 710px) {
+      width: min(670px, 100%);
+      margin-inline: auto;
+    }
+  }
+
+  &__note {
+    margin: 16px auto;
+    font-size: 16px;
+    line-height: 110%;
+    color: $cb8;
+    text-align: center;
+
+    @media (min-width: 376px) {
+      margin: 24px auto;
+    }
+
+    @media (min-width: $screen-xs) {
+      margin: 32px 0 48px;
+      font-size: 18px;
+    }
+  }
+}
+
+@media (min-width: $screen-xs) and (max-height: 769px) {
+  .v-elec-h__mark {
+    width: 140px;
+  }
+
+  .v-elec-intro__t {
+    margin-top: 16px;
+    font-size: 42px;
+  }
+
+  .v-elec-intro__st {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  .v-elec-intro__note {
+    margin-bottom: 32px;
+  }
+}

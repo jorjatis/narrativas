@@ -1,15 +1,15 @@
-<div id="shareResults" class="v-mdl v-mdl--t3">
+<div id="shareResults" class="v-mdl v-mdl--t3" role="dialog" aria-labelledby="v-elec-share-h">
   <div class="v-mdl__c">
-    <button class="v-x" popovertarget="shareResults" popovertargetaction="hide">
+    <button class="v-x" type="button" popovertarget="shareResults" popovertargetaction="hide" aria-label="Cerrar">
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
         <use href="#icon-close-modal"></use>
       </svg>
     </button>
     <div class="v-mdl__h">
       <span class="v-i">
-        <img class="v-log__i" src="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-57x57.png" alt="[]" loading="lazy" decoding="async" width="57" height="57">
+        <img class="v-log__i" src="https://s1.abcstatics.com/comun/2018/img/iconos-metas/apple-touch-icon-57x57.png" alt="" loading="lazy" decoding="async" width="57" height="57">
       </span>
-      <p class="v-mdl__p"></p>
+      <p class="v-mdl__p" id="v-elec-share-h"></p>
     </div>
     <div class="v-mdl__w">
       <div class="v-sld v-sld--t2 not-touch not-sld" data-voc-component="slider">
@@ -17,17 +17,17 @@
           <div class="v-sld__w">
             <ul class="v-sld__g">
               <li class="v-sld__s">
-                <button class="v-i-c v-i-c--1" data-voc-portals="social-sharer" data-voc-social-sharer="whatsapp" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="fixed-whatsapp" data-voc-anchor-id="" action="share/whatsapp/share">
+                <button class="v-i-c v-i-c--1" type="button" data-elec-red="whatsapp" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="compartir-resultado-elecciones-whatsapp">
                   <span class="v-i">
                     <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
                       <use href="#icon-share-wh"></use>
                     </svg>
                   </span>
-                  <p class="v-p">WhastApp</p>
+                  <p class="v-p">WhatsApp</p>
                 </button>
               </li>
               <li class="v-sld__s">
-                <button class="v-i-c v-i-c--2" data-voc-portals="social-sharer" data-voc-social-sharer="facebook" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="fixed-facebook" data-voc-anchor-id="">
+                <button class="v-i-c v-i-c--2" type="button" data-elec-red="facebook" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="compartir-resultado-elecciones-facebook">
                   <span class="v-i">
                     <svg width="7" height="14" viewBox="0 0 7 14" aria-hidden="true">
                       <use href="#icon-share-fb"></use>
@@ -37,7 +37,7 @@
                 </button>
               </li>
               <li class="v-sld__s">
-                <button class="v-i-c v-i-c--3" data-voc-portals="social-sharer" data-voc-social-sharer="twitter" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="fixed-twitter" data-voc-anchor-id="">
+                <button class="v-i-c v-i-c--3" type="button" data-elec-red="twitter" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="compartir-resultado-elecciones-twitter">
                   <span class="v-i">
                     <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
                       <use href="#icon-share-tw"></use>
@@ -47,7 +47,7 @@
                 </button>
               </li>
               <li class="v-sld__s">
-                <button class="v-i-c v-i-c--4" data-voc-portals="social-sharer" data-voc-social-sharer="linkedin" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="fixed-linkedin" data-voc-anchor-id="">
+                <button class="v-i-c v-i-c--4" type="button" data-elec-red="linkedin" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="compartir-resultado-elecciones-linkedin">
                   <span class="v-i">
                     <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
                       <use href="#icon-share-linkedin"></use>
@@ -57,7 +57,7 @@
                 </button>
               </li>
               <li class="v-sld__s">
-                <button class="v-i-c v-i-c--5" data-voc-portals="social-sharer" data-voc-social-sharer="telegram" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="fixed-telegram" data-voc-anchor-id="">
+                <button class="v-i-c v-i-c--5" type="button" data-elec-red="telegram" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="compartir-resultado-elecciones-telegram">
                   <span class="v-i">
                     <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
                       <use href="#icon-share-telegram"></use>
@@ -67,7 +67,7 @@
                 </button>
               </li>
               <li class="v-sld__s">
-                <button class="v-i-c v-i-c--6" data-voc-portals="social-sharer" data-voc-social-sharer="threads" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="fixed-threads" data-voc-anchor-id="">
+                <button class="v-i-c v-i-c--6" type="button" data-elec-red="threads" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="compartir-resultado-elecciones-threads">
                   <span class="v-i">
                     <svg width="22" height="24" viewBox="0 0 22 24" aria-hidden="true">
                       <use href="#icon-share-threads"></use>
@@ -83,9 +83,9 @@
       <form class="v-frm">
         <div class="v-frm__c">
           <div class="v-frm__w">
-            <label class="v-frm__l" for="[id]"></label>
-            <input class="v-frm__i" id="[id]" disabled>
-            <button class="v-frm__b v-btn v-btn-g v-btn-i v-btn-i--l v-btn--l v-i-t" type="button" data-voc-component="copy-link">
+            <label class="v-frm__l" for="v-elec-share-txt"></label>
+            <input class="v-frm__i" id="v-elec-share-txt" disabled>
+            <button class="v-frm__b v-btn v-btn-g v-btn-i v-btn-i--l v-btn--l v-i-t" type="button" data-elec-copiar aria-label="Copiar texto y enlace" data-voc-vtm-id="compartirrrss" data-voc-vtm-info="compartir-resultado-elecciones-link">
               <span class="v-i-t__i">
                 <span class="v-i v-i--1">
                   <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
@@ -103,7 +103,7 @@
         </div>
       </form>
       <div class="v-elec-share-img">
-        <button class="v-btn v-btn-g v-btn--l v-i-t" type="button" data-elec-share="download" data-elec-done="Imagen descargada">
+        <button class="v-btn v-btn-g v-btn--l v-i-t" type="button" data-elec-share="download" data-voc-vtm-id="elecciones" data-voc-vtm-info="descargar-resultado-elecciones-noticia" data-elec-done="Imagen descargada">
           <span class="v-i-t__i" aria-hidden="true">
             <span class="v-i v-i--2">
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
@@ -113,8 +113,8 @@
           </span>
           <span class="v-elec-share-img__t">Descargar imagen</span>
         </button>
-        <button class="v-btn v-btn-g v-btn--l" type="button" data-elec-share="share">Compartir imagen</button>
-        <button class="v-btn v-btn-g v-btn--l v-i-t" type="button" data-elec-share="copy" data-elec-done="Imagen copiada">
+        <button class="v-btn v-btn-g v-btn--l" type="button" data-elec-share="share" data-voc-vtm-id="elecciones" data-voc-vtm-info="compartir-resultado-elecciones-noticia" hidden>Compartir imagen</button>
+        <button class="v-btn v-btn-g v-btn--l v-i-t" type="button" data-elec-share="copy" data-voc-vtm-id="elecciones" data-voc-vtm-info="copiar-resultado-elecciones-noticia" data-elec-done="Imagen copiada" hidden>
           <span class="v-i-t__i" aria-hidden="true">
             <span class="v-i v-i--2">
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
@@ -125,6 +125,7 @@
           <span class="v-elec-share-img__t">Copiar imagen</span>
         </button>
       </div>
+      <p class="v-elec-share-img__estado" role="status" aria-live="polite"></p>
     </div>
   </div>
 </div>

@@ -1,4 +1,35 @@
+@use "sass:meta";
 @use "../base/variables" as *;
+
+// Familias tipográficas (ver $fuentes-* en _variables.scss): las de la marca por defecto y, dentro de
+// .abc, las de ABC.
+:root {
+  @each $nombre, $familia in $fuentes-por-defecto {
+    --elec-f-#{$nombre}: #{meta.inspect($familia)}; // inspect: conserva las comillas
+  }
+}
+
+.abc {
+  @each $nombre, $familia in $fuentes-abc {
+    --elec-f-#{$nombre}: #{meta.inspect($familia)}; // inspect: conserva las comillas
+  }
+}
+
+// Artículo del CMS: elementos de la plantilla de noticia que no se usan en la pieza.
+body:has(.v-elec) {
+  .v-a,
+  .v-ath,
+  .v-d-n,
+  .v-w-c--2,
+  .v-hsc,
+  .v-bdc {
+    display: none;
+  }
+
+  .v-d > * {
+    margin-bottom: 0 !important;
+  }
+}
 
 .v-h:not(.is-fixed), .v-f {
   background: $cb2;
@@ -7,3 +38,58 @@
 body, .v-w {
   background: $cp15;
 }
+
+.v-h.v-h--t3 {
+  height: 50px;
+  margin-bottom: 0;
+
+  @media (min-width: $screen-xs) {
+    height: 58px;
+    margin-bottom: 0;
+  }
+}
+
+.v-c-cmp {
+  &:has(.v-cmp-ftn),
+  &:has(.v-cmp-crd) {
+    display: none;
+  }
+}
+
+footer.v-f {
+  display: none;
+  margin-top: 70px;
+}
+
+body:has(.v-elec.is-widgets-on) {
+  .v-c-cmp {
+    &:has(.v-cmp-ftn),
+    &:has(.v-cmp-crd) {
+      display: block;
+    }
+  }
+
+  footer.v-f {
+    display: block;
+  }
+}
+
+.v-w {
+  .v-w-c {
+    margin-bottom: 0;
+  }
+}
+
+.v-d--1 {
+  .v-elec {
+    margin-bottom: 0;
+  }
+}
+
+.v-btn.v-btn--xl {
+  @media (max-width: 375px) {
+    height: 40px;
+    padding: 0 32px;
+    font-size: 1rem;
+  }
+}

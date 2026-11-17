@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const fs = require('fs');
 const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -6,12 +7,18 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const styleChunksCacheGroups = require('./styleChunksCacheGroups.js');
 
-const pages = fs.existsSync(path.resolve(__dirname, 'src/views/pages'))
+const todasLasPaginas = fs.existsSync(path.resolve(__dirname, 'src/views/pages'))
   ? glob.sync('src/views/pages/**/*.hbs')
   : [];
 
-module.exports = (env, argv) => {
+module.exports = (env = {}, argv) => {
   const isProduction = argv.mode === 'production';
+  // Producción (`npm run build`): solo index-ok y nada de desarrollo (localhost, Netlify, ?medio=, "Rellenar"...).
+  // `npm run build:pruebas` (--env pruebas) y `npm start` lo incluyen todo.
+  const desarrollo = !isProduction || Boolean(env.pruebas);
+  const pages = desarrollo
+    ? todasLasPaginas
+    : todasLasPaginas.filter((p) => path.basename(p) === 'index-ok.hbs');
 
   return {
     mode: argv.mode || 'development',
@@ -21,7 +28,9 @@ module.exports = (env, argv) => {
       filename: 'js/[name].js',
       chunkFilename: 'js/[name].js',
       clean: true,
-      publicPath: '/',
+      // 'auto': los JS que se cargan bajo demanda (html2canvas -> js/vendors.js) se buscan en la misma carpeta
+      // desde la que se cargó main.js. Con '/' se buscaban en la raíz del dominio del medio y fallaban en el CMS.
+      publicPath: 'auto',
     },
     resolve: {
       alias: {
@@ -81,7 +90,8 @@ module.exports = (env, argv) => {
     },
     optimization: {
       minimize: isProduction,
-      runtimeChunk: 'single',
+      // Sin runtime.js aparte: en el CMS basta con cargar main.js (y js/vendors.js en la misma carpeta).
+      runtimeChunk: false,
       splitChunks: {
         chunks: 'all',
         cacheGroups: {
@@ -95,6 +105,7 @@ module.exports = (env, argv) => {
       },
     },
     plugins: [
+      new webpack.DefinePlugin({ ELEC_DESARROLLO: JSON.stringify(desarrollo) }),
       ...pages.map((filePath) => {
         const outputPath = path
           .relative('src/views/pages', filePath)
@@ -166,4 +177,4 @@ module.exports = (env, argv) => {
       errorDetails: true,
     },
   };
-};
+};

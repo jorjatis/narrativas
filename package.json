@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test": "node --test \"tests/**/*.test.js\"",
     "start": "webpack serve --mode development",
     "build": "npm run clean && webpack --mode production",
+    "postbuild": "node scripts/extraer-cms.js",
+    "build:pruebas": "npm run clean && webpack --mode production --env pruebas",
     "clean": "rimraf dist",
     "deploy": "netlify deploy --prod --dir=dist",
-    "build:deploy": "npm run build && npm run deploy"
+    "build:deploy": "npm run build:pruebas && npm run deploy"
   },
   "author": "",
   "license": "ISC",

@@ -204,6 +204,15 @@ function youLabelShift(box, you, chosen) {
   return Math.abs(toRight) <= Math.abs(toLeft) ? toRight : toLeft;
 }
 
+/** Desplaza en horizontal un texto del SVG para que quede entero dentro del gráfico (0..100). */
+function encajarEnGrafico(el) {
+  const box = el.getBBox();
+  if (!box.width) return;
+  const x = +el.getAttribute('x');
+  if (box.x < 0) el.setAttribute('x', x - box.x);
+  else if (box.x + box.width > 100) el.setAttribute('x', x - (box.x + box.width - 100));
+}
+
 function calloutBox(x, y) {
   return { x: x - 8, y: y - 12, w: 16, h: 8 };
 }
@@ -248,6 +257,11 @@ function nameBox(point, place) {
   return { x: point.x - w / 2, y: point.y + 3, w, h };
 }
 
+/** Solo llevan nombre fijo el partido elegido en el test y el más cercano; el resto, en tooltip. */
+function labelShown(id, result) {
+  return id === result.chosen?.id || id === result.closest?.id;
+}
+
 function paintColor(el, colorClass) {
   if (el.dataset.partyColor) el.classList.remove(el.dataset.partyColor);
   el.classList.remove('is-default');
@@ -260,7 +274,7 @@ function markerBlocks(result) {
   result.parties.forEach((party) => {
     const point = toPoint(party);
     boxes.push({ x: point.x - 3.2, y: point.y - 3.2, w: 6.4, h: 6.4 });
-    boxes.push(nameBox(point, LABEL_PLACE[party.id] || 'below'));
+    if (labelShown(party.id, result)) boxes.push(nameBox(point, LABEL_PLACE[party.id] || 'below'));
   });
   const you = toPoint(result.you);
   boxes.push({ x: you.x - 3.2, y: you.y - 3.2, w: 6.4, h: 6.4 });
@@ -288,6 +302,7 @@ export function initMatriz(model) {
 
   let result = model;
   root.dataset.ready = 'true';
+  root.classList.toggle('is-no-you', Boolean(model.sinUsuario)); // IP bloqueada sin resultado previo
   paintHeader(root, result);
 
   let readers = model.readers || [];
@@ -444,7 +459,96 @@ export function initMatriz(model) {
   svg.append(grid, readerLayer, link, partyLayer, you, labelLayer, callout);
   plot.appendChild(svg);
 
+  const tooltip = document.createElement('div');
+  tooltip.className = 'v-elec-matriz__tooltip';
+  tooltip.setAttribute('role', 'tooltip');
+  tooltip.hidden = true;
+  plot.appendChild(tooltip);
+
+  function syncLabels() {
+    partyLabels.forEach((label) => {
+      label.classList.toggle('is-muted', !labelShown(label.dataset.id, result));
+    });
+    hideTooltip();
+  }
+
+  let tipDot = null;
+
+  function hideTooltip() {
+    tipDot?.classList.remove('is-active');
+    tipDot = null;
+    tooltip.hidden = true;
+    svg.classList.remove('is-pointing');
+  }
+
+  function showTooltip(dot) {
+    if (dot === tipDot) return;
+    tipDot?.classList.remove('is-active');
+    tipDot = dot;
+    dot.classList.add('is-active');
+    svg.classList.add('is-pointing');
+    const party = result.parties.find((item) => item.id === dot.dataset.id);
+    tooltip.textContent = party?.name || '';
+    tooltip.hidden = false;
+
+    const width = plot.clientWidth;
+    const unit = width / 100;
+    const r = +dot.getAttribute('r') * unit;
+    const x = +dot.dataset.x * unit;
+    const y = +dot.dataset.y * unit;
+    const half = tooltip.offsetWidth / 2;
+    const left = Math.min(width - half, Math.max(half, x));
+    const below = y - r - 8 - tooltip.offsetHeight < 0;
+    tooltip.classList.toggle('is-below', below);
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${below ? y + r + 8 : y - r - 8}px`;
+  }
+
+  /** Partido sin nombre fijo más próximo al puntero (en px), dentro del radio de alcance. */
+  function dotAt(event, reach) {
+    if (!state.revealed) return null;
+    const box = svg.getBoundingClientRect();
+    const unit = box.width / 100;
+    const px = event.clientX - box.left;
+    const py = event.clientY - box.top;
+    let best = null;
+    let bestDist = Infinity;
+    partyDots.forEach((dot) => {
+      if (labelShown(dot.dataset.id, result)) return;
+      const d = Math.hypot(+dot.dataset.x * unit - px, +dot.dataset.y * unit - py);
+      const limit = Math.max(reach, +dot.getAttribute('r') * unit + 2);
+      if (d <= limit && d < bestDist) {
+        best = dot;
+        bestDist = d;
+      }
+    });
+    return best;
+  }
+
+  svg.addEventListener('pointermove', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    const dot = dotAt(event, 4);
+    if (dot) showTooltip(dot);
+    else hideTooltip();
+  });
+  svg.addEventListener('pointerleave', (event) => {
+    if (event.pointerType === 'mouse') hideTooltip();
+  });
+  svg.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'mouse') return;
+    const dot = dotAt(event, 16);
+    if (dot) showTooltip(dot);
+    else hideTooltip();
+  });
+  document.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'mouse' && !svg.contains(event.target)) hideTooltip();
+  });
+  window.addEventListener('scroll', () => {
+    if (tipDot && !tipDot.matches(':hover')) hideTooltip();
+  }, { passive: true });
+
   const state = { revealed: false, reduce: false };
+  syncLabels();
 
   function layout() {
     const width = plot.clientWidth;
@@ -462,6 +566,7 @@ export function initMatriz(model) {
       const ratio = +dot.dataset.ratio;
       dot.setAttribute('r', readerR * (0.82 + ratio * 0.36));
     });
+    hideTooltip();
 
     svg.querySelectorAll('.v-elec-matriz__label').forEach((label) => {
       const pos = labelPoint(+label.dataset.x, +label.dataset.y, label.dataset.place, partyR, unit);
@@ -470,9 +575,11 @@ export function initMatriz(model) {
       label.setAttribute('text-anchor', pos.anchor);
       label.setAttribute('dominant-baseline', pos.baseline);
       label.setAttribute('font-size', labelSize);
-      if (!label.classList.contains('v-elec-matriz__label--you')) return;
-      const shift = youLabelShift(label.getBBox(), view.you, view.chosen);
-      if (shift) label.setAttribute('x', pos.x + shift);
+      if (label.classList.contains('v-elec-matriz__label--you')) {
+        const shift = youLabelShift(label.getBBox(), view.you, view.chosen);
+        if (shift) label.setAttribute('x', pos.x + shift);
+      }
+      encajarEnGrafico(label); // los partidos en los bordes (p. ej. x = ±2) no sacan su nombre fuera
     });
 
     if (!anchorDot) return;
@@ -484,6 +591,7 @@ export function initMatriz(model) {
     calloutText.setAttribute('x', ax);
     calloutText.setAttribute('y', textY);
     calloutText.setAttribute('font-size', (narrow ? 11 : 12) / unit);
+    encajarEnGrafico(calloutText);
     calloutLine.setAttribute('x1', ax);
     calloutLine.setAttribute('x2', ax);
     calloutLine.setAttribute('y1', textY + 2.5 / unit);
@@ -629,6 +737,7 @@ export function initMatriz(model) {
 
   function update(next) {
     result = next;
+    root.classList.toggle('is-no-you', Boolean(next.sinUsuario));
     stopIntro();
     state.revealed = true;
     view.you = toPoint(next.you);
@@ -648,6 +757,7 @@ export function initMatriz(model) {
     });
     youLabel.dataset.x = view.you.x;
     youLabel.dataset.y = view.you.y;
+    syncLabels();
     anchor = pickCallout(readers, markerBlocks(next));
     anchorDot = readerDots[readers.indexOf(anchor)];
     paintHeader(root, next);
@@ -661,6 +771,8 @@ export function initMatriz(model) {
     });
     setMotion(partyLabels, { autoAlpha: 1 });
     setMotion(youLabel, { autoAlpha: 1 });
+    // stopIntro() corta el onComplete que mostraba a los demás lectores: se muestran aquí
+    fadeReaders(input.checked, false);
 
     const duration = state.reduce ? 0 : 0.35;
     tweenMotion(you, {
