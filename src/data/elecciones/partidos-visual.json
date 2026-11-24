@@ -1,0 +1,79 @@
+{
+  "PP": {
+    "slug": "pp",
+    "nombre": "PP",
+    "titulo": "Partido Popular"
+  },
+  "PSOE": {
+    "slug": "psoe",
+    "nombre": "PSOE",
+    "titulo": "Partido Socialista Obrero Español"
+  },
+  "Vox": {
+    "slug": "vox",
+    "nombre": "VOX",
+    "titulo": "Vox"
+  },
+  "PNV": {
+    "slug": "pnv",
+    "nombre": "PNV",
+    "titulo": "Partido Nacionalista Vasco"
+  },
+  "ERC": {
+    "slug": "erc",
+    "nombre": "ERC",
+    "titulo": "Esquerra Republicana de Catalunya"
+  },
+  "Compromis": {
+    "slug": "compromis",
+    "nombre": "Compromís",
+    "titulo": "Compromís"
+  },
+  "CC": {
+    "slug": "cc",
+    "nombre": "CC",
+    "titulo": "Coalición Canaria"
+  },
+  "Frente Amplio": {
+    "slug": "frente-amplio",
+    "nombre": "F. Amplio",
+    "titulo": "Frente Amplio"
+  },
+  "Podemos": {
+    "slug": "podemos",
+    "nombre": "Podemos",
+    "titulo": "Podemos"
+  },
+  "EH Bildu": {
+    "slug": "eh-bildu",
+    "nombre": "EH Bildu",
+    "titulo": "Euskal Herria Bildu"
+  },
+  "Ara Més": {
+    "slug": "ara-mes",
+    "nombre": "Ara Més",
+    "titulo": "Ara Més"
+  },
+  "Adelante": {
+    "slug": "adelante",
+    "nombre": "Adelante",
+    "titulo": "Adelante Andalucía"
+  },
+  "BNG": {
+    "slug": "bng",
+    "nombre": "BNG",
+    "titulo": "Bloque Nacionalista Galego"
+  },
+  "Junts": {
+    "slug": "junts",
+    "nombre": "Junts",
+    "titulo": "Junts per Catalunya",
+    "sinDatos": true,
+    "nota": "*Junts no ha presentado programa electoral, por lo que no se puede situar en la matriz."
+  },
+  "SALF": {
+    "slug": "salf",
+    "nombre": "SALF",
+    "titulo": "Se Acabó La Fiesta"
+  }
+}

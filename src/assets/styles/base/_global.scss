@@ -1,4 +1,38 @@
+@use "sass:meta";
 @use "../base/variables" as *;
+
+// Familias tipográficas (ver $fuentes-* en _variables.scss): sin variables en :root; las de la marca por
+// defecto van como reserva en cada var() y, dentro de .abc, se usan las de ABC.
+.abc {
+  @each $nombre, $familia in $fuentes-abc {
+    --elec-f-#{$nombre}: #{meta.inspect($familia)}; // inspect: conserva las comillas
+  }
+}
+
+// Artículo del CMS: elementos de la plantilla de noticia que no se usan en la pieza.
+body:has(.v-elec) {
+  .v-a,
+  .v-ath,
+  .v-d-n,
+  .v-w-c--2,
+  .v-hsc,
+  .v-bdc,
+  .v-h__n.v-h__n--1,
+  .v-h-a,
+  .v-tck {
+    display: none;
+  }
+
+  // Recomendador "Para ti" de Marfeel. Solo ese bloque (clase + id): .v-c a secas es un contenedor clave del
+  // CMS. Con !important porque Marfeel lo enseña y lo esconde con un style="display: …" en línea.
+  .v-c#ab-test-marfeel {
+    display: none !important;
+  }
+
+  .v-d > * {
+    margin-bottom: 0 !important;
+  }
+}
 
 .v-h:not(.is-fixed), .v-f {
   background: $cb2;
@@ -6,4 +40,67 @@
 
 body, .v-w {
   background: $cp15;
+}
+
+.v-h.v-h--t3 {
+  height: 50px;
+  margin-bottom: 0;
+
+  @media (min-width: $screen-xs) {
+    height: 58px;
+    margin-bottom: 0;
+  }
+}
+
+.v-c-cmp {
+  &:has(.v-cmp-ftn),
+  &:has(.v-cmp-crd) {
+    display: none;
+  }
+}
+
+footer.v-f {
+  display: none;
+  margin-top: 70px;
+}
+
+body:has(.v-elec.is-widgets-on) {
+  .v-c-cmp {
+    &:has(.v-cmp-ftn),
+    &:has(.v-cmp-crd) {
+      display: block;
+    }
+  }
+
+  footer.v-f {
+    display: block;
+  }
+}
+
+.v-w {
+  .v-w-c {
+    margin-bottom: 0;
+  }
+}
+
+.v-d--1 {
+  .v-elec {
+    margin-bottom: 0;
+  }
+}
+
+.v-btn.v-btn--xl {
+  @media (max-width: 375px) {
+    height: 40px;
+    padding: 0 32px;
+    font-size: 1rem;
+  }
+}
+
+// Por debajo de 420px los botones van con menos aire lateral para que el texto no parta en dos líneas.
+.v-elec .v-btn,
+.v-elec .v-btn.v-btn--xl {
+  @media (max-width: 420px) {
+    padding-inline: 20px;
+  }
 }

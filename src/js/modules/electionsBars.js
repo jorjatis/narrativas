@@ -1,3 +1,5 @@
+import { restore } from './selectPartyColor';
+
 function paintColor(el, colorClass) {
   if (el.dataset.partyColor) el.classList.remove(el.dataset.partyColor);
   el.classList.remove('is-default');
@@ -11,6 +13,8 @@ function applyParty(root, party, distances) {
   items.forEach((item, index) => {
     if (distances[index] == null) return;
     item.style.setProperty('--distance', distances[index]);
+    // Coinciden lector y partido: el «Tú» se aparta un poco (ver .is-same en _elections-bars.scss)
+    item.classList.toggle('is-same', distances[index] === 0);
 
     const dot = item.querySelector('.v-elec-bars__dot--party');
     const name = item.querySelector('.v-elec-bars__name--party');
@@ -34,8 +38,12 @@ export function initBars(source) {
   let current = initial;
   applyParty(root, current, initialDistances);
 
-  const label = select.querySelector('.v-slc__t');
-  if (label) label.textContent = initial.name;
+  const initialOption = select.querySelector(`.v-slc__a[data-party="${CSS.escape(initial.id)}"]`);
+  if (initialOption) restore(select, initialOption);
+  else {
+    const label = select.querySelector('.v-slc__name') ?? select.querySelector('.v-slc__t');
+    if (label) label.textContent = initial.name;
+  }
 
   select.addEventListener('click', (event) => {
     const option = event.target.closest('.v-slc__a');

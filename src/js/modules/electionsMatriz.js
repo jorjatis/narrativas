@@ -144,22 +144,29 @@ const NS = 'http://www.w3.org/2000/svg';
 const CELLS = 6;
 const CENTER = 50;
 
+// Los partidos de izquierda están casi en la esquina inferior izquierda (y ≈ 90-95 de 100, x ≈ 5-15): ahí el
+// nombre solo cabe encima o a la derecha. Si los dos rotulados (elegido y más cercano) se pisan, layout() recoloca uno.
 const LABEL_PLACE = {
-  salf: 'below',
   vox: 'below',
   pp: 'below',
   cc: 'below',
-  junts: 'below',
   psoe: 'below',
   pnv: 'below',
-  'eh-bildu': 'left',
-  erc: 'left',
+  'eh-bildu': 'above',
+  'frente-amplio': 'above',
+  adelante: 'above',
   compromis: 'above',
+  'ara-mes': 'right',
   bng: 'right',
-  adelante: 'below',
-  'frente-amplio': 'right',
-  podemos: 'below',
+  erc: 'right',
+  podemos: 'right',
+  // Catálogo (hoy no vienen en los datos): si vuelven, comprobar que su nombre no choca con nada
+  junts: 'below',
+  salf: 'below',
 };
+
+/** Orden en que se prueban las posiciones de un nombre que choca con el otro rotulado. */
+const PLACES = ['above', 'right', 'below', 'left'];
 
 function svgEl(name, attrs = {}) {
   const node = document.createElementNS(NS, name);
@@ -204,6 +211,22 @@ function youLabelShift(box, you, chosen) {
   return Math.abs(toRight) <= Math.abs(toLeft) ? toRight : toLeft;
 }
 
+/** Desplaza un texto del SVG para que quede entero dentro del gráfico (0..100); el SVG recorta lo que sobra. */
+function encajarEnGrafico(el) {
+  const box = el.getBBox();
+  if (!box.width) return;
+  const x = +el.getAttribute('x');
+  if (box.x < 0) el.setAttribute('x', x - box.x);
+  else if (box.x + box.width > 100) el.setAttribute('x', x - (box.x + box.width - 100));
+  const y = +el.getAttribute('y');
+  if (box.y < 0) el.setAttribute('y', y - box.y);
+  else if (box.y + box.height > 100) el.setAttribute('y', y - (box.y + box.height - 100));
+}
+
+function bboxesOverlap(a, b) {
+  return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+}
+
 function calloutBox(x, y) {
   return { x: x - 8, y: y - 12, w: 16, h: 8 };
 }
@@ -212,30 +235,41 @@ function boxesOverlap(a, b) {
   return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 }
 
+/**
+ * Punto de "Otros lectores" sobre el que va la etiqueta: el más cercano al centro de la nube de lectores
+ * (media ponderada por el nº de lectores de cada punto), para que la etiqueta quede en medio de ellos y no
+ * en un extremo. Se descartan los puntos cuya etiqueta taparía un partido, su nombre o "Tú", o se saldría
+ * por arriba del gráfico.
+ */
 function pickCallout(readers, blocks) {
-  const zone = readers.filter((dot) => {
-    const point = toPoint(dot);
-    return point.x >= 16 && point.x <= 36 && point.y >= 8 && point.y <= 32;
-  });
-  const pool = zone.length ? zone : readers;
+  if (!readers.length) return undefined;
 
-  const clear = pool.filter((dot) => {
+  let total = 0;
+  let cx = 0;
+  let cy = 0;
+  readers.forEach((dot) => {
+    const point = toPoint(dot);
+    const peso = dot.force > 0 ? dot.force : 1;
+    total += peso;
+    cx += point.x * peso;
+    cy += point.y * peso;
+  });
+  cx /= total;
+  cy /= total;
+
+  const clear = readers.filter((dot) => {
     const point = toPoint(dot);
     const box = calloutBox(point.x, point.y);
-    const coversReader = readers.some((other) => {
-      if (other === dot) return false;
-      const otherPoint = toPoint(other);
-      return otherPoint.x > box.x && otherPoint.x < box.x + box.w
-        && otherPoint.y > box.y && otherPoint.y < box.y + box.h;
-    });
-    return !coversReader && !blocks.some((block) => boxesOverlap(box, block));
+    return box.y >= 0 && !blocks.some((block) => boxesOverlap(box, block));
   });
-  const candidates = clear.length ? clear : pool;
+  const candidates = clear.length ? clear : readers;
 
   return candidates.reduce((best, dot) => {
     const point = toPoint(dot);
-    const score = point.y * 4 + Math.abs(point.x - 22);
-    return score < best.score ? { dot, score } : best;
+    const score = Math.hypot(point.x - cx, point.y - cy);
+    // a igual distancia, el punto con más lectores
+    const mejor = score < best.score || (score === best.score && dot.force > best.dot.force);
+    return mejor ? { dot, score } : best;
   }, { dot: candidates[0], score: Infinity }).dot;
 }
 
@@ -246,6 +280,11 @@ function nameBox(point, place) {
   if (place === 'right') return { x: point.x + 3, y: point.y - h / 2, w, h };
   if (place === 'above') return { x: point.x - w / 2, y: point.y - h - 3, w, h };
   return { x: point.x - w / 2, y: point.y + 3, w, h };
+}
+
+/** Solo llevan nombre fijo el partido elegido en el test y el más cercano; el resto, en tooltip. */
+function labelShown(id, result) {
+  return id === result.chosen?.id || id === result.closest?.id;
 }
 
 function paintColor(el, colorClass) {
@@ -260,7 +299,7 @@ function markerBlocks(result) {
   result.parties.forEach((party) => {
     const point = toPoint(party);
     boxes.push({ x: point.x - 3.2, y: point.y - 3.2, w: 6.4, h: 6.4 });
-    boxes.push(nameBox(point, LABEL_PLACE[party.id] || 'below'));
+    if (labelShown(party.id, result)) boxes.push(nameBox(point, LABEL_PLACE[party.id] || 'below'));
   });
   const you = toPoint(result.you);
   boxes.push({ x: you.x - 3.2, y: you.y - 3.2, w: 6.4, h: 6.4 });
@@ -288,6 +327,7 @@ export function initMatriz(model) {
 
   let result = model;
   root.dataset.ready = 'true';
+  root.classList.toggle('is-no-you', Boolean(model.sinUsuario)); // IP bloqueada sin resultado previo
   paintHeader(root, result);
 
   let readers = model.readers || [];
@@ -444,7 +484,109 @@ export function initMatriz(model) {
   svg.append(grid, readerLayer, link, partyLayer, you, labelLayer, callout);
   plot.appendChild(svg);
 
+  const tooltip = document.createElement('div');
+  tooltip.className = 'v-elec-matriz__tooltip';
+  tooltip.setAttribute('role', 'tooltip');
+  tooltip.hidden = true;
+  plot.appendChild(tooltip);
+
+  function syncLabels() {
+    partyLabels.forEach((label) => {
+      label.classList.toggle('is-muted', !labelShown(label.dataset.id, result));
+    });
+    raiseDots();
+    hideTooltip();
+  }
+
+  /**
+   * En SVG se pinta encima lo que va después: el punto del partido elegido (y, si no eligió, el del más
+   * cercano) pasa al final de su capa. Así, si dos partidos caen en el mismo punto (hoy Frente Amplio y
+   * EH Bildu), se ve el color del que eligió el lector.
+   */
+  function raiseDots() {
+    [result.closest?.id, result.chosen?.id].forEach((id) => {
+      const dot = partyDots.find((el) => el.dataset.id === id);
+      if (dot) partyLayer.appendChild(dot);
+    });
+  }
+
+  let tipDot = null;
+
+  function hideTooltip() {
+    tipDot?.classList.remove('is-active');
+    tipDot = null;
+    tooltip.hidden = true;
+    svg.classList.remove('is-pointing');
+  }
+
+  function showTooltip(dot) {
+    if (dot === tipDot) return;
+    tipDot?.classList.remove('is-active');
+    tipDot = dot;
+    dot.classList.add('is-active');
+    svg.classList.add('is-pointing');
+    const party = result.parties.find((item) => item.id === dot.dataset.id);
+    tooltip.textContent = party?.name || '';
+    tooltip.hidden = false;
+
+    const width = plot.clientWidth;
+    const unit = width / 100;
+    const r = +dot.getAttribute('r') * unit;
+    const x = +dot.dataset.x * unit;
+    const y = +dot.dataset.y * unit;
+    const half = tooltip.offsetWidth / 2;
+    const left = Math.min(width - half, Math.max(half, x));
+    const below = y - r - 8 - tooltip.offsetHeight < 0;
+    tooltip.classList.toggle('is-below', below);
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${below ? y + r + 8 : y - r - 8}px`;
+  }
+
+  /** Partido sin nombre fijo más próximo al puntero (en px), dentro del radio de alcance. */
+  function dotAt(event, reach) {
+    if (!state.revealed) return null;
+    const box = svg.getBoundingClientRect();
+    const unit = box.width / 100;
+    const px = event.clientX - box.left;
+    const py = event.clientY - box.top;
+    let best = null;
+    let bestDist = Infinity;
+    partyDots.forEach((dot) => {
+      if (labelShown(dot.dataset.id, result)) return;
+      const d = Math.hypot(+dot.dataset.x * unit - px, +dot.dataset.y * unit - py);
+      const limit = Math.max(reach, +dot.getAttribute('r') * unit + 2);
+      if (d <= limit && d < bestDist) {
+        best = dot;
+        bestDist = d;
+      }
+    });
+    return best;
+  }
+
+  svg.addEventListener('pointermove', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    const dot = dotAt(event, 4);
+    if (dot) showTooltip(dot);
+    else hideTooltip();
+  });
+  svg.addEventListener('pointerleave', (event) => {
+    if (event.pointerType === 'mouse') hideTooltip();
+  });
+  svg.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'mouse') return;
+    const dot = dotAt(event, 16);
+    if (dot) showTooltip(dot);
+    else hideTooltip();
+  });
+  document.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'mouse' && !svg.contains(event.target)) hideTooltip();
+  });
+  window.addEventListener('scroll', () => {
+    if (tipDot && !tipDot.matches(':hover')) hideTooltip();
+  }, { passive: true });
+
   const state = { revealed: false, reduce: false };
+  syncLabels();
 
   function layout() {
     const width = plot.clientWidth;
@@ -462,18 +604,34 @@ export function initMatriz(model) {
       const ratio = +dot.dataset.ratio;
       dot.setAttribute('r', readerR * (0.82 + ratio * 0.36));
     });
+    hideTooltip();
 
-    svg.querySelectorAll('.v-elec-matriz__label').forEach((label) => {
-      const pos = labelPoint(+label.dataset.x, +label.dataset.y, label.dataset.place, partyR, unit);
+    const placeLabel = (label, place) => {
+      const pos = labelPoint(+label.dataset.x, +label.dataset.y, place, partyR, unit);
       label.setAttribute('x', pos.x);
       label.setAttribute('y', pos.y);
       label.setAttribute('text-anchor', pos.anchor);
       label.setAttribute('dominant-baseline', pos.baseline);
       label.setAttribute('font-size', labelSize);
-      if (!label.classList.contains('v-elec-matriz__label--you')) return;
-      const shift = youLabelShift(label.getBBox(), view.you, view.chosen);
-      if (shift) label.setAttribute('x', pos.x + shift);
-    });
+      if (label.classList.contains('v-elec-matriz__label--you')) {
+        const shift = youLabelShift(label.getBBox(), view.you, view.chosen);
+        if (shift) label.setAttribute('x', pos.x + shift);
+      }
+      encajarEnGrafico(label); // los partidos en los bordes (p. ej. x = ±2) no sacan su nombre fuera
+    };
+    svg.querySelectorAll('.v-elec-matriz__label').forEach((label) => placeLabel(label, label.dataset.place));
+
+    // Elegido y más cercano pueden ser dos partidos casi en el mismo punto: si sus nombres se pisan, el
+    // segundo prueba otras posiciones; si ninguna queda libre, se queda en la suya.
+    const shown = partyLabels.filter((label) => labelShown(label.dataset.id, result));
+    if (shown.length === 2 && bboxesOverlap(shown[0].getBBox(), shown[1].getBBox())) {
+      const [fixed, moved] = shown;
+      const free = PLACES.filter((place) => place !== moved.dataset.place).find((place) => {
+        placeLabel(moved, place);
+        return !bboxesOverlap(fixed.getBBox(), moved.getBBox());
+      });
+      if (!free) placeLabel(moved, moved.dataset.place);
+    }
 
     if (!anchorDot) return;
     const ax = +anchorDot.dataset.x;
@@ -484,6 +642,7 @@ export function initMatriz(model) {
     calloutText.setAttribute('x', ax);
     calloutText.setAttribute('y', textY);
     calloutText.setAttribute('font-size', (narrow ? 11 : 12) / unit);
+    encajarEnGrafico(calloutText);
     calloutLine.setAttribute('x1', ax);
     calloutLine.setAttribute('x2', ax);
     calloutLine.setAttribute('y1', textY + 2.5 / unit);
@@ -629,6 +788,7 @@ export function initMatriz(model) {
 
   function update(next) {
     result = next;
+    root.classList.toggle('is-no-you', Boolean(next.sinUsuario));
     stopIntro();
     state.revealed = true;
     view.you = toPoint(next.you);
@@ -648,6 +808,7 @@ export function initMatriz(model) {
     });
     youLabel.dataset.x = view.you.x;
     youLabel.dataset.y = view.you.y;
+    syncLabels();
     anchor = pickCallout(readers, markerBlocks(next));
     anchorDot = readerDots[readers.indexOf(anchor)];
     paintHeader(root, next);
@@ -661,6 +822,8 @@ export function initMatriz(model) {
     });
     setMotion(partyLabels, { autoAlpha: 1 });
     setMotion(youLabel, { autoAlpha: 1 });
+    // stopIntro() corta el onComplete que mostraba a los demás lectores: se muestran aquí
+    fadeReaders(input.checked, false);
 
     const duration = state.reduce ? 0 : 0.35;
     tweenMotion(you, {

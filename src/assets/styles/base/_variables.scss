@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:meta";
+
 // =======================================================
 // Variables Kraken
 // =======================================================
@@ -51,33 +54,60 @@ $cb9: #202020;
 
 $marca: abc !default;
 
-$adel: 'ABC Display ExtraLight', serif;
-$adl: 'ABC Display Light', serif;
-$ads: 'ABC Display Semibold', serif;
+// Las familias van en variables CSS para que UN SOLO main.css sirva en cualquier medio:
+//  - por defecto, las de $marca (ppll en styles.scss);
+//  - dentro de .abc (las páginas de ABC), siempre las de ABC (Micrograph, ABC Display, ABC Text...).
+// Las propiedades --elec-f-* solo se declaran en .abc (_global.scss); fuera, vale la reserva de var(). En los componentes se sigue usando $mcs, $adl, etc.
+$fuentes-abc: (
+  adel: ('ABC Display ExtraLight', 'PPLL Vocento Light', serif),
+  adl: ('ABC Display Light', 'PPLL Vocento Light', serif),
+  ads: ('ABC Display Semibold', 'PPLL Vocento Semibold', serif),
+  atl: ('ABC Text Light', 'PPLL Vocento Light', serif),
+  atli: ('ABC Text Light Italic', 'PPLL Vocento Light Italic', serif),
+  ats: ('ABC Text Semibold', 'PPLL Vocento Semibold', serif),
+  atsi: ('ABC Text Semibold Italic', 'PPLL Vocento Semibold Italic', serif),
+  mcl: ('Micrograph Light', 'Micrograph Regular', 'PPLL Sans Light', sans-serif),
+  mcr: ('Micrograph Regular', 'PPLL Sans Regular', sans-serif),
+  mcs: ('Micrograph Semibold', 'PPLL Sans Semibold', sans-serif),
+  axs: ('ABC XCond Semibold', 'PPLL Sans Semibold', serif),
+);
 
-$atl: 'ABC Text Light', serif;
-$atli: 'ABC Text Light Italic', serif;
-$ats: 'ABC Text Semibold', serif;
-$atsi: 'ABC Text Semibold Italic', serif;
+$fuentes-ppll: (
+  adel: ('PPLL Vocento Light', serif),
+  adl: ('PPLL Vocento Light', serif),
+  ads: ('PPLL Vocento Semibold', serif),
+  atl: ('PPLL Vocento Light', serif),
+  atli: ('PPLL Vocento Light Italic', serif),
+  ats: ('PPLL Vocento Semibold', serif),
+  atsi: ('PPLL Vocento Semibold Italic', serif),
+  mcl: ('PPLL Sans Light', 'PPLL Sans Regular', sans-serif),
+  mcr: ('PPLL Sans Regular', sans-serif),
+  mcs: ('PPLL Sans Semibold', sans-serif),
+  axs: ('PPLL Sans Semibold', serif),
+);
 
-$mcr: 'Micrograph Regular', sans-serif;
-$mcs: 'Micrograph Semibold', sans-serif;
-$axs: 'ABC XCond Semibold', serif;
-
+$fuentes-por-defecto: $fuentes-abc;
 @if $marca == ppll {
-  $adel: 'PPLL Vocento Light', serif !global;
-  $adl: 'PPLL Vocento Light', serif !global;
-  $ads: 'PPLL Vocento Semibold', serif !global;
-
-  $atl: 'PPLL Vocento Light', serif !global;
-  $atli: 'PPLL Vocento Light Italic', serif !global;
-  $ats: 'PPLL Vocento Semibold', serif !global;
-  $atsi: 'PPLL Vocento Semibold Italic', serif !global;
-
-  $mcr: 'PPLL Sans Regular', serif !global;
-  $mcs: 'PPLL Sans Semibold', serif !global;
-  $axs: 'PPLL Sans Semibold', serif !global;
+  $fuentes-por-defecto: $fuentes-ppll;
 }
+
+// Sin variables en :root: cada familia lleva como reserva la de $marca, y solo .abc declara --elec-f-*
+// (ver _global.scss). inspect conserva las comillas.
+@function fuente($nombre) {
+  @return var(--elec-f-#{$nombre}, #{meta.inspect(map.get($fuentes-por-defecto, $nombre))});
+}
+
+$adel: fuente(adel);
+$adl: fuente(adl);
+$ads: fuente(ads);
+$atl: fuente(atl);
+$atli: fuente(atli);
+$ats: fuente(ats);
+$atsi: fuente(atsi);
+$mcl: fuente(mcl);
+$mcr: fuente(mcr);
+$mcs: fuente(mcs);
+$axs: fuente(axs);
 
 // ---------------------------------------
 // Media queries

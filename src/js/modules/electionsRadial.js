@@ -2,6 +2,9 @@ const NS = 'http://www.w3.org/2000/svg';
 const LEVELS = 5;
 const DURATION = 450;
 const NARROW_QUERY = '(max-width: 698px)';
+/** Por debajo de 400px, "Derechos y libertades" se corta en el borde: se desplaza un poco hacia dentro. */
+const TINY_QUERY = '(max-width: 399px)';
+const LABEL_NUDGE = { 'Derechos y libertades': 6 };
 
 function svgEl(name, attrs = {}) {
   const node = document.createElementNS(NS, name);
@@ -171,6 +174,7 @@ export function initRadial(source) {
         if (cos > 0.35) x += box.width / 2;
         else if (cos < -0.35) x -= box.width / 2;
         if (lines.length > 1 && sin < -0.2) y -= geom.lineStep;
+        if (LABEL_NUDGE[theme] && window.matchMedia(TINY_QUERY).matches) x += LABEL_NUDGE[theme];
       } else {
         const extra = (box.width / 2) * Math.abs(cos) + (box.height / 2) * Math.abs(sin);
         const dist = geom.r + geom.gap + extra;

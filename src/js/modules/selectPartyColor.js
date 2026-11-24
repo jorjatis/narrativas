@@ -8,7 +8,15 @@ function setActive(select, option) {
   });
 }
 
-function restore(select, option) {
+function nameNode(text) {
+  const name = document.createElement('span');
+  name.className = 'v-slc__name';
+  name.textContent = text;
+  return name;
+}
+
+/** Pinta en la cabecera del desplegable el color y el nombre (con elipsis) de la opción elegida. */
+export function restore(select, option) {
   const label = select.querySelector('.v-slc__t');
   if (!label || !option) return;
 
@@ -17,11 +25,11 @@ function restore(select, option) {
   const text = optionValue(option);
   const color = option.querySelector('.v-slc__party-color');
   if (!color) {
-    label.textContent = text;
+    label.replaceChildren(nameNode(text));
     return;
   }
 
-  label.replaceChildren(color.cloneNode(true), document.createTextNode(text));
+  label.replaceChildren(color.cloneNode(true), nameNode(text));
 }
 
 function sync(select) {

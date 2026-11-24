@@ -3,16 +3,16 @@
 .v-elec-test {
   container-type: inline-size;
   box-sizing: border-box;
-  min-height: 100dvh;
-  margin-top: -110px;
-  padding-top: 86px;
+  height: 100dvh;
+  margin-top: -72px;
+  padding-top: 48px;
   flex-direction: column;
   align-items: center;
   justify-content: safe center;
 
   @media (min-width: $screen-xs) {
-    margin-top: -143px;
-    padding-top: 123px;
+    margin-top: -78px;
+    padding-top: 58px;
   }
 
   :where(svg) {
@@ -22,59 +22,24 @@
     color: $cb1;
   }
 
-  &__bt {
-    background: transparent;
-    font-family: inherit;
-    display: grid;
-    align-items: center;
-    justify-content: start;
-    gap: 15px;
-    grid-template-columns: 30px 1fr;
-    border: 1px solid #d6d4ce;
-    min-height: 36px;
-    box-sizing: border-box;
-    padding: 0 12px;
-    font-size: 15px;
-    line-height: 1.2;
-    text-align: left;
-    cursor: pointer;
+  abbr {
+    text-decoration: none;
+  }
 
-    @media (min-width: 700px) {
-      min-height: 44px;
-      padding: 0 14px;
-      font-size: 16px;
-    }
+  .v-elec-intro__note {
+    margin: 12px 0 0;
+    font-size: 16px;
 
-    @media (min-width: 1100px) {
-      min-height: 50px;
-      gap: 15px;
-      padding: 0 16px;
-      font-size: 18px;
-    }
-
-    &--p {
-      color: $cb8;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      gap: 5px;
-      padding: 7px;
-      grid-template-columns: 1fr;
-
-      @media (min-width: $screen-sm) {
-        grid-template-columns: auto 1fr;
-        padding: 0 16px;
-        gap: 15px;
-      }
+    @media (min-width: $screen-xs) {
+      margin: 20px 0 0; 
     }
   }
 
   &__nav {
     position: absolute;
     z-index: 2;
-    top: 50%;
-    left: 0;
+    top: 46px;
+    left: 40px;
     transform: translateY(-50%);
     display: flex;
     justify-content: center;
@@ -85,27 +50,33 @@
     border: 1px solid rgba(214, 212, 206, 0.50);
     border-radius: 30px;
     cursor: pointer;
+    transition: opacity .2s;
 
-    @media (min-width: 700px) {
-      left: calc(50% - min(700px, calc(100vw - 88px)) / 2 - 40px);
-      width: 60px;
-      height: 60px;
+    &:hover {
+      opacity: .7;
     }
 
-    @media (min-width: 1100px) {
-      left: calc(50% - 440px);
+    @media (min-width: $screen-xs) {
+      top: 50%;
+      left: calc(50% - min(700px, calc(100vw - 88px)) / 2 - 40px);  
+      width: 60px;
+      height: 60px;    
+    }
+
+    @media (min-width: $screen-sm) {
+      left: calc(50% - 470px);
     }
 
     & + & {
       left: auto;
-      right: 0;
+      right: 40px;
 
-      @media (min-width: 700px) {
+      @media (min-width: $screen-xs) {
         right: calc(50% - min(700px, calc(100vw - 88px)) / 2 - 40px);
       }
 
-      @media (min-width: 1100px) {
-        right: calc(50% - 440px);
+      @media (min-width: $screen-sm) {
+        right: calc(50% - 470px);
       }
     }
 
@@ -120,15 +91,191 @@
     }
   }
 
+  &__list {
+    box-sizing: border-box; // el padding de escritorio va DENTRO del 100%: si no, la página se ensanchaba
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+    padding-inline: 0;
+    padding-block: 4px;
+    list-style: none;
+    transition: transform .3s ease, height .3s ease;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain; // que el gesto no acabe en "atrás" del navegador
+    scrollbar-width: none;
+    gap: 0;
+
+    @media (min-width: $screen-xs) {
+      padding-inline: calc((100% - 700px) / 2);
+      padding-block: 16px;
+      gap: 180px;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__item {
+    flex: 0 0 100%;
+    box-sizing: content-box;
+    scroll-snap-align: center;
+    opacity: .4;
+    transition: opacity .3s ease;
+
+    &--on {
+      opacity: 1;
+    }
+
+    // Tarjeta a la que todavía no se puede ir: sin punto de snap, así al deslizar hacia ella el carrusel
+    // vuelve solo a la actual. (electionsTest.js le pone además "inert".)
+    &--locked {
+      scroll-snap-align: none;
+      pointer-events: none;
+    }
+
+    &--party {
+      .v-elec-test {
+        &__qt {
+          @media (max-width: $screen-xs) {
+            height: auto;
+            margin-bottom: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  &__card {
+    height: min(620px, calc(100dvh - 190px));
+    max-height: 620px;
+    margin: 0 20px;
+    padding: 26px 20px;
+    background: $cb2;
+    border: 1px solid #D6D4CE;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    @media (min-width: $screen-xs) {
+      padding: 26px 52px;
+    }
+
+    @media (min-width: 740px) {
+      margin: 0;
+    }
+
+    @media (max-width: ($screen-xs - 1px)) {
+      display: flex;
+      flex-direction: column;
+
+      > * {
+        flex-shrink: 0;
+      }
+
+      .v-elec-test__group {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: calc(300px + 1.5em);
+        margin-top: auto;
+      }
+    }
+  }
+
+  &__bt {
+    position: relative;
+    background: transparent;
+    font-family: inherit;
+    display: grid;
+    align-items: center;
+    justify-content: start;
+    gap: 15px;
+    grid-template-columns: 30px 1fr;
+    border: 1px solid #d6d4ce;
+    min-height: 50px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    font-size: 18px;
+    line-height: 1.2;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid #202020;
+    }
+
+    &--p {
+      grid-template-columns: 1fr;
+      padding: 7px;
+      gap: 5px;
+      font-size: 14px;
+      line-height: normal;
+      color: $cb8;
+
+      @media (min-width: $screen-xs) {
+        grid-template-columns: auto 1fr;
+        gap: 10px;
+        padding: 0 12px;
+        font-size: 18px;
+      }
+
+      &:hover {
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    // Partido sin datos (p. ej. Junts): se ve, pero no se puede elegir
+    &--off {
+      cursor: default;
+      color: $cb5;
+      border-color: $cb4;
+
+      .v-elec-test__pr {
+        opacity: 0.25;
+      }
+
+      // sin el efecto de hover de las demás opciones (mismo tamaño que en reposo)
+      &:hover {
+        border-color: $cb4;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: normal;
+
+        @media (min-width: $screen-xs) {
+          font-size: 18px;
+        }
+      }
+
+      abbr {
+        cursor: default;
+      }
+    }
+  }
+
+  // Nota bajo los partidos (la de los partidos sin datos)
+  &__nota-p {
+    max-width: 560px;
+    margin: 24px auto;
+    font-family: $mcl;
+    font-size: 16px;
+    line-height: 1.3;
+    text-align: center;
+    color: $cb8;
+
+    @media (min-width: $screen-xs) {
+      font-size: 14px;
+    }
+  }
+
   &__prog {
     text-align: center;
     color: $cb8;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1;
-
-    @media (min-width: 700px) {
-      font-size: 16px;
-    }
 
     b {
       font-family: $mcs;
@@ -138,12 +285,6 @@
       width: 80px;
       height: 8px;
       margin: 6px auto 0;
-
-      @media (min-width: 700px) {
-        width: 110px;
-        height: 10px;
-        margin-top: 8px;
-      }
       background: $cb5;
       border-radius: 10px;
       overflow: hidden;
@@ -181,97 +322,34 @@
     display: block;
   }
 
-  &__track {
-    margin-top: 16px;
-  }
+  &__qt {
+    //height: 113px;
+    margin: 28px 0 32px;
+    font-family: $ads;
+    font-size: 18px;
+    line-height: 115%;
+    text-align: center;
+    text-wrap: balance;
 
-  &__list {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    padding-inline: 0;
-    padding-block: 12px;
-    list-style: none;
-    transition: transform .3s ease, height .3s ease;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    gap: 0;
-
-    @media (min-width: 700px) {
-      padding-inline: calc((100% - min(700px, calc(100vw - 88px))) / 2);
-      gap: 20px;
+    @media (min-width: 390px) {
+      height: 90px;
     }
 
-    @media (min-width: 1100px) {
-      padding-inline: calc((100% - 700px) / 2);
-      padding-block: 16px;
-      gap: 120px;
+    @media (min-width: 390px) {
+      height: 70px;
     }
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  &__item {
-    flex: 0 0 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
-    scroll-snap-align: center;
-    opacity: .4;
-    transition: opacity .3s ease;
-
-    @media (min-width: 700px) {
-      flex-basis: min(700px, calc(100vw - 88px));
-      padding-inline: 0;
-    }
-
-    @media (min-width: 1100px) {
-      flex-basis: 700px;
-    }
-
-    &--on {
-      opacity: 1;
-    }
-  }
-
-  &__card {
-    box-sizing: border-box;
-    height: min(620px, calc(100dvh - 190px));
-    max-height: 620px;
-  }
-
-  &__card {
-    padding: 12px 30px 14px;
-    background: $cb2;
-    border-radius: 20px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-
-    @media (min-width: 700px) {
-      padding: 18px 20px 22px;
-    }
-
-    @media (min-width: 1100px) {
-      padding: 26px 22px 42px;
+    @media (min-width: $screen-xs) {
+      height: 83px;
+      margin: 36px 20px;
+      font-size: 24px;
     }
   }
 
   &__more {
     position: relative;
     z-index: 1;
-    margin-bottom: 8px;
-
-    @media (min-width: 700px) {
-      margin-bottom: 16px;
-    }
-
-    @media (min-width: 1100px) {
-      margin-bottom: 24px;
-    }
+    margin-bottom: 24px;
 
     &-bt {
       position: relative;
@@ -288,8 +366,8 @@
 
       svg {
         flex-shrink: 0;
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
         max-width: none;
         transition: transform 0.3s ease;
       }
@@ -300,6 +378,11 @@
 
       &[aria-expanded="true"] &--1 {
         display: none;
+      }
+
+      &--1,
+      &--2 {
+        margin-top: 2px;
       }
 
       &--2 {
@@ -324,11 +407,20 @@
       max-width: 500px;
       background: $cb3;
       border: 1px solid #d6d4ce;
-      padding: 28px 20px;
-      font-size: 18px;
+      padding: 16px;
+      font-size: 16px;
       line-height: normal;
       color: $cb8;
       transition: opacity .3s ease, visibility 0s linear .3s;
+      box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.10);
+
+      @media (min-width: 420px) {
+        font-size: 18px;
+      }
+
+      @media (min-width: $screen-xs) {
+        padding: 28px 20px;
+      }
     }
 
     &-bt[aria-expanded="true"] + &-txt {
@@ -339,40 +431,14 @@
     }
   }
 
-  &__qt {
-    height: 80px;
-    margin: 8px 0 10px;
-    font-family: $ads;
-    font-size: 17px;
-    line-height: 115%;
-    text-align: center;
-
-    @media (min-width: 700px) {
-      height: 72px;
-      margin: 16px 0 18px;
-      font-size: 22px;
-    }
-
-    @media (min-width: 1100px) {
-      height: 83px;
-      margin: 28px 0 32px;
-      font-size: 24px;
-    }
-  }
-
   &__group {
     margin: 0 auto;
     border: none;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 6px;
+    gap: 8px;
+    max-width: 300px;
     overflow: hidden;
-    max-width: none;
-
-    @media (min-width: 700px) {
-      gap: 8px;
-      max-width: 300px;
-    }
 
     input {
       opacity: 0;
@@ -423,5 +489,141 @@
       width: 24px;
       height: 24px;
     }
+  }
+}
+
+@media (min-width: $screen-xs) and (max-height: 840px) {
+  .v-elec-test__list {
+    padding-block: 4px;
+  }
+
+  .v-elec-test__card {
+    height: min(520px, 100dvh - 190px);
+    max-height: 520px;
+    padding: 26px 20px;
+  }
+
+  .v-elec-test__qt {
+    height: 70px;
+    margin: 16px 20px;
+    font-size: 20px;
+  }
+
+  .v-elec-test__more {
+    margin-bottom: 16px;
+  }
+
+  .v-elec-test .v-elec-intro__note {
+    margin: 12px 0 0;
+  }
+}
+
+@media (min-width: $screen-xs) and (max-height: 710px) {
+  .v-elec-test__qt {
+    height: 66px;
+  }
+
+  .v-elec-test__bt {
+    min-height: 40px;
+  }
+
+  .v-elec-test__card {
+    height: min(520px, 100dvh - 160px);
+    max-height: 520px;
+  }      
+}
+
+@media (max-width: $screen-xs) and (max-height: 710px) {
+  .v-elec-test__qt {
+    margin: 16px 0;
+  }
+
+  .v-elec-test__more {
+    margin-bottom: 12px;
+  }
+
+  .v-elec-test__bt {
+    min-height: 42px;
+  }
+}
+
+@media (max-width: $screen-xs) and (max-height: 670px) { 
+  .v-elec-test__card {
+    height: min(620px, 100dvh - 150px);
+    padding: 16px 16px 40px 16px;
+  }
+
+  .v-elec-test__nav {
+    top: 38px;
+  }
+
+  .v-elec-test .v-elec-intro__note {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 420px) and (max-height: 640px) {
+  // La tarjeta es más alta (100dvh - 75px). Como el contenedor la centra en vertical, crecería por arriba
+  // y por abajo; con 78px de padding su borde superior se queda donde estaba (a 78px, como con 40px de
+  // padding y la tarjeta de 100dvh - 116px) y solo crece hacia abajo.
+  .v-elec-test {
+    padding-top: 78px;
+  }
+
+  .v-elec-test .v-elec-h {
+    display: none;
+  }
+
+  .v-elec-test__card {
+    height: min(620px, 100dvh - 75px);
+  }
+
+  .v-elec-test__qt {
+    //height: 104px;
+    font-size: 18px;
+  }
+
+  .v-elec-test__nav {
+    width: 30px;
+    height: 30px;
+
+    svg {
+      width: 8px;
+    }
+  }
+
+  .v-elec-test__group {
+    gap: 6px;
+  }
+
+  .v-elec-test__bt {
+    min-height: 40px;
+    font-size: 16px;
+  }
+
+  // Pregunta de partido: botones más compactos y sin cambio de tamaño al pasar por encima
+  .v-elec-test__bt--p {
+    padding: 4px;
+    font-size: 14px;
+
+    &:hover {
+      font-size: 14px;
+    }
+  }
+
+  .v-elec-test__pr {
+    width: 12px;
+    height: 12px;
+  }
+
+  .v-elec-test__nota-p {
+    margin: 12px auto;
+    font-size: 14px;
+  }
+
+  .v-elec-test .v-elec-intro__note {
+    margin-top: 12px;
+    font-size: 12px;
   }
 }

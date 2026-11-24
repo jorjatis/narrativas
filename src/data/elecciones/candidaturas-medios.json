@@ -1,0 +1,33 @@
+{
+  "_leeme": "Qué candidaturas ve el lector de cada medio. Claves de partido = las de partidos_29N.json / partidos-visual.json. 'todas' = sin filtro. El resto de medios ve las 'nacionales' más sus 'regionales'. Un medio que no esté aquí ve todas (un test avisa).",
+  "nacionales": ["PP", "PSOE", "Vox", "Frente Amplio", "Podemos", "SALF"],
+  "medios": {
+    "abc": "todas",
+
+    "elcorreo": ["PNV", "EH Bildu"],
+    "diariovasco": ["PNV", "EH Bildu"],
+
+    "lasprovincias": ["Compromis"],
+    "todoalicante": ["Compromis"],
+
+    "ideal": ["Adelante"],
+    "diariosur": ["Adelante"],
+    "surinenglish": ["Adelante"],
+    "lavozdigital": ["Adelante"],
+    "huelva24": ["Adelante"],
+
+    "canarias7": ["CC"],
+
+    "laverdad": [],
+    "elnortedecastilla": [],
+    "elcomercio": [],
+    "eldiariomontanes": [],
+    "hoy": [],
+    "leonoticias": [],
+    "larioja": [],
+    "burgosconecta": [],
+    "salamancahoy": [],
+    "lagacetadesalamanca": [],
+    "elbierzonoticias": []
+  }
+}

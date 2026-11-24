@@ -1,6 +1,25 @@
-import html2canvas from 'html2canvas';
+// html2canvas (~190 KB) solo se descarga cuando hace falta: cuando el lector ve el botón de compartir
+// (ver initElectionsShare). Si la descarga falla, se olvida para que el siguiente intento la repita.
+let html2canvasCargado = null;
+const cargarHtml2canvas = () =>
+  (html2canvasCargado ??= import(/* webpackChunkName: "html2canvas" */ 'html2canvas')
+    .then((m) => m.default)
+    .catch((error) => {
+      html2canvasCargado = null;
+      throw error;
+    }));
+
+/** Ejecuta `fn` cuando el navegador esté libre (sin entorpecer animaciones ni el primer pintado). */
+const cuandoLibre = (fn, timeout = 1500) =>
+  ('requestIdleCallback' in window ? window.requestIdleCallback(fn, { timeout }) : window.setTimeout(fn, 200));
+import { capacidadesImagen, copiarAlPortapapeles, datosCompartir, nombreDelMedio } from '../elecciones/compartir';
+import { logoDelMedio } from '../elecciones/logos';
+import { trackNarrativa } from '../elecciones/analitica';
+import { CONFIG } from '../elecciones/config';
 
 const IMAGE_NAME = 'elecciones-resultado.jpg';
+// Ancho máximo de la imagen, en px CSS (con scale: 2, el fichero mide el doble).
+const ANCHO_MAX_CAPTURA = 920;
 
 function appleTouchIcon() {
   const icon = document.querySelector('link[rel="apple-touch-icon"][sizes="57x57"]')
@@ -8,88 +27,56 @@ function appleTouchIcon() {
   return icon ? icon.href : '';
 }
 
-function copyText(text) {
-  if (navigator.clipboard?.writeText) {
-    return navigator.clipboard.writeText(text).catch(() => copyTextFallback(text));
-  }
-  return copyTextFallback(text);
-}
-
-function copyTextFallback(text) {
-  const area = document.createElement('textarea');
-  area.value = text;
-  area.setAttribute('readonly', '');
-  area.style.position = 'fixed';
-  area.style.left = '-9999px';
-  document.body.appendChild(area);
-  area.select();
-  document.execCommand('copy');
-  area.remove();
-}
-
 function pageTitle() {
   return (document.querySelector('title')?.textContent || '').replace(/\s+/g, ' ').trim();
 }
 
-function fieldText(selector) {
-  return (document.querySelector(selector)?.textContent || '').replace(/\s+/g, ' ').trim();
+/** Texto y enlaces del resultado actual (src/js/elecciones/compartir.js), o null si aún no hay resultado. */
+function datosActuales(app) {
+  const resultado = app?.resultadoActual();
+  return resultado ? datosCompartir({ resultado, medio: app.test.medio }) : null;
 }
 
-function resultText() {
-  const chosen = fieldText('.v-elec-res__party-chosen');
-  const closest = fieldText('.v-elec-res__party-name');
-  const percent = fieldText('.v-elec-res__party-percent');
-  return `Has elegido ${chosen} y el partido más cercano a tus posiciones es ${closest} por un ${percent}.`;
+function avisar(modal, texto) {
+  const estado = modal.querySelector('.v-elec-share-img__estado');
+  if (estado) estado.textContent = texto;
 }
 
-function shareMessage() {
-  return `${resultText()} ${window.location.href}`;
-}
+function fillShareModal(modal, app) {
+  const datos = datosActuales(app);
+  const texto = datos?.texto ?? '';
 
-const shareTargets = {
-  whatsapp: (text) => `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`,
-  facebook: (text, url) => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`,
-  twitter: (text) => `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`,
-  linkedin: (text, url) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&summary=${encodeURIComponent(text)}`,
-  telegram: (text, url) => `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
-  threads: (text) => `https://www.threads.net/intent/post?text=${encodeURIComponent(text)}`,
-};
-
-function fillShareModal(modal) {
-  const url = window.location.href;
-  const title = pageTitle();
-
+  // El campo enseña lo mismo que se copia (texto + enlace). La etiqueta va vacía, como en el compartidor
+  // de Vocento: si se rellenan las dos, su CSS las pinta una encima de otra.
   const input = modal.querySelector('.v-frm__i');
-  if (input) input.value = url;
+  if (input) input.value = texto;
 
   const logo = modal.querySelector('.v-mdl__h .v-log__i');
   const icon = appleTouchIcon();
   if (logo && icon) logo.src = icon;
 
   const heading = modal.querySelector('.v-mdl__p');
-  if (heading) heading.textContent = title;
+  if (heading) heading.textContent = pageTitle();
+
+  avisar(modal, '');
+  return datos;
 }
 
-function openShare(network) {
-  const build = shareTargets[network];
-  if (!build) return;
-
-  const url = window.location.href;
-  const sentence = resultText();
-  const text = network === 'whatsapp' || network === 'twitter' || network === 'threads'
-    ? `${sentence} ${url}`
-    : sentence;
-
-  window.open(build(text, url), '_blank', 'noopener,width=600,height=500');
-}
-
-function bindCopy(modal) {
-  modal.querySelectorAll('[data-voc-component="copy-link"]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const input = button.closest('.v-frm__w')?.querySelector('.v-frm__i');
-      const url = window.location.href;
-      if (input) input.value = url;
-      copyText(url);
+function bindCopy(modal, app) {
+  modal.querySelectorAll('[data-elec-copiar]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const datos = fillShareModal(modal, app);
+      if (!datos) return;
+      const ok = await copiarAlPortapapeles(datos.texto);
+      if (!ok) {
+        avisar(modal, 'No se ha podido copiar: selecciona el texto a mano');
+        return;
+      }
+      button.classList.add('is-active'); // icono de check (sin texto de aviso)
+      window.clearTimeout(Number(button.dataset.elecTimer));
+      button.dataset.elecTimer = String(window.setTimeout(() => {
+        button.classList.remove('is-active');
+      }, 2500));
     });
   });
 }
@@ -115,7 +102,27 @@ function chartSpan(chart) {
   return Math.ceil(right - left);
 }
 
-function captureCanvas() {
+const ESTILOS = 'link[rel~="stylesheet"], style';
+
+/** Logo del medio (SVG en línea, sin red) o, si no lo tenemos, su nombre en texto. */
+function cabeceraMedio(app) {
+  const caja = document.createElement('div');
+  caja.className = 'v-elec-capture__logo';
+  const svg = logoDelMedio(app?.test?.medio?.id);
+  if (svg) {
+    caja.innerHTML = svg;
+  } else {
+    const nombre = nombreDelMedio(app?.test?.medio?.id);
+    if (!nombre) return null;
+    const texto = document.createElement('span');
+    texto.className = 'v-elec-capture__medio';
+    texto.textContent = nombre;
+    caja.append(texto);
+  }
+  return caja;
+}
+
+function captureCanvas(app) {
   const header = document.querySelector('.v-elec-h');
   const matriz = document.querySelector('.v-elec-matriz');
   const widgets = document.querySelector('.v-elec-widgets');
@@ -148,15 +155,37 @@ function captureCanvas() {
     chartClone.style.marginRight = 'auto';
   }
 
-  stage.append(header.cloneNode(true), matrizClone);
+  // Arriba, el logo del medio en lugar de la mini-matriz decorativa de la cabecera.
+  const headerClone = header.cloneNode(true);
+  headerClone.querySelector('.v-elec-h__mark')?.remove();
+  const logo = cabeceraMedio(app);
+  if (logo) stage.append(logo);
+  stage.append(headerClone, matrizClone);
   document.body.append(stage);
 
-  return html2canvas(stage, {
+  // En pantallas anchas el escenario puede medir más de ANCHO_MAX_CAPTURA, pero el contenido va centrado
+  // y nunca lo supera: se recorta lo que sobra por los laterales, a partes iguales.
+  const stageWidth = Math.ceil(stage.getBoundingClientRect().width);
+  const width = Math.min(stageWidth, ANCHO_MAX_CAPTURA);
+  const x = Math.floor((stageWidth - width) / 2);
+
+  return cargarHtml2canvas().then((html2canvas) => html2canvas(stage, {
+    x, // desplazamiento desde el borde izquierdo del escenario (html2canvas 1.4 le suma su posición)
+    width,
     backgroundColor: '#F9F6EE',
     scale: 2,
     logging: false,
     useCORS: true,
-  }).finally(() => stage.remove());
+    imageTimeout: 4000,
+    // html2canvas copia TODA la página en un iframe y espera a que carguen todas sus imágenes
+    // (en un artículo del CMS: fotos, lazy-loads, anuncios…). Solo hace falta la captura:
+    // se descarta todo lo del <body> que no sea la captura o uno de sus contenedores, SALVO las hojas
+    // de estilo: en el CMS el <link> de main.css va dentro del cuerpo de la noticia y, sin él, la
+    // captura salía sin nuestros estilos.
+    ignoreElements: (el) => document.body.contains(el)
+      && el !== stage && !el.contains(stage) && !stage.contains(el)
+      && !el.matches(ESTILOS) && !el.querySelector(ESTILOS),
+  })).finally(() => stage.remove());
 }
 
 function downloadBlob(blob) {
@@ -167,7 +196,8 @@ function downloadBlob(blob) {
   document.body.append(link);
   link.click();
   link.remove();
-  URL.revokeObjectURL(url);
+  // Revocar en el mismo instante cancela la descarga en algunos navegadores (Firefox, Safari).
+  window.setTimeout(() => URL.revokeObjectURL(url), 10000);
 }
 
 function showImageFeedback(button) {
@@ -185,68 +215,156 @@ function showImageFeedback(button) {
   }, 2000));
 }
 
-function bindImageActions(modal) {
-  let pending = null;
+function bindImageActions(modal, app) {
+  // Copiar y compartir la imagen solo si el navegador lo admite (descargar funciona siempre).
+  const puede = capacidadesImagen();
+  const copyBtn = modal.querySelector('[data-elec-share="copy"]');
+  const shareBtn = modal.querySelector('[data-elec-share="share"]');
+  if (copyBtn) copyBtn.hidden = !puede.copiar;
+  if (shareBtn) shareBtn.hidden = !puede.compartir;
 
-  function canvas() {
-    if (!pending) pending = captureCanvas().finally(() => { pending = null; });
-    return pending;
+  // Una captura por apertura del modal: se genera nada más abrirlo (mientras el lector elige)
+  // y los botones reutilizan el mismo canvas y los mismos ficheros PNG/JPG.
+  let cache = null;
+  function captura() {
+    if (!cache) {
+      const shot = captureCanvas(app);
+      const actual = { shot, png: null, jpeg: null };
+      cache = actual;
+      shot.catch(() => { if (cache === actual) cache = null; }); // si falla, el siguiente clic lo reintenta
+    }
+    return cache;
   }
+  function imagen(tipo) {
+    const c = captura();
+    const clave = tipo === 'image/png' ? 'png' : 'jpeg';
+    c[clave] ??= c.shot
+      .then((shot) => toBlob(shot, tipo, tipo === 'image/jpeg' ? 0.92 : undefined))
+      .then((blob) => {
+        c[`${clave}Listo`] = blob; // ya generada: "Compartir imagen" la usa sin esperar (ver compartirImagen)
+        return blob;
+      });
+    return c[clave];
+  }
+
+  /**
+   * navigator.share() solo funciona justo al pulsar (Safari es el más estricto): si se llama después de
+   * esperar a que se genere la imagen, el navegador lo rechaza (NotAllowedError). Por eso:
+   *  - si la imagen ya está (lo normal: se genera al abrir el modal), se comparte en el mismo clic;
+   *  - si aún no, se avisa de que se está preparando y, cuando está, se pide volver a pulsar.
+   */
+  function compartirImagen() {
+    const lista = captura().jpegListo;
+    if (!lista) {
+      avisar(modal, 'Preparando la imagen…');
+      imagen('image/jpeg')
+        .then(() => avisar(modal, 'La imagen ya está lista: vuelve a pulsar «Compartir imagen»'))
+        .catch(() => avisar(modal, 'No se ha podido generar la imagen'));
+      return;
+    }
+    const file = new File([lista], IMAGE_NAME, { type: 'image/jpeg' });
+    if (!navigator.canShare?.({ files: [file] })) {
+      avisar(modal, 'Este navegador no permite compartir la imagen: prueba a descargarla');
+      return;
+    }
+    avisar(modal, '');
+    navigator.share({ files: [file], title: pageTitle(), text: datosActuales(app)?.texto }).catch((error) => {
+      if (error?.name === 'AbortError') return; // el lector cerró el menú de compartir
+      if (error?.name === 'NotAllowedError') {
+        avisar(modal, 'Vuelve a pulsar «Compartir imagen»');
+        return;
+      }
+      avisar(modal, 'No se ha podido compartir la imagen: prueba a descargarla');
+    });
+  }
+  function precalentar() {
+    cache = null; // el resultado puede haber cambiado desde la última vez
+    const lanzar = () => {
+      if (!modal.matches(':popover-open')) return; // ya lo han cerrado
+      // Primero el JPG (descargar y compartir). El PNG, solo para "Copiar imagen", va después:
+      // codificarlo es lento y, en paralelo, retrasaba el JPG.
+      const jpeg = imagen('image/jpeg');
+      jpeg.catch(() => {});
+      if (puede.copiar) jpeg.finally(() => imagen('image/png').catch(() => {}));
+    };
+    // Tras la animación de apertura, para no entorpecerla.
+    cuandoLibre(lanzar, 400);
+  }
+  modal.addEventListener('toggle', (event) => {
+    if (event.newState === 'open') precalentar();
+  });
 
   modal.querySelectorAll('[data-elec-share]').forEach((button) => {
     button.addEventListener('click', () => {
       const action = button.getAttribute('data-elec-share');
 
       if (action === 'copy') {
-        const blob = canvas().then((shot) => toBlob(shot, 'image/png'));
-        navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+        // write() dentro del mismo clic y con la imagen como promesa: es lo que exige Safari.
+        navigator.clipboard.write([new ClipboardItem({ 'image/png': imagen('image/png') })])
           .then(() => showImageFeedback(button))
-          .catch(() => {});
+          .catch(() => avisar(modal, 'No se ha podido copiar la imagen: prueba a descargarla'));
         return;
       }
 
-      canvas().then(async (shot) => {
-        const blob = await toBlob(shot, 'image/jpeg', 0.92);
-        if (action === 'download') {
-          downloadBlob(blob);
-          showImageFeedback(button);
-          return;
-        }
-        const file = new File([blob], IMAGE_NAME, { type: 'image/jpeg' });
-        if (!navigator.canShare?.({ files: [file] })) return;
-        await navigator.share({ files: [file], title: pageTitle(), text: resultText() });
-      }).catch((error) => {
-        if (error?.name === 'AbortError') return;
-      });
+      if (action === 'share') {
+        compartirImagen();
+        return;
+      }
+
+      // Descargar: no necesita el clic "fresco", puede esperar a que la imagen esté lista.
+      imagen('image/jpeg').then((blob) => {
+        downloadBlob(blob);
+        showImageFeedback(button);
+      }).catch(() => avisar(modal, 'No se ha podido generar la imagen'));
     });
   });
 }
 
-function bindShares(modal) {
-  modal.querySelectorAll('[data-voc-social-sharer]').forEach((button) => {
-    button.addEventListener('click', (event) => {
-      const network = button.getAttribute('data-voc-social-sharer');
-      if (!shareTargets[network]) return;
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      openShare(network);
-    }, true);
+function bindShares(modal, app) {
+  modal.querySelectorAll('[data-elec-red]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const datos = datosActuales(app);
+      const url = datos?.redes[button.getAttribute('data-elec-red')];
+      if (url) window.open(url, '_blank', 'noopener,noreferrer,width=600,height=500');
+    });
   });
 }
 
-export function initElectionsShare() {
+export function initElectionsShare(app) {
   const modal = document.getElementById('shareResults');
-  if (!modal) return;
+  if (!modal || !app) return;
 
-  const fill = () => fillShareModal(modal);
+  const fill = () => fillShareModal(modal, app);
   fill();
-  bindCopy(modal);
-  bindShares(modal);
-  bindImageActions(modal);
-  document.querySelectorAll('[popovertarget="shareResults"]').forEach((button) => {
+  bindCopy(modal, app);
+  bindShares(modal, app);
+  bindImageActions(modal, app);
+  // Los botones que ABREN el modal ("Compartir mi resultado"). La X de dentro también apunta a shareResults,
+  // pero con popovertargetaction="hide": esa no cuenta (cerrar no es compartir).
+  const abrir = [...document.querySelectorAll('[popovertarget="shareResults"]')]
+    .filter((button) => button.getAttribute('popovertargetaction') !== 'hide' && !modal.contains(button));
+  abrir.forEach((button) => {
     button.addEventListener('click', fill);
+    // Analítica, hito "Compartir": clic en "Compartir mi resultado", con el partido más afín como resultado.
+    button.addEventListener('click', () => {
+      const partido = app.resultadoActual()?.masCercano?.nombre ?? '';
+      trackNarrativa('compartir', CONFIG.ANALITICA.PASO_COMPARTIR, partido);
+    });
   });
   modal.addEventListener('toggle', (event) => {
     if (event.newState === 'open') fill();
   });
+  // Se adelanta la descarga de html2canvas: en cuanto el botón de compartir asoma en pantalla (con el
+  // navegador libre), para que al abrir el modal ya esté y la imagen se genere sin esperar a la red.
+  // Así solo la descarga quien llega a los resultados. El clic queda de respaldo.
+  const precargar = () => cargarHtml2canvas().catch(() => {});
+  abrir.forEach((button) => button.addEventListener('click', precargar, { once: true }));
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      cuandoLibre(precargar);
+    }, { rootMargin: '300px 0px' });
+    abrir.forEach((button) => observer.observe(button));
+  }
 }

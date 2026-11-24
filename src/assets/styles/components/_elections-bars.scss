@@ -6,6 +6,13 @@
   initial-value: 0;
 }
 
+// Cuánto se aparta el «Tú» cuando coincide con el partido (distancia 0). Registrada para que se anime.
+@property --elec-bars-tu-offset {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
 @keyframes showMoreChevron {
   0% { transform: translateY(0); }
   35% { transform: translateY(6px); }
@@ -14,27 +21,42 @@
 }
 
 .v-elec-bars {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 680px;
   margin-top: 64px;
+  margin-inline: auto;
 
   @media (min-width: $screen-xs) {
     margin-top: 82px;
   }
 
   &__list {
+    // Margen lateral de la lista: también lo usan las etiquetas de partido para no salirse en móvil.
+    --elec-bars-pad: 20px;
+
     position: relative;
-    height: 570px;
+    height:670px;
     margin: 32px auto 0;
-    padding: 0 20px;
+    padding: 0 var(--elec-bars-pad);
     overflow: hidden;
 
     @media (min-width: $screen-xxs) {
-      padding: 0 32px;
+      --elec-bars-pad: 32px;
     }
 
     @media (min-width: $screen-xs) {
-      height: 822px;
+      --elec-bars-pad: 24px;
+
+      height: 1000px;
       margin-top: 42px;
-      padding: 0 24px;
+
+      // Escritorio: los nombres largos (Compromís, Adelante…) pueden salirse por la izquierda
+      // del contenedor. Solo se recorta en vertical (la lista plegada con «Ver más»).
+      @supports (overflow: clip) {
+        overflow-x: visible;
+        overflow-y: clip;
+      }
     }
 
     &.is-open {
@@ -56,24 +78,26 @@
 
   &__item {
     text-align: center;
-    transition: --distance .45s ease;
+    transition: --distance .45s ease, --elec-bars-tu-offset .45s ease;
+
+    // Lector y partido coinciden (distancia 0): el «Tú» se aparta un poco a la derecha para que se vea
+    // también el punto del partido, que si no queda tapado debajo.
+    &.is-same {
+      --elec-bars-tu-offset: .85rem;
+    }
 
     & + & {
-      margin-top: 16px;
+      margin-top: 24px;
 
       @media (min-width: $screen-xs) {
-        margin-top: 24px;
+        margin-top: 42px;
       }
     }
   }
 
   &__k {
-    font: 14px/normal $mcr;
+    font: 16px/normal $mcr;
     color: $cb8;
-
-    @media (min-width: $screen-xs) {
-      font-size: 16px;
-    }
 
     b {
       font-family: $mcs;
@@ -93,7 +117,7 @@
   &__q {
     max-width: 260px;
     margin: 8px auto 0;
-    font: 16px/normal $atl;
+    font: 18px/normal $atl;
     letter-spacing: -.08px;
 
     @media (min-width: $screen-xs) {
@@ -160,7 +184,7 @@
     @media (min-width: $screen-xs) {
       width: 30px;
       height: 30px;
-      border-width: 4px;
+      border-width: 3px;
     }
 
     &--party {
@@ -169,7 +193,7 @@
     }
 
     &--you {
-      left: calc(var(--distance) * 1%);
+      left: calc(var(--distance) * 1% + var(--elec-bars-tu-offset));
       z-index: 2;
       background: $cb2;
       border-color: $cb9;
@@ -197,13 +221,24 @@
       left: 0;
       transition: opacity .45s ease;
 
+      // Móvil: centrado bajo su punto, pero si el nombre es largo se desplaza a la derecha
+      // lo justo para no pasar del borde de la lista (como mucho, el margen lateral).
+      @media (max-width: ($screen-xs - 1px)) {
+        transform: translateX(max(-50%, calc(-1 * var(--elec-bars-pad))));
+      }
+
+      // Pantallas muy estrechas (< 360px): un punto menos de letra para que no pise al «Tú».
+      @media (max-width: ($screen-xxs - 1px)) {
+        font-size: 14px;
+      }
+
       &.is-on-top {
         opacity: 0;
       }
     }
 
     &--you {
-      left: calc(var(--distance) * 1%);
+      left: calc(var(--distance) * 1% + var(--elec-bars-tu-offset));
     }
   }
 
