@@ -10,7 +10,8 @@ const { SCHEMA, claveStorage } = await import('../src/js/elecciones/storage.js')
 const { CONFIG } = await import('../src/js/elecciones/config.js');
 
 const plantilla = readFileSync(new URL('../src/views/partials/includes/elections-boot.hbs', import.meta.url), 'utf8');
-const codigo = plantilla.replace(/{{!--[\s\S]*?--}}/, '').match(/<script>([\s\S]*?)<\/script>/)[1];
+// Fuera todos los comentarios {{!-- --}} (también el del catch), como hace Handlebars al renderizar.
+const codigo = plantilla.replace(/{{!--[\s\S]*?--}}/g, '').match(/<script>([\s\S]*?)<\/script>/)[1];
 
 /** Ejecuta el arranque en una "página" de `hostname` y devuelve las clases que deja en .v-elec. */
 function arrancar({ hostname = 'www.elcorreo.com', search = '', storage = almacen, roto = false, cabecera = null } = {}) {

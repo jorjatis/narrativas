@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "edition": {
+      "ppll": false, 
+      "sevilla": false
+    },
+    "subedition": {
+      "pasionensevilla": false
+    },
+    "coverUrl": "https://s1.abcstatics.com/abc/www/multimedia/espana/2026/07/25/cibeles-1200x672.jpg",
+    "img": {
+      "exists": true,
+      "preArticleHeader": false,
+      "src": false,
+      "figcaption": false,
+      "figcaptionText": false
+    },
+    "infoContainer": {
+      "exists": true,
+      "pretitle": false,
+      "title": "29N: Elecciones generales",
+      "description": "Los ceutíes manifiestan su incredulidad ante la falta de respuesta del país al que pertenecen, viven con temor el día a día, exigen una frontera con garantías y coinciden en la necesidad de devolver a Marruecos a quienes cruzaron de forma ilegal",
+      "chevronDown": true
+    }
+  }
+}

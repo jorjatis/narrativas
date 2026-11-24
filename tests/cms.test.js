@@ -21,8 +21,8 @@ test('avisa si un icono no está definido dentro del bloque o si se cuela algo d
   assert.equal(mal.problemas.length, 3);
 });
 
-test('index-ok: el bloque .v-elec lleva dentro todos sus iconos y nada de pruebas', () => {
-  const datos = require('../src/data/index-ok.js');
+test('index: el bloque .v-elec lleva dentro todos sus iconos y nada de pruebas', () => {
+  const datos = require('../src/data/index.js');
   const h = Handlebars.create();
   for (const carpeta of ['includes', 'kraken-components', 'layout']) {
     const dir = new URL(`../src/views/partials/${carpeta}/`, import.meta.url);

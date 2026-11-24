@@ -152,7 +152,7 @@ export const CONFIG = Object.freeze({
   PATRON_LIMITE_IP: /too many attempts/i,
 
   /** Endpoint de coordenadas. POST a la base, GET a `${API_BASE}/${medio}`. */
-  API_BASE: 'https://service-data.vocento.com/api/coordenadas',
+  API_BASE: 'https://pre-service-data.vocento.com/api/coordenadas',
   API_TIMEOUT_MS: 12000,
 
 

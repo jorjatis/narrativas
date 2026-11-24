@@ -1,3 +1,4 @@
+{{!-- VERSIÓN LIMPIA (la que se publica). Misma maqueta que index-sandbox, sin nada de pruebas: ver src/data/index.js --}}
 {{> base/head }}
 
 {{> base/header }}
@@ -6,31 +7,14 @@
   {{!-- Contenido principal --}}
   <main class="v-w-c {{#if hasPaywall}}v-w-c--1{{/if}} v-d-c">
     <article class="v-d-w">
-      {{!-- Include superior a la cabecera, si lo lleva --}}
-      {{#unless metadata.img.preArticleHeader}}
-        {{> ./includes/pre-article-header }}
-      {{/unless}}
-
-      {{!-- Cabecera articulo visual --}}
-      {{> ./layout/article-header }}
-
       {{!-- Contenido articulo --}}
       <div class="v-c">
         <div class="v-d v-d--1 v-d--s v-d--abc">
-          {{> ./layout/article-metadata }}
-
           {{> ./layout/article-content }}
-
-          {{> ./kraken-components/credits }}
-
-          {{> ./layout/article-topics-comments }}
         </div>
       </div>
     </article>
   </main>
-
-  {{!-- Contenido secundario (outbrain / relacionadas / megabanner footer) --}}
-  {{> ./layout/article-bottom }}
 </div>
 
 {{> base/footer }}

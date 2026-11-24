@@ -13,12 +13,12 @@ const todasLasPaginas = fs.existsSync(path.resolve(__dirname, 'src/views/pages')
 
 module.exports = (env = {}, argv) => {
   const isProduction = argv.mode === 'production';
-  // Producción (`npm run build`): solo index-ok y nada de desarrollo (localhost, Netlify, ?medio=, "Rellenar"...).
+  // Producción (`npm run build`): solo index y nada de desarrollo (localhost, Netlify, ?medio=, "Rellenar"...).
   // `npm run build:pruebas` (--env pruebas) y `npm start` lo incluyen todo.
   const desarrollo = !isProduction || Boolean(env.pruebas);
   const pages = desarrollo
     ? todasLasPaginas
-    : todasLasPaginas.filter((p) => path.basename(p) === 'index-ok.hbs');
+    : todasLasPaginas.filter((p) => path.basename(p) === 'index.hbs');
 
   return {
     mode: argv.mode || 'development',

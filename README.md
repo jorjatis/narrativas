@@ -152,14 +152,14 @@ Siempre se llama a preproducción (`API_BASE` en `src/js/elecciones/config.js`).
 | Página | Para qué |
 |---|---|
 | `index-sandbox.html` | **Pruebas**: botón *Rellenar test* y avisos de lo que falta (contexto de las preguntas, metodología). |
-| `index-ok.html` | **Limpia**, la que se publica: nada de pruebas. Sin contexto en una pregunta no sale *Necesito saber más*; sin metodología no sale ese bloque. La metodología va en `src/data/index-ok.json`, campo `metodologia` (admite HTML). |
+| `index.html` | **Limpia**, la que se publica: nada de pruebas. Sin contexto en una pregunta no sale *Necesito saber más*; sin metodología no sale ese bloque. La metodología va en `src/data/index.json`, campo `metodologia` (admite HTML). |
 
-Las dos usan las mismas plantillas; la diferencia está en `src/data/index-sandbox.js` / `index-ok.js`.
+Las dos usan las mismas plantillas; la diferencia está en `src/data/index-sandbox.js` / `index.js`.
 
 ### Para el CMS
 
 `npm run build` genera además **`dist/cms/v-elec.html`**: el bloque `<div class="v-elec">…</div>` de
-`index-ok.html`, que es lo que se pega en el CMS (lo hace `scripts/extraer-cms.js` y avisa si falta algo).
+`index.html`, que es lo que se pega en el CMS (lo hace `scripts/extraer-cms.js` y avisa si falta algo).
 
 - Es autocontenido: los iconos que usa (`<symbol>`) van dentro del propio bloque.
 - Ya lleva el `<link>` de `assets/styles/main.css` y el `<script>` de `js/main.js`, con `?v=` calculado del

@@ -12,7 +12,7 @@ const leer = (archivo) => JSON.parse(fs.readFileSync(path.join(__dirname, '..', 
 const CONTEXTO_PENDIENTE = 'Contexto pendiente: añadir el campo "contexto" a esta pregunta en preguntas_29N.json.';
 
 /**
- * Versión limpia (index-ok / CMS): texto de ejemplo mientras la pregunta no traiga "contexto", para ver cómo
+ * Versión limpia (index / CMS): texto de ejemplo mientras la pregunta no traiga "contexto", para ver cómo
  * se pinta "Necesito saber más". Lleva data-elec-pendiente y el build avisa de cuántas quedan.
  */
 const CONTEXTO_EJEMPLO =
@@ -20,7 +20,7 @@ const CONTEXTO_EJEMPLO =
 
 /** Versión de pruebas: texto de la metodología mientras la página no traiga el suyo. */
 const METODOLOGIA_PENDIENTE =
-  'Metodología pendiente: añadir el campo "metodologia" al JSON de la página (src/data/index-ok.json).';
+  'Metodología pendiente: añadir el campo "metodologia" al JSON de la página (src/data/index.json).';
 
 /**
  * Las cinco respuestas en el orden del diseño (de "Muy de acuerdo" a "Muy en desacuerdo").
@@ -37,7 +37,7 @@ const OPCIONES = [
 
 /**
  * pruebas = true  -> versión de pruebas (index-sandbox): botón "Rellenar test" y avisos de lo que falta.
- * pruebas = false -> versión limpia (index-ok): sin "Rellenar test"; el contexto que falta, con texto de ejemplo.
+ * pruebas = false -> versión limpia (index): sin "Rellenar test"; el contexto que falta, con texto de ejemplo.
  */
 function datosElecciones({ pruebas = true, metodologia = null } = {}) {
   // Se leen en cada compilación: con `npm start`, al guardar los JSON se ve el cambio.

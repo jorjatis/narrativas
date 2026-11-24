@@ -1,4 +1,4 @@
-// Plantillas Handlebars de la visual: se renderizan con los datos reales (src/data/index.js) y el mismo
+// Plantillas Handlebars de la visual: se renderizan con los datos reales (src/data/index-test.js) y el mismo
 // Handlebars del proyecto, y se comprueba el HTML que sale (lo que llega a la página).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,7 +12,7 @@ const SLUGS = PARTIDOS.map((p) => p.slug);
 
 const require = createRequire(import.meta.url);
 const Handlebars = require('handlebars');
-const datosPagina = require('../src/data/index.js');
+const datosPagina = require('../src/data/index-test.js');
 
 const plantilla = (nombre) => readFileSync(new URL(`../src/views/partials/includes/${nombre}.hbs`, import.meta.url), 'utf8');
 const hb = Handlebars.create();
@@ -28,7 +28,7 @@ test('datos de la página: las 26 preguntas del JSON, en orden, con su familia',
   assert.deepEqual(preguntas.map((p) => p.n), ids.map((_, i) => i + 1));
   assert.equal(preguntas[0].claim, PREGUNTAS_JSON.p1.claim);
   assert.equal(preguntas[0].familia, 'Vivienda');
-  assert.ok(datosPagina.metadata, 'se mantienen los metadatos de index.json');
+  assert.ok(datosPagina.metadata, 'se mantienen los metadatos de index-test.json');
 });
 
 test('el valor de cada botón es el idResp de la escala del cálculo (5 = Muy de acuerdo ... 1 = Muy en desacuerdo)', () => {
@@ -116,7 +116,7 @@ test('DATOS: todas las preguntas tienen su texto de contexto', { todo: 'falta el
   assert.deepEqual(sin, []);
 });
 
-test('index.html e index-sandbox.html llevan los mismos datos del test, cada una con sus metadatos', () => {
+test('index-test.html e index-sandbox.html llevan los mismos datos del test, cada una con sus metadatos', () => {
   const sandbox = require('../src/data/index-sandbox.js');
   assert.deepEqual(sandbox.elecciones, datosPagina.elecciones);
   assert.equal(sandbox.metadata.edition.ppll, true);
@@ -161,7 +161,7 @@ test('matriz: la cabecera no lleva un resultado de prueba escrito a mano', () =>
   assert.ok(!/VOX|84%/.test(html));
 });
 
-// ---------- las dos versiones: index-sandbox (pruebas) e index-ok (limpia) ----------
+// ---------- las dos versiones: index-sandbox (pruebas) e index (limpia) ----------
 
 const { readdirSync } = await import('node:fs');
 /** Renderiza el contenedor completo (article-content) con todos los parciales del proyecto. */
@@ -180,8 +180,8 @@ function renderPagina(datos) {
   return h.compile(readFileSync(new URL('../src/views/partials/layout/article-content.hbs', import.meta.url), 'utf8'))(datos);
 }
 
-test('index-ok (versión limpia): sin "Rellenar test" ni avisos de pruebas; contexto de ejemplo donde falta', () => {
-  const ok = require('../src/data/index-ok.js');
+test('index (versión limpia): sin "Rellenar test" ni avisos de pruebas; contexto de ejemplo donde falta', () => {
+  const ok = require('../src/data/index.js');
   const { CONTEXTO_EJEMPLO } = require('../src/data/lib/elecciones.js');
   assert.equal(ok.elecciones.rellenar, false);
   const html = renderPagina(ok);
@@ -197,7 +197,7 @@ test('index-ok (versión limpia): sin "Rellenar test" ni avisos de pruebas; cont
   assert.equal((html.match(/data-elec-q="p\d+"/g) || []).length, 52); // 26 en el test + 26 en las barras
 });
 
-test('index-ok: la metodología sale del campo "metodologia" de index-ok.json', () => {
+test('index: la metodología sale del campo "metodologia" de index.json', () => {
   const { datosElecciones } = require('../src/data/lib/elecciones.js');
   const html = renderPagina({ elecciones: datosElecciones({ pruebas: false, metodologia: 'Se han analizado los <b>programas</b>.' }) });
   assert.ok(html.includes('La metodología'));

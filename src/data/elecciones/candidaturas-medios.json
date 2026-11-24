@@ -3,6 +3,7 @@
   "nacionales": ["PP", "PSOE", "Vox", "Frente Amplio", "Podemos", "SALF"],
   "medios": {
     "abc": "todas",
+    "mujerhoy": "todas",
 
     "elcorreo": ["PNV", "EH Bildu"],
     "diariovasco": ["PNV", "EH Bildu"],

@@ -385,7 +385,7 @@ export function initElectionsTest(app) {
   document.getElementById('v-elec-fill')?.addEventListener('click', rellenar);
   document.getElementById('v-elec-restart')?.addEventListener('click', reiniciar);
 
-  // "Rellenar test": solo existe en la versión de pruebas (index-sandbox). En index-ok no está en el HTML.
+  // "Rellenar test": solo existe en la versión de pruebas (index-sandbox). En index no está en el HTML.
   const fill = document.querySelector('.v-elec-mock-options');
   if (fill) fill.hidden = false;
 

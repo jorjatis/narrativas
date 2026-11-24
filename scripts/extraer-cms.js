@@ -1,5 +1,5 @@
 /**
- * Después de `npm run build` (se lanza solo como "postbuild"): saca de dist/index-ok.html el bloque
+ * Después de `npm run build` (se lanza solo como "postbuild"): saca de dist/index.html el bloque
  * <div class="v-elec">…</div>, que es lo que se pega en el CMS, a dist/cms/v-elec.html.
  *
  * Comprueba además que el bloque es autocontenido: que todos los iconos que usa (<use href="#…">) están
@@ -21,7 +21,7 @@ const RUTA = (process.env.CMS_RUTA || 'RUTA_DIST').replace(/\/+$/, '');
 const RECURSOS = { css: 'assets/styles/main.css', js: 'js/main.js' };
 
 const DIST = path.resolve(__dirname, '..', 'dist');
-const ORIGEN = path.join(DIST, 'index-ok.html');
+const ORIGEN = path.join(DIST, 'index.html');
 const DESTINO = path.join(DIST, 'cms', 'v-elec.html');
 const APERTURA = '<div class="v-elec">';
 
@@ -94,7 +94,7 @@ function envolver(bloque, { ruta = RUTA, v = version } = {}) {
 
 /** Lo que se sube a producción no debe llevar nada de desarrollo (hosts locales, Netlify...). */
 const RASTROS_DEV = /localhost|127\.0\.0\.1|0\.0\.0\.0|netlify|\.local\b|Rellenar test/;
-const FICHEROS_PRODUCCION = ['js/main.js', 'js/vendors.js', 'assets/styles/main.css', 'index-ok.html'];
+const FICHEROS_PRODUCCION = ['js/main.js', 'js/vendors.js', 'assets/styles/main.css', 'index.html'];
 
 function rastrosDeDesarrollo(dist = DIST) {
   return FICHEROS_PRODUCCION.filter((f) => {
